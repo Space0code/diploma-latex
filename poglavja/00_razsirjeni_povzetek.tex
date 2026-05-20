@@ -21,7 +21,15 @@ Kratko povzemi, kaj so grafovske nevronske mreže, zakaj so primerne za podatke 
 \section*{II Grafovska predstavitev podatkov sledilnika pogleda}
 
 \TODO{
-Kratko povzemi: vozlišče = ena meritev sledilnika pogleda; značilke vozlišča = koordinate pogleda in velikosti zenic; časovne povezave = bližina vzorcev v času; prostorske povezave = bližina vzorcev v prostoru pogleda; uteži povezav kot del modela.
+\begin{itemize}
+    \item vozlišče = ena meritev sledilnika pogleda;
+    \item značilke vozlišča = \texttt{x-avg}, \texttt{y-avg}, leva/desna zenica, \texttt{time-window-normalized}, \texttt{distance-avg}, \texttt{fixation-duration};
+    \item časovne povezave = bližina vzorcev v času, $k_t=2$;
+    \item prostorske povezave = bližina vzorcev v prostoru pogleda, $k_s=2$;
+    \item fiksacijske povezave = razširjene povezave znotraj fiksacije, $k_f=3$;
+    \item uteži povezav = naučene podpisane uteži iz značilk relacije;
+    \item \texttt{fixation-index} = grupiranje, ne numerična značilka vozlišča.
+\end{itemize}
 }
 
 \section*{III Modeliranje in eksperimentalna evalvacija}

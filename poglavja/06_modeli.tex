@@ -1,4 +1,4 @@
-\chapter{Modeli}
+\chapter{Primerjani modeli in predlagana arhitektura}
 \label{sec:modeli}
 
 V tem poglavju predstavimo modele, ki jih primerjamo v eksperimentalni evalvaciji.
@@ -21,7 +21,16 @@ Uporabljeni osnovni modeli so:
 \end{itemize}
 
 \TODO{
-Dodaj, kako iz časovnega okna pripraviš vhod za baseline modele, katere agregirane/window značilke uporabiš, ali baseline modeli uporabljajo iste signale kot GNN, hiperparametre in jasno razlago enakih splitov.
+\begin{itemize}
+    \item vhod baseline modelov: agregirane značilke iz istih 10 s oken kot GNN;
+    \item osnovni signali: \texttt{x-avg}, \texttt{y-avg}, \texttt{pupil-size-left-avg}, \texttt{pupil-size-right-avg};
+    \item trenutni dodatni signali: \texttt{time-window-normalized}, \texttt{distance-avg}, \texttt{fixation-duration};
+    \item \texttt{fixation-index}: ne kot numerična vhodna značilka;
+    \item enaki train/validation/test split-i kot pri GNN;
+    \item standardizacija značilk: scaler naučen samo na učnem foldu;
+    \item MLP baseline: PyTorch MLP, validacijski split iz folda, early stopping na validacijski izgubi;
+    \item dodati hiperparametre: SVM, LightGBM, MLP, večinski klasifikator.
+\end{itemize}
 }
 
 \section{\GazeMAE{} + MLP}
@@ -37,7 +46,18 @@ Pipeline je:
 \end{equation}
 
 \TODO{
-Dopolni opis zamrznjenih prednaučenih \GazeMAE{} enkoderjev, vhodnega formata, dimenzije embeddinga, arhitekture MLP klasifikatorja in omejitev reprodukcije.
+\begin{itemize}
+    \item zamrznjena prednaučena enkoderja \GazeMAE{}: position in velocity;
+    \item lokalni uteži: \texttt{models/gazemae/pos-i3738-encoder-state.pt}, \texttt{models/gazemae/vel-i8528-encoder-state.pt};
+    \item 10 s okno razdeljeno v pet 2 s kosov;
+    \item ciljna frekvenca: 500 Hz;
+    \item koordinate MAHNOB: clipping na $1280\times 800$;
+    \item brez umetnega skaliranja višine $800 \rightarrow 1024$;
+    \item pooling kosov: mean + standard deviation;
+    \item okenska predstavitev: 512 dimenzij;
+    \item trenira se samo MLP glava;
+    \item omejitev: transfer baseline, ne polno ponovno predtreniranje \GazeMAE{}.
+\end{itemize}
 }
 
 \section{Grafovski osnovni modeli}
@@ -54,13 +74,23 @@ Osnovni grafovski primerjavi sta \GCN{} in \GAT{}.
 
 \GAT{} uporablja mehanizem pozornosti za uteževanje prispevkov sosednjih vozlišč.
 
-\TODO{Dodaj kratek opis GCN, kratek opis GAT in ali uporabljata isto grafovsko konstrukcijo kot finalni model.}
+\TODO{
+\begin{itemize}
+    \item \GCN{}: relacijski \texttt{GCNConv};
+    \item \GAT{}: relacijski \texttt{GATConv};
+    \item isti vhodni graf pri primerljivih zagonih;
+    \item \texttt{GATConv} v trenutni kodi ne uporablja skalarnih naučenih uteži povezav;
+    \item za primerjave uteži povezav uporabljati \texttt{GCNConv};
+    \item GNN v1: starejša primerjava z relacijama \texttt{temporal} in \texttt{spatial};
+    \item GNN v2: relacije \texttt{spatial}, \texttt{temporal\_forward}, \texttt{temporal\_backward}, \texttt{fixation}.
+\end{itemize}
+}
 
 \section{Predlagani prostorsko-časovni heterogeni GNN}
 \label{subsec:finalni-gnn}
 
 Finalni model temelji na prostorsko-časovni heterogeni grafovski nevronski mreži.
-Model ločeno obravnava prostorske povezave, časovne povezave naprej in časovne povezave nazaj.
+Model ločeno obravnava prostorske povezave, časovne povezave naprej, časovne povezave nazaj in fiksacijske povezave.
 S tem lahko za različne tipe odnosov uporablja različne parametre.
 
 \subsection{Pregled arhitekture}
@@ -81,13 +111,31 @@ Osnovni potek modela je:
 \end{equation}
 
 \TODO{
-Dodaj arhitekturne detajle: preprocess MLP, LayerNorm, residual connections, GELU, dropout, edge weights, število plasti, hidden dimension in ločeno obravnavo relacij.
+\begin{itemize}
+    \item razred v kodi: \texttt{SpatioTemporalHeteroGNN};
+    \item wrapper za multiclass: \texttt{MulticlassSpatioTemporalGNN};
+    \item trenutni privzeti konvolucijski tip v hitrih/Table-6 konfiguracijah: \texttt{GCNConv};
+    \item \texttt{hidden\_channels=128};
+    \item \texttt{num\_layers=3} v trenutnih hitrih/Table-6 konfiguracijah;
+    \item \texttt{use\_preprocess\_mlp=true};
+    \item preprocess MLP: Linear $\rightarrow$ GELU $\rightarrow$ LayerNorm $\rightarrow$ Dropout $\rightarrow$ Linear $\rightarrow$ LayerNorm;
+    \item relacije v v2: \texttt{spatial}, \texttt{temporal\_forward}, \texttt{temporal\_backward}, \texttt{fixation};
+    \item po vsaki relaciji ločena konvolucija;
+    \item fuzija relacij: konkatenacija + MLP, \texttt{relation\_pooling=mlp};
+    \item residual povezava v vsaki plasti;
+    \item LayerNorm po residual seštevku;
+    \item GELU aktivacija;
+    \item dropout v preprocess MLP, GNN plasteh in glavi: privzeto $0,1$;
+    \item naučene podpisane uteži povezav: \texttt{edge\_weight\_mode=learned\_signed};
+    \item standardizacija edge značilk: \texttt{standardize\_edge\_features=true}, scaler samo na učnem foldu;
+    \item graph pooling: attention, \texttt{graph\_pooling=attention}.
+\end{itemize}
 }
 
-\subsection{Fuzija prostorskih in časovnih predstavitev}
+\subsection{Fuzija relacijskih predstavitev}
 \label{subsec:fuzija}
 
-Po posredovanju sporočil po različnih tipih povezav dobimo predstavitve, ki izvirajo iz prostorskih in časovnih relacij.
+Po posredovanju sporočil po različnih tipih povezav dobimo predstavitve, ki izvirajo iz posameznih relacij.
 Te predstavitve združimo na ravni vozlišč s konkatenacijo in MLP fuzijo:
 \begin{equation}
     \mathbf{h}_i =
@@ -99,24 +147,33 @@ Te predstavitve združimo na ravni vozlišč s konkatenacijo in MLP fuzijo:
     \mathbf{h}_{i}^{(t+)}
     \Vert
     \mathbf{h}_{i}^{(t-)}
+    \Vert
+    \mathbf{h}_{i}^{(f)}
     \right]
     \right),
 \end{equation}
-kjer $\Vert$ označuje konkatenacijo, $\mathbf{h}_{i}^{(s)}$ prostorsko predstavitev, $\mathbf{h}_{i}^{(t+)}$ časovno predstavitev naprej in $\mathbf{h}_{i}^{(t-)}$ časovno predstavitev nazaj.
+kjer $\Vert$ označuje konkatenacijo, $\mathbf{h}_{i}^{(s)}$ prostorsko predstavitev, $\mathbf{h}_{i}^{(t+)}$ časovno predstavitev naprej, $\mathbf{h}_{i}^{(t-)}$ časovno predstavitev nazaj in $\mathbf{h}_{i}^{(f)}$ fiksacijsko predstavitev.
 
 \subsection{Združevanje v predstavitev grafa}
 \label{subsec:pooling}
 
 Ker napovedujemo oznako celotnega okna, moramo predstavitve vozlišč združiti v predstavitev grafa.
-Osnovna možnost je povprečno združevanje:
+V trenutni privzeti nastavitvi uporabimo združevanje s pozornostjo:
 \begin{equation}
-    \mathbf{h}_G^{\text{mean}} =
-    \frac{1}{|V|}
+    \mathbf{h}_G =
     \sum_{v \in V}
-    \mathbf{h}_v.
+    \alpha_v \mathbf{h}_v.
 \end{equation}
 
-\TODO{Določi finalno pooling strategijo: mean pooling, mean+max pooling ali attention pooling.}
+\TODO{
+\begin{itemize}
+    \item definiraj izračun $\alpha_v$ s pozornostnim MLP;
+    \item \texttt{graph\_pooling=attention};
+    \item \texttt{head\_pooling=attention};
+    \item starejši možnosti samo kot primerjava/ablacija: mean, mean+max;
+    \item odločitev mentorjev 2026-05-13: MLP fuzija na ravni vozlišč, attention pooling na ravni grafa.
+\end{itemize}
+}
 
 \subsection{Napovedna glava in učenje}
 \label{subsec:head-training}
@@ -130,7 +187,22 @@ Za 3-razredno klasifikacijo uporabimo navzkrižno entropijo:
     y_c \log \hat{y}_c.
 \end{equation}
 
-\TODO{Dodaj, ali treniraš ločena modela za valenco in vzburjenje, class weights, optimizator, learning rate, batch size, število epoh, early stopping, seed-e in strojno opremo.}
+\TODO{
+\begin{itemize}
+    \item ločena modela za valenco in vzburjenje;
+    \item loss: CrossEntropy;
+    \item optimizer: Adam;
+    \item learning rate v trenutnih hitrih/Table-6 konfiguracijah: $5\cdot 10^{-5}$;
+    \item batch size v trenutnih hitrih/Table-6 konfiguracijah: 256;
+    \item največ epoh: 500;
+    \item early stopping: validation loss;
+    \item patience: 20;
+    \item restore best checkpoint: \texttt{best\_model.pt};
+    \item seed: 42;
+    \item še preveriti: ali finalni zagoni uporabljajo class weights;
+    \item strojna oprema: RTX 4070 12 GB, Ryzen 7 5700X, 32 GB RAM.
+\end{itemize}
+}
 
 \subsection{Diagnostika predstavitev}
 \label{subsec:diagnostika}
@@ -138,4 +210,14 @@ Za 3-razredno klasifikacijo uporabimo navzkrižno entropijo:
 Poleg končnih klasifikacijskih metrik spremljamo tudi notranje predstavitve modela.
 Namen diagnostike je preveriti, ali model ohranja raznolikost predstavitev ali pa pride do kolapsa.
 
-\TODO{Dodaj statistike variance, kosinusne podobnosti, razpona logitov in razlago, kako diagnostika pomaga interpretirati oversmoothing.}
+\TODO{
+\begin{itemize}
+    \item varianca predstavitev po plasteh;
+    \item kosinusna podobnost vozliščnih ali grafovskih predstavitev;
+    \item razpon logitov;
+    \item train/validation/test loss krivulje po foldih;
+    \item namen: zaznava prekomernega glajenja;
+    \item namen: zaznava kolapsa napovedne glave;
+    \item ne interpretirati kot dokaz vzročnosti.
+\end{itemize}
+}

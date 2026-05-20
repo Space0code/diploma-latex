@@ -2,7 +2,15 @@
 \label{sec:rezultati}
 
 \TODO{
-To poglavje napiši šele po glavnih eksperimentih. Ne mešaj rezultatov iz \ESEED{} z glavno \MAHNOB{} evalvacijo, razen če jih daš v dodatek ali kratko motivacijo.
+\begin{itemize}
+    \item napisati po glavnih eksperimentih;
+    \item glavna evalvacija: \MAHNOB{};
+    \item \ESEED{} samo v dodatku ali kratki motivaciji;
+    \item ne mešati \ESEED{} rezultatov z glavnimi tabelami;
+    \item poročati mean $\pm$ std čez folde;
+    \item jasno ločiti subject LOO in recording LOO;
+    \item če finalna zgodba preide na low/high valence, uskladiti naslove tabel.
+\end{itemize}
 }
 
 \section{Porazdelitev razredov}
@@ -10,11 +18,31 @@ To poglavje napiši šele po glavnih eksperimentih. Ne mešaj rezultatov iz \ESE
 
 \subsection{Valenca}
 
-\TODO{Dodaj tabelo razredov za valenco po končni tvorbi oken.}
+\TODO{
+\begin{itemize}
+    \item tabela razredov po končni tvorbi oken;
+    \item razredi: neprijetna, nevtralna, prijetna;
+    \item št. oken po razredu;
+    \item delež oken po razredu;
+    \item ločeno za finalni snapshot;
+    \item navesti izključene subjekte P9, P12, P15;
+    \item navesti \texttt{min\_samples\_per\_window=60}.
+\end{itemize}
+}
 
 \subsection{Vzburjenost}
 
-\TODO{Dodaj tabelo razredov za vzburjenost, komentar neuravnoteženosti in večinski baseline kot referenčno točko.}
+\TODO{
+\begin{itemize}
+    \item tabela razredov po končni tvorbi oken;
+    \item razredi: nizka, srednja, visoka vzburjenost;
+    \item št. oken po razredu;
+    \item delež oken po razredu;
+    \item komentar neuravnoteženosti;
+    \item večinski baseline kot referenčna točka;
+    \item navesti, ali je bil uporabljen downsampling.
+\end{itemize}
+}
 
 \section{Rezultati za 3-razredno valenco}
 \label{subsec:rezultati-valence}
@@ -65,7 +93,17 @@ To poglavje napiši šele po glavnih eksperimentih. Ne mešaj rezultatov iz \ESE
 
 \subsection{Interpretacija rezultatov}
 
-\TODO{Po tabelah napiši, kateri model je najboljši, ali GNN premaga najboljši ne-grafovski baseline, ali je razlika med subject LOO in recording LOO velika ter interpretacijo confusion matrix.}
+\TODO{
+\begin{itemize}
+    \item najboljši model po balanced accuracy;
+    \item najboljši ne-grafovski baseline;
+    \item primerjava GNN v2 proti najboljšemu ne-grafovskemu baseline;
+    \item primerjava GNN v2 proti \GazeMAE{} + MLP;
+    \item razlika subject LOO vs recording LOO;
+    \item najpogostejše zamenjave razredov iz confusion matrix;
+    \item previdna interpretacija, brez pretiranih trditev.
+\end{itemize}
+}
 
 \section{Rezultati za 3-razredno vzburjenje}
 \label{subsec:rezultati-arousal}
@@ -119,11 +157,27 @@ To poglavje napiši šele po glavnih eksperimentih. Ne mešaj rezultatov iz \ESE
 
 \subsection{Posploševanje na nove subjekte}
 
-\TODO{Dodaj primerjavo rezultatov pri subject LOO.}
+\TODO{
+\begin{itemize}
+    \item primerjava rezultatov pri subject LOO;
+    \item posploševanje na nove udeležence;
+    \item variance med foldi;
+    \item morebitni težavni subjekti;
+    \item ali graf pomaga bolj/manj kot pri recording LOO.
+\end{itemize}
+}
 
 \subsection{Posploševanje na nove posnetke}
 
-\TODO{Dodaj primerjavo rezultatov pri recording LOO in razlago razlike med protokoloma.}
+\TODO{
+\begin{itemize}
+    \item primerjava rezultatov pri recording LOO;
+    \item posploševanje na nove posnetke/stimuluse;
+    \item pričakovano lažje/težje kot subject LOO;
+    \item razlika med protokoloma;
+    \item opozorilo: recording LOO lahko še vedno deli iste subjekte med train/test.
+\end{itemize}
+}
 
 \section{Ablacijska študija}
 \label{subsec:rezultati-ablation}
@@ -142,6 +196,7 @@ To poglavje napiši šele po glavnih eksperimentih. Ne mešaj rezultatov iz \ESE
         Brez pupil značilk & TODO & TODO & TODO & TODO & TODO \\
         Brez prostorskih povezav & TODO & TODO & TODO & TODO & TODO \\
         Brez časovnih povezav & TODO & TODO & TODO & TODO & TODO \\
+        Brez fiksacijskih povezav & TODO & TODO & TODO & TODO & TODO \\
         Brez uteži povezav & TODO & TODO & TODO & TODO & TODO \\
         5 s okna & TODO & TODO & TODO & TODO & TODO \\
         Brez MLP fuzije & TODO & TODO & TODO & TODO & TODO \\
@@ -154,11 +209,30 @@ To poglavje napiši šele po glavnih eksperimentih. Ne mešaj rezultatov iz \ESE
 
 \subsection{Varianca in podobnost predstavitev}
 
-\TODO{Dodaj graf/tabelo variance predstavitev po plasteh, kosinusno podobnost, razpon logitov in komentar kolapsa predstavitev.}
+\TODO{
+\begin{itemize}
+    \item graf ali tabela variance predstavitev po plasteh;
+    \item kosinusna podobnost predstavitev;
+    \item razpon logitov;
+    \item train/validation/test loss krivulje;
+    \item komentar prekomernega glajenja;
+    \item komentar kolapsa napovedne glave;
+    \item povezava z izbiro \texttt{num\_layers=3}.
+\end{itemize}
+}
 
 \section{Analiza napak}
 \label{subsec:analiza-napak}
 
 \subsection{Matrike zmede}
 
-\TODO{Dodaj confusion matrix za najboljši model in najboljši baseline ter analizo najpogostejših zamenjav razredov.}
+\TODO{
+\begin{itemize}
+    \item confusion matrix za najboljši GNN;
+    \item confusion matrix za najboljši ne-grafovski baseline;
+    \item vrstično normalizirane vrednosti med 0 in 1;
+    \item barvna lestvica fiksna $[0,1]$;
+    \item najpogostejše zamenjave razredov;
+    \item primerjava valenca vs vzburjenost.
+\end{itemize}
+}

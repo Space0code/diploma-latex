@@ -37,7 +37,7 @@ Za neutežene povezave si lahko predstavljamo, da imajo utež $w_{ij}=1$.
 
 Homogeni graf je graf, ki ne loči različnih vrst vozlišč ali povezav.
 Heterogeni graf vsebuje vsaj dve različni vrsti vozlišč ali povezav.
-V tej nalogi uporabljamo heterogeno grafovsko predstavitev, saj ločimo vsaj dva tipa povezav: časovne povezave in prostorske povezave.
+V tej nalogi uporabljamo heterogeno grafovsko predstavitev, saj ločimo več tipov povezav: časovne povezave naprej, časovne povezave nazaj, prostorske povezave in fiksacijske povezave.
 
 \section{Grafovske nevronske mreže}
 \label{subsec:gnn}
@@ -120,7 +120,7 @@ Pogoste vzorčne frekvence raziskovalnih sledilnikov pogleda so 60~Hz, 100~Hz, 5
 Lokacija pogleda se običajno zapiše v obliki koordinat $(x,y)$.
 Velikost zenice označuje njen premer in se običajno zapiše kot skalar.
 Podatke sledilnika pogleda obravnavamo kot časovno vrsto meritev pogleda in velikosti zenic.
-Takšni podatki so primerni za grafovsko obravnavo, saj lahko posamezne meritve v časovnem oknu predstavimo kot vozlišča, povezave pa določimo glede na časovno ali prostorsko bližino lokacij pogleda.
+Takšni podatki so primerni za grafovsko obravnavo, saj lahko posamezne meritve v časovnem oknu predstavimo kot vozlišča, povezave pa določimo glede na časovno bližino, prostorsko bližino lokacij pogleda ali pripadnost isti fiksaciji.
 
 \section{Čustvena stanja: valenca in vzburjenost}
 \label{subsec:valenca-vzburjenje}

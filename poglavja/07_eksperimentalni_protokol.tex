@@ -13,7 +13,22 @@ V nalogi obravnavamo dve glavni klasifikacijski nalogi:
 \end{enumerate}
 Obe nalogi obravnavamo enakovredno.
 
-\TODO{Dodaj definicijo treh razredov pri valenci in vzburjenju ter pojasni, zakaj ne poročaš regresije ali emotion-id multiclass kot glavnega rezultata.}
+\TODO{
+\begin{itemize}
+    \item valenca: neprijetna, nevtralna, prijetna;
+    \item valenca neprijetna: \emph{fear}, \emph{anger}, \emph{disgust}, \emph{sadness}, \emph{anxiety};
+    \item valenca nevtralna: \emph{neutral}, \emph{surprise};
+    \item valenca prijetna: \emph{joy}, \emph{happiness}, \emph{amusement};
+    \item vzburjenost: nizka, srednja, visoka;
+    \item vzburjenost nizka: \emph{sadness}, \emph{disgust}, \emph{neutral};
+    \item vzburjenost srednja: \emph{joy}, \emph{happiness}, \emph{amusement};
+    \item vzburjenost visoka: \emph{surprise}, \emph{fear}, \emph{anger}, \emph{anxiety};
+    \item oznake iz \texttt{emotion-id}, ne neposredno rezanje self-report valence/arousal ocen;
+    \item pojasni: regresija ni glavni rezultat;
+    \item pojasni: neposredni \texttt{emotion-id} multiclass ni glavni rezultat;
+    \item opomba: če finalna zgodba preide na low/high valence, uskladiti to poglavje.
+\end{itemize}
+}
 
 \section{Validacijska protokola}
 \label{subsec:validacijska-protokola}
@@ -31,7 +46,21 @@ Uporabimo dva validacijska protokola:
 Prvi protokol meri posploševanje na nove udeležence, drugi pa posploševanje na nove posnetke.
 Kombinirane delitve po subjektih in posnetkih v tej nalogi ne uporabljamo, ker bi bila računsko bistveno dražja in bi presegla obseg diplomske naloge.
 
-\TODO{Dodaj natančno definicijo foldov, število foldov in opis validacijske množice ter preprečevanja uhajanja informacij.}
+\TODO{
+\begin{itemize}
+    \item trenutne hitre/Table-6 konfiguracije: \texttt{subject\_loo} in \texttt{recording\_loo};
+    \item validacijska množica: \texttt{val\_size=2} v trenutnem quick Table-6 wrapperju;
+    \item seed: 42;
+    \item izključeni subjekti: P9, P12, P15;
+    \item label quality filter: \texttt{emotion-derivation-status=ok};
+    \item scope/filter: \texttt{emotion-elicitation};
+    \item baseline in GNN delitve poravnane z istimi fold identitetami;
+    \item scalerji za node/tabular značilke: samo učni fold;
+    \item scalerji za edge značilke: samo učni fold;
+    \item thresholdi/label transformacije pri binarnih poskusih: samo učni fold;
+    \item opomba: če uporabiš subject-kfold/recording-kfold rezultate, zamenjati LOO opis in število foldov.
+\end{itemize}
+}
 
 \section{Metrike}
 \label{subsec:metrike}
@@ -48,7 +77,18 @@ Za vsako nalogo in vsak validacijski protokol zbiramo naslednje metrike:
     \item confusion matrix.
 \end{itemize}
 
-\TODO{Dopolni glavne metrike, poudari balanced accuracy in macro-F1, opiši one-vs-rest macro AUC in način poročanja mean $\pm$ std čez folde.}
+\TODO{
+\begin{itemize}
+    \item glavna metrika: balanced accuracy;
+    \item podporna metrika: macro-F1;
+    \item dodatne metrike: accuracy, weighted-F1;
+    \item AUC: one-vs-rest;
+    \item macro AUC in weighted AUC, če sta stabilno izračunljiva;
+    \item confusion matrix: vrstično normalizirana;
+    \item poročanje: mean $\pm$ std čez folde;
+    \item pri manjkajočem AUC za fold: jasno označiti.
+\end{itemize}
+}
 
 \section{Glavna primerjava modelov}
 \label{subsec:glavna-primerjava}
@@ -67,7 +107,20 @@ Glavna primerjava vključuje naslednje modele:
     \item predlagani prostorsko-časovni heterogeni GNN.
 \end{itemize}
 
-\TODO{Dodaj tabelo konfiguracij modelov, enake vhodne podatke za primerljive modele, iste splite in isti način poročanja metrik.}
+\TODO{
+\begin{itemize}
+    \item tabela modelov: Majority, SVM, LightGBM, MLP, \GazeMAE{} + MLP, GNN v1, GNN v2;
+    \item GNN v2: \texttt{GCNConv}, \texttt{num\_layers=3}, \texttt{hidden\_channels=128};
+    \item GNN v2: \texttt{relation\_pooling=mlp}, \texttt{graph\_pooling=attention};
+    \item GNN v2: \texttt{learned\_signed} edge weights;
+    \item graf: \texttt{kt=2}, \texttt{ks=2}, \texttt{fixation\_dilation\_k=3};
+    \item dodatni signali: \texttt{time-window-normalized}, \texttt{distance-avg}, \texttt{fixation-duration};
+    \item edge feature: \texttt{delta\_distance};
+    \item isti split-i za primerljive modele;
+    \item isti način poročanja metrik;
+    \item opomba: \GazeMAE{} + MLP uporablja drugačno predstavitev okna, zato ga opisati kot transfer baseline.
+\end{itemize}
+}
 
 \section{Ablacijska študija}
 \label{subsec:ablacijska-studija}
@@ -82,10 +135,20 @@ Predvidene ablacijske nastavitve so:
     \item odstranitev značilk zenice,
     \item odstranitev prostorskih povezav,
     \item odstranitev časovnih povezav,
+    \item odstranitev fiksacijskih povezav,
     \item izklop uteži povezav,
     \item uporaba 5-sekundnih oken namesto 10-sekundnih,
-    \item odstranitev MLP fuzije prostorskih in časovnih predstavitev,
+    \item odstranitev MLP fuzije relacijskih predstavitev,
     \item primerjava različnih pooling strategij.
 \end{itemize}
 
-\TODO{Ko bo model končan, izberi največ 5--7 ablations in rezultate predstavi v eni glavni tabeli.}
+\TODO{
+\begin{itemize}
+    \item največ 5--7 ablations;
+    \item obvezni kandidati: brez fiksacijskih povezav, brez \texttt{distance-avg}, brez \texttt{fixation-duration}, brez \texttt{delta\_distance} edge značilke;
+    \item obvezni kandidati: brez naučenih uteži povezav, brez prostorskih povezav, brez časovnih povezav;
+    \item pooling kandidati: attention vs mean/mean+max samo, če ostane v obsegu;
+    \item jasno ločiti graf-construction ablations od model-architecture ablations;
+    \item rezultat v eni glavni tabeli.
+\end{itemize}
+}

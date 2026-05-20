@@ -5,28 +5,63 @@
 \label{subsec:diskusija-graf-pomaga}
 
 \TODO{
-Odgovori neposredno: ali finalni GNN premaga ne-grafovske baseline modele; če jih ne premaga, ali vseeno pokaže smiselno vedenje; pri kateri nalogi je graf najbolj koristen; ali graf prispeva več pri subject LOO ali recording LOO.
+\begin{itemize}
+    \item ali finalni GNN premaga ne-grafovske baseline modele;
+    \item če ne premaga: ali kaže smiselno vedenje;
+    \item pri kateri nalogi je graf najbolj koristen;
+    \item subject LOO vs recording LOO;
+    \item primerjava proti \GazeMAE{} + MLP;
+    \item povezava z ablations;
+    \item konservativen zaključek.
+\end{itemize}
 }
 
 \section{Vloga časovnih in prostorskih povezav}
 \label{subsec:diskusija-edge-types}
 
 \TODO{
-Interpretiraj ablations: časovne povezave, prostorske povezave, forward/backward temporal separation, edge weights in kaj to pomeni za razumevanje eye-tracking signalov.
+\begin{itemize}
+    \item časovne povezave;
+    \item prostorske povezave;
+    \item fiksacijske povezave;
+    \item forward/backward temporal separation;
+    \item learned signed edge weights;
+    \item \texttt{distance-avg};
+    \item \texttt{fixation-duration};
+    \item \texttt{delta\_distance} edge feature;
+    \item kaj to pomeni za eye-tracking signale;
+    \item brez kavzalnih trditev.
+\end{itemize}
 }
 
 \section{Primerjava z \GazeMAE{}}
 \label{subsec:diskusija-gazemae}
 
 \TODO{
-Povej, ali \GazeMAE{} + MLP premaga baseline modele, ali premaga GNN, ali primerjava kaže, da je self-supervised representation learning uporabna smer, in katere so omejitve reprodukcije oziroma implementacije.
+\begin{itemize}
+    \item ali \GazeMAE{} + MLP premaga baseline modele;
+    \item ali \GazeMAE{} + MLP premaga GNN;
+    \item self-supervised representation learning kot uporabna smer;
+    \item zamrznjena enkoderja position/velocity;
+    \item 512-dim okenska predstavitev;
+    \item omejitev: transfer baseline;
+    \item omejitev: ne polna reprodukcija predtreniranja.
+\end{itemize}
 }
 
 \section{Primerjava z izvirnim \MAHNOB{} pristopom}
 \label{subsec:diskusija-mahnob}
 
 \TODO{
-Povej previdno: izvirni paper uporablja drugačne ročno oblikovane eye-gaze značilke, drugačen pipeline izbire značilk in SVM; primerjava je metodološko motivacijska, ne neposredna reprodukcija.
+\begin{itemize}
+    \item izvirni paper: ročno oblikovane eye-gaze značilke;
+    \item izvirni paper: drugačen pipeline izbire značilk;
+    \item izvirni paper: SVM;
+    \item ta naloga: grafi iz časovnih oken surovejših signalov;
+    \item primerjava metodološko motivacijska;
+    \item ne neposredna reprodukcija;
+    \item posebej omeniti uporabo \texttt{distance-avg} in fiksacijskih informacij kot približanje širšemu naboru signalov iz literature.
+\end{itemize}
 }
 
 \section{Omejitve}

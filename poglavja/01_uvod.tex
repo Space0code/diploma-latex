@@ -8,7 +8,7 @@ Ti signali so časovno odvisni in lahko vsebujejo informacije o pozornosti, kogn
 V tej diplomski nalogi se osredotočamo na grafovsko modeliranje podatkov sledilnika pogleda.
 Namesto da časovno okno meritev obravnavamo zgolj kot tabelaričen niz ali vektor agregiranih značilk, ga predstavimo kot prostorsko-časovni graf.
 V takem grafu posamezne meritve predstavljajo vozlišča, povezave pa opisujejo odnose med meritvami.
-Časovne povezave povezujejo meritve, ki so si blizu v času, prostorske povezave pa meritve, ki so si blizu v prostoru pogleda.
+Časovne povezave povezujejo meritve, ki so si blizu v času, prostorske povezave meritve, ki so si blizu v prostoru pogleda, fiksacijske povezave pa meritve znotraj iste zaznane fiksacije.
 
 Osrednje raziskovalno vprašanje naloge je:
 
@@ -23,7 +23,15 @@ Glavni ciljni nalogi sta 3-razredna klasifikacija valence in 3-razredna klasifik
 \section{Motivacija}
 \label{subsec:motivacija}
 
-\TODO{Izberi in uredi eno končno verzijo motivacije. Spodaj sta ohranjeni dve delovni verziji iz Overleafa.}
+\TODO{
+\begin{itemize}
+    \item izberi eno končno verzijo motivacije;
+    \item spodaj ohranjeni dve delovni verziji iz Overleafa;
+    \item končna motivacija naj poudari grafovsko predstavitev kot metodološki prispevek;
+    \item omeniti časovne, prostorske in fiksacijske odnose;
+    \item ne obljubljati splošnega foundation modela kot glavni rezultat diplome.
+\end{itemize}
+}
 
 \subsection{Verzija 1: poudarek na GNN}
 
@@ -63,7 +71,7 @@ Dodatna podvprašanja so:
 
 \begin{enumerate}[label=\textbf{PV\arabic*:}]
     \item Kako podatke sledilnika pogleda predstaviti kot prostorsko-časovni graf?
-    \item Kakšen je vpliv časovnih povezav, prostorskih povezav, uteži povezav, informacije o velikosti zenice in informacije smeri pogleda na uspešnost modela?
+    \item Kakšen je vpliv časovnih povezav, prostorskih povezav, fiksacijskih povezav, uteži povezav, informacije o velikosti zenice, razdalje do sledilnika in trajanja fiksacij na uspešnost modela?
     \item Katere komponente končnega modela statistično značilno izboljšajo rezultate inference?
     \item Kako se grafovski modeli primerjajo s klasičnimi modeli strojnega učenja in predstavnikom SOTA?
     \item Kako se rezultati razlikujejo med delitvijo po subjektih in delitvijo po posnetkih?
@@ -81,10 +89,18 @@ Glavni doprinosi diplomske naloge so:
     \item primerjava grafovskih modelov z ne-grafovskimi modeli na enakih vhodnih oknih;
     \item vključitev \GazeMAE{} + MLP kot primerjave s sodobnim pristopom učenja predstavitev iz podatkov pogleda;
     \item evalvacija z dvema validacijskima protokoloma: subject LOO in recording LOO;
-    \item ablacijska analiza vpliva ključnih komponent grafovske konstrukcije.
+    \item ablacijska analiza vpliva ključnih komponent grafovske konstrukcije in arhitekture.
 \end{enumerate}
 
-\TODO{Ko bodo rezultati znani, prispevke po potrebi preformuliraj iz ``implementirali smo'' v bolj vsebinske trditve.}
+\TODO{
+\begin{itemize}
+    \item po rezultatih preformulirati prispevke;
+    \item iz ``implementirali smo'' v vsebinske trditve;
+    \item dodati, ali GNN v2 izboljša GNN v1;
+    \item dodati, ali grafovski modeli izboljšajo ne-grafovske baseline;
+    \item dodati, katere grafovske komponente največ prispevajo.
+\end{itemize}
+}
 
 \section{Struktura naloge}
 \label{subsec:struktura}

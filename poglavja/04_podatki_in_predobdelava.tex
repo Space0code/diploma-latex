@@ -66,7 +66,18 @@ Kadar so bila v datoteki \texttt{session.xml} prisotna vsa potrebna polja, upora
 Pri stimulusnih poskusih z nepopolnimi XML metapodatki pretvorba uporabi nadomestni vir \texttt{Guide-Cut}.
 V eksperimentalnem cevovodu uporabljamo samo vrstice z veljavno izpeljano oznako.
 
-\TODO{Dodaj tabeli/sliki porazdelitve razredov za valenco in vzburjenost po končni tvorbi 10-sekundnih oken.}
+\TODO{
+\begin{itemize}
+    \item tabela/slika porazdelitve razredov za valenco;
+    \item tabela/slika porazdelitve razredov za vzburjenost;
+    \item po končni tvorbi 10-sekundnih oken;
+    \item \texttt{min\_samples\_per\_window=60};
+    \item izključeni subjekti: P9, P12, P15;
+    \item samo \texttt{emotion-elicitation};
+    \item samo \texttt{emotion-derivation-status=ok};
+    \item ločeno navesti absolutna števila in deleže.
+\end{itemize}
+}
 
 \section{Priprava vhodnih signalov}
 \label{subsec:vhodni-signali}
@@ -83,7 +94,10 @@ Za vsak časovni vzorec uporabimo štiri osnovne signale sledilnika pogleda:
 
 V trenutni implementaciji so to stolpci \texttt{x-avg}, \texttt{y-avg}, \texttt{pupil-size-left-avg} in \texttt{pupil-size-right-avg}.
 Koordinati pogleda predstavljata povprečen položaj pogleda med levim in desnim očesom, velikosti zenic pa sta ohranjeni ločeno.
-Čas $t_i$ v sekundah uporabljamo pri konstrukciji časovnih povezav.
+Poleg osnovnih signalov trenutna konfiguracija doda še normalizirani čas znotraj okna, povprečno razdaljo med očmi in sledilnikom ter trajanje fiksacije.
+To ustreza stolpcem \texttt{time-window-normalized}, \texttt{distance-avg} in \texttt{fixation-duration}.
+Stolpec \texttt{fixation-index} uporabimo za konstrukcijo fiksacijskih povezav, ne pa kot numerično vhodno značilko.
+Čas v sekundah uporabljamo pri tvorbi časovnih oken in časovnih povezav, za vhodno značilko modela pa uporabimo okensko normalizirani čas.
 
 \subsection{Čiščenje in filtriranje podatkov}
 \label{subsec:ciscenje}
@@ -109,6 +123,9 @@ Prva standardizacija se izvede šele po razdelitvi podatkov na učni, validacijs
 
 Pri grafovskem modelu se \texttt{StandardScaler} prilagodi samo na matrikah značilk vozlišč iz grafov učnega folda.
 Isti scaler se nato uporabi za grafe učnega, validacijskega in testnega folda.
+Pri naučenih značilkah povezav se scalerji prav tako prilagodijo samo na učnem foldu.
+Časovne povezave imajo skupen scaler za relaciji \texttt{temporal\_forward} in \texttt{temporal\_backward}, pri čemer značilka smeri ostane neskalirana.
+Prostorske in fiksacijske povezave imajo ločena scalerja.
 
 \subsection{Normalizacija pri tabelaričnih modelih}
 

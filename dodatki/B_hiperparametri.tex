@@ -2,5 +2,18 @@
 \label{app:hiperparametri}
 
 \TODO{
-Dodaj tabelo hiperparametrov za baseline modele, tabelo hiperparametrov za GNN modele, finalni config in search space, če delaš hyperparameter search.
+\begin{itemize}
+    \item tabela hiperparametrov za baseline modele;
+    \item tabela hiperparametrov za \GazeMAE{} + MLP;
+    \item tabela hiperparametrov za GNN v1;
+    \item tabela hiperparametrov za GNN v2;
+    \item trenutni GNN v2: \texttt{GCNConv}, \texttt{hidden\_channels=128}, \texttt{num\_layers=3};
+    \item trenutni GNN v2: \texttt{relation\_pooling=mlp}, \texttt{graph\_pooling=attention};
+    \item trenutni graf: \texttt{kt=2}, \texttt{ks=2}, \texttt{fixation\_dilation\_k=3};
+    \item trenutne edge značilke: \texttt{use\_delta\_distance\_edge\_feature=true};
+    \item trenutni trening: learning rate $5\cdot 10^{-5}$, batch size 256, max 500 epoh, patience 20;
+    \item finalni config path;
+    \item search space, če bo uporabljen;
+    \item opomba, če kaj ni bilo sistematično tunano.
+\end{itemize}
 }

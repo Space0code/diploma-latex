@@ -1,17 +1,16 @@
 # Diploma v LaTeXu
 
-Ta mapa vsebuje lokalno verzijo diplomske naloge, pripravljeno iz FRI LaTeX predloge.
+Ta repozitorij vsebuje samostojno LaTeX verzijo diplomske naloge, pripravljeno iz FRI LaTeX predloge. Projekt nima odvisnosti od raziskovalnega repozitorija `GFM-for-eyetracker`.
 
 Glavna datoteka je:
 
 ```bash
-diploma/diploma.tex
+diploma.tex
 ```
 
 Lokalni prevod iz terminala:
 
 ```bash
-cd diploma
 latexmk diploma.tex
 ```
 

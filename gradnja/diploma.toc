@@ -1,0 +1,152 @@
+\babel@toc {american}{}\relax 
+\babel@toc {slovene}{}\relax 
+\contentsline {chapter}{Povzetek}{}{chapter*.2}%
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{Abstract}{}{chapter*.3}%
+\babel@toc {slovene}{}\relax 
+\contentsline {chapter}{Razširjeni povzetek}{1}{chapter*.5}%
+\contentsline {chapter}{\numberline {1}Uvod}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Motivacija}{4}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1.1}Verzija 1: poudarek na GNN}{4}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.1.2}Verzija 2: aplikacijsko usmerjeno}{4}{subsection.1.1.2}%
+\contentsline {section}{\numberline {1.2}Raziskovalni problem}{5}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Raziskovalna vprašanja}{5}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Doprinosi naloge}{6}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Struktura naloge}{7}{section.1.5}%
+\contentsline {chapter}{\numberline {2}Teoretično ozadje}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Grafi}{9}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Osnovna definicija grafa}{9}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Usmerjeni, uteženi in heterogeni grafi}{10}{subsection.2.1.2}%
+\contentsline {subsubsection}{Homogeni in heterogeni grafi}{10}{section*.10}%
+\contentsline {section}{\numberline {2.2}Grafovske nevronske mreže}{10}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Posredovanje sporočil}{10}{subsection.2.2.1}%
+\contentsline {subsubsection}{Splošna oblika plasti}{11}{section*.11}%
+\contentsline {subsubsection}{Agregacijska funkcija}{11}{section*.12}%
+\contentsline {subsection}{\numberline {2.2.2}Klasifikacija na ravni grafa}{11}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Prekomerno glajenje in kolaps predstavitev}{11}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}Podatki sledilnika pogleda}{12}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Merjeni signali}{12}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Časovna narava signala}{12}{subsection.2.3.2}%
+\contentsline {section}{\numberline {2.4}Čustvena stanja: valenca in vzburjenost}{13}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Dimenzijski opis čustev}{13}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}3-razredna klasifikacija}{13}{subsection.2.4.2}%
+\contentsline {chapter}{\numberline {3}Sorodna dela}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Prepoznavanje čustev iz podatkov sledilnika pogleda}{15}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Ročno oblikovane značilke}{15}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Naučene predstavitve}{16}{subsection.3.1.2}%
+\contentsline {section}{\numberline {3.2}Podatkovna zbirka MAHNOB-HCI{}}{16}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Izvirni protokol za valenco in vzburjenost}{16}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Razlika do naše eksperimentalne postavitve}{16}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Grafovske nevronske mreže za časovno-prostorske podatke}{17}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Uporaba na oknih podatkov pogleda}{17}{subsection.3.3.1}%
+\contentsline {section}{\numberline {3.4}Učenje predstavitev iz podatkov pogleda in GazeMAE{}}{17}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}GazeMAE{}}{18}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.5}Položaj te naloge glede na sorodna dela}{18}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Podatki in predobdelava}{19}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Podatkovna zbirka MAHNOB-HCI{}}{19}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Izvirna zbirka}{19}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Lokalni podnabor}{20}{subsection.4.1.2}%
+\contentsline {section}{\numberline {4.2}Ciljne oznake}{20}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Izvor čustvenih oznak}{20}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Preslikava v razrede valence in vzburjenosti}{20}{subsection.4.2.2}%
+\contentsline {section}{\numberline {4.3}Priprava vhodnih signalov}{21}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Uporabljeni stolpci}{21}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Čiščenje in filtriranje podatkov}{22}{subsection.4.3.2}%
+\contentsline {section}{\numberline {4.4}Normalizacija}{22}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Normalizacija pri grafovskih modelih}{22}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Normalizacija pri tabelaričnih modelih}{23}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Preprečevanje uhajanja informacij}{23}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Segmentacija v časovna okna}{23}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}Dolžina okna}{23}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}Dodelitev oznake oknu}{23}{subsection.4.5.2}%
+\contentsline {subsection}{\numberline {4.5.3}Minimalno število vzorcev}{23}{subsection.4.5.3}%
+\contentsline {section}{\numberline {4.6}Predhodni poskus z zbirko eSEEd\_v2{}}{24}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Grafovska predstavitev podatkov sledilnika pogleda}{27}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Učni vzorec kot graf}{27}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Definicija grafa}{27}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}Oznaka grafa}{28}{subsection.5.1.2}%
+\contentsline {section}{\numberline {5.2}Vozlišča}{28}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Definicija vozlišča}{28}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Značilke vozlišč}{28}{subsection.5.2.2}%
+\contentsline {subsubsection}{Časovna značilka}{28}{section*.13}%
+\contentsline {subsubsection}{Koordinate pogleda}{29}{section*.14}%
+\contentsline {subsubsection}{Značilke zenice}{29}{section*.15}%
+\contentsline {subsubsection}{Razdalja do sledilnika in fiksacije}{29}{section*.16}%
+\contentsline {section}{\numberline {5.3}Povezave}{29}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Časovne povezave}{29}{subsection.5.3.1}%
+\contentsline {subsubsection}{Povezave naprej in nazaj}{29}{section*.17}%
+\contentsline {subsubsection}{Parameter $k_t$}{30}{section*.18}%
+\contentsline {subsection}{\numberline {5.3.2}Prostorske povezave}{30}{subsection.5.3.2}%
+\contentsline {subsubsection}{Najbližji sosedi v prostoru pogleda}{30}{section*.19}%
+\contentsline {subsubsection}{Simetrizacija povezav}{30}{section*.20}%
+\contentsline {subsection}{\numberline {5.3.3}Fiksacijske povezave}{30}{subsection.5.3.3}%
+\contentsline {subsubsection}{Redčenje povezav znotraj fiksacije}{31}{section*.21}%
+\contentsline {section}{\numberline {5.4}Uteži povezav}{31}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Značilke povezav}{31}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Normalizacija uteži}{31}{subsection.5.4.2}%
+\contentsline {section}{\numberline {5.5}Heterogena grafovska predstavitev}{31}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Tipi relacij}{31}{subsection.5.5.1}%
+\contentsline {subsection}{\numberline {5.5.2}Zakaj ločimo relacije}{32}{subsection.5.5.2}%
+\contentsline {section}{\numberline {5.6}Statistika grafov}{32}{section.5.6}%
+\contentsline {subsection}{\numberline {5.6.1}Število vozlišč in povezav}{32}{subsection.5.6.1}%
+\contentsline {subsection}{\numberline {5.6.2}Računska zahtevnost}{32}{subsection.5.6.2}%
+\contentsline {chapter}{\numberline {6}Modeli}{33}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Ne-grafovski osnovni modeli}{33}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Primerjani modeli}{33}{subsection.6.1.1}%
+\contentsline {section}{\numberline {6.2}GazeMAE{} + MLP}{34}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Procesna veriga}{34}{subsection.6.2.1}%
+\contentsline {section}{\numberline {6.3}Grafovski osnovni modeli}{34}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}GCN{}}{34}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}GAT{}}{34}{subsection.6.3.2}%
+\contentsline {section}{\numberline {6.4}Predlagani prostorsko-časovni heterogeni GNN}{35}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Pregled arhitekture}{35}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Fuzija prostorskih in časovnih predstavitev}{35}{subsection.6.4.2}%
+\contentsline {subsection}{\numberline {6.4.3}Združevanje v predstavitev grafa}{35}{subsection.6.4.3}%
+\contentsline {subsection}{\numberline {6.4.4}Napovedna glava in učenje}{36}{subsection.6.4.4}%
+\contentsline {subsection}{\numberline {6.4.5}Diagnostika predstavitev}{36}{subsection.6.4.5}%
+\contentsline {chapter}{\numberline {7}Eksperimentalni protokol}{37}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Eksperimentalne naloge}{37}{section.7.1}%
+\contentsline {subsection}{\numberline {7.1.1}Valenca in vzburjenost}{37}{subsection.7.1.1}%
+\contentsline {section}{\numberline {7.2}Validacijska protokola}{37}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}Definicija protokolov}{37}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}Razlika med protokoloma}{38}{subsection.7.2.2}%
+\contentsline {section}{\numberline {7.3}Metrike}{38}{section.7.3}%
+\contentsline {subsection}{\numberline {7.3.1}Zbrane metrike}{38}{subsection.7.3.1}%
+\contentsline {section}{\numberline {7.4}Glavna primerjava modelov}{39}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}Primerjani modeli}{39}{subsection.7.4.1}%
+\contentsline {section}{\numberline {7.5}Ablacijska študija}{39}{section.7.5}%
+\contentsline {subsection}{\numberline {7.5.1}Predvidene ablacijske nastavitve}{39}{subsection.7.5.1}%
+\contentsline {chapter}{\numberline {8}Rezultati}{41}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Porazdelitev razredov}{41}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}Valenca}{41}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}Vzburjenost}{41}{subsection.8.1.2}%
+\contentsline {section}{\numberline {8.2}Rezultati za 3-razredno valenco}{42}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}Subject LOO}{42}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}Recording LOO}{42}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}Interpretacija rezultatov}{43}{subsection.8.2.3}%
+\contentsline {section}{\numberline {8.3}Rezultati za 3-razredno vzburjenje}{43}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Subject LOO}{43}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Recording LOO}{44}{subsection.8.3.2}%
+\contentsline {section}{\numberline {8.4}Primerjava validacijskih protokolov}{44}{section.8.4}%
+\contentsline {subsection}{\numberline {8.4.1}Posploševanje na nove subjekte}{44}{subsection.8.4.1}%
+\contentsline {subsection}{\numberline {8.4.2}Posploševanje na nove posnetke}{44}{subsection.8.4.2}%
+\contentsline {section}{\numberline {8.5}Ablacijska študija}{45}{section.8.5}%
+\contentsline {subsection}{\numberline {8.5.1}Vpliv vhodnih signalov in povezav}{45}{subsection.8.5.1}%
+\contentsline {section}{\numberline {8.6}Analiza notranjih predstavitev modela}{45}{section.8.6}%
+\contentsline {subsection}{\numberline {8.6.1}Varianca in podobnost predstavitev}{45}{subsection.8.6.1}%
+\contentsline {section}{\numberline {8.7}Analiza napak}{45}{section.8.7}%
+\contentsline {subsection}{\numberline {8.7.1}Matrike zmede}{45}{subsection.8.7.1}%
+\contentsline {chapter}{\numberline {9}Diskusija}{47}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Ali grafovska predstavitev pomaga?}{47}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Vloga časovnih in prostorskih povezav}{47}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Primerjava z GazeMAE{}}{47}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Primerjava z izvirnim MAHNOB-HCI{} pristopom}{48}{section.9.4}%
+\contentsline {section}{\numberline {9.5}Omejitve}{48}{section.9.5}%
+\contentsline {section}{\numberline {9.6}Možnosti nadaljnjega dela}{48}{section.9.6}%
+\contentsline {chapter}{\numberline {10}Zaključek}{49}{chapter.10}%
+\contentsline {chapter}{\numberline {A}Dodatni rezultati}{51}{appendix.A}%
+\contentsline {chapter}{\numberline {B}Hiperparametri}{53}{appendix.B}%
+\contentsline {chapter}{\numberline {C}Dodatne vizualizacije grafov}{55}{appendix.C}%
+\contentsline {chapter}{\numberline {D}Diagnostika predstavitev modela}{57}{appendix.D}%
+\contentsline {chapter}{\numberline {E}Zgodovinski poskusi na eSEEd\_v2{}}{59}{appendix.E}%
+\contentsline {chapter}{Literatura}{61}{appendix*.22}%

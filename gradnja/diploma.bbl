@@ -1,0 +1,370 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{bautista2021gazemae}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=9453027b84955708c5136f0430d3f968}{%
+           family={Bautista},
+           familyi={B\bibinitperiod},
+           given={Louise\bibnamedelimb Gillian\bibnamedelima C.},
+           giveni={L\bibinitperiod\bibinitdelim G\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=49a8606f4b83afe71eb2f567ccbe9c97}{%
+           family={Naval},
+           familyi={N\bibinitperiod},
+           given={Prospero\bibnamedelima C.},
+           giveni={P\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{e206dfcef1f29a57e48c5856de476483}
+      \strng{fullhash}{e206dfcef1f29a57e48c5856de476483}
+      \strng{bibnamehash}{e206dfcef1f29a57e48c5856de476483}
+      \strng{authorbibnamehash}{e206dfcef1f29a57e48c5856de476483}
+      \strng{authornamehash}{e206dfcef1f29a57e48c5856de476483}
+      \strng{authorfullhash}{e206dfcef1f29a57e48c5856de476483}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2020 25th International Conference on Pattern Recognition (ICPR)}
+      \field{title}{{GazeMAE}: General Representations of Eye Movements Using a Micro-Macro Autoencoder}
+      \field{year}{2021}
+      \field{pages}{7004\bibrangedash 7011}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/ICPR48806.2021.9412761
+      \endverb
+    \endentry
+    \entry{gilmer2017mpnn}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=4f550339f0337905aa634f39e1ba4833}{%
+           family={Gilmer},
+           familyi={G\bibinitperiod},
+           given={Justin},
+           giveni={J\bibinitperiod}}}%
+        {{hash=aa3475bbb938eec3f9f0d7c8d44f1e86}{%
+           family={Schoenholz},
+           familyi={S\bibinitperiod},
+           given={Samuel\bibnamedelima S.},
+           giveni={S\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=e9632c2c29a574cd09a5a7503be60435}{%
+           family={Riley},
+           familyi={R\bibinitperiod},
+           given={Patrick\bibnamedelima F.},
+           giveni={P\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=494b568c5dc85ba8f3f409635f9c5f25}{%
+           family={Vinyals},
+           familyi={V\bibinitperiod},
+           given={Oriol},
+           giveni={O\bibinitperiod}}}%
+        {{hash=b2367e57c17225a47853346440e87b35}{%
+           family={Dahl},
+           familyi={D\bibinitperiod},
+           given={George\bibnamedelima E.},
+           giveni={G\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {PMLR}%
+      }
+      \strng{namehash}{c654290e16b9e71825428d767650ff2a}
+      \strng{fullhash}{a97dbeb15b563be460fc056e7a076a4b}
+      \strng{bibnamehash}{c654290e16b9e71825428d767650ff2a}
+      \strng{authorbibnamehash}{c654290e16b9e71825428d767650ff2a}
+      \strng{authornamehash}{c654290e16b9e71825428d767650ff2a}
+      \strng{authorfullhash}{a97dbeb15b563be460fc056e7a076a4b}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 34th International Conference on Machine Learning}
+      \field{series}{Proceedings of Machine Learning Research}
+      \field{title}{Neural Message Passing for Quantum Chemistry}
+      \field{volume}{70}
+      \field{year}{2017}
+      \field{pages}{1263\bibrangedash 1272}
+      \range{pages}{10}
+    \endentry
+    \entry{kipf2017gcn}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=26d8bcbda6afaf96334bf47c8fb88a75}{%
+           family={Kipf},
+           familyi={K\bibinitperiod},
+           given={Thomas\bibnamedelima N.},
+           giveni={T\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+        {{hash=53d2880ad8047b61cdae2c6b2803e763}{%
+           family={Welling},
+           familyi={W\bibinitperiod},
+           given={Max},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{e04e5808dc0d0ec733212b81e1f8c78a}
+      \strng{fullhash}{e04e5808dc0d0ec733212b81e1f8c78a}
+      \strng{bibnamehash}{e04e5808dc0d0ec733212b81e1f8c78a}
+      \strng{authorbibnamehash}{e04e5808dc0d0ec733212b81e1f8c78a}
+      \strng{authornamehash}{e04e5808dc0d0ec733212b81e1f8c78a}
+      \strng{authorfullhash}{e04e5808dc0d0ec733212b81e1f8c78a}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{International Conference on Learning Representations}
+      \field{title}{Semi-Supervised Classification with Graph Convolutional Networks}
+      \field{year}{2017}
+      \verb{urlraw}
+      \verb https://openreview.net/forum?id=SJU4ayYgl
+      \endverb
+      \verb{url}
+      \verb https://openreview.net/forum?id=SJU4ayYgl
+      \endverb
+    \endentry
+    \entry{lim2020emotion}{article}{}
+      \name{author}{3}{}{%
+        {{hash=5da6ed8385b2343e9a4763c6d23c254c}{%
+           family={Lim},
+           familyi={L\bibinitperiod},
+           given={Jia\bibnamedelima Zheng},
+           giveni={J\bibinitperiod\bibinitdelim Z\bibinitperiod}}}%
+        {{hash=87644a4341e5589c3b8d2a2d86e62532}{%
+           family={Mountstephens},
+           familyi={M\bibinitperiod},
+           given={James},
+           giveni={J\bibinitperiod}}}%
+        {{hash=724511dc81475b15e9193461224c6bf4}{%
+           family={Teo},
+           familyi={T\bibinitperiod},
+           given={Jason},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {MDPI}%
+      }
+      \strng{namehash}{8d9e65baf2b46ab42fa718151366486f}
+      \strng{fullhash}{8d9e65baf2b46ab42fa718151366486f}
+      \strng{bibnamehash}{8d9e65baf2b46ab42fa718151366486f}
+      \strng{authorbibnamehash}{8d9e65baf2b46ab42fa718151366486f}
+      \strng{authornamehash}{8d9e65baf2b46ab42fa718151366486f}
+      \strng{authorfullhash}{8d9e65baf2b46ab42fa718151366486f}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Sensors}
+      \field{number}{8}
+      \field{title}{Emotion Recognition Using Eye-Tracking: Taxonomy, Review and Current Challenges}
+      \field{volume}{20}
+      \field{year}{2020}
+      \field{pages}{2384}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.3390/s20082384
+      \endverb
+    \endentry
+    \entry{soleymani2012mahnob}{article}{}
+      \name{author}{4}{}{%
+        {{hash=102f5f953b96751cafe841ae28608655}{%
+           family={Soleymani},
+           familyi={S\bibinitperiod},
+           given={Mohammad},
+           giveni={M\bibinitperiod}}}%
+        {{hash=60626202d9288aaa05a92e5e6c21920e}{%
+           family={Lichtenauer},
+           familyi={L\bibinitperiod},
+           given={Jeroen},
+           giveni={J\bibinitperiod}}}%
+        {{hash=365121602dae6fe0f43231bf62bdd821}{%
+           family={Pun},
+           familyi={P\bibinitperiod},
+           given={Thierry},
+           giveni={T\bibinitperiod}}}%
+        {{hash=8cb77420f48bdd963270052918f1ec5b}{%
+           family={Pantic},
+           familyi={P\bibinitperiod},
+           given={Maja},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{f8f4e45559858412db753efaf725b83a}
+      \strng{fullhash}{2b518ad7ff4413c4aac0b02aefb64177}
+      \strng{bibnamehash}{f8f4e45559858412db753efaf725b83a}
+      \strng{authorbibnamehash}{f8f4e45559858412db753efaf725b83a}
+      \strng{authornamehash}{f8f4e45559858412db753efaf725b83a}
+      \strng{authorfullhash}{2b518ad7ff4413c4aac0b02aefb64177}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Affective Computing}
+      \field{number}{1}
+      \field{title}{A Multimodal Database for Affect Recognition and Implicit Tagging}
+      \field{volume}{3}
+      \field{year}{2012}
+      \field{pages}{42\bibrangedash 55}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1109/T-AFFC.2011.25
+      \endverb
+    \endentry
+    \entry{tarnowski2020eye}{article}{}
+      \name{author}{4}{}{%
+        {{hash=cb6f064a23019a46972f2c40d9e2e0f5}{%
+           family={Tarnowski},
+           familyi={T\bibinitperiod},
+           given={Pawe{ł}},
+           giveni={P\bibinitperiod}}}%
+        {{hash=2acac7489632a980f745ff4fb3f115f2}{%
+           family={Ko{ł}odziej},
+           familyi={K\bibinitperiod},
+           given={Marcin},
+           giveni={M\bibinitperiod}}}%
+        {{hash=159f16ee8c9926049802cadc2a19854f}{%
+           family={Majkowski},
+           familyi={M\bibinitperiod},
+           given={Andrzej},
+           giveni={A\bibinitperiod}}}%
+        {{hash=0eaf6a82fd82f7dc3ef6ccd68cfadb1a}{%
+           family={Rak},
+           familyi={R\bibinitperiod},
+           given={Remigiusz\bibnamedelima Jan},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Hindawi}%
+      }
+      \strng{namehash}{c318353c2babd50f609968b06bf8f485}
+      \strng{fullhash}{6b23cc2eb24f8e4cba79ed07c32a503c}
+      \strng{bibnamehash}{c318353c2babd50f609968b06bf8f485}
+      \strng{authorbibnamehash}{c318353c2babd50f609968b06bf8f485}
+      \strng{authornamehash}{c318353c2babd50f609968b06bf8f485}
+      \strng{authorfullhash}{6b23cc2eb24f8e4cba79ed07c32a503c}
+      \field{sortinit}{T}
+      \field{sortinithash}{9af77f0292593c26bde9a56e688eaee9}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computational Intelligence and Neuroscience}
+      \field{title}{Eye-Tracking Analysis for Emotion Recognition}
+      \field{volume}{2020}
+      \field{year}{2020}
+      \field{pages}{2909267}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1155/2020/2909267
+      \endverb
+    \endentry
+    \entry{velickovic2018gat}{inproceedings}{}
+      \name{author}{6}{}{%
+        {{hash=b1208a71c9b067bcef8fb29c15a09b5d}{%
+           family={Veličković},
+           familyi={V\bibinitperiod},
+           given={Petar},
+           giveni={P\bibinitperiod}}}%
+        {{hash=c30bc5878e196747275a7ff581c6ed22}{%
+           family={Cucurull},
+           familyi={C\bibinitperiod},
+           given={Guillem},
+           giveni={G\bibinitperiod}}}%
+        {{hash=5a0765951987db22af274a31732111fa}{%
+           family={Casanova},
+           familyi={C\bibinitperiod},
+           given={Arantxa},
+           giveni={A\bibinitperiod}}}%
+        {{hash=8e0f06556535de7b7d9d04d390dc4ac3}{%
+           family={Romero},
+           familyi={R\bibinitperiod},
+           given={Adriana},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b1dc447055a5e64105a2984bf8306851}{%
+           family={Liò},
+           familyi={L\bibinitperiod},
+           given={Pietro},
+           giveni={P\bibinitperiod}}}%
+        {{hash=40a8e4774982146adc2688546f54efb2}{%
+           family={Bengio},
+           familyi={B\bibinitperiod},
+           given={Yoshua},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{a923132f6a9d7d93c40facfd855c7dc4}
+      \strng{fullhash}{e36c8bf9f36dc60726c1c2afa402755c}
+      \strng{bibnamehash}{a923132f6a9d7d93c40facfd855c7dc4}
+      \strng{authorbibnamehash}{a923132f6a9d7d93c40facfd855c7dc4}
+      \strng{authornamehash}{a923132f6a9d7d93c40facfd855c7dc4}
+      \strng{authorfullhash}{e36c8bf9f36dc60726c1c2afa402755c}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{International Conference on Learning Representations}
+      \field{title}{Graph Attention Networks}
+      \field{year}{2018}
+      \verb{urlraw}
+      \verb https://openreview.net/forum?id=rJXMpikCZ
+      \endverb
+      \verb{url}
+      \verb https://openreview.net/forum?id=rJXMpikCZ
+      \endverb
+    \endentry
+    \entry{yu2018stgcn}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=fc6283cba40337baef29625ca7f4d236}{%
+           family={Yu},
+           familyi={Y\bibinitperiod},
+           given={Bing},
+           giveni={B\bibinitperiod}}}%
+        {{hash=6151143b5e294089662c732e705c1e46}{%
+           family={Yin},
+           familyi={Y\bibinitperiod},
+           given={Haoteng},
+           giveni={H\bibinitperiod}}}%
+        {{hash=7ca1785e29d89d5e12c4af422138f7c9}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Zhanxing},
+           giveni={Z\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {International Joint Conferences on Artificial Intelligence Organization}%
+      }
+      \strng{namehash}{5026f64964b36effc881a59a46e95f37}
+      \strng{fullhash}{5026f64964b36effc881a59a46e95f37}
+      \strng{bibnamehash}{5026f64964b36effc881a59a46e95f37}
+      \strng{authorbibnamehash}{5026f64964b36effc881a59a46e95f37}
+      \strng{authornamehash}{5026f64964b36effc881a59a46e95f37}
+      \strng{authorfullhash}{5026f64964b36effc881a59a46e95f37}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Twenty-Seventh International Joint Conference on Artificial Intelligence}
+      \field{title}{Spatio-Temporal Graph Convolutional Networks: A Deep Learning Framework for Traffic Forecasting}
+      \field{year}{2018}
+      \field{pages}{3634\bibrangedash 3640}
+      \range{pages}{7}
+      \verb{doi}
+      \verb 10.24963/ijcai.2018/505
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

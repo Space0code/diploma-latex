@@ -24,6 +24,8 @@ En graf predstavlja en učni vzorec.
 
 Vsak graf označimo z oznako pripadajočega časovnega okna.
 V nalogi to oznako uporabimo pri ločenih klasifikacijskih nalogah valence in vzburjenosti.
+\END_NOTE{Na koncu popravi, če klasifikacijski nalogi nista ločeni, ampak združeni v eno nalogo. Predvidevam, da bosta ločeni, ker mislim, da so tako tudi naredili v MAHNOB članku.}
+
 
 \section{Vozlišča}
 \label{subsec:vozlisca}
@@ -60,7 +62,7 @@ Vektor značilk vozlišča je
         f_{dur,i}
     \right],
 \end{equation}
-kjer sta $x_i$ in $y_i$ koordinati pogleda, $p_{l,i}$ in $p_{r,i}$ sta velikosti leve in desne zenice, $t_i$ je normalizirani čas znotraj okna, $d_i$ je razdalja med sledilnikom in udeleženčevimi očmi, $f_{dur,i}$ pa trajanje fiksacije, ki ji pripada $i$-ta meritev.
+kjer sta $x_i$ in $y_i$ koordinati pogleda, $p_{l,i}$ in $p_{r,i}$ velikosti leve in desne zenice, $t_i$ je normalizirani čas znotraj okna, $d_i$ razdalja med sledilnikom in udeleženčevimi očmi, $f_{dur,i}$ pa trajanje fiksacije, ki ji pripada $i$-ta meritev.
 
 \subsubsection{Časovna značilka}
 
@@ -79,15 +81,34 @@ Značilki $p_{l,i}$ in $p_{r,i}$ opisujeta velikost leve in desne zenice.
 Značilki $d_i$ in $f_{dur,i}$ opisujeta razdaljo do sledilnika ter trajanje fiksacije pripadajoče meritve.
 Manjkajoče vrednosti trajanja fiksacije in meritve, ki ne pripadajo fiksaciji, so kodirane z vrednostjo $f_{dur,i}=0$.
 
+\section{Heterogena grafovska predstavitev}
+\label{subsec:heterogeni-graf}
+
+\subsection{Tipi relacij}
+
+Ker različne povezave opisujejo različne odnose med meritvami, graf obravnavamo kot heterogen graf z več tipi povezav.
+V trenutni predstavitvi uporabljamo množico relacij
+\begin{equation}
+    \mathcal{R} =
+    \{\texttt{temporal\_forward}, \texttt{temporal\_backward}, \texttt{spatial}, \texttt{fixation}\}.
+\end{equation}
+Časovne povezave naprej, časovne povezave nazaj, prostorske povezave in fiksacijske povezave so obravnavane kot ločene relacije.
+
+\subsection{Zakaj ločimo relacije}
+
+Ločevanje relacij omogoča, da model za vsak tip relacije uporablja ločeno transformacijo oziroma ločeno funkcijo posredovanja sporočil.
+S tem lahko časovno zaporednost, prostorsko bližino in pripadnost isti fiksaciji modeliramo z različnimi parametri, namesto da bi vse povezave obravnavali kot enakovredne. 
+S tem tudi dovolimo modelu, da se za različne relacije nauči dajati rezlično težo istim vozliščem. Morda je neko vozlišče zelo pomembno s pogleda časovne zaporednosti, ampak povsem nepomembno z vidika umeščenosti v prostor.
+
 \section{Povezave}
 
 \subsection{Časovne povezave}
 \label{subsec:casovne-povezave}
 
-Časovne povezave povezujejo zaporedne meritve znotraj lokalnega časovnega konteksta.
+Časovne povezave povezujejo meritve zaporedne v času.
 Naj bodo vozlišča v posameznem oknu urejena po času, tako da je $v_i$ $i$-ta meritev v časovnem zaporedju.
-Parameter $k_t \in \mathbb{N}$ določa število časovnih sosedov na vsako stran in ne časovnega radija v sekundah.
-V trenutnih poskusih uporabljamo $k_t = 2$.
+Parameter $k_t \in \mathbb{N}$ določa število časovnih sosedov na vsako stran.
+V naši privzeti nastavitvi uporabljamo $k_t = 2$. \END_NOTE{preveri končni $k_t$}
 
 \subsubsection{Povezave naprej in nazaj}
 
@@ -102,17 +123,15 @@ Ločitev smeri je smiselna, ker ima vrstni red očesnega gibanja pomen.
 
 \subsubsection{Parameter $k_t$}
 
-Parameter $k_t$ določa velikost lokalnega časovnega konteksta in s tem število povezav, ki jih dodamo okrog posamezne meritve.
+Parameter $k_t$ določa velikost lokalnega časovnega konteksta in s tem število povezav, ki jih dodamo okrog posamezne meritve. Smiselno lahko zahtevamo $k_t < n$, kjer je $n$ število vozlišč v oknu. Pričakovano število usmerjenih povezav v grafu naprej je $|E_t^+| = k_t \cdot n - \sum_{i=1}^{k_t} (i) = k_t \cdot n - \frac{k_t(k_t+1)}{2} = k_t \cdot (n - \frac{k_t+1}{2})$. Za naš primer \END_NOTE{$k_t=2$ in $n=600$ je to $|E_t^+| = 2 \cdot (600 - \frac{2+1}{2}) = 1197$ }usmerjenih povezav naprej, enako število pa je tudi usmerjenih povezav nazaj. Torej skupno imamo približno $2 k_t \cdot n$ časovnih povezav.
 
-\TODO{
-\begin{itemize}
-    \item slika časovnih povezav;
-    \item $k_t=2$ v trenutnih hitrih/Table-6 konfiguracijah;
-    \item ločeni relaciji \texttt{temporal\_forward} in \texttt{temporal\_backward};
-    \item število vseh časovnih povezav pri $n$ vozliščih: $2\sum_{d=1}^{k_t}(n-d)$;
-    \item pri $k_t=2$: približno $4n-6$ usmerjenih časovnih povezav.
-\end{itemize}
+\END_NOTE{
+    \begin{itemize}
+        \item Vstavi sliko časovnih povezav.
+        \item Razmisli o smiselnosti $k_t$ glede na število layerjev GNN .
+    \end{itemize}
 }
+
 
 \subsection{Prostorske povezave}
 \label{subsec:prostorske-povezave}
@@ -122,105 +141,141 @@ Za vsako vozlišče poiščemo $k_s$ najbližjih sosedov v prostoru koordinat po
 
 \subsubsection{Najbližji sosedi v prostoru pogleda}
 
-Prostorsko razdaljo med meritvama $i$ in $j$ definiramo kot
+Prostorsko razdaljo med meritvama $i$ in $j$ definiramo evklidsko:
 \begin{equation}
     d_{ij}^{(s)} =
     \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}.
 \end{equation}
-Povezava $(v_i, v_j)$ je dodana, če je $v_j$ med $k_s$ najbližjimi prostorskimi sosedi vozlišča $v_i$.
+
+Za vsako vozlišče $v_i$ poiščemo $k_s$ najbližjih sosedov v prostoru koordinat pogleda $(x,y)$ z uporabo k-d drevesa. Če je $v_j$ med temi sosedi, dodamo povezavo med vozliščema $v_i$ in $v_j$; ker prostorske povezave obravnavamo kot neusmerjene, povezavo predstavimo z obema usmerjenima povezavama $(v_i,v_j)$ in $(v_j,v_i)$. Na koncu odstranimo podvojene povezave znotraj relacije $E_s$.
 
 \subsubsection{Simetrizacija povezav}
 
 Ker povezave obravnavamo kot neusmerjene, vsaki povezavi $(v_i,v_j)$ dodamo tudi povezavo $(v_j,v_i)$.
 
-\TODO{
-\begin{itemize}
-    \item slika prostorskih povezav;
-    \item $k_s=2$ v trenutnih hitrih/Table-6 konfiguracijah;
-    \item iskanje najbližjih sosedov v prostoru $(x_i,y_i)$;
-    \item dodajanje povezav v obe smeri;
-    \item odstranjevanje podvojenih prostorskih povezav s \texttt{torch.unique}.
-\end{itemize}
+\END_NOTE{
+    \begin{itemize}
+        \item Vstavi sliko prostorskih povezav.
+        \item $k_s=2$ v trenutnih poskusih. Preveri končni $k_s$.
+    \end{itemize}
 }
+
 
 \subsection{Fiksacijske povezave}
 \label{subsec:fiksacijske-povezave}
 
 Fiksacijske povezave povezujejo meritve, ki pripadajo isti zaznani fiksaciji.
-Pripadnost fiksaciji določimo z identifikatorjem fiksacije.
+Pripadnost fiksaciji določimo z identifikatorjem fiksacije, podanim v \MAHNOB podatkih.
 
 \subsubsection{Redčenje povezav znotraj fiksacije}
 
-Znotraj posamezne fiksacije ne povežemo vseh vozlišč med seboj, saj bi to povzročilo veliko število povezav pri daljših fiksacijah.
-Namesto tega uporabimo redkejšo konstrukcijo, ki ohrani informacijo o pripadnosti isti fiksaciji, vendar zmanjša prostorsko in časovno zahtevnost konstrukcije grafa.
+Znotraj posamezne fiksacije ne povežemo vseh vozlišč med seboj, saj bi to povzročilo preveliko število fiksacijskih povezav.
+Namesto tega uporabimo redkejšo konstrukcijo, ki ohrani informacijo o pripadnosti isti fiksaciji, vendar zmanjša prostorsko in časovno zahtevnost konstrukcije grafa ter učenja na grafu.
+To konstrukcijo imenujemo razširjene povezave znotraj fiksacije (angl. \emph{dilated intra-fixation edges}).
+Fiksacijo obravnavamo kot zvezno zaporedje vozlišč z istim veljavnim identifikatorjem \texttt{fixation-index}.
+Če ima taka fiksacija $F$ vozlišč, jim znotraj fiksacije priredimo lokalne indekse $0,\ldots,F-1$.
 
-\TODO{
-\begin{itemize}
-    \item ime konstrukcije: razširjene povezave znotraj fiksacije;
-    \item angleško ime: \emph{dilated intra-fixation edges};
-    \item dejanski konfiguracijski ključi: \texttt{use\_fixation\_edges=true}, \texttt{fixation\_dilation\_k=3};
-    \item \texttt{fixation\_edge\_mode} še ni dejanski konfiguracijski ključ;
-    \item fiksacijski tek: zvezno zaporedje vozlišč z istim veljavnim \texttt{fixation-index};
-    \item \texttt{fixation-index}: samo za grupiranje, ne numerična značilka vozlišča;
-    \item za tek dolžine $F$: lokalni indeksi $0,\ldots,F-1$;
-    \item gostotni parameter: $k_f=\texttt{fixation\_dilation\_k}$, trenutno $k_f=3$;
-    \item korak razširitve: $s=\max(1,\lfloor F/k_f+0.5\rfloor)$;
-    \item odmiki: $D=\{(1+q s)\bmod F \mid q=0,\ldots,k_f-1\}$;
-    \item odstranitev odmika $0$ in deduplikacija odmikov;
-    \item povezave: $\{v_i,v_{(i+d)\bmod F}\}$ za $d\in D$;
-    \item zapis za PyG: vsaka neusmerjena povezava kot dve usmerjeni povezavi;
-    \item deduplikacija povezav znotraj relacije \texttt{fixation};
-    \item primer: $F=30$, $k_f=10$, $s=3$, vozlišče $0$ povežemo z $1,4,7,10,13,16,19,22,25,28$;
-    \item razlog: več dosega znotraj fiksacije kot zaporedne povezave;
-    \item razlog: brez eksplozije števila povezav kot pri polnem kliku;
-    \item primerjava gostot pri 10 s oknih, $k_t=2$, $k_s=2$: $k_f=2$ približno $1956$ fiksacijskih povezav/graf, $k_f=3$ približno $2908$, $k_f=5$ približno $4163$, $k_f=10$ približno $7273$;
-    \item trenutni privzeti izbor: $k_f=3$, približno $45,7\,\%$ vseh povezav v grafu \texttt{temporal + spatial + fixation}.
-\end{itemize}
+Gostoto povezav uravnava parameter $k_f$, ki določa število fiksacijskih povezav, ki jih generira vsako vozlišče.
+V trenutni privzeti konfiguraciji uporabljamo $k_f=3$.
+Za posamezno fiksacijo najprej izračunamo korak razširitve
+\begin{equation}
+    s = \max(1, \lfloor F/k_f + 0{,}5 \rfloor).
+\end{equation}
+Množico kandidatnih odmikov nato definiramo kot
+\begin{equation}
+    D = \{(1 + q s) \bmod F \mid q = 0,\ldots,k_f-1\}.
+\end{equation}
+Morebitni odmik $0$ in podvojene odmike odstranimo.
+Za vsak odmik $d \in D$ dodamo neusmerjene povezave
+\begin{equation}
+    \{v_i, v_{(i+d)\bmod F}\},
+    \qquad i = 0,\ldots,F-1.
+\end{equation}
+Pri zapisu grafa za posredovanje sporočil vsako neusmerjeno povezavo predstavimo z dvema usmerjenima povezavama.
+Podvojene povezave znotraj relacije $E_f$ odstranimo.
+
+Na primer, pri fiksaciji dolžine $F=30$ in parametru $k_f=3$ dobimo $s=10$.
+Vozlišče z lokalnim indeksom $0$ torej povežemo z vozlišči $1, 11$ in $21$.
+Odmik $1$ ohrani časovno lokalno komunikacijo znotraj fiksacije, večji odmiki pa omogočijo širjenje informacij tudi med časovno bolj oddaljenimi meritvami iste fiksacije.
+
+Razširjene povezave imajo večji doseg kot zgolj zaporedne fiksacijske povezave, hkrati pa se izognejo kombinatorični eksploziji, ki bi nastala pri polnem kliku.
+Pri polnem kliku bi namreč število povezav naraščalo kvadratno z dolžino fiksacije.
+Pri analiziranih 10-sekundnih oknih dobimo približno $1.956$ fiksacijskih povezav na graf pri $k_f=2$, $2.908$ pri $k_f=3$, $4.163$ pri $k_f=5$ in $7.273$ pri $k_f=10$.
+Pri privzeti izbiri $k_f=3$ so fiksacijske povezave predstavljale približno $45{,}7\,\%$ vseh povezav v grafu (relacije \texttt{temporal}, \texttt{spatial} in \texttt{fixation}).
+
+Izbira $k_f=3$ je zato kompromis med dosegom in gostoto grafa.
+Ker vsaka plast GNN omogoča izmenjavo informacij med neposredno povezanimi vozlišči, se doseg znotraj fiksacije povečuje tudi z večanjem števila plasti.
+Pri $k_f=3$ vozlišče že v eni plasti prejme informacije iz več delov iste fiksacije, večplastni model pa lahko te informacije dodatno propagira po fiksacijski relaciji.
+Večje vrednosti $k_f$ povečajo gostoto grafa, računsko zahtevnost in možnosti za prekomerno glajenje, manjše vrednosti pa graf dodatno razredčijo.
+\END_NOTE{
+    \begin{itemize}
+        \item Vstavi sliko fiksacijskih povezav.
+        \item $k_f=3$ v trenutnih poskusih. Preveri končni $k_f$ glede na eksperimente (consider kf=2).
+    \end{itemize}
 }
 
 \section{Uteži povezav}
 \label{subsec:utezi-povezav}
 
-Uteži povezav omogočajo, da model razlikuje med bližnjimi in oddaljenimi povezavami.
+Uteži povezav omogočajo, da model razlikuje med povezavami, ki povezujejo v času in prostoru različno oddaljene meritve.
 
 \subsection{Značilke povezav}
 
-V trenutni smeri razvoja uporabimo naučene uteži povezav, izračunane iz značilk relacije:
+Za vsako povezavo sestavimo vektor značilk, iz katerega model izračuna surovo skalarno oceno povezave:
 \begin{equation}
-    w_{ij}=f_{\theta}(\mathbf{r}_{ij}),
+    a_{ij}=f_{\theta}(\mathbf{r}_{ij}),
 \end{equation}
-kjer je $\mathbf{r}_{ij}$ vektor značilk povezave, $f_{\theta}$ pa večslojni perceptron.
-Za prostorske in fiksacijske povezave so uporabljene značilke $[t_i, t_j, \Delta t, \Delta x, \Delta y, d_{ij}, \Delta d^{eye}_{ij}]$, za časovne povezave pa dodatno še značilka smeri.
-Prostorske in fiksacijske povezave imajo zato v trenutni privzeti nastavitvi 7 značilk, časovne povezave pa 8 značilk.
+kjer je $\mathbf{r}_{ij}$ vektor značilk povezave $e_{ij}$, $f_{\theta}$ pa večslojni perceptron.
+Za prostorske in fiksacijske povezave so uporabljene značilke $[t_i, t_j, \Delta t, \Delta x, \Delta y, d_{ij}^{screen}, \Delta d^{eye}_{ij}]$, za časovne povezave pa dodatno še značilka smeri $\rho_{ij}$.
+Pri časovni povezavi naprej je $\rho_{ij}=1$, pri časovni povezavi nazaj pa $\rho_{ij}=-1$.
+Prostorske in fiksacijske povezave imajo torej 7, časovne povezave pa 8 značilk, iz katerih se izračunajo uteži povezav.
+  
+\begin{table}[H]
+    \centering
+    \caption{Značilke povezav za izračun naučenih uteži povezav.}
+    \label{tab:znacilke-povezav}
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth} >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Značilka & Opis \\
+        \midrule
+        $t_i$ & Normaliziran čas izvornega vozlišča znotraj časovnega okna. \\
+        $t_j$ & Normaliziran čas ciljnega vozlišča znotraj časovnega okna. \\
+        $\Delta t$ & Časovna razlika med ciljnim in izvornim vozliščem, $\Delta t = t_j - t_i$. \\
+        $\Delta x$ & Razlika v vodoravni koordinati pogleda, $\Delta x = x_j - x_i$. \\
+        $\Delta y$ & Razlika v navpični koordinati pogleda, $\Delta y = y_j - y_i$. \\
+        $d_{ij}^{screen}$ & Evklidska razdalja med položajema pogleda na zaslonu. \\
+        $\Delta d^{eye}_{ij}$ & Sprememba razdalje med sledilnikom in udeleženčevimi očmi. \\
+        $\rho_{ij} = \pm 1$ & Smer časovne povezave; uporablja se samo pri časovnih povezavah. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
 
 \subsection{Normalizacija uteži}
 
-\TODO{
-\begin{itemize}
-    \item surovi rezultat MLP: $a_{ij}=f_\theta(\mathbf{r}_{ij})$;
-    \item podpisana utež pred normalizacijo: $\tilde{w}_{ij}=\tanh(a_{ij})$;
-    \item normalizacija po vhodnih povezavah ciljnega vozlišča $j$;
-    \item formula: $w_{ij}=\tilde{w}_{ij}/(\sum_{i'\in\mathcal{N}^{-}(j)}|\tilde{w}_{i'j}|+\epsilon)$;
-    \item $\epsilon=10^{-8}$ v implementaciji;
-    \item prostorska relacija: ločen MLP;
-    \item časovni relaciji naprej/nazaj: skupen časovni MLP z značilko smeri $+1/-1$;
-    \item fiksacijska relacija: ločen MLP;
-    \item pri \texttt{learned\_signed} in \texttt{GCNConv}: \texttt{normalize=False}, \texttt{add\_self\_loops=False} v konvoluciji;
-    \item pri \texttt{GATConv}: scalar edge weights se v modelni kodi ne uporabljajo.
-\end{itemize}
-}
+Surovo skalarno oceno $a_{ij}$ najprej preslikamo v omejeno območje na interval $(-1, 1)$:
+\begin{equation}
+    \tilde{w}_{ij} = \tanh(a_{ij}).
+\end{equation}
 
-\section{Heterogena grafovska predstavitev}
-\label{subsec:heterogeni-graf}
+Nato uteži normaliziramo po vhodnih povezavah ciljnega vozlišča. 
+To pomeni, da za vozlišče $v_j$ upoštevamo povezave, ki imajo $v_j$ za ciljno vozlišče.
+Pri neusmerjenih povezavah, tretiramo vse povezave za vhodne in izhodne.
+Normalizacijo izvedemo ločeno za vsako relacijo $r$:
+\begin{equation}
+    w_{ij}^{(r)} =
+    \frac{\tilde{w}_{ij}^{(r)}}
+    {\sum_{i' \in \mathcal{N}^{-}_r(j)}
+    |\tilde{w}_{i'j}^{(r)}| + \epsilon},
+\end{equation}
+kjer je $\mathcal{N}^{-}_r(j)$ množica izvornih vozlišč, ki so z vozliščem $v_j$ povezana z vhodno povezavo tipa $r$.
+Majhna konstanta $\epsilon$ prepreči deljenje z nič.
+Takšna normalizacija stabilizira velikost agregiranih sporočil tudi pri vozliščih z večjim številom vhodnih povezav.
 
-\subsection{Tipi relacij}
-
-Ker različne povezave opisujejo različne odnose, graf obravnavamo kot heterogen graf z več tipi povezav.
-Prostorske povezave, časovne povezave naprej, časovne povezave nazaj in fiksacijske povezave imajo ločene relacije.
-
-\subsection{Zakaj ločimo relacije}
-
-To omogoča, da model za vsak tip odnosa uporablja ločeno transformacijo oziroma ločeno funkcijo posredovanja sporočil.
+Za izračun surovih ocen uporabljamo tri ločene večslojne perceptrone: enega za prostorske povezave, enega za fiksacijske povezave in enega za časovne povezave.
+Časovni relaciji naprej in nazaj si delita isti perceptron, ločeni pa sta z dodatno značilko smeri $\rho_{ij}$.
+Skalarne uteži povezav se uporabljajo pri konvoluciji \texttt{GCNConv}, ki je privzeta izbira modela.
+Pri poskusih z \texttt{GATConv} se te skalarne uteži ne uporabijo, saj \texttt{GATConv} pomembnost povezav modelira z notranjim mehanizmom pozornosti.
 
 \section{Statistika grafov}
 \label{subsec:statistika-grafov}
@@ -246,25 +301,22 @@ To omogoča, da model za vsak tip odnosa uporablja ločeno transformacijo ozirom
     \end{tabular}
 \end{table}
 
+\END_NOTE{Verjetno prestavi to poglavje nižje med modele.}
+ 
 \subsection{Računska zahtevnost}
 
-\TODO{
+
+% TODO: Izpolni spodnje alineje in preveri podatke
 \begin{itemize}
-    \item vir številk v tabeli: \texttt{docs/fixation-edges-analysis.md};
-    \item snapshot: \texttt{results/quick\_v1\_v2\_comparison/2026-05-18\_12-06-36/.../snapshot.csv};
-    \item 5034 uporabnih 10 s oken;
-    \item 22 analiziranih subjektov;
-    \item izključeni subjekti: P9, P12, P15;
-    \item povprečno število časovnih povezav skupaj: 2018;
-    \item mediana časovnih povezav skupaj: 2234;
-    \item povprečno število prostorskih povezav: 1408;
-    \item povprečno število fiksacijskih povezav pri $k_f=3$: 2908;
-    \item mediana fiksacijskih povezav pri $k_f=3$: 3204;
-    \item povprečni delež fiksacijskih povezav pri $k_f=3$: $45,7\,\%$;
-    \item še manjka: gostota grafa;
-    \item še manjka: statistika za 5 s okna, če bo uporabljena;
-    \item še manjka: slika primera 10 s grafa;
-    \item še manjka: slika krajšega 2 s ali 5 s grafa za berljivost;
-    \item še manjka: komentar računske zahtevnosti prostorskega kNN in števila povezav.
+    \item Oceni velikost GNN modela po neki metriki -- število učljivih parametrov.
+    \item Primerjaj velikost med modeli:
+    \begin{itemize}
+        \item GNN približno 560K parametrov, MLP baseline približno 5K, GazeMAE + MLP približno 2.100K parametrov, od tega samo 80K učljivih (MLP), ker je GazeMAE hrbtenica zamrznjena. (Te podatke je potrebno preveriti.)
+        \item LightGBM lahko merimo v n\_estimators in max\_depth, ampak ni zelo primerljivo.
+        \item SVM je odvisen od števila podpornih vektorjev. SVM in LGBM bomo zato primerjali samo časovno.
+    \end{itemize}
+    \item Pri eni plasti GNN je strošek posredovanja sporočil približno linearen v številu povezav in v širini skritih predstavitev. Za $L$ plasti je zato groba odvisnost $O(L \cdot |E| \cdot H)$, ob tem pa model vsebuje še linearne transformacije in MLP-je za združevanje relacij. V našem primeru je $L=3$, $H=128$, tipičen graf pa ima nekaj sto vozlišč in nekaj tisoč povezav.
+    \item Primerjaj prostorsko zahtevnost med modeli.
+    \item Primerjaj časovno zahtevnost med modeli -- konkreten povprečen čas učenja za vsak model v našem primeru.
+    \item Verjetno prestavi to poglavje nižje med modele.
 \end{itemize}
-}

@@ -128,6 +128,20 @@
     \par\vspace{0.5em}
 }
 
+\def\END_NOTE#1{%
+    \par\noindent
+    \begingroup
+    \footnotesize\itshape\color{black}%
+    \setlength{\fboxsep}{4pt}%
+    \colorbox{yellow!25}{%
+        \begin{minipage}{\dimexpr\linewidth-2\fboxsep\relax}
+        #1
+        \end{minipage}%
+    }%
+    \endgroup
+    \par\vspace{0.5em}
+}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % naslovi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

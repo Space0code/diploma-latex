@@ -12,6 +12,11 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   odstavkih.
 - Konkretnim podrobnostim o modelu, podatkih, rezultatih in konfiguracijah ne
   zaupaj iz spomina; preveri jih v `GFM-for-eyetracker`.
+- Pri zapisu števil v slovenskem besedilu uporabljaj decimalno vejico in piko za
+  ločevanje tisočic: npr. `1,2`, `1.200`, `1.123.456,789`. V LaTeX matematičnem
+  načinu decimalno vejico piši kot `{,}`, npr. `$45{,}7\,\%$`.
+- Za angleški izraz `signed value` ne uporabljaj izraza "podpisana vrednost",
+  temveč "predznačena vrednost".
 
 ## Referenčni kontekst
 

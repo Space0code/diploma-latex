@@ -242,6 +242,7 @@ Implementacijskih podrobnosti ne razprši po teoretičnih poglavjih.
   odvisnosti na lokalne poti ali na `GFM-for-eyetracker`.
 - Če iz kode izvoziš sliko ali tabelo, končni artefakt kopiraj v ustrezno mapo
   znotraj `diploma-latex` in ga referenciraj relativno.
+- Če potrebuješ python, ga uporabljaj iz conda env `gfm`.
 
 ## Reference in citiranje
 

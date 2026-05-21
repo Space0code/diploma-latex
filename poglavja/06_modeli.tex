@@ -1,64 +1,55 @@
 \chapter{Primerjani modeli in predlagana arhitektura}
 \label{sec:modeli}
 
-V tem poglavju predstavimo modele, ki jih primerjamo v eksperimentalni evalvaciji.
-Modele razdelimo na ne-grafovske osnovne modele, model \GazeMAE{} + MLP in grafovske modele.
+V tem poglavju predstavimo klasifikacijske modele strojnega učenja, ki jih primerjamo v eksperimentalni evalvaciji.
+Modele razdelimo na negrafovske osnovne modele, model \GazeMAE{} + MLP kot predstavnika SOTA ter grafovske modele.
+\END_NOTE{...grafovske modele - množina?}
 
-\section{Ne-grafovski osnovni modeli}
+Vsi modeli - osnovni, predstavnik SOTA ter grafovski modeli - uporabljajo iste izvorne podatke, ista 10-sekundna okna in iste delitve na učne, validacijske in testne množice.
+Razlika je v predstavitvi vhodnega vzorca.
+Grafovski modeli prejmejo okno kot graf meritev, negrafovski osnovni modeli prejmejo agregirano tabelarično predstavitev istega okna, \GazeMAE{} pa po svoji konstrukciji le signala \texttt{x-avg} in \texttt{y-avg}koordinat za celotno 10~s okno. 
+Za poštenejšo primerjavo so v tabelarični vhod osnovnih modelov vključene agregirane značilke istih osnovnih signalov, ki jih uporabimo tudi pri GNN: koordinati pogleda \texttt{x-avg} in \texttt{y-avg}, velikosti leve in desne zenice, oddaljenost od zaslona ter informacije o fiksacijah oziroma trajanju fiksacij.
+\TODO{Natančen seznam agregiranih statistik bomo zapisali po dokončni uskladitvi implementacije; predvidene so opisne statistike posameznega signala znotraj okna, na primer povprečje, standardni odklon, minimum, maksimum in razpon.}
+
+\section{Negrafovski osnovni modeli}
 \label{subsec:baseline-modeli}
 
-Grafovske modele primerjamo z ne-grafovskimi modeli, ki ne uporabljajo eksplicitne strukture grafa.
-Ti modeli služijo kot kontrola, ali grafovska predstavitev dejansko prispeva informacijo.
+Prvo skupino primerjalnih modelov sestavljajo negrafovski osnovni modeli.
+Z izrazom osnovni model označujemo preprostejši primerjalni model, s katerim preverimo, ali zahtevnejša arhitektura prinaša dodatno korist.
+V to skupino vključimo večinski klasifikator, naključni klasifikator, klasifikator podpornih vektorjev (SVM), Light Gradient Boosting Machine (LightGBM) in večplastni perceptron (MLP).
 
-\subsection{Primerjani modeli}
+Večinski in naključni klasifikator predstavljata spodnjo primerjalno mejo.
+Če model ne preseže teh dveh klasifikatorjev, težko trdimo, da se iz vhodnih podatkov uči uporabne vzorce.
+SVM vključimo kot predstavnika jedrnih metod oziroma metod podpornih vektorjev, LightGBM kot učinkovitega predstavnika ansambelskih drevesnih metod z gradientnim spodbujevanjem, MLP pa kot osnovni nevronski model brez eksplicitne grafovske strukture.
+Hiperparametrov osnovnih modelov nismo optimizirali.
 
-Uporabljeni osnovni modeli so:
-\begin{itemize}
-    \item večinski klasifikator,
-    \item SVM,
-    \item LightGBM,
-    \item MLP.
-\end{itemize}
+Pri modelih SVM in MLP vhodne značilke standardiziramo s pretvorbo, naučeno samo na učni podmnožici.
+Ista pretvorba se nato uporabi na validacijski in testni množici.
+LightGBM standardizacije ne potrebuje, zato prejme neposredno tabelarično predstavitev okna.
 
-\TODO{
-\begin{itemize}
-    \item vhod baseline modelov: agregirane značilke iz istih 10 s oken kot GNN;
-    \item osnovni signali: \texttt{x-avg}, \texttt{y-avg}, \texttt{pupil-size-left-avg}, \texttt{pupil-size-right-avg};
-    \item trenutni dodatni signali: \texttt{time-window-normalized}, \texttt{distance-avg}, \texttt{fixation-duration};
-    \item \texttt{fixation-index}: ne kot numerična vhodna značilka;
-    \item enaki train/validation/test split-i kot pri GNN;
-    \item standardizacija značilk: scaler naučen samo na učnem foldu;
-    \item MLP baseline: PyTorch MLP, validacijski split iz folda, early stopping na validacijski izgubi;
-    \item dodati hiperparametre: SVM, LightGBM, MLP, večinski klasifikator.
-\end{itemize}
-}
+\subsection{MLP}
 
-\section{\GazeMAE{} + MLP}
+Osnovni MLP uporabimo kot nevronski model nad agregirano tabelarično predstavitvijo okna.
+Vhod modela je vektor agregiranih značilk enega 10-sekundnega okna, izhod pa logiti za tri razrede valence oziroma vzburjenja.
+Arhitektura je namerno preprosta: dve skriti polno povezani plasti velikosti 64 z aktivacijo ReLU in izpuščanjem, za njima pa izhodna linearna plast.
+Model učimo z navzkrižno entropijo.
+Za optimizacijo uporabimo AdamW, validacijsko podmnožico pa uporabimo za zgodnje ustavljanje na podlagi validacijske izgube.
+
+
+
+\section{Ne-grafovski predstavnik SOTA: \GazeMAE{} + MLP}
 \label{subsec:gazemae-model}
 
-Model \GazeMAE{} + MLP uporabimo kot primerjavo s sodobnim pristopom učenja predstavitev iz podatkov pogleda.
-
-\subsection{Procesna veriga}
-
-Pipeline je:
+Za primerjavo s sodobnim temeljnim modelom smo uporabili odprtokodni prednaučeni kodirnik \GazeMAE{} \ref{}.
+Uporabili smo ga po principu zamrznjene hrbtenice: parametrov kodirnika med učenjem nismo spreminjali, ampak smo z njim iz podatkov pogleda izračunali vektorske predstavitve, na katerih smo nato učili MLP.
+V tem delu MLP zato ne nastopa kot samostojen klasifikator nad ročno agregiranimi značilkami, temveč kot klasifikacijska glava nad značilkami, ki jih izračuna \GazeMAE{}.
+Ker je bil \GazeMAE{} učen na $2~s$ oknih, vzorčenih s frekvenco $500~Hz$, smo tudi naša $10~s$ okna najprej pretvorili v obliko, ki jo model pričakuje: signala koordinat pogleda $(x, y)$ smo razdelili na pet neprekrivajočih se $2~s$ kosov in ju prevzorčili na ciljno frekvenco $500~Hz$.
+Iz teh kosov smo s kodirnikom pridobili predstavitev celotnega okna z~512 razsežnostmi, ta predstavitev pa je bila vhod v klasifikacijsko glavo MLP.
+Procesna veriga je zato:
 \begin{equation}
-    \text{podatki} \rightarrow \GazeMAE{} \rightarrow \text{predstavitev} \rightarrow \MLP{} \rightarrow \text{napoved}.
+    \text{koordinate } (x,y) \rightarrow \text{predprocesiranje} \rightarrow \GazeMAE{} \rightarrow \text{predstavitev} \rightarrow \MLP{} \rightarrow \text{napoved}.
 \end{equation}
-
-\TODO{
-\begin{itemize}
-    \item zamrznjena prednaučena enkoderja \GazeMAE{}: position in velocity;
-    \item lokalni uteži: \texttt{models/gazemae/pos-i3738-encoder-state.pt}, \texttt{models/gazemae/vel-i8528-encoder-state.pt};
-    \item 10 s okno razdeljeno v pet 2 s kosov;
-    \item ciljna frekvenca: 500 Hz;
-    \item koordinate MAHNOB: clipping na $1280\times 800$;
-    \item brez umetnega skaliranja višine $800 \rightarrow 1024$;
-    \item pooling kosov: mean + standard deviation;
-    \item okenska predstavitev: 512 dimenzij;
-    \item trenira se samo MLP glava;
-    \item omejitev: transfer baseline, ne polno ponovno predtreniranje \GazeMAE{}.
-\end{itemize}
-}
+ 
 
 \section{Grafovski osnovni modeli}
 \label{subsec:gnn-baselines}
@@ -126,7 +117,7 @@ Osnovni potek modela je:
     \item LayerNorm po residual seštevku;
     \item GELU aktivacija;
     \item dropout v preprocess MLP, GNN plasteh in glavi: privzeto $0,1$;
-    \item naučene podpisane uteži povezav: \texttt{edge\_weight\_mode=learned\_signed};
+    \item naučene predznačene uteži povezav: \texttt{edge\_weight\_mode=learned\_signed};
     \item standardizacija edge značilk: \texttt{standardize\_edge\_features=true}, scaler samo na učnem foldu;
     \item graph pooling: attention, \texttt{graph\_pooling=attention}.
 \end{itemize}

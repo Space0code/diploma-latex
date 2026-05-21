@@ -46,6 +46,31 @@ uporabljajo enaka časovna okna?
 - Ne trdi, da model “razume čustva”. Model klasificira oznake čustvenih stanj,
   izpeljane iz eksperimentalnih oznak oziroma samoocen.
 
+## LaTeX zapis številk, enot in izrazov
+
+- Inline matematične izraze piši z `$...$`.
+- Prikazane enačbe piši z `\begin{equation}...\end{equation}` ali `\[...\]`.
+- Ne uporabljaj `$$...$$`.
+- Številko daj v matematični način, kadar je del matematičnega izraza,
+  spremenljivke, parametra, oznake ali tehnične mere, npr. `$k=5$`, `$N=600$`,
+  `$2~s$`, `$500~Hz$`, `$(x, y)$`.
+- Številke ne daj v matematični način, kadar je navadna količina v tekočem
+  besedilu, npr. `pet kosov`, `tri naloge`, `dva modela`.
+- Pri tehničnih vrednostih z enotami vedno uporabi matematični način in nedeljivi
+  presledek, npr. `$10~s$`, `$500~Hz$`, `$60~Hz$`, `$1280 \times 800$`.
+- Pri dimenzionalnosti raje piši opisno, npr. `predstavitev z~512 razsežnostmi`,
+  namesto `$512$-dimenzionalna predstavitev`, kadar je to slogovno mogoče.
+- Spremenljivke in koordinate vedno piši v matematičnem načinu, npr. `$(x, y)$`,
+  `$t_i$`, `$p_i^{left}$`, `$G=(V,E)$`.
+- Uporabi `~` med številom in enoto, pri sklicih (`Slika~1`, `Tabela~2`,
+  `Poglavje~3`, `enačba~(4)`), pri nazivih (`prof.~dr.`, `izr.~prof.~dr.`,
+  `doc.~dr.`) in tam, kjer bi bil prelom vrstice neroden.
+- Ne pretiravaj z `~` med vsako kratko besedo in naslednjo besedo; uporabi ga
+  predvsem pri enotah, sklicih, nazivih in izrazih, ki se ne smejo prelomiti.
+- Za vire uporabljaj `\cite{...}`, ne `\ref{...}`. `\ref{...}` uporabljaj samo za
+  sklice na označene slike, tabele, enačbe, poglavja ali algoritme.
+- Nikoli ne pusti praznega `\ref{}` ali `\cite{}`.
+
 Dober vzorec odstavka:
 
 1. Povej tehnično trditev.
@@ -62,6 +87,25 @@ prostorskih in fiksacijskih povezav med zaporednimi meritvami sledilnika pogleda
 ```
 
 ## Terminologija
+
+Pri pisanju diplome dosledno skrbi za slovensko strokovno terminologijo. Ko se
+prvič pojavi nov angleški strokovni izraz:
+
+1. Ne prevajaj ga na pamet.
+2. Preveri slovensko rabo v zanesljivih virih, po prednostnem vrstnem redu:
+   Univerza v Ljubljani, posebej FRI; Institut Jožef Stefan; Univerza v Mariboru,
+   posebej FERI; slovenski terminološki slovarji in ostala strokovna literatura.
+3. Predlagaj 2--4 možne prevode, na kratko razloži razliko med njimi in označi
+   priporočeno izbiro.
+4. Vprašaj Tomija, kateri izraz želi uporabljati.
+5. Po potrditvi izraz zabeleži v projektni terminološki slovar oziroma
+   `MEMORY.md`/`AGENTS.md`.
+6. Nato ga v celotni diplomi uporabljaj konsistentno.
+
+Ob prvi pojavitvi izraza v diplomi praviloma uporabi obliko `slovenski izraz
+(angl. English term)`, kasneje pa uporabljaj samo potrjeni slovenski izraz. Ne
+uporabljaj dobesednih prevodov, če v slovenščini zvenijo nenaravno ali imajo drug
+pomen. Pri nejasnosti raje uporabi opisni prevod in vprašaj.
 
 Dosledno uporabljaj:
 

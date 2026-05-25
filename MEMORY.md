@@ -38,6 +38,16 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   `Poglavje~3`, `enačba~(4)`. Za vire uporabljaj `\cite{...}`, ne `\ref{...}`;
   `\ref{...}` uporabljaj samo za označene slike, tabele, enačbe, poglavja ali
   algoritme. Nikoli ne pusti praznega `\ref{}` ali `\cite{}`.
+- Pri naštevanju relacij oziroma tipov povezav vedno uporabi vrstni red:
+  časovne (`temporal`), prostorske (`spatial`), fiksacijske (`fixation`). Vrstni
+  red prilagodi kontekstu, npr. časovne naprej/nazaj pred prostorskimi in
+  fiksacijskimi.
+- Za model, ki je prispevek naloge, privzeto uporabljaj izraz "predlagani model".
+  Kadar je treba poudariti grafovski tip modela, uporabi "predlagani GNN"; kadar
+  opisuješ notranjo zgradbo, uporabi "predlagana arhitektura". Izraz "končni
+  model" uporabi samo, ko ga je treba ločiti od osnovnega GNN, ablacijske
+  različice ali vmesnih poskusov. Izrazom "naš model" in "naš GNN" se v končnem
+  besedilu izogibaj.
 
 ## Referenčni kontekst
 
@@ -62,5 +72,16 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   (`LightGBM`, `SVM`, `MLP`) naj dobijo razširjene agregirane statistike istih
   signalov kot GNN, vključno z informacijo o oddaljenosti od zaslona in
   fiksacijah/trajanju fiksacij.
+- Odločitev za grafovske primerjave v poglavju 6: osnovni grafovski model naj bo
+  arhitekturni baseline, ki uporablja iste signale kot finalni GNN, vendar
+  poenostavi arhitekturo. Načrtovana implementacija je majhen ločen modelni
+  razred s homogenim `GCNConv`, enotno potjo posredovanja sporočil, brez naučenih
+  skalarnih uteži povezav in zaenkrat brez različice `GATConv`. Ablacijska
+  študija naj bo ločena: tam arhitektura ostane finalna, odstranjuje pa se en
+  informacijski vir naenkrat. Ko odstranimo signal, odstranimo vse informacije,
+  ki iz njega izhajajo: značilke vozlišč, značilke povezav in povezave, zgrajene
+  na podlagi tega signala. Načrtovane skupine ablacijski poskusov so časovna
+  informacija, položaj pogleda/prostorska informacija, velikost zenic in
+  oddaljenost od zaslona.
 - Pri naslednjem delu na poglavjih preveri, ali se trenutna struktura v
   `AGENTS.md` ujema z dejansko strukturo `diploma.tex` in poglavij.

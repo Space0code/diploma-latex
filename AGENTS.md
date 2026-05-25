@@ -128,6 +128,18 @@ Dosledno uporabljaj:
 | embedding | predstavitev, razen kjer je “vložitev” res bolj naravno |
 | baseline | izhodiščni model ali primerjalni model, odvisno od stavka |
 
+Pri naštevanju relacij oziroma tipov povezav vedno uporabi vrstni red: časovne
+(`temporal`), prostorske (`spatial`), fiksacijske (`fixation`). Vrstni red
+prilagodi kontekstu, npr. časovne naprej/nazaj naštej pred prostorskimi in
+fiksacijskimi.
+
+Za model, ki je prispevek naloge, privzeto uporabljaj izraz `predlagani model`.
+Kadar je treba poudariti grafovski tip modela, uporabi `predlagani GNN`; kadar
+opisuješ notranjo zgradbo, uporabi `predlagana arhitektura`. Izraz `končni
+model` uporabi samo, ko ga je treba ločiti od osnovnega GNN, ablacijske različice
+ali vmesnih poskusov. Izrazom `naš model` in `naš GNN` se v končnem besedilu
+izogibaj.
+
 Pri prvi omembi uporabi:
 
 ```latex

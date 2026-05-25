@@ -108,7 +108,7 @@ S tem tudi dovolimo modelu, da se za različne relacije nauči dajati rezlično 
 Časovne povezave povezujejo meritve zaporedne v času.
 Naj bodo vozlišča v posameznem oknu urejena po času, tako da je $v_i$ $i$-ta meritev v časovnem zaporedju.
 Parameter $k_t \in \mathbb{N}$ določa število časovnih sosedov na vsako stran.
-V naši privzeti nastavitvi uporabljamo $k_t = 2$. \END_NOTE{preveri končni $k_t$}
+V privzeti nastavitvi uporabljamo $k_t = 2$. \END_NOTE{preveri končni $k_t$}
 
 \subsubsection{Povezave naprej in nazaj}
 
@@ -123,7 +123,7 @@ Ločitev smeri je smiselna, ker ima vrstni red očesnega gibanja pomen.
 
 \subsubsection{Parameter $k_t$}
 
-Parameter $k_t$ določa velikost lokalnega časovnega konteksta in s tem število povezav, ki jih dodamo okrog posamezne meritve. Smiselno lahko zahtevamo $k_t < n$, kjer je $n$ število vozlišč v oknu. Pričakovano število usmerjenih povezav v grafu naprej je $|E_t^+| = k_t \cdot n - \sum_{i=1}^{k_t} (i) = k_t \cdot n - \frac{k_t(k_t+1)}{2} = k_t \cdot (n - \frac{k_t+1}{2})$. Za naš primer \END_NOTE{$k_t=2$ in $n=600$ je to $|E_t^+| = 2 \cdot (600 - \frac{2+1}{2}) = 1197$ }usmerjenih povezav naprej, enako število pa je tudi usmerjenih povezav nazaj. Torej skupno imamo približno $2 k_t \cdot n$ časovnih povezav.
+Parameter $k_t$ določa velikost lokalnega časovnega konteksta in s tem število povezav, ki jih dodamo okrog posamezne meritve. Smiselno lahko zahtevamo $k_t < n$, kjer je $n$ število vozlišč v oknu. Pričakovano število usmerjenih povezav v grafu naprej je $|E_t^+| = k_t \cdot n - \sum_{i=1}^{k_t} (i) = k_t \cdot n - \frac{k_t(k_t+1)}{2} = k_t \cdot (n - \frac{k_t+1}{2})$. Za obravnavani primer \END_NOTE{$k_t=2$ in $n=600$ je to $|E_t^+| = 2 \cdot (600 - \frac{2+1}{2}) = 1197$ }usmerjenih povezav naprej, enako število pa je tudi usmerjenih povezav nazaj. Torej skupno imamo približno $2 k_t \cdot n$ časovnih povezav.
 
 \END_NOTE{
     \begin{itemize}
@@ -226,9 +226,9 @@ Za vsako povezavo sestavimo vektor značilk, iz katerega model izračuna surovo 
     a_{ij}=f_{\theta}(\mathbf{r}_{ij}),
 \end{equation}
 kjer je $\mathbf{r}_{ij}$ vektor značilk povezave $e_{ij}$, $f_{\theta}$ pa večslojni perceptron.
-Za prostorske in fiksacijske povezave so uporabljene značilke $[t_i, t_j, \Delta t, \Delta x, \Delta y, d_{ij}^{screen}, \Delta d^{eye}_{ij}]$, za časovne povezave pa dodatno še značilka smeri $\rho_{ij}$.
+Za časovne, prostorske in fiksacijske povezave so uporabljene značilke $[t_i, t_j, \Delta t, \Delta x, \Delta y, d_{ij}^{screen}, \Delta d^{eye}_{ij}]$, pri časovnih povezavah pa dodatno še značilka smeri $\rho_{ij}$.
 Pri časovni povezavi naprej je $\rho_{ij}=1$, pri časovni povezavi nazaj pa $\rho_{ij}=-1$.
-Prostorske in fiksacijske povezave imajo torej 7, časovne povezave pa 8 značilk, iz katerih se izračunajo uteži povezav.
+Časovne povezave imajo torej 8 značilk, prostorske in fiksacijske povezave pa 7 značilk, iz katerih se izračunajo uteži povezav.
   
 \begin{table}[H]
     \centering
@@ -272,7 +272,7 @@ kjer je $\mathcal{N}^{-}_r(j)$ množica izvornih vozlišč, ki so z vozliščem 
 Majhna konstanta $\epsilon$ prepreči deljenje z nič.
 Takšna normalizacija stabilizira velikost agregiranih sporočil tudi pri vozliščih z večjim številom vhodnih povezav.
 
-Za izračun surovih ocen uporabljamo tri ločene večslojne perceptrone: enega za prostorske povezave, enega za fiksacijske povezave in enega za časovne povezave.
+Za izračun surovih ocen uporabljamo tri ločene večslojne perceptrone: enega za časovne povezave, enega za prostorske povezave in enega za fiksacijske povezave.
 Časovni relaciji naprej in nazaj si delita isti perceptron, ločeni pa sta z dodatno značilko smeri $\rho_{ij}$.
 Skalarne uteži povezav se uporabljajo pri konvoluciji \texttt{GCNConv}, ki je privzeta izbira modela.
 Pri poskusih z \texttt{GATConv} se te skalarne uteži ne uporabijo, saj \texttt{GATConv} pomembnost povezav modelira z notranjim mehanizmom pozornosti.
@@ -292,9 +292,9 @@ Pri poskusih z \texttt{GATConv} se te skalarne uteži ne uporabijo, saj \texttt{
         \midrule
         Mediana števila vozlišč & 560 \\
         Povprečno število vozlišč & 505,9 \\
-        Mediana števila prostorskih povezav & 1546 \\
         Mediana števila časovnih povezav naprej & 1117 \\
         Mediana števila časovnih povezav nazaj & 1117 \\
+        Mediana števila prostorskih povezav & 1546 \\
         Mediana števila fiksacijskih povezav & 3204 \\
         Povprečna gostota grafa & TODO \\
         \bottomrule
@@ -316,8 +316,8 @@ Pri poskusih z \texttt{GATConv} se te skalarne uteži ne uporabijo, saj \texttt{
         \item LightGBM lahko merimo v n\_estimators in max\_depth, ampak ni zelo primerljivo.
         \item SVM je odvisen od števila podpornih vektorjev. SVM in LGBM bomo zato primerjali samo časovno.
     \end{itemize}
-    \item Pri eni plasti GNN je strošek posredovanja sporočil približno linearen v številu povezav in v širini skritih predstavitev. Za $L$ plasti je zato groba odvisnost $O(L \cdot |E| \cdot H)$, ob tem pa model vsebuje še linearne transformacije in MLP-je za združevanje relacij. V našem primeru je $L=3$, $H=128$, tipičen graf pa ima nekaj sto vozlišč in nekaj tisoč povezav.
+    \item Pri eni plasti GNN je strošek posredovanja sporočil približno linearen v številu povezav in v širini skritih predstavitev. Za $L$ plasti je zato groba odvisnost $O(L \cdot |E| \cdot H)$, ob tem pa model vsebuje še linearne transformacije in MLP-je za združevanje relacij. Pri predlaganem modelu je $L=3$, $H=128$, tipičen graf pa ima nekaj sto vozlišč in nekaj tisoč povezav.
     \item Primerjaj prostorsko zahtevnost med modeli.
-    \item Primerjaj časovno zahtevnost med modeli -- konkreten povprečen čas učenja za vsak model v našem primeru.
+    \item Primerjaj časovno zahtevnost med modeli -- konkreten povprečen čas učenja za vsak model v tej nalogi.
     \item Verjetno prestavi to poglavje nižje med modele.
 \end{itemize}

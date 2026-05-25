@@ -1,7 +1,7 @@
 \chapter{Sorodna dela}
 \label{sec:sorodna-dela}
 
-To poglavje povzame sorodna dela, ki so neposredno povezana z našo nalogo.
+To poglavje povzame sorodna dela, ki so neposredno povezana s to nalogo.
 Osredotočimo se na prepoznavanje čustev iz podatkov sledilnika pogleda, podatkovno zbirko \MAHNOB{}, grafovske nevronske mreže za časovno-prostorske podatke ter učenje predstavitev iz podatkov pogleda.
 
 \section{Prepoznavanje čustev iz podatkov sledilnika pogleda}
@@ -29,13 +29,13 @@ V tej nalogi uporabljamo samo podatke sledilnika pogleda, ker je osrednji cilj r
 
 \subsection{Izvirni protokol za valenco in vzburjenost}
 
-Za našo nalogo je pomemben del zbirke, v katerem so udeleženci gledali čustvene video posnetke in po vsakem posnetku podali samoocene.
+Za to nalogo je pomemben del zbirke, v katerem so udeleženci gledali čustvene video posnetke in po vsakem posnetku podali samoocene.
 V izvirnem članku so avtorji za prepoznavanje čustev med drugim poročali rezultate za 3-razredno klasifikacijo valence in vzburjenosti, pri čemer so razrede izpeljali iz poročane čustvene oznake.
 Enako formulacijo uporabimo tudi v tej nalogi, saj omogoča primerjavo z izhodiščnim protokolom podatkovne zbirke.
 
-\subsection{Razlika do naše eksperimentalne postavitve}
+\subsection{Razlika do eksperimentalne postavitve v tej nalogi}
 
-Kljub temu neposredna primerjava med rezultati v izvirnem članku in našimi rezultati ni mogoča, saj avtorji uporabljajo ročno oblikovane značilke, izračunane iz celotnega odziva na posnetek.
+Kljub temu neposredna primerjava med rezultati v izvirnem članku in rezultati te naloge ni mogoča, saj avtorji uporabljajo ročno oblikovane značilke, izračunane iz celotnega odziva na posnetek.
 Naš pristop uporablja časovna okna surovih signalov pogleda in velikosti zenic, ki jih pretvorimo v grafe.
 Zato je primerjava smiselna kot referenčni okvir za podatkovno zbirko in ciljno nalogo, ne kot ponovitev izvirnega eksperimenta.
 
@@ -43,7 +43,7 @@ Zato je primerjava smiselna kot referenčni okvir za podatkovno zbirko in ciljno
 \label{subsec:sorodna-stgnn}
 
 Grafovske nevronske mreže so primerne za podatke, pri katerih so pomembni odnosi med elementi~\cite{gilmer2017mpnn,kipf2017gcn,velickovic2018gat}.
-Pri časovno-prostorskih podatkih lahko vozlišča predstavljajo meritve, lokacije ali druge osnovne elemente, povezave pa opisujejo prostorsko bližino, časovno zaporedje ali druge odnose med njimi.
+Pri časovno-prostorskih podatkih lahko vozlišča predstavljajo meritve, lokacije ali druge osnovne elemente, povezave pa opisujejo časovno zaporedje, prostorsko bližino ali druge odnose med njimi.
 Časovno-prostorske grafovske nevronske mreže so se uveljavile predvsem pri nalogah, kjer podatki naravno nastopajo kot časovne vrste na grafu, na primer pri napovedovanju prometa~\cite{yu2018stgcn}.
 
 \subsection{Uporaba na oknih podatkov pogleda}

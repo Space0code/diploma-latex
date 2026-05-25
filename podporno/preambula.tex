@@ -128,7 +128,28 @@
     \par\vspace{0.5em}
 }
 
-\def\END_NOTE#1{%
+\makeatletter
+\begingroup
+\catcode`\_=13
+\gdef\ENDNOTEActivateUnderscore{%
+    \catcode`\_=13
+    \def_{\ifmmode\sb\else\textunderscore\fi}%
+}
+\endgroup
+\def\END_NOTE{%
+    \begingroup
+    \ENDNOTEActivateUnderscore
+    \@ifstar{\ENDNOTEBlock}{\ENDNOTEInline}%
+}
+\makeatother
+
+\newcommand{\ENDNOTEInline}[1]{%
+    \footnotesize\itshape\color{orange!70!black}%
+    [#1]%
+    \endgroup
+}
+
+\newcommand{\ENDNOTEBlock}[1]{%
     \par\noindent
     \begingroup
     \footnotesize\itshape\color{black}%
@@ -140,6 +161,7 @@
     }%
     \endgroup
     \par\vspace{0.5em}
+    \endgroup
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

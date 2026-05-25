@@ -49,6 +49,14 @@ Grafovska nevronska mreža namreč deluje na množici vozlišč in povezav, kon�
 \subsection{Značilke vozlišč}
 \label{subsec:znacilke-vozlisca}
 
+\TODO{
+\begin{itemize}
+    \item Tu naj ostane samo opis vhodnih značilk vozlišč kot dela grafovske predstavitve.
+    \item Preslikavo značilk vozlišč v latentni prostor opiši v poglavju~6.4.
+    \item Ne opisuj LayerNorm, dropout, MLP blokov ali drugih arhitekturnih komponent v tem poglavju.
+\end{itemize}
+}
+
 Vektor značilk vozlišča je
 \begin{equation}
     \mathbf{x}_i =
@@ -100,6 +108,14 @@ Ločevanje relacij omogoča, da model za vsak tip relacije uporablja ločeno tra
 S tem lahko časovno zaporednost, prostorsko bližino in pripadnost isti fiksaciji modeliramo z različnimi parametri, namesto da bi vse povezave obravnavali kot enakovredne. 
 S tem tudi dovolimo modelu, da se za različne relacije nauči dajati rezlično težo istim vozliščem. Morda je neko vozlišče zelo pomembno s pogleda časovne zaporednosti, ampak povsem nepomembno z vidika umeščenosti v prostor.
 
+\TODO{
+\begin{itemize}
+    \item Ta pododsek naj ostane konceptualna motivacija za heterogen graf.
+    \item Podrobnosti, kako model dejansko uporabi ločene relacijske transformacije, prestavi v poglavje~6.4.
+    \item Popravi slog in tipkarske napake; izogni se preveč modelno specifični razlagi v poglavju 5.
+\end{itemize}
+}
+
 \section{Povezave}
 
 \subsection{Časovne povezave}
@@ -125,7 +141,7 @@ Ločitev smeri je smiselna, ker ima vrstni red očesnega gibanja pomen.
 
 Parameter $k_t$ določa velikost lokalnega časovnega konteksta in s tem število povezav, ki jih dodamo okrog posamezne meritve. Smiselno lahko zahtevamo $k_t < n$, kjer je $n$ število vozlišč v oknu. Pričakovano število usmerjenih povezav v grafu naprej je $|E_t^+| = k_t \cdot n - \sum_{i=1}^{k_t} (i) = k_t \cdot n - \frac{k_t(k_t+1)}{2} = k_t \cdot (n - \frac{k_t+1}{2})$. Za obravnavani primer \END_NOTE{$k_t=2$ in $n=600$ je to $|E_t^+| = 2 \cdot (600 - \frac{2+1}{2}) = 1197$ }usmerjenih povezav naprej, enako število pa je tudi usmerjenih povezav nazaj. Torej skupno imamo približno $2 k_t \cdot n$ časovnih povezav.
 
-\END_NOTE{
+\END_NOTE*{
     \begin{itemize}
         \item Vstavi sliko časovnih povezav.
         \item Razmisli o smiselnosti $k_t$ glede na število layerjev GNN .
@@ -153,7 +169,7 @@ Za vsako vozlišče $v_i$ poiščemo $k_s$ najbližjih sosedov v prostoru koordi
 
 Ker povezave obravnavamo kot neusmerjene, vsaki povezavi $(v_i,v_j)$ dodamo tudi povezavo $(v_j,v_i)$.
 
-\END_NOTE{
+\END_NOTE*{
     \begin{itemize}
         \item Vstavi sliko prostorskih povezav.
         \item $k_s=2$ v trenutnih poskusih. Preveri končni $k_s$.
@@ -207,7 +223,7 @@ Izbira $k_f=3$ je zato kompromis med dosegom in gostoto grafa.
 Ker vsaka plast GNN omogoča izmenjavo informacij med neposredno povezanimi vozlišči, se doseg znotraj fiksacije povečuje tudi z večanjem števila plasti.
 Pri $k_f=3$ vozlišče že v eni plasti prejme informacije iz več delov iste fiksacije, večplastni model pa lahko te informacije dodatno propagira po fiksacijski relaciji.
 Večje vrednosti $k_f$ povečajo gostoto grafa, računsko zahtevnost in možnosti za prekomerno glajenje, manjše vrednosti pa graf dodatno razredčijo.
-\END_NOTE{
+\END_NOTE*{
     \begin{itemize}
         \item Vstavi sliko fiksacijskih povezav.
         \item $k_f=3$ v trenutnih poskusih. Preveri končni $k_f$ glede na eksperimente (consider kf=2).
@@ -216,6 +232,15 @@ Večje vrednosti $k_f$ povečajo gostoto grafa, računsko zahtevnost in možnost
 
 \section{Uteži povezav}
 \label{subsec:utezi-povezav}
+
+\TODO{
+\begin{itemize}
+    \item Razdeli vsebino tega odseka med poglavji 5 in 6.4.
+    \item V poglavju 5 naj ostanejo značilke povezav: katere količine opišejo relacijo med dvema meritvama.
+    \item V poglavje~6.4 prestavi ali tam povzemalno opiši arhitekturni del: MLP za izračun uteži, predznačene uteži, normalizacijo in uporabo uteži pri posredovanju sporočil.
+    \item V poglavju 5 ne poudarjaj več, da model iz značilk izračuna uteži; to naj bo predvsem del opisa predlaganega modela.
+\end{itemize}
+}
 
 Uteži povezav omogočajo, da model razlikuje med povezavami, ki povezujejo v času in prostoru različno oddaljene meritve.
 
@@ -252,6 +277,14 @@ Pri časovni povezavi naprej je $\rho_{ij}=1$, pri časovni povezavi nazaj pa $\
 
 
 \subsection{Normalizacija uteži}
+
+\TODO{
+\begin{itemize}
+    \item Razmisli o prestavitvi tega pododseka v poglavje~6.4, ker je normalizacija uteži del arhitekture modela in ne del same definicije vhodnega grafa.
+    \item Če formule ostanejo tukaj, jih v 6.4 ne ponavljaj; tam dodaj samo konceptualni povzetek in sklic na ta odsek.
+    \item Če formule prestaviš v 6.4, naj poglavje 5 vsebuje samo tabelo značilk povezav.
+\end{itemize}
+}
 
 Surovo skalarno oceno $a_{ij}$ najprej preslikamo v omejeno območje na interval $(-1, 1)$:
 \begin{equation}
@@ -305,6 +338,14 @@ Pri poskusih z \texttt{GATConv} se te skalarne uteži ne uporabijo, saj \texttt{
  
 \subsection{Računska zahtevnost}
 
+\TODO{
+\begin{itemize}
+    \item Ta odsek verjetno ne sodi v poglavje 5, ker govori o zahtevnosti modela, ne o konstrukciji vhodnega grafa.
+    \item Statistiko števila vozlišč in povezav lahko pustiš v poglavju 5.
+    \item Oceno števila parametrov, časa učenja, pomnilniške zahtevnosti in primerjavo z drugimi modeli prestavi v poglavje 6, poglavje 7 ali dodatek s hiperparametri.
+    \item Če v poglavju 5 ostane kaj o zahtevnosti, naj bo omejeno na zahtevnost konstrukcije grafa in gostoto povezav.
+\end{itemize}
+}
 
 % TODO: Izpolni spodnje alineje in preveri podatke
 \TODO{Stvari spodaj}

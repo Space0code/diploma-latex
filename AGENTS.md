@@ -69,7 +69,10 @@ uporabljajo enaka časovna okna?
   predvsem pri enotah, sklicih, nazivih in izrazih, ki se ne smejo prelomiti.
 - Za vire uporabljaj `\cite{...}`, ne `\ref{...}`. `\ref{...}` uporabljaj samo za
   sklice na označene slike, tabele, enačbe, poglavja ali algoritme.
-- Nikoli ne pusti praznega `\ref{}` ali `\cite{}`.
+- Prazni `\ref{}` in prazni `\cite{}` so dovoljeni kot vidni placeholderji.
+  Prazni `\ref{}` označuje kasnejši notranji sklic, prazni `\cite{}` pa mesto,
+  kjer želimo vir, vendar ga še nimamo izbranega. Če imaš dober vir ali ga lahko
+  razumno pridobiš, ga dodaj v `literatura.bib` in ga takoj citiraj.
 
 Dober vzorec odstavka:
 
@@ -127,6 +130,9 @@ Dosledno uporabljaj:
 | pixel | slikovna pika |
 | embedding | predstavitev, razen kjer je “vložitev” res bolj naravno |
 | baseline | izhodiščni model ali primerjalni model, odvisno od stavka |
+| latent space | latentni prostor, po potrebi tudi prostor predstavitev |
+| batch, mini-batch | mini-serija |
+| overfitting | prekomerno prileganje |
 
 Pri naštevanju relacij oziroma tipov povezav vedno uporabi vrstni red: časovne
 (`temporal`), prostorske (`spatial`), fiksacijske (`fixation`). Vrstni red

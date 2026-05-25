@@ -37,7 +37,12 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Pri sklicih uporabljaj nedeljivi presledek: `Slika~1`, `Tabela~2`,
   `Poglavje~3`, `enačba~(4)`. Za vire uporabljaj `\cite{...}`, ne `\ref{...}`;
   `\ref{...}` uporabljaj samo za označene slike, tabele, enačbe, poglavja ali
-  algoritme. Nikoli ne pusti praznega `\ref{}` ali `\cite{}`.
+  algoritme.
+- Tomi želi, da so prazni `\ref{}` in prazni `\cite{}` dovoljeni kot vidni
+  placeholderji. Prazni `\ref{}` označuje kasnejši notranji sklic, prazni
+  `\cite{}` pa mesto, kjer želimo vir, vendar ga še nimamo izbranega. Če imaš
+  dober vir ali ga lahko razumno pridobiš, ga dodaj v `literatura.bib` in ga
+  takoj uporabi.
 - Pri naštevanju relacij oziroma tipov povezav vedno uporabi vrstni red:
   časovne (`temporal`), prostorske (`spatial`), fiksacijske (`fixation`). Vrstni
   red prilagodi kontekstu, npr. časovne naprej/nazaj pred prostorskimi in
@@ -48,6 +53,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   model" uporabi samo, ko ga je treba ločiti od osnovnega GNN, ablacijske
   različice ali vmesnih poskusov. Izrazom "naš model" in "naš GNN" se v končnem
   besedilu izogibaj.
+- Za `latent space` uporabljaj "latentni prostor". Kadar je slogovno bolj
+  nevtralno ali konkretno, je dopusten tudi izraz "prostor predstavitev".
+- Za `batch` in `mini-batch` uporabljaj "mini-serija", ne "paket".
+- Za `overfitting` uporabljaj "prekomerno prileganje", ne "preprileganje".
 
 ## Referenčni kontekst
 

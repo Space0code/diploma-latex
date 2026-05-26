@@ -73,6 +73,13 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   eksplicitne prispevke, eksperimentalni protokol in previdno interpretacijo.
 - `hci-tagging dataset paper.pdf` je vsebinski vir za podatkovni kontekst, ne
   slogovni zgled FRI diplome.
+- Izvirni MAHNOB-HCI članek pri baseline prepoznavi čustev uporablja
+  participant-independent evalvacijo z leave-one-participant-out CV. V vsakem
+  koraku so vsi vzorci enega udeleženca testni, SVM z RBF jedrom se uči na
+  ostalih udeležencih, parameter $\gamma$ izberejo na učni množici z 20-fold CV
+  po povprečnem F1, $C=1$, izbor značilk pa naredijo z enosmerno ANOVA samo na
+  učni množici. Poročani `Average F1` je povprečje F1 po razredih, tj. makro
+  povprečje v sodobni terminologiji; članek ga ne označi kot uteženega.
 
 ## Odprte opombe
 
@@ -92,5 +99,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   na podlagi tega signala. Načrtovane skupine ablacijski poskusov so časovna
   informacija, položaj pogleda/prostorska informacija, velikost zenic in
   oddaljenost od zaslona.
+- Pri diagnostiki učenja naj glavno besedilo poroča samo ključne diagnostične
+  grafe in ugotovitve. Podrobnejše diagnostične tabele, dodatne slike kolapsa
+  predstavitev in relacijske porazdelitve uteži povezav sodijo v dodatek
+  `D_diagnostika_predstavitev.tex`.
 - Pri naslednjem delu na poglavjih preveri, ali se trenutna struktura v
   `AGENTS.md` ujema z dejansko strukturo `diploma.tex` in poglavij.

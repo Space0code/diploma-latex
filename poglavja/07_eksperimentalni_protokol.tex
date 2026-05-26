@@ -17,6 +17,7 @@ V nalogi obravnavamo dve glavni klasifikacijski nalogi:
 Obe nalogi definiramo po preslikavi iz tabele~6 izvirnega članka podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
 Razredi niso dobljeni z neposredno diskretizacijo številskih samoocen valence in vzburjenosti, temveč iz poročane čustvene oznake \texttt{emotion-id}.
 S tem eksperimentalni nalogi sledita izvirni formulaciji in omogočata primerjavo z objavljenimi rezultati na isti podatkovni zbirki.
+Za dodatno primerjavo uporabimo tudi binarni različici, pri katerih obdržimo samo oba skrajna razreda.
 
 \begin{table}[t]
     \centering
@@ -38,141 +39,148 @@ S tem eksperimentalni nalogi sledita izvirni formulaciji in omogočata primerjav
     \end{tabularx}
 \end{table}
 
-Za dodatno primerjavo uporabimo tudi binarni različici, pri katerih obdržimo samo oba skrajna razreda.
-Primarni eksperimentalni nalogi ostaneta 3-razredna klasifikacija valence in 3-razredna klasifikacija vzburjenosti.
 
 \section{Validacijska protokola}
 \label{subsec:validacijska-protokola}
 
-\subsection{Definicija protokolov}
+\subsection{Prečno preverjanje z izpuščanjem enega primerka}
 
-Uporabimo dva validacijska protokola:
+Uporabimo dva validacijska protokola prečnega preverjanja tipa "izpusti enega" (ang. \emph{leave-one-out}, LOO).
+Pri takem protokolu množico podatkov najprej razdelimo na primerke po izbrani kategoriji, na primer po subjektih ali posnetkih.
+V vsaki iteraciji nato en primerek izvzamemo iz množice in njegove podatke uporabimo kot testno množico, podatke ostalih primerkov pa uporabimo za učenje oziroma jih pri nevronskih modelih dodatno razdelimo na učno in validacijsko množico.
+Pri klasičnih modelih strojnega učenja, kot sta SVM in LightGBM, validacijske množice v osnovnem učenju ne potrebujemo, pri nevronskih modelih, kot sta MLP in GNN, pa jo uporabimo za spremljanje učenja, spreminjanje hiperparametrov učenja ter zgodnje ustavljanje.
+
+Velikost validacijske množice smo določili z \texttt{val\_size=2}.
+Ta vrednost ustreza velikostnemu redu uporabljene podatkovne množice, ki po filtriranju vsebuje 22 subjektov in 20 posnetkov.
+Od testne množice se validacijska razlikuje po tem, da lahko vpliva na potek učenja oziroma izbiro modela, testna množica pa ostane namenjena samo končni oceni delovanja v posamezni iteraciji.
+
+Uporabili smo dva validacijska protokola prečnega preverjanja tipa LOO:
 \begin{itemize}
-    \item \textbf{Subject LOO}: v vsakem foldu je en subjekt testna množica, ostali subjekti pa učna množica.
-    \item \textbf{Recording LOO}: v vsakem foldu je en posnetek oziroma stimulus testna množica, ostali posnetki pa učna množica.
+    \item \textbf{Subject LOO}: v vsaki iteraciji so podatki enega subjekta testna množica, podatki ostalih subjektov pa so na voljo za učenje oziroma validacijo.
+    \item \textbf{Recording LOO}: v vsaki iteraciji so podatki enega posnetka oziroma stimulusa testna množica, podatki ostalih posnetkov pa so na voljo za učenje oziroma validacijo.
 \end{itemize}
 
-\subsection{Razlika med protokoloma}
-
-Prvi protokol meri posploševanje na nove udeležence, drugi pa posploševanje na nove posnetke.
 Kombinirane delitve po subjektih in posnetkih v tej nalogi ne uporabljamo, ker bi bila računsko bistveno dražja in bi presegla obseg diplomske naloge.
 
-\TODO{
-\begin{itemize}
-    \item trenutne hitre/Table-6 konfiguracije: \texttt{subject\_loo} in \texttt{recording\_loo};
-    \item validacijska množica: \texttt{val\_size=2} v trenutnem quick Table-6 wrapperju;
-    \item seed: 42;
-    \item izključeni subjekti: P9, P12, P15;
-    \item label quality filter: \texttt{emotion-derivation-status=ok};
-    \item scope/filter: \texttt{emotion-elicitation};
-    \item baseline in GNN delitve poravnane z istimi fold identitetami;
-    \item scalerji za node/tabular značilke: samo učni fold;
-    \item scalerji za edge značilke: samo učni fold;
-    \item thresholdi/label transformacije pri binarnih poskusih: samo učni fold;
-    \item opomba: če uporabiš subject-kfold/recording-kfold rezultate, zamenjati LOO opis in število foldov.
-\end{itemize}
-}
+Pred izvedbo delitev smo iz podatkov izključili subjekte P9, P12 in P15.
+Ti subjekti so kot problematični navedeni že v izvirnem članku podatkovne zbirke \MAHNOB{}, zato jih izključimo tudi tukaj in s tem ohranimo boljšo primerljivost z izvirnimi rezultati.
+Pri oznakah uporabimo samo primere, pri katerih je vrednost stolpca \texttt{emotion-derivation-status} enaka \texttt{ok}, saj s tem odstranimo oglede posnetkov z nezanesljivo izpeljano čustveno oznako.
+
+Pri vsaki iteraciji prečnega preverjanja standardizacijo izračunamo samo na učni množici.
+Tako za značilke vozlišč, značilke povezav in tabelarične značilke najprej izračunamo statistike učne množice, nato pa isto pretvorbo uporabimo še na validacijski in testni množici.
+S tem preprečimo uhajanje informacij iz validacijske ali testne množice v učni postopek.
+
+\subsection{Subject LOO}
+
+Subject LOO meri posploševanje na nove udeležence.
+Izvedli smo ga zato, ker pri uporabi modela na novem uporabniku običajno nimamo označenih podatkov zanj.
+S tem protokolom ocenimo, kako dobro se naučeni vzorci prenesejo na nove subjekte in koliko so modeli občutljivi na razlike med posameznimi udeleženci.
+
+V vsaki iteraciji je en subjekt v testni množici.
+Pri nevronskih modelih sta dva izmed preostalih subjektov v validacijski množici, ostalih 19 subjektov pa je v učni množici.
+Pri tem protokolu delimo podatke po subjektih, zato so lahko podatki vseh posnetkov prisotni v učni, validacijski in testni množici.
+
+\subsection{Recording LOO}
+
+Recording LOO meri posploševanje na nove posnetke oziroma stimuluse.
+Izvedli smo ga zato, ker preverja drugačen vidik posploševanja kot Subject LOO: nov posnetek lahko povzroči drugačne vzorce pogleda, saj je pogled usmerjen na druge dele zaslona in sledi drugačnemu dogajanju.
+S tem preverimo, kako dobre so napovedi modelov pri novem stimulusu.
+
+V vsaki iteraciji je en posnetek v testni množici.
+Pri nevronskih modelih sta dva izmed preostalih posnetkov v validacijski množici, ostalih 17 posnetkov pa je v učni množici.
+Pri tem protokolu delimo podatke po posnetkih, zato so lahko podatki vseh subjektov prisotni v učni, validacijski in testni množici.
 
 \section{Metrike}
 \label{subsec:metrike}
 
-\subsection{Zbrane metrike}
+Za vsako nalogo in vsak validacijski protokol izračunamo več metrik, ker različne metrike povedo različne informacije o delovanju modela.
+Kot glavni metriki uporabimo točnost in macro-F1, z namenom direktne primerjave z izvirnim člankom podatkovne zbirke \MAHNOB{}.
+Članek sicer ne poroča izrecno, ali uporablja navadno ali uravnoteženo točnost oziroma macro-F1 ali weighted-F1, vendar to utemeljeno sklepamo iz poročanih rezultatov naključnega klasifikatorja.
 
-Za vsako nalogo in vsak validacijski protokol zbiramo naslednje metrike:
-\begin{itemize}
-    \item balanced accuracy,
-    \item accuracy,
-    \item macro-F1,
-    \item weighted-F1,
-    \item AUC,
-    \item confusion matrix.
-\end{itemize}
+\begin{table}[t]
+    \centering
+    \caption{Metrike, uporabljene pri vrednotenju modelov.}
+    \label{tab:eksperimentalni-protokol-metrike}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Metrika & Definicija & Interpretacija \\
+        \midrule
+        Accuracy & Delež pravilno razvrščenih primerov med vsemi primeri. & Ena izmed dveh glavnih metrik za primerjavo z izvirnimi rezultati na podatkovni zbirki \MAHNOB{}. \\
+        Macro-F1 & Povprečje vrednosti F1 po razredih, pri čemer ima vsak razred enako težo. & Druga glavna metrika za primerjavo z izvirnim člankom; posebej pomembna pri neuravnoteženih razredih. \\
+        Balanced accuracy & Povprečje priklica po razredih. & Enaka teža vseh razredov pri oceni uspešnosti. \\
+        Weighted-F1 & Povprečje vrednosti F1 po razredih, uteženo s številom primerov v posameznem razredu. & Dodatna ocena uspešnosti glede na dejansko porazdelitev razredov. \\
+        AUC & Ločljivost razredov na podlagi napovedanih verjetnosti; pri večrazredni nalogi jo izračunamo po pristopu one-vs-rest. & Podporna informacija o ločevanju posameznih razredov. \\
+        Confusion matrix & Število in delež napovedi za vsako kombinacijo pravega in napovedanega razreda. & Razlaga tipičnih napak modela; pri prikazu je normalizirana po vrsticah. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
 
-\TODO{
-\begin{itemize}
-    \item glavna metrika: balanced accuracy;
-    \item podporna metrika: macro-F1;
-    \item dodatne metrike: accuracy, weighted-F1;
-    \item AUC: one-vs-rest;
-    \item macro AUC in weighted AUC, če sta stabilno izračunljiva;
-    \item confusion matrix: vrstično normalizirana;
-    \item poročanje: mean $\pm$ std čez folde;
-    \item pri manjkajočem AUC za fold: jasno označiti.
-\end{itemize}
-}
+Rezultate metrik poročamo kot povprečje in standardni odklon čez iteracije prečnega preverjanja, torej v obliki mean $\pm$ std.
 
 \section{Spremljanje učenja in diagnostika}
 \label{subsec:spremljanje-ucenja}
 
 \TODO{
 \begin{itemize}
-    \item Opiši, katere diagnostične vrednosti shranjujemo med učenjem in evalvacijo.
-    \item Krivulje učne, validacijske in testne izgube uporabimo za spremljanje stabilnosti učenja in prekomernega prileganja.
-    \item Za grafovske modele dodatno spremljamo varianco predstavitev, kosinusno podobnost predstavitev in razpon logitov.
-    \item Diagnostika ni del arhitekture modela, ampak pomožna analiza za interpretacijo rezultatov.
-    \item Končne diagnostične grafe in interpretacijo predstavi v poglavju~\ref{subsec:rezultati-diagnostika} oziroma v diskusiji.
+    \item Napiši, da diagnostiko učenja obravnavamo ločeno od končnih metrik vrednotenja, kot so accuracy, F1 in AUC.
+    \item Navedi, da za nevronske modele shranjujemo učno izgubo, validacijsko izgubo, najboljšo epoho, zgodnje ustavljanje, čas epohe, trenutno stopnjo učenja in norme gradientov.
+    \item Pojasni, da krivulji učne in validacijske izgube uporabimo za preverjanje stabilnosti optimizacije in znakov prekomernega prileganja; testno izgubo izračunamo šele po izbiri najboljšega modela.
+    \item Za grafovske modele napiši, da dodatno spremljamo varianco predstavitev grafa, povprečno kosinusno podobnost predstavitev, razpon logitov in entropijo napovednih verjetnosti.
+    \item Pojasni namen teh GNN diagnostik: zaznavanje prekomernega glajenja, kolapsa predstavitev in skoraj konstantnih napovedi klasifikacijske glave.
+    \item Za predlagani model omeni še povzetke naučenih uteži povezav po časovnih, prostorskih in fiksacijskih relacijah.
+    \item V glavnem besedilu poročaj samo agregirane krivulje izgub, porazdelitev najboljše epohe in ključne GNN diagnostike; podrobne grafe po gubah in relacijske porazdelitve uteži prestavi v dodatek~\ref{app:diagnostika}.
 \end{itemize}
 }
 
 \section{Glavna primerjava modelov}
 \label{subsec:glavna-primerjava}
 
-\subsection{Primerjani modeli}
+Glavna primerjava vključuje modele v tabeli~\ref{tab:primerjani-modeli}.
+Tabela poleg imena modela povzema osnovne parametre, ki jih pri posamezni vrsti modela poročamo ali uporabljamo pri razlagi rezultatov.
 
-Glavna primerjava vključuje naslednje modele:
-\begin{itemize}
-    \item večinski klasifikator,
-    \item SVM,
-    \item LightGBM,
-    \item MLP,
-    \item \GazeMAE{} + MLP,
-    \item GCN,
-    \item GAT,
-    \item predlagani prostorsko-časovni heterogeni GNN.
-\end{itemize}
+\begin{table}[t]
+    \centering
+    \caption{Modeli, vključeni v glavno primerjavo, in njihovi osnovni parametri.}
+    \label{tab:primerjani-modeli}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.26\textwidth} >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Model & Parametri \\
+        \midrule
+        Naključni klasifikator & Enakomerno naključno vzorčenje razreda; \texttt{random\_state=42}; brez učljivih parametrov. \\
+        Večinski klasifikator & Vedno napove najpogostejši razred učne množice; brez učljivih parametrov. \\
+        SVM & Jedro RBF, \texttt{C=1.0}, \texttt{probability=true}; tabelarične značilke so standardizirane s statistikami učne množice. \\
+        LightGBM & \texttt{n\_estimators=100}, \texttt{learning\_rate=0.05}, \texttt{max\_depth=5}; učenje nad agregiranimi tabelaričnimi značilkami okna. \\
+        MLP & Dve skriti plasti s po 64 nevroni, \texttt{dropout=0.1}, \texttt{learning\_rate=0.001}, \texttt{weight\_decay=0.0001}, \texttt{max\_iter=200}; zgodnje ustavljanje na validacijski izgubi. \\
+        \GazeMAE{} + MLP & Zamrznjena prednaučena kodirnika položaja in hitrosti; okno pretvorimo v predstavitev z~512 razsežnostmi; klasifikacijska glava MLP uporablja \texttt{hidden\_layer\_size=128}, \texttt{dropout=0.2}, \texttt{learning\_rate=0.001} in \texttt{num\_epochs=100}. \\
+        Osnovni GCN & Homogeni \texttt{GCNConv} kot arhitekturni primerjalni model; isti vhodni signali in delitve kot pri predlaganem modelu; ena skupna pot posredovanja sporočil in brez naučenih skalarnih uteži povezav. \\
+        Predlagani GNN & \texttt{GCNConv}, \texttt{num\_layers=3}, \texttt{hidden\_channels=128}, \texttt{relation\_pooling=mlp}, \texttt{graph\_pooling=attention}; naučene predznačene uteži povezav; \texttt{kt=2}, \texttt{ks=2}, \texttt{fixation\_dilation\_k=3}. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+\END_NOTE{Na koncu preveri, da se vrstni red ujema z vrstnim redom v tabelah/plotih. Preveri tudi, da se ujemajo poimenovanja znotraj diplome (recimo, če si že definiral naš GNN kot X, potem uporabljaj ta konsistentno v besedilu, tabelah in slikah).}
 
 \TODO{
 \begin{itemize}
-    \item tabela modelov: Majority, SVM, LightGBM, MLP, \GazeMAE{} + MLP, GNN v1, GNN v2;
-    \item GNN v2: \texttt{GCNConv}, \texttt{num\_layers=3}, \texttt{hidden\_channels=128};
-    \item GNN v2: \texttt{relation\_pooling=mlp}, \texttt{graph\_pooling=attention};
-    \item GNN v2: \texttt{learned\_signed} edge weights;
-    \item graf: \texttt{kt=2}, \texttt{ks=2}, \texttt{fixation\_dilation\_k=3};
     \item dodatni signali: \texttt{time-window-normalized}, \texttt{distance-avg}, \texttt{fixation-duration};
     \item edge feature: \texttt{delta\_distance};
-    \item isti split-i za primerljive modele;
-    \item isti način poročanja metrik;
-    \item opomba: \GazeMAE{} + MLP uporablja drugačno predstavitev okna, zato ga opisati kot transfer baseline.
+    \item po implementaciji osnovnega GCN preveri, ali sta \texttt{num\_layers=3} in \texttt{hidden\_channels=128} uporabljena tudi pri njem.
 \end{itemize}
 }
 
 \section{Ablacijska študija}
 \label{subsec:ablacijska-studija}
 
-Ablacijska študija bo izvedena po zaklepu finalne arhitekture.
-Namen ablacijske študije je preveriti, katere komponente grafovske predstavitve in modela dejansko prispevajo k rezultatu.
+Namen ablacijske študije je bil preveriti, koliko kateri signali prispevajo k boljšim napovedim predlaganega modela.
+Izhodišče je bil predlagani model iz glavne primerjave.
+Pri vsaki ablacijski nastavitvi smo ohranili enak validacijski protokol, enake delitve podatkov in enake hiperparametre učenja, zakrili pa smo samo eno skupino informacij (en signal).
 
-\subsection{Predvidene ablacijske nastavitve}
+Preverili smo štiri ablacijske nastavitve.
+Pri prvi smo odstranili značilke velikosti zenic.
+Pri drugi smo odstranili časovno informacijo, torej časovne značilke vozlišč in povezav ter časovne povezave. 
+Pri tretji smo odstranili prostorsko informacijo, ki vključuje koordinate pogleda $(x, y)$, razdaljo in iz njih izpeljane prostorske povezave ter značilke povezav. 
+Pri četrti smo odstranili informacijo o fiksacijah, torej trajanje fiksacij in fiksacijske povezave.
 
-Predvidene ablacijske nastavitve so:
-\begin{itemize}
-    \item odstranitev značilk zenice,
-    \item odstranitev časovnih povezav,
-    \item odstranitev prostorskih povezav,
-    \item odstranitev fiksacijskih povezav,
-    \item izklop uteži povezav,
-    \item uporaba 5-sekundnih oken namesto 10-sekundnih,
-    \item odstranitev MLP fuzije relacijskih predstavitev,
-    \item primerjava različnih pooling strategij.
-\end{itemize}
 
-\TODO{
-\begin{itemize}
-    \item največ 5--7 ablations;
-    \item obvezni kandidati: brez fiksacijskih povezav, brez \texttt{distance-avg}, brez \texttt{fixation-duration}, brez \texttt{delta\_distance} edge značilke;
-    \item obvezni kandidati: brez naučenih uteži povezav, brez časovnih povezav, brez prostorskih povezav;
-    \item pooling kandidati: attention vs mean/mean+max samo, če ostane v obsegu;
-    \item jasno ločiti graf-construction ablations od model-architecture ablations;
-    \item rezultat v eni glavni tabeli.
-\end{itemize}
-}
+\END_NOTE{Morebitni dodatni poskusi naj bodo obravnavani kot ločena arhitekturna analiza, ne kot ablacijska študija vhodnih signalov: izklop uteži povezav, uporaba $5~s$ oken namesto $10~s$ oken, odstranitev MLP fuzije relacijskih predstavitev in primerjava različnih strategij združevanja grafa.}

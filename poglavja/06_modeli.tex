@@ -30,7 +30,7 @@ LightGBM standardizacije ne potrebuje, zato prejme neposredno tabelarično preds
 \subsection{MLP}
 
 Osnovni MLP uporabimo kot nevronski model nad agregirano tabelarično predstavitvijo okna.
-Vhod modela je vektor agregiranih značilk enega 10-sekundnega okna, izhod pa logiti za tri razrede valence oziroma vzburjenja.
+Vhod modela je vektor agregiranih značilk enega 10-sekundnega okna, izhod pa logiti za tri razrede valence oziroma vzburjenosti.
 Arhitektura je namerno preprosta: dve skriti polno povezani plasti velikosti 64 z aktivacijo ReLU in izpuščanjem, za njima pa izhodna linearna plast.
 Model učimo z navzkrižno entropijo.
 Za optimizacijo uporabimo AdamW, validacijsko podmnožico pa uporabimo za zgodnje ustavljanje na podlagi validacijske izgube.

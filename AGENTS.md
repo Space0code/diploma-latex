@@ -150,7 +150,7 @@ Pri prvi omembi uporabi:
 
 ```latex
 valenca (angl. valence)
-vzburjenost (angl. arousal)
+vzburjenost (ang. arousal)
 ```
 
 Izogibaj se izrazu `afektivno stanje`, razen če je v kontekstu res potreben.

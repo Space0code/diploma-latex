@@ -57,6 +57,8 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   nevtralno ali konkretno, je dopusten tudi izraz "prostor predstavitev".
 - Za `batch` in `mini-batch` uporabljaj "mini-serija", ne "paket".
 - Za `overfitting` uporabljaj "prekomerno prileganje", ne "preprileganje".
+- Za `arousal` dosledno uporabljaj "vzburjenost", ne "vzburjenje". Samo pri prvi
+  omembi v diplomi dodaj angleški izraz v oklepaju: `vzburjenost (ang. arousal)`.
 
 ## Referenčni kontekst
 

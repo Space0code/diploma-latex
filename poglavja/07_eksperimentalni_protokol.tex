@@ -9,26 +9,37 @@
 V nalogi obravnavamo dve glavni klasifikacijski nalogi:
 \begin{enumerate}
     \item 3-razredna klasifikacija valence;
-    \item 3-razredna klasifikacija vzburjenja.
+    \item 3-razredna klasifikacija vzburjenosti.
 \end{enumerate}
-Obe nalogi obravnavamo enakovredno.
 
-\TODO{
-\begin{itemize}
-    \item valenca: neprijetna, nevtralna, prijetna;
-    \item valenca neprijetna: \emph{fear}, \emph{anger}, \emph{disgust}, \emph{sadness}, \emph{anxiety};
-    \item valenca nevtralna: \emph{neutral}, \emph{surprise};
-    \item valenca prijetna: \emph{joy}, \emph{happiness}, \emph{amusement};
-    \item vzburjenost: nizka, srednja, visoka;
-    \item vzburjenost nizka: \emph{sadness}, \emph{disgust}, \emph{neutral};
-    \item vzburjenost srednja: \emph{joy}, \emph{happiness}, \emph{amusement};
-    \item vzburjenost visoka: \emph{surprise}, \emph{fear}, \emph{anger}, \emph{anxiety};
-    \item oznake iz \texttt{emotion-id}, ne neposredno rezanje self-report valence/arousal ocen;
-    \item pojasni: regresija ni glavni rezultat;
-    \item pojasni: neposredni \texttt{emotion-id} multiclass ni glavni rezultat;
-    \item opomba: če finalna zgodba preide na low/high valence, uskladiti to poglavje.
-\end{itemize}
-}
+% OPOMBA (ne briši): obe nalogi obravnavamo enakovredno, ampak v interpretaciji/diskusiji bomo večjo težo dali rezultatom za valenco, ker so podatki za vzburjenost slabši. razlaga: labele za vzburjenost se slabše ujemajo s "self reported" arousal score kot pri valenci. dokaz/referenca so ploti v GFM-for-eyetracker/docs/figures/hci-tagging/mentors meeting 2026-05-13/label_noise_analysis/2026-05-13_table6_self_report_alignment
+
+Obe nalogi definiramo po preslikavi iz tabele~6 izvirnega članka podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
+Razredi niso dobljeni z neposredno diskretizacijo številskih samoocen valence in vzburjenosti, temveč iz poročane čustvene oznake \texttt{emotion-id}.
+S tem eksperimentalni nalogi sledita izvirni formulaciji in omogočata primerjavo z objavljenimi rezultati na isti podatkovni zbirki.
+
+\begin{table}[t]
+    \centering
+    \caption{Preslikava čustvenih oznak v razrede valence in vzburjenosti, povzeta po tabeli~6 izvirnega članka \MAHNOB{}~\cite{soleymani2012mahnob}.}
+    \label{tab:eksperimentalne-naloge-table6}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedright\arraybackslash}p{0.24\textwidth} >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Ciljna naloga & Razred & Čustvene oznake \\
+        \midrule
+        Valenca & neprijetna (\emph{unpleasant}) & \emph{fear}, \emph{anger}, \emph{disgust}, \emph{sadness}, \emph{anxiety} \\
+        Valenca & nevtralna (\emph{neutral valence}) & \emph{neutral}, \emph{surprise} \\
+        Valenca & prijetna (\emph{pleasant}) & \emph{joy/happiness}, \emph{amusement} \\
+        \midrule
+        Vzburjenost & nizka (\emph{calm}) & \emph{sadness}, \emph{disgust}, \emph{neutral} \\
+        Vzburjenost & srednja (\emph{medium aroused}) & \emph{joy/happiness}, \emph{amusement} \\
+        Vzburjenost & visoka (\emph{excited/activated}) & \emph{surprise}, \emph{fear}, \emph{anger}, \emph{anxiety} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Za dodatno primerjavo uporabimo tudi binarni različici, pri katerih obdržimo samo oba skrajna razreda.
+Primarni eksperimentalni nalogi ostaneta 3-razredna klasifikacija valence in 3-razredna klasifikacija vzburjenosti.
 
 \section{Validacijska protokola}
 \label{subsec:validacijska-protokola}

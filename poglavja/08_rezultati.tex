@@ -25,6 +25,15 @@
 \end{itemize}
 }
 
+\TODO{
+\begin{itemize}
+    \item Uredniški plan slik v glavnem besedilu: obdrži samo slike, ki neposredno podprejo glavno zgodbo rezultatov. Cilj je približno ena slika za porazdelitev podatkov, ena do dve sliki za glavne rezultate, ena slika za napake modela, ena slika za ablacijsko študijo in po potrebi ena diagnostična slika.
+    \item Glavno besedilo: ne dodajaj vseh avtomatsko ustvarjenih plotov iz eksperimentalnega cevovoda. Heatmape vseh metrik, dodatne matrike zmede, per-fold grafe, recording LOO podrobnosti in alternativne metrike prestavi v dodatek~\ref{app:dodatni-rezultati}.
+    \item Kandidatna slika: UMAP procesiranih podatkov ali naučenih predstavitev. Vključi jo samo, če je vizualno berljiva, stabilna glede na naključni seed in pomaga razložiti razliko med vhodnimi podatki, \GazeMAE{} predstavitvami ali GNN predstavitvami.
+    \item Če UMAP ne pokaže jasne razredne ali modelne strukture, ga uporabi največ kot opombo v dodatku~\ref{app:dodatni-rezultati}; v glavnem besedilu ga izpusti.
+\end{itemize}
+}
+
 \section{Porazdelitev razredov}
 \label{subsec:rezultati-class-balance}
 
@@ -35,6 +44,7 @@
     \item Eksperimenti: iz končnega snapshot-a po tvorbi oken izračunati število in delež oken za razrede neprijetna, nevtralna in prijetna valenca.
     \item Eksperimenti: izračun ponoviti za podatke po izključitvi subjektov P9, P12 in P15 ter po filtriranju \texttt{emotion-derivation-status=ok}.
     \item Eksperimenti: preveriti in navesti uporabljeno vrednost \texttt{min\_samples\_per\_window=60}.
+    \item Slika: valenco združi z vzburjenostjo v eno skupno sliko porazdelitve razredov; ne ustvarjaj dveh ločenih glavnih slik.
 \end{itemize}
 }
 
@@ -51,6 +61,7 @@
 \begin{itemize}
     \item Eksperimenti: iz končnega snapshot-a po tvorbi oken izračunati število in delež oken za razrede nizka, srednja in visoka vzburjenost.
     \item Eksperimenti: preveriti, ali je porazdelitev vzburjenosti bolj neuravnotežena ali manj usklajena s samoocenami kot porazdelitev valence.
+    \item Slika: vzburjenost naj bo drugi panel skupne slike porazdelitve razredov.
 \end{itemize}
 }
 
@@ -67,6 +78,7 @@
 \begin{itemize}
     \item Eksperimenti: za binarno low/high valenco izračunati število in delež oken po odstranitvi srednjega oziroma nevtralnega razreda.
     \item Eksperimenti: za binarno low/high vzburjenost izračunati število in delež oken po odstranitvi srednjega razreda.
+    \item Dodatek~\ref{app:dodatni-rezultati}: binarne porazdelitve naj bodo v dodatku, razen če postanejo ključne za razlago glavnega rezultata.
 \end{itemize}
 }
 
@@ -117,7 +129,7 @@
 
 \TODO{
 \begin{itemize}
-    \item Slika: dodati bar plot accuracy in macro-F1 za 3-razredno valenco pri subject LOO.
+    \item Slika: dodati bar plot accuracy in macro-F1 za 3-razredno valenco pri subject LOO, če tabela sama ni dovolj pregledna. Slika naj bo združljiva po slogu z ustrezno sliko za vzburjenost ali naj obe nalogi združi v eno sliko.
     \item Slika: dodati vrstično normalizirano matriko zmede za najboljši model pri 3-razredni valenci; po potrebi dodati še primerjavo z najboljšim negrafovskim modelom.
 \end{itemize}
 }
@@ -209,7 +221,7 @@
 
 \TODO{
 \begin{itemize}
-    \item Slika: dodati bar plot accuracy in macro-F1 za 3-razredno vzburjenost pri subject LOO.
+    \item Slika: dodati bar plot accuracy in macro-F1 za 3-razredno vzburjenost pri subject LOO, po možnosti v isti sliki kot valenco.
     \item Slika: dodati vrstično normalizirano matriko zmede za najboljši model pri 3-razredni vzburjenosti.
 \end{itemize}
 }
@@ -367,6 +379,7 @@
 \TODO{
 \begin{itemize}
     \item Slika: dodati label-alignment plot ali matriko zmede iz \texttt{label\_noise\_analysis}.
+    \item Glavno besedilo: uporabi največ eno sliko za ujemanje Table 6 oznak s samoocenami, prednostno heatmapo za valenco in vzburjenost skupaj. Podrobnejše label-noise slike prestavi v dodatek~\ref{app:dodatni-rezultati}.
     \item Pisanje: razložiti, zakaj pri interpretaciji vzburjenosti pričakujemo več negotovosti kot pri valenci.
 \end{itemize}
 }
@@ -377,7 +390,7 @@
 \begin{itemize}
     \item Slika: dodati matriko zmede za najboljši GNN pri 3-razredni valenci.
     \item Slika: dodati matriko zmede za najboljši GNN pri 3-razredni vzburjenosti.
-    \item Slika: po potrebi dodati matriko zmede za najboljši negrafovski primerjalni model.
+    \item Slika: po potrebi dodati matriko zmede za najboljši negrafovski primerjalni model samo v dodatek~\ref{app:dodatni-rezultati}, razen če neposredno spremeni interpretacijo glavne primerjave.
     \item Pisanje: matrike zmede naj bodo vrstično normalizirane z barvno lestvico $[0,1]$.
     \item Pisanje: opisati najpogostejše zamenjave razredov in jih povezati s porazdelitvijo razredov ter analizo oznak.
 \end{itemize}
@@ -400,7 +413,7 @@
 \TODO{
 \begin{itemize}
     \item Pisanje: v glavnem besedilu glede na rezultate verjetno podrobneje poročati valenco, vzburjenost pa povzeti ali prestaviti v dodatek.
-    \item Slika: dodati ablation bar plot za accuracy in macro-F1.
+    \item Slika: dodati en ablation bar plot za accuracy in macro-F1. Če sta valenca in vzburjenost obe informativni, ju združi v eno sliko z dvema paneloma; sicer naj bo v glavnem besedilu samo valenca, vzburjenost pa v dodatku~\ref{app:dodatni-rezultati}.
 \end{itemize}
 }
 
@@ -435,7 +448,7 @@
 
 \TODO{
 \begin{itemize}
-    \item Slika: dodati train/val loss krivulje za glavne nevronske modele, posebej za Osnovni GCN in predlagani GNN.
+    \item Slika: dodati train/val loss krivulje za glavne nevronske modele, posebej za Osnovni GCN in predlagani GNN. V glavnem besedilu naj bo samo agregiran ali reprezentativen prikaz; per-fold krivulje prestavi v dodatek~\ref{app:diagnostika}.
     \item Pisanje: krivulje uporabiti za podporo interpretaciji rezultatov, ne kot novo glavno evalvacijo.
 \end{itemize}
 }
@@ -451,6 +464,8 @@
 
 \TODO{
 \begin{itemize}
+    \item Kandidatna slika: UMAP naučenih predstavitev grafa za najboljši GNN in, če je smiselno, primerjava z vhodnimi agregiranimi značilkami ali \GazeMAE{} predstavitvami.
+    \item UMAP vključi v glavno besedilo samo, če jasno pokaže informativno strukturo in ne zgolj subjektnih ali stimulusnih skupkov; drugače ga prestavi v dodatek~\ref{app:diagnostika} ali izpusti.
     \item Pisanje: primerjati Osnovni GCN in predlagani GNN samo toliko, kolikor diagnostika pomaga razložiti glavne rezultate.
     \item Pisanje: podrobne grafe po gubah in relacijske porazdelitve uteži prestaviti v dodatek~\ref{app:diagnostika}.
 \end{itemize}

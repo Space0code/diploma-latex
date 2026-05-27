@@ -125,5 +125,14 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   grafe in ugotovitve. Podrobnejše diagnostične tabele, dodatne slike kolapsa
   predstavitev in relacijske porazdelitve uteži povezav sodijo v dodatek
   `D_diagnostika_predstavitev.tex`.
+- Uredniški plan vizualizacij: glavno besedilo naj ima omejeno število močnih
+  slik, približno eno sliko porazdelitve podatkov, eno osrednjo sliko grafovske
+  predstavitve, eno do dve sliki glavnih rezultatov, eno sliko napak oziroma
+  matrik zmede, eno ablacijsko sliko in po potrebi eno diagnostično sliko.
+  Podrobne porazdelitve, dodatne metrike, per-fold grafe, dodatne matrike zmede,
+  ločene relacijske vizualizacije grafov in sekundarne diagnostike sodijo v
+  dodatke. UMAP je kandidatna kvalitativna slika: v glavno besedilo gre samo, če
+  je berljiva, stabilna in interpretativno koristna; sicer gre v dodatek ali se
+  izpusti.
 - Pri naslednjem delu na poglavjih preveri, ali se trenutna struktura v
   `AGENTS.md` ujema z dejansko strukturo `diploma.tex` in poglavij.

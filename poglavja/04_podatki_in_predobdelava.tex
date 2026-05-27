@@ -68,14 +68,10 @@ V eksperimentalnem cevovodu uporabljamo samo vrstice z veljavno izpeljano oznako
 
 \TODO{
 \begin{itemize}
-    \item tabela/slika porazdelitve razredov za valenco;
-    \item tabela/slika porazdelitve razredov za vzburjenost;
-    \item po končni tvorbi 10-sekundnih oken;
-    \item \texttt{min\_samples\_per\_window=60};
-    \item izključeni subjekti: P9, P12, P15;
-    \item samo \texttt{emotion-elicitation};
-    \item samo \texttt{emotion-derivation-status=ok};
-    \item ločeno navesti absolutna števila in deleže.
+    \item Glavno besedilo: dodati eno kompaktno sliko porazdelitve razredov po končnih 10-sekundnih oknih. Slika naj v dveh panelih pokaže 3-razredno valenco in 3-razredno vzburjenost; v oznakah ali spremljevalni tabeli naj bodo absolutna števila in deleži.
+    \item Glavno besedilo: pri sliki jasno navesti pogoje izračuna: \texttt{min\_samples\_per\_window=60}, izključeni subjekti P9, P12 in P15, samo \texttt{emotion-elicitation}, samo \texttt{emotion-derivation-status=ok}.
+    \item Dodatek~\ref{app:dodatni-rezultati}: prestaviti podrobnejše porazdelitve, če bodo potrebne, npr. porazdelitve po subjektih, po posnetkih, po izvornih čustvenih oznakah in ločene porazdelitve za binarni low/high nalogi.
+    \item Ne dodajaj več ločenih slik porazdelitve v glavno besedilo, razen če ena od porazdelitev neposredno pojasnjuje rezultat modela.
 \end{itemize}
 }
 
@@ -175,6 +171,15 @@ Po dodatnem filtru osamelcev q01--q99 dobimo 5\,158 uporabnih 10-sekundnih časo
         \bottomrule
     \end{tabularx}
 \end{table}
+
+\TODO{
+\begin{itemize}
+    \item Kandidatna slika za glavno besedilo: UMAP projekcija procesiranih učnih primerov po tvorbi oken. Najprej poskusi projekcijo agregiranih tabelaričnih značilk oken, obarvano po valenci in vzburjenosti.
+    \item Če UMAP pokaže jasno in razložljivo strukturo, ga vključi kot kvalitativni prikaz podatkov v poglavje o podatkih ali rezultate; v besedilu eksplicitno zapiši, da gre za vizualizacijsko projekcijo in ne za kvantitativni dokaz ločljivosti razredov.
+    \item Če UMAP ne pokaže jasne strukture ali je slika vizualno neprepričljiva, ga ne vključi v glavno besedilo; po potrebi ga prestavi v dodatek~\ref{app:dodatni-rezultati} ali ga izpusti.
+    \item Pri vseh UMAP slikah preveri barvanje po razredu, subjektu in posnetku, da ločiš morebitno razredno strukturo od subjektnih oziroma stimulusnih učinkov.
+\end{itemize}
+}
 
 \section{Predhodni poskus z zbirko \ESEED{}}
 \label{subsec:eseed}

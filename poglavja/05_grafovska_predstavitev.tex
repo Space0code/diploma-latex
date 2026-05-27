@@ -4,6 +4,14 @@
 To poglavje je eno osrednjih metodoloških poglavij naloge.
 Njegov namen je natančno opisati, kako iz časovnega okna meritev sledilnika pogleda nastane graf, ki ga uporabimo kot vhod v grafovsko nevronsko mrežo.
 
+\TODO{
+\begin{itemize}
+    \item Glavno besedilo: dodati eno osrednjo metodološko sliko grafovske predstavitve. Slika naj na majhnem, berljivem izseku okna pokaže vozlišča po koordinatah pogleda in relacije časovnih, prostorskih ter fiksacijskih povezav z različnimi barvami ali paneli.
+    \item Glavno besedilo: slika naj razloži idejo konstrukcije grafa, ne vseh implementacijskih podrobnosti. Ne dodajaj ločene slike za vsako relacijo v glavnem besedilu, ker bi to prekinilo tok poglavja.
+    \item Dodatek~\ref{app:grafi}: prestaviti podrobne vizualizacije posameznih relacij, primer 10-sekundnega grafa, berljiv 2- ali 5-sekundni izsek, prekrivanja relacij in različice z velikostjo vozlišč po zenici.
+\end{itemize}
+}
+
 \section{Učni vzorec kot graf}
 \label{subsec:ucni-vzorec}
 
@@ -143,7 +151,7 @@ Parameter $k_t$ določa velikost lokalnega časovnega konteksta in s tem števil
 
 \END_NOTE*{
     \begin{itemize}
-        \item Vstavi sliko časovnih povezav.
+        \item V glavno metodološko sliko vključi časovne povezave, v dodatek~\ref{app:grafi} pa prestavi ločeni vizualizaciji \texttt{temporal\_forward} in \texttt{temporal\_backward}.
         \item Razmisli o smiselnosti $k_t$ glede na število layerjev GNN .
     \end{itemize}
 }
@@ -171,7 +179,7 @@ Ker povezave obravnavamo kot neusmerjene, vsaki povezavi $(v_i,v_j)$ dodamo tudi
 
 \END_NOTE*{
     \begin{itemize}
-        \item Vstavi sliko prostorskih povezav.
+        \item V glavno metodološko sliko vključi prostorske povezave, v dodatek~\ref{app:grafi} pa prestavi ločeno vizualizacijo \texttt{spatial} povezav.
         \item $k_s=2$ v trenutnih poskusih. Preveri končni $k_s$.
     \end{itemize}
 }
@@ -225,7 +233,7 @@ Pri $k_f=3$ vozlišče že v eni plasti prejme informacije iz več delov iste fi
 Večje vrednosti $k_f$ povečajo gostoto grafa, računsko zahtevnost in možnosti za prekomerno glajenje, manjše vrednosti pa graf dodatno razredčijo.
 \END_NOTE*{
     \begin{itemize}
-        \item Vstavi sliko fiksacijskih povezav.
+        \item V glavno metodološko sliko vključi fiksacijske povezave, v dodatek~\ref{app:grafi} pa prestavi ločeno vizualizacijo \texttt{fixation} povezav in primer razširjenih povezav znotraj ene fiksacije.
         \item $k_f=3$ v trenutnih poskusih. Preveri končni $k_f$ glede na eksperimente (consider kf=2).
     \end{itemize}
 }

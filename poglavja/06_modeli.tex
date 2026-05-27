@@ -9,7 +9,9 @@ Vsi modeli -- osnovni, predstavnik SOTA ter grafovski modeli -- uporabljajo iste
 Razlika je v predstavitvi vhodnega vzorca.
 Grafovski modeli prejmejo okno kot graf meritev, negrafovski osnovni modeli prejmejo agregirano tabelarično predstavitev istega okna, \GazeMAE{} pa po svoji konstrukciji le signala \texttt{x-avg} in \texttt{y-avg} koordinat za celotno 10~s okno. 
 Za poštenejšo primerjavo so v tabelarični vhod osnovnih modelov vključene agregirane značilke istih osnovnih signalov, ki jih uporabimo tudi pri GNN: koordinati pogleda \texttt{x-avg} in \texttt{y-avg}, velikosti leve in desne zenice, oddaljenost od zaslona ter informacije o fiksacijah oziroma trajanju fiksacij.
-\TODO{Natančen seznam agregiranih statistik bomo zapisali po dokončni uskladitvi implementacije; predvidene so opisne statistike posameznega signala znotraj okna, na primer povprečje, standardni odklon, minimum, maksimum in razpon.}
+Za vsak signal izračunamo povprečje, standardni odklon, minimum, maksimum, razpon, mediano, prvi kvartil, tretji kvartil in medkvartilni razmik.
+Pri trajanju fiksacij dodamo še število fiksacij, delež meritev v oknu, ki pripadajo fiksacijam, vsoto trajanj fiksacij, povprečno trajanje fiksacije in največje trajanje fiksacije.
+S tem sledimo običajnemu pristopu ne-grafovskih modelov za podatke pogleda, kjer se časovni signal najprej pretvori v opisne statistike na ravni okna oziroma odziva~\cite{lim2020emotion,tarnowski2020eye}.
 
 \section{Negrafovski osnovni modeli}
 \label{subsec:baseline-modeli}

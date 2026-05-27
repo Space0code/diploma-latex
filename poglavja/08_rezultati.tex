@@ -3,44 +3,76 @@
 
 \TODO{
 \begin{itemize}
-    \item napisati po glavnih eksperimentih;
-    \item glavna evalvacija: \MAHNOB{};
-    \item \ESEED{} samo v dodatku ali kratki motivaciji;
-    \item ne mešati \ESEED{} rezultatov z glavnimi tabelami;
-    \item poročati mean $\pm$ std čez folde;
-    \item jasno ločiti subject LOO in recording LOO;
-    \item če finalna zgodba preide na low/high valence, uskladiti naslove tabel.
+    \item Eksperimenti: najprej zbrati rezultate glavnih poskusov na \MAHNOB{} za 3-razredno valenco in 3-razredno vzburjenost.
+    \item Eksperimenti: za vsako glavno nalogo zbrati subject LOO kot glavni rezultat in recording LOO kot dodatni rezultat; kfold rezultatov ne vključuj v glavne tabele.
+    \item Eksperimenti: zbrati še rezultate binarne low/high valence in binarne low/high vzburjenosti kot dodatna poskusa v glavnem besedilu.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: rezultate poročati kot mean $\pm$ std čez gube oziroma iteracije validacijskega protokola.
+    \item Pisanje: glavne tabele v tem poglavju naj vsebujejo samo accuracy in macro-F1; balanced accuracy, weighted-F1, AUC in podrobnejše tabele prestavi v dodatek.
+    \item Pisanje: \ESEED{} rezultatov ne mešati z glavnimi tabelami; če jih ohranimo, sodijo v dodatek ali kratko motivacijsko opombo.
+    \item Pisanje: pred oddajo uskladiti vrstni red modelov v tabelah, slikah in besedilu z vrstnim redom v poglavju~\ref{subsec:glavna-primerjava}.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: v dodatku pripraviti razširjene tabele z balanced accuracy, weighted-F1, AUC, po potrebi še rezultati po posameznih gubah in dodatnimi matrikami zmede.
+    \item Pisanje: preveriti strukturo dodatkov in po potrebi prenoviti dodatek z dodatnimi rezultati, da ne podvaja glavnih tabel iz tega poglavja.
 \end{itemize}
 }
 
 \section{Porazdelitev razredov}
 \label{subsec:rezultati-class-balance}
 
-\subsection{Valenca}
+\subsection{3-razredna valenca}
 
 \TODO{
 \begin{itemize}
-    \item tabela razredov po končni tvorbi oken;
-    \item razredi: neprijetna, nevtralna, prijetna;
-    \item št. oken po razredu;
-    \item delež oken po razredu;
-    \item ločeno za finalni snapshot;
-    \item navesti izključene subjekte P9, P12, P15;
-    \item navesti \texttt{min\_samples\_per\_window=60}.
+    \item Eksperimenti: iz končnega snapshot-a po tvorbi oken izračunati število in delež oken za razrede neprijetna, nevtralna in prijetna valenca.
+    \item Eksperimenti: izračun ponoviti za podatke po izključitvi subjektov P9, P12 in P15 ter po filtriranju \texttt{emotion-derivation-status=ok}.
+    \item Eksperimenti: preveriti in navesti uporabljeno vrednost \texttt{min\_samples\_per\_window=60}.
 \end{itemize}
 }
 
-\subsection{Vzburjenost}
+\TODO{
+\begin{itemize}
+    \item Pisanje: poročati, ali je bil uporabljen downsampling oziroma kakšna druga obravnava neuravnoteženosti razredov.
+    \item Pisanje: kratko povezati porazdelitev razredov z interpretacijo večinskega klasifikatorja.
+\end{itemize}
+}
+
+\subsection{3-razredna vzburjenost}
 
 \TODO{
 \begin{itemize}
-    \item tabela razredov po končni tvorbi oken;
-    \item razredi: nizka, srednja, visoka vzburjenost;
-    \item št. oken po razredu;
-    \item delež oken po razredu;
-    \item komentar neuravnoteženosti;
-    \item večinski baseline kot referenčna točka;
-    \item navesti, ali je bil uporabljen downsampling.
+    \item Eksperimenti: iz končnega snapshot-a po tvorbi oken izračunati število in delež oken za razrede nizka, srednja in visoka vzburjenost.
+    \item Eksperimenti: preveriti, ali je porazdelitev vzburjenosti bolj neuravnotežena ali manj usklajena s samoocenami kot porazdelitev valence.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: poročati neuravnoteženost razredov in večinski klasifikator kot referenčno točko.
+    \item Pisanje: v interpretaciji biti previden, ker je ujemanje oznak vzburjenosti s samoocenami šibkejše kot pri valenci.
+\end{itemize}
+}
+
+\subsection{Binarni nalogi}
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: za binarno low/high valenco izračunati število in delež oken po odstranitvi srednjega oziroma nevtralnega razreda.
+    \item Eksperimenti: za binarno low/high vzburjenost izračunati število in delež oken po odstranitvi srednjega razreda.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: binarni nalogi predstaviti kot dodatno evalvacijo z izrazitejšimi razredi, ne kot glavno formulacijo naloge.
 \end{itemize}
 }
 
@@ -49,44 +81,78 @@
 
 \subsection{Subject LOO}
 
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: pognati vse modele za 3-razredno valenco pri subject LOO.
+    \item Eksperimenti: za vsak model zbrati accuracy in macro-F1 kot mean $\pm$ std.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: to tabelo obravnavaj kot glavno tabelo rezultatov za valenco.
+    \item Pisanje: po rezultatih dodati kratek komentar najboljšega modela, najboljšega negrafovskega primerjalnega modela in razlike med Osnovnim GCN ter predlaganim GNN.
+\end{itemize}
+}
+
 \begin{table}[H]
     \centering
     \caption{TODO: Rezultati za 3-razredno klasifikacijo valence pri subject LOO.}
     \label{tab:results-valence-subject-loo}
-    \begin{tabular}{lccccc}
+    \begin{tabular}{lcc}
         \toprule
-        Model & Bal. acc. & Acc. & Macro-F1 & Weighted-F1 & AUC \\
+        Model & Accuracy & Macro-F1 \\
         \midrule
-        Majority & TODO & TODO & TODO & TODO & TODO \\
-        SVM & TODO & TODO & TODO & TODO & TODO \\
-        LightGBM & TODO & TODO & TODO & TODO & TODO \\
-        MLP & TODO & TODO & TODO & TODO & TODO \\
-        \GazeMAE{} + MLP & TODO & TODO & TODO & TODO & TODO \\
-        GCN & TODO & TODO & TODO & TODO & TODO \\
-        GAT & TODO & TODO & TODO & TODO & TODO \\
-        ST-HeteroGNN & TODO & TODO & TODO & TODO & TODO \\
+        Naključni klasifikator & TODO & TODO \\
+        Večinski klasifikator & TODO & TODO \\
+        SVM & TODO & TODO \\
+        LightGBM & TODO & TODO \\
+        MLP & TODO & TODO \\
+        \GazeMAE{} + MLP & TODO & TODO \\
+        Osnovni GCN & TODO & TODO \\
+        Predlagani GNN & TODO & TODO \\
         \bottomrule
     \end{tabular}
 \end{table}
 
+\TODO{
+\begin{itemize}
+    \item Slika: dodati bar plot accuracy in macro-F1 za 3-razredno valenco pri subject LOO.
+    \item Slika: dodati vrstično normalizirano matriko zmede za najboljši model pri 3-razredni valenci; po potrebi dodati še primerjavo z najboljšim negrafovskim modelom.
+\end{itemize}
+}
+
 \subsection{Recording LOO}
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: pognati vse modele za 3-razredno valenco pri recording LOO.
+    \item Eksperimenti: za vsak model zbrati accuracy in macro-F1 kot mean $\pm$ std.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: recording LOO poročaj kot dodatni rezultat, ki preverja posploševanje na nove posnetke oziroma stimuluse.
+\end{itemize}
+}
 
 \begin{table}[H]
     \centering
     \caption{TODO: Rezultati za 3-razredno klasifikacijo valence pri recording LOO.}
     \label{tab:results-valence-recording-loo}
-    \begin{tabular}{lccccc}
+    \begin{tabular}{lcc}
         \toprule
-        Model & Bal. acc. & Acc. & Macro-F1 & Weighted-F1 & AUC \\
+        Model & Accuracy & Macro-F1 \\
         \midrule
-        Majority & TODO & TODO & TODO & TODO & TODO \\
-        SVM & TODO & TODO & TODO & TODO & TODO \\
-        LightGBM & TODO & TODO & TODO & TODO & TODO \\
-        MLP & TODO & TODO & TODO & TODO & TODO \\
-        \GazeMAE{} + MLP & TODO & TODO & TODO & TODO & TODO \\
-        GCN & TODO & TODO & TODO & TODO & TODO \\
-        GAT & TODO & TODO & TODO & TODO & TODO \\
-        ST-HeteroGNN & TODO & TODO & TODO & TODO & TODO \\
+        Naključni klasifikator & TODO & TODO \\
+        Večinski klasifikator & TODO & TODO \\
+        SVM & TODO & TODO \\
+        LightGBM & TODO & TODO \\
+        MLP & TODO & TODO \\
+        \GazeMAE{} + MLP & TODO & TODO \\
+        Osnovni GCN & TODO & TODO \\
+        Predlagani GNN & TODO & TODO \\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -95,13 +161,11 @@
 
 \TODO{
 \begin{itemize}
-    \item najboljši model po balanced accuracy;
-    \item najboljši ne-grafovski baseline;
-    \item primerjava GNN v2 proti najboljšemu ne-grafovskemu baseline;
-    \item primerjava GNN v2 proti \GazeMAE{} + MLP;
-    \item razlika subject LOO vs recording LOO;
-    \item najpogostejše zamenjave razredov iz confusion matrix;
-    \item previdna interpretacija, brez pretiranih trditev.
+    \item Pisanje: interpretirati predvsem subject LOO, ker je to glavni protokol za končne rezultate.
+    \item Pisanje: primerjati predlagani GNN z najboljšim negrafovskim primerjalnim modelom, \GazeMAE{} + MLP in Osnovnim GCN.
+    \item Pisanje: primerjati subject LOO in recording LOO ter opozoriti, da recording LOO še vedno deli iste subjekte med učno in testno množico.
+    \item Pisanje: opisati najpogostejše zamenjave razredov iz matrike zmede.
+    \item Pisanje: sklepe oblikovati previdno in jih vezati na accuracy, macro-F1 ter strukturo napak, ne samo na eno metriko.
 \end{itemize}
 }
 
@@ -110,47 +174,161 @@
 
 \subsection{Subject LOO}
 
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: pognati vse modele za 3-razredno vzburjenost pri subject LOO.
+    \item Eksperimenti: za vsak model zbrati accuracy in macro-F1 kot mean $\pm$ std.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: to tabelo obravnavaj kot glavno tabelo rezultatov za vzburjenost, vendar v interpretaciji upoštevaj slabše ujemanje oznak s samoocenami.
+\end{itemize}
+}
+
 \begin{table}[H]
     \centering
     \caption{TODO: Rezultati za 3-razredno klasifikacijo vzburjenosti pri subject LOO.}
     \label{tab:results-arousal-subject-loo}
-    \begin{tabular}{lccccc}
+    \begin{tabular}{lcc}
         \toprule
-        Model & Bal. acc. & Acc. & Macro-F1 & Weighted-F1 & AUC \\
+        Model & Accuracy & Macro-F1 \\
         \midrule
-        Majority & TODO & TODO & TODO & TODO & TODO \\
-        SVM & TODO & TODO & TODO & TODO & TODO \\
-        LightGBM & TODO & TODO & TODO & TODO & TODO \\
-        MLP & TODO & TODO & TODO & TODO & TODO \\
-        \GazeMAE{} + MLP & TODO & TODO & TODO & TODO & TODO \\
-        GCN & TODO & TODO & TODO & TODO & TODO \\
-        GAT & TODO & TODO & TODO & TODO & TODO \\
-        ST-HeteroGNN & TODO & TODO & TODO & TODO & TODO \\
+        Naključni klasifikator & TODO & TODO \\
+        Večinski klasifikator & TODO & TODO \\
+        SVM & TODO & TODO \\
+        LightGBM & TODO & TODO \\
+        MLP & TODO & TODO \\
+        \GazeMAE{} + MLP & TODO & TODO \\
+        Osnovni GCN & TODO & TODO \\
+        Predlagani GNN & TODO & TODO \\
         \bottomrule
     \end{tabular}
 \end{table}
 
+\TODO{
+\begin{itemize}
+    \item Slika: dodati bar plot accuracy in macro-F1 za 3-razredno vzburjenost pri subject LOO.
+    \item Slika: dodati vrstično normalizirano matriko zmede za najboljši model pri 3-razredni vzburjenosti.
+\end{itemize}
+}
+
 \subsection{Recording LOO}
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: pognati vse modele za 3-razredno vzburjenost pri recording LOO.
+    \item Eksperimenti: za vsak model zbrati accuracy in macro-F1 kot mean $\pm$ std.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: recording LOO poročaj kot dodatni rezultat in ga interpretiraj ločeno od subject LOO.
+\end{itemize}
+}
 
 \begin{table}[H]
     \centering
     \caption{TODO: Rezultati za 3-razredno klasifikacijo vzburjenosti pri recording LOO.}
     \label{tab:results-arousal-recording-loo}
-    \begin{tabular}{lccccc}
+    \begin{tabular}{lcc}
         \toprule
-        Model & Bal. acc. & Acc. & Macro-F1 & Weighted-F1 & AUC \\
+        Model & Accuracy & Macro-F1 \\
         \midrule
-        Majority & TODO & TODO & TODO & TODO & TODO \\
-        SVM & TODO & TODO & TODO & TODO & TODO \\
-        LightGBM & TODO & TODO & TODO & TODO & TODO \\
-        MLP & TODO & TODO & TODO & TODO & TODO \\
-        \GazeMAE{} + MLP & TODO & TODO & TODO & TODO & TODO \\
-        GCN & TODO & TODO & TODO & TODO & TODO \\
-        GAT & TODO & TODO & TODO & TODO & TODO \\
-        ST-HeteroGNN & TODO & TODO & TODO & TODO & TODO \\
+        Naključni klasifikator & TODO & TODO \\
+        Večinski klasifikator & TODO & TODO \\
+        SVM & TODO & TODO \\
+        LightGBM & TODO & TODO \\
+        MLP & TODO & TODO \\
+        \GazeMAE{} + MLP & TODO & TODO \\
+        Osnovni GCN & TODO & TODO \\
+        Predlagani GNN & TODO & TODO \\
         \bottomrule
     \end{tabular}
 \end{table}
+
+\section{Binarna klasifikacija valence in vzburjenosti}
+\label{subsec:rezultati-binary}
+
+\subsection{Binarna valenca}
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: pognati low/high valenco za subject LOO in recording LOO.
+    \item Eksperimenti: za vsak model zbrati accuracy in macro-F1; podrobnejše metrike prestavi v dodatek.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: pojasniti, da ta poskus odstrani nevtralni oziroma srednji razred in zato preverja čistejšo formulacijo z izrazitejšimi razredi.
+    \item Pisanje: poročati, ali se relativni vrstni red modelov ujema s 3-razredno valenco.
+\end{itemize}
+}
+
+\begin{table}[H]
+    \centering
+    \caption{TODO: Rezultati za binarno low/high klasifikacijo valence pri subject LOO.}
+    \label{tab:results-binary-valence-subject-loo}
+    \begin{tabular}{lcc}
+        \toprule
+        Model & Accuracy & Macro-F1 \\
+        \midrule
+        Naključni klasifikator & TODO & TODO \\
+        Večinski klasifikator & TODO & TODO \\
+        SVM & TODO & TODO \\
+        LightGBM & TODO & TODO \\
+        MLP & TODO & TODO \\
+        \GazeMAE{} + MLP & TODO & TODO \\
+        Osnovni GCN & TODO & TODO \\
+        Predlagani GNN & TODO & TODO \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Binarna vzburjenost}
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: pognati low/high vzburjenost za subject LOO in recording LOO.
+    \item Eksperimenti: za vsak model zbrati accuracy in macro-F1; podrobnejše metrike prestavi v dodatek.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: pojasniti, da ta poskus odstrani srednji razred vzburjenosti in preverja izrazitejši kontrast med nizko in visoko vzburjenostjo.
+    \item Pisanje: poročati, ali binarna formulacija ublaži težave, opažene pri 3-razredni vzburjenosti.
+\end{itemize}
+}
+
+\begin{table}[H]
+    \centering
+    \caption{TODO: Rezultati za binarno low/high klasifikacijo vzburjenosti pri subject LOO.}
+    \label{tab:results-binary-arousal-subject-loo}
+    \begin{tabular}{lcc}
+        \toprule
+        Model & Accuracy & Macro-F1 \\
+        \midrule
+        Naključni klasifikator & TODO & TODO \\
+        Večinski klasifikator & TODO & TODO \\
+        SVM & TODO & TODO \\
+        LightGBM & TODO & TODO \\
+        MLP & TODO & TODO \\
+        \GazeMAE{} + MLP & TODO & TODO \\
+        Osnovni GCN & TODO & TODO \\
+        Predlagani GNN & TODO & TODO \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: odločiti, ali recording LOO tabele za binarno valenco in vzburjenost ostanejo v glavnem besedilu ali gredo v dodatek; v glavnem besedilu naj bo vsaj kratek povzetek.
+\end{itemize}
+}
 
 \section{Primerjava validacijskih protokolov}
 \label{subsec:primerjava-splitov}
@@ -159,11 +337,9 @@
 
 \TODO{
 \begin{itemize}
-    \item primerjava rezultatov pri subject LOO;
-    \item posploševanje na nove udeležence;
-    \item variance med foldi;
-    \item morebitni težavni subjekti;
-    \item ali graf pomaga bolj/manj kot pri recording LOO.
+    \item Pisanje: povzeti subject LOO rezultate za 3-razredno valenco in vzburjenost.
+    \item Pisanje: komentirati variance med gubami in morebitne težavne subjekte, če jih pokažejo rezultati.
+    \item Pisanje: posebej poudariti, da je subject LOO glavni protokol za končne rezultate naloge.
 \end{itemize}
 }
 
@@ -171,11 +347,39 @@
 
 \TODO{
 \begin{itemize}
-    \item primerjava rezultatov pri recording LOO;
-    \item posploševanje na nove posnetke/stimuluse;
-    \item pričakovano lažje/težje kot subject LOO;
-    \item razlika med protokoloma;
-    \item opozorilo: recording LOO lahko še vedno deli iste subjekte med train/test.
+    \item Pisanje: povzeti recording LOO rezultate za 3-razredno valenco in vzburjenost.
+    \item Pisanje: primerjati, ali je posploševanje na nove posnetke lažje ali težje od posploševanja na nove subjekte.
+    \item Pisanje: opozoriti, da recording LOO lahko deli iste subjekte med učno in testno množico, zato ne meri istega vidika posploševanja kot subject LOO.
+\end{itemize}
+}
+
+\section{Analiza oznak in napak}
+\label{subsec:analiza-napak}
+
+\subsection{Ujemanje oznak s samoocenami}
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: uporabiti artefakte iz \texttt{label\_noise\_analysis} za analizo ujemanja razredov valence in vzburjenosti s samoocenami.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Slika: dodati label-alignment plot ali matriko zmede iz \texttt{label\_noise\_analysis}.
+    \item Pisanje: razložiti, zakaj pri interpretaciji vzburjenosti pričakujemo več negotovosti kot pri valenci.
+\end{itemize}
+}
+
+\subsection{Matrike zmede}
+
+\TODO{
+\begin{itemize}
+    \item Slika: dodati matriko zmede za najboljši GNN pri 3-razredni valenci.
+    \item Slika: dodati matriko zmede za najboljši GNN pri 3-razredni vzburjenosti.
+    \item Slika: po potrebi dodati matriko zmede za najboljši negrafovski primerjalni model.
+    \item Pisanje: matrike zmede naj bodo vrstično normalizirane z barvno lestvico $[0,1]$.
+    \item Pisanje: opisati najpogostejše zamenjave razredov in jih povezati s porazdelitvijo razredov ter analizo oznak.
 \end{itemize}
 }
 
@@ -184,55 +388,70 @@
 
 \subsection{Vpliv vhodnih signalov in povezav}
 
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: pognati ablacijsko študijo za 3-razredno valenco in 3-razredno vzburjenost.
+    \item Eksperimenti: uporabiti subject kfold, trenutno $k=5$, zaradi časovne ekonomičnosti.
+    \item Eksperimenti: preveriti primerljivost kfold in LOO rezultatov na osnovnih konfiguracijah ter zapisati, da je primerljivost zadostna za relativno ablacijsko analizo.
+    \item Eksperimenti: za vsako ablacijsko nastavitev odstraniti ustrezne značilke vozlišč, značilke povezav in povezave, izpeljane iz odstranjenega signala.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: v glavnem besedilu glede na rezultate verjetno podrobneje poročati valenco, vzburjenost pa povzeti ali prestaviti v dodatek.
+    \item Slika: dodati ablation bar plot za accuracy in macro-F1.
+\end{itemize}
+}
+
 \begin{table}[H]
     \centering
-    \caption{TODO: Ablacijska študija finalnega modela.}
-    \label{tab:ablation}
-    \begin{tabular}{lccccc}
+    \caption{TODO: Ablacijska študija predlaganega modela pri 3-razredni valenci na subject kfold.}
+    \label{tab:ablation-valence}
+    \begin{tabular}{lcc}
         \toprule
-        Nastavitev & Bal. acc. & Acc. & Macro-F1 & Weighted-F1 & AUC \\
+        Nastavitev & Accuracy & Macro-F1 \\
         \midrule
-        Finalni model & TODO & TODO & TODO & TODO & TODO \\
-        Brez pupil značilk & TODO & TODO & TODO & TODO & TODO \\
-        Brez časovnih povezav & TODO & TODO & TODO & TODO & TODO \\
-        Brez prostorskih povezav & TODO & TODO & TODO & TODO & TODO \\
-        Brez fiksacijskih povezav & TODO & TODO & TODO & TODO & TODO \\
-        Brez uteži povezav & TODO & TODO & TODO & TODO & TODO \\
-        5 s okna & TODO & TODO & TODO & TODO & TODO \\
-        Brez MLP fuzije & TODO & TODO & TODO & TODO & TODO \\
+        Predlagani GNN & TODO & TODO \\
+        Brez časovne informacije & TODO & TODO \\
+        Brez prostorske/gaze informacije & TODO & TODO \\
+        Brez fiksacijske informacije & TODO & TODO \\
+        Brez zenične informacije & TODO & TODO \\
+        Brez razdaljne informacije & TODO & TODO \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-\section{Analiza notranjih predstavitev modela}
+\section{Analiza učenja in notranjih predstavitev}
 \label{subsec:rezultati-diagnostika}
 
-\subsection{Varianca in podobnost predstavitev}
+\subsection{Krivulje izgub}
 
 \TODO{
 \begin{itemize}
-    \item prikaži krivulje učne, validacijske in testne izgube za glavne grafovske modele;
-    \item prikaži varianco predstavitev po plasteh oziroma po izbranih fazah modela;
-    \item prikaži kosinusno podobnost predstavitev kot indikator morebitnega prekomernega glajenja;
-    \item prikaži razpon logitov kot indikator zasičenosti ali kolapsa napovedne glave;
-    \item primerjaj diagnostiko osnovnega GCN in predlaganega modela, če bodo artefakti na voljo;
-    \item komentar naj ostane kratek: namen je podpreti interpretacijo rezultatov, ne uvajati nove glavne evalvacije;
-    \item poveži ugotovitve z izbiro števila grafovskih plasti.
+    \item Eksperimenti: zbrati najboljšo epoho, zgodnje ustavljanje in morebitne znake nestabilnega učenja.
 \end{itemize}
 }
 
-\section{Analiza napak}
-\label{subsec:analiza-napak}
+\TODO{
+\begin{itemize}
+    \item Slika: dodati train/val loss krivulje za glavne nevronske modele, posebej za Osnovni GCN in predlagani GNN.
+    \item Pisanje: krivulje uporabiti za podporo interpretaciji rezultatov, ne kot novo glavno evalvacijo.
+\end{itemize}
+}
 
-\subsection{Matrike zmede}
+\subsection{Predstavitve in grafovske diagnostike}
 
 \TODO{
 \begin{itemize}
-    \item confusion matrix za najboljši GNN;
-    \item confusion matrix za najboljši ne-grafovski baseline;
-    \item vrstično normalizirane vrednosti med 0 in 1;
-    \item barvna lestvica fiksna $[0,1]$;
-    \item najpogostejše zamenjave razredov;
-    \item primerjava valenca vs vzburjenost.
+    \item Eksperimenti: zbrati varianco predstavitev, povprečno kosinusno podobnost, razpon logitov in entropijo napovednih verjetnosti za grafovske modele, če so artefakti na voljo.
+    \item Eksperimenti: za predlagani GNN zbrati tudi povzetke naučenih uteži povezav po časovnih, prostorskih in fiksacijskih relacijah.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: primerjati Osnovni GCN in predlagani GNN samo toliko, kolikor diagnostika pomaga razložiti glavne rezultate.
+    \item Pisanje: podrobne grafe po gubah in relacijske porazdelitve uteži prestaviti v dodatek~\ref{app:diagnostika}.
 \end{itemize}
 }

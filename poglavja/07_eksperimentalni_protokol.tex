@@ -13,6 +13,20 @@ Razredi niso dobljeni z neposredno diskretizacijo številskih samoocen valence i
 S tem eksperimentalni nalogi sledita izvirni formulaciji in omogočata primerjavo z objavljenimi rezultati na isti podatkovni zbirki.
 Za dodatno primerjavo uporabimo tudi binarni različici, pri katerih obdržimo samo oba skrajna razreda. 
 
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: pognati glavni nalogi diplome kot 3-razredno klasifikacijo valence in 3-razredno klasifikacijo vzburjenosti, ker sta tako neposredno primerljivi z formulacijo v \MAHNOB{}.
+    \item Eksperimenti: pognati še binarni low/high različici valence in vzburjenosti, kjer odstranimo srednji oziroma nevtralni razred in obdržimo izrazitejša skrajna razreda.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: v besedilu jasno ločiti glavni eksperiment od dodatnega binarnega eksperimenta; binarno formulacijo opiši kot čistejšo in lažjo dopolnilno evalvacijo, ne kot zamenjavo glavne naloge.
+    \item Pisanje: po rezultatih preveriti, ali imena razredov v tabelah, slikah in dodatkih sledijo enaki terminologiji kot v tabeli~\ref{tab:eksperimentalne-naloge-table6}.
+\end{itemize}
+}
+
 \begin{table}[t]
     \centering
     \caption{Preslikava čustvenih oznak v razrede valence in vzburjenosti, povzeta po tabeli~6 izvirnega članka \MAHNOB{}~\cite{soleymani2012mahnob}.}
@@ -63,6 +77,20 @@ Pri oznakah uporabimo samo primere, pri katerih je vrednost stolpca \texttt{emot
 Pri vsaki iteraciji prečnega preverjanja standardizacijo izračunamo samo na učni množici.
 Tako za značilke vozlišč, značilke povezav in tabelarične značilke najprej izračunamo statistike učne množice, nato pa isto pretvorbo uporabimo še na validacijski in testni množici.
 S tem preprečimo uhajanje informacij iz validacijske ali testne množice v učni postopek.
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: za glavne rezultate pognati subject LOO kot primarni validacijski protokol in recording LOO kot dodatni poročani protokol.
+    \item Eksperimenti: kfold ne uporabljati in ne poročati kot glavni rezultat za primerjavo modelov; izjema je ablacijska študija, opisana v razdelku~\ref{subsec:ablacijska-studija}.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: v poglavju z rezultati naj bodo glavne tabele najprej za subject LOO, nato za recording LOO; kfold naj se pojavi samo pri ablacijski študiji.
+    \item Pisanje: jasno zapisati, da subject LOO ocenjuje posploševanje na nove udeležence, recording LOO pa posploševanje na nove posnetke oziroma stimuluse.
+\end{itemize}
+}
 
 \subsection{Subject LOO}
 
@@ -164,9 +192,18 @@ Tabela poleg imena modela povzema kratko vlogo modela v primerjavi in osnovne pa
 
 \TODO{
 \begin{itemize}
-    \item dodatni signali: \texttt{time-window-normalized}, \texttt{distance-avg}, \texttt{fixation-duration};
-    \item edge feature: \texttt{delta\_distance};
-    \item po implementaciji osnovnega GCN preveri, ali sta \texttt{num\_layers=3} in \texttt{hidden\_channels=128} uporabljena tudi pri njem.
+    \item Eksperimenti: preveriti, da primerjava vključuje diplomski grafovski baseline \textbf{Osnovni GCN}; stare interne različice grafovskega modela ne sodijo v diplomsko primerjavo.
+    \item Eksperimenti: za Osnovni GCN uporabiti isto grafovsko predstavitev, iste signale, ista okna, iste delitve in isto standardizacijo kot pri predlaganem GNN.
+    \item Eksperimenti: pri Osnovnem GCN združiti relacije \texttt{temporal\_forward}, \texttt{temporal\_backward}, \texttt{spatial} in \texttt{fixation} v homogeni graf, odstraniti podvojene povezave ter ne uporabiti značilk povezav ali naučenih uteži povezav.
+    \item Eksperimenti: preveriti, da Osnovni GCN uporablja \texttt{GCNConv}, isto napovedno glavo, iste YAML hiperparametre in ločen parameter za readout; trenutni readout je \texttt{attention}, pozneje lahko preverimo še \texttt{mean}.
+    \item Eksperimenti: preveriti, da Osnovni GCN deluje za 2- in 3-razredno klasifikacijo ter da sta \texttt{num\_layers=3} in \texttt{hidden\_channels=128} res uporabljena tudi pri njem.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: v tabeli in besedilu uporabljaj ime Osnovni GCN.
+    \item Pisanje: v razlagi osnovnega GCN poudari, da je to arhitekturno poenostavljen grafovski baseline, ne starejša različica predlaganega modela.
 \end{itemize}
 }
 
@@ -182,6 +219,23 @@ Pri prvi smo odstranili značilke velikosti zenic.
 Pri drugi smo odstranili časovno informacijo, torej časovne značilke vozlišč in povezav ter časovne povezave. 
 Pri tretji smo odstranili prostorsko informacijo, ki vključuje koordinate pogleda $(x, y)$, razdaljo in iz njih izpeljane prostorske povezave ter značilke povezav. 
 Pri četrti smo odstranili informacijo o fiksacijah, torej trajanje fiksacij in fiksacijske povezave.
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: ablacijske poskuse pognati za 3-razredno valenco in 3-razredno vzburjenost.
+    \item Eksperimenti: zaradi časovne ekonomičnosti ablacijske poskuse pognati na subject kfold, trenutno z $k=5$, ne na polnem subject LOO.
+    \item Eksperimenti: pripraviti ablacijske nastavitve za odstranitev časovne informacije, prostorske oziroma gaze informacije, fiksacijske informacije, zenične informacije in razdaljne informacije.
+    \item Eksperimenti: ko odstranimo signal, odstraniti vse informacije, izpeljane iz njega: značilke vozlišč, značilke povezav in povezave.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: trenutni opis štirih ablacijsko nastavitev uskladiti s petimi skupinami signalov; razdaljo obravnavaj ločeno od prostorske/gaze informacije, če bo tako implementirana v poskusih.
+    \item Pisanje: po pridobitvi rezultatov odločiti, ali v glavnem besedilu podrobno poročamo obe nalogi ali predvsem valenco; za vzburjenost naj bodo vsaj podporni rezultati v dodatku.
+    \item Pisanje: v poglavju z rezultati zapisati, da so kfold in LOO rezultati dovolj primerljivi za ablacijsko analizo, ker nas zanima relativni vpliv odstranitve signalov, ne končna absolutna ocena modela.
+\end{itemize}
+}
 
 
 \END_NOTE{Morebitni dodatni poskusi naj bodo obravnavani kot ločena arhitekturna analiza, ne kot ablacijska študija vhodnih signalov: izklop uteži povezav, uporaba $5~s$ oken namesto $10~s$ oken, odstranitev MLP fuzije relacijskih predstavitev in primerjava različnih strategij združevanja grafa.}

@@ -79,6 +79,16 @@ Ta model zato predstavlja vmesno primerjavo med učenjem nad agregiranimi tabela
 
 \END_NOTE{Ko bo osnovni GCN dokončno definiran, koda napisana, rezultati pridobljeni, tehnično še bolj specificiraj točno arhitekturo. Npr: uporabljen je bil identičen MLP head, ista READOUT funkcija, isti preprocessing X -> fGCN, itd.}
 
+\TODO{
+\begin{itemize}
+    \item Pisanje: osnovni grafovski model v diplomi dosledno poimenuj Osnovni GCN.
+    \item Pisanje: opis uskladiti s končno implementacijo: ista grafovska predstavitev, isti signali, ista okna, iste delitve in ista standardizacija kot pri predlaganem GNN.
+    \item Pisanje: zapisati, da Osnovni GCN relacije \texttt{temporal\_forward}, \texttt{temporal\_backward}, \texttt{spatial} in \texttt{fixation} združi v homogeni graf, odstrani podvojene povezave ter ne uporablja značilk povezav ali naučenih uteži povezav.
+    \item Pisanje: preveriti in zapisati, da uporablja \texttt{GCNConv}, isto napovedno glavo, iste YAML hiperparametre in ločen readout parameter, trenutno \texttt{attention}; možnost \texttt{mean} omeni samo, če bo dejansko preverjena.
+    \item Pisanje: ne predstavljaj ga kot starejšo različico predlaganega GNN, temveč kot ločen grafovski baseline za preverjanje učinka homogene grafovske predstavitve.
+\end{itemize}
+}
+
 \section{Predlagani prostorsko-časovni heterogeni GNN}
 \label{subsec:koncni-gnn}
 

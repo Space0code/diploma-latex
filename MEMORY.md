@@ -90,22 +90,28 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   Binarni low/high poskusi za valenco in vzburjenost so dodatni eksperimenti, ki
   jih prav tako poročamo v glavnem besedilu, predvsem kot čistejšo in lažjo
   formulacijo brez srednjega/nevtralnega razreda.
-- `GNN_v1` ostane dovoljen samo kot interna raziskovalna referenca v
-  eksperimentalnem repozitoriju. V diplomi ga ne poročamo in ga ne omenjamo.
-  Za diplomsko primerjavo je treba implementirati nov `BasicGCN`, usklajen z
-  opisom grafovskega osnovnega modela v poglavju 6.
+- Stare interne različice grafovskega modela ostanejo dovoljene samo kot
+  raziskovalna referenca v eksperimentalnem repozitoriju. V diplomi jih ne
+  poročamo in jih ne omenjamo. Za diplomsko primerjavo je treba uporabiti
+  Osnovni GCN, usklajen z opisom grafovskega osnovnega modela v poglavju 6.
 - Končni rezultati v diplomi naj uporabljajo `subject LOO` kot glavni protokol in
-  `recording LOO` kot dodatni poročani protokol. `kfold` rezultati so samo za
-  interno eksperimentiranje in jih v diplomi ne poročamo.
+  `recording LOO` kot dodatni poročani protokol. `kfold` ne uporabljamo za glavne
+  rezultate, ga pa omenimo pri ablacijski študiji: zaradi časovne ekonomičnosti
+  bodo ablacijski poskusi izvedeni s subject kfold protokolom, trenutno z
+  `k=5`, ob pojasnilu, da so rezultati dovolj primerljivi z LOO za analizo vpliva
+  komponent.
 - Ablacijska študija naj poleg časovne, prostorske/gaze, zenice in razdalje do
   zaslona vključuje tudi odstranitev fiksacijske informacije.
+- Diplomsko ime za homogeni grafovski baseline je `Osnovni GCN`. V glavnih
+  tabelah rezultatov naj bosta samo `accuracy` in `macro-F1`; podrobnejše metrike
+  sodijo v dodatek.
 - Odločitev za osnovne modele v eksperimentih: ne uporabljamo surove konkatenacije
   signalov in ne PCA različice kot glavne primerjave. Negrafovski modeli
   (`LightGBM`, `SVM`, `MLP`) naj dobijo razširjene agregirane statistike istih
   signalov kot GNN, vključno z informacijo o oddaljenosti od zaslona in
   fiksacijah/trajanju fiksacij.
 - Odločitev za grafovske primerjave v poglavju 6: osnovni grafovski model naj bo
-  arhitekturni baseline, ki uporablja iste signale kot finalni GNN, vendar
+  arhitekturni baseline, ki uporablja iste signale kot predlagani GNN, vendar
   poenostavi arhitekturo. Načrtovana implementacija je majhen ločen modelni
   razred s homogenim `GCNConv`, enotno potjo posredovanja sporočil, brez naučenih
   skalarnih uteži povezav in zaenkrat brez različice `GATConv`. Ablacijska

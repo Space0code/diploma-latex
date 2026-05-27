@@ -45,12 +45,13 @@ Zato je primerjava smiselna kot referenčni okvir za podatkovno zbirko in ciljno
 Grafovske nevronske mreže so primerne za podatke, pri katerih so pomembni odnosi med elementi~\cite{gilmer2017mpnn,kipf2017gcn,velickovic2018gat}.
 Pri časovno-prostorskih podatkih lahko vozlišča predstavljajo meritve, lokacije ali druge osnovne elemente, povezave pa opisujejo časovno zaporedje, prostorsko bližino ali druge odnose med njimi.
 Časovno-prostorske grafovske nevronske mreže so se uveljavile predvsem pri nalogah, kjer podatki naravno nastopajo kot časovne vrste na grafu, na primer pri napovedovanju prometa~\cite{yu2018stgcn}.
+Ta primer je za to nalogo predvsem analogija za podatkovno strukturo: zaporedne meritve pogleda v časovnem oknu obravnavamo podobno kot časovne meritve senzorjev v prometnem omrežju.
 
 \subsection{Uporaba na oknih podatkov pogleda}
 
 V tej nalogi to idejo uporabimo na časovnih oknih podatkov sledilnika pogleda.
 Posamezne meritve znotraj okna predstavimo kot vozlišča.
-Časovne povezave opisujejo zaporedje meritev, prostorske povezave pa podobnost lokacij pogleda.
+Časovne povezave opisujejo zaporedje meritev, prostorske povezave pa podobnost lokacij pogleda, izračunano iz evklidske razdalje med koordinatami pogleda.
 S tem dobimo časovno-prostorski graf, ki je prilagojen strukturi podatkov in hkrati omogoča uporabo GNN za klasifikacijo celotnega okna.
 
 \section{Učenje predstavitev iz podatkov pogleda in \GazeMAE{}}

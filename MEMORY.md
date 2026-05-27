@@ -85,6 +85,20 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- Glavni eksperiment diplome je 3-razredna klasifikacija valence in vzburjenosti
+  po protokolu MAHNOB-HCI, ker omogoča primerjavo z izvirno formulacijo naloge.
+  Binarni low/high poskusi za valenco in vzburjenost so dodatni eksperimenti, ki
+  jih prav tako poročamo v glavnem besedilu, predvsem kot čistejšo in lažjo
+  formulacijo brez srednjega/nevtralnega razreda.
+- `GNN_v1` ostane dovoljen samo kot interna raziskovalna referenca v
+  eksperimentalnem repozitoriju. V diplomi ga ne poročamo in ga ne omenjamo.
+  Za diplomsko primerjavo je treba implementirati nov `BasicGCN`, usklajen z
+  opisom grafovskega osnovnega modela v poglavju 6.
+- Končni rezultati v diplomi naj uporabljajo `subject LOO` kot glavni protokol in
+  `recording LOO` kot dodatni poročani protokol. `kfold` rezultati so samo za
+  interno eksperimentiranje in jih v diplomi ne poročamo.
+- Ablacijska študija naj poleg časovne, prostorske/gaze, zenice in razdalje do
+  zaslona vključuje tudi odstranitev fiksacijske informacije.
 - Odločitev za osnovne modele v eksperimentih: ne uporabljamo surove konkatenacije
   signalov in ne PCA različice kot glavne primerjave. Negrafovski modeli
   (`LightGBM`, `SVM`, `MLP`) naj dobijo razširjene agregirane statistike istih

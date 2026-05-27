@@ -131,25 +131,32 @@ Rezultate metrik poročamo kot povprečje in standardni odklon čez iteracije pr
 \label{subsec:glavna-primerjava}
 
 Glavna primerjava vključuje modele v tabeli~\ref{tab:primerjani-modeli}.
-Tabela poleg imena modela povzema osnovne parametre, ki jih pri posamezni vrsti modela poročamo ali uporabljamo pri razlagi rezultatov.
-
+Tabela poleg imena modela povzema kratko vlogo modela v primerjavi in osnovne parametre, ki jih pri posamezni vrsti modela poročamo ali uporabljamo pri razlagi rezultatov.
+ 
 \begin{table}[t]
     \centering
-    \caption{Modeli, vključeni v glavno primerjavo, in njihovi osnovni parametri.}
+    \caption{Modeli, vključeni v glavno primerjavo, njihova vloga in osnovni parametri.}
     \label{tab:primerjani-modeli}
     \small
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.26\textwidth} >{\raggedright\arraybackslash}X@{}}
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.34\textwidth}@{}}
         \toprule
-        Model & Parametri \\
+        Model & Opis & Parametri \\
         \midrule
-        Naključni klasifikator & Enakomerno naključno vzorčenje razreda; \texttt{random\_state=42}; brez učljivih parametrov. \\
-        Večinski klasifikator & Vedno napove najpogostejši razred učne množice; brez učljivih parametrov. \\
-        SVM & Jedro RBF, \texttt{C=1.0}, \texttt{probability=true}; tabelarične značilke so standardizirane s statistikami učne množice. \\
-        LightGBM & \texttt{n\_estimators=100}, \texttt{learning\_rate=0.05}, \texttt{max\_depth=5}; učenje nad agregiranimi tabelaričnimi značilkami okna. \\
-        MLP & Dve skriti plasti s po 64 nevroni, \texttt{dropout=0.1}, \texttt{learning\_rate=0.001}, \texttt{weight\_decay=0.0001}, \texttt{max\_iter=200}; zgodnje ustavljanje na validacijski izgubi. \\
-        \GazeMAE{} + MLP & Zamrznjena prednaučena kodirnika položaja in hitrosti; okno pretvorimo v predstavitev z~512 razsežnostmi; klasifikacijska glava MLP uporablja \texttt{hidden\_layer\_size=128}, \texttt{dropout=0.2}, \texttt{learning\_rate=0.001} in \texttt{num\_epochs=100}. \\
-        Osnovni GCN & Homogeni \texttt{GCNConv} kot arhitekturni primerjalni model; isti vhodni signali in delitve kot pri predlaganem modelu; ena skupna pot posredovanja sporočil in brez naučenih skalarnih uteži povezav. \\
-        Predlagani GNN & \texttt{GCNConv}, \texttt{num\_layers=3}, \texttt{hidden\_channels=128}, \texttt{relation\_pooling=mlp}, \texttt{graph\_pooling=attention}; naučene predznačene uteži povezav; \texttt{kt=2}, \texttt{ks=2}, \texttt{fixation\_dilation\_k=3}. \\
+        Naključni klasifikator & Enakomerno naključno vzorčenje razreda. & \texttt{random\_state=42} \\
+        \addlinespace
+        Večinski klasifikator & Napoved najpogostejšega razreda učne množice. & \texttt{/} \\
+        \addlinespace
+        SVM & Klasifikator z jedrom RBF nad agregiranimi značilkami okna. & \texttt{C=1.0}, \texttt{kernel=rbf}, \texttt{probability=true} \\
+        \addlinespace
+        LightGBM & Gradientno spodbujena odločitvena drevesa nad agregiranimi značilkami okna. & \texttt{n\_estimators=100}, \texttt{learning\_rate=0.05}, \texttt{max\_depth=5} \\
+        \addlinespace
+        MLP & Polno povezana nevronska mreža nad agregiranimi značilkami okna. & \texttt{hidden\_layers=(64,64)}, \texttt{dropout=0.1}, \texttt{learning\_rate=0.001}, \texttt{weight\_decay=0.0001} \\
+        \addlinespace
+        \GazeMAE{} + MLP & Zamrznjen prednaučen kodirnik položajev pogleda. & predstavitev z~512 razsežnostmi, \texttt{hidden\_layer\_size=128}, \texttt{dropout=0.2}, \texttt{learning\_rate=0.001} \\
+        \addlinespace
+        Osnovni GCN & Homogeni grafovski primerjalni model z enotnim posredovanjem sporočil. & \texttt{GCNConv}, \texttt{num\_layers=3}, \texttt{hidden\_channels=128} \\
+        \addlinespace
+        Predlagani GNN & Heterogena časovno-prostorska grafovska nevronska mreža z naučenimi utežmi povezav. & \texttt{GCNConv}, \texttt{num\_layers=3}, \texttt{hidden\_channels=128}, \texttt{relation\_pooling=mlp}, \texttt{graph\_pooling=attention} \\
         \bottomrule
     \end{tabularx}
 \end{table}

@@ -140,9 +140,11 @@ S tem preprečimo uhajanje informacij iz validacijskih in testnih foldov v učno
 
 \subsection{Dolžina okna}
 
-Časovno vrsto razdelimo na neprekrivajoča se časovna okna dolžine $T=10$~s.
+Časovno vrsto razdelimo na neprekrivajoča se časovna okna dolžine $T=10~s$.
 Vsako uporabno časovno okno predstavlja en učni primer.
 Pri ne-grafovskih osnovnih modelih ga pretvorimo v tabelarični vektor značilk, pri grafovskem modelu pa v časovno-prostorski graf.
+Za $10~s$ smo se odločili na podlagi sorodnega dela na podatkih sledilnika pogleda, kjer so se daljša okna med dolžinami $1$, $3$, $5$ in $10~s$ praviloma izkazala za bolj informativna~\cite{bozak2024feature}.
+Še daljših oken ne uporabimo, ker bi dobili manj učnih primerov in hkrati izgubili del lokalnih časovnih sprememb, kar je znan kompromis pri segmentaciji fizioloških signalov za prepoznavanje čustev~\cite{bamonte2024determining,ouyang2022effect}.
 
 \subsection{Dodelitev oznake oknu}
 

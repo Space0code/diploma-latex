@@ -1,0 +1,16 @@
+Bibliografski kljuc: lim2020emotion
+Naslov: Emotion Recognition Using Eye-Tracking: Taxonomy, Review and Current Challenges
+DOI: https://doi.org/10.3390/s20082384
+
+Primarni odprto dostopni vir:
+https://www.mdpi.com/1424-8220/20/8/2384
+
+Preneseni vir:
+https://ftp.ncbi.nlm.nih.gov/pub/pmc/deprecated/oa_package/e3/e2/PMC7219342.tar.gz
+
+Datoteka v paketu:
+PMC7219342/sensors-20-02384.pdf
+
+Format: PDF
+Licenca/status vira: odprto dostopno, CC BY; PMC OA zapis za PMC7219342
+Status prenosa: uspelo; PDF shranjen kot literatura-offline/lim2020emotion.pdf

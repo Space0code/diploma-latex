@@ -1,0 +1,9 @@
+Bibliographic key: yu2018stgcn
+Title: Spatio-Temporal Graph Convolutional Networks: A Deep Learning Framework for Traffic Forecasting
+Authors: Bing Yu, Haoteng Yin, Zhanxing Zhu
+Source URL: https://www.ijcai.org/Proceedings/2018/0505.pdf
+Landing page: https://www.ijcai.org/proceedings/2018/505
+Source type: IJCAI official proceedings/open-access conference paper page
+Format: PDF
+Saved file: yu2018stgcn.pdf
+Status: downloaded successfully on 2026-05-27

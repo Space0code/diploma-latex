@@ -1,0 +1,9 @@
+Bibliographic key: kipf2017gcn
+Title: Semi-Supervised Classification with Graph Convolutional Networks
+Authors: Thomas N. Kipf and Max Welling
+Source URL: https://openreview.net/pdf?id=SJU4ayYgl
+Landing page: https://openreview.net/forum?id=SJU4ayYgl
+Source type: OpenReview official/open-access conference paper page
+Format: PDF
+Saved file: kipf2017gcn.pdf
+Status: downloaded successfully on 2026-05-27

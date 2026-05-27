@@ -1,0 +1,6 @@
+Key: soleymani2012mahnob
+Source URL: https://ibug.doc.ic.ac.uk/media/uploads/documents/taffcsi-2010-11-0112-2.pdf
+Source page: https://ibug.doc.ic.ac.uk/publications/by_author/msoleymani/
+Format: PDF
+Status: Download succeeded; legal author/institutional publication page (iBUG, Imperial College London). Verified as a 14-page PDF containing "A Multimodal Database for Affect Recognition and Implicit Tagging".
+Accessed: 2026-05-27

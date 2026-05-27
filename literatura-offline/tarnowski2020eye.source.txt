@@ -1,0 +1,8 @@
+URL: https://europepmc.org/articles/PMC7492682?pdf=render
+Direct PDF URL: https://europepmc.org/api/getPdf?pmcid=PMC7492682
+Format: PDF
+Status: Downloaded successfully
+Access: Open access via Europe PMC / PMC, PMCID PMC7492682
+License: CC BY
+DOI: 10.1155/2020/2909267
+Downloaded: 2026-05-27

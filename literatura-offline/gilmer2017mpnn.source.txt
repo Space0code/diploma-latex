@@ -1,0 +1,4 @@
+URL: https://proceedings.mlr.press/v70/gilmer17a/gilmer17a.pdf
+Format: PDF
+Source: PMLR official proceedings page for ICML 2017 / PMLR volume 70
+Status: Download successful; saved as gilmer2017mpnn.pdf on 2026-05-27.

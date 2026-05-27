@@ -1,0 +1,5 @@
+URL: https://openreview.net/pdf?id=rJXMpikCZ
+Source: OpenReview (official ICLR/OpenReview page for "Graph Attention Networks")
+Format: PDF
+Status: downloaded successfully
+Accessed: 2026-05-27

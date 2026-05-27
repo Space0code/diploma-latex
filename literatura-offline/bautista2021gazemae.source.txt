@@ -1,0 +1,6 @@
+Bibliografski kljuc: bautista2021gazemae
+Vir URL: https://arxiv.org/pdf/2009.02437
+Pristajalna stran: https://arxiv.org/abs/2009.02437
+Format: PDF, arXiv odprto dostopna kopija (v2, 25 Oct 2020)
+Status: uspesno preneseno 2026-05-27; PDF preverjen z file/pdfinfo/pdftotext.
+Opomba: IEEE/ICPR bibliografski vnos ima DOI 10.1109/ICPR48806.2021.9412761; za offline kopijo je uporabljen zakonito dostopen arXiv PDF.

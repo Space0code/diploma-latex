@@ -60,6 +60,30 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Za `arousal` dosledno uporabljaj "vzburjenost", ne "vzburjenje". Samo pri prvi
   omembi v diplomi dodaj angleški izraz v oklepaju: `vzburjenost (ang. arousal)`.
 
+## Vizualna identiteta diplome
+
+- Za vse diagrame, TikZ slike, SVG slike, grafe, sheme cevovodov in druge
+  vizualne elemente diplomske naloge uporabljaj konsistentno barvno paleto B:
+  `#2F3437` temna siva za tekst/robove, `#8ECAE6` pastelna modra, `#A8DADC`
+  pastelna teal, `#B8A1D9` pastelna vijolična, `#F4A261` pastelna oranžna,
+  `#E9A6A6` pastelna rožnata in `#F7F7F2` svetlo ozadje.
+- Slog vizualnih elementov naj bo akademski, čist, tehničen in primeren za
+  diplomsko nalogo oziroma znanstveni članek: dovolj praznega prostora, tanki
+  robovi, berljiva tipografija, brez dekorativnih gradientov in brez risankastih
+  ikon.
+- Barve uporabljaj semantično konsistentno. Isti koncept naj ima skozi celotno
+  diplomo vedno isto barvo.
+- Če obstoječa slika, TikZ koda, SVG ali graf uporablja barve izven te palete brez
+  jasnega razloga, opozori uporabnika in predlagaj popravek na paleto B.
+- LaTeX definicije barv:
+  `\definecolor{thesisDark}{HTML}{2F3437}`,
+  `\definecolor{thesisBlue}{HTML}{8ECAE6}`,
+  `\definecolor{thesisTeal}{HTML}{A8DADC}`,
+  `\definecolor{thesisPurple}{HTML}{B8A1D9}`,
+  `\definecolor{thesisOrange}{HTML}{F4A261}`,
+  `\definecolor{thesisPink}{HTML}{E9A6A6}`,
+  `\definecolor{thesisBackground}{HTML}{F7F7F2}`.
+
 ## Referenčni kontekst
 
 - PDF-ji v `codex-kontekst` so dobri zgledi kakovostnih FRI diplomskih in

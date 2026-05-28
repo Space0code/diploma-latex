@@ -136,3 +136,16 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   izpusti.
 - Pri naslednjem delu na poglavjih preveri, ali se trenutna struktura v
   `AGENTS.md` ujema z dejansko strukturo `diploma.tex` in poglavij.
+- Za glavno primerjavo velikosti in praktične zahtevnosti modelov poročamo o
+  končnih 3-razrednih `subject LOO` eksperimentih za valenco in vzburjenost.
+  Primerjani modeli so `LightGBM`, `SVM`, `MLP`, `GazeMAE_MLP`, `Osnovni GCN` in
+  `predlagani GNN`. V glavno besedilo naj gre ozek nabor: število učljivih
+  parametrov, število vseh parametrov, čas učenja na okno/graf, čas inference na
+  okno/graf ter skupni stolpec `accuracy`/`macro-F1`. Za `GazeMAE_MLP` zabeleži
+  učljive parametre glave in skupno število parametrov zamrznjenih enkoderjev z
+  glavo. Za klasična modela `LightGBM` in `SVM` število nevronskih parametrov ni
+  neposredno primerljivo; v glavnem poročilu ga označi kot nerelevantno oziroma
+  nedoločeno, modelno specifične mere pa lahko ostanejo v surovem artefaktu.
+- Implementacija poročanja v `GFM-for-eyetracker` zdaj ob končnih multiclass
+  tekih z `benchmarking.enabled=true` zapiše fold-level benchmark JSON-e,
+  agregirane CSV-je in glavni `main_model_complexity_report.csv/.md`.

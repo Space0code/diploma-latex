@@ -192,17 +192,17 @@ Tabela poleg imena modela povzema kratko vlogo modela v primerjavi in osnovne pa
 
 \TODO{
 \begin{itemize}
-    \item Eksperimenti: preveriti, da primerjava vključuje diplomski grafovski baseline \textbf{Osnovni GCN}; stare interne različice grafovskega modela ne sodijo v diplomsko primerjavo.
-    \item Eksperimenti: za Osnovni GCN uporabiti isto grafovsko predstavitev, iste signale, ista okna, iste delitve in isto standardizacijo kot pri predlaganem GNN.
-    \item Eksperimenti: pri Osnovnem GCN združiti relacije \texttt{temporal\_forward}, \texttt{temporal\_backward}, \texttt{spatial} in \texttt{fixation} v homogeni graf, odstraniti podvojene povezave ter ne uporabiti značilk povezav ali naučenih uteži povezav.
-    \item Eksperimenti: preveriti, da Osnovni GCN uporablja \texttt{GCNConv}, isto napovedno glavo, iste YAML hiperparametre in ločen parameter za readout; trenutni readout je \texttt{attention}, pozneje lahko preverimo še \texttt{mean}.
-    \item Eksperimenti: preveriti, da Osnovni GCN deluje za 2- in 3-razredno klasifikacijo ter da sta \texttt{num\_layers=3} in \texttt{hidden\_channels=128} res uporabljena tudi pri njem.
+    \item Eksperimenti: preveriti, da primerjava vključuje diplomski grafovski baseline \textbf{osnovni GCN}; stare interne različice grafovskega modela ne sodijo v diplomsko primerjavo.
+    \item Eksperimenti: za osnovni GCN uporabiti isto grafovsko predstavitev, iste signale, ista okna, iste delitve in isto standardizacijo kot pri predlaganem GNN.
+    \item Eksperimenti: pri osnovnem GCN združiti relacije \texttt{temporal\_forward}, \texttt{temporal\_backward}, \texttt{spatial} in \texttt{fixation} v homogeni graf, odstraniti podvojene povezave ter ne uporabiti značilk povezav ali naučenih uteži povezav.
+    \item Eksperimenti: preveriti, da osnovni GCN uporablja \texttt{GCNConv}, isto napovedno glavo, iste YAML hiperparametre in ločen parameter za readout; trenutni readout je \texttt{attention}, pozneje lahko preverimo še \texttt{mean}.
+    \item Eksperimenti: preveriti, da osnovni GCN deluje za 2- in 3-razredno klasifikacijo ter da sta \texttt{num\_layers=3} in \texttt{hidden\_channels=128} res uporabljena tudi pri njem.
 \end{itemize}
 }
 
 \TODO{
 \begin{itemize}
-    \item Pisanje: v tabeli in besedilu uporabljaj ime Osnovni GCN.
+    \item Pisanje: v tabeli in besedilu uporabljaj izraz osnovni GCN.
     \item Pisanje: v razlagi osnovnega GCN poudari, da je to arhitekturno poenostavljen grafovski baseline, ne starejša različica predlaganega modela.
 \end{itemize}
 }

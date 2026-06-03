@@ -1,0 +1,191 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1000" viewBox="0 0 1900 1000">
+<defs><marker id="arrow-dark" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2F3437"/></marker><marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8ECAE6"/></marker><marker id="arrow-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#A8DADC"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F4A261"/></marker><marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#B8A1D9"/></marker><marker id="arrow-pink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#E9A6A6"/></marker></defs>
+<rect x="0" y="0" width="1900" height="1000" fill="#F7F7F2"/>
+<text x="55" y="55" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#2F3437" text-anchor="start">
+<tspan x="55" dy="0">Arhitektura predlaganega GNN</tspan>
+</text>
+<rect x="530" y="34" width="120" height="42" rx="18" fill="#8ECAE6" fill-opacity="0.8" stroke="#2F3437" stroke-width="2"/>
+<text x="590" y="62" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="590" dy="0">L = 2</tspan>
+</text>
+<rect x="670" y="34" width="120" height="42" rx="18" fill="#A8DADC" fill-opacity="0.8" stroke="#2F3437" stroke-width="2"/>
+<text x="730" y="62" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="730" dy="0">H = 64</tspan>
+</text>
+<rect x="810" y="34" width="120" height="42" rx="18" fill="#8ECAE6" fill-opacity="0.8" stroke="#2F3437" stroke-width="2"/>
+<text x="870" y="62" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="870" dy="0">k_t = 1</tspan>
+</text>
+<rect x="950" y="34" width="120" height="42" rx="18" fill="#F4A261" fill-opacity="0.8" stroke="#2F3437" stroke-width="2"/>
+<text x="1010" y="62" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1010" dy="0">k_s = 1</tspan>
+</text>
+<rect x="1090" y="34" width="120" height="42" rx="18" fill="#B8A1D9" fill-opacity="0.8" stroke="#2F3437" stroke-width="2"/>
+<text x="1150" y="62" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1150" dy="0">k_f = 3</tspan>
+</text>
+<rect x="55" y="160" width="270" height="310" rx="20" fill="#FFFFFF" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="190.0" y="196" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="190.0" dy="0">heterogeni graf</tspan>
+</text>
+<line x1="91.0" y1="241.4" x2="112.6" y2="227.0" stroke="#8ECAE6" stroke-width="4" stroke-linecap="round" opacity="1"/>
+<line x1="112.6" y1="227.0" x2="131.8" y2="233.24" stroke="#A8DADC" stroke-width="4" stroke-linecap="round" opacity="1"/>
+<line x1="131.8" y1="233.24" x2="151.0" y2="260.6" stroke="#8ECAE6" stroke-width="4" stroke-linecap="round" opacity="1"/>
+<line x1="151.0" y1="260.6" x2="177.39999999999998" y2="248.6" stroke="#A8DADC" stroke-width="4" stroke-linecap="round" opacity="1"/>
+<line x1="177.39999999999998" y1="248.6" x2="201.39999999999998" y2="272.6" stroke="#8ECAE6" stroke-width="4" stroke-linecap="round" opacity="1"/>
+<line x1="201.39999999999998" y1="272.6" x2="223.0" y2="255.8" stroke="#A8DADC" stroke-width="4" stroke-linecap="round" opacity="1"/>
+<line x1="223.0" y1="255.8" x2="247.0" y2="284.6" stroke="#8ECAE6" stroke-width="4" stroke-linecap="round" opacity="1"/>
+<line x1="247.0" y1="284.6" x2="268.6" y2="270.2" stroke="#A8DADC" stroke-width="4" stroke-linecap="round" opacity="1"/>
+<line x1="91.0" y1="241.4" x2="131.8" y2="233.24" stroke="#F4A261" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+<line x1="131.8" y1="233.24" x2="177.39999999999998" y2="248.6" stroke="#F4A261" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+<line x1="177.39999999999998" y1="248.6" x2="223.0" y2="255.8" stroke="#F4A261" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+<line x1="223.0" y1="255.8" x2="268.6" y2="270.2" stroke="#F4A261" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+<line x1="112.6" y1="227.0" x2="151.0" y2="260.6" stroke="#F4A261" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+<line x1="131.8" y1="233.24" x2="151.0" y2="260.6" stroke="#B8A1D9" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+<line x1="151.0" y1="260.6" x2="177.39999999999998" y2="248.6" stroke="#B8A1D9" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+<line x1="201.39999999999998" y1="272.6" x2="223.0" y2="255.8" stroke="#B8A1D9" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+<line x1="223.0" y1="255.8" x2="247.0" y2="284.6" stroke="#B8A1D9" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+<circle cx="91.0" cy="241.4" r="4.32" fill="#FFFFFF" stroke="#2F3437" stroke-width="2"/>
+<circle cx="112.6" cy="227.0" r="4.32" fill="#FFFFFF" stroke="#2F3437" stroke-width="2"/>
+<circle cx="131.8" cy="233.24" r="4.32" fill="#FFFFFF" stroke="#2F3437" stroke-width="2"/>
+<circle cx="151.0" cy="260.6" r="4.32" fill="#FFFFFF" stroke="#2F3437" stroke-width="2"/>
+<circle cx="177.39999999999998" cy="248.6" r="4.32" fill="#FFFFFF" stroke="#2F3437" stroke-width="2"/>
+<circle cx="201.39999999999998" cy="272.6" r="4.32" fill="#FFFFFF" stroke="#2F3437" stroke-width="2"/>
+<circle cx="223.0" cy="255.8" r="4.32" fill="#FFFFFF" stroke="#2F3437" stroke-width="2"/>
+<circle cx="247.0" cy="284.6" r="4.32" fill="#FFFFFF" stroke="#2F3437" stroke-width="2"/>
+<circle cx="268.6" cy="270.2" r="4.32" fill="#FFFFFF" stroke="#2F3437" stroke-width="2"/>
+<text x="79" y="325" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="79" dy="0">časovne povezave naprej</tspan>
+<tspan x="79" dy="22">časovne povezave nazaj</tspan>
+<tspan x="79" dy="22">prostorske povezave</tspan>
+<tspan x="79" dy="22">fiksacijske povezave</tspan>
+</text>
+<rect x="75" y="412" width="230" height="42" rx="12" fill="#E9A6A6" fill-opacity="0.35" stroke="#2F3437" stroke-width="1.5"/>
+<text x="190.0" y="440" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="190.0" dy="0">ciljna oznaka: valenca ali vzburjenost</tspan>
+</text>
+<path d="M 325 315 L 355 315" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="360" y="170" width="235" height="255" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#8ECAE6" stroke-width="3"/>
+<text x="478" y="208" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="478" dy="0">značilke vozlišč X</tspan>
+</text>
+<text x="385" y="250" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="385" dy="0">x, y</tspan>
+<tspan x="385" dy="22">leva/desna zenica</tspan>
+<tspan x="385" dy="22">normalizirani čas</tspan>
+<tspan x="385" dy="22">razdalja do sledilnika</tspan>
+<tspan x="385" dy="22">trajanje fiksacije</tspan>
+</text>
+<path d="M 595 300 L 625 300" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="630" y="230" width="185" height="115" rx="18" fill="#A8DADC" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="722.5" y="268" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="722.5" dy="0">vhodni MLP</tspan>
+</text>
+<path d="M 815 288 L 845 288" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="850" y="230" width="185" height="115" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#A8DADC" stroke-width="3"/>
+<text x="942.5" y="268" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="942.5" dy="0">h^(0)</tspan>
+<tspan x="942.5" dy="28">H = 64</tspan>
+</text>
+<path d="M 1035 288 L 1070 288" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1075" y="150" width="335" height="280" rx="22" fill="#FFFFFF" fill-opacity="1" stroke="#2F3437" stroke-width="4"/>
+<text x="1242" y="192" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1242" dy="0">2 × heterogena GNN plast</tspan>
+</text>
+<text x="1105" y="238" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="1105" dy="0">GCNConv po relacijah</tspan>
+<tspan x="1105" dy="23">GELU</tspan>
+<tspan x="1105" dy="23">fuzija relacij z MLP</tspan>
+<tspan x="1105" dy="23">rezidualna povezava</tspan>
+<tspan x="1105" dy="23">LayerNorm + Dropout</tspan>
+</text>
+<path d="M 325 365 L 355 585" fill="none" stroke="#2F3437" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="0.65"/>
+<rect x="360" y="510" width="235" height="185" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#F4A261" stroke-width="3"/>
+<text x="478" y="548" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="478" dy="0">značilke povezav R</tspan>
+</text>
+<text x="385" y="586" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="385" dy="0">t_i, t_j, Δt</tspan>
+<tspan x="385" dy="22">Δx, Δy, razdalja</tspan>
+<tspan x="385" dy="22">Δd</tspan>
+<tspan x="385" dy="22">smer ρ pri časovnih</tspan>
+</text>
+<path d="M 595 602 L 625 602" fill="none" stroke="#2F3437" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="630" y="552" width="195" height="105" rx="18" fill="#F4A261" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="727.5" y="590" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="727.5" dy="0">MLP za uteži</tspan>
+<tspan x="727.5" dy="27">povezav</tspan>
+</text>
+<path d="M 825 602 L 855 602" fill="none" stroke="#2F3437" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="860" y="552" width="120" height="105" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="920.0" y="590" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="920.0" dy="0">tanh</tspan>
+</text>
+<path d="M 980 602 L 1010 602" fill="none" stroke="#2F3437" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1015" y="540" width="210" height="130" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="1120.0" y="578" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1120.0" dy="0">normalizacija</tspan>
+<tspan x="1120.0" dy="26">po ciljnih</tspan>
+<tspan x="1120.0" dy="26">vozliščih</tspan>
+</text>
+<path d="M 1225 602 L 1255 602" fill="none" stroke="#2F3437" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1260" y="552" width="165" height="105" rx="18" fill="#E9A6A6" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="1342.5" y="590" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1342.5" dy="0">predznačene</tspan>
+<tspan x="1342.5" dy="25">uteži w_ij^(r)</tspan>
+</text>
+<path d="M 1340 552 L 1340 432" fill="none" stroke="#2F3437" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<path d="M 1410 288 L 1440 240" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1445" y="190" width="185" height="100" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="1537.5" y="228" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1537.5" dy="0">predstavitve</tspan>
+<tspan x="1537.5" dy="26">vozlišč h_i</tspan>
+</text>
+<path d="M 1630 240 L 1660 240" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1665" y="190" width="195" height="100" rx="18" fill="#B8A1D9" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="1762.5" y="228" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1762.5" dy="0">pozornostno</tspan>
+<tspan x="1762.5" dy="26">združevanje</tspan>
+</text>
+<path d="M 1762 290 L 1762 350 L 1630 350" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1445" y="330" width="185" height="100" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="1537.5" y="368" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1537.5" dy="0">predstavitev</tspan>
+<tspan x="1537.5" dy="26">grafa h_G</tspan>
+</text>
+<path d="M 1630 380 L 1660 380" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1665" y="330" width="195" height="100" rx="18" fill="#A8DADC" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="1762.5" y="368" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1762.5" dy="0">napovedna</tspan>
+<tspan x="1762.5" dy="26">glava MLP</tspan>
+</text>
+<path d="M 1762 430 L 1762 485" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1600" y="490" width="260" height="120" rx="18" fill="#E9A6A6" fill-opacity="0.45" stroke="#2F3437" stroke-width="3"/>
+<text x="1730" y="528" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1730" dy="0">napoved razreda</tspan>
+</text>
+<text x="1620" y="568" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="1620" dy="0">razred valence</tspan>
+<tspan x="1620" dy="22">ali razred vzburjenosti</tspan>
+</text>
+<rect x="55" y="825" width="720" height="105" rx="16" fill="#FFFFFF" fill-opacity="0.85" stroke="#2F3437" stroke-width="2"/>
+<text x="80" y="860" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#2F3437" text-anchor="start">
+<tspan x="80" dy="0">relacije</tspan>
+</text>
+<line x1="190" y1="854" x2="234" y2="854" stroke="#8ECAE6" stroke-width="6" stroke-linecap="round" opacity="1"/>
+<text x="190" y="895" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="190" dy="0">časovne naprej</tspan>
+</text>
+<line x1="325" y1="854" x2="369" y2="854" stroke="#A8DADC" stroke-width="6" stroke-linecap="round" opacity="1"/>
+<text x="325" y="895" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="325" dy="0">časovne nazaj</tspan>
+</text>
+<line x1="460" y1="854" x2="504" y2="854" stroke="#F4A261" stroke-width="6" stroke-linecap="round" opacity="1"/>
+<text x="460" y="895" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="460" dy="0">prostorske</tspan>
+</text>
+<line x1="595" y1="854" x2="639" y2="854" stroke="#B8A1D9" stroke-width="6" stroke-linecap="round" opacity="1"/>
+<text x="595" y="895" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="595" dy="0">fiksacijske</tspan>
+</text>
+</svg>

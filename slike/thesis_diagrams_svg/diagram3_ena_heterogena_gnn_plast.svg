@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1000" viewBox="0 0 1900 1000">
+<defs><marker id="arrow-dark" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2F3437"/></marker><marker id="arrow-blue" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#8ECAE6"/></marker><marker id="arrow-teal" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#A8DADC"/></marker><marker id="arrow-orange" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F4A261"/></marker><marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#B8A1D9"/></marker><marker id="arrow-pink" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#E9A6A6"/></marker></defs>
+<rect x="0" y="0" width="1900" height="1000" fill="#F7F7F2"/>
+<text x="55" y="55" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" fill="#2F3437" text-anchor="start">
+<tspan x="55" dy="0">Ena heterogena GNN plast</tspan>
+</text>
+<rect x="620" y="34" width="120" height="42" rx="18" fill="#8ECAE6" fill-opacity="0.8" stroke="#2F3437" stroke-width="2"/>
+<text x="680" y="62" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="680" dy="0">plast ℓ od 2</tspan>
+</text>
+<rect x="760" y="34" width="230" height="42" rx="18" fill="#A8DADC" fill-opacity="0.8" stroke="#2F3437" stroke-width="2"/>
+<text x="875" y="62" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="875" dy="0">H = 64</tspan>
+</text>
+<rect x="65" y="370" width="270" height="110" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="200" y="414" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="200" dy="0">predstavitve vozlišč</tspan>
+<tspan x="200" dy="27">h_i^(ℓ)</tspan>
+</text>
+<rect x="65" y="555" width="270" height="120" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#E9A6A6" stroke-width="3"/>
+<text x="200" y="597" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="200" dy="0">predznačene uteži</tspan>
+<tspan x="200" dy="26">povezav w_ij^(r)</tspan>
+</text>
+<text x="200" y="642" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="middle">
+<tspan x="200" dy="0">normalizirane po ciljnih vozliščih</tspan>
+</text>
+<path d="M 335 425 L 390 425 M 390 225 L 390 700" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1"/>
+<path d="M 335 615 L 420 615 M 420 250 L 420 700" fill="none" stroke="#E9A6A6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8 8" opacity="0.95"/>
+<path d="M 335 390 L 370 390 L 370 125 L 1410 125 L 1410 385" fill="none" stroke="#2F3437" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<text x="875" y="112" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="875" dy="0">rezidualna povezava</tspan>
+</text>
+<path d="M 390 250 L 455 250" fill="none" stroke="#2F3437" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<path d="M 420 275 L 455 275" fill="none" stroke="#E9A6A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7" marker-end="url(#arrow-pink)" opacity="1"/>
+<rect x="460" y="205" width="285" height="95" rx="16" fill="#8ECAE6" fill-opacity="0.42" stroke="#2F3437" stroke-width="2.5"/>
+<text x="602" y="243" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="602" dy="0">GCNConv + GELU</tspan>
+</text>
+<text x="602" y="275" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#2F3437" text-anchor="middle">
+<tspan x="602" dy="0">časovne naprej</tspan>
+</text>
+<path d="M 745 252 L 835 252" fill="none" stroke="#8ECAE6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<text x="760" y="235" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="760" dy="0">h_i^(t+)</tspan>
+</text>
+<path d="M 390 390 L 455 390" fill="none" stroke="#2F3437" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<path d="M 420 415 L 455 415" fill="none" stroke="#E9A6A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7" marker-end="url(#arrow-pink)" opacity="1"/>
+<rect x="460" y="345" width="285" height="95" rx="16" fill="#A8DADC" fill-opacity="0.42" stroke="#2F3437" stroke-width="2.5"/>
+<text x="602" y="383" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="602" dy="0">GCNConv + GELU</tspan>
+</text>
+<text x="602" y="415" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#2F3437" text-anchor="middle">
+<tspan x="602" dy="0">časovne nazaj</tspan>
+</text>
+<path d="M 745 392 L 835 392" fill="none" stroke="#A8DADC" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<text x="760" y="375" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="760" dy="0">h_i^(t−)</tspan>
+</text>
+<path d="M 390 530 L 455 530" fill="none" stroke="#2F3437" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<path d="M 420 555 L 455 555" fill="none" stroke="#E9A6A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7" marker-end="url(#arrow-pink)" opacity="1"/>
+<rect x="460" y="485" width="285" height="95" rx="16" fill="#F4A261" fill-opacity="0.42" stroke="#2F3437" stroke-width="2.5"/>
+<text x="602" y="523" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="602" dy="0">GCNConv + GELU</tspan>
+</text>
+<text x="602" y="555" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#2F3437" text-anchor="middle">
+<tspan x="602" dy="0">prostorske</tspan>
+</text>
+<path d="M 745 532 L 835 532" fill="none" stroke="#F4A261" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<text x="760" y="515" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="760" dy="0">h_i^(s)</tspan>
+</text>
+<path d="M 390 670 L 455 670" fill="none" stroke="#2F3437" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<path d="M 420 695 L 455 695" fill="none" stroke="#E9A6A6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="7 7" marker-end="url(#arrow-pink)" opacity="1"/>
+<rect x="460" y="625" width="285" height="95" rx="16" fill="#B8A1D9" fill-opacity="0.42" stroke="#2F3437" stroke-width="2.5"/>
+<text x="602" y="663" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="602" dy="0">GCNConv + GELU</tspan>
+</text>
+<text x="602" y="695" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#2F3437" text-anchor="middle">
+<tspan x="602" dy="0">fiksacijske</tspan>
+</text>
+<path d="M 745 672 L 835 672" fill="none" stroke="#B8A1D9" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<text x="760" y="655" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="760" dy="0">h_i^(f)</tspan>
+</text>
+<rect x="850" y="330" width="185" height="260" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="942" y="372" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="942" dy="0">konkatenacija</tspan>
+</text>
+<text x="875" y="420" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="875" dy="0">h_i^(t+)</tspan>
+<tspan x="875" dy="23">h_i^(t−)</tspan>
+<tspan x="875" dy="23">h_i^(s)</tspan>
+<tspan x="875" dy="23">h_i^(f)</tspan>
+</text>
+<text x="942" y="555" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="942" dy="0">→ h_i^concat</tspan>
+</text>
+<path d="M 1035 460 L 1080 460" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1085" y="390" width="230" height="140" rx="18" fill="#B8A1D9" fill-opacity="0.35" stroke="#2F3437" stroke-width="3"/>
+<text x="1200" y="440" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1200" dy="0">MLP fuzija</tspan>
+<tspan x="1200" dy="28">relacij</tspan>
+</text>
+<text x="1200" y="488" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1200" dy="0">→ h_i^fuz</tspan>
+</text>
+<path d="M 1315 460 L 1360 460" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1365" y="400" width="205" height="120" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="1467" y="445" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1467" dy="0">rezidualni</tspan>
+<tspan x="1467" dy="27">seštevek</tspan>
+</text>
+<path d="M 1570 460 L 1610 460" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1615" y="405" width="220" height="110" rx="18" fill="#A8DADC" fill-opacity="0.42" stroke="#2F3437" stroke-width="3"/>
+<text x="1725" y="452" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1725" dy="0">LayerNorm</tspan>
+<tspan x="1725" dy="27">+ Dropout</tspan>
+</text>
+<path d="M 1725 515 L 1725 585" fill="none" stroke="#2F3437" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrow-dark)" opacity="1"/>
+<rect x="1585" y="590" width="280" height="110" rx="18" fill="#FFFFFF" fill-opacity="1" stroke="#2F3437" stroke-width="3"/>
+<text x="1725" y="635" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2F3437" text-anchor="middle">
+<tspan x="1725" dy="0">predstavitve vozlišč</tspan>
+<tspan x="1725" dy="27">h_i^(ℓ+1)</tspan>
+</text>
+<rect x="850" y="720" width="690" height="75" rx="16" fill="#FFFFFF" fill-opacity="0.82" stroke="#2F3437" stroke-width="2"/>
+<text x="870" y="765" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="870" dy="0">[h_i^(t+) || h_i^(t−) || h_i^(s) || h_i^(f)] → h_i^fuz</tspan>
+</text>
+<text x="360" y="742" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="360" dy="0">solidno vodilo: h_i^(ℓ)</tspan>
+</text>
+<text x="360" y="770" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#2F3437" text-anchor="start">
+<tspan x="360" dy="0">črtkano vodilo: w_ij^(r)</tspan>
+</text>
+</svg>

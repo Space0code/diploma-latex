@@ -173,3 +173,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Implementacija poročanja v `GFM-for-eyetracker` zdaj ob končnih multiclass
   tekih z `benchmarking.enabled=true` zapiše fold-level benchmark JSON-e,
   agregirane CSV-je in glavni `main_model_complexity_report.csv/.md`.
+- Grid search hiperparametrov predlaganega GNN naj v diplomi ostane majhen
+  podporni poskus za izbiro konfiguracije. Metodološki opis in utemeljitev izbire
+  sodita v poglavje 7 pri glavni primerjavi modelov; v poglavju 8 ga omeni le
+  kratko ali ga po potrebi prestavi v dodatek. Izbrana konfiguracija je
+  `num_layers=2`, `hidden_channels=64`, `kt=1`, `ks=1`, `kf=3`; predlagani GNN
+  ima pri tej nastavitvi 101.143 učljivih parametrov.

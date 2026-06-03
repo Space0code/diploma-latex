@@ -158,6 +158,15 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   dodatke. UMAP je kandidatna kvalitativna slika: v glavno besedilo gre samo, če
   je berljiva, stabilna in interpretativno koristna; sicer gre v dodatek ali se
   izpusti.
+- Slike za konstrukcijo grafa v `slike/konstrukcija_grafa` naj v naslovu ne
+  vsebujejo metapodatkov posnetka. Za osrednji naslov uporabi
+  `Majhen primer konstrukcije grafa iz podatkov sledilnika pogleda`, metapodatke
+  kandidata pa zapiši v ime datoteke.
+- Za vsak izbrani primer konstrukcije grafa naj skripta poleg zgornjega kolaža
+  ustvari še podmapo z datotekami `kolaz`, `vse_povezave`, `casovne`,
+  `prostorske` in `fiksacijske` v formatih SVG in PNG. Samostojni paneli naj
+  imajo večje pisave in več prostora za oznake, da so uporabni kot ločene slike v
+  PDF-ju.
 - Pri naslednjem delu na poglavjih preveri, ali se trenutna struktura v
   `AGENTS.md` ujema z dejansko strukturo `diploma.tex` in poglavij.
 - Za glavno primerjavo velikosti in praktične zahtevnosti modelov poročamo o

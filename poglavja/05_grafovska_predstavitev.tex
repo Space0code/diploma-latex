@@ -144,6 +144,14 @@ Ločimo usmerjene časovne povezave naprej in nazaj:
 
 Povezave v $E_t^+$ potekajo od prejšnjih proti kasnejšim meritvam, povezave v $E_t^-$ pa od kasnejših proti prejšnjim meritvam.
 Ločitev smeri je smiselna, ker ima vrstni red očesnega gibanja pomen.
+Primer časovnih povezav na majhnem izseku okna je prikazan na sliki~\ref{fig:casovne-povezave-primer}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/casovne.png}
+    \caption{Primer časovnih povezav v izseku grafa. Povezave sledijo časovni urejenosti meritev in ločijo smer naprej ter nazaj.}
+    \label{fig:casovne-povezave-primer}
+\end{figure}
 
 \subsubsection{Parameter $k_t$}
 
@@ -176,6 +184,14 @@ Za vsako vozlišče $v_i$ poiščemo $k_s$ najbližjih sosedov v prostoru koordi
 \subsubsection{Simetrizacija povezav}
 
 Ker povezave obravnavamo kot neusmerjene, vsaki povezavi $(v_i,v_j)$ dodamo tudi povezavo $(v_j,v_i)$.
+Primer prostorskih povezav je prikazan na sliki~\ref{fig:prostorske-povezave-primer}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/prostorske.png}
+    \caption{Primer prostorskih povezav v izseku grafa. Povezave nastanejo med meritvami s podobnim položajem pogleda, zato niso nujno omejene na časovno zaporedne meritve.}
+    \label{fig:prostorske-povezave-primer}
+\end{figure}
 
 \END_NOTE*{
     \begin{itemize}
@@ -221,6 +237,14 @@ Podvojene povezave znotraj relacije $E_f$ odstranimo.
 Na primer, pri fiksaciji dolžine $F=30$ in parametru $k_f=3$ dobimo $s=10$.
 Vozlišče z lokalnim indeksom $0$ torej povežemo z vozlišči $1, 11$ in $21$.
 Odmik $1$ ohrani časovno lokalno komunikacijo znotraj fiksacije, večji odmiki pa omogočijo širjenje informacij tudi med časovno bolj oddaljenimi meritvami iste fiksacije.
+Primer fiksacijskih povezav je prikazan na sliki~\ref{fig:fiksacijske-povezave-primer}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/fiksacijske.png}
+    \caption{Primer fiksacijskih povezav v izseku grafa. Povezave združujejo meritve, ki pripadajo isti zaznani fiksaciji, pri čemer razširjena konstrukcija ohrani redkejšo povezovalno strukturo.}
+    \label{fig:fiksacijske-povezave-primer}
+\end{figure}
 
 Razširjene povezave imajo večji doseg kot zgolj zaporedne fiksacijske povezave, hkrati pa se izognejo kombinatorični eksploziji, ki bi nastala pri polnem kliku.
 Pri polnem kliku bi namreč število povezav naraščalo kvadratno z dolžino fiksacije.
@@ -237,6 +261,16 @@ Večje vrednosti $k_f$ povečajo gostoto grafa, računsko zahtevnost in možnost
         \item $k_f=3$ v trenutnih poskusih. Preveri končni $k_f$ glede na eksperimente (consider kf=2).
     \end{itemize}
 }
+
+Isti izsek z vsemi opisanimi tipi povezav je prikazan na sliki~\ref{fig:konstrukcija-grafa-primer}.
+Prikaz povzema konstrukcijo heterogenega grafa in zato služi kot povezava med formalno definicijo grafa ter posameznimi konstrukcijskimi pravili.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/vse_povezave.png}
+    \caption{Majhen primer konstrukcije grafa iz podatkov sledilnika pogleda. Vozlišča predstavljajo meritve v izseku časovnega okna, povezave pa skupaj prikazujejo časovne, prostorske in fiksacijske relacije, opisane v tem poglavju.}
+    \label{fig:konstrukcija-grafa-primer}
+\end{figure}
 
 \section{Uteži povezav}
 \label{subsec:utezi-povezav}

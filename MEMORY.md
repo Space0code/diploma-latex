@@ -163,10 +163,13 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   `Majhen primer konstrukcije grafa iz podatkov sledilnika pogleda`, metapodatke
   kandidata pa zapiši v ime datoteke.
 - Za vsak izbrani primer konstrukcije grafa naj skripta poleg zgornjega kolaža
-  ustvari še podmapo z datotekami `kolaz`, `vse_povezave`, `casovne`,
-  `prostorske` in `fiksacijske` v formatih SVG in PNG. Samostojni paneli naj
-  imajo večje pisave in več prostora za oznake, da so uporabni kot ločene slike v
-  PDF-ju.
+  ustvari še podmapo z datotekami `kolaz`, `vse_povezave`,
+  `vse_povezave_brez_oznak`, `casovne`, `prostorske` in `fiksacijske` v formatih
+  SVG in PNG. Samostojni paneli naj imajo večje pisave in več prostora za
+  oznake, da so uporabni kot ločene slike v PDF-ju.
+- Pri slikah konstrukcije grafa SVG shranjuj s transparentnim ozadjem, PNG pa
+  lahko obdrži svetlo ozadje za pregledovanje. Na teh slikah ne uporabljaj mreže
+  osi, ker pri polprosojnih povezavah povzroča vidne artefakte.
 - Pri naslednjem delu na poglavjih preveri, ali se trenutna struktura v
   `AGENTS.md` ujema z dejansko strukturo `diploma.tex` in poglavij.
 - Za glavno primerjavo velikosti in praktične zahtevnosti modelov poročamo o

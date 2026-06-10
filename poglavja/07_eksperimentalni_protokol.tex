@@ -4,6 +4,15 @@
 \section{Eksperimentalne naloge}
 \label{subsec:eksperimentalne-naloge}
 
+\TODO{
+\begin{itemize}
+    \item Novo delovno izhodišče: glavna naloga naj bo binarna klasifikacija, ne več 3-razredna klasifikacija; obstoječi opis 3-razredne naloge kasneje prestaviti v dodatni ali primerjalni del, če jo bomo še poročali.
+    \item Glavno primerjavo zastaviti kot model $\times$ nabor signalov, z nabori \emph{gaze}, \emph{gaze+pupil} in \emph{all}; \emph{pupil-only} naj ostane placeholder za morebitni MOMENT eksperiment, ne obvezni del GNN primerjave.
+    \item Za začetek uporabiti subject k-fold kot glavni protokol; recording k-fold, subject LOO in recording LOO označiti kot možne dodatne robustnostne preveritve, če bodo izvedene.
+    \item \GazeMAE{} trenirati oziroma uporabiti samo na \emph{gaze-only}; v tabelah ga je dovoljeno primerjati tudi z drugimi nabori kot referenčni model, vendar ne kot model, treniran na teh signalih.
+\end{itemize}
+}
+
 \subsection{Valenca in vzburjenost}
 
 % OPOMBA (ne briši): obe nalogi obravnavamo enakovredno, ampak v interpretaciji/diskusiji bomo večjo težo dali rezultatom za valenco, ker so podatki za vzburjenost slabši. razlaga: labele za vzburjenost se slabše ujemajo s "self reported" arousal score kot pri valenci. dokaz/referenca so ploti v GFM-for-eyetracker/docs/figures/hci-tagging/mentors meeting 2026-05-13/label_noise_analysis/2026-05-13_table6_self_report_alignment
@@ -158,6 +167,13 @@ Rezultate metrik poročamo kot povprečje in standardni odklon čez iteracije pr
 \section{Glavna primerjava modelov}
 \label{subsec:glavna-primerjava}
 
+\TODO{
+\begin{itemize}
+    \item Ta razdelek kasneje prepisati v opis glavne faktorske primerjave: modeli po vrsticah, nabori signalov po stolpcih oziroma ločeni teki za \emph{gaze}, \emph{gaze+pupil} in \emph{all}.
+    \item Ločiti modele, ki so definirani za vse nabore signalov, od modelov, ki so smiselni samo za posamezen nabor: \GazeMAE{} za \emph{gaze-only}, morebitni MOMENT za \emph{pupil-only} oziroma zenični del.
+\end{itemize}
+}
+
 Glavna primerjava vključuje modele v tabeli~\ref{tab:primerjani-modeli}.
 Tabela poleg imena modela povzema kratko vlogo modela v primerjavi in osnovne parametre, ki jih pri posamezni vrsti modela poročamo ali uporabljamo pri razlagi rezultatov.
  
@@ -212,6 +228,13 @@ Kot končno nastavitev smo izbrali \texttt{num\_layers=2}, \texttt{hidden\_chann
 
 \section{Ablacijska študija}
 \label{subsec:ablacijska-studija}
+
+\TODO{
+\begin{itemize}
+    \item Preveriti, ali ta razdelek po novi zasnovi sploh ostane ločena ablacijska študija ali se združi z glavno primerjavo signalnih naborov.
+    \item Če ostane ločeno, naj ablacijska študija odgovarja predvsem na vprašanja znotraj predlaganega GNN; primerjava \emph{gaze}, \emph{gaze+pupil} in \emph{all} naj bo glavna signalna primerjava, ne samo ablacijska opomba.
+\end{itemize}
+}
 
 Namen ablacijske študije je bil preveriti, koliko kateri signali prispevajo k boljšim napovedim predlaganega modela.
 Izhodišče je bil predlagani model iz glavne primerjave.

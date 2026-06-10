@@ -8,6 +8,16 @@ Modele razdelimo na negrafovske osnovne modele, model \GazeMAE{} + MLP kot preds
 Vsi modeli uporabljajo iste izvorne podatke, ista 10-sekundna okna in iste delitve na učne, validacijske (v primerih nevronskih mrež) in testne množice.
 Razlika je v predstavitvi vhodnih podatkov.
 Grafovski modeli prejmejo okno kot graf meritev, negrafovski osnovni modeli prejmejo agregirano tabelarično predstavitev istega okna, \GazeMAE{} pa po svoji konstrukciji le koordinati pogleda $(x,~y)$ za celotno 10~s okno.
+
+\TODO{
+\begin{itemize}
+    \item Poglavje preurediti tako, da modeli niso opisani samo za en polni vhodni nabor, ampak za primerjavo po naborih \emph{gaze}, \emph{gaze+pupil} in \emph{all}.
+    \item Jasno zapisati, da \GazeMAE{} učimo oziroma uporabimo samo na \emph{gaze-only} vhodu, ker uporablja koordinate pogleda; če dosega močne rezultate, ga lahko v rezultatih primerjamo kot referenco tudi proti modelom, ki uporabljajo bogatejše nabore signalov.
+    \item Dodati placeholder za morebitni MOMENT + MLP nad zeničnim signalom ter za kombinacijo MOMENT in \GazeMAE{} predstavitev v skupni MLP pri \emph{gaze+pupil} oziroma \emph{all}.
+    \item Pri GNN zaenkrat ne dodajati \emph{pupil-only} različice, dokler ni jasen smiseln grafovski protokol.
+\end{itemize}
+}
+
 Za pravično primerjavo osnovnim modelom podamo agregirane značilke istih signalov kot jih prejme GNN.
 To so: koordinati pogleda $(x,~y)$, velikosti leve in desne zenice, oddaljenost od zaslona ter informacija o fiksacijah.
 Za vsak signal izračunamo opisne statistike na ravni okna: povprečje, standardni odklon, minimum, maksimum, razpon, mediano, prvi kvartil, tretji kvartil in medkvartilni razmik.

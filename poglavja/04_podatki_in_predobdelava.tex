@@ -78,6 +78,14 @@ V eksperimentalnem cevovodu uporabljamo samo vrstice z veljavno izpeljano oznako
 \section{Priprava vhodnih signalov}
 \label{subsec:vhodni-signali}
 
+\TODO{
+\begin{itemize}
+    \item Dodati kratek podrazdelek ali tabelo z eksperimentalnimi nabori signalov: \emph{gaze} = samo koordinati pogleda $(x,y)$; \emph{gaze+pupil} = koordinati pogleda in velikosti zenic; \emph{all} = trenutni celoten nabor z razdaljo, fiksacijami, fiksacijskimi povezavami in značilkami povezav.
+    \item \emph{Pupil-only} zaenkrat označiti kot odprto možnost oziroma placeholder, ne kot del glavnega eksperimentalnega protokola, dokler ne bo jasna modelna definicija.
+    \item Če bo implementiran MOMENT + MLP za zenični signal, dodati ločen opis priprave zenične časovne vrste in način združevanja z \GazeMAE{} predstavitvami.
+\end{itemize}
+}
+
 \subsection{Uporabljeni stolpci}
 
 Za vsak časovni vzorec uporabimo štiri osnovne signale sledilnika pogleda:

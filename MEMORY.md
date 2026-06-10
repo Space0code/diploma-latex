@@ -203,3 +203,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   kratko ali ga po potrebi prestavi v dodatek. Izbrana konfiguracija je
   `num_layers=2`, `hidden_channels=64`, `kt=1`, `ks=1`, `kf=3`; predlagani GNN
   ima pri tej nastavitvi 101.143 učljivih parametrov.
+- 2026-06-10 je bila v eksperimentalnem repozitoriju zaklenjena čista
+  arhitekturna lestvica grafovskih modelov: `BasicGCN`, `HeteroGCNMean`,
+  `HeteroGCNMLP` in `HeteroGCNMLPWeights`. Vsi uporabljajo attention readout,
+  enako globino/širino in enako grafovsko konstrukcijo; razlika je postopno
+  dodajanje heterogenih relacij, MLP združevanja relacij in naučenih
+  predznačenih uteži povezav. Deskriptivno ime končnega modela v kodi je
+  `HeteroGCNMLPWeights`, ne `ProposedGNN` ali `GNN_v2`.

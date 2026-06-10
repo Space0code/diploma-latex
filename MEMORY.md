@@ -109,6 +109,18 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-06-09 je Tomi poslal Lovru, v CC tudi Gašperju, mentorski update o
+  stanju diplome. V mailu je povedal, da je diploma v grobem napisana do
+  rezultatov, da so po pravičnejšem eksperimentalnem protokolu tabularni modeli
+  bistveno boljši, predlagani GNN pa je med slabšimi po opazovanih metrikah.
+  Predlagana nova zgodba diplome je primerjalna in ablacijska študija: ne
+  dokazovati na silo, da je GNN najboljši, temveč analizirati, kateri signali,
+  grafovska predstavitev in arhitekturne komponente pomagajo ali škodijo. GNN
+  ostane metodološki fokus diplome, sklep pa mora biti pošten: trenutni GNN ni
+  premagal močnejših tabularnih modelov, vendar naloga pokaže smiselno grafovsko
+  predstavitev podatkov sledilnika pogleda, njene omejitve in smeri za nadaljnje
+  delo. Če Lovro ne odgovori z vsebinsko močno spremembo, to ostane delovni plan
+  za rezultate, diskusijo in zaključek.
 - Glavni eksperiment diplome je 3-razredna klasifikacija valence in vzburjenosti
   po protokolu MAHNOB-HCI, ker omogoča primerjavo z izvirno formulacijo naloge.
   Binarni low/high poskusi za valenco in vzburjenost so dodatni eksperimenti, ki

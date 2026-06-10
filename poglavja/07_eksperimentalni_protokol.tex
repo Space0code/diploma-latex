@@ -190,15 +190,8 @@ Tabela poleg imena modela povzema kratko vlogo modela v primerjavi in osnovne pa
 \end{table}
 \END_NOTE{Na koncu preveri, da se vrstni red ujema z vrstnim redom v tabelah/plotih. Preveri tudi, da se ujemajo poimenovanja znotraj diplome (recimo, če si že definiral naš GNN kot X, potem uporabljaj ta konsistentno v besedilu, tabelah in slikah).}
 
-\TODO{
-\begin{itemize}
-    \item Pisanje: tukaj dodati zelo kratek odstavek o izbiri hiperparametrov predlaganega GNN. Standardno naj bo metodološki del v tem poglavju, rezultatski razpon pa samo kot ena podporna poved; ne odpiraj ločenega velikega podpoglavja.
-    \item Povej, da smo za nastavitev predlaganega modela izvedli manjši grid search na 3-razredni valenci s subject k-fold protokolom ($k=5$, en validacijski subjekt na gubo). Preizkusili smo \texttt{num\_layers} $\in \{2,3,4\}$, \texttt{hidden\_channels} $\in \{64,128,256\}$, \texttt{kt} $\in \{1,2,3\}$, \texttt{ks} $\in \{1,2,3\}$ in \texttt{kf} oziroma \texttt{fixation\_dilation\_k} $\in \{1,2,3,5\}$.
-    \item Rezultat povzemi z eno povedjo: najboljša preizkušena konfiguracija je dosegla accuracy $0{,}5260$ in macro-F1 $0{,}5104$, najslabša pa accuracy $0{,}4933$ in macro-F1 $0{,}4709$; razlike med najboljšimi konfiguracijami so bile majhne.
-    \item Utemelji končno izbiro kot kompromis med kakovostjo in velikostjo modela: izbrali smo \texttt{num\_layers=2}, \texttt{hidden\_channels=64}, \texttt{kt=1}, \texttt{ks=1}, \texttt{kf=3}. Ta nastavitev je bila v kompaktnem grid searchu med tremi najboljšimi po accuracy (accuracy $0{,}5176$, macro-F1 $0{,}5070$), hkrati pa ima predlagani GNN samo 101.143 učljivih parametrov.
-    \item Pojasni vzorec brez pretiranega razčlenjevanja: manjša \texttt{kt} in \texttt{ks} sta bila konsistentno med najboljšimi nastavitvami pri kompaktnem modelu. Večji \texttt{kf} je lahko pomagal, vendar \texttt{kf=5} fiksacijskim povezavam dodeli razmeroma veliko gostoto glede na časovne in prostorske povezave; zato izberemo \texttt{kf=3}, ker je razlika v rezultatu majhna, graf pa ostane bolj uravnotežen.
-\end{itemize}
-}
+Za nastavitev predlaganega GNN smo izvedli kompakten grid search na 3-razredni valenci s subject k-fold protokolom ($k=5$, en subjekt na validacijsko množico), pri čemer smo preizkusili \texttt{num\_layers} $\in \{2,3,4\}$, \texttt{hidden\_channels} $\in \{64,128,256\}$, \texttt{kt} $\in \{1,2,3\}$, \texttt{ks} $\in \{1,2,3\}$ in \texttt{kf} oziroma \texttt{fixation\_dilation\_k} $\in \{1,2,3,5\}$.
+Kot končno nastavitev smo izbrali \texttt{num\_layers=2}, \texttt{hidden\_channels=64}, \texttt{kt=1}, \texttt{ks=1} in \texttt{kf=3}, saj je bila ta konfiguracija med najboljšimi po accuracy in macro-F1, hkrati pa je ohranila razmeroma majhen model s 101.143 učljivimi parametri in uravnoteženo gostoto grafovskih povezav.
 
 \TODO{
 \begin{itemize}

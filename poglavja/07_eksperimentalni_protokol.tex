@@ -206,6 +206,9 @@ Tabela poleg imena modela povzema kratko vlogo modela v primerjavi in osnovne pa
 \end{table}
 \END_NOTE{Na koncu preveri, da se vrstni red ujema z vrstnim redom v tabelah/plotih. Preveri tudi, da se ujemajo poimenovanja znotraj diplome (recimo, če si že definiral naš GNN kot X, potem uporabljaj ta konsistentno v besedilu, tabelah in slikah).}
 
+% TODO: preveri, Codex napisal.
+Vsi grafovski modeli uporabljajo \texttt{GCNConv}; utemeljitev te izbire je podana v poglavju~\ref{subsec:izbira-grafovske-konvolucije}.
+
 Za nastavitev predlaganega GNN smo izvedli kompakten grid search na 3-razredni valenci s subject k-fold protokolom ($k=5$, en subjekt na validacijsko množico), pri čemer smo preizkusili \texttt{num\_layers} $\in \{2,3,4\}$, \texttt{hidden\_channels} $\in \{64,128,256\}$, \texttt{kt} $\in \{1,2,3\}$, \texttt{ks} $\in \{1,2,3\}$ in \texttt{kf} oziroma \texttt{fixation\_dilation\_k} $\in \{1,2,3,5\}$.
 Kot končno nastavitev smo izbrali \texttt{num\_layers=2}, \texttt{hidden\_channels=64}, \texttt{kt=1}, \texttt{ks=1} in \texttt{kf=3}, saj je bila ta konfiguracija med najboljšimi po accuracy in macro-F1, hkrati pa je ohranila razmeroma majhen model s 101.143 učljivimi parametri in uravnoteženo gostoto grafovskih povezav.
 

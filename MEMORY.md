@@ -210,3 +210,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   dodajanje heterogenih relacij, MLP združevanja relacij in naučenih
   predznačenih uteži povezav. Deskriptivno ime končnega modela v kodi je
   `HeteroGCNMLPWeights`, ne `ProposedGNN` ali `GNN_v2`.
+- 2026-06-12 je bila v poglavje 6 dodana kratka utemeljitev izbire `GCNConv`:
+  grafovski operator ostane fiksen, ker naloga primerja grafovsko predstavitev,
+  relacijsko arhitekturo in naučene uteži povezav, ne pa družin GNN plasti.
+  Poglavje 7 vsebuje samo sklic na to utemeljitev, poglavje 10 pa naj druge
+  plasti (`GATConv`, `GraphSAGE`, `GIN`, grafovski transformerji) omeni kot
+  nadaljnje delo.

@@ -103,6 +103,20 @@ Ta model zato predstavlja vmesno primerjavo med učenjem nad agregiranimi tabela
 \end{itemize}
 }
 
+\subsection{Izbira grafovske konvolucije}
+\label{subsec:izbira-grafovske-konvolucije}
+
+% TODO: preveri, Codex napisal.
+V vseh grafovskih modelih uporabimo plast \texttt{GCNConv} \cite{kipf2017gcn}.
+Ta izbira ohrani konvolucijski operator fiksen, zato lahko primerjava med grafovskimi modeli bolj jasno pokaže vpliv tistih delov, ki so za nalogo pomembnejši: ločevanja časovnih, prostorskih in fiksacijskih relacij, združevanja relacijskih predstavitev ter naučenih uteži povezav.
+Poleg tega \texttt{GCNConv} neposredno podpira skalarne uteži povezav, ki jih predlagani model izračuna iz značilk povezav.
+
+Drugih grafovskih plasti zato ne obravnavamo kot del glavnega eksperimentalnega protokola.
+\texttt{GATConv} \cite{velickovic2018gat} bi pomenil drugačen način določanja pomembnosti sosedov in v trenutni implementaciji ne uporablja istih skalarnih uteži povezav.
+\texttt{GraphSAGE} je zanimiv predvsem pri zelo velikih grafih in vzorčenju sosesk, kar pri grafih posameznih časovnih oken ni osrednja omejitev.
+\texttt{GIN} je močan model za klasifikacijo grafov, vendar bi zahteval dodatno uglaševanje na razmeroma majhni in šumni podatkovni zbirki.
+Grafovski transformerji so smiselna smer nadaljnjega dela, vendar bi v to nalogo vnesli še ločeno vprašanje pozicijskih in strukturnih kodiranj.
+
 \section{Predlagani prostorsko-časovni heterogeni GNN}
 \label{subsec:koncni-gnn}
 

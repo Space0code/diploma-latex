@@ -42,12 +42,28 @@ Zato je primerjava smiselna kot referenčni okvir za podatkovno zbirko in ciljno
 \section{Grafovske nevronske mreže za časovno-prostorske podatke}
 \label{subsec:sorodna-stgnn}
 
+\TODO{
+\begin{itemize}
+    \item Ta razdelek naj ostane pregled sorodnih del in motivacija za uporabo GNN na časovno-prostorskih podatkih.
+    \item Ne ponavljaj splošnih definicij grafa, heterogenosti, uteženosti ali READOUT; te so v poglavju~\ref{sec:ozadje}.
+    \item Ne opisuj natančne konstrukcije grafa te naloge; ta je enkratno definirana v poglavju~\ref{sec:grafovska-predstavitev}. Tu naj bo največ kratek opis položaja te naloge glede na sorodna dela.
+\end{itemize}
+}
+
 Grafovske nevronske mreže so primerne za podatke, pri katerih so pomembni odnosi med elementi~\cite{gilmer2017mpnn,kipf2017gcn,velickovic2018gat}.
 Pri časovno-prostorskih podatkih lahko vozlišča predstavljajo meritve, lokacije ali druge osnovne elemente, povezave pa opisujejo časovno zaporedje, prostorsko bližino ali druge odnose med njimi.
 Časovno-prostorske grafovske nevronske mreže so se uveljavile predvsem pri nalogah, kjer podatki naravno nastopajo kot časovne vrste na grafu, na primer pri napovedovanju prometa~\cite{yu2018stgcn}.
 Ta primer je za to nalogo predvsem analogija za podatkovno strukturo: zaporedne meritve pogleda v časovnem oknu obravnavamo podobno kot časovne meritve senzorjev v prometnem omrežju.
 
 \subsection{Uporaba na oknih podatkov pogleda}
+
+\TODO{
+\begin{itemize}
+    \item Ta podrazdelek skrajšaj, da ne podvaja poglavja~\ref{sec:grafovska-predstavitev}.
+    \item Namesto opisovanja časovnih in prostorskih povezav dodaj sklic na poglavje~\ref{sec:grafovska-predstavitev}; tukaj poudari samo, da je prispevek naloge uporaba take predstavitve na oknih podatkov sledilnika pogleda.
+    \item Če ostane omemba relacij, uporabi isti vrstni red kot drugje: časovne, prostorske, fiksacijske.
+\end{itemize}
+}
 
 V tej nalogi to idejo uporabimo na časovnih oknih podatkov sledilnika pogleda.
 Posamezne meritve znotraj okna predstavimo kot vozlišča.

@@ -11,6 +11,15 @@ Grafovski modeli prejmejo okno kot graf meritev, negrafovski osnovni modeli prej
 
 \TODO{
 \begin{itemize}
+    \item To poglavje naj bo edino mesto za opis arhitektur modelov.
+    \item Ne ponavljaj splošnih definicij grafov in GNN iz poglavja~\ref{sec:ozadje}.
+    \item Ne ponavljaj pravil konstrukcije časovnih, prostorskih in fiksacijskih povezav iz poglavja~\ref{sec:grafovska-predstavitev}; uporabi sklic na konkretno grafovsko predstavitev.
+    \item Tu pa obdrži opis, kako posamezen model uporablja že definirano predstavitev: homogenizacija pri osnovnem GCN, relacijska obravnava pri heterogenem GNN, naučene uteži povezav, fuzija relacij in konkretni READOUT.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
     \item Poglavje preurediti tako, da modeli niso opisani samo za en polni vhodni nabor, ampak za primerjavo po naborih \emph{gaze}, \emph{gaze+pupil} in \emph{all}.
     \item Jasno zapisati, da \GazeMAE{} učimo oziroma uporabimo samo na \emph{gaze-only} vhodu, ker uporablja koordinate pogleda; če dosega močne rezultate, ga lahko v rezultatih primerjamo kot referenco tudi proti modelom, ki uporabljajo bogatejše nabore signalov.
     \item Dodati placeholder za morebitni MOMENT + MLP nad zeničnim signalom ter za kombinacijo MOMENT in \GazeMAE{} predstavitev v skupni MLP pri \emph{gaze+pupil} oziroma \emph{all}.
@@ -70,6 +79,14 @@ Procesna veriga torej izgleda sledeče:
 \section{Osnovni GCN}
 \label{subsec:gnn-baselines}
 
+\TODO{
+\begin{itemize}
+    \item Ta razdelek naj ne redefinira grafa; sklicuj se na poglavje~\ref{sec:grafovska-predstavitev}.
+    \item Natančno povej samo arhitekturno razliko: osnovni GCN združi vse relacije v homogen graf, ne uporablja značilk povezav in ne uporablja naučenih uteži povezav.
+    \item READOUT opiši samo kot konkretno izbiro modela, ne kot ponovno splošno definicijo klasifikacije grafov; splošna definicija je v poglavju~\ref{subsec:grafovska-klasifikacija}.
+\end{itemize}
+}
+
 Grafovski modeli se od negrafovskih modelov razlikujejo že v predstavitvi podatkov, saj okno meritev obravnavajo kot graf in ne kot tabelarični vektor značilk.
 Predlagani model, predstavljen v naslednjem odseku, tej predstavitvi doda še ločeno obravnavo tipov povezav, fuzijo relacijskih predstavitev in naučene uteži povezav.
 Zato za primerjavo s predlaganim modelom poleg negrafovskih modelov uporabimo še osnovni GCN, s katerim ločimo vpliv same grafovske predstavitve od vpliva bolj dodelane heterogene grafovske arhitekture.
@@ -105,6 +122,13 @@ Ta model zato predstavlja vmesno primerjavo med učenjem nad agregiranimi tabela
 
 \subsection{Izbira grafovske konvolucije}
 \label{subsec:izbira-grafovske-konvolucije}
+
+\TODO{
+\begin{itemize}
+    \item Odloči, ali ta razdelek ostane v poglavju~\ref{sec:modeli} ali gre v eksperimentalni protokol kot utemeljitev fiksiranega operatorja.
+    \item Če ostane tukaj, naj poglavje~\ref{sec:eksperimenti} ne ponavlja razlage primerjave \texttt{GCNConv}, \texttt{GATConv}, \texttt{GraphConv} in \texttt{GINConv}, ampak naj se sklicuje sem oziroma v dodatek.
+\end{itemize}
+}
 
 % TODO: preveri, Codex napisal.
 V vseh grafovskih modelih uporabimo plast \texttt{GCNConv} \cite{kipf2017gcn}.
@@ -192,6 +216,14 @@ Za primerjavo podajamo tudi potek osnovnega GCN:
 \subsection{Relacijsko posredovanje sporočil in uteži povezav}
 \label{subsec:relacijsko-posredovanje}
 
+\TODO{
+\begin{itemize}
+    \item Ta podrazdelek naj bo glavno mesto za arhitekturno razlago naučenih uteži povezav.
+    \item Sem prestavi formuli za surovo oceno, preslikavo s $\tanh$ in normalizacijo uteži iz poglavja~\ref{subsec:utezi-povezav}, če ostaneta del končnega modela.
+    \item V poglavju~\ref{sec:grafovska-predstavitev} naj po prestavitvi ostane samo tabela značilk povezav in sklic, da jih končni model uporabi za izračun uteži.
+\end{itemize}
+}
+
 Kot definirano v poglavju~\ref{subsec:heterogeni-graf}, $f_{\text{HeteroGNN}}$ ločeno obravnava različne relacije oziroma tipe povezav med vozlišči. 
 Za primerjavo, osnovni GCN vse povezave obravnava kot enake, zato težje prilagodi posredovanje sporočil različnim odnosom med meritvami.
 
@@ -232,6 +264,14 @@ kjer $\Vert$ označuje konkatenacijo, $\mathbf{h}_{i}^{(t+)}$ časovno predstavi
 
 \subsection{Predstavitev grafa in napoved}
 \label{subsec:pooling}
+
+\TODO{
+\begin{itemize}
+    \item Ne ponavljaj splošne razlage READOUT iz poglavja~\ref{subsec:grafovska-klasifikacija}.
+    \item Tukaj opiši samo konkretno izbiro arhitekture: združevanje s pozornostjo, izračun $\alpha_v$, klasifikacijska glava in izguba za dejansko število razredov.
+    \item Uskladi besedilo in izgubo z novo glavno nalogo: binarna klasifikacija valence, ne trirazredna valenca in vzburjenost, razen če bo ta del ostal kot sekundarni eksperiment.
+\end{itemize}
+}
 
 Ker napovedujemo oznako celotnega okna, moramo predstavitve vozlišč združiti v predstavitev grafa. Uporabimo združevanje s pozornostjo:
 \begin{equation}

@@ -6,6 +6,15 @@ Najprej uvedemo grafe in grafovske nevronske mreže, nato opišemo klasifikacijo
 Na koncu povzamemo osnovne lastnosti podatkov sledilnika pogleda ter ciljni oznaki valence in vzburjenosti.
 Psihološko ozadje čustev obravnavamo le v obsegu, ki je potreben za razumevanje klasifikacijske naloge.
 
+\TODO{
+\begin{itemize}
+    \item To poglavje naj bo edino mesto za splošne definicije: graf, usmerjenost, uteženost, homogenost/heterogenost, posredovanje sporočil, READOUT in prekomerno glajenje.
+    \item Ne opisuj podrobne konstrukcije grafa iz podatkov sledilnika pogleda; ta mora ostati v poglavju~\ref{sec:grafovska-predstavitev}.
+    \item Ne opisuj arhitekturne uporabe relacij, naučenih uteži povezav ali attention READOUT; to sodi v poglavje~\ref{sec:modeli}.
+    \item Uvod poglavja uskladi z novo zgodbo: glavna naloga je binarna klasifikacija valence, vzburjenost pa je ozadje oziroma sekundarni kontekst, če ostane v nalogi.
+\end{itemize}
+}
+
 \section{Grafi}
 \label{subsec:grafi}
 
@@ -39,6 +48,14 @@ Homogeni graf je graf, ki ne loči različnih vrst vozlišč ali povezav.
 Heterogeni graf vsebuje vsaj dve različni vrsti vozlišč ali povezav.
 V tej nalogi uporabljamo heterogeno grafovsko predstavitev, saj ločimo več tipov povezav: časovne povezave naprej, časovne povezave nazaj, prostorske povezave in fiksacijske povezave.
 
+\TODO{
+\begin{itemize}
+    \item Tu obdrži samo splošno definicijo homogenega in heterogenega grafa.
+    \item Konkretno naštevanje relacij \texttt{temporal\_forward}, \texttt{temporal\_backward}, \texttt{spatial} in \texttt{fixation} prestavi oziroma pusti v poglavju~\ref{subsec:heterogeni-graf}.
+    \item Po potrebi dodaj samo en stavek s sklicem: v tej nalogi konkretno heterogeno predstavitev definiramo v poglavju~\ref{sec:grafovska-predstavitev}.
+\end{itemize}
+}
+
 \section{Grafovske nevronske mreže}
 \label{subsec:gnn}
 
@@ -46,6 +63,14 @@ Grafovske nevronske mreže so razred nevronskih mrež, namenjen učenju nad poda
 Graf zapišemo kot $G = (V, E)$, kjer je $V$ množica vozlišč, $E$ pa množica povezav med njimi.
 Vozlišča lahko vsebujejo značilke $\mathbf{x}_v$, povezave pa dodatne značilke $\mathbf{e}_{uv}$, ki opisujejo odnos med vozliščema $u$ in $v$.
 Cilj GNN je naučiti se predstavitev vozlišč, povezav ali celotnega grafa tako, da model pri izračunu predstavitve posameznega vozlišča upošteva tudi njegovo lokalno okolico.
+
+\TODO{
+\begin{itemize}
+    \item Ne ponavljaj polne definicije grafa iz prejšnjega razdelka; tu se nanjo samo naveži.
+    \item Če ostane formula za splošno posredovanje sporočil, naj bo to edina splošna formula GNN v nalogi.
+    \item Konkretne plasti \texttt{GCNConv}, relacijsko posredovanje sporočil in fuzijo relacijskih predstavitev opiši samo v poglavju~\ref{sec:modeli}.
+\end{itemize}
+}
 
 \subsection{Posredovanje sporočil}
 
@@ -122,6 +147,14 @@ Velikost zenice označuje njen premer in se običajno zapiše kot skalar.
 Podatke sledilnika pogleda obravnavamo kot časovno vrsto meritev pogleda in velikosti zenic.
 Takšni podatki so primerni za grafovsko obravnavo, saj lahko posamezne meritve v časovnem oknu predstavimo kot vozlišča, povezave pa določimo glede na časovno bližino, prostorsko bližino lokacij pogleda ali pripadnost isti fiksaciji.
 
+\TODO{
+\begin{itemize}
+    \item Ta razdelek naj ostane konceptualno ozadje o signalih sledilnika pogleda.
+    \item Podrobno pravilo, da vozlišča predstavljajo meritve, povezave pa časovne, prostorske in fiksacijske odnose, naj bo natančno definirano samo v poglavju~\ref{sec:grafovska-predstavitev}.
+    \item Tu po potrebi dodaj samo kratek most do poglavja~\ref{sec:grafovska-predstavitev}, brez ponavljanja formul ali parametrov $k_t$, $k_s$ in $k_f$.
+\end{itemize}
+}
+
 \section{Čustvena stanja: valenca in vzburjenost}
 \label{subsec:valenca-vzburjenost}
 
@@ -131,6 +164,14 @@ Takšni podatki so primerni za grafovsko obravnavo, saj lahko posamezne meritve 
 Valenca opisuje prijetnost oziroma neprijetnost čustvenega odziva, vzburjenost pa stopnjo aktivacije odziva~\cite{soleymani2012mahnob}.
 
 \subsection{3-razredna klasifikacija}
+
+\TODO{
+\begin{itemize}
+    \item Ta razdelek uskladi z uvodom in trenutno zgodbo naloge.
+    \item Če je glavna naloga binarna klasifikacija valence, naj bo 3-razredna preslikava predstavljena samo kot izvorni \MAHNOB{} kontekst oziroma kot podrobnost poglavja~\ref{sec:podatki}.
+    \item Podrobne sezname čustvenih oznak po razredih ne podvajaj tukaj, če so že v poglavju~\ref{sec:podatki} ali poglavju~\ref{sec:eksperimenti}; tu raje dodaj sklic.
+\end{itemize}
+}
 
 V tej nalogi valenco in vzburjenost obravnavamo kot dve ločeni 3-razredni klasifikacijski nalogi.
 Takšna formulacija omogoča primerjavo z izhodiščnim člankom podatkovne zbirke \MAHNOB{}, kjer so avtorji prav tako poročali rezultate za 3-razredno klasifikacijo valence in vzburjenosti~\cite{soleymani2012mahnob}.

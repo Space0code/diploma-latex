@@ -169,6 +169,15 @@ Rezultate metrik poročamo kot povprečje in standardni odklon čez iteracije pr
 
 \TODO{
 \begin{itemize}
+    \item Ta razdelek naj bo samo protokolarni povzetek primerjanih modelov, signalnih naborov in hiperparametrov.
+    \item Ne razlagaj ponovno, kaj je homogeni ali heterogeni graf; za to uporabi sklic na poglavji~\ref{sec:ozadje} in~\ref{sec:grafovska-predstavitev}.
+    \item Ne razlagaj ponovno naučenih uteži povezav, relacijskega posredovanja sporočil ali READOUT; za to uporabi sklic na poglavje~\ref{sec:modeli}.
+    \item Tabela modelov naj vsebuje kratek opis vloge modela v primerjavi, ne metodološke definicije.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
     \item Ta razdelek kasneje prepisati v opis glavne faktorske primerjave: modeli po vrsticah, nabori signalov po stolpcih oziroma ločeni teki za \emph{gaze}, \emph{gaze+pupil} in \emph{all}.
     \item Ločiti modele, ki so definirani za vse nabore signalov, od modelov, ki so smiselni samo za posamezen nabor: \GazeMAE{} za \emph{gaze-only}, morebitni MOMENT za \emph{pupil-only} oziroma zenični del.
 \end{itemize}
@@ -211,6 +220,13 @@ V dodatnem poskusu na naboru pogled+zenici smo preizkusili še \texttt{GATConv},
 Razlike med različicami niso bile velike, \texttt{GCNConv} pa je dosegel primerljive in stabilne rezultate pri neuteženi in uteženi arhitekturi.
 Zato smo v glavnih poskusih ohranili enoten operator \texttt{GCNConv}, podrobnosti primerjave pa podajamo v dodatku~\ref{subsec:izbira-grafovske-konvolucije}.
 
+\TODO{
+\begin{itemize}
+    \item Če je izbira grafovske konvolucije razložena v poglavju~\ref{subsec:izbira-grafovske-konvolucije}, tukaj pusti samo protokolarno odločitev in sklic.
+    \item Preveri sklic: trenutno \ref{subsec:izbira-grafovske-konvolucije} kaže na razdelek v poglavju~\ref{sec:modeli}, ne v dodatek.
+\end{itemize}
+}
+
 Za nastavitev predlaganega GNN smo izvedli kompakten grid search na 3-razredni valenci s subject k-fold protokolom ($k=5$, en subjekt na validacijsko množico), pri čemer smo preizkusili \texttt{num\_layers} $\in \{2,3,4\}$, \texttt{hidden\_channels} $\in \{64,128,256\}$, \texttt{kt} $\in \{1,2,3\}$, \texttt{ks} $\in \{1,2,3\}$ in \texttt{kf} oziroma \texttt{fixation\_dilation\_k} $\in \{1,2,3,5\}$.
 Kot končno nastavitev smo izbrali \texttt{num\_layers=2}, \texttt{hidden\_channels=64}, \texttt{kt=1}, \texttt{ks=1} in \texttt{kf=3}, saj je bila ta konfiguracija med najboljšimi po accuracy in macro-F1, hkrati pa je ohranila razmeroma majhen model s 101.143 učljivimi parametri in uravnoteženo gostoto grafovskih povezav.
 
@@ -233,6 +249,14 @@ Kot končno nastavitev smo izbrali \texttt{num\_layers=2}, \texttt{hidden\_chann
 
 \section{Ablacijska študija}
 \label{subsec:ablacijska-studija}
+
+\TODO{
+\begin{itemize}
+    \item Če ta razdelek ostane, naj opisuje samo protokol ablacijske študije.
+    \item Ne razlagaj ponovno, kako so časovne, prostorske ali fiksacijske povezave zgrajene; sklicuj se na poglavje~\ref{sec:grafovska-predstavitev}.
+    \item Ne razlagaj ponovno, kako model uporablja relacije ali uteži; sklicuj se na poglavje~\ref{sec:modeli}.
+\end{itemize}
+}
 
 \TODO{
 \begin{itemize}

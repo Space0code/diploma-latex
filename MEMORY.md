@@ -109,6 +109,61 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-06-15 Tomi je zaklenil novo glavno zgodbo diplome: fokus ostane na GNN
+  za podatke sledilnika pogleda, ne na razvoju najboljšega možnega modela za
+  prepoznavo čustev. Glavno vprašanje naj bo v smeri, kako dobro GNN kodirajo
+  podatke sledilnika pogleda za klasifikacijo čustvenih oznak. Podatki
+  sledilnika pogleda so osrednji vhodni signal in jih je treba opisati dovolj za
+  razumevanje grafovske konstrukcije; čustva so predvsem oznake, zato se naloga
+  ne sme poglobiti v psihologijo čustev. Glavni eksperimenti so štirje nabori
+  signalov: pogled, zenici, pogled+zenici in vsi signali. Delitev je motivirana
+  s tipično dostopnostjo signalov pri sledilnikih pogleda: pogosto imamo samo
+  pogled, samo zenici ali oboje, redkeje pa dodatne signale, ki so prisotni v
+  tej podatkovni zbirki. Glavna naloga je samo binarna low/high klasifikacija
+  valence; 3-razredne rezultate izključi iz glavnega besedila, razen kot opombo
+  pri definiciji razredov in pri utemeljitvi izbire hiperparametrov, kjer povej,
+  da je bil grid search izveden v preliminarnih 3-razrednih poskusih. Pri
+  definiciji razredov naj se najprej pojasni izvorna 3-razredna preslikava in
+  nato zapiše, da je naloga poenostavljena z izključitvijo razreda 1. Izogibaj
+  se izrazu `predlagani model`; za zadnjo stopnjo arhitekturne lestvice lahko
+  uporabiš `končni model`, vendar samo v pomenu končne stopnje, ne najboljšega
+  ali predlaganega modela. Ločene ablacijske študije v glavni zasnovi ne
+  potrebujemo več.
+- Glavno raziskovalno vprašanje diplome je: `Kako učinkovita je grafovska
+  predstavitev podatkov sledilnika pogleda pri klasifikaciji čustvenih oznak v
+  primerjavi z uveljavljenimi negrafovskimi pristopi?`
+- Izbrani delovni naslov diplome je `Grafovske nevronske mreže za klasifikacijo
+  čustvenih oznak iz podatkov sledilnika pogleda`. Angleški delovni naslov:
+  `Graph Neural Networks for Classification of Emotional Labels from Eye-Tracking
+  Data`.
+- V poglavju 4 je treba utemeljiti, da vzburjenost ni več glavna ciljna naloga,
+  ker se oznake vzburjenosti slabše ujemajo s samoocenami in so zato za to
+  diplomsko evalvacijo šumnejše. Kot dokaz uporabiti oziroma v dodatek povezati
+  artefakte iz `GFM-for-eyetracker/docs/figures/hci-tagging/mentors meeting
+  2026-05-13/label_noise_analysis/2026-05-13_table6_self_report_alignment`.
+- `vsi signali` pomeni koordinate pogleda, velikosti zenic, oddaljenost od
+  sledilnika pogleda in fiksacijsko informacijo. Za `distance to ET` privzeto
+  uporabljaj opisni izraz `oddaljenost od sledilnika pogleda`, dokler Tomi ne
+  potrdi drugačne terminologije.
+- Za signalni nabor s podatki obeh zenic uporabljaj izraz `zenici` in pri tem
+  dosledno upoštevaj slovensko dvojino. Signalni nabori so: `pogled`, `zenici`,
+  `pogled+zenici` in `vsi signali`.
+- V uvodu naj se zgodba začne pri GNN oziroma grafovskem modeliranju, nato naj se
+  poveže s podatki sledilnika pogleda, šele nato naj se omeni čustvene oznake kot
+  evalvacijsko nalogo. Glavno raziskovalno vprašanje naj bo v uvodu motivirano,
+  dobesedno pa naj se pojavi v razdelku `Raziskovalna vprašanja`.
+- V uvodu še ne naštevaj imen posameznih GNN modelov. Uporabi samo splošni izraz
+  `arhitekturna lestvica grafovskih modelov`; tehnična imena sodijo v poglavje 6.
+- V splošni diskusiji je dovoljeno uporabiti `končni model` za zadnjo stopnjo
+  arhitekturne lestvice, kadar je jasno, da pomeni končno stopnjo in ne najboljši
+  model. Pri tehničnih primerjavah uporabljaj konkretna imena modelov:
+  `GCN`, `HeteroGCN-mean`, `HeteroGCN-MLP` in `HeteroGCN-MLP-w`.
+- GazeMAE/MOMENT v diplomi obravnavaj previdno kot `zamrznjene prednaučene
+  predstavitvene modele`, ne kot polno primerjavo z vsemi temeljnimi modeli ali
+  kot reprodukcijo njihovega predtreniranja.
+- V naslovu, povzetku in motivacijskem kontekstu lahko ostane izraz `prepoznava
+  čustev`, v glavnem tehničnem besedilu pa raje uporabljaj `klasifikacija
+  čustvenih oznak`, ker modeli napovedujejo eksperimentalno izpeljane oznake.
 - 2026-06-09 je Tomi poslal Lovru, v CC tudi Gašperju, mentorski update o
   stanju diplome. V mailu je povedal, da je diploma v grobem napisana do
   rezultatov, da so po pravičnejšem eksperimentalnem protokolu tabularni modeli

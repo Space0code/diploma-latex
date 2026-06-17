@@ -6,6 +6,14 @@ Njegov namen je natančno opisati, kako iz časovnega okna meritev sledilnika po
 
 \TODO{
 \begin{itemize}
+    \item To poglavje naj bo edino mesto za natančno definicijo konkretnega vhodnega grafa te naloge.
+    \item Ne ponavljaj splošnih definicij grafa, heterogenosti ali uteženosti iz poglavja~\ref{sec:ozadje}; uporabi sklic.
+    \item Ne opisuj arhitekturnih odločitev modela, kot so relacijske transformacije, MLP za uteži, normalizacija naučenih uteži, \texttt{GCNConv} ali READOUT; te prestavi v poglavje~\ref{sec:modeli}.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
     \item Dodati opombo, da se grafovska konstrukcija v eksperimentih prilagodi izbranemu naboru signalov.
     \item Za \emph{gaze} opisati graf iz koordinat pogleda $(x,y)$ in relacij, ki jih je smiselno zgraditi iz pogleda; za \emph{gaze+pupil} dodati zenične značilke vozlišč; za \emph{all} ohraniti trenutno polno konstrukcijo z razdaljo, fiksacijami, fiksacijskimi povezavami in značilkami povezav.
     \item \emph{Pupil-only} ne vključevati v glavno grafovsko konstrukcijo, dokler ni jasen smiseln GNN protokol; zaenkrat ga označiti kot odprto možnost ali ga izpustiti.
@@ -37,6 +45,13 @@ Povezave med vozlišči opisujejo različne relacije med meritvami: časovno zap
 En graf predstavlja en učni vzorec.
 
 \subsection{Oznaka grafa}
+
+\TODO{
+\begin{itemize}
+    \item Uskladi z novo formulacijo naloge: glavni cilj je binarna klasifikacija valence.
+    \item Tu zapiši samo, da je oznaka na ravni grafa oziroma časovnega okna; podrobna preslikava oznak naj ostane v poglavju~\ref{sec:podatki} oziroma \ref{sec:eksperimenti}.
+\end{itemize}
+}
 
 Vsak graf označimo z oznako pripadajočega časovnega okna.
 V nalogi to oznako uporabimo pri ločenih klasifikacijskih nalogah valence in vzburjenosti.
@@ -107,6 +122,14 @@ Manjkajoče vrednosti trajanja fiksacije in meritve, ki ne pripadajo fiksaciji, 
 
 \section{Heterogena grafovska predstavitev}
 \label{subsec:heterogeni-graf}
+
+\TODO{
+\begin{itemize}
+    \item Splošna definicija heterogenega grafa naj ostane v poglavju~\ref{sec:ozadje}.
+    \item Tukaj definiraj samo konkretno množico relacij $\mathcal{R}$ in razloži, kaj posamezna relacija pomeni v podatkih sledilnika pogleda.
+    \item Razlago, da model za vsako relacijo uporablja ločeno transformacijo oziroma ločeno posredovanje sporočil, prestavi v poglavje~\ref{subsec:relacijsko-posredovanje}.
+\end{itemize}
+}
 
 \subsection{Tipi relacij}
 
@@ -285,6 +308,7 @@ Prikaz povzema konstrukcijo heterogenega grafa in zato služi kot povezava med f
 
 \TODO{
 \begin{itemize}
+    \item Ta odsek preimenuj v \emph{Značilke povezav}, če bodo naučene uteži in njihova normalizacija prestavljene v poglavje~\ref{sec:modeli}.
     \item Razdeli vsebino tega odseka med poglavji 5 in 6.4.
     \item V poglavju 5 naj ostanejo značilke povezav: katere količine opišejo relacijo med dvema meritvama.
     \item V poglavje~6.4 prestavi ali tam povzemalno opiši arhitekturni del: MLP za izračun uteži, predznačene uteži, normalizacijo in uporabo uteži pri posredovanju sporočil.
@@ -362,6 +386,14 @@ Pri poskusih z \texttt{GATConv} se te skalarne uteži ne uporabijo, saj \texttt{
 
 \section{Statistika grafov}
 \label{subsec:statistika-grafov}
+
+\TODO{
+\begin{itemize}
+    \item Ta razdelek lahko ostane v poglavju~\ref{sec:grafovska-predstavitev}, ker opisuje lastnosti konstruiranih grafov.
+    \item V njem ne razlagaj več splošne računske zahtevnosti GNN modela; za to uporabi poglavje~\ref{sec:modeli}, poglavje~\ref{sec:eksperimenti} ali dodatek s hiperparametri.
+    \item Preveri, da so parametri v napisu tabele skladni s končno izbrano konfiguracijo in da niso v konfliktu z opisom v poglavju~\ref{sec:eksperimenti}.
+\end{itemize}
+}
 
 \subsection{Število vozlišč in povezav}
 

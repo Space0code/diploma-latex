@@ -141,6 +141,14 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Diplomsko ime za homogeni grafovski baseline je `Osnovni GCN`. V glavnih
   tabelah rezultatov naj bosta samo `accuracy` in `macro-F1`; podrobnejše metrike
   sodijo v dodatek.
+- 2026-06-17 zaklenjena odločitev o grafovskem operatorju: v glavnih poskusih
+  ostane `GCNConv`. Dodatni poskus na naboru pogled+zenici je pokazal, da bi pri
+  izključno najboljšem rezultatu za neuteženi model izbrali `GINConv`, za
+  uteženo arhitekturo pa `GraphConv`, vendar bi to po nepotrebnem zakompliciralo
+  eksperimentalno zasnovo. V glavnem besedilu povej kratko: preizkusili smo štiri
+  različice, razlike niso bile velike, `GCNConv` je bil konsistenten sredinski
+  kompromis, zato smo ga ohranili. Podrobno utemeljitev in tabelo rezultatov
+  poročaj v dodatku.
 - Odločitev za osnovne modele v eksperimentih: ne uporabljamo surove konkatenacije
   signalov in ne PCA različice kot glavne primerjave. Negrafovski modeli
   (`LightGBM`, `SVM`, `MLP`) naj dobijo razširjene agregirane statistike istih
@@ -210,9 +218,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   dodajanje heterogenih relacij, MLP združevanja relacij in naučenih
   predznačenih uteži povezav. Deskriptivno ime končnega modela v kodi je
   `HeteroGCNMLPWeights`, ne `ProposedGNN` ali `GNN_v2`.
-- 2026-06-12 je bila v poglavje 6 dodana kratka utemeljitev izbire `GCNConv`:
-  grafovski operator ostane fiksen, ker naloga primerja grafovsko predstavitev,
-  relacijsko arhitekturo in naučene uteži povezav, ne pa družin GNN plasti.
-  Poglavje 7 vsebuje samo sklic na to utemeljitev, poglavje 10 pa naj druge
-  plasti (`GATConv`, `GraphSAGE`, `GIN`, grafovski transformerji) omeni kot
-  nadaljnje delo.
+- Izbira `GCNConv` naj bo v glavnem besedilu utemeljena kratko v poglavju 7,
+  podrobnejša primerjava operatorjev pa sodi v dodatek z dodatnimi rezultati.
+  Poglavje 10 lahko druge plasti (`GATConv`, `GraphSAGE`, `GIN`, grafovski
+  transformerji) omeni samo previdno kot nadaljnje delo.

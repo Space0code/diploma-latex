@@ -15,3 +15,52 @@
     \item UMAP procesiranih podatkov dodaj sem samo, če je slika zanimiva, vendar premalo ključna ali premalo čista za glavno besedilo. Če UMAP ne doda interpretativne vrednosti, ga ne vključuj.
 \end{itemize}
 }
+
+\section{Izbira tipa grafovske konvolucije}
+\label{subsec:izbira-grafovske-konvolucije}
+
+Za preverjanje izbire grafovskega operatorja smo izvedli dodatni poskus na binarni
+nalogi valence z naborom signalov pogled+zenici.
+Primerjali smo osnovni homogeni grafovski model in uteženo heterogeno arhitekturo
+z različnimi tipi grafovskih konvolucij.
+Pri osnovnem modelu so bile povezave neutežene, pri uteženi heterogeni arhitekturi
+pa so različice \texttt{GCNConv}, \texttt{GraphConv} in \texttt{GINEConv} uporabile
+naučene skalarne uteži povezav.
+Različica \texttt{GATConv} teh skalarnih uteži ni uporabila, saj pomembnost
+povezav modelira z notranjim mehanizmom pozornosti.
+
+\begin{table}[h]
+    \centering
+    \caption{Primerjava tipov grafovskih konvolucij pri naboru signalov pogled+zenici.}
+    \label{tab:dodatek-izbira-konvolucije}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.28\textwidth} >{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.14\textwidth} >{\raggedleft\arraybackslash}p{0.14\textwidth} >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Arhitektura & Operator & Accuracy & Makro-F1 & Opomba \\
+        \midrule
+        Osnovni GCN & \texttt{GCNConv} & $0{,}6474$ & $0{,}6337$ & neuteženi homogeni graf \\
+        Osnovni GCN & \texttt{GATConv} & $0{,}6484$ & $0{,}6336$ & neutežena pozornost \\
+        Osnovni GCN & \texttt{GraphConv} & $0{,}6367$ & $0{,}6192$ & neuteženi homogeni graf \\
+        Osnovni GCN & \texttt{GINConv} & $0{,}6613$ & $0{,}6501$ & najboljši neuteženi rezultat \\
+        \addlinespace
+        HeteroGCN-MLP-w & \texttt{GCNConv} & $0{,}6391$ & $0{,}6103$ & naučene uteži povezav \\
+        HeteroGCN-MLP-w & \texttt{GATConv} & $0{,}6370$ & $0{,}6116$ & pozornost brez skalarnih uteži \\
+        HeteroGCN-MLP-w & \texttt{GraphConv} & $0{,}6606$ & $0{,}6503$ & najboljši uteženi rezultat \\
+        HeteroGCN-MLP-w & \texttt{GINEConv} & $0{,}6325$ & $0{,}6028$ & značilke in uteži povezav \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Če bi izbirali izključno najboljši operator za ta dodatni poskus, bi pri
+neuteženem osnovnem modelu izbrali \texttt{GINConv}, pri uteženi heterogeni
+arhitekturi pa \texttt{GraphConv}.
+V glavnih poskusih tega nismo storili, ker bi s tem hkrati spremenili več delov
+arhitekture in otežili primerjavo med osnovnim GCN in uteženo heterogeno
+različico.
+\texttt{GCNConv} se je v obeh skupinah uvrstil približno v sredino: ni bil
+najboljši operator, hkrati pa tudi ni izrazito odstopal navzdol.
+Zato smo ga obravnavali kot dober kompromis med enostavnostjo, konsistentnostjo
+eksperimentalne zasnove in rezultati.
+Glavni namen naloge ni bil poiskati absolutno najboljši grafovski operator,
+temveč primerjati grafovsko predstavitev in arhitekturne stopnje pri enakem,
+razmeroma standardnem operatorju posredovanja sporočil.

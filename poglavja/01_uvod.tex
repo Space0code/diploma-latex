@@ -1,90 +1,34 @@
 \chapter{Uvod}
 \label{sec:uvod}
 
-Prepoznavanje čustev oziroma afektivnih stanj iz fizioloških in vedenjskih signalov je pomemben problem na področju afektivnega računalništva.
-Med možnimi viri podatkov je tudi sledilnik pogleda, ki omogoča merjenje položaja pogleda, dinamike premikanja oči in velikosti zenic.
-Ti signali so časovno odvisni in lahko vsebujejo informacije o pozornosti, kognitivni obremenitvi in čustvenem stanju udeleženca.
-
-V tej diplomski nalogi se osredotočamo na grafovsko modeliranje podatkov sledilnika pogleda.
-Namesto da časovno okno meritev obravnavamo zgolj kot tabelaričen niz ali vektor agregiranih značilk, ga predstavimo kot prostorsko-časovni graf.
-V takem grafu posamezne meritve predstavljajo vozlišča, povezave pa opisujejo odnose med meritvami.
-Časovne povezave povezujejo meritve, ki so si blizu v času, prostorske povezave meritve, ki so si blizu v prostoru pogleda, fiksacijske povezave pa meritve znotraj iste zaznane fiksacije.
-
-Osrednje raziskovalno vprašanje naloge je:
-
-\begin{quote}
-Ali lahko prostorsko-časovna grafovska predstavitev podatkov sledilnika pogleda izboljša klasifikacijo čustvenih stanj v primerjavi z ne-grafovskimi modeli na enakih vhodnih podatkih?
-\end{quote}
-
-Nalogo obravnavamo kot problem nadzorovane klasifikacije grafov.
-Vsako časovno okno podatkov sledilnika pogleda pretvorimo v graf, model pa napove čustveno oznako pripadajočega okna.
-Glavni ciljni nalogi sta 3-razredna klasifikacija valence in 3-razredna klasifikacija vzburjenosti na podatkovni zbirki \MAHNOB{}.
-
-\TODO{
-\begin{itemize}
-    \item Nova smer naloge: uvod, raziskovalna vprašanja in prispevke uskladiti s primerjalno študijo modelov pri različnih naborih signalov, pri čemer GNN ostane metodološki fokus.
-    \item Kot glavno nalogo zaenkrat obravnavati binarno klasifikacijo valence oziroma vzburjenosti; 3-razredno formulacijo prestaviti v dodatni ali primerjalni kontekst, če bo ostala v glavnem besedilu.
-    \item V raziskovalna vprašanja dodati primerjavo naborov \emph{gaze}, \emph{gaze+pupil} in \emph{all}; \emph{pupil-only} naj ostane placeholder, dokler ni jasen smiseln GNN oziroma MOMENT protokol.
-    \item Prispevke preoblikovati tako, da ne obljubljajo samo zmage GNN, ampak pošteno analizo, kateri signali in kateri tipi modelov pomagajo pri klasifikaciji.
-\end{itemize}
-}
-
-\section{Motivacija}
-\label{subsec:motivacija}
-
-\TODO{
-\begin{itemize}
-    \item izberi eno končno verzijo motivacije;
-    \item spodaj ohranjeni dve delovni verziji iz Overleafa;
-    \item končna motivacija naj poudari grafovsko predstavitev kot metodološki prispevek;
-    \item omeniti časovne, prostorske in fiksacijske odnose;
-    \item ne obljubljati splošnega foundation modela kot glavni rezultat diplome.
-\end{itemize}
-}
-
-\subsection{Verzija 1: poudarek na GNN}
-
-Podatki sledilnika pogleda so časovna vrsta prostorskih meritev: vsak vzorec vsebuje položaj pogleda, velikost zenice in časovni žig.
-Pri prepoznavi čustvenih stanj se takšni podatki pogosto pretvorijo v tabelarične značilke na ravni časovnega okna, na primer v povprečja, standardne odklone, statistike fiksacij, dolžine poti pogleda in agregirane značilke zenice~\cite{lim2020emotion,tarnowski2020eye}.
-Takšen pristop poenostavi modeliranje, vendar hkrati zabriše zaporedje meritev, lokalne prehode pogleda in prostorske odnose med točkami pogleda.
-
-Osrednja motivacija te naloge je zato metodološka: preveriti želimo, ali je mogoče časovno okno podatkov sledilnika pogleda predstaviti kot časovno-prostorski graf in ga obdelati z grafovsko nevronsko mrežo.
-V predlagani predstavitvi posamezne meritve ostanejo eksplicitno prisotne kot vozlišča, povezave pa kodirajo časovno zaporedje in prostorsko bližino med meritvami.
-Takšna predstavitev omogoča, da model sklepa neposredno iz strukture gibanja pogleda in sprememb velikosti zenice, namesto da bi uporabljal le vnaprej agregirane statistike.
-
-\subsection{Verzija 2: aplikacijsko usmerjeno}
-
-Prepoznava čustvenih stanj iz človekovih fizioloških in vedenjskih odzivov je pomemben problem afektivnega računalništva, saj omogoča razvoj sistemov, ki se lahko prilagajajo uporabnikovemu stanju~\cite{soleymani2012mahnob,lim2020emotion}.
-Pri tem se pogosto uporabljajo kontaktni fiziološki podatki, kot so elektroencefalografija, elektrokardiografija, variabilnost srčnega utripa in elektrodermalna aktivnost, vendar njihova uporaba zahteva namensko namestitev senzorjev in je zato manj primerna za nevsiljive interakcijske sisteme~\cite{soleymani2012mahnob}.
-Sledilnik pogleda predstavlja manj obremenjujoč vir podatkov, saj meri gibanje pogleda in velikost zenice, ki sta povezana s pozornostjo, kognitivno obremenitvijo in čustvenimi odzivi~\cite{lim2020emotion,tarnowski2020eye}.
-V tej nalogi zato obravnavamo podatke sledilnika pogleda kot časovno-prostorske grafe, kjer posamezne meritve predstavljajo vozlišča, povezave pa opisujejo časovne prehode in prostorsko bližino pogleda.
+Za učenje iz podatkov, kjer niso pomembne zgolj lastnosti posameznih elementov, ampak tudi odnosi med njimi, lahko uporabimo grafovske nevronske mreže (GNN)~\cite{gilmer2017mpnn,kipf2017gcn}.
+Primer takšnih podatkov so podatki sledilnika pogleda.
+Meritvam sledilnika pogleda lahko smiselno določimo časovne in prostorske odnose in jim s tem priredimo časovno-prostorski graf. 
+Na tem grafu se z grafovsko nevronsko mrežo učimo predstavitev vozlišč in grafov, ki jih uporabimo za klasifikacijo grafa.
+Podatki, uporabljeni v tej nalogi, so označeni s čustvenimi oznakami valence, zato GNN učimo binarno klasifikacijo valence, rezultate pa primerjamo z rezultati uveljavljenih negrafovskih pristopov. 
+Eksperimentalno primerjavo izvedemo na štirih signalnih naborih: samo koordinatah pogleda (pogled), samo velikostih zenic (zenici), združenih koordinatah pogleda in velikostih zenic (pogled+zenici) ter celotnem naboru razpoložljivih signalov (vsi signali).
 
 \section{Raziskovalni problem}
 \label{subsec:raziskovalni-problem}
 
-Raziskovalni problem naloge je zasnova, implementacija in ovrednotenje grafovske predstavitve podatkov sledilnika pogleda za klasifikacijo čustvenih stanj.
-Pri tem nas zanimata dva vidika.
-Prvi je predstavitveni: kako iz zaporedja meritev zgraditi graf, ki smiselno odraža časovne in prostorske odnose v signalu.
-Drugi je modelni: ali lahko grafovska nevronska mreža takšno predstavitev izkoristi bolje kot ne-grafovski modeli, ki uporabljajo enaka vhodna okna.
+Raziskovalni problem naloge je zasnova, implementacija in ovrednotenje grafovske predstavitve podatkov sledilnika pogleda za klasifikacijo valence.
 
-\section{Raziskovalna vprašanja}
+
+\subsection{Raziskovalna vprašanja}
 \label{subsec:raziskovalna-vprasanja}
 
 Glavno raziskovalno vprašanje je:
 
 \begin{enumerate}[label=\textbf{RV\arabic*:}]
-    \item Ali lahko prostorsko-časovna grafovska predstavitev podatkov sledilnika pogleda izboljša klasifikacijo čustvenih stanj v primerjavi z ne-grafovskimi modeli na enakih vhodnih oknih?
+    \item Kakšna je klasifikacijska uspešnost grafovske nevronske mreže za binarno klasifikacijo valence iz podatkov sledilnika pogleda v primerjavi s klasifikacijsko uspešnostjo uveljavljenih negrafovskih pristopov?
 \end{enumerate}
 
 Dodatna podvprašanja so:
 
 \begin{enumerate}[label=\textbf{PV\arabic*:}]
-    \item Kako podatke sledilnika pogleda predstaviti kot prostorsko-časovni graf?
-    \item Kakšen je vpliv časovnih povezav, prostorskih povezav, fiksacijskih povezav, uteži povezav, informacije o velikosti zenice, razdalje do sledilnika in trajanja fiksacij na uspešnost modela?
-    \item Katere komponente končnega modela statistično značilno izboljšajo rezultate inference?
-    \item Kako se grafovski modeli primerjajo s klasičnimi modeli strojnega učenja in predstavnikom najsodobnejših modelov (angl. \emph{state of the art}, SOTA) za podatke sledilnika pogleda?
-    \item Kako se rezultati razlikujejo med delitvijo po subjektih in delitvijo po posnetkih?
-    \item Kako se napovedna uspešnost modelov razlikuje med 3-razredno klasifikacijo valence in 3-razredno klasifikacijo vzburjenosti?
+    \item Kako podatke sledilnika pogleda smiselno predstaviti kot časovno-prostorski graf?
+    \item Kako se uspešnost klasifikatorjev razlikuje med posameznimi nabori signalov sledilnika pogleda?
+    \item Kako se klasifikacijska uspešnost spreminja z večjo kompleksnostjo grafovske nevronske mreže?
 \end{enumerate}
 
 \section{Doprinosi naloge}
@@ -93,23 +37,13 @@ Dodatna podvprašanja so:
 Glavni doprinosi diplomske naloge so:
 
 \begin{enumerate}
-    \item zasnova prostorsko-časovne grafovske predstavitve podatkov sledilnika pogleda;
-    \item implementacija heterogene časovno-prostorske grafovske nevronske mreže za 3-razredno klasifikacijo valence in vzburjenosti;
-    \item primerjava grafovskih modelov z ne-grafovskimi modeli na enakih vhodnih oknih;
-    \item vključitev \GazeMAE{} + MLP kot primerjave s sodobnim pristopom učenja predstavitev iz podatkov pogleda;
-    \item evalvacija z dvema validacijskima protokoloma: subject LOO in recording LOO;
-    \item ablacijska analiza vpliva ključnih komponent grafovske konstrukcije in arhitekture.
-\end{enumerate}
+    \item zasnova časovno-prostorske grafovske predstavitve časovnih oken podatkov sledilnika pogleda;
+    \item ovrednotenje arhitekturne lestvice grafovskih modelov za klasifikacijo čustvenih oznak iz podatkov sledilnika pogleda;
+    \item primerjava klasifikacijske uspešnosti pri različnih signalnih naborih;
+    \item primerjava grafovskih modelov z uveljavljenimi negrafovskimi modeli in zamrznjenimi prednaučenimi predstavitvenimi modeli.
+\end{enumerate} 
 
-\TODO{
-\begin{itemize}
-    \item po rezultatih preformulirati prispevke;
-    \item iz ``implementirali smo'' v vsebinske trditve;
-    \item dodati kratko omembo binarne evalvacije low/high valence in vzburjenosti kot dodatne preveritve z izrazitejšimi razredi;
-    \item dodati, ali grafovski modeli izboljšajo ne-grafovske baseline;
-    \item dodati, katere grafovske komponente največ prispevajo.
-\end{itemize}
-}
+\END_NOTE{Ali rabimo tele doprinose ali raje odstranimo, glede na to da se samo ponovijo raziskovalna vprašanja?}
 
 \section{Struktura naloge}
 \label{subsec:struktura}
@@ -117,8 +51,8 @@ Glavni doprinosi diplomske naloge so:
 V poglavju~\ref{sec:ozadje} predstavimo teoretično ozadje grafov, grafovskih nevronskih mrež, podatkov sledilnika pogleda in afektivnega računalništva.
 V poglavju~\ref{sec:sorodna-dela} predstavimo sorodna dela, vključno z uporabo podatkovne zbirke \MAHNOB{} in metodami učenja predstavitev iz podatkov pogleda.
 Poglavje~\ref{sec:podatki} opisuje uporabljene podatke, ciljne oznake in predobdelavo.
-V poglavju~\ref{sec:grafovska-predstavitev} opišemo konstrukcijo prostorsko-časovnega grafa.
+V poglavju~\ref{sec:grafovska-predstavitev} opišemo konstrukcijo časovno-prostorskega grafa.
 Poglavje~\ref{sec:modeli} predstavi uporabljene modele.
-V poglavju~\ref{sec:eksperimenti} opišemo eksperimentalni protokol, v poglavju~\ref{sec:rezultati} pa rezultate in ablacijsko študijo.
+V poglavju~\ref{sec:eksperimenti} opišemo eksperimentalni protokol, v poglavju~\ref{sec:rezultati} pa rezultate glavne primerjave modelov in signalnih naborov.
 Poglavje~\ref{sec:diskusija} vsebuje interpretacijo rezultatov, omejitve in možnosti nadaljnjega dela.
 Nalogo sklenemo v poglavju~\ref{sec:zakljucek}.

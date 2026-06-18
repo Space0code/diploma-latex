@@ -3,15 +3,6 @@
 
 V tem poglavju predstavimo metodološke pojme, ki so potrebni za razumevanje grafov, grafovskih nevronskih mrež, podatkov sledilnika pogleda ter valence.
 
-\TODO{
-\begin{itemize}
-    \item To poglavje naj bo edino mesto za splošne definicije: graf, usmerjenost, uteženost, homogenost/heterogenost, posredovanje sporočil, READOUT in prekomerno glajenje.
-    \item Ne opisuj podrobne konstrukcije grafa iz podatkov sledilnika pogleda; ta mora ostati v poglavju~\ref{sec:grafovska-predstavitev}.
-    \item Ne opisuj arhitekturne uporabe relacij, naučenih uteži povezav ali attention READOUT; to sodi v poglavje~\ref{sec:modeli}.
-    \item Uvod poglavja uskladi z novo zgodbo: glavna naloga je binarna klasifikacija valence, vzburjenost pa je ozadje oziroma sekundarni kontekst, če ostane v nalogi.
-\end{itemize}
-}
-
 \section{Grafi}
 \label{subsec:grafi}
 
@@ -41,7 +32,7 @@ Za neutežene povezave si lahko predstavljamo, da imajo utež $w_{ij}=1$.
 
 \subsubsection{Homogeni in heterogeni grafi}
 
-Homogeni graf je graf, ki ne loči različnih vrst vozlišč ali povezav.
+Homogeni graf je graf, ki ne loči različnih vrst vozlišč in povezav.
 Heterogeni graf vsebuje vsaj dve različni vrsti vozlišč ali povezav.
 V tej nalogi uporabljamo heterogeno grafovsko predstavitev, saj ločimo več tipov povezav.
 
@@ -75,6 +66,23 @@ Splošno plast posredovanja sporočil lahko zapišemo kot
 \end{equation}
 kjer je $\mathcal{N}(v)$ množica sosedov vozlišča $v$, $\psi^{(k)}$ funkcija sporočila, $\oplus$ agregacijska funkcija, $\phi^{(k)}$ funkcija posodobitve, $\mathbf{h}_v^{(k)}$ pa predstavitev vozlišča $v$ v plasti $k$.
 
+\subsubsection{Posredovanje sporočil v heterogenih grafih}
+
+Pri heterogenem grafu, kjer povezave razdelimo po tipih oziroma relacijah $r \in \mathcal{R}$, namesto ene same množice sosedov obravnavamo množice $\mathcal{N}_r(v)$, ki vsebujejo sosede vozlišča $v$ po relaciji $r$.
+Sporočila se najprej agregirajo ločeno znotraj posamezne relacije:
+\begin{equation}
+    \mathbf{m}_{v,r}^{(k)} =
+    \bigoplus_{u \in \mathcal{N}_r(v)}
+    \psi_r^{(k)}
+    \left(
+        \mathbf{h}_u^{(k-1)},
+        \mathbf{e}_{uv}
+    \right).
+\end{equation}
+Pri tem je $\psi_r^{(k)}$ funkcija sporočila za relacijo $r$, $\mathbf{m}_{v,r}^{(k)}$ pa agregirano sporočilo, ki ga vozlišče $v$ prejme po tej relaciji v plasti $k$.
+Relacijska sporočila $\mathbf{m}_{v,r}^{(k)}$ se nato združijo v skupno sporočilo za vozlišče.
+Združevanje relacij je lahko preprosta vsota ali povprečje, lahko pa vključuje konkatenacijo oziroma naučeno fuzijo relacijskih predstavitev.
+
 \subsubsection{Agregacijska funkcija}
 
 Agregacijska funkcija mora biti praviloma invariantna na vrstni red sosedov, saj graf v splošnem nima naravne ureditve vozlišč.
@@ -84,8 +92,8 @@ Ta lastnost omogoča, da ista GNN plast deluje na grafih različnih velikosti.
 \subsection{Klasifikacija na ravni grafa}
 \label{subsec:grafovska-klasifikacija}
 
-Ker želimo napovedati oznako celotnega časovnega okna, nalogo obravnavamo kot klasifikacijo grafa.
-Po več plasteh grafovske nevronske mreže dobimo predstavitve vozlišč $\mathbf{h}_v^{(K)}$, ki jih združimo v predstavitev celotnega grafa:
+Če želimo napovedati oznako celotnega časovnega okna, lahko nalogo obravnavamo kot klasifikacijo grafa.
+Po več plasteh grafovske nevronske mreže dobimo končne predstavitve vozlišč $\mathbf{h}_v^{(K)}$, ki jih združimo v predstavitev celotnega grafa:
 \begin{equation}
     \mathbf{h}_G =
     \text{READOUT}
@@ -112,27 +120,12 @@ Razpon logitov pa pokaže, ali klasifikacijska glava proizvaja dovolj raznolike 
 \section{Podatki sledilnika pogleda}
 \label{subsec:eye-tracking}
 
-\subsection{Merjeni signali}
-
 Sledilnik pogleda je naprava, ki meri, kam v prostoru ali na zaslonu oseba usmerja pogled.
-Poleg lokacije pogleda lahko meri tudi velikost zenic.
+Poleg lokacije pogleda lahko meri tudi velikost zenic, ki jo običajno opišemo s premerom zenice.
+Signal pogleda navadno opišemo s koordinatama $x$ in $y$ na zaslonu.
+Iz dinamike teh dveh signalov nekateri sledilniki zaznavajo in poročajo tudi informacije o fiksacijah, sakadah in mežikih, ki nas pogosto zanimajo v tej domeni.
 Meritve se izvajajo zaporedno z določeno vzorčno frekvenco, ki je odvisna od zmogljivosti naprave in namena uporabe.
 Pogoste vzorčne frekvence raziskovalnih sledilnikov pogleda so 60~Hz, 100~Hz, 500~Hz in 1000~Hz~\cite{lim2020emotion,tarnowski2020eye}.
-
-\subsection{Časovna narava signala}
-
-Lokacija pogleda se običajno zapiše v obliki koordinat $(x,y)$.
-Velikost zenice označuje njen premer in se običajno zapiše kot skalar.
-Podatke sledilnika pogleda obravnavamo kot časovno vrsto meritev pogleda in velikosti zenic.
-Takšni podatki so primerni za grafovsko obravnavo, saj lahko posamezne meritve v časovnem oknu predstavimo kot vozlišča, povezave pa določimo glede na časovno bližino, prostorsko bližino lokacij pogleda ali pripadnost isti fiksaciji.
-
-\TODO{
-\begin{itemize}
-    \item Ta razdelek naj ostane konceptualno ozadje o signalih sledilnika pogleda.
-    \item Podrobno pravilo, da vozlišča predstavljajo meritve, povezave pa časovne, prostorske in fiksacijske odnose, naj bo natančno definirano samo v poglavju~\ref{sec:grafovska-predstavitev}.
-    \item Tu po potrebi dodaj samo kratek most do poglavja~\ref{sec:grafovska-predstavitev}, brez ponavljanja formul ali parametrov $k_t$, $k_s$ in $k_f$.
-\end{itemize}
-}
 
 \section{Čustvena stanja: valenca in vzburjenost}
 \label{subsec:valenca-vzburjenost}
@@ -142,25 +135,10 @@ Takšni podatki so primerni za grafovsko obravnavo, saj lahko posamezne meritve 
 Čustvena stanja pogosto opisujemo z dimenzijama valence in vzburjenosti.
 Valenca opisuje prijetnost oziroma neprijetnost čustvenega odziva, vzburjenost pa stopnjo aktivacije odziva~\cite{soleymani2012mahnob}.
 
-\subsection{3-razredna klasifikacija}
+\subsection{Binarna klasifikacija}
 
-\TODO{
-\begin{itemize}
-    \item Ta razdelek uskladi z uvodom in trenutno zgodbo naloge.
-    \item Če je glavna naloga binarna klasifikacija valence, naj bo 3-razredna preslikava predstavljena samo kot izvorni \MAHNOB{} kontekst oziroma kot podrobnost poglavja~\ref{sec:podatki}.
-    \item Podrobne sezname čustvenih oznak po razredih ne podvajaj tukaj, če so že v poglavju~\ref{sec:podatki} ali poglavju~\ref{sec:eksperimenti}; tu raje dodaj sklic.
-\end{itemize}
-}
-
-V tej nalogi valenco in vzburjenost obravnavamo kot dve ločeni 3-razredni klasifikacijski nalogi.
-Takšna formulacija omogoča primerjavo z izhodiščnim člankom podatkovne zbirke \MAHNOB{}, kjer so avtorji prav tako poročali rezultate za 3-razredno klasifikacijo valence in vzburjenosti~\cite{soleymani2012mahnob}.
-Razredi niso tvorjeni z neposrednim rezanjem številskih ocen valence in vzburjenosti, temveč iz poročane čustvene oznake posnetka.
-
-Pri vzburjenosti uporabimo tri razrede: nizka, srednja in visoka vzburjenost.
-V razred nizke vzburjenosti spadajo oznake \emph{sadness}, \emph{disgust} in \emph{neutral}.
-V razred srednje vzburjenosti spadajo oznake \emph{joy}, \emph{happiness} in \emph{amusement}.
-V razred visoke vzburjenosti spadajo oznake \emph{surprise}, \emph{fear}, \emph{anger} in \emph{anxiety}.
-Pri valenci uporabimo razrede neprijetna, nevtralna in prijetna valenca.
-V razred neprijetne valence spadajo oznake \emph{fear}, \emph{anger}, \emph{disgust}, \emph{sadness} in \emph{anxiety}.
-V razred nevtralne valence spadata oznaki \emph{surprise} in \emph{neutral}.
-V razred prijetne valence spadajo oznake \emph{joy}, \emph{happiness} in \emph{amusement}.
+V uporabljeni podatkovni zbirki \MAHNOB{} so poleg številskih samoocen valence in vzburjenosti na voljo tudi eksplicitne čustvene oznake posnetkov, kot so žalost, jeza, strah in druge~\cite{soleymani2012mahnob}.
+V tej nalogi se omejimo na binarno klasifikacijo valence, pri čemer razrede določimo po vzoru izvirnega članka podatkovne zbirke \MAHNOB{}.
+Podrobna preslikava čustvenih oznak v razrede valence je navedena v dodatku~\ref{app:preslikava-valence}.
+Vzburjenosti v glavni nalogi ne obravnavamo, ker se izpeljani razredi v uporabljenem podnaboru slabše ujemajo s samoocenami kot pri valenci.
+Podrobnejša razlaga tega neskladja je podana v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}.

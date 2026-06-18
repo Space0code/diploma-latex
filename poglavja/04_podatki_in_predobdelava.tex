@@ -33,33 +33,9 @@ Zato lokalnega podnabora ne obravnavamo kot popolne rekonstrukcije izvirne zbirk
 
 \subsection{Izvor čustvenih oznak}
 
-V eksperimentih ne napovedujemo posamezne čustvene oznake neposredno, temveč iz nje izpeljemo dve ločeni klasifikacijski nalogi: 3-razredno klasifikacijo valence in 3-razredno klasifikacijo vzburjenosti.
-Tako sledimo izvirnemu eksperimentalnemu protokolu zbirke \MAHNOB{} in omogočimo primerjavo z objavljenimi rezultati.
-Numeričnih samoocen valence in vzburjenosti ne diskretiziramo z dodatnimi pragovi, temveč uporabimo preslikavo iz čustvenih oznak v razrede valence in vzburjenosti, prikazano v tabeli~\ref{tab:label-mapping}.
-
-\subsection{Preslikava v razrede valence in vzburjenosti}
-
-\begin{table}[t]
-    \centering
-    \caption{Preslikava čustvenih oznak v 3-razredni nalogi valence in vzburjenosti.}
-    \label{tab:label-mapping}
-    \small
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.28\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
-        \toprule
-        Izvorna čustvena oznaka & Razred valence & Razred vzburjenosti \\
-        \midrule
-        Nevtralno stanje & nevtralna & nizka \\
-        Žalost & negativna & nizka \\
-        Gnus & negativna & nizka \\
-        Veselje / sreča & pozitivna & srednja \\
-        Zabava & pozitivna & srednja \\
-        Presenečenje & nevtralna & visoka \\
-        Strah & negativna & visoka \\
-        Jeza & negativna & visoka \\
-        Tesnoba & negativna & visoka \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+V eksperimentih ne napovedujemo posamezne čustvene oznake neposredno, temveč iz nje izpeljemo binarno klasifikacijsko nalogo valence.
+Pri tem sledimo preslikavi čustvenih oznak v razrede valence iz izvirnega članka podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
+Numeričnih samoocen valence ne diskretiziramo z dodatnimi pragovi, temveč uporabimo preslikavo iz čustvenih oznak, prikazano v tabeli~\ref{tab:label-mapping}.
 
 Oznake čustvenih stanj so pridobljene iz metapodatkov posameznega poskusa.
 Kadar so bila v datoteki \texttt{session.xml} prisotna vsa potrebna polja, uporabimo oznake iz XML metapodatkov.
@@ -68,7 +44,7 @@ V eksperimentalnem cevovodu uporabljamo samo vrstice z veljavno izpeljano oznako
 
 \TODO{
 \begin{itemize}
-    \item Glavno besedilo: dodati eno kompaktno sliko porazdelitve razredov po končnih 10-sekundnih oknih. Slika naj v dveh panelih pokaže 3-razredno valenco in 3-razredno vzburjenost; v oznakah ali spremljevalni tabeli naj bodo absolutna števila in deleži.
+    \item Glavno besedilo: dodati eno kompaktno sliko porazdelitve razredov po končnih 10-sekundnih oknih za binarno valenco; v oznakah ali spremljevalni tabeli naj bodo absolutna števila in deleži.
     \item Glavno besedilo: pri sliki jasno navesti pogoje izračuna: \texttt{min\_samples\_per\_window=60}, izključeni subjekti P9, P12 in P15, samo \texttt{emotion-elicitation}, samo \texttt{emotion-derivation-status=ok}.
     \item Dodatek~\ref{app:dodatni-rezultati}: prestaviti podrobnejše porazdelitve, če bodo potrebne, npr. porazdelitve po subjektih, po posnetkih, po izvornih čustvenih oznakah in ločene porazdelitve za binarni low/high nalogi.
     \item Ne dodajaj več ločenih slik porazdelitve v glavno besedilo, razen če ena od porazdelitev neposredno pojasnjuje rezultat modela.

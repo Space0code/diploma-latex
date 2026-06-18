@@ -11,3 +11,13 @@ _minted-*/
 *.run.xml
 *.synctex.gz
 *.toc
+.DS_Store
+**/.ipynb_checkpoints/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.pytest_cache/
+**/.mypy_cache/
+**/.vscode/
+**/.DS_Store

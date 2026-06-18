@@ -11,3 +11,32 @@
     \item Če UMAP kaže predvsem subjektne ali stimulusne gruče, ga interpretiraj kot omejitev oziroma opozorilo, ne kot dokaz razredne ločljivosti.
 \end{itemize}
 }
+
+\section{Diagnostika prekomernega glajenja}
+\label{app:diagnostika-prekomerno-glajenje}
+
+\TODO{V tem razdelku poročaj diagnostiko iz
+\texttt{GFM-for-eyetracker/results/quick\_v1\_v2\_comparison/RETAIN\_2026-06-12\_16-29-08}.
+Interpretacija naj bo informativna: rezultati ne kažejo jasnega kolapsa
+predstavitev oziroma prekomernega glajenja pri glavnih grafovskih modelih.
+Posebej omeni, da je signalni nabor \texttt{pupil\_only} šibkejši in ima bolj
+neodločne napovedi, vendar tega ne predstavimo kot dokaz sistemskega kolapsa
+GNN.}
+
+\begin{table}[H]
+    \centering
+    \caption{TODO: Diagnostika naučenih predstavitev in izhodov najboljšega grafovskega modela za posamezen signalni nabor pri binarni klasifikaciji valence. Vrednosti so agregirane po testnih gubah.}
+    \label{tab:diagnostika-prekomerno-glajenje}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{l l c c c c c c}
+        \toprule
+        Signalni nabor & Najboljši GNN & Makro-F1 & Urav. točnost & Razpon logitov & Entropija & Varianca predstavitev & Kos. podobnost \\
+        \midrule
+        \texttt{all\_signals} & HeteroGCN-MLP-w & $0{,}608$ & $0{,}623$ & $3{,}31$ & $0{,}545$ & $0{,}352$ & $0{,}409$ \\
+        \texttt{gaze\_only} & HeteroGCN-MLP & $0{,}658$ & $0{,}662$ & $3{,}93$ & $0{,}583$ & $0{,}291$ & $0{,}307$ \\
+        \texttt{gaze\_pupil} & HeteroGCN-MLP-w & $0{,}644$ & $0{,}652$ & $3{,}38$ & $0{,}582$ & $0{,}336$ & $0{,}360$ \\
+        \texttt{pupil\_only} & GCN & $0{,}584$ & $0{,}607$ & $1{,}40$ & $0{,}653$ & $0{,}258$ & $0{,}569$ \\
+        \bottomrule
+    \end{tabular}
+    }
+\end{table}

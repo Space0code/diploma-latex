@@ -224,6 +224,12 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   grafe in ugotovitve. Podrobnejše diagnostične tabele, dodatne slike kolapsa
   predstavitev in relacijske porazdelitve uteži povezav sodijo v dodatek
   `D_diagnostika_predstavitev.tex`.
+- 2026-06-18 diagnostiko najboljših GNN iz reteniranega runa
+  `GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08`
+  obravnavamo informativno, ne kot primer prekomernega glajenja. V glavnem
+  besedilu naj bo največ ena poved, da se GNN pri glavnih signalnih naborih uči
+  razločevalnih predstavitev in ne kaže jasnega kolapsa; tabela z vrednostmi
+  sodi v dodatek `D_diagnostika_predstavitev.tex`.
 - Uredniški plan vizualizacij: glavno besedilo naj ima omejeno število močnih
   slik, približno eno sliko porazdelitve podatkov, eno osrednjo sliko grafovske
   predstavitve, eno do dve sliki glavnih rezultatov, eno sliko napak oziroma

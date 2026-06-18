@@ -1,107 +1,60 @@
 \chapter{Sorodna dela}
 \label{sec:sorodna-dela}
 
-To poglavje povzame sorodna dela, ki so neposredno povezana s to nalogo.
-Osredotočimo se na prepoznavanje čustev iz podatkov sledilnika pogleda, podatkovno zbirko \MAHNOB{}, grafovske nevronske mreže za časovno-prostorske podatke ter učenje predstavitev iz podatkov pogleda.
+To poglavje umešča nalogo med obstoječe pristope za delo s podatki sledilnika pogleda.
+Sorodna dela v tem poglavju obravnavamo z vidika vprašanja, kako podatke sledilnika pogleda predstaviti za klasifikacijo čustvenih oznak.
+Najprej povzamemo uporabo podatkov sledilnika pogleda pri klasifikaciji čustvenih oznak in vlogo podatkovne zbirke \MAHNOB{}.
+Nato predstavimo grafovske nevronske mreže za časovne vrste in časovno-prostorske podatke, saj je osrednji del naloge pretvorba časovnega okna meritev v graf.
+Na koncu povzamemo še učenje predstavitev iz zaporedij pogleda ter položaj te naloge glede na sorodna dela.
 
-\section{Prepoznavanje čustev iz podatkov sledilnika pogleda}
-\label{subsec:sorodna-et-emotion}
+\section{Podatki sledilnika pogleda pri klasifikaciji čustvenih oznak}
 
-\subsection{Ročno oblikovane značilke}
+Podatki sledilnika pogleda se med drugim uporabljajo kot vedenjski in psihofiziološki signal pri nalogah prepoznave čustvenih stanj.
+V literaturi se pojavljajo različne ciljne naloge: klasifikacija diskretnih čustvenih stanj, regresija valence in vzburjenosti, binarna klasifikacija valence in vzburjenosti ter druge~\cite{lim2020emotion,tarnowski2020eye}.
 
-Podatki sledilnika pogleda se v prepoznavanju čustev uporabljajo kot vedenjski in psihofiziološki signal.
-Najpogosteje uporabljeni signali vključujejo lokacijo pogleda, značilke fiksacij in sakad, mežike, velikost zenice ter spremembe razdalje med očesom in sledilnikom pogleda~\cite{lim2020emotion,tarnowski2020eye}.
-Iz teh signalov lahko izpeljemo ročno oblikovane značilke, kot so povprečna velikost zenice, trajanje fiksacij, število fiksacij, dolžina poti pogleda ali statistike porazdelitve koordinat pogleda.
-Takšni pristopi so razložljivi, vendar zahtevajo izbiro značilk in pogosto tudi dodatno predobdelavo signala.
-
-\subsection{Naučene predstavitve}
-
-Novejši pristopi namesto ročno oblikovanih značilk uporabljajo naučene predstavitve~\cite{bautista2021gazemae}.
-Model v tem primeru prejme manj obdelan časovni signal in se sam nauči predstavitev, ki so uporabne za napovedno nalogo.
-Ciljne naloge v sorodnih delih so različne: klasifikacija diskretnega čustvenega razreda, napoved valence in vzburjenosti ter binarna klasifikacija čustvenega odziva~\cite{soleymani2012mahnob}.
+Med pogosto uporabljenimi signali so velikost zenic, dinamika pogleda, fiksacije, sakade, mežiki in oddaljenost oči od sledilnika pogleda.
+Vhod v klasične napovedne modele za čustvena stanja so pogosto ročno oblikovane statistične značilke, kot so povprečja, variance in ekstremi časovnih oken meritev velikosti zenic, signalov pogleda, fiksacij, sakad in mežikov~\cite{bozak2024feature,lim2020emotion,tarnowski2020eye}. 
+Novejši modeli, na primer samokodirniki, pa kot vhod vzamejo tudi časovna okna manj agregiranih signalov pogleda, na primer zaporedja koordinat pogleda, iz katerih lahko izpeljejo tudi dinamiko gibanja pogleda~\cite{bautista2021gazemae}.
 
 \section{Podatkovna zbirka \MAHNOB{}}
 \label{subsec:sorodna-mahnob}
 
 Podatkovna zbirka \MAHNOB{} je večmodalna zbirka za prepoznavanje čustev in implicitno označevanje multimedijskih vsebin~\cite{soleymani2012mahnob}.
-Vsebuje odzive udeležencev na čustvene video posnetke ter sinhrono zajete signale, med katerimi so obrazni video, zvok, fiziološki signali, EEG in podatki sledilnika pogleda.
-V tej nalogi uporabljamo samo podatke sledilnika pogleda, ker je osrednji cilj raziskati grafovsko predstavitev tega tipa časovnega signala.
+Vsebuje odzive udeležencev na čustvene video posnetke ter sinhrono zajete signale, med katerimi so video obraza, zvok, fiziološki signali, elektroencefalogram (EEG) in signali sledilnika pogleda.
+V tej nalogi uporabljamo samo signale sledilnika pogleda, ker je osrednji cilj raziskati grafovsko predstavitev tega tipa časovnega signala.
 
-\subsection{Izvirni protokol za valenco in vzburjenost}
+Pregledali in preizkusili smo več podatkovnih zbirk (na primer \ESEED{}). \MAHNOB{} se je za našo nalogo izkazal kot najprimernejši predvsem zaradi kakovosti in količine podatkov ter dobre dokumentacije.
 
-Za to nalogo je pomemben del zbirke, v katerem so udeleženci gledali čustvene video posnetke in po vsakem posnetku podali samoocene.
-V izvirnem članku so avtorji za prepoznavanje čustev med drugim poročali rezultate za 3-razredno klasifikacijo valence in vzburjenosti, pri čemer so razrede izpeljali iz poročane čustvene oznake.
-Enako formulacijo uporabimo tudi v tej nalogi, saj omogoča primerjavo z izhodiščnim protokolom podatkovne zbirke.
-
-\subsection{Razlika do eksperimentalne postavitve v tej nalogi}
-
-Kljub temu neposredna primerjava med rezultati v izvirnem članku in rezultati te naloge ni mogoča, saj avtorji uporabljajo ročno oblikovane značilke, izračunane iz celotnega odziva na posnetek.
-Naš pristop uporablja časovna okna surovih signalov pogleda in velikosti zenic, ki jih pretvorimo v grafe.
-Zato je primerjava smiselna kot referenčni okvir za podatkovno zbirko in ciljno nalogo, ne kot ponovitev izvirnega eksperimenta.
+Za to nalogo je pomemben predvsem del zbirke z odzivi na čustvene video posnetke, kjer so poleg signalov sledilnika pogleda na voljo tudi samoocene udeležencev in čustvene oznake posnetkov.
+V izvirnem članku so avtorji te oznake uporabili za definicijo razredov valence in vzburjenosti ter med drugim poročali rezultate 3-razredne klasifikacije.
+V tej nalogi isto preslikavo uporabimo kot izhodišče za definicijo razredov valence, glavno nalogo pa omejimo na binarno klasifikacijo skrajnih razredov.
+Podrobna preslikava čustvenih oznak v razrede valence je navedena v dodatku~\ref{app:preslikava-valence}.
 
 \section{Grafovske nevronske mreže za časovno-prostorske podatke}
-\label{subsec:sorodna-stgnn}
 
-\TODO{
-\begin{itemize}
-    \item Ta razdelek naj ostane pregled sorodnih del in motivacija za uporabo GNN na časovno-prostorskih podatkih.
-    \item Ne ponavljaj splošnih definicij grafa, heterogenosti, uteženosti ali READOUT; te so v poglavju~\ref{sec:ozadje}.
-    \item Ne opisuj natančne konstrukcije grafa te naloge; ta je enkratno definirana v poglavju~\ref{sec:grafovska-predstavitev}. Tu naj bo največ kratek opis položaja te naloge glede na sorodna dela.
-\end{itemize}
-}
+Grafovske nevronske mreže je smiselno uporabiti, kadar želimo poleg lastnosti elementov modelirati tudi odnose med njimi. 
+Pri časovnih vrstah so takšni odnosi vsaj časovni -- neka meritev je časovno pred drugo meritvijo ali za njo. 
+Pregled GNN za časovne vrste~\cite{jin2024gnn4ts} to področje obravnava skozi naloge napovedovanja, klasifikacije, imputacije in zaznavanja anomalij ter posebej poudari modeliranje časovnih odvisnosti ter odvisnosti med različnimi spremenljivkami.
+Za to nalogo je pomembna predvsem formulacija, pri kateri posamezno časovno okno pretvorimo v grafovsko predstavitev in oznako napovemo na ravni celotnega grafa.
 
-Grafovske nevronske mreže so primerne za podatke, pri katerih so pomembni odnosi med elementi~\cite{gilmer2017mpnn,kipf2017gcn,velickovic2018gat}.
-Pri časovno-prostorskih podatkih lahko vozlišča predstavljajo meritve, lokacije ali druge osnovne elemente, povezave pa opisujejo časovno zaporedje, prostorsko bližino ali druge odnose med njimi.
-Časovno-prostorske grafovske nevronske mreže so se uveljavile predvsem pri nalogah, kjer podatki naravno nastopajo kot časovne vrste na grafu, na primer pri napovedovanju prometa~\cite{yu2018stgcn}.
-Ta primer je za to nalogo predvsem analogija za podatkovno strukturo: zaporedne meritve pogleda v časovnem oknu obravnavamo podobno kot časovne meritve senzorjev v prometnem omrežju.
+Pri podatkih sledilnika pogleda imajo meritve poleg časovnega vrstnega reda tudi prostorsko komponento, saj je vsaka veljavna meritev vezana na položaj pogleda na zaslonu.
+Podobno ločevanje časovnih in prostorskih odvisnosti uporabljajo časovno-prostorske grafovske mreže, na primer ST-GCN pri napovedovanju prometa, kjer grafovska konvolucija modelira prostorske povezave med senzorji, časovna konvolucija pa dinamiko signala skozi čas~\cite{yu2018stgcn}.
+V tej nalogi je ta pristop uporaben kot metodološka analogija: ne napovedujemo prihodnjih meritev, temveč klasificiramo oznako časovnega okna meritev.
 
-\subsection{Uporaba na oknih podatkov pogleda}
+\section{Učenje predstavitev iz signalov}
+\label{subsec:sorodna-predstavitve}
 
-\TODO{
-\begin{itemize}
-    \item Ta podrazdelek skrajšaj, da ne podvaja poglavja~\ref{sec:grafovska-predstavitev}.
-    \item Namesto opisovanja časovnih in prostorskih povezav dodaj sklic na poglavje~\ref{sec:grafovska-predstavitev}; tukaj poudari samo, da je prispevek naloge uporaba take predstavitve na oknih podatkov sledilnika pogleda.
-    \item Če ostane omemba relacij, uporabi isti vrstni red kot drugje: časovne, prostorske, fiksacijske.
-\end{itemize}
-}
+Poleg ročno oblikovanih značilk obstajajo pristopi, ki se predstavitev naučijo neposredno iz zaporedij meritev.
+S tem zmanjšajo odvisnost od ročne izbire značilk, hkrati pa so njihove predstavitve vezane na podatke in naloge, uporabljene pri predtreniranju.
+V nalogi takšni modeli služijo kot most med klasičnimi modeli na ročno agregiranih značilkah in grafovskimi modeli, ki se predstavitev učijo na eksplicitno strukturiranih časovnih oknih.
 
-V tej nalogi to idejo uporabimo na časovnih oknih podatkov sledilnika pogleda.
-Posamezne meritve znotraj okna predstavimo kot vozlišča.
-Časovne povezave opisujejo zaporedje meritev, prostorske povezave pa podobnost lokacij pogleda, izračunano iz evklidske razdalje med koordinatami pogleda.
-S tem dobimo časovno-prostorski graf, ki je prilagojen strukturi podatkov in hkrati omogoča uporabo GNN za klasifikacijo celotnega okna.
-
-\section{Učenje predstavitev iz podatkov pogleda in \GazeMAE{}}
-\label{subsec:sorodna-gazemae}
-
-Poleg ročno oblikovanih značilk se pri podatkih pogleda pojavljajo tudi metode za samonadzorovano učenje predstavitev.
-Takšne metode poskušajo iz neoznačenih ali šibko označenih zaporedij pogleda naučiti vektorske predstavitve, ki jih lahko nato uporabimo pri različnih napovednih nalogah.
-
-\subsection{\GazeMAE{}}
-
-\GazeMAE{} je primer takšnega pristopa.
-Podatke pogleda obravnava kot zaporedja položajev in hitrosti ter z avtokodirniško arhitekturo uči mikro- in makro-predstavitve očesnih gibov~\cite{bautista2021gazemae}.
-
-\GazeMAE{} v tej nalogi obravnavamo kot relevanten ne-grafovski predstavnik učenja predstavitev iz podatkov pogleda.
-Eksperimentalno ga vključimo kot ločeno procesno verigo:
-\begin{equation}
-    \text{podatki}
-    \rightarrow
-    \GazeMAE{}
-    \rightarrow
-    \text{predstavitev}
-    \rightarrow
-    \text{MLP klasifikator}
-    \rightarrow
-    \text{napoved}.
-\end{equation}
+\GazeMAE{} je primer modela, zasnovanega posebej za očesne gibe -- kot vhod uporablja zaporedje koordinat pogleda, iz katerega z avtokodirniško arhitekturo uči mikro- in makro-predstavitve~\cite{bautista2021gazemae}.
+MOMENT je splošnejši prednaučen temeljni model za časovne vrste, zato je uporaben kot primerjava pri signalih, ki niso omejeni na koordinate pogleda~\cite{goswami2024moment}.
 
 \section{Položaj te naloge glede na sorodna dela}
-\label{subsec:polozaj-naloge}
 
-Ta naloga ne tekmuje neposredno z vsemi večmodalnimi metodami za prepoznavanje čustev.
-Večmodalni sistemi lahko uporabljajo EEG, fiziološke signale, obrazni video, zvok in podatke pogleda, zato rešujejo širši problem kot ta naloga.
-Naš fokus je ožji: zanima nas, ali lahko časovno-prostorska grafovska predstavitev izboljša klasifikacijo valence in vzburjenosti iz podatkov sledilnika pogleda.
+Ta naloga ne obravnava psihološkega modeliranja čustev. Čustvene oznake uporablja zgolj kot evalvacijsko nalogo za primerjavo predstavitev podatkov sledilnika pogleda.
+Glavna primerjava je med različnimi predstavitvami istega časovnega okna: agregiranimi značilkami za klasične modele, naučenimi predstavitvami iz prednaučenih kodirnikov in časovno-prostorsko grafovsko predstavitvijo za GNN.
 
-Glavna primerjava je zato med grafovskimi in ne-grafovskimi modeli na enakih vhodnih oknih.
-Ne-grafovski modeli služijo kot kontrola, ki pokaže, koliko informacije je dostopne brez eksplicitne grafovske strukture.
-Grafovski modeli pa preverjajo, ali relacije med meritvami pogleda izboljšajo naučeno predstavitev okna.
+Grafovski del naloge preverja, ali eksplicitne časovne, prostorske in fiksacijske relacije med meritvami pogleda prispevajo k uporabnejši predstavitvi okna.
+Naloga zato povezuje (1) klasifikacijo čustvenih oznak iz podatkov sledilnika pogleda, (2) GNN za časovno-prostorske podatke ter (3) primerjavo ročno oblikovanih, naučenih in grafovskih predstavitev časovnih oken.

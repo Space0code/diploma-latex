@@ -1,10 +1,7 @@
 \chapter{Teoretično ozadje}
 \label{sec:ozadje}
 
-To poglavje predstavi metodološke pojme, ki so potrebni za razumevanje predlaganega pristopa.
-Najprej uvedemo grafe in grafovske nevronske mreže, nato opišemo klasifikacijo na ravni grafa in pojav prekomernega glajenja.
-Na koncu povzamemo osnovne lastnosti podatkov sledilnika pogleda ter ciljni oznaki valence in vzburjenosti.
-Psihološko ozadje čustev obravnavamo le v obsegu, ki je potreben za razumevanje klasifikacijske naloge.
+V tem poglavju predstavimo metodološke pojme, ki so potrebni za razumevanje grafov, grafovskih nevronskih mrež, podatkov sledilnika pogleda ter valence.
 
 \TODO{
 \begin{itemize}
@@ -25,7 +22,7 @@ Graf definiramo kot
     G = (V, E),
 \end{equation}
 kjer je $V$ množica vozlišč, $E \subseteq V \times V$ pa množica povezav med vozlišči.
-Vozlišča imajo lahko značilke, ki jih zapišemo v matriko
+Vozlišča praviloma vsebujejo značilke $\mathbf{x}_v$, ki jih zapišemo v matriko
 \begin{equation}
     X \in \mathbb{R}^{|V| \times d},
 \end{equation}
@@ -37,40 +34,22 @@ Povezavo med vozliščema $i$ in $j$ označimo z $e_{ij} \in E$.
 V usmerjenih grafih ima povezava določeno izvorno in ponorno vozlišče, zato velja $e_{ij} \ne e_{ji}$.
 V neusmerjenih grafih povezave nimajo smeri, zato velja $e_{ij} = e_{ji}$.
 
-Povezave lahko vsebujejo tudi uteži ali dodatne značilke.
+Povezave lahko vsebujejo tudi uteži.
 Utež povezave med vozliščema $i$ in $j$ označimo z $w_{ij}$.
 Za neutežene povezave si lahko predstavljamo, da imajo utež $w_{ij}=1$.
-Če imajo povezave več značilk, jih zapišemo kot vektor $\mathbf{e}_{ij}$~\cite{gilmer2017mpnn}.
+Če imajo povezave več uteži, jih zapišemo kot vektor $\mathbf{e}_{ij}$~\cite{gilmer2017mpnn}.
 
 \subsubsection{Homogeni in heterogeni grafi}
 
 Homogeni graf je graf, ki ne loči različnih vrst vozlišč ali povezav.
 Heterogeni graf vsebuje vsaj dve različni vrsti vozlišč ali povezav.
-V tej nalogi uporabljamo heterogeno grafovsko predstavitev, saj ločimo več tipov povezav: časovne povezave naprej, časovne povezave nazaj, prostorske povezave in fiksacijske povezave.
-
-\TODO{
-\begin{itemize}
-    \item Tu obdrži samo splošno definicijo homogenega in heterogenega grafa.
-    \item Konkretno naštevanje relacij \texttt{temporal\_forward}, \texttt{temporal\_backward}, \texttt{spatial} in \texttt{fixation} prestavi oziroma pusti v poglavju~\ref{subsec:heterogeni-graf}.
-    \item Po potrebi dodaj samo en stavek s sklicem: v tej nalogi konkretno heterogeno predstavitev definiramo v poglavju~\ref{sec:grafovska-predstavitev}.
-\end{itemize}
-}
+V tej nalogi uporabljamo heterogeno grafovsko predstavitev, saj ločimo več tipov povezav.
 
 \section{Grafovske nevronske mreže}
 \label{subsec:gnn}
 
 Grafovske nevronske mreže so razred nevronskih mrež, namenjen učenju nad podatki, ki jih naravno predstavimo z grafom~\cite{gilmer2017mpnn,kipf2017gcn,velickovic2018gat}.
-Graf zapišemo kot $G = (V, E)$, kjer je $V$ množica vozlišč, $E$ pa množica povezav med njimi.
-Vozlišča lahko vsebujejo značilke $\mathbf{x}_v$, povezave pa dodatne značilke $\mathbf{e}_{uv}$, ki opisujejo odnos med vozliščema $u$ in $v$.
 Cilj GNN je naučiti se predstavitev vozlišč, povezav ali celotnega grafa tako, da model pri izračunu predstavitve posameznega vozlišča upošteva tudi njegovo lokalno okolico.
-
-\TODO{
-\begin{itemize}
-    \item Ne ponavljaj polne definicije grafa iz prejšnjega razdelka; tu se nanjo samo naveži.
-    \item Če ostane formula za splošno posredovanje sporočil, naj bo to edina splošna formula GNN v nalogi.
-    \item Konkretne plasti \texttt{GCNConv}, relacijsko posredovanje sporočil in fuzijo relacijskih predstavitev opiši samo v poglavju~\ref{sec:modeli}.
-\end{itemize}
-}
 
 \subsection{Posredovanje sporočil}
 
@@ -98,7 +77,7 @@ kjer je $\mathcal{N}(v)$ množica sosedov vozlišča $v$, $\psi^{(k)}$ funkcija 
 
 \subsubsection{Agregacijska funkcija}
 
-Agregacijska funkcija mora biti praviloma invariantna na vrstni red sosedov, saj graf nima naravne ureditve vozlišč.
+Agregacijska funkcija mora biti praviloma invariantna na vrstni red sosedov, saj graf v splošnem nima naravne ureditve vozlišč.
 Zato se pogosto uporabljajo operacije, kot so vsota, povprečje ali maksimum.
 Ta lastnost omogoča, da ista GNN plast deluje na grafih različnih velikosti.
 

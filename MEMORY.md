@@ -59,6 +59,14 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Za `overfitting` uporabljaj "prekomerno prileganje", ne "preprileganje".
 - Za `arousal` dosledno uporabljaj "vzburjenost", ne "vzburjenje". Samo pri prvi
   omembi v diplomi dodaj angleški izraz v oklepaju: `vzburjenost (ang. arousal)`.
+- Za primerjave razpoložljivih signalov sledilnika pogleda uporabljaj izraz
+  `množica signalov` oziroma `podmnožica signalov`, ne `nabor signalov`. Imena
+  glavnih množic so zaenkrat: `samo pogled`, `samo zenici`, `pogled in zenici` in
+  `vsi signali`.
+- Pri proofreadingu ne vračaj Tomijevih ročnih slogovnih popravkov nazaj na
+  prejšnje predloge. Če Tomi popravi vezaje, veznike (`in`/`ter`), formulacije
+  ali poenostavi zapis, to obravnavaj kot aktualen slogovni signal in ga ohrani,
+  razen če gre za očitno LaTeX ali factualno napako.
 
 ## Vizualna identiteta diplome
 
@@ -115,8 +123,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   podatke sledilnika pogleda za klasifikacijo čustvenih oznak. Podatki
   sledilnika pogleda so osrednji vhodni signal in jih je treba opisati dovolj za
   razumevanje grafovske konstrukcije; čustva so predvsem oznake, zato se naloga
-  ne sme poglobiti v psihologijo čustev. Glavni eksperimenti so štirje nabori
-  signalov: pogled, zenici, pogled+zenici in vsi signali. Delitev je motivirana
+  ne sme poglobiti v psihologijo čustev. Glavni eksperimenti so štiri množice
+  signalov: `samo pogled`, `samo zenici`, `pogled in zenici` in `vsi signali`.
+  Delitev je motivirana
   s tipično dostopnostjo signalov pri sledilnikih pogleda: pogosto imamo samo
   pogled, samo zenici ali oboje, redkeje pa dodatne signale, ki so prisotni v
   tej podatkovni zbirki. Glavna naloga je samo binarna low/high klasifikacija
@@ -145,9 +154,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   sledilnika pogleda in fiksacijsko informacijo. Za `distance to ET` privzeto
   uporabljaj opisni izraz `oddaljenost od sledilnika pogleda`, dokler Tomi ne
   potrdi drugačne terminologije.
-- Za signalni nabor s podatki obeh zenic uporabljaj izraz `zenici` in pri tem
-  dosledno upoštevaj slovensko dvojino. Signalni nabori so: `pogled`, `zenici`,
-  `pogled+zenici` in `vsi signali`.
+- Za signalno množico s podatki obeh zenic uporabljaj izraz `zenici` in pri tem
+  dosledno upoštevaj slovensko dvojino. Signalne množice so: `samo pogled`,
+  `samo zenici`, `pogled in zenici` in `vsi signali`.
 - V uvodu naj se zgodba začne pri GNN oziroma grafovskem modeliranju, nato naj se
   poveže s podatki sledilnika pogleda, šele nato naj se omeni čustvene oznake kot
   evalvacijsko nalogo. Glavno raziskovalno vprašanje naj bo v uvodu motivirano,
@@ -197,7 +206,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   tabelah rezultatov naj bosta samo `accuracy` in `macro-F1`; podrobnejše metrike
   sodijo v dodatek.
 - 2026-06-17 zaklenjena odločitev o grafovskem operatorju: v glavnih poskusih
-  ostane `GCNConv`. Dodatni poskus na naboru pogled+zenici je pokazal, da bi pri
+  ostane `GCNConv`. Dodatni poskus na množici `pogled in zenici` je pokazal, da bi pri
   izključno najboljšem rezultatu za neuteženi model izbrali `GINConv`, za
   uteženo arhitekturo pa `GraphConv`, vendar bi to po nepotrebnem zakompliciralo
   eksperimentalno zasnovo. V glavnem besedilu povej kratko: preizkusili smo štiri
@@ -227,7 +236,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - 2026-06-18 diagnostiko najboljših GNN iz reteniranega runa
   `GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08`
   obravnavamo informativno, ne kot primer prekomernega glajenja. V glavnem
-  besedilu naj bo največ ena poved, da se GNN pri glavnih signalnih naborih uči
+  besedilu naj bo največ ena poved, da se GNN pri glavnih signalnih množicah uči
   razločevalnih predstavitev in ne kaže jasnega kolapsa; tabela z vrednostmi
   sodi v dodatek `D_diagnostika_predstavitev.tex`.
 - Uredniški plan vizualizacij: glavno besedilo naj ima omejeno število močnih

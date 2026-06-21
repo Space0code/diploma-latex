@@ -1,21 +1,34 @@
 \chapter{Dodatne vizualizacije grafov}
 \label{app:grafi}
 
+Ta dodatek dopolnjuje osrednji primer grafovske konstrukcije iz poglavja~\ref{sec:grafovska-predstavitev}.
+Slike prikazujejo isti izsek časovnega okna, vendar ločeno za posamezne tipe povezav.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/casovne.png}
+    \caption{Primer časovnih povezav v izseku grafa. Povezave sledijo časovni urejenosti meritev in ločijo smer naprej ter nazaj.}
+    \label{fig:casovne-povezave-primer}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/prostorske.png}
+    \caption{Primer prostorskih povezav v izseku grafa. Povezave nastanejo med meritvami s podobnim položajem pogleda, zato niso nujno omejene na časovno zaporedne meritve.}
+    \label{fig:prostorske-povezave-primer}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/fiksacijske.png}
+    \caption{Primer fiksacijskih povezav v izseku grafa. Povezave združujejo meritve, ki pripadajo isti zaznani fiksaciji, pri čemer razširjena konstrukcija ohrani redkejšo povezovalno strukturo.}
+    \label{fig:fiksacijske-povezave-primer}
+\end{figure}
+
 \TODO{
 \begin{itemize}
-    \item Dodatek naj dopolni eno osrednjo sliko grafovske predstavitve iz glavnega besedila, ne pa je podvaja.
-    \item primer 10 s grafa;
-    \item berljiv primer 2 s ali 5 s grafa;
-    \item vizualizacija \texttt{temporal\_forward} povezav;
-    \item vizualizacija \texttt{temporal\_backward} povezav;
-    \item vizualizacija \texttt{spatial} povezav;
-    \item vizualizacija \texttt{fixation} povezav;
-    \item ločen prikaz razširjenih fiksacijskih povezav znotraj ene fiksacije za razlago parametra $k_f$;
-    \item prikaz prekrivanja relacij med istimi pari vozlišč s krivljenimi povezavami;
-    \item vozlišča po koordinatah pogleda $(x,~y)$;
-    \item velikost vozlišč po povprečni velikosti zenice;
-    \item lokalne oznake vozlišč od 0 naprej;
-    \item robovi različnih barv po relacijah.
-    \item Pri vseh grafovskih slikah uporabi enako barvno shemo relacij kot v glavnem besedilu.
+    \item Po potrebi dodaj primer celotnega 10-sekundnega grafa.
+    \item Po potrebi dodaj ločen prikaz razširjenih fiksacijskih povezav znotraj ene fiksacije za razlago parametra $k_f$.
+    \item Po potrebi dodaj prikaz prekrivanja relacij med istimi pari vozlišč s krivljenimi povezavami.
 \end{itemize}
 }

@@ -63,7 +63,7 @@ Kot kaže matrika zmede v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se sam
 \subsection{Skupine signalov}
 
 Splošen opis meritev sledilnika pogleda je podan v razdelku~\ref{subsec:eye-tracking}; tukaj navedemo konkretne skupine signalov, ki jih uporabimo v eksperimentih.
-V uporabljeni podatkovni zbirki imamo na voljo pet skupin signalov. To so:
+V uporabljeni podatkovni zbirki imamo na voljo pet osnovnih vrst signalov. To so:
 \begin{itemize}
     \item časovni žig meritve $t_i$,
     \item koordinati pogleda na zaslonu $(x_i,~y_i)$ -- povprečje med meritvama levega in desnega očesa,
@@ -74,8 +74,8 @@ V uporabljeni podatkovni zbirki imamo na voljo pet skupin signalov. To so:
 
 Večina podatkovnih zbirk s podatki sledilnika pogleda vsebuje bodisi le koordinate pogleda bodisi le velikost zenic bodisi oboje.
 Nekatere zbirke pa ponujajo tudi dodatne signale, kot sta v našem primeru oddaljenost ter informacije o fiksacijah.
-Da bi s primerjalno študijo pokrili čim širši razpon različnih tipov zbirk, \MAHNOB podatke razdelimo v štiri delno prekrivajoče se množice signalov, prikazane v tabeli~\ref{tab:mnozice-signalov}.
-V vseh primerih uporabimo tudi informacijo o času.
+Da bi s primerjalno študijo pokrili čim širši razpon različnih tipov zbirk, \MAHNOB podatke razdelimo v štiri delno prekrivajoče se eksperimentalne množice signalov, prikazane v tabeli~\ref{tab:mnozice-signalov}.
+V vseh štirih množicah uporabimo tudi informacijo o času, zato v tabeli navedemo le preostale vključene signale.
 
 \begin{table}[t]
     \centering
@@ -86,10 +86,10 @@ V vseh primerih uporabimo tudi informacijo o času.
         \toprule
         Množica & Vključeni signali \\
         \midrule
-        samo pogled & koordinati pogleda $(x_i, y_i)$ \\
-        samo zenici & velikosti leve in desne zenice $(p^{(l)}_i, p^{(r)}_i)$ \\
-        pogled in zenici & koordinati pogleda ter velikosti leve in desne zenice \\
-        vsi signali & koordinati pogleda, velikosti zenic, oddaljenost od sledilnika pogleda in informacija o fiksacijah \\
+        \emph{samo pogled} & koordinati pogleda $(x_i, y_i)$ \\
+        \emph{samo zenici} & velikosti leve in desne zenice $(p^{(l)}_i, p^{(r)}_i)$ \\
+        \emph{pogled in zenici} & koordinati pogleda ter velikosti leve in desne zenice \\
+        \emph{vsi signali} & koordinati pogleda, velikosti zenic, oddaljenost od sledilnika pogleda in informacija o fiksacijah \\
         \bottomrule
     \end{tabularx}
 \end{table}

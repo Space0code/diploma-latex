@@ -67,6 +67,11 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   prejšnje predloge. Če Tomi popravi vezaje, veznike (`in`/`ter`), formulacije
   ali poenostavi zapis, to obravnavaj kot aktualen slogovni signal in ga ohrani,
   razen če gre za očitno LaTeX ali factualno napako.
+- Ko Tomi ročno popravi besedilo za predlogom, iz popravka sklepaj o slogovni
+  preferenci in jo uporabljaj v nadaljevanju. Če je vzorec dvoumen ali odvisen od
+  konteksta, ga ne posplošuj na slepo, ampak Tomija eksplicitno vprašaj. Konkretna
+  potrjena preferenca: razpone tipa `1-2` piši z enim vezajem, ne kot `1--2`,
+  razen če Tomi za določen kontekst naroči drugače.
 
 ## Vizualna identiteta diplome
 

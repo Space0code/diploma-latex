@@ -1,103 +1,252 @@
-\chapter{Primerjani modeli in predlagana arhitektura}
+\chapter{Primerjani modeli}
 \label{sec:modeli}
 
-V tem poglavju predstavimo klasifikacijske modele strojnega učenja, ki jih primerjamo v eksperimentalni evalvaciji.
-Modele razdelimo na negrafovske osnovne modele, model \GazeMAE{} + MLP kot predstavnika SOTA ter grafovske modele.
-\END_NOTE{...grafovske modele - množina?}
+% TODO: Napiši kratek uvod v poglavje:
+% - poglavje predstavi modele, ne eksperimentalnega protokola;
+% - vsi modeli uporabljajo ista 10-sekundna okna in isto ciljno nalogo;
+% - razlikujejo se po predstavitvi okna: agregirane značilke, zamrznjene
+%   prednaučene predstavitve ali grafovska predstavitev;
+% - osrednji namen poglavja je pripraviti pošteno primerjavo za raziskovalno
+%   vprašanje.
 
-Vsi modeli uporabljajo iste izvorne podatke, ista 10-sekundna okna in iste delitve na učne, validacijske (v primerih nevronskih mrež) in testne množice.
+Vsi modeli uporabljajo iste izvorne podatke, ista 10-sekundna okna in iste delitve na učne, validacijske in testne množice.
 Razlika je v predstavitvi vhodnih podatkov.
-Grafovski modeli prejmejo okno kot graf meritev, negrafovski osnovni modeli prejmejo agregirano tabelarično predstavitev istega okna, \GazeMAE{} pa po svoji konstrukciji le koordinati pogleda $(x,~y)$ za celotno 10~s okno.
+Grafovski modeli prejmejo okno kot graf meritev, negrafovski osnovni modeli prejmejo agregirano tabelarično predstavitev istega okna, zamrznjeni prednaučeni predstavitveni modeli pa iz okna najprej izračunajo naučeno vektorsko predstavitev.
 
-\TODO{
-\begin{itemize}
-    \item To poglavje naj bo edino mesto za opis arhitektur modelov.
-    \item Ne ponavljaj splošnih definicij grafov in GNN iz poglavja~\ref{sec:ozadje}.
-    \item Ne ponavljaj pravil konstrukcije časovnih, prostorskih in fiksacijskih povezav iz poglavja~\ref{sec:grafovska-predstavitev}; uporabi sklic na konkretno grafovsko predstavitev.
-    \item Tu pa obdrži opis, kako posamezen model uporablja že definirano predstavitev: homogenizacija pri osnovnem GCN, relacijska obravnava pri heterogenem GNN, naučene uteži povezav, fuzija relacij in konkretni READOUT.
-\end{itemize}
-}
+\section{Pregled primerjanih pristopov}
+\label{subsec:pregled-primerjanih-pristopov}
 
-\TODO{
-\begin{itemize}
-    \item Poglavje preurediti tako, da modeli niso opisani samo za en polni vhodni nabor, ampak za primerjavo po množicah \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}.
-    \item Jasno zapisati, da \GazeMAE{} učimo oziroma uporabimo samo na vhodu \emph{samo pogled}, ker uporablja koordinate pogleda; če dosega močne rezultate, ga lahko v rezultatih primerjamo kot referenco tudi proti modelom, ki uporabljajo bogatejše nabore signalov.
-    \item Dodati opomnik za morebitni MOMENT + MLP nad zeničnim signalom ter za kombinacijo MOMENT in \GazeMAE{} predstavitev v skupni MLP pri \emph{pogled in zenici} oziroma \emph{vsi signali}.
-    \item Pri GNN zaenkrat ne dodajati različice \emph{samo zenici}, dokler ni jasen smiseln grafovski protokol.
-\end{itemize}
-}
+% TODO: Tukaj napiši orientacijski odstavek, ki bralcu razloži štiri družine
+% modelov:
+% 1. izhodiščna klasifikatorja: naključni in večinski;
+% 2. klasični modeli strojnega učenja nad agregiranimi značilkami: SVM,
+%    LightGBM in MLP;
+% 3. zamrznjeni prednaučeni predstavitveni modeli: GazeMAE in MOMENT;
+% 4. grafovski modeli, urejeni v arhitekturno lestvico.
+%
+% TODO: Po odločitvi o končnem poimenovanju uskladi ime te družine modelov tudi
+% v poglavjih 7-9, tabelah in slikah.
 
-Za pravično primerjavo osnovnim modelom podamo agregirane značilke istih signalov kot jih prejme GNN.
-To so: koordinati pogleda $(x,~y)$, velikosti leve in desne zenice, oddaljenost od zaslona ter informacija o fiksacijah.
+\begin{table}[t]
+    \centering
+    \caption{Pregled primerjanih modelov in njihovih vhodnih predstavitev.}
+    \label{tab:pregled-primerjanih-modelov}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth} >{\raggedright\arraybackslash}p{0.27\textwidth} >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Model & Vhodna predstavitev & Vloga v primerjavi \\
+        \midrule
+        Naključni & brez učenja iz značilk & spodnja meja naključnega ugibanja \\
+        Večinski & brez učenja iz značilk & spodnja meja napovedovanja najpogostejšega razreda \\
+        SVM & agregirane značilke okna & klasični model strojnega učenja \\
+        LightGBM & agregirane značilke okna & klasični model strojnega učenja \\
+        MLP & agregirane značilke okna & klasični model strojnega učenja \\
+        \GazeMAE{} & zamrznjena predstavitev koordinat pogleda & prednaučena predstavitev za množico \emph{samo pogled} \\
+        MOMENT & zamrznjena predstavitev časovne vrste & prednaučena predstavitev za množice s signali zenic oziroma več signali \\
+        GCN & homogeni graf okna & osnovni grafovski model \\
+        HeteroGCN-mean & heterogeni graf okna & ločena obravnava relacij s preprosto fuzijo \\
+        HeteroGCN-MLP & heterogeni graf okna & ločena obravnava relacij z naučeno fuzijo \\
+        HeteroGCN-MLP-w & heterogeni graf okna in značilke povezav & najkompleksnejša stopnja arhitekturne lestvice \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+% TODO: Premisli, ali tabela ostane tukaj ali se skrajša in delno prestavi v
+% poglavje 7. V poglavju 6 naj tabela razlaga arhitekturno vlogo modelov, v
+% poglavju 7 pa eksperimentalno konfiguracijo in hiperparametre.
+
+\section{Negrafovski osnovni modeli}
+\label{subsec:negrafovski-osnovni-modeli}
+
+% TODO: Ta razdelek naj zajame samo modele, ki ne uporabljajo grafovske
+% predstavitve in niso zamrznjeni prednaučeni kodirniki. Prednaučeni modeli so
+% negrafovski, vendar niso "osnovni", zato so v ločenem razdelku.
+
+Negrafovski osnovni modeli prejmejo časovno okno kot vektor agregiranih značilk.
+S tem predstavljajo primerjavo, pri kateri imajo modeli dostop do istih signalov kot grafovski modeli, vendar brez eksplicitne grafovske strukture.
+
+\subsection{Izhodiščna klasifikatorja}
+\label{subsec:izhodiscna-klasifikatorja}
+
+Večinski in naključni klasifikator predstavljata spodnjo primerjalno mejo.
+Večinski klasifikator vedno napove večinski razred učne množice, naključni klasifikator pa razrede napoveduje z enako verjetnostjo.
+Pri binarni klasifikaciji to pomeni verjetnost $50~\%$ za vsak razred.
+Če model ne preseže rezultatov teh dveh klasifikatorjev, težko trdimo, da se iz vhodnih podatkov uči uporabne vzorce.
+
+\subsection{Klasični modeli strojnega učenja}
+\label{subsec:klasicni-modeli-strojnega-ucenja}
+
+% TODO: V tem podrazdelku jasno loči:
+% - vhodno predstavitev okna, ki je skupna za SVM, LightGBM in MLP;
+% - kratek opis posameznega modela;
+% - dejstvo, da ti modeli služijo kot močni negrafovski osnovni modeli.
+
+Za pravično primerjavo negrafovskim osnovnim modelom podamo agregirane značilke istih signalov kot jih prejme GNN.
+To so koordinati pogleda $(x,~y)$, velikosti leve in desne zenice, oddaljenost od sledilnika pogleda ter informacija o fiksacijah.
 Za vsak signal izračunamo opisne statistike na ravni okna: povprečje, standardni odklon, minimum, maksimum, razpon, mediano, prvi kvartil, tretji kvartil in medkvartilni razmik.
 Pri fiksacijah dodamo še število fiksacij, delež meritev v oknu, ki pripadajo fiksacijam, vsoto trajanj, povprečno trajanje in največje trajanje fiksacije.
 Takšna pretvorba časovnega signala v opisne statistike na ravni okna oziroma odziva je običajen pristop pri klasičnih modelih strojnega učenja za podatke pogleda~\cite{bozak2024feature,lim2020emotion,tarnowski2020eye}.
 
-\section{Negrafovski osnovni modeli}
-\label{subsec:baseline-modeli}
+\subsubsection{SVM}
 
-Prvo skupino primerjalnih modelov sestavljajo negrafovski osnovni modeli.
-Z izrazom osnovni model označujemo preprostejši primerjalni model, s katerim preverimo, ali zahtevnejša arhitektura prinaša dodatno korist.
-V to skupino vključimo večinski klasifikator, naključni klasifikator, klasifikator podpornih vektorjev (SVM), Light Gradient Boosting Machine (LightGBM) in večplastni perceptron (MLP).
+% TODO: Kratek opis:
+% - SVM kot klasični model z RBF jedrom;
+% - uporaben kot močan negrafovski osnovni model;
+% - uporablja standardizirane agregirane značilke;
+% - hiperparametre pusti za poglavje 7.
 
-Večinski in naključni klasifikator predstavljata spodnjo primerjalno mejo.
-Večinski klasifikator vedno napove večinski razred testne množice, naključni klasifikator pa vse razrede napove z enako verjetnostjo ($33,3~\%$ oz $50$~\%).
-Če model ne preseže rezultatov teh dveh klasifikatorjev, težko trdimo, da se iz vhodnih podatkov uči uporabne vzorce.
+\subsubsection{LightGBM}
 
-SVM vključimo kot predstavnika jedrnih metod oziroma metod podpornih vektorjev, LightGBM kot učinkovitega predstavnika ansambelskih drevesnih metod z gradientnim spodbujevanjem, MLP pa kot osnovni nevronski model brez grafovske strukture.
-Hiperparametrov osnovnih modelov nismo optimizirali.
+% TODO: Kratek opis:
+% - gradientno spodbujena odločitvena drevesa;
+% - dobro deluje na tabelaričnih značilkah;
+% - standardizacija ni potrebna;
+% - ne razlagaj algoritma preveč učbeniško.
 
-Pri modelih SVM in MLP vhodne značilke standardiziramo s pretvorbo, naučeno samo na učni podmnožici.
-Ista pretvorba se nato uporabi na testni in, v primeru MLP, tudi validacijski množici.
-LightGBM standardizacije ne potrebuje, zato prejme neposredno tabelarično predstavitev okna.
-
-\subsection{MLP}
+\subsubsection{MLP}
 
 Osnovni MLP uporabimo kot nevronski model nad agregirano tabelarično predstavitvijo okna.
-Vhod modela je vektor agregiranih značilk enega 10-sekundnega okna, izhod pa logiti za tri razrede valence oziroma vzburjenosti.
-Arhitektura je namerno preprosta: dve skriti polno povezani plasti velikosti 64 z aktivacijo ReLU in izpuščanjem, za njima pa izhodna linearna plast.
+Vhod modela je vektor agregiranih značilk enega 10-sekundnega okna, izhod pa logiti za razrede ciljne naloge.
+Arhitektura je namerno preprosta: dve skriti polno povezani plasti z aktivacijo ReLU in izpuščanjem, za njima pa izhodna linearna plast.
 Model učimo z navzkrižno entropijo.
-Za optimizacijo uporabimo AdamW, validacijsko podmnožico pa uporabimo za zgodnje ustavljanje na podlagi validacijske izgube.
 
+% TODO: Po preverjanju trenutne konfiguracije dopiši konkretne vrednosti
+% arhitekture in regularizacije ali pa jih pusti za poglavje 7. Če ostanejo v
+% poglavju 7, tukaj zapiši samo princip.
 
+\section{Zamrznjeni prednaučeni predstavitveni modeli}
+\label{subsec:zamrznjeni-prednauceni-modeli}
 
-\section{Negrafovski predstavnik SOTA: \GazeMAE{} + MLP}
+% TODO: Razdelek naj poudari:
+% - GazeMAE in MOMENT nista osnovna modela, ampak zamrznjena kodirnika;
+% - v tej nalogi ju ne predtreniramo in ne reproduciramo izvirnega učenja;
+% - izračunata predstavitev okna, na kateri se nato uči klasifikacijska glava;
+% - v poimenovanju modelov v glavnem besedilu uporabljamo samo GazeMAE oziroma
+%   MOMENT, ne GazeMAE+MLP ali MOMENT+MLP.
+
+\subsection{\GazeMAE{}}
 \label{subsec:gazemae-model}
 
-Za primerjavo s sodobnim temeljnim modelom smo uporabili odprtokodni prednaučeni kodirnik \GazeMAE{}~\cite{bautista2021gazemae}.
-Uporabili smo ga po principu zamrznjene hrbtenice. To pomeni, da parametrov kodirnika med učenjem nismo spreminjali, ampak smo z njim iz podatkov pogleda izračunali vektorske predstavitve, na katerih smo nato učili MLP.
-V tem delu MLP zato ne nastopa kot samostojen klasifikator nad ročno agregiranimi značilkami, temveč kot klasifikacijska glava nad značilkami, ki jih izračuna \GazeMAE{}.
-Ker je bil \GazeMAE{} učen na $2~s$ oknih, vzorčenih s frekvenco $500~Hz$, smo tudi uporabljena $10~s$ okna najprej pretvorili v obliko, ki jo model pričakuje. Signala koordinat pogleda $(x,~y)$ smo razdelili na pet neprekrivajočih se $2~s$ kosov in ju prevzorčili na ciljno frekvenco $500~Hz$.
-Iz teh kosov smo s kodirnikom pridobili predstavitev celotnega okna s~512 razsežnostmi, ta predstavitev pa je bila vhod v klasifikacijsko glavo MLP.
-Procesna veriga torej izgleda sledeče:
+Za primerjavo s sodobnim modelom za učenje predstavitev iz podatkov pogleda uporabimo odprtokodni prednaučeni kodirnik \GazeMAE{}~\cite{bautista2021gazemae}.
+Uporabimo ga po principu zamrznjene hrbtenice.
+To pomeni, da parametrov kodirnika med učenjem ne spreminjamo, ampak z njim iz podatkov pogleda izračunamo vektorske predstavitve, na katerih nato učimo klasifikacijsko glavo.
+
+Ker je bil \GazeMAE{} učen na $2~s$ oknih, vzorčenih s frekvenco $500~Hz$, uporabljena $10~s$ okna najprej pretvorimo v obliko, ki jo model pričakuje.
+Signala koordinat pogleda $(x,~y)$ razdelimo na pet neprekrivajočih se $2~s$ kosov in ju prevzorčimo na ciljno frekvenco $500~Hz$.
+Iz teh kosov s kodirnikom pridobimo predstavitev celotnega okna s~512 razsežnostmi.
+
+% TODO: Dopiši s svojimi besedami:
+% - GazeMAE uporabljamo samo za množico \emph{samo pogled};
+% - v rezultatih ga lahko vseeno pokažemo kot močno referenco ob bogatejših
+%   množicah signalov, vendar ne kot model z enakim vhodom;
+% - klasifikacijska glava je tehnični del uporabe predstavitve, ne del imena
+%   modela v besedilu.
+
+\subsection{MOMENT}
+\label{subsec:moment-model}
+
+% TODO: Napiši odsek za MOMENT:
+% - MOMENT je splošni zamrznjeni prednaučeni model za časovne vrste;
+% - uporabljamo ga kot predstavitveni model za signale, ki niso samo koordinate
+%   pogleda, predvsem za \emph{samo zenici};
+% - MOMENT v trenutni implementaciji izračuna predstavitev s 768 razsežnostmi;
+% - na predstavitvi se uči enaka vrsta klasifikacijske glave kot pri GazeMAE;
+% - v glavnem besedilu model poimenujemo MOMENT, ne MOMENT+MLP.
+%
+% TODO: Če v eksperimentih za \emph{pogled in zenici} ter \emph{vsi signali}
+% ostane združitev predstavitev MOMENT in GazeMAE, tukaj zelo kratko razloži,
+% da se predstavitvi konkatenirata pred klasifikacijsko glavo. Nato se odločiva,
+% ali to v besedilu poimenujemo "MOMENT+GazeMAE" ali drugače.
+
+\section{Grafovski modeli}
+\label{subsec:grafovski-modeli}
+
+% TODO: To je jedro poglavja. Napiši ga kot jasno arhitekturno lestvico, ne kot
+% opis enega predlaganega modela. Bralec mora videti, kaj vsaka naslednja stopnja
+% doda prejšnji.
+
+Grafovski modeli uporabljajo grafovsko predstavitev okna iz poglavja~\ref{sec:grafovska-predstavitev}.
+Vsi modeli uporabljajo iste vozliščne značilke, iste množice signalov in ista časovna okna.
+Razlikujejo se po tem, kako obravnavajo tipe povezav, kako združujejo relacijske predstavitve in ali uporabljajo značilke povezav za izračun naučenih uteži povezav.
+
+\begin{table}[t]
+    \centering
+    \caption{Arhitekturna lestvica grafovskih modelov.}
+    \label{tab:arhitekturna-lestvica-gnn}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth} c c c >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Model & Ločene relacije & Fuzija relacij & Uteži povezav & Namen stopnje \\
+        \midrule
+        GCN & ne & -- & ne & preveri samo grafovsko predstavitev v homogenem grafu \\
+        HeteroGCN-mean & da & povprečje & ne & preveri vpliv ločene obravnave relacij \\
+        HeteroGCN-MLP & da & MLP & ne & preveri vpliv naučene fuzije relacijskih predstavitev \\
+        HeteroGCN-MLP-w & da & MLP & da & preveri vpliv naučenih predznačenih uteži povezav \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+% TODO: Po potrebi popravi imena v tabeli glede na končno odločitev:
+% - "GCN" je prikazno ime za BasicGCN;
+% - v starejših opombah se pojavlja "Osnovni GCN"; odločiti se moramo, ali bo
+%   prikazno ime v tabelah "GCN" ali "Osnovni GCN".
+
+\subsection{Skupni vhod grafovskih modelov}
+\label{subsec:skupni-vhod-grafovskih-modelov}
+
+% TODO: Napiši:
+% - grafovski modeli uporabljajo štiri množice signalov iz tabele
+%   \ref{tab:mnozice-signalov};
+% - pri \emph{samo zenici} graf vsebuje časovno značilko, zenični značilki in
+%   časovne povezave; prostorskih in fiksacijskih povezav ni, ker zanje ni
+%   potrebnega signala;
+% - pri \emph{samo pogled} in \emph{pogled in zenici} so poleg časovnih povezav
+%   na voljo tudi prostorske povezave;
+% - pri \emph{vsi signali} so na voljo časovne, prostorske in fiksacijske
+%   povezave.
+
+\subsection{Skupni deli grafovske arhitekture}
+\label{subsec:skupni-deli-grafovske-arhitekture}
+
+% TODO: Tukaj naj bodo skupni deli, ki jih ni treba ponavljati pri vsakem modelu:
+% - začetna preslikava značilk vozlišč v latentni prostor;
+% - več zaporednih grafovskih plasti;
+% - pozornostno združevanje vozlišč v predstavitev grafa;
+% - klasifikacijska glava;
+% - rezidualne povezave, normalizacija plasti, GELU in izpuščanje, če so skupni.
+%
+% TODO: Podrobnosti optimizacije, učne stopnje in števila epoh sodijo v
+% poglavje 7, ne sem.
+
+Ker napovedujemo oznako celotnega okna, predstavitve vozlišč združimo v predstavitev grafa.
+Uporabimo združevanje s pozornostjo:
 \begin{equation}
-    \text{koordinate } (x, y) \rightarrow \text{predprocesiranje} \rightarrow \GazeMAE{} \rightarrow \text{predstavitev} \rightarrow \MLP{} \rightarrow \text{napoved}.
+    \mathbf{h}_G =
+    \sum_{v \in V}
+    \alpha_v \mathbf{h}_v,
 \end{equation}
-\TODO{naredi lep diagram/grafiko/nekaj boljšega kot je trenutni zapis procesne verige.}
-  
- 
-\section{Osnovni GCN}
-\label{subsec:gnn-baselines}
+kjer je $\mathbf{h}_G$ predstavitev grafa, $\alpha_v$ utež pozornosti za vozlišče $v$, $\mathbf{h}_v$ pa predstavitev vozlišča $v$.
 
-\TODO{
-\begin{itemize}
-    \item Ta razdelek naj ne redefinira grafa; sklicuj se na poglavje~\ref{sec:grafovska-predstavitev}.
-    \item Natančno povej samo arhitekturno razliko: osnovni GCN združi vse relacije v homogen graf, ne uporablja značilk povezav in ne uporablja naučenih uteži povezav.
-    \item READOUT opiši samo kot konkretno izbiro modela, ne kot ponovno splošno definicijo klasifikacije grafov; splošna definicija je v poglavju~\ref{subsec:grafovska-klasifikacija}.
-\end{itemize}
-}
+Uteži pozornosti izračunamo s softmax normalizacijo:
+\begin{equation}
+    \alpha_v =
+    \frac{\exp(g(\mathbf{h}_v))}
+    {\sum_{u \in V} \exp(g(\mathbf{h}_u))},
+\end{equation}
+kjer je $g$ naučena funkcija, ki vozliščni predstavitvi priredi skalarno oceno pomembnosti.
 
-Grafovski modeli se od negrafovskih modelov razlikujejo že v predstavitvi podatkov, saj okno meritev obravnavajo kot graf in ne kot tabelarični vektor značilk.
-Predlagani model, predstavljen v naslednjem odseku, tej predstavitvi doda še ločeno obravnavo tipov povezav, fuzijo relacijskih predstavitev in naučene uteži povezav.
-Zato za primerjavo s predlaganim modelom poleg negrafovskih modelov uporabimo še osnovni GCN, s katerim ločimo vpliv same grafovske predstavitve od vpliva bolj dodelane heterogene grafovske arhitekture.
+% TODO: Ta odstavek popravi glede na končno implementacijo in dodaj vir za
+% pozornostno združevanje, če ostane v besedilu.
 
-Osnovni GCN je homogeni \GCN{}.
-Osnovni GCN uporablja isto grafovsko predstavitev okna, kot je bila opisana v poglavju~\ref{sec:grafovska-predstavitev}: vozlišča vsebujejo iste značilke, uporabljeni so isti izvorni signali in ista časovna okna.
-Od predlaganega GNN, ki ga opišemo v naslednjem odseku, se razlikuje po tem, da ne ločuje časovnih, prostorskih in fiksacijskih relacij.
+\subsection{GCN}
+\label{subsec:model-gcn}
+
+GCN je homogeni grafovski model.
+Uporablja isto grafovsko predstavitev okna, kot je bila opisana v poglavju~\ref{sec:grafovska-predstavitev}, vendar ne ločuje časovnih, prostorskih in fiksacijskih relacij.
 Vse povezave združi v en homogen graf, posredovanje sporočil pa izvede z običajnimi plastmi \texttt{GCNConv}.
-Model prav tako ne uporablja uteži povezav.
+Model ne uporablja značilk povezav in ne uporablja naučenih uteži povezav.
 
-Tehnično lahko osnovni GCN zapišemo kot:
+Tehnično lahko model zapišemo kot:
 \begin{equation}
     X
     \rightarrow
@@ -108,140 +257,31 @@ Tehnično lahko osnovni GCN zapišemo kot:
     f_{\text{head}},
 \end{equation}
 kjer je $X$ matrika značilk vozlišč, $f_{\GCN}$ zaporedje grafovskih konvolucijskih plasti, korak READOUT združi predstavitve vozlišč v predstavitev celotnega grafa, $f_{\text{head}}$ pa iz te predstavitve izračuna napoved razreda.
-Ta model zato predstavlja vmesno primerjavo med učenjem nad agregiranimi tabelaričnimi značilkami in predlaganim heterogenim grafovskim modelom.
 
-\END_NOTE{Ko bo osnovni GCN dokončno definiran, koda napisana, rezultati pridobljeni, tehnično še bolj specificiraj točno arhitekturo. Npr: uporabljen je bil identičen MLP head, ista READOUT funkcija, isti preprocessing X -> fGCN, itd.}
-\END_NOTE{Zamenjaj vse te diagrame z lepo grafiko, ki nazorno pokaže cevovode/poteke.}
+% TODO: Odloči se, ali v besedilu tukaj uporabiš prikazno ime "GCN" ali
+% "Osnovni GCN". Če ostane "GCN", v prvem stavku lahko zapišeš, da gre za
+% osnovni homogeni GCN.
 
-\TODO{
-\begin{itemize}
-    \item Pisanje: opis uskladiti s končno implementacijo: ista grafovska predstavitev, isti signali, ista okna, iste delitve in ista standardizacija kot pri predlaganem GNN.
-    \item Pisanje: preveriti in zapisati, da uporablja \texttt{GCNConv}, isto napovedno glavo, iste YAML hiperparametre in ločen readout parameter, trenutno \texttt{attention}; možnost \texttt{mean} omeni samo, če bo dejansko preverjena.
-\end{itemize}
-}
+\subsection{HeteroGCN-mean}
+\label{subsec:model-heterogcn-mean}
 
-\subsection{Izbira grafovske konvolucije}
-\label{subsec:izbira-grafovske-konvolucije}
+% TODO: Napiši:
+% - model prvič uporabi heterogeno grafovsko predstavitev kot heterogeni model,
+%   ne samo kot vir povezav za homogen graf;
+% - časovne povezave naprej, časovne povezave nazaj, prostorske povezave in
+%   fiksacijske povezave obravnava z ločenimi potmi posredovanja sporočil;
+% - relacijske predstavitve združi s povprečenjem;
+% - ne uporablja značilk povezav in naučenih uteži povezav;
+% - namen stopnje je izolirati vpliv ločevanja relacij.
 
-\TODO{
-\begin{itemize}
-    \item Odloči, ali ta razdelek ostane v poglavju~\ref{sec:modeli} ali gre v eksperimentalni protokol kot utemeljitev fiksiranega operatorja.
-    \item Če ostane tukaj, naj poglavje~\ref{sec:eksperimenti} ne ponavlja razlage primerjave \texttt{GCNConv}, \texttt{GATConv}, \texttt{GraphConv} in \texttt{GINConv}, ampak naj se sklicuje sem oziroma v dodatek.
-\end{itemize}
-}
+\subsection{HeteroGCN-MLP}
+\label{subsec:model-heterogcn-mlp}
 
-% TODO: preveri, Codex napisal.
-V vseh grafovskih modelih uporabimo plast \texttt{GCNConv} \cite{kipf2017gcn}.
-Ta izbira ohrani konvolucijski operator fiksen, zato lahko primerjava med grafovskimi modeli bolj jasno pokaže vpliv tistih delov, ki so za nalogo pomembnejši: ločevanja časovnih, prostorskih in fiksacijskih relacij, združevanja relacijskih predstavitev ter naučenih uteži povezav.
-Poleg tega \texttt{GCNConv} neposredno podpira skalarne uteži povezav, ki jih predlagani model izračuna iz značilk povezav.
-
-Drugih grafovskih plasti zato ne obravnavamo kot del glavnega eksperimentalnega protokola.
-\texttt{GATConv} \cite{velickovic2018gat} bi pomenil drugačen način določanja pomembnosti sosedov in v trenutni implementaciji ne uporablja istih skalarnih uteži povezav.
-\texttt{GraphSAGE} je zanimiv predvsem pri zelo velikih grafih in vzorčenju sosesk, kar pri grafih posameznih časovnih oken ni osrednja omejitev.
-\texttt{GIN} je močan model za klasifikacijo grafov, vendar bi zahteval dodatno uglaševanje na razmeroma majhni in šumni podatkovni zbirki.
-Grafovski transformerji so smiselna smer nadaljnjega dela, vendar bi v to nalogo vnesli še ločeno vprašanje pozicijskih in strukturnih kodiranj.
-
-\section{Predlagani prostorsko-časovni heterogeni GNN}
-\label{subsec:koncni-gnn}
-
-Končni model nadgradi osnovni GCN iz prejšnjega odseka in temelji na prostorsko-časovni heterogeni grafovski nevronski mreži.
-Model ločeno obravnava časovne povezave naprej, časovne povezave nazaj, prostorske povezave in fiksacijske povezave.
-S tem lahko za različne tipe odnosov uporablja različne transformacije.
-
-
-\subsection{Pregled arhitekture}
-\label{subsec:pregled-arhitekture-gnn}
-
-Osnovni potek modela je prikazan na sliki~\ref{fig:predlagani-gnn-delovni-diagram}.
-
-\begin{figure}[H]
-    \centering
-    \resizebox{\textwidth}{!}{%
-    \begin{tikzpicture}[
-        font=\small,
-        >=Latex,
-        node distance=12mm and 14mm,
-        data/.style={draw, rounded corners=2pt, fill=green!12, align=center, minimum height=10mm, text width=23mm},
-        feat/.style={draw, rounded corners=2pt, fill=purple!15, align=center, minimum height=10mm, text width=25mm},
-        proc/.style={draw, rounded corners=2pt, fill=yellow!18, align=center, minimum height=11mm, text width=28mm},
-        gnn/.style={draw, rounded corners=2pt, fill=blue!12, align=center, minimum height=18mm, text width=34mm},
-        outputblock/.style={draw, rounded corners=2pt, fill=red!12, align=center, minimum height=10mm, text width=21mm},
-        arrow/.style={->, thick}
-    ]
-        \node[data] (window) {10-sekundno\\okno meritev};
-        \node[feat, right=of window, yshift=10mm] (nodefeat) {značilke\\vozlišč $X$};
-        \node[feat, right=of window, yshift=-13mm] (edgefeat) {značilke\\povezav $R$};
-        \node[proc, right=of nodefeat] (pre) {$f_{\text{pre}}$\\preslikava\\vozlišč};
-        \node[proc, right=of edgefeat] (edgeweights) {$f_w^{\mathrm{rel}}$\\uteži povezav\\$w_{ij}^{(r)}$};
-        \node[gnn, right=17mm of pre, yshift=-12mm] (hetero) {$f_{\text{HeteroGNN}}$\\relacijsko\\posredovanje sporočil};
-        \node[proc, right=of hetero] (fusion) {$f_{\text{fuzija}}$\\fuzija relacij};
-        \node[proc, right=of fusion] (readout) {READOUT\\uteži vozlišč\\$\alpha_v$};
-        \node[proc, right=of readout] (head) {$f_{\text{head}}$\\klasifikacijska\\glava};
-        \node[outputblock, right=of head] (prediction) {napoved};
-
-        \draw[arrow] (window) -- (nodefeat);
-        \draw[arrow] (window) -- (edgefeat);
-        \draw[arrow] (nodefeat) -- (pre);
-        \draw[arrow] (edgefeat) -- (edgeweights);
-        \draw[arrow] (pre) -| node[pos=0.25, above] {$\mathbf{h}^{(0)}$} (hetero);
-        \draw[arrow] (edgeweights) -| (hetero);
-        \draw[arrow] (hetero) -- node[above] {$\mathbf{h}_i^{(r)}$} (fusion);
-        \draw[arrow] (fusion) -- node[above] {$\mathbf{h}_i$} (readout);
-        \draw[arrow] (readout) -- node[above] {$\mathbf{h}_G$} (head);
-        \draw[arrow] (head) -- (prediction);
-    \end{tikzpicture}%
-    }
-    \caption{Delovna shema predlaganega GNN. Diagram prikazuje glavni tok podatkov od vhodnega okna do napovedi ter ločeno pot za izračun uteži povezav in pozornostnih uteži vozlišč.}
-    \label{fig:predlagani-gnn-delovni-diagram}
-\end{figure}
-
-\TODO{Trenutni diagram je samo delovna predloga za pisanje. Pred oddajo je treba izdelati končne diagrame arhitekture in z njimi zamenjati to predlogo: pregledni diagram celotnega predlaganega GNN ter ločen diagram notranjosti heterogene GNN plasti. Besedilo pod diagrammom pa je treba prilagoditi poimenovanjem na diagramu. dodati je treba tudi računanje uteži na povezavah}
-
-Na diagramu je $X$ vhodna matrika značilk vozlišč opisana v poglavju~\ref{subsec:znacilke-vozlisca}, $f_{\text{pre}}$ je naučena preslikava $X$ v skupni latentni prostor
-%TODO: ali dodamo tukaj "z nameno, da <namen na kratko>"?
-, $f_{\text{HeteroGNN}}$ so plasti predlagane heterogene grafovske nevronske mreže, $f_{\text{fuzija}}$ označuje združevanje vseh štirih predstavitev vozlišča v eno skupno predstavitev, $\text{READOUT}$ predstavlja združevanje predstavitev vozlišč v predstavitev celotnega grafa, ki se prenese kot vhod v napovedno klasifikacijsko glavo $f_{\text{head}}$. 
-
-Za primerjavo podajamo tudi potek osnovnega GCN:
-\begin{equation}
-    X
-    \rightarrow
-    f_{\text{GCN}}
-    \rightarrow
-    \text{READOUT}
-    \rightarrow
-    f_{\text{head}},
-\end{equation}
-
-
-\subsection{Relacijsko posredovanje sporočil in uteži povezav}
-\label{subsec:relacijsko-posredovanje}
-
-\TODO{
-\begin{itemize}
-    \item Ta podrazdelek naj bo glavno mesto za arhitekturno razlago naučenih uteži povezav.
-    \item Sem prestavi formuli za surovo oceno, preslikavo s $\tanh$ in normalizacijo uteži iz poglavja~\ref{subsec:utezi-povezav}, če ostaneta del končnega modela.
-    \item V poglavju~\ref{sec:grafovska-predstavitev} naj po prestavitvi ostane samo tabela značilk povezav in sklic, da jih končni model uporabi za izračun uteži.
-\end{itemize}
-}
-
-Kot definirano v poglavju~\ref{subsec:heterogeni-graf}, $f_{\text{HeteroGNN}}$ ločeno obravnava različne relacije oziroma tipe povezav med vozlišči. 
-Za primerjavo, osnovni GCN vse povezave obravnava kot enake, zato težje prilagodi posredovanje sporočil različnim odnosom med meritvami.
-
-Posredovanje sporočil med vozlišči v heterogenem grafovskem modelu izvajamo ločeno po relacijah.
-Model se za vsako relacijo nauči svojo grafovsko konvolucijo in tako ločeno izračuna predstavitve vozlišč na podlagi vseh štirih tipov povezav.
-
-Za izračun uteži povezav se model uči treh večslojnih perceptronov $f_w^{\mathrm{time}}$, $f_w^{\mathrm{space}}$ ter $f_w^{\mathrm{fixation}}$.
-Te funkcije iz značilk povezave izračunajo skalarno predznačeno utež, ki določa, kako močno posamezna povezava vpliva na posredovanje sporočil. 
-Ker so uteži predznačene, lahko povezava prispevek sosednjega vozlišča tudi zmanjša.
-Časovne povezave naprej in nazaj si delijo isto funkcijo $f_w^{\mathrm{time}}$, smer povezave pa je podana kot dodatna značilka povezave $\rho_{ij}$.
-Značilke povezav, iz katerih model izračuna uteži, so opisane v poglavju~\ref{subsec:utezi-povezav}.
-
-\END_NOTE{Ko bomo imeli sliko/diagram poteka (nekaj podobnega kot je GFM-for-eyetracker/docs/figures/gnn_pipeline.svg), bomo tukaj referencirali funkcijo/MLP, ki računa uteži. Trenutno za placeholder pustimo $f_w^{\mathrm{rel}}$.} 
-
-\END_NOTE{Če normalizacijo uteži prestaviš iz poglavja 5 v 6.4, dodaj tukaj kratko formulo; sicer formule ne ponavljaj.}
-
-\subsection{Fuzija relacijskih predstavitev}
-\label{subsec:fuzija}
+% TODO: Napiši:
+% - model ohrani ločeno posredovanje sporočil po relacijah;
+% - namesto povprečenja uporabi naučeno fuzijo relacijskih predstavitev;
+% - s tem preverimo, ali je koristno, da se model sam nauči, kako združiti
+%   časovno, prostorsko in fiksacijsko informacijo.
 
 Po posredovanju sporočil po različnih tipih povezav dobimo za vsako vozlišče eno predstavitev na relacijo.
 Te predstavitve združimo na ravni vozlišč s konkatenacijo in MLP fuzijo v enotno predstavitev vozlišča:
@@ -262,53 +302,54 @@ Te predstavitve združimo na ravni vozlišč s konkatenacijo in MLP fuzijo v eno
 \end{equation}
 kjer $\Vert$ označuje konkatenacijo, $\mathbf{h}_{i}^{(t+)}$ časovno predstavitev naprej, $\mathbf{h}_{i}^{(t-)}$ časovno predstavitev nazaj, $\mathbf{h}_{i}^{(s)}$ prostorsko predstavitev in $\mathbf{h}_{i}^{(f)}$ fiksacijsko predstavitev.
 
-\subsection{Predstavitev grafa in napoved}
-\label{subsec:pooling}
+% TODO: Prilagodi formulo za množice signalov, kjer nekatere relacije niso
+% prisotne. Najverjetneje je dovolj ena poved, da se fuzija izvede nad
+% relacijami, ki so v dani množici signalov na voljo.
 
-\TODO{
-\begin{itemize}
-    \item Ne ponavljaj splošne razlage READOUT iz poglavja~\ref{subsec:grafovska-klasifikacija}.
-    \item Tukaj opiši samo konkretno izbiro arhitekture: združevanje s pozornostjo, izračun $\alpha_v$, klasifikacijska glava in izguba za dejansko število razredov.
-    \item Uskladi besedilo in izgubo z novo glavno nalogo: binarna klasifikacija valence, ne trirazredna valenca in vzburjenost, razen če bo ta del ostal kot sekundarni eksperiment.
-\end{itemize}
-}
+\subsection{HeteroGCN-MLP-w}
+\label{subsec:model-heterogcn-mlp-w}
 
-Ker napovedujemo oznako celotnega okna, moramo predstavitve vozlišč združiti v predstavitev grafa. Uporabimo združevanje s pozornostjo:
-\begin{equation}
-    \mathbf{h}_G =
-    \sum_{v \in V}
-    \alpha_v \mathbf{h}_v, 
-\end{equation}
-kjer je $\mathbf{h}_G$ predstavitev grafa, $\alpha_v$ utež pozornosti za vozlišče $v$, $\mathbf{h}_v$ pa predstavitev vozlišča $v$.
-S tem modelu omogočimo, da se dinamično opre na informativne dele časovnega okna, torej na informativna vozlišča. 
-Uteži pozornosti izračunamo s softmax normalizacijo, kot je običajno pri mehki pozornosti in pozornostnem združevanju grafov~\cite{bahdanau2015neural,li2016gated}:
+% TODO: To je zadnja stopnja arhitekturne lestvice, ne "najboljši" model.
+% Napiši:
+% - model ohrani ločeno relacijsko posredovanje sporočil in MLP fuzijo;
+% - doda naučene predznačene uteži povezav;
+% - uteži izračuna iz značilk povezav, opisanih v poglavju
+%   \ref{subsec:utezi-povezav};
+% - namen stopnje je preveriti, ali modelu pomaga razlikovati moč in smer
+%   posameznih povezav znotraj iste relacije.
 
-\begin{equation}
-    \alpha_v =
-    \frac{\exp(g(\mathbf{h}_v))}
-    {\sum_{u \in V} \exp(g(\mathbf{h}_u))},
-\end{equation}
-kjer je $g$ naučena funkcija, ki vozliščni predstavitvi priredi skalarno oceno pomembnosti. 
+Za izračun uteži povezav se model uči treh večslojnih perceptronov $f_w^{\mathrm{time}}$, $f_w^{\mathrm{space}}$ ter $f_w^{\mathrm{fixation}}$.
+Te funkcije iz značilk povezave izračunajo skalarno predznačeno utež, ki določa, kako močno posamezna povezava vpliva na posredovanje sporočil.
+Ker so uteži predznačene, lahko povezava prispevek sosednjega vozlišča tudi zmanjša.
+Časovne povezave naprej in nazaj si delijo isto funkcijo $f_w^{\mathrm{time}}$, smer povezave pa je podana kot dodatna značilka povezave $\rho_{ij}$.
 
-Predstavitev grafa $\mathbf{h}_G$ posredujemo v napovedno glavo $f_{\text{head}}$, ki vrne logite za tri razrede.
-Pri vrednotenju logite s funkcijo softmax pretvorimo v napovedne verjetnosti, končno napoved pa določimo kot razred z največjo napovedno verjetnostjo.
-Valenco in vzburjenost obravnavamo kot ločeni klasifikacijski nalogi, zato za vsako nalogo učimo ločen model z enako arhitekturo.
-Model učimo z znano navzkrižno entropijo za trirazredno klasifikacijo:
-\begin{equation}
-    \mathcal{L}
-    =
-    - \sum_{c=1}^{3}
-    y_c \log \hat{y}_c,
-\end{equation} 
-kjer je $\mathcal{L}$ izguba, $y_c$ prava oznaka razreda $c$, $\hat{y}_c$ pa napovedana verjetnost za razred $c$~\cite{goodfellow2016deep}.
+% TODO: Po preverjanju implementacije dodaj formulo za izračun in normalizacijo
+% uteži, če želiš, da je ta del tehnično popoln v poglavju 6. Če bi bilo preveč
+% podrobno, pusti samo opis in formulo prestavi v dodatek.
 
-Podrobnosti optimizacije, kot so učna stopnja, velikost mini-serij in število epoh, podamo v eksperimentalnem protokolu.
+\subsection{Izbira grafovske konvolucije}
+\label{subsec:izbira-grafovske-konvolucije}
 
-\subsection{Stabilizacija učenja}
-\label{subsec:stabilizacija-ucenja}
+% TODO: Odloči, ali ta podrazdelek ostane tukaj ali gre v poglavje 7.
+% V poglavju 6 je smiselno zelo kratko povedati samo, da vse stopnje lestvice
+% uporabljajo isti operator, ker želimo primerjati arhitekturne dodatke, ne
+% menjave operatorja.
 
-Pri učenju uporabimo več uveljavljenih mehanizmov, ki pomagajo pri stabilnosti optimizacije in zmanjševanju prekomernega prileganja.
-Rezidualne povezave olajšajo pretok informacij skozi več grafovskih plasti, normalizacija plasti stabilizira porazdelitve latentnih predstavitev, aktivacija GELU uvede gladko nelinearnost, izpuščanje pa deluje kot regularizacija~\cite{he2016deep,ba2016layer,hendrycks2016gelu,srivastava2014dropout}.
-Te komponente ne spreminjajo grafovske predstavitve podatkov, temveč izboljšajo učni postopek predlagane arhitekture.
+V vseh grafovskih modelih uporabimo plast \texttt{GCNConv}~\cite{kipf2017gcn}.
+Ta izbira ohrani grafovski operator fiksen, zato lahko primerjava med grafovskimi modeli bolj jasno pokaže vpliv ločevanja relacij, fuzije relacijskih predstavitev in naučenih uteži povezav.
 
-\END_NOTE{Dodamo angleške izraze v oklepajih? Npr. izpuščanje (ang. dropout)}
+% TODO: Podrobnejšo primerjavo z \texttt{GATConv}, \texttt{GraphConv},
+% \texttt{GINConv} in \texttt{GINEConv} prestavi v dodatek oziroma poglavje z
+% dodatnimi rezultati. Tukaj naj ne razširi glavne zgodbe.
+
+\section{Povzetek poglavja}
+\label{subsec:povzetek-modelov}
+
+% TODO: Napiši zelo kratek zaključek poglavja:
+% - modeli tvorijo tri vrste predstavitev istega okna;
+% - negrafovski osnovni modeli preverjajo moč agregiranih značilk;
+% - GazeMAE/MOMENT preverjata zamrznjene naučene predstavitve;
+% - grafovska lestvica preverja, kaj dodajo grafovska struktura, relacije,
+%   fuzija relacij in uteži povezav.
+% Zaključi s prehodom v poglavje 7: naslednje poglavje opiše validacijski
+% protokol, metrike in konkretne eksperimentalne nastavitve.

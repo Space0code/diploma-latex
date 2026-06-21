@@ -90,6 +90,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   konteksta, ga ne posplošuj na slepo, ampak Tomija eksplicitno vprašaj. Konkretna
   potrjena preferenca: razpone tipa `1-2` piši z enim vezajem, ne kot `1--2`,
   razen če Tomi za določen kontekst naroči drugače.
+- Pri pisanju in pregledovanju poglavij ne ponavljaj istih idej, definicij in
+  razlag iz prejšnjih poglavij. Kadar je dodatna razlaga že podana drugje, uporabi
+  kratek sklic na ustrezno poglavje, razdelek, tabelo ali sliko, novo besedilo pa
+  osredotoči samo na kontekst, ki je potreben na trenutnem mestu.
 
 ## Vizualna identiteta diplome
 
@@ -315,3 +319,11 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   podrobnejša primerjava operatorjev pa sodi v dodatek z dodatnimi rezultati.
   Poglavje 10 lahko druge plasti (`GATConv`, `GraphSAGE`, `GIN`, grafovski
   transformerji) omeni samo previdno kot nadaljnje delo.
+- 2026-06-21 pri preurejanju poglavja 6 je Tomi potrdil, da je `samo zenici`
+  ena od glavnih množic signalov. Negrafovske modele brez grafovske predstavitve
+  in brez zamrznjenega prednaučenega kodirnika imenuj `negrafovski osnovni
+  modeli`. Znotraj njih loči zelo preprosta izhodiščna klasifikatorja
+  (`Naključni`, `Večinski`) od klasičnih modelov strojnega učenja (`SVM`,
+  `LightGBM`, `MLP`). Zamrznjene prednaučene predstavitvene modele obravnavaj
+  ločeno; v glavnem besedilu jih poimenuj `GazeMAE` oziroma `MOMENT`, brez
+  dodatka `+ MLP`, čeprav se za klasifikacijo tehnično uči MLP glava.

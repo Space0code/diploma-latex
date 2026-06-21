@@ -195,9 +195,9 @@ Tabela poleg imena modela povzema kratko vlogo modela v primerjavi in osnovne pa
         \toprule
         Model & Opis & Parametri \\
         \midrule
-        Naključni klasifikator & Enakomerno naključno vzorčenje razreda. & \texttt{random\_state=42} \\
+        Naključni & Enakomerno naključno vzorčenje razreda. & \texttt{random\_state=42} \\
         \addlinespace
-        Večinski klasifikator & Napoved najpogostejšega razreda učne množice. & \texttt{/} \\
+        Večinski & Napoved najpogostejšega razreda učne množice. & \texttt{/} \\
         \addlinespace
         SVM & Klasifikator z jedrom RBF nad agregiranimi značilkami okna. & \texttt{C=1.0}, \texttt{kernel=rbf}, \texttt{probability=true} \\
         \addlinespace
@@ -205,9 +205,9 @@ Tabela poleg imena modela povzema kratko vlogo modela v primerjavi in osnovne pa
         \addlinespace
         MLP & Polno povezana nevronska mreža nad agregiranimi značilkami okna. & \texttt{hidden\_layers=(64,64)}, \texttt{dropout=0.1}, \texttt{learning\_rate=0.001}, \texttt{weight\_decay=0.0001} \\
         \addlinespace
-        \GazeMAE{} + MLP & Zamrznjen prednaučen kodirnik položajev pogleda. & predstavitev z~512 razsežnostmi, \texttt{hidden\_layer\_size=128}, \texttt{dropout=0.2}, \texttt{learning\_rate=0.001} \\
+        \GazeMAE{} & Zamrznjen prednaučen kodirnik položajev pogleda. & predstavitev z~512 razsežnostmi, \texttt{hidden\_layer\_size=128}, \texttt{dropout=0.2}, \texttt{learning\_rate=0.001} \\
         \addlinespace
-        Osnovni GCN & Homogeni grafovski primerjalni model z enotnim posredovanjem sporočil. & \texttt{GCNConv}, \texttt{num\_layers=3}, \texttt{hidden\_channels=128} \\
+        Osnovni GCN & Homogeni osnovni grafovski model z enotnim posredovanjem sporočil. & \texttt{GCNConv}, \texttt{num\_layers=3}, \texttt{hidden\_channels=128} \\
         \addlinespace
         Predlagani GNN & Heterogena časovno-prostorska grafovska nevronska mreža z naučenimi utežmi povezav. & \texttt{GCNConv}, \texttt{num\_layers=2}, \texttt{hidden\_channels=64}, \texttt{kt=1}, \texttt{ks=1}, \texttt{kf=3}, \texttt{relation\_pooling=mlp}, \texttt{graph\_pooling=attention} \\
         \bottomrule

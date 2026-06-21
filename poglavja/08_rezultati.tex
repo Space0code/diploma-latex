@@ -7,7 +7,7 @@
     \item Glavni prikaz naj primerja modele pri množicah \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}; najprimernejša oblika je tabela ali matrični prikaz model $\times$ nabor signalov za macro-F1 in accuracy.
     \item 3-razredne rezultate in LOO protokole prestaviti v dodatni ali sekundarni del, če bodo sploh izvedeni oziroma poročani.
     \item \GazeMAE{} prikazati kot model, naučen oziroma uporabljen na množici \emph{samo pogled}, in ga po potrebi primerjati z modeli na bogatejših naborih kot močno referenčno točko, ne kot model z enakim vhodom.
-    \item Rezultatov za množico \emph{samo zenici} ne obljubljati, dokler ni jasna implementacija MOMENT + MLP oziroma GNN protokol.
+    \item Rezultatov za množico \emph{samo zenici} ne obljubljati, dokler ni jasna implementacija MOMENT oziroma GNN protokol.
 \end{itemize}
 }
 
@@ -114,7 +114,7 @@
 \TODO{
 \begin{itemize}
     \item Pisanje: to tabelo obravnavaj kot glavno tabelo rezultatov za valenco.
-    \item Pisanje: po rezultatih dodati kratek komentar najboljšega modela, najboljšega negrafovskega primerjalnega modela in razlike med osnovnim GCN ter predlaganim GNN.
+    \item Pisanje: po rezultatih dodati kratek komentar najboljšega modela, najboljšega negrafovskega osnovnega modela in razlike med osnovnim GCN ter predlaganim GNN.
 \end{itemize}
 }
 
@@ -126,12 +126,12 @@
         \toprule
         Model & Accuracy & Macro-F1 \\
         \midrule
-        Naključni klasifikator & TODO & TODO \\
-        Večinski klasifikator & TODO & TODO \\
+        Naključni & TODO & TODO \\
+        Večinski & TODO & TODO \\
         SVM & TODO & TODO \\
         LightGBM & TODO & TODO \\
         MLP & TODO & TODO \\
-        \GazeMAE{} + MLP & TODO & TODO \\
+        \GazeMAE{} & TODO & TODO \\
         Osnovni GCN & TODO & TODO \\
         Predlagani GNN & TODO & TODO \\
         \bottomrule
@@ -141,7 +141,7 @@
 \TODO{
 \begin{itemize}
     \item Slika: dodati stolpčni graf accuracy in macro-F1 za 3-razredno valenco pri LOO po subjektih, če tabela sama ni dovolj pregledna. Slika naj bo združljiva po slogu z ustrezno sliko za vzburjenost ali naj obe nalogi združi v eno sliko.
-    \item Slika: dodati vrstično normalizirano matriko zmede za najboljši model pri 3-razredni valenci; po potrebi dodati še primerjavo z najboljšim negrafovskim modelom.
+    \item Slika: dodati vrstično normalizirano matriko zmede za najboljši model pri 3-razredni valenci; po potrebi dodati še primerjavo z najboljšim negrafovskim osnovnim modelom.
 \end{itemize}
 }
 
@@ -168,12 +168,12 @@
         \toprule
         Model & Accuracy & Macro-F1 \\
         \midrule
-        Naključni klasifikator & TODO & TODO \\
-        Večinski klasifikator & TODO & TODO \\
+        Naključni & TODO & TODO \\
+        Večinski & TODO & TODO \\
         SVM & TODO & TODO \\
         LightGBM & TODO & TODO \\
         MLP & TODO & TODO \\
-        \GazeMAE{} + MLP & TODO & TODO \\
+        \GazeMAE{} & TODO & TODO \\
         Osnovni GCN & TODO & TODO \\
         Predlagani GNN & TODO & TODO \\
         \bottomrule
@@ -185,7 +185,7 @@
 \TODO{
 \begin{itemize}
     \item Pisanje: interpretirati predvsem LOO po subjektih, ker je to glavni protokol za končne rezultate.
-    \item Pisanje: primerjati predlagani GNN z najboljšim negrafovskim primerjalnim modelom, \GazeMAE{} + MLP in osnovnim GCN.
+    \item Pisanje: primerjati predlagani GNN z najboljšim negrafovskim osnovnim modelom, \GazeMAE{} in osnovnim GCN.
     \item Pisanje: primerjati LOO po subjektih in LOO po posnetkih ter opozoriti, da LOO po posnetkih še vedno deli iste subjekte med učno in testno množico.
     \item Pisanje: opisati najpogostejše zamenjave razredov iz matrike zmede.
     \item Pisanje: sklepe oblikovati previdno in jih vezati na accuracy, macro-F1 ter strukturo napak, ne samo na eno metriko.
@@ -218,12 +218,12 @@
         \toprule
         Model & Accuracy & Macro-F1 \\
         \midrule
-        Naključni klasifikator & TODO & TODO \\
-        Večinski klasifikator & TODO & TODO \\
+        Naključni & TODO & TODO \\
+        Večinski & TODO & TODO \\
         SVM & TODO & TODO \\
         LightGBM & TODO & TODO \\
         MLP & TODO & TODO \\
-        \GazeMAE{} + MLP & TODO & TODO \\
+        \GazeMAE{} & TODO & TODO \\
         Osnovni GCN & TODO & TODO \\
         Predlagani GNN & TODO & TODO \\
         \bottomrule
@@ -260,12 +260,12 @@
         \toprule
         Model & Accuracy & Macro-F1 \\
         \midrule
-        Naključni klasifikator & TODO & TODO \\
-        Večinski klasifikator & TODO & TODO \\
+        Naključni & TODO & TODO \\
+        Večinski & TODO & TODO \\
         SVM & TODO & TODO \\
         LightGBM & TODO & TODO \\
         MLP & TODO & TODO \\
-        \GazeMAE{} + MLP & TODO & TODO \\
+        \GazeMAE{} & TODO & TODO \\
         Osnovni GCN & TODO & TODO \\
         Predlagani GNN & TODO & TODO \\
         \bottomrule
@@ -299,12 +299,12 @@
         \toprule
         Model & Accuracy & Macro-F1 \\
         \midrule
-        Naključni klasifikator & TODO & TODO \\
-        Večinski klasifikator & TODO & TODO \\
+        Naključni & TODO & TODO \\
+        Večinski & TODO & TODO \\
         SVM & TODO & TODO \\
         LightGBM & TODO & TODO \\
         MLP & TODO & TODO \\
-        \GazeMAE{} + MLP & TODO & TODO \\
+        \GazeMAE{} & TODO & TODO \\
         Osnovni GCN & TODO & TODO \\
         Predlagani GNN & TODO & TODO \\
         \bottomrule
@@ -335,12 +335,12 @@
         \toprule
         Model & Accuracy & Macro-F1 \\
         \midrule
-        Naključni klasifikator & TODO & TODO \\
-        Večinski klasifikator & TODO & TODO \\
+        Naključni & TODO & TODO \\
+        Večinski & TODO & TODO \\
         SVM & TODO & TODO \\
         LightGBM & TODO & TODO \\
         MLP & TODO & TODO \\
-        \GazeMAE{} + MLP & TODO & TODO \\
+        \GazeMAE{} & TODO & TODO \\
         Osnovni GCN & TODO & TODO \\
         Predlagani GNN & TODO & TODO \\
         \bottomrule
@@ -401,7 +401,7 @@
 \begin{itemize}
     \item Slika: dodati matriko zmede za najboljši GNN pri 3-razredni valenci.
     \item Slika: dodati matriko zmede za najboljši GNN pri 3-razredni vzburjenosti.
-    \item Slika: po potrebi dodati matriko zmede za najboljši negrafovski primerjalni model samo v dodatek~\ref{app:dodatni-rezultati}, razen če neposredno spremeni interpretacijo glavne primerjave.
+    \item Slika: po potrebi dodati matriko zmede za najboljši negrafovski osnovni model samo v dodatek~\ref{app:dodatni-rezultati}, razen če neposredno spremeni interpretacijo glavne primerjave.
     \item Pisanje: matrike zmede naj bodo vrstično normalizirane z barvno lestvico $[0,1]$.
     \item Pisanje: opisati najpogostejše zamenjave razredov in jih povezati s porazdelitvijo razredov ter analizo oznak.
 \end{itemize}

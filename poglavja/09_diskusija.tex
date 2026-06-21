@@ -4,7 +4,7 @@
 \TODO{
 \begin{itemize}
     \item Diskusijo preusmeriti iz vprašanja, ali GNN absolutno zmaga, v vprašanje, kako se modeli obnašajo pri različnih naborih signalov.
-    \item Posebej interpretirati razlike med \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}: ali zenični signal pomaga nad koordinatami pogleda, ali dodatni signali v \emph{vsi signali} pomagajo ali dodajo šum, ter ali GNN bogatejšo strukturo izkoristi bolje kot negrafovski modeli.
+    \item Posebej interpretirati razlike med \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}: ali zenični signal pomaga nad koordinatami pogleda, ali dodatni signali v \emph{vsi signali} pomagajo ali dodajo šum, ter ali GNN bogatejšo strukturo izkoristi bolje kot negrafovski osnovni modeli.
     \item \GazeMAE{} obravnavati kot močno referenco za množico \emph{samo pogled}; če premaga modele z več signali, to interpretirati kot pomembno ugotovitev o naučenih predstavitvah pogleda.
     \item \emph{Samo zenici} in MOMENT opisati samo kot prihodnje delo ali podporni poskus, če ne bosta dokončana.
 \end{itemize}
@@ -15,11 +15,11 @@
 
 \TODO{
 \begin{itemize}
-    \item ali finalni GNN premaga ne-grafovske primerjalne modele;
+    \item ali finalni GNN premaga negrafovske osnovne modele;
     \item če ne premaga: ali kaže smiselno vedenje;
     \item pri kateri nalogi je graf najbolj koristen;
     \item LOO po subjektih v primerjavi z LOO po posnetkih;
-    \item primerjava proti \GazeMAE{} + MLP;
+    \item primerjava proti \GazeMAE{};
     \item povezava z ablations;
     \item konservativen zaključek.
 \end{itemize}
@@ -48,12 +48,12 @@
 
 \TODO{
 \begin{itemize}
-    \item ali \GazeMAE{} + MLP premaga primerjalne modele;
-    \item ali \GazeMAE{} + MLP premaga GNN;
+    \item ali \GazeMAE{} premaga negrafovske osnovne modele;
+    \item ali \GazeMAE{} premaga GNN;
     \item samonadzorovano učenje predstavitev kot uporabna smer;
     \item zamrznjena enkoderja position/velocity;
     \item 512-dim okenska predstavitev;
-    \item omejitev: primerjalni model s prenosom;
+    \item omejitev: predstavitveni model s prenosom;
     \item omejitev: ne polna reprodukcija predtreniranja.
 \end{itemize}
 }

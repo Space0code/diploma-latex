@@ -34,6 +34,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   presledkom, npr. `$10~s$`, `$500~Hz$`, `$500~ms$`. Spremenljivke, koordinate,
   parametre in matematične oznake vedno piši v matematičnem načinu, navadne
   količine v tekočem besedilu pa praviloma z besedo ali brez matematičnega načina.
+- Za velikosti leve in desne zenice uporabljaj notacijo `$p_i^{(l)}$` in
+  `$p_i^{(r)}$`, ne `$p_{l,i}$`, `$p_{r,i}$` ali `$p^l_i$`. Indeks `$i$`
+  označuje meritev oziroma vozlišče, nadpis v oklepaju pa levo/desno oko.
 - Pri sklicih uporabljaj nedeljivi presledek: `Slika~1`, `Tabela~2`,
   `Poglavje~3`, `enačba~(4)`. Za vire uporabljaj `\cite{...}`, ne `\ref{...}`;
   `\ref{...}` uporabljaj samo za označene slike, tabele, enačbe, poglavja ali

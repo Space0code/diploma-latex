@@ -1,9 +1,14 @@
 \chapter{Grafovska predstavitev podatkov sledilnika pogleda}
 \label{sec:grafovska-predstavitev}
 
-UVOD
+V prejšnjem poglavju smo meritve sledilnika pogleda razdelili na 10-sekundna časovna okna.
+V tem poglavju opišemo, kako posamezno okno pretvorimo v graf, ki ga uporabimo kot vhod za grafovske modele.
+Vozlišča predstavljajo veljavne meritve znotraj okna, povezave pa izbrane odnose med meritvami.
 
-% med drugim omeni to idejo (ne rabi biti v teh besedah in lahko je na krajše): V tem poglavju opišemo najbogatejšo grafovsko predstavitev učnega vzorca. Posamezne stopnje arhitekturne lestvice iz poglavja~\ref{sec:modeli} nato uporabljajo različne poenostavitve oziroma dele te predstavitve.
+Najprej podamo najbogatejšo grafovsko predstavitev učnega vzorca, ki uporablja vse razpoložljive signale.
+Nato pokažemo, kako se ista osnovna konstrukcija prilagodi štirim množicam signalov iz poglavja~\ref{subsec:vhodni-signali}.
+Kadar določena množica signalov ne vsebuje informacije, potrebne za posamezno značilko ali relacijo, ta del predstavitve izpustimo.
+Graf zato v vseh primerih predstavlja isto vrsto učnega vzorca, razlikuje pa se po količini vhodne informacije in po razpoložljivih relacijah med meritvami.
 
 \section{Vozlišča}
 \subsection{Definicija}
@@ -24,14 +29,13 @@ Vektor značilk vozlišča za končni graf za množico \emph{vsi signali} je
         t_i,
         x_i,
         y_i,
-        p_{l,i},
-        p_{r,i},
-        t_i,
+        p_i^{(l)},
+        p_i^{(r)},
         d_i,
         f_{dur,i}
     \right],
 \end{equation} % fact check the equation
-kjer je $t_i$ normaliziran časovni žig za vozlišče $i$, $x_i$ in $y_i$ sta koordinati pogleda, $p_{l,i}$ in $p_{r,i}$ velikosti leve in desne zenice, $d_i$ je razdalja med sledilnikom in udeleženčevimi očmi, $f_{dur,i}$ pa trajanje fiksacije.
+kjer je $t_i$ normaliziran časovni žig za vozlišče $i$, $x_i$ in $y_i$ sta koordinati pogleda, $p_i^{(l)}$ in $p_i^{(r)}$ velikosti leve in desne zenice, $d_i$ je razdalja med sledilnikom in udeleženčevimi očmi, $f_{dur,i}$ pa trajanje fiksacije.
 
 Za ostale podgrafe se vektor značilk ustrezno filtrira.
 V vseh primerih ohranimo časovno značilko $t_i$, ostale podatke pa ohranimo glede na obravnavano množico signalov.
@@ -102,7 +106,7 @@ Ta podatek imamo zgolj v množici \emph{vsi signali}, zato so te povezave vklju�
 
 Znotraj posamezne fiksacije ne povežemo vseh vozlišč med seboj, saj bi to povzročilo preveliko število fiksacijskih povezav.
 Namesto tega uporabimo redkejšo konstrukcijo, ki ohrani informacijo o pripadnosti isti fiksaciji, hkrati pa zmanjša prostorsko in časovno zahtevnost konstrukcije grafa ter učenja na grafu.
-To konstrukcijo sami imenujemo \emp{razširjene povezave znotraj fiksacije} (angl. \emph{dilated intra-fixation edges}).
+To konstrukcijo sami imenujemo \emph{razširjene povezave znotraj fiksacije} (angl. \emph{dilated intra-fixation edges}).
 Fiksacijo obravnavamo kot neprekinjeno zaporedje vozlišč z istim veljavnim identifikatorjem \texttt{fixation-index}.
 Če ima taka fiksacija $F$ vozlišč, jim znotraj fiksacije priredimo lokalne indekse $0,\ldots,F-1$.
 

@@ -66,6 +66,21 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   `množica signalov` oziroma `podmnožica signalov`, ne `nabor signalov`. Imena
   glavnih množic so zaenkrat: `samo pogled`, `samo zenici`, `pogled in zenici` in
   `vsi signali`.
+- Potrjeni slovenski izrazi za pogoste angleške oznake v diplomi: `eye` v
+  matematičnih oznakah prevajaj kot `oči`, `screen` kot `zaslon`,
+  `eye-tracking` glede na kontekst kot `sledilnik pogleda`, `podatki sledilnika
+  pogleda`, `signali sledilnika pogleda` ali `okna meritev sledilnika pogleda`,
+  `gaze` kot `pogled`, `gaze-only` kot `samo pogled`, `pupil-only` kot `samo
+  zenici`, `gaze+pupil` kot `pogled in zenici`, `all` kot `vsi signali`,
+  `baseline` kot `primerjalni model` oziroma `izhodiščni model`, `subject LOO`
+  kot `LOO po subjektih`, `recording LOO` kot `LOO po posnetkih`, `k-fold` kot
+  `k-kratno prečno preverjanje`, `plot` kot `graf` ali `prikaz`, `pipeline` kot
+  `cevovod`, `edge feature` kot `značilka povezave`, `forward/backward temporal
+  separation` kot `ločevanje časovnih povezav naprej in nazaj`, `learned signed
+  edge weights` kot `naučene predznačene uteži povezav`, `self-supervised
+  representation learning` kot `samonadzorovano učenje predstavitev` in
+  `foundation model` kot `temeljni model`. Izrazu `heatmap` se po možnosti
+  izogibaj; kadar je res potreben, uporabi `toplotna karta`.
 - Pri proofreadingu ne vračaj Tomijevih ročnih slogovnih popravkov nazaj na
   prejšnje predloge. Če Tomi popravi vezaje, veznike (`in`/`ter`), formulacije
   ali poenostavi zapis, to obravnavaj kot aktualen slogovni signal in ga ohrani,

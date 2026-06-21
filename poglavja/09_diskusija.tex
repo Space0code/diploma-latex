@@ -4,9 +4,9 @@
 \TODO{
 \begin{itemize}
     \item Diskusijo preusmeriti iz vprašanja, ali GNN absolutno zmaga, v vprašanje, kako se modeli obnašajo pri različnih naborih signalov.
-    \item Posebej interpretirati razlike med \emph{gaze}, \emph{gaze+pupil} in \emph{all}: ali zenični signal pomaga nad koordinatami pogleda, ali dodatni signali v \emph{all} pomagajo ali dodajo šum, ter ali GNN bogatejšo strukturo izkoristi bolje kot negrafovski modeli.
-    \item \GazeMAE{} obravnavati kot močno \emph{gaze-only} referenco; če premaga modele z več signali, to interpretirati kot pomembno ugotovitev o naučenih predstavitvah pogleda.
-    \item \emph{Pupil-only} in MOMENT opisati samo kot prihodnje delo ali podporni poskus, če ne bosta dokončana.
+    \item Posebej interpretirati razlike med \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}: ali zenični signal pomaga nad koordinatami pogleda, ali dodatni signali v \emph{vsi signali} pomagajo ali dodajo šum, ter ali GNN bogatejšo strukturo izkoristi bolje kot negrafovski modeli.
+    \item \GazeMAE{} obravnavati kot močno referenco za množico \emph{samo pogled}; če premaga modele z več signali, to interpretirati kot pomembno ugotovitev o naučenih predstavitvah pogleda.
+    \item \emph{Samo zenici} in MOMENT opisati samo kot prihodnje delo ali podporni poskus, če ne bosta dokončana.
 \end{itemize}
 }
 
@@ -15,10 +15,10 @@
 
 \TODO{
 \begin{itemize}
-    \item ali finalni GNN premaga ne-grafovske baseline modele;
+    \item ali finalni GNN premaga ne-grafovske primerjalne modele;
     \item če ne premaga: ali kaže smiselno vedenje;
     \item pri kateri nalogi je graf najbolj koristen;
-    \item subject LOO vs recording LOO;
+    \item LOO po subjektih v primerjavi z LOO po posnetkih;
     \item primerjava proti \GazeMAE{} + MLP;
     \item povezava z ablations;
     \item konservativen zaključek.
@@ -33,12 +33,12 @@
     \item časovne povezave;
     \item prostorske povezave;
     \item fiksacijske povezave;
-    \item forward/backward temporal separation;
-    \item learned signed edge weights;
+    \item ločevanje časovnih povezav naprej in nazaj;
+    \item naučene predznačene uteži povezav;
     \item \texttt{distance-avg};
     \item \texttt{fixation-duration};
-    \item \texttt{delta\_distance} edge feature;
-    \item kaj to pomeni za eye-tracking signale;
+    \item značilka povezave \texttt{delta\_distance};
+    \item kaj to pomeni za signale sledilnika pogleda;
     \item brez kavzalnih trditev.
 \end{itemize}
 }
@@ -48,12 +48,12 @@
 
 \TODO{
 \begin{itemize}
-    \item ali \GazeMAE{} + MLP premaga baseline modele;
+    \item ali \GazeMAE{} + MLP premaga primerjalne modele;
     \item ali \GazeMAE{} + MLP premaga GNN;
-    \item self-supervised representation learning kot uporabna smer;
+    \item samonadzorovano učenje predstavitev kot uporabna smer;
     \item zamrznjena enkoderja position/velocity;
     \item 512-dim okenska predstavitev;
-    \item omejitev: transfer baseline;
+    \item omejitev: primerjalni model s prenosom;
     \item omejitev: ne polna reprodukcija predtreniranja.
 \end{itemize}
 }
@@ -77,9 +77,9 @@
 
 \TODO{
 \begin{itemize}
-    \item izvirni paper: ročno oblikovane eye-gaze značilke;
-    \item izvirni paper: drugačen pipeline izbire značilk;
-    \item izvirni paper: SVM;
+    \item izvirni članek: ročno oblikovane značilke pogleda;
+    \item izvirni članek: drugačen cevovod izbire značilk;
+    \item izvirni članek: SVM;
     \item ta naloga: grafi iz časovnih oken surovejših signalov;
     \item primerjava metodološko motivacijska;
     \item ne neposredna reprodukcija;
@@ -94,7 +94,7 @@ Glavne omejitve naloge so:
 \begin{itemize}
     \item uporaba ene glavne podatkovne zbirke;
     \item subjektivnost čustvenih oznak;
-    \item omejitev na eye-tracking signale brez drugih fizioloških modalnosti;
+    \item omejitev na signale sledilnika pogleda brez drugih fizioloških modalnosti;
     \item občutljivost grafovske konstrukcije na hiperparametre;
     \item računska zahtevnost validacije z LOO protokoli;
     \item možnost prekomernega glajenja v grafovskih modelih.
@@ -107,8 +107,8 @@ Možne smeri nadaljnjega dela vključujejo:
 \begin{itemize}
     \item učenje povezav namesto ročne konstrukcije grafa;
     \item uporabo grafovskih transformerjev;
-    \item samonadzorovano predtreniranje na neoznačenih eye-tracking signalih;
-    \item razvoj grafovskega foundation modela za podatke pogleda;
+    \item samonadzorovano predtreniranje na neoznačenih signalih sledilnika pogleda;
+    \item razvoj grafovskega temeljnega modela za podatke pogleda;
     \item razširitev na večmodalne fiziološke podatke;
     \item evalvacijo na več podatkovnih zbirkah.
 \end{itemize}

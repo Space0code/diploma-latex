@@ -7,9 +7,9 @@
 \TODO{
 \begin{itemize}
     \item Novo delovno izhodišče: glavna naloga naj bo binarna klasifikacija, ne več 3-razredna klasifikacija; obstoječi opis 3-razredne naloge kasneje prestaviti v dodatni ali primerjalni del, če jo bomo še poročali.
-    \item Glavno primerjavo zastaviti kot model $\times$ nabor signalov, z nabori \emph{gaze}, \emph{gaze+pupil} in \emph{all}; \emph{pupil-only} naj ostane placeholder za morebitni MOMENT eksperiment, ne obvezni del GNN primerjave.
-    \item Za začetek uporabiti subject k-fold kot glavni protokol; recording k-fold, subject LOO in recording LOO označiti kot možne dodatne robustnostne preveritve, če bodo izvedene.
-    \item \GazeMAE{} trenirati oziroma uporabiti samo na \emph{gaze-only}; v tabelah ga je dovoljeno primerjati tudi z drugimi nabori kot referenčni model, vendar ne kot model, treniran na teh signalih.
+    \item Glavno primerjavo zastaviti kot model $\times$ množica signalov, z množicami \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}; \emph{samo zenici} naj ostane opomnik za morebitni MOMENT eksperiment, ne obvezni del GNN primerjave.
+    \item Za začetek uporabiti k-kratno prečno preverjanje po subjektih kot glavni protokol; k-kratno prečno preverjanje po posnetkih, LOO po subjektih in LOO po posnetkih označiti kot možne dodatne robustnostne preveritve, če bodo izvedene.
+    \item \GazeMAE{} trenirati oziroma uporabiti samo na množici \emph{samo pogled}; v tabelah ga je dovoljeno primerjati tudi z drugimi nabori kot referenčni model, vendar ne kot model, treniran na teh signalih.
 \end{itemize}
 }
 
@@ -73,8 +73,8 @@ Od testne množice se validacijska razlikuje po tem, da lahko vpliva na potek u�
 
 Uporabili smo dva validacijska protokola prečnega preverjanja tipa LOO:
 \begin{itemize}
-    \item \textbf{Subject LOO}: v vsaki iteraciji so podatki enega subjekta testna množica, podatki ostalih subjektov pa so na voljo za učenje oziroma validacijo.
-    \item \textbf{Recording LOO}: v vsaki iteraciji so podatki enega posnetka oziroma stimulusa testna množica, podatki ostalih posnetkov pa so na voljo za učenje oziroma validacijo.
+    \item \textbf{LOO po subjektih}: v vsaki iteraciji so podatki enega subjekta testna množica, podatki ostalih subjektov pa so na voljo za učenje oziroma validacijo.
+    \item \textbf{LOO po posnetkih}: v vsaki iteraciji so podatki enega posnetka oziroma stimulusa testna množica, podatki ostalih posnetkov pa so na voljo za učenje oziroma validacijo.
 \end{itemize}
 
 Kombinirane delitve po subjektih in posnetkih v tej nalogi ne uporabljamo, ker bi bila računsko bistveno dražja in bi presegla obseg diplomske naloge.
@@ -89,21 +89,21 @@ S tem preprečimo uhajanje informacij iz validacijske ali testne množice v učn
 
 \TODO{
 \begin{itemize}
-    \item Eksperimenti: za glavne rezultate pognati subject LOO kot primarni validacijski protokol in recording LOO kot dodatni poročani protokol.
-    \item Eksperimenti: kfold ne uporabljati in ne poročati kot glavni rezultat za primerjavo modelov; izjema je ablacijska študija, opisana v razdelku~\ref{subsec:ablacijska-studija}.
+    \item Eksperimenti: za glavne rezultate pognati LOO po subjektih kot primarni validacijski protokol in LOO po posnetkih kot dodatni poročani protokol.
+    \item Eksperimenti: k-kratnega prečnega preverjanja ne uporabljati in ne poročati kot glavni rezultat za primerjavo modelov; izjema je ablacijska študija, opisana v razdelku~\ref{subsec:ablacijska-studija}.
 \end{itemize}
 }
 
 \TODO{
 \begin{itemize}
-    \item Pisanje: v poglavju z rezultati naj bodo glavne tabele najprej za subject LOO, nato za recording LOO; kfold naj se pojavi samo pri ablacijski študiji.
-    \item Pisanje: jasno zapisati, da subject LOO ocenjuje posploševanje na nove udeležence, recording LOO pa posploševanje na nove posnetke oziroma stimuluse.
+    \item Pisanje: v poglavju z rezultati naj bodo glavne tabele najprej za LOO po subjektih, nato za LOO po posnetkih; k-kratno prečno preverjanje naj se pojavi samo pri ablacijski študiji.
+    \item Pisanje: jasno zapisati, da LOO po subjektih ocenjuje posploševanje na nove udeležence, LOO po posnetkih pa posploševanje na nove posnetke oziroma stimuluse.
 \end{itemize}
 }
 
-\subsection{Subject LOO}
+\subsection{LOO po subjektih}
 
-Subject LOO meri posploševanje na nove udeležence.
+LOO po subjektih meri posploševanje na nove udeležence.
 Izvedli smo ga zato, ker pri uporabi modela na novem uporabniku običajno nimamo označenih podatkov zanj.
 S tem protokolom ocenimo, kako dobro se naučeni vzorci prenesejo na nove subjekte in koliko so modeli občutljivi na razlike med posameznimi udeleženci.
 
@@ -111,10 +111,10 @@ V vsaki iteraciji je en subjekt v testni množici.
 Pri nevronskih modelih sta dva izmed preostalih subjektov v validacijski množici, ostalih 19 subjektov pa je v učni množici.
 Pri tem protokolu delimo podatke po subjektih, zato so lahko podatki vseh posnetkov prisotni v učni, validacijski in testni množici.
 
-\subsection{Recording LOO}
+\subsection{LOO po posnetkih}
 
-Recording LOO meri posploševanje na nove posnetke oziroma stimuluse.
-Izvedli smo ga zato, ker preverja drugačen vidik posploševanja kot Subject LOO: nov posnetek lahko povzroči drugačne vzorce pogleda, saj je pogled usmerjen na druge dele zaslona in sledi drugačnemu dogajanju.
+LOO po posnetkih meri posploševanje na nove posnetke oziroma stimuluse.
+Izvedli smo ga zato, ker preverja drugačen vidik posploševanja kot LOO po subjektih: nov posnetek lahko povzroči drugačne vzorce pogleda, saj je pogled usmerjen na druge dele zaslona in sledi drugačnemu dogajanju.
 S tem preverimo, kako dobre so napovedi modelov pri novem stimulusu.
 
 V vsaki iteraciji je en posnetek v testni množici.
@@ -178,8 +178,8 @@ Rezultate metrik poročamo kot povprečje in standardni odklon čez iteracije pr
 
 \TODO{
 \begin{itemize}
-    \item Ta razdelek kasneje prepisati v opis glavne faktorske primerjave: modeli po vrsticah, nabori signalov po stolpcih oziroma ločeni teki za \emph{gaze}, \emph{gaze+pupil} in \emph{all}.
-    \item Ločiti modele, ki so definirani za vse nabore signalov, od modelov, ki so smiselni samo za posamezen nabor: \GazeMAE{} za \emph{gaze-only}, morebitni MOMENT za \emph{pupil-only} oziroma zenični del.
+    \item Ta razdelek kasneje prepisati v opis glavne faktorske primerjave: modeli po vrsticah, nabori signalov po stolpcih oziroma ločeni teki za \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}.
+    \item Ločiti modele, ki so definirani za vse nabore signalov, od modelov, ki so smiselni samo za posamezen nabor: \GazeMAE{} za \emph{samo pogled}, morebitni MOMENT za \emph{samo zenici} oziroma zenični del.
 \end{itemize}
 }
 
@@ -227,12 +227,12 @@ Zato smo v glavnih poskusih ohranili enoten operator \texttt{GCNConv}, podrobnos
 \end{itemize}
 }
 
-Za nastavitev predlaganega GNN smo izvedli kompakten grid search na 3-razredni valenci s subject k-fold protokolom ($k=5$, en subjekt na validacijsko množico), pri čemer smo preizkusili \texttt{num\_layers} $\in \{2,3,4\}$, \texttt{hidden\_channels} $\in \{64,128,256\}$, \texttt{kt} $\in \{1,2,3\}$, \texttt{ks} $\in \{1,2,3\}$ in \texttt{kf} oziroma \texttt{fixation\_dilation\_k} $\in \{1,2,3,5\}$.
+Za nastavitev predlaganega GNN smo izvedli kompaktno iskanje po mreži na 3-razredni valenci s k-kratnim prečnim preverjanjem po subjektih ($k=5$, en subjekt na validacijsko množico), pri čemer smo preizkusili \texttt{num\_layers} $\in \{2,3,4\}$, \texttt{hidden\_channels} $\in \{64,128,256\}$, \texttt{kt} $\in \{1,2,3\}$, \texttt{ks} $\in \{1,2,3\}$ in \texttt{kf} oziroma \texttt{fixation\_dilation\_k} $\in \{1,2,3,5\}$.
 Kot končno nastavitev smo izbrali \texttt{num\_layers=2}, \texttt{hidden\_channels=64}, \texttt{kt=1}, \texttt{ks=1} in \texttt{kf=3}, saj je bila ta konfiguracija med najboljšimi po accuracy in macro-F1, hkrati pa je ohranila razmeroma majhen model s 101.143 učljivimi parametri in uravnoteženo gostoto grafovskih povezav.
 
 \TODO{
 \begin{itemize}
-    \item Eksperimenti: preveriti, da primerjava vključuje diplomski grafovski baseline \textbf{osnovni GCN}; stare interne različice grafovskega modela ne sodijo v diplomsko primerjavo.
+    \item Eksperimenti: preveriti, da primerjava vključuje diplomski grafovski izhodiščni model \textbf{osnovni GCN}; stare interne različice grafovskega modela ne sodijo v diplomsko primerjavo.
     \item Eksperimenti: za osnovni GCN uporabiti isto grafovsko predstavitev, iste signale, ista okna, iste delitve in isto standardizacijo kot pri predlaganem GNN.
     \item Eksperimenti: pri osnovnem GCN združiti relacije \texttt{temporal\_forward}, \texttt{temporal\_backward}, \texttt{spatial} in \texttt{fixation} v homogeni graf, odstraniti podvojene povezave ter ne uporabiti značilk povezav ali naučenih uteži povezav.
     \item Eksperimenti: preveriti, da osnovni GCN uporablja \texttt{GCNConv}, isto napovedno glavo, iste YAML hiperparametre in ločen parameter za readout; trenutni readout je \texttt{attention}, pozneje lahko preverimo še \texttt{mean}.
@@ -243,7 +243,7 @@ Kot končno nastavitev smo izbrali \texttt{num\_layers=2}, \texttt{hidden\_chann
 \TODO{
 \begin{itemize}
     \item Pisanje: v tabeli in besedilu uporabljaj izraz osnovni GCN.
-    \item Pisanje: v razlagi osnovnega GCN poudari, da je to arhitekturno poenostavljen grafovski baseline, ne starejša različica predlaganega modela.
+    \item Pisanje: v razlagi osnovnega GCN poudari, da je to arhitekturno poenostavljen grafovski izhodiščni model, ne starejša različica predlaganega modela.
 \end{itemize}
 }
 
@@ -261,7 +261,7 @@ Kot končno nastavitev smo izbrali \texttt{num\_layers=2}, \texttt{hidden\_chann
 \TODO{
 \begin{itemize}
     \item Preveriti, ali ta razdelek po novi zasnovi sploh ostane ločena ablacijska študija ali se združi z glavno primerjavo signalnih naborov.
-    \item Če ostane ločeno, naj ablacijska študija odgovarja predvsem na vprašanja znotraj predlaganega GNN; primerjava \emph{gaze}, \emph{gaze+pupil} in \emph{all} naj bo glavna signalna primerjava, ne samo ablacijska opomba.
+    \item Če ostane ločeno, naj ablacijska študija odgovarja predvsem na vprašanja znotraj predlaganega GNN; primerjava \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali} naj bo glavna signalna primerjava, ne samo ablacijska opomba.
 \end{itemize}
 }
 
@@ -278,17 +278,17 @@ Pri četrti smo odstranili informacijo o fiksacijah, torej trajanje fiksacij in 
 \TODO{
 \begin{itemize}
     \item Eksperimenti: ablacijske poskuse pognati za 3-razredno valenco in 3-razredno vzburjenost.
-    \item Eksperimenti: zaradi časovne ekonomičnosti ablacijske poskuse pognati na subject kfold, trenutno z $k=5$, ne na polnem subject LOO.
-    \item Eksperimenti: pripraviti ablacijske nastavitve za odstranitev časovne informacije, prostorske oziroma gaze informacije, fiksacijske informacije, zenične informacije in razdaljne informacije.
+    \item Eksperimenti: zaradi časovne ekonomičnosti ablacijske poskuse pognati s k-kratnim prečnim preverjanjem po subjektih, trenutno z $k=5$, ne s polnim LOO po subjektih.
+    \item Eksperimenti: pripraviti ablacijske nastavitve za odstranitev časovne informacije, prostorske oziroma informacije pogleda, fiksacijske informacije, zenične informacije in razdaljne informacije.
     \item Eksperimenti: ko odstranimo signal, odstraniti vse informacije, izpeljane iz njega: značilke vozlišč, značilke povezav in povezave.
 \end{itemize}
 }
 
 \TODO{
 \begin{itemize}
-    \item Pisanje: trenutni opis štirih ablacijsko nastavitev uskladiti s petimi skupinami signalov; razdaljo obravnavaj ločeno od prostorske/gaze informacije, če bo tako implementirana v poskusih.
+    \item Pisanje: trenutni opis štirih ablacijsko nastavitev uskladiti s petimi skupinami signalov; razdaljo obravnavaj ločeno od prostorske informacije oziroma informacije pogleda, če bo tako implementirana v poskusih.
     \item Pisanje: po pridobitvi rezultatov odločiti, ali v glavnem besedilu podrobno poročamo obe nalogi ali predvsem valenco; za vzburjenost naj bodo vsaj podporni rezultati v dodatku.
-    \item Pisanje: v poglavju z rezultati zapisati, da so kfold in LOO rezultati dovolj primerljivi za ablacijsko analizo, ker nas zanima relativni vpliv odstranitve signalov, ne končna absolutna ocena modela.
+    \item Pisanje: v poglavju z rezultati zapisati, da so rezultati k-kratnega prečnega preverjanja in LOO dovolj primerljivi za ablacijsko analizo, ker nas zanima relativni vpliv odstranitve signalov, ne končna absolutna ocena modela.
 \end{itemize}
 }
 

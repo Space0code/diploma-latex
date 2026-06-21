@@ -4,12 +4,12 @@
 \TODO{
 To poglavje napiši na koncu, ko bodo znani rezultati. Struktura naj bo podobna raziskovalnemu članku:
 \begin{itemize}
-    \item novo izhodišče: glavna evalvacija naj bo binarna klasifikacija in primerjava modelov pri naborih \emph{gaze}, \emph{gaze+pupil} in \emph{all};
-    \item \GazeMAE{} opiši kot \emph{gaze-only} referenco; \emph{pupil-only}/MOMENT omeni samo, če bo eksperiment dokončan;
+    \item novo izhodišče: glavna evalvacija naj bo binarna klasifikacija in primerjava modelov pri množicah \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali};
+    \item \GazeMAE{} opiši kot referenco za množico \emph{samo pogled}; \emph{samo zenici}/MOMENT omeni samo, če bo eksperiment dokončan;
     \item motivacija: zakaj grafovska predstavitev podatkov sledilnika pogleda;
     \item predlagana metoda: kako iz časovnih oken nastanejo grafi;
-    \item eksperimentalni protokol: \MAHNOB{}, 3-razredna valenca/vzburjenost, subject LOO in recording LOO;
-    \item rezultati: primerjava z baseline modeli, \GazeMAE{} in GNN arhitekturami;
+    \item eksperimentalni protokol: \MAHNOB{}, 3-razredna valenca/vzburjenost, LOO po subjektih in LOO po posnetkih;
+    \item rezultati: primerjava s primerjalnimi modeli, \GazeMAE{} in GNN arhitekturami;
     \item sklep: kaj grafovska predstavitev prispeva in kje so omejitve.
 \end{itemize}
 }
@@ -17,7 +17,7 @@ To poglavje napiši na koncu, ko bodo znani rezultati. Struktura naj bo podobna 
 \section*{I Grafovske nevronske mreže in motivacija}
 
 \TODO{
-Kratko povzemi, kaj so grafovske nevronske mreže, zakaj so primerne za podatke z relacijsko, prostorsko ali časovno strukturo in zakaj je eye-tracking okno smiselno obravnavati kot prostorsko-časovni graf.
+Kratko povzemi, kaj so grafovske nevronske mreže, zakaj so primerne za podatke z relacijsko, prostorsko ali časovno strukturo in zakaj je okno meritev sledilnika pogleda smiselno obravnavati kot prostorsko-časovni graf.
 }
 
 \section*{II Grafovska predstavitev podatkov sledilnika pogleda}
@@ -40,11 +40,11 @@ Kratko povzemi, kaj so grafovske nevronske mreže, zakaj so primerne za podatke 
 \section*{III Modeliranje in eksperimentalna evalvacija}
 
 \TODO{
-Kratko povzemi uporabljeno podatkovno zbirko \MAHNOB{}, nalogi 3-razredne valence in 3-razredne vzburjenosti, validacijo subject LOO in recording LOO ter primerjane modele: SVM, LightGBM, MLP, \GazeMAE{} + MLP, osnovni GCN in predlagani GNN.
+Kratko povzemi uporabljeno podatkovno zbirko \MAHNOB{}, nalogi 3-razredne valence in 3-razredne vzburjenosti, validacijo LOO po subjektih in LOO po posnetkih ter primerjane modele: SVM, LightGBM, MLP, \GazeMAE{} + MLP, osnovni GCN in predlagani GNN.
 }
 
 \section*{IV Rezultati in sklep}
 
 \TODO{
-Dopolni po zaključku eksperimentov: kateri model je najboljši pri valenci, kateri pri vzburjenosti, ali GNN izboljša rezultate glede na ne-grafovske baseline modele, katere komponente grafa najbolj prispevajo k rezultatu ter glavne omejitve in prihodnje delo.
+Dopolni po zaključku eksperimentov: kateri model je najboljši pri valenci, kateri pri vzburjenosti, ali GNN izboljša rezultate glede na ne-grafovske primerjalne modele, katere komponente grafa najbolj prispevajo k rezultatu ter glavne omejitve in prihodnje delo.
 }

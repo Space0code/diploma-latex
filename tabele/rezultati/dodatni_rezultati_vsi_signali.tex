@@ -1,0 +1,24 @@
+% Samodejno generirano iz .../tables/metric_summary_with_std.csv.
+% Micro-F1 je pri enooznacni klasifikaciji enak tocnosti, zato je prevzet iz istega stolpca.
+\begin{table}[H]
+    \centering
+    \caption{Razširjeni rezultati za množico signalov vsi signali. Vrednosti so povprečje $\pm$ standardni odklon čez sedem gub, v odstotkih.}
+    \label{tab:dodatek-rezultati-dodatni-rezultati-vsi-signali}
+    \scriptsize
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.21\textwidth} *{6}{>{\centering\arraybackslash}X}@{}}
+        \toprule
+        Model & Točnost & Preciznost & Priklic & Makro F1 & Micro-F1 & AUC \\
+        \midrule
+        Naključni & $50,9 \pm 2,0$ & $50,8 \pm 1,9$ & $50,9 \pm 1,9$ & $50,7 \pm 1,8$ & $50,9 \pm 2,0$ & $50,9 \pm 1,9$ \\
+        Večinski & $52,2 \pm 4,8$ & $26,1 \pm 2,4$ & $50,0 \pm 0,0$ & $34,2 \pm 2,0$ & $52,2 \pm 4,8$ & $50,0 \pm 0,0$ \\
+        SVM & $68,6 \pm 3,3$ & $69,9 \pm 2,1$ & $68,3 \pm 2,3$ & $67,6 \pm 3,3$ & $68,6 \pm 3,3$ & $76,2 \pm 2,6$ \\
+        LightGBM & $69,0 \pm 3,0$ & $70,4 \pm 2,2$ & $69,0 \pm 2,5$ & $68,3 \pm 3,2$ & $69,0 \pm 3,0$ & $77,6 \pm 2,7$ \\
+        MLP & $67,2 \pm 3,0$ & $68,9 \pm 2,6$ & $67,1 \pm 2,2$ & $66,2 \pm 2,7$ & $67,2 \pm 3,0$ & $75,4 \pm 3,6$ \\
+        GazeMAE/MOMENT & $66,1 \pm 3,1$ & $66,8 \pm 2,6$ & $66,3 \pm 3,0$ & $65,6 \pm 3,4$ & $66,1 \pm 3,1$ & $72,2 \pm 4,2$ \\
+        GCN & $59,6 \pm 8,4$ & $61,5 \pm 8,9$ & $59,3 \pm 8,0$ & $57,6 \pm 8,5$ & $59,6 \pm 8,4$ & $65,7 \pm 12,3$ \\
+        HeteroGCN-mean & $61,8 \pm 3,9$ & $63,8 \pm 3,7$ & $61,3 \pm 2,5$ & $59,7 \pm 4,0$ & $61,8 \pm 3,9$ & $69,6 \pm 3,1$ \\
+        HeteroGCN-MLP & $60,5 \pm 6,7$ & $61,3 \pm 9,3$ & $59,9 \pm 6,3$ & $56,6 \pm 10,7$ & $60,5 \pm 6,7$ & $69,0 \pm 6,2$ \\
+        HeteroGCN-MLP-w & $62,7 \pm 4,5$ & $64,6 \pm 3,0$ & $62,3 \pm 3,1$ & $60,8 \pm 5,1$ & $62,7 \pm 4,5$ & $70,2 \pm 3,4$ \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

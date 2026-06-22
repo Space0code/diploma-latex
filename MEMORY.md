@@ -97,6 +97,19 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Vizualna identiteta diplome
 
+- V diplomski nalogi nikoli ne uporabljaj LLM-generiranih ali drugih
+  generativno ustvarjenih slik za rezultate, diagrame, grafe ali podatkovne
+  prikaze. Vse rezultate vedno plottaj reproducibilno s Python orodji
+  (Matplotlib/seaborn oziroma obstoječa projektna orodja), TikZ, SVG ali drugim
+  sledljivim programskim postopkom iz konkretnih podatkov. Ob slikah rezultatov
+  v LaTeX komentarju zapiši izvorne podatke in skript, ki sliko generira.
+- Slike rezultatov naj slogovno sledijo slikam, ki jih generira glavni
+  eksperimentalni runner oziroma njegov postprocesirni skript. Posebej za
+  toplotne karte in matrike zmede uporabljaj isti `seaborn.heatmap` slog,
+  barvno shemo `Blues`, bele mrežne črte oziroma runnerjeve nastavitve, format
+  deležev med $0$ in $1$ ter vrstično normalizacijo matrik zmede. Izjema sta
+  trenutni sliki porazdelitve razredov za poglavji 4 in 8, ki sta Tomiju všeč in
+  ostaneta v posebej pripravljenem diploma slogu.
 - Za vse diagrame, TikZ slike, SVG slike, grafe, sheme cevovodov in druge
   vizualne elemente diplomske naloge uporabljaj konsistentno barvno paleto B:
   `#2F3437` temna siva za tekst/robove, `#8ECAE6` pastelna modra, `#A8DADC`
@@ -184,6 +197,14 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Za signalno množico s podatki obeh zenic uporabljaj izraz `zenici` in pri tem
   dosledno upoštevaj slovensko dvojino. Signalne množice so: `samo pogled`,
   `samo zenici`, `pogled in zenici` in `vsi signali`.
+- 2026-06-21 Tomi je izrecno zaklenil, da je `samo zenici` enakovreden glavni
+  eksperiment ostalim trem signalnim množicam. V glavnih rezultatih obravnavaj
+  vse štiri signalne množice: `samo pogled`, `samo zenici`, `pogled in zenici`
+  in `vsi signali`.
+- 2026-06-21 Pri glavnih rezultatih je glavna metrika `accuracy` oziroma
+  `točnost`. V glavni toplotni karti model × množica signalov naj barva celic
+  sledi točnosti; makro F1 ostane druga številka v celicah in spremljevalna
+  metrika.
 - V uvodu naj se zgodba začne pri GNN oziroma grafovskem modeliranju, nato naj se
   poveže s podatki sledilnika pogleda, šele nato naj se omeni čustvene oznake kot
   evalvacijsko nalogo. Glavno raziskovalno vprašanje naj bo v uvodu motivirano,
@@ -194,6 +215,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   arhitekturne lestvice, kadar je jasno, da pomeni končno stopnjo in ne najboljši
   model. Pri tehničnih primerjavah uporabljaj konkretna imena modelov:
   `GCN`, `HeteroGCN-mean`, `HeteroGCN-MLP` in `HeteroGCN-MLP-w`.
+- Kadar tabela, slika ali stavek našteva več GNN modelov skupaj, za zadnjo
+  različico vedno uporabi tehnično ime `HeteroGCN-MLP-w`, ne `končni GNN`.
+  Izraz `končni GNN` uporabi samo v tekočem besedilu, ko omenjaš samo ta model
+  oziroma ga ne postavljaš neposredno ob ostale GNN različice.
 - GazeMAE/MOMENT v diplomi obravnavaj previdno kot `zamrznjene prednaučene
   predstavitvene modele`, ne kot polno primerjavo z vsemi temeljnimi modeli ali
   kot reprodukcijo njihovega predtreniranja.

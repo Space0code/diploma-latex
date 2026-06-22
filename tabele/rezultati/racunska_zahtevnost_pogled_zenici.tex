@@ -1,0 +1,23 @@
+% Samodejno generirano iz .../tables/main_model_complexity_report.csv za signalno množico pogled in zenici.
+\begin{table}[H]
+    \centering
+    \caption{Velikost in računska zahtevnost modelov pri množici signalov pogled in zenici.}
+    \label{tab:rezultati-racunska-zahtevnost}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth} >{\raggedleft\arraybackslash}p{0.17\textwidth} >{\raggedleft\arraybackslash}p{0.17\textwidth} >{\raggedleft\arraybackslash}X >{\raggedleft\arraybackslash}X@{}}
+        \toprule
+        Model & Učljivi parametri & Vsi parametri & Učenje [ms/okno] & Inferenca [ms/okno] \\
+        \midrule
+        Naključni & -- & -- & -- & -- \\
+        Večinski & -- & -- & -- & -- \\
+        SVM & -- & -- & 0,386 & 0,079 \\
+        LightGBM & -- & -- & 0,042 & 0,002 \\
+        MLP & 7.234 & 7.234 & 0,390 & 0,001 \\
+        GazeMAE/MOMENT & 180.738 & 127.217.238 & 0,263 & 0,001 \\
+        GCN & 26.051 & 26.051 & 20,727 & 0,190 \\
+        HeteroGCN-mean & 42.691 & 42.691 & 26,641 & 0,201 \\
+        HeteroGCN-MLP & 75.715 & 75.715 & 22,272 & 0,201 \\
+        HeteroGCN-MLP-w & 76.006 & 76.006 & 21,742 & 0,193 \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

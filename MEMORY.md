@@ -94,6 +94,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   razlag iz prejšnjih poglavij. Kadar je dodatna razlaga že podana drugje, uporabi
   kratek sklic na ustrezno poglavje, razdelek, tabelo ali sliko, novo besedilo pa
   osredotoči samo na kontekst, ki je potreben na trenutnem mestu.
+- Pri pisanju LaTeX poglavij naj bo praviloma ena poved v eni vrstici. Ne lomi
+  ene povedi čez več vrstic samo zaradi širine urejevalnika. Ročno vrstično
+  oblikovanje naj sledi stavkom oziroma logičnim enotam, ker Tomi tako lažje
+  pregleduje in ureja besedilo.
 
 ## Vizualna identiteta diplome
 

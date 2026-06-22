@@ -1,0 +1,299 @@
+\chapter{Eksperimentalni protokol}
+\label{sec:eksperimenti}
+
+% Arhivska različica poglavja pred prehodom na končni protokol z binarno
+% valenco, 7-kratnim prečnim preverjanjem po subjektih in štirimi množicami
+% signalov.
+
+\section{Eksperimentalne naloge}
+\label{subsec:eksperimentalne-naloge}
+
+\TODO{
+\begin{itemize}
+    \item Novo delovno izhodišče: glavna naloga naj bo binarna klasifikacija, ne več 3-razredna klasifikacija; obstoječi opis 3-razredne naloge kasneje prestaviti v dodatni ali primerjalni del, če jo bomo še poročali.
+    \item Glavno primerjavo zastaviti kot model $\times$ množica signalov, z množicami \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}; \emph{samo zenici} naj ostane opomnik za morebitni MOMENT eksperiment, ne obvezni del GNN primerjave.
+    \item Za začetek uporabiti k-kratno prečno preverjanje po subjektih kot glavni protokol; k-kratno prečno preverjanje po posnetkih, LOO po subjektih in LOO po posnetkih označiti kot možne dodatne robustnostne preveritve, če bodo izvedene.
+    \item \GazeMAE{} trenirati oziroma uporabiti samo na množici \emph{samo pogled}; v tabelah ga je dovoljeno primerjati tudi z drugimi nabori kot referenčni model, vendar ne kot model, treniran na teh signalih.
+\end{itemize}
+}
+
+\subsection{Valenca in vzburjenost}
+
+% OPOMBA (ne briši): obe nalogi obravnavamo enakovredno, ampak v interpretaciji/diskusiji bomo večjo težo dali rezultatom za valenco, ker so podatki za vzburjenost slabši. razlaga: labele za vzburjenost se slabše ujemajo s "self reported" arousal score kot pri valenci. dokaz/referenca so ploti v GFM-for-eyetracker/docs/figures/hci-tagging/mentors meeting 2026-05-13/label_noise_analysis/2026-05-13_table6_self_report_alignment
+V nalogi obravnavamo dve glavni klasifikacijski nalogi: 3-razredno klasifikacijo valence ter 3-razredno klasifikacijo vzburjenosti.
+Obe nalogi definiramo po preslikavi iz tabele~6 izvirnega članka podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
+Razredi niso dobljeni z neposredno diskretizacijo številskih samoocen valence in vzburjenosti, temveč iz poročane čustvene oznake \texttt{emotion-id}.
+S tem eksperimentalni nalogi sledita izvirni formulaciji in omogočata primerjavo z objavljenimi rezultati na isti podatkovni zbirki.
+Za dodatno primerjavo uporabimo tudi binarni različici, pri katerih obdržimo samo oba skrajna razreda. 
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: pognati glavni nalogi diplome kot 3-razredno klasifikacijo valence in 3-razredno klasifikacijo vzburjenosti, ker sta tako neposredno primerljivi z formulacijo v \MAHNOB{}.
+    \item Eksperimenti: pognati še binarni low/high različici valence in vzburjenosti, kjer odstranimo srednji oziroma nevtralni razred in obdržimo izrazitejša skrajna razreda.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: v besedilu jasno ločiti glavni eksperiment od dodatnega binarnega eksperimenta; binarno formulacijo opiši kot čistejšo in lažjo dopolnilno evalvacijo, ne kot zamenjavo glavne naloge.
+    \item Pisanje: po rezultatih preveriti, ali imena razredov v tabelah, slikah in dodatkih sledijo enaki terminologiji kot v tabeli~\ref{tab:eksperimentalne-naloge-table6}.
+\end{itemize}
+}
+
+\begin{table}[t]
+    \centering
+    \caption{Preslikava čustvenih oznak v razrede valence in vzburjenosti, povzeta po tabeli~6 izvirnega članka \MAHNOB{}~\cite{soleymani2012mahnob}.}
+    \label{tab:eksperimentalne-naloge-table6}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedright\arraybackslash}p{0.24\textwidth} >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Ciljna naloga & Razred & Čustvene oznake \\
+        \midrule
+        Valenca & neprijetna (\emph{unpleasant}) & \emph{fear}, \emph{anger}, \emph{disgust}, \emph{sadness}, \emph{anxiety} \\
+        Valenca & nevtralna (\emph{neutral valence}) & \emph{neutral}, \emph{surprise} \\
+        Valenca & prijetna (\emph{pleasant}) & \emph{joy/happiness}, \emph{amusement} \\
+        \midrule
+        Vzburjenost & nizka (\emph{calm}) & \emph{sadness}, \emph{disgust}, \emph{neutral} \\
+        Vzburjenost & srednja (\emph{medium aroused}) & \emph{joy/happiness}, \emph{amusement} \\
+        Vzburjenost & visoka (\emph{excited/activated}) & \emph{surprise}, \emph{fear}, \emph{anger}, \emph{anxiety} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+
+\section{Validacijska protokola}
+\label{subsec:validacijska-protokola}
+
+\subsection{Prečno preverjanje z izpuščanjem enega primerka}
+
+Uporabimo dva validacijska protokola prečnega preverjanja tipa "izpusti enega" (ang. \emph{leave-one-out}, LOO).
+Pri takem protokolu množico podatkov najprej razdelimo na primerke po izbrani kategoriji, na primer po subjektih ali posnetkih.
+V vsaki iteraciji nato en primerek izvzamemo iz množice in njegove podatke uporabimo kot testno množico, podatke ostalih primerkov pa uporabimo za učenje oziroma jih pri nevronskih modelih dodatno razdelimo na učno in validacijsko množico.
+Pri klasičnih modelih strojnega učenja, kot sta SVM in LightGBM, validacijske množice v osnovnem učenju ne potrebujemo, pri nevronskih modelih, kot sta MLP in GNN, pa jo uporabimo za spremljanje učenja, spreminjanje hiperparametrov učenja ter zgodnje ustavljanje.
+
+Velikost validacijske množice smo določili z \texttt{val\_size=2}.
+Ta vrednost ustreza velikostnemu redu uporabljene podatkovne množice, ki po filtriranju vsebuje 22 subjektov in 20 posnetkov.
+Od testne množice se validacijska razlikuje po tem, da lahko vpliva na potek učenja oziroma izbiro modela, testna množica pa ostane namenjena samo končni oceni delovanja v posamezni iteraciji.
+
+Uporabili smo dva validacijska protokola prečnega preverjanja tipa LOO:
+\begin{itemize}
+    \item \textbf{LOO po subjektih}: v vsaki iteraciji so podatki enega subjekta testna množica, podatki ostalih subjektov pa so na voljo za učenje oziroma validacijo.
+    \item \textbf{LOO po posnetkih}: v vsaki iteraciji so podatki enega posnetka oziroma stimulusa testna množica, podatki ostalih posnetkov pa so na voljo za učenje oziroma validacijo.
+\end{itemize}
+
+Kombinirane delitve po subjektih in posnetkih v tej nalogi ne uporabljamo, ker bi bila računsko bistveno dražja in bi presegla obseg diplomske naloge.
+
+Pred izvedbo delitev smo iz podatkov izključili subjekte P9, P12 in P15.
+Ti subjekti so kot problematični navedeni že v izvirnem članku podatkovne zbirke \MAHNOB{}, zato jih izključimo tudi tukaj in s tem ohranimo boljšo primerljivost z izvirnimi rezultati.
+Pri oznakah uporabimo samo primere, pri katerih je vrednost stolpca \texttt{emotion-derivation-status} enaka \texttt{ok}, saj s tem odstranimo oglede posnetkov z nezanesljivo izpeljano čustveno oznako.
+
+Pri vsaki iteraciji prečnega preverjanja standardizacijo izračunamo samo na učni množici.
+Tako za značilke vozlišč, značilke povezav in tabelarične značilke najprej izračunamo statistike učne množice, nato pa isto pretvorbo uporabimo še na validacijski in testni množici.
+S tem preprečimo uhajanje informacij iz validacijske ali testne množice v učni postopek.
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: za glavne rezultate pognati LOO po subjektih kot primarni validacijski protokol in LOO po posnetkih kot dodatni poročani protokol.
+    \item Eksperimenti: k-kratnega prečnega preverjanja ne uporabljati in ne poročati kot glavni rezultat za primerjavo modelov; izjema je ablacijska študija, opisana v razdelku~\ref{subsec:ablacijska-studija}.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: v poglavju z rezultati naj bodo glavne tabele najprej za LOO po subjektih, nato za LOO po posnetkih; k-kratno prečno preverjanje naj se pojavi samo pri ablacijski študiji.
+    \item Pisanje: jasno zapisati, da LOO po subjektih ocenjuje posploševanje na nove udeležence, LOO po posnetkih pa posploševanje na nove posnetke oziroma stimuluse.
+\end{itemize}
+}
+
+\subsection{LOO po subjektih}
+
+LOO po subjektih meri posploševanje na nove udeležence.
+Izvedli smo ga zato, ker pri uporabi modela na novem uporabniku običajno nimamo označenih podatkov zanj.
+S tem protokolom ocenimo, kako dobro se naučeni vzorci prenesejo na nove subjekte in koliko so modeli občutljivi na razlike med posameznimi udeleženci.
+
+V vsaki iteraciji je en subjekt v testni množici.
+Pri nevronskih modelih sta dva izmed preostalih subjektov v validacijski množici, ostalih 19 subjektov pa je v učni množici.
+Pri tem protokolu delimo podatke po subjektih, zato so lahko podatki vseh posnetkov prisotni v učni, validacijski in testni množici.
+
+\subsection{LOO po posnetkih}
+
+LOO po posnetkih meri posploševanje na nove posnetke oziroma stimuluse.
+Izvedli smo ga zato, ker preverja drugačen vidik posploševanja kot LOO po subjektih: nov posnetek lahko povzroči drugačne vzorce pogleda, saj je pogled usmerjen na druge dele zaslona in sledi drugačnemu dogajanju.
+S tem preverimo, kako dobre so napovedi modelov pri novem stimulusu.
+
+V vsaki iteraciji je en posnetek v testni množici.
+Pri nevronskih modelih sta dva izmed preostalih posnetkov v validacijski množici, ostalih 17 posnetkov pa je v učni množici.
+Pri tem protokolu delimo podatke po posnetkih, zato so lahko podatki vseh subjektov prisotni v učni, validacijski in testni množici.
+
+\section{Metrike}
+\label{subsec:metrike}
+
+Za vsako nalogo in vsak validacijski protokol izračunamo več metrik, ker različne metrike povedo različne informacije o delovanju modela.
+Kot glavni metriki uporabimo točnost in macro-F1, z namenom direktne primerjave z izvirnim člankom podatkovne zbirke \MAHNOB{}.
+Članek sicer ne poroča izrecno, ali uporablja navadno ali uravnoteženo točnost oziroma macro-F1 ali weighted-F1, vendar to utemeljeno sklepamo iz poročanih rezultatov naključnega klasifikatorja.
+
+\begin{table}[t]
+    \centering
+    \caption{Metrike, uporabljene pri vrednotenju modelov.}
+    \label{tab:eksperimentalni-protokol-metrike}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Metrika & Definicija & Interpretacija \\
+        \midrule
+        Accuracy & Delež pravilno razvrščenih primerov med vsemi primeri. & Ena izmed dveh glavnih metrik za primerjavo z izvirnimi rezultati na podatkovni zbirki \MAHNOB{}. \\
+        Macro-F1 & Povprečje vrednosti F1 po razredih, pri čemer ima vsak razred enako težo. & Druga glavna metrika za primerjavo z izvirnim člankom; posebej pomembna pri neuravnoteženih razredih. \\
+        Balanced accuracy & Povprečje priklica po razredih. & Enaka teža vseh razredov pri oceni uspešnosti. \\
+        Weighted-F1 & Povprečje vrednosti F1 po razredih, uteženo s številom primerov v posameznem razredu. & Dodatna ocena uspešnosti glede na dejansko porazdelitev razredov. \\
+        AUC & Ločljivost razredov na podlagi napovedanih verjetnosti; pri večrazredni nalogi jo izračunamo po pristopu one-vs-rest. & Podporna informacija o ločevanju posameznih razredov. \\
+        Confusion matrix & Število in delež napovedi za vsako kombinacijo pravega in napovedanega razreda. & Razlaga tipičnih napak modela; pri prikazu je normalizirana po vrsticah. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+Rezultate metrik poročamo kot povprečje in standardni odklon čez iteracije prečnega preverjanja, torej v obliki mean $\pm$ std.
+
+\section{Spremljanje učenja in diagnostika}
+\label{subsec:spremljanje-ucenja}
+
+\TODO{
+\begin{itemize}
+    \item Napiši, da diagnostiko učenja obravnavamo ločeno od končnih metrik vrednotenja, kot so accuracy, F1 in AUC.
+    \item Navedi, da za nevronske modele shranjujemo učno izgubo, validacijsko izgubo, najboljšo epoho, zgodnje ustavljanje, čas epohe, trenutno stopnjo učenja in norme gradientov.
+    \item Pojasni, da krivulji učne in validacijske izgube uporabimo za preverjanje stabilnosti optimizacije in znakov prekomernega prileganja; testno izgubo izračunamo šele po izbiri najboljšega modela.
+    \item Za grafovske modele napiši, da dodatno spremljamo varianco predstavitev grafa, povprečno kosinusno podobnost predstavitev, razpon logitov in entropijo napovednih verjetnosti.
+    \item Pojasni namen teh GNN diagnostik: zaznavanje prekomernega glajenja, kolapsa predstavitev in skoraj konstantnih napovedi klasifikacijske glave.
+    \item Za predlagani model omeni še povzetke naučenih uteži povezav po časovnih, prostorskih in fiksacijskih relacijah.
+    \item V glavnem besedilu poročaj samo agregirane krivulje izgub, porazdelitev najboljše epohe in ključne GNN diagnostike; podrobne grafe po gubah in relacijske porazdelitve uteži prestavi v dodatek~\ref{app:diagnostika}.
+\end{itemize}
+}
+
+\section{Glavna primerjava modelov}
+\label{subsec:glavna-primerjava}
+
+\TODO{
+\begin{itemize}
+    \item Ta razdelek naj bo samo protokolarni povzetek primerjanih modelov, signalnih naborov in hiperparametrov.
+    \item Ne razlagaj ponovno, kaj je homogeni ali heterogeni graf; za to uporabi sklic na poglavji~\ref{sec:ozadje} in~\ref{sec:grafovska-predstavitev}.
+    \item Ne razlagaj ponovno naučenih uteži povezav, relacijskega posredovanja sporočil ali READOUT; za to uporabi sklic na poglavje~\ref{sec:modeli}.
+    \item Tabela modelov naj vsebuje kratek opis vloge modela v primerjavi, ne metodološke definicije.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Ta razdelek kasneje prepisati v opis glavne faktorske primerjave: modeli po vrsticah, nabori signalov po stolpcih oziroma ločeni teki za \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}.
+    \item Ločiti modele, ki so definirani za vse nabore signalov, od modelov, ki so smiselni samo za posamezen nabor: \GazeMAE{} za \emph{samo pogled}, morebitni MOMENT za \emph{samo zenici} oziroma zenični del.
+\end{itemize}
+}
+
+Glavna primerjava vključuje modele v tabeli~\ref{tab:primerjani-modeli}.
+Tabela poleg imena modela povzema kratko vlogo modela v primerjavi in osnovne parametre, ki jih pri posamezni vrsti modela poročamo ali uporabljamo pri razlagi rezultatov.
+ 
+\begin{table}[t]
+    \centering
+    \caption{Modeli, vključeni v glavno primerjavo, njihova vloga in osnovni parametri.}
+    \label{tab:primerjani-modeli}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.34\textwidth}@{}}
+        \toprule
+        Model & Opis & Parametri \\
+        \midrule
+        Naključni klasifikator & Enakomerno naključno vzorčenje razreda. & \texttt{random\_state=42} \\
+        \addlinespace
+        Večinski klasifikator & Napoved najpogostejšega razreda učne množice. & \texttt{/} \\
+        \addlinespace
+        SVM & Klasifikator z jedrom RBF nad agregiranimi značilkami okna. & \texttt{C=1.0}, \texttt{kernel=rbf}, \texttt{probability=true} \\
+        \addlinespace
+        LightGBM & Gradientno spodbujena odločitvena drevesa nad agregiranimi značilkami okna. & \texttt{n\_estimators=100}, \texttt{learning\_rate=0.05}, \texttt{max\_depth=5} \\
+        \addlinespace
+        MLP & Polno povezana nevronska mreža nad agregiranimi značilkami okna. & \texttt{hidden\_layers=(64,64)}, \texttt{dropout=0.1}, \texttt{learning\_rate=0.001}, \texttt{weight\_decay=0.0001} \\
+        \addlinespace
+        \GazeMAE{} + MLP & Zamrznjen prednaučen kodirnik položajev pogleda. & predstavitev z~512 razsežnostmi, \texttt{hidden\_layer\_size=128}, \texttt{dropout=0.2}, \texttt{learning\_rate=0.001} \\
+        \addlinespace
+        Osnovni GCN & Homogeni grafovski primerjalni model z enotnim posredovanjem sporočil. & \texttt{GCNConv}, \texttt{num\_layers=3}, \texttt{hidden\_channels=128} \\
+        \addlinespace
+        Predlagani GNN & Heterogena časovno-prostorska grafovska nevronska mreža z naučenimi utežmi povezav. & \texttt{GCNConv}, \texttt{num\_layers=2}, \texttt{hidden\_channels=64}, \texttt{kt=1}, \texttt{ks=1}, \texttt{kf=3}, \texttt{relation\_pooling=mlp}, \texttt{graph\_pooling=attention} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+\END_NOTE{Na koncu preveri, da se vrstni red ujema z vrstnim redom v tabelah/plotih. Preveri tudi, da se ujemajo poimenovanja znotraj diplome (recimo, če si že definiral naš GNN kot X, potem uporabljaj ta konsistentno v besedilu, tabelah in slikah).}
+
+Vsi grafovski modeli v glavnih poskusih uporabljajo \texttt{GCNConv}.
+V dodatnem poskusu na naboru pogled+zenici smo preizkusili še \texttt{GATConv}, \texttt{GraphConv} in \texttt{GINConv} oziroma \texttt{GINEConv}.
+Razlike med različicami niso bile velike, \texttt{GCNConv} pa je dosegel primerljive in stabilne rezultate pri neuteženi in uteženi arhitekturi.
+Zato smo v glavnih poskusih ohranili enoten operator \texttt{GCNConv}, podrobnosti primerjave pa podajamo v dodatku~\ref{app:izbira-grafovske-konvolucije}.
+
+\TODO{
+\begin{itemize}
+    \item Če je izbira grafovske konvolucije razložena v dodatku~\ref{app:izbira-grafovske-konvolucije}, tukaj pusti samo protokolarno odločitev in sklic.
+\end{itemize}
+}
+
+Za nastavitev predlaganega GNN smo izvedli kompaktno iskanje po mreži na 3-razredni valenci s k-kratnim prečnim preverjanjem po subjektih ($k=5$, en subjekt na validacijsko množico), pri čemer smo preizkusili \texttt{num\_layers} $\in \{2,3,4\}$, \texttt{hidden\_channels} $\in \{64,128,256\}$, \texttt{kt} $\in \{1,2,3\}$, \texttt{ks} $\in \{1,2,3\}$ in \texttt{kf} oziroma \texttt{fixation\_dilation\_k} $\in \{1,2,3,5\}$.
+Kot končno nastavitev smo izbrali \texttt{num\_layers=2}, \texttt{hidden\_channels=64}, \texttt{kt=1}, \texttt{ks=1} in \texttt{kf=3}, saj je bila ta konfiguracija med najboljšimi po accuracy in macro-F1, hkrati pa je ohranila razmeroma majhen model s 101.143 učljivimi parametri in uravnoteženo gostoto grafovskih povezav.
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: preveriti, da primerjava vključuje diplomski grafovski izhodiščni model \textbf{osnovni GCN}; stare interne različice grafovskega modela ne sodijo v diplomsko primerjavo.
+    \item Eksperimenti: za osnovni GCN uporabiti isto grafovsko predstavitev, iste signale, ista okna, iste delitve in isto standardizacijo kot pri predlaganem GNN.
+    \item Eksperimenti: pri osnovnem GCN združiti relacije \texttt{temporal\_forward}, \texttt{temporal\_backward}, \texttt{spatial} in \texttt{fixation} v homogeni graf, odstraniti podvojene povezave ter ne uporabiti značilk povezav ali naučenih uteži povezav.
+    \item Eksperimenti: preveriti, da osnovni GCN uporablja \texttt{GCNConv}, isto napovedno glavo, iste YAML hiperparametre in ločen parameter za readout; trenutni readout je \texttt{attention}, pozneje lahko preverimo še \texttt{mean}.
+    \item Eksperimenti: preveriti, da osnovni GCN deluje za 2- in 3-razredno klasifikacijo ter da sta \texttt{num\_layers=3} in \texttt{hidden\_channels=128} res uporabljena tudi pri njem.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: v tabeli in besedilu uporabljaj izraz osnovni GCN.
+    \item Pisanje: v razlagi osnovnega GCN poudari, da je to arhitekturno poenostavljen grafovski izhodiščni model, ne starejša različica predlaganega modela.
+\end{itemize}
+}
+
+\section{Ablacijska študija}
+\label{subsec:ablacijska-studija}
+
+\TODO{
+\begin{itemize}
+    \item Če ta razdelek ostane, naj opisuje samo protokol ablacijske študije.
+    \item Ne razlagaj ponovno, kako so časovne, prostorske ali fiksacijske povezave zgrajene; sklicuj se na poglavje~\ref{sec:grafovska-predstavitev}.
+    \item Ne razlagaj ponovno, kako model uporablja relacije ali uteži; sklicuj se na poglavje~\ref{sec:modeli}.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Preveriti, ali ta razdelek po novi zasnovi sploh ostane ločena ablacijska študija ali se združi z glavno primerjavo signalnih naborov.
+    \item Če ostane ločeno, naj ablacijska študija odgovarja predvsem na vprašanja znotraj predlaganega GNN; primerjava \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali} naj bo glavna signalna primerjava, ne samo ablacijska opomba.
+\end{itemize}
+}
+
+Namen ablacijske študije je bil preveriti, koliko kateri signali prispevajo k boljšim napovedim predlaganega modela.
+Izhodišče je bil predlagani model iz glavne primerjave.
+Pri vsaki ablacijski nastavitvi smo ohranili enak validacijski protokol, enake delitve podatkov in enake hiperparametre učenja, zakrili pa smo samo eno skupino informacij (en signal).
+
+Preverili smo štiri ablacijske nastavitve.
+Pri prvi smo odstranili značilke velikosti zenic.
+Pri drugi smo odstranili časovno informacijo, torej časovne značilke vozlišč in povezav ter časovne povezave. 
+Pri tretji smo odstranili prostorsko informacijo, ki vključuje koordinate pogleda $(x, y)$, razdaljo in iz njih izpeljane prostorske povezave ter značilke povezav. 
+Pri četrti smo odstranili informacijo o fiksacijah, torej trajanje fiksacij in fiksacijske povezave.
+
+\TODO{
+\begin{itemize}
+    \item Eksperimenti: ablacijske poskuse pognati za 3-razredno valenco in 3-razredno vzburjenost.
+    \item Eksperimenti: zaradi časovne ekonomičnosti ablacijske poskuse pognati s k-kratnim prečnim preverjanjem po subjektih, trenutno z $k=5$, ne s polnim LOO po subjektih.
+    \item Eksperimenti: pripraviti ablacijske nastavitve za odstranitev časovne informacije, prostorske oziroma informacije pogleda, fiksacijske informacije, zenične informacije in razdaljne informacije.
+    \item Eksperimenti: ko odstranimo signal, odstraniti vse informacije, izpeljane iz njega: značilke vozlišč, značilke povezav in povezave.
+\end{itemize}
+}
+
+\TODO{
+\begin{itemize}
+    \item Pisanje: trenutni opis štirih ablacijsko nastavitev uskladiti s petimi skupinami signalov; razdaljo obravnavaj ločeno od prostorske informacije oziroma informacije pogleda, če bo tako implementirana v poskusih.
+    \item Pisanje: po pridobitvi rezultatov odločiti, ali v glavnem besedilu podrobno poročamo obe nalogi ali predvsem valenco; za vzburjenost naj bodo vsaj podporni rezultati v dodatku.
+    \item Pisanje: v poglavju z rezultati zapisati, da so rezultati k-kratnega prečnega preverjanja in LOO dovolj primerljivi za ablacijsko analizo, ker nas zanima relativni vpliv odstranitve signalov, ne končna absolutna ocena modela.
+\end{itemize}
+}
+
+
+\END_NOTE{Morebitni dodatni poskusi naj bodo obravnavani kot ločena arhitekturna analiza, ne kot ablacijska študija vhodnih signalov: izklop uteži povezav, uporaba $5~s$ oken namesto $10~s$ oken, odstranitev MLP fuzije relacijskih predstavitev in primerjava različnih strategij združevanja grafa.}

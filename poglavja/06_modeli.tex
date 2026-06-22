@@ -134,6 +134,12 @@ MOMENT temelji na arhitekturi transformerjev za časovne vrste in v uporabljeni 
 Pri množicah \emph{pogled in zenici} ter \emph{vsi signali} uporabimo združeno predstavitev obeh kodirnikov.
 Predstavitev \GazeMAE{} in predstavitev MOMENT konkateniramo v en skupni vektor, ki je nato vhod v klasifikacijsko glavo MLP.
 
+V rezultatih zamrznjene prednaučene predstavitvene modele obravnavamo kot eno
+družino modelov \GazeMAE{}/MOMENT.
+Pri množici \emph{samo pogled} ta vrstica pomeni uporabo \GazeMAE{}, pri množici
+\emph{samo zenici} uporabo MOMENT, pri množicah \emph{pogled in zenici} ter
+\emph{vsi signali} pa združeno predstavitev obeh kodirnikov.
+
 
 \section{Grafovski modeli}
 \label{subsec:grafovski-modeli}

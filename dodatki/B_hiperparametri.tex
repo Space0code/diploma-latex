@@ -5,15 +5,15 @@
 \begin{itemize}
     \item tabela hiperparametrov za negrafovske osnovne modele;
     \item tabela hiperparametrov za \GazeMAE{};
-    \item tabela hiperparametrov za osnovni GCN;
-    \item tabela hiperparametrov za predlagani GNN;
-    \item predlagani GNN: \texttt{GCNConv}, \texttt{hidden\_channels=128}, \texttt{num\_layers=3};
-    \item predlagani GNN: \texttt{relation\_pooling=mlp}, \texttt{graph\_pooling=attention};
-    \item osnovni GCN: uporabljeni isti splošni parametri kot pri predlaganem GNN; posebej navesti readout funkcijo;
-    \item trenutni graf: \texttt{kt=2}, \texttt{ks=2}, \texttt{fixation\_dilation\_k=3};
+    \item tabela hiperparametrov za grafovske modele;
+    \item grafovski modeli: \texttt{GCNConv}, \texttt{hidden\_channels=64}, \texttt{num\_layers=2};
+    \item grafovski modeli: dvoslojni predobdelavni MLP, pozornostno združevanje in klasifikacijska glava MLP;
+    \item HeteroGCN-MLP in HeteroGCN-MLP-w: \texttt{relation\_fusion=mlp}; HeteroGCN-mean: \texttt{relation\_fusion=mean};
+    \item GCN: uporabljeni isti splošni parametri kot pri heterogenih modelih, vendar z združenim homogenim grafom in brez značilk povezav;
+    \item trenutni graf: \texttt{kt=1}, \texttt{ks=1}, \texttt{fixation\_dilation\_k=3};
     \item dodaj rezultate mrežnega iskanja velikostnih hiperparametrov GNN: \texttt{kt}, \texttt{ks}, \texttt{kf}, število slojev in dimenzija skritih predstavitev;
     \item trenutne edge značilke: \texttt{use\_delta\_distance\_edge\_feature=true};
-    \item trenutni trening: učna stopnja $5\cdot 10^{-5}$, velikost mini-serije 256, največ 500 epoh, potrpežljivost 20;
+    \item trenutni trening: učna stopnja $5\cdot 10^{-5}$, velikost mini-serije 256, največ 350 epoh, potrpežljivost 20;
     \item dodaj kratek opis uporabljene strojne in programske opreme za poganjanje poskusov: CPU, GPU, RAM, operacijski sistem, različica Pythona, ključne knjižnice in različice paketov;
     \item dodaj kratko poročilo o času učenja oziroma trajanju poskusov, po potrebi ločeno za glavne modele, protokole delitev in mrežna iskanja;
     \item finalni config path;
@@ -21,3 +21,48 @@
     \item opomba, če kaj ni bilo sistematično tunano.
 \end{itemize}
 }
+
+\section{Naučene uteži povezav}
+\label{app:naucene-utezi-povezav}
+
+V modelu HeteroGCN-MLP-w značilke povezave uporabimo za izračun skalarne uteži povezave.
+Naj bo $\mathbf{e}_{ij}^{(r)}$ vektor značilk povezave $(v_i, v_j)$ v relaciji $r$.
+Najprej izračunamo surovo oceno:
+\begin{equation}
+    s_{ij}^{(r)} =
+    f_w^{(r)}
+    \left(
+    \mathbf{e}_{ij}^{(r)}
+    \right),
+\end{equation}
+kjer je $f_w^{(r)}$ večslojni perceptron za ustrezno družino relacij.
+Za časovne povezave naprej in nazaj uporabimo isti perceptron $f_w^{\mathrm{time}}$, za prostorske povezave $f_w^{\mathrm{space}}$, za fiksacijske povezave pa $f_w^{\mathrm{fixation}}$.
+Vsak od teh perceptronov ima obliko
+\begin{equation}
+    d_e \rightarrow 6 \rightarrow 4 \rightarrow 2 \rightarrow 1,
+\end{equation}
+kjer je $d_e$ razsežnost vektorja značilk povezave za izbrano relacijo in množico signalov.
+
+Surovo oceno nato omejimo s funkcijo $\tanh$:
+\begin{equation}
+    \tilde{w}_{ij}^{(r)} =
+    \tanh
+    \left(
+    s_{ij}^{(r)}
+    \right).
+\end{equation}
+Končno utež normaliziramo po vhodnih povezavah ciljne meritve $v_j$ znotraj iste relacije:
+\begin{equation}
+    w_{ij}^{(r)} =
+    \frac{
+        \tilde{w}_{ij}^{(r)}
+    }{
+        \sum_{k : (v_k, v_j) \in E_r}
+        \left|
+        \tilde{w}_{kj}^{(r)}
+        \right|
+        + \epsilon
+    },
+\end{equation}
+kjer je $\epsilon=10^{-8}$ majhna konstanta za numerično stabilnost.
+Ker normalizacija ohrani predznak uteži, lahko povezava prispevek sosednjega vozlišča tudi zmanjša, ne le poveča.

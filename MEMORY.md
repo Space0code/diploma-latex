@@ -157,6 +157,22 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-06-22 Tomi je zaklenil strukturo končnega eksperimentalnega protokola za
+  poglavje 7: glavna naloga je binarna klasifikacija valence, 3-razredne naloge
+  in vzburjenost se ne poročajo kot glavni eksperimenti, temveč se po potrebi
+  pojavijo v dodatku oziroma pri razlagi izbire hiperparametrov. Glavni
+  validacijski protokol je 7-kratno prečno preverjanje po subjektih. LOO po
+  subjektih omenimo kot predhodno preverjanje na množici `vsi signali`; v dodatku
+  naj bo primerjalna tabela za valenco med subject 7-fold in subject LOO.
+  Ločene ablacijske študije v diplomi ni več. Primerjava po signalnih množicah
+  je del glavne primerjave, vse štiri signalne množice (`samo pogled`, `samo
+  zenici`, `pogled in zenici`, `vsi signali`) so enakovredne. Zamrznjene
+  predstavitvene modele v protokolarni tabeli združi v eno vrstico
+  `GazeMAE/MOMENT`.
+- 2026-06-22 Pri MAHNOB-HCI ciljnih oznakah `target_aggregation` nima resne
+  vsebinske vloge, ker so ciljni razredi znotraj posameznega 10-sekundnega okna
+  konstantni. Razliko med `mean` in `constant` zato ne obravnavaj kot pomembno
+  metodološko razliko za končne rezultate.
 - 2026-06-15 Tomi je zaklenil novo glavno zgodbo diplome: fokus ostane na GNN
   za podatke sledilnika pogleda, ne na razvoju najboljšega možnega modela za
   prepoznavo čustev. Glavno vprašanje naj bo v smeri, kako dobro GNN kodirajo

@@ -3,17 +3,8 @@
 
 \TODO{
 \begin{itemize}
-    \item tabela hiperparametrov za negrafovske osnovne modele;
-    \item tabela hiperparametrov za \GazeMAE{};
-    \item tabela hiperparametrov za grafovske modele;
-    \item grafovski modeli: \texttt{GCNConv}, \texttt{hidden\_channels=64}, \texttt{num\_layers=2};
-    \item grafovski modeli: dvoslojni predobdelavni MLP, pozornostno združevanje in klasifikacijska glava MLP;
-    \item HeteroGCN-MLP in HeteroGCN-MLP-w: \texttt{relation\_fusion=mlp}; HeteroGCN-mean: \texttt{relation\_fusion=mean};
-    \item GCN: uporabljeni isti splošni parametri kot pri heterogenih modelih, vendar z združenim homogenim grafom in brez značilk povezav;
-    \item trenutni graf: \texttt{kt=1}, \texttt{ks=1}, \texttt{fixation\_dilation\_k=3};
-    \item dodaj rezultate mrežnega iskanja velikostnih hiperparametrov GNN: \texttt{kt}, \texttt{ks}, \texttt{kf}, število slojev in dimenzija skritih predstavitev;
-    \item trenutne edge značilke: \texttt{use\_delta\_distance\_edge\_feature=true};
-    \item trenutni trening: učna stopnja $5\cdot 10^{-5}$, velikost mini-serije 256, največ 350 epoh, potrpežljivost 20;
+    \item preveri in po potrebi dopolni enotno tabelo hiperparametrov;
+    \item dodaj rezultate mrežnega iskanja velikostnih hiperparametrov GNN: $k_t$, $k_s$, $k_f$, število slojev in dimenzija skritih predstavitev;
     \item dodaj kratek opis uporabljene strojne in programske opreme za poganjanje poskusov: CPU, GPU, RAM, operacijski sistem, različica Pythona, ključne knjižnice in različice paketov;
     \item dodaj kratko poročilo o času učenja oziroma trajanju poskusov, po potrebi ločeno za glavne modele, protokole delitev in mrežna iskanja;
     \item finalni config path;
@@ -21,6 +12,37 @@
     \item opomba, če kaj ni bilo sistematično tunano.
 \end{itemize}
 }
+
+\section{Hiperparametri modelov}
+\label{app:hiperparametri-modelov}
+
+Tabela~\ref{tab:hiperparametri-modelov} povzema glavne hiperparametre modelov v končnih eksperimentih.
+Klasični primerjalni modeli uporabljajo agregirane tabelarične značilke, nevronske primerjalne glave uporabljajo bodisi agregirane značilke bodisi zamrznjene predstavitve, grafovski modeli pa uporabljajo grafovsko predstavitev časovnih oken.
+
+\begin{table}[p]
+    \centering
+    \caption{Glavni hiperparametri modelov v končnih eksperimentih.}
+    \label{tab:hiperparametri-modelov}
+    \footnotesize
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.21\textwidth} >{\raggedright\arraybackslash}p{0.23\textwidth} >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Model oziroma družina & Podatkovna predstavitev & Glavni hiperparametri \\
+        \midrule
+        Naključni model & agregirane tabelarične značilke & enakomerna naključna napoved razreda; seme 42 \\
+        Večinski model & agregirane tabelarične značilke & napoved večinskega razreda na učni množici \\
+        SVM & agregirane tabelarične značilke & jedro RBF; $C=1{,}0$; \texttt{probability=true}; \texttt{decision\_function\_shape=ovr}; standardizacija značilk na učni množici \\
+        LightGBM & agregirane tabelarične značilke & \texttt{n\_estimators=100}; \texttt{learning\_rate=0.05}; \texttt{max\_depth=5}; \texttt{random\_state=42} \\
+        MLP & agregirane tabelarične značilke & klasifikacijska glava MLP s skrito velikostjo 64; največ 200 epoh; učna stopnja $10^{-3}$; \texttt{weight\_decay=0.0001}; \texttt{dropout=0.1}; mini-serija 128; zgodnje ustavljanje s potrpežljivostjo 15 epoh \\
+        \GazeMAE{} in MOMENT glave & zamrznjene predstavitve časovnih oken & klasifikacijska glava MLP s skrito velikostjo 128; največ 100 epoh; učna stopnja $10^{-3}$; \texttt{weight\_decay=0.0001}; \texttt{dropout=0.2}; mini-serija 128; zgodnje ustavljanje s potrpežljivostjo 15 epoh \\
+        Grafovski modeli & grafovska predstavitev časovnih oken & \texttt{GCNConv}; dve grafovski plasti; \texttt{hidden\_channels=64}; pozornostno združevanje grafa; predobdelavni MLP; \texttt{dropout=0.1}; učna stopnja $5 \cdot 10^{-5}$; mini-serija 256; največ 350 epoh; zgodnje ustavljanje s potrpežljivostjo 20 epoh \\
+        GCN & grafovska predstavitev časovnih oken & homogen graf; relacije niso modelno ločene; brez značilk povezav \\
+        HeteroGCN-mean & grafovska predstavitev časovnih oken & heterogeni graf; ločene časovne, prostorske in fiksacijske relacije; združevanje relacij s povprečenjem \\
+        HeteroGCN-MLP & grafovska predstavitev časovnih oken & heterogeni graf; ločene časovne, prostorske in fiksacijske relacije; združevanje relacij z MLP \\
+        HeteroGCN-MLP-w & grafovska predstavitev časovnih oken & kot HeteroGCN-MLP, dodatno naučene predznačene uteži povezav iz značilk povezav \\
+        Grafovska konstrukcija & grafovska predstavitev časovnih oken & $k_t=1$; $k_s=1$; $k_f=3$ (\texttt{fixation\_dilation\_k}); standardizacija značilk povezav; značilke povezav odvisne od uporabljene množice signalov \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
 
 \section{Strojna in programska oprema}
 \label{app:strojna-programska-oprema}

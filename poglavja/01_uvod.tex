@@ -5,8 +5,8 @@ Za učenje iz podatkov, kjer niso pomembne zgolj lastnosti posameznih elementov,
 Primer takšnih podatkov so podatki sledilnika pogleda.
 Meritvam sledilnika pogleda lahko smiselno določimo časovne in prostorske odnose in jim s tem priredimo časovno-prostorski graf. 
 Na tem grafu se z grafovsko nevronsko mrežo učimo predstavitev vozlišč in grafov, ki jih uporabimo za klasifikacijo grafa.
-Podatki, uporabljeni v tej nalogi, so označeni s čustvenimi oznakami valence, zato GNN učimo binarno klasifikacijo valence, rezultate pa primerjamo z rezultati uveljavljenih negrafovskih pristopov. 
-Eksperimentalno primerjavo izvedemo na štirih signalnih naborih: samo koordinatah pogleda (pogled), samo velikostih zenic (zenici), združenih koordinatah pogleda in velikostih zenic (pogled+zenici) ter celotnem naboru razpoložljivih signalov (vsi signali).
+Podatki, uporabljeni v tej nalogi, imajo ciljne oznake valence, izpeljane iz samoocen udeležencev, zato GNN učimo binarno klasifikacijo valence, rezultate pa primerjamo z rezultati uveljavljenih negrafovskih pristopov.
+Eksperimentalno primerjavo izvedemo na štirih množicah signalov: samo koordinatah pogleda (\emph{samo pogled}), samo velikostih zenic (\emph{samo zenici}), združenih koordinatah pogleda in velikostih zenic (\emph{pogled in zenici}) ter vseh razpoložljivih signalih (\emph{vsi signali}).
 
 \section{Raziskovalni problem}
 \label{subsec:raziskovalni-problem}
@@ -27,7 +27,7 @@ Dodatna podvprašanja so:
 
 \begin{enumerate}[label=\textbf{PV\arabic*:}]
     \item Kako podatke sledilnika pogleda smiselno predstaviti kot časovno-prostorski graf?
-    \item Kako se uspešnost klasifikatorjev razlikuje med posameznimi nabori signalov sledilnika pogleda?
+    \item Kako se uspešnost klasifikatorjev razlikuje med posameznimi množicami signalov sledilnika pogleda?
     \item Kako se klasifikacijska uspešnost spreminja z večjo kompleksnostjo grafovske nevronske mreže?
 \end{enumerate}
 
@@ -39,7 +39,7 @@ Glavni doprinosi diplomske naloge so:
 \begin{enumerate}
     \item zasnova časovno-prostorske grafovske predstavitve časovnih oken podatkov sledilnika pogleda;
     \item ovrednotenje arhitekturne lestvice grafovskih modelov za klasifikacijo čustvenih oznak iz podatkov sledilnika pogleda;
-    \item primerjava klasifikacijske uspešnosti pri različnih signalnih naborih;
+    \item primerjava klasifikacijske uspešnosti pri različnih množicah signalov;
     \item primerjava grafovskih modelov z negrafovskimi osnovnimi modeli in zamrznjenimi prednaučenimi predstavitvenimi modeli.
 \end{enumerate} 
 
@@ -53,6 +53,6 @@ V poglavju~\ref{sec:sorodna-dela} predstavimo sorodna dela, vključno z uporabo 
 Poglavje~\ref{sec:podatki} opisuje uporabljene podatke, ciljne oznake in predobdelavo.
 V poglavju~\ref{sec:grafovska-predstavitev} opišemo konstrukcijo časovno-prostorskega grafa.
 Poglavje~\ref{sec:modeli} predstavi uporabljene modele.
-V poglavju~\ref{sec:eksperimenti} opišemo eksperimentalni protokol, v poglavju~\ref{sec:rezultati} pa rezultate glavne primerjave modelov in signalnih naborov.
+V poglavju~\ref{sec:eksperimenti} opišemo eksperimentalni protokol, v poglavju~\ref{sec:rezultati} pa rezultate glavne primerjave modelov in množic signalov.
 Poglavje~\ref{sec:diskusija} vsebuje interpretacijo rezultatov, omejitve in možnosti nadaljnjega dela.
 Nalogo sklenemo v poglavju~\ref{sec:zakljucek}.

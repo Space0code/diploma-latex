@@ -150,11 +150,14 @@ Večje vrednosti $k_f$ povečajo gostoto grafa, računsko zahtevnost in možnost
 Povezavam poleg tipa relacije priredimo tudi značilke povezav, ki opisujejo odnos med izvorno meritvijo $v_i$ in ciljno meritvijo $v_j$.
 Osnovne časovne značilke so normalizirani čas izvorne in ciljne meritve, $t_i$ in $t_j$, ter časovna razlika $\Delta t = t_j - t_i$.
 Pri časovnih povezavah dodamo še smer $\rho_{ij}$, kjer ima povezava naprej vrednost $\rho_{ij}=1$, povezava nazaj pa $\rho_{ij}=-1$.
-Značilke povezav so del najbogatejše grafovske predstavitve; eksplicitno jih uporabi utežena stopnja arhitekturne lestvice, opisana v poglavju~\ref{sec:modeli}.
+Značilke povezav so del grafovske predstavitve; eksplicitno jih uporabi utežena stopnja arhitekturne lestvice, opisana v poglavju~\ref{sec:modeli}.
 
 Pri grafih, ki vsebujejo koordinate pogleda, povezavam dodamo tudi prostorske značilke.
 To sta razliki v koordinatah pogleda, $\Delta x = x_j - x_i$ in $\Delta y = y_j - y_i$, ter evklidska razdalja med položajema pogleda na zaslonu $d_{ij}^{\text{zaslon}}$.
 Te značilke so zato na voljo pri vseh množicah signalov, razen pri množici \emph{samo zenici}.
+
+Pri grafih, ki vsebujejo velikosti zenic, povezavam dodamo spremembi velikosti leve in desne zenice.
+Značilki $\Delta p^{(l)}_{ij} = p_j^{(l)} - p_i^{(l)}$ in $\Delta p^{(r)}_{ij} = p_j^{(r)} - p_i^{(r)}$ sta na voljo pri množicah \emph{samo zenici}, \emph{pogled in zenici} in \emph{vsi signali}.
 
 Pri množici \emph{vsi signali} povezavam dodamo še značilko, povezano z oddaljenostjo od sledilnika pogleda.
 Značilka $\Delta d^{\text{oči}}_{ij}$ opisuje razliko v oddaljenosti med ciljno in izvorno meritvijo.
@@ -176,6 +179,8 @@ Pregled vseh značilk povezav in njihove uporabe je podan v tabeli~\ref{tab:znac
         $\Delta x$ & Razlika v vodoravni koordinati pogleda, $\Delta x = x_j - x_i$. & Grafi s koordinatami pogleda. \\
         $\Delta y$ & Razlika v navpični koordinati pogleda, $\Delta y = y_j - y_i$. & Grafi s koordinatami pogleda. \\
         $d_{ij}^{\text{zaslon}}$ & Evklidska razdalja med položajema pogleda na zaslonu. & Grafi s koordinatami pogleda. \\
+        $\Delta p^{(l)}_{ij}$ & Razlika v velikosti leve zenice, $\Delta p^{(l)}_{ij} = p_j^{(l)} - p_i^{(l)}$. & Grafi z velikostmi zenic. \\
+        $\Delta p^{(r)}_{ij}$ & Razlika v velikosti desne zenice, $\Delta p^{(r)}_{ij} = p_j^{(r)} - p_i^{(r)}$. & Grafi z velikostmi zenic. \\
         $\Delta d^{\text{oči}}_{ij}$ & Razlika v oddaljenosti od sledilnika pogleda med ciljno in izvorno meritvijo. & Samo \emph{vsi signali}. \\
         \bottomrule
     \end{tabularx}

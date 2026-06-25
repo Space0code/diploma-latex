@@ -53,32 +53,9 @@ Primerjava obeh validacijskih protokolov za valenco in množico \emph{vsi signal
 \label{subsec:nastavitve-ucenja}
 
 V tem razdelku navedemo nastavitve učenja, ki vplivajo na izvedbo eksperimentov.
-Nevronske modele učimo z zgodnjim ustavljanjem na validacijski izgubi.
-Učenje lahko traja največ 350 epoh, potrpežljivost zgodnjega ustavljanja je 20 epoh, velikost mini-serije pa 256.
-Glavne nastavitve nevronskih in grafovskih modelov so povzete v tabeli~\ref{tab:nastavitve-ucenja}, celoten seznam hiperparametrov pa je v dodatku~\ref{app:hiperparametri}.
-
-\begin{table}[t]
-    \centering
-    \caption{Glavne nastavitve učenja za nevronske in grafovske modele v končnih eksperimentih.}
-    \label{tab:nastavitve-ucenja}
-    \small
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.34\textwidth} >{\raggedright\arraybackslash}X@{}}
-        \toprule
-        Nastavitev & Vrednost \\
-        \midrule
-        Največje število epoh & 350 \\
-        Zgodnje ustavljanje & validacijska izguba, potrpežljivost 20 epoh \\
-        Velikost mini-serije & 256 \\
-        Grafovski operator & \texttt{GCNConv} \\
-        Učna stopnja grafovskih modelov & $5 \cdot 10^{-5}$ \\
-        Število grafovskih plasti & \texttt{num\_layers=2} \\
-        Velikost skrite predstavitve & \texttt{hidden\_channels=64} \\
-        Časovne povezave & \texttt{kt=1} \\
-        Prostorske povezave & \texttt{ks=1} \\
-        Razširjene povezave znotraj fiksacije & \texttt{kf=3} \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+Nevronske modele učimo z zgodnjim ustavljanjem na validacijski izgubi, pri čemer grafovski modeli in nevronske primerjalne glave uporabljajo ločene nastavitve učenja.
+Grafovski modeli uporabljajo operator \texttt{GCNConv}, dve grafovski plasti, skrite predstavitve velikosti 64 ter povezave s parametri $k_t=1$, $k_s=1$ in $k_f=3$, kot so definirani v poglavju~\ref{sec:grafovska-predstavitev}.
+Podrobni hiperparametri vseh modelov so podani v dodatku~\ref{app:hiperparametri}.
 
 Nastavitve grafovskih modelov izberemo na podlagi predhodnega kompaktnega mrežnega iskanja.
 To iskanje je bilo izvedeno na 3-razredni valenci in ga poročamo samo kot pomožni poskus za izbiro stabilnih nastavitev.

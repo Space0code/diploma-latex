@@ -33,11 +33,14 @@ V tabeli~\ref{tab:pregled-primerjanih-modelov} je prikazano, katere modele upora
         \midrule
         Naključni & \multirow{2}{=}{izhodiščna klasifikatorja} & \multirow{2}{=}{brez učenja iz značilk} & spodnja meja naključnega ugibanja \\
         Večinski & & & spodnja meja napovedovanja najpogostejšega razreda \\
+        \cmidrule(lr){1-4}
         SVM & \multirow{3}{=}{klasični modeli strojnega učenja} & \multirow{3}{=}{agregirane značilke okna} & \multirow{3}{=}{klasični model strojnega učenja} \\
         LightGBM & & & \\
         MLP & & & \\
+        \cmidrule(lr){1-4}
         \GazeMAE{} & \multirow{2}{=}{zamrznjeni prednaučeni predstavitveni modeli} & koordinati pogleda $(x, y)$ & prednaučena predstavitev za množico \emph{samo pogled} \\
         MOMENT & & časovne vrste izbranih signalov & prednaučena predstavitev za množice s signali zenic oziroma več signali \\
+        \cmidrule(lr){1-4}
         GCN & \multirow{4}{=}{grafovski modeli} & homogeni graf okna & osnovni grafovski model \\
         HeteroGCN-mean & & \multirow{2}{=}{heterogeni graf okna} & ločena obravnava relacij s preprosto fuzijo \\
         HeteroGCN-MLP & & & ločena obravnava relacij z naučeno fuzijo \\

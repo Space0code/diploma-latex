@@ -14,11 +14,11 @@ validacijsko in testno množico.
 \section{Zasnova glavne primerjave}
 \label{subsec:zasnova-glavne-primerjave}
 
-Cilj glavne primerjave je odgovoriti na raziskovalno vprašanje iz razdelka~\ref{subsec:raziskovalna-vprasanja}: kakšna je klasifikacijska uspešnost grafovskih modelov v primerjavi z negrafovskimi pristopi pri isti ciljni nalogi in istih osnovnih podatkovnih oknih.
+Cilj glavne primerjave je odgovoriti na raziskovalno vprašanje~\ref{rv:glavno}: \rvGlavnoBesedilo
 Zato v primerjavi spreminjamo le način predstavitve okna in model, ki to predstavitev uporabi.
 
 Ciljna oznaka je binarni razred valence, pri kateri model ločuje med nizko in visoko valenco.
-Vse štiri množice iz tabele~\ref{tab:mnozice-signalov} obravnavamo kot enakovreden del primerjave, saj nas zanima tudi, kako se klasifikacijska uspešnost spreminja z razpoložljivostjo različnih signalov sledilnika pogleda.
+Vse štiri množice iz tabele~\ref{tab:grafovska-konstrukcija-po-mnozicah} obravnavamo kot enakovreden del primerjave, saj nas zanima tudi, kako se klasifikacijska uspešnost spreminja z razpoložljivostjo različnih signalov sledilnika pogleda.
 
 V primerjavi nastopajo vsi modeli iz tabele~\ref{tab:pregled-primerjanih-modelov}: izhodiščna klasifikatorja, klasični modeli nad agregiranimi značilkami, zamrznjeni prednaučeni predstavitveni modeli in grafovski modeli.
 S tem primerjamo tri različne načine opisa istega časovnega okna: tabelarični povzetek signalov, vektorsko predstavitev časovne vrste in grafovsko predstavitev meritev.
@@ -31,7 +31,7 @@ S tem primerjamo tri različne načine opisa istega časovnega okna: tabelaričn
 
 Glavno primerjavo izvedemo s 7-kratnim prečnim preverjanjem po subjektih.
 Pri vsaki ponovitvi so testni subjekti popolnoma ločeni od subjektov, ki so uporabljeni za učenje in validacijo.
-Iz učnega dela izberemo še enega subjekta za validacijsko množico, preostali subjekti pa sestavljajo učno množico.
+Iz učnega dela izberemo eno skupino subjektov za validacijsko množico, preostali subjekti pa sestavljajo učno množico.
 Delitve so pri vseh modelih in vseh množicah signalov enake, določene s fiksnim naključnim semenom.
 
 Takšna delitev ocenjuje posploševanje na nove udeležence.
@@ -53,12 +53,12 @@ Primerjava obeh validacijskih protokolov za valenco in množico \emph{vsi signal
 \label{subsec:nastavitve-ucenja}
 
 V tem razdelku navedemo nastavitve učenja, ki vplivajo na izvedbo eksperimentov.
-Nevronske modele učimo z zgodnjim ustavljanjem na validacijski izgubi, pri čemer grafovski modeli in nevronske primerjalne glave uporabljajo ločene nastavitve učenja.
+Nevronske modele učimo z zgodnjim ustavljanjem na validacijski izgubi.
 Grafovski modeli uporabljajo operator \texttt{GCNConv}, dve grafovski plasti, skrite predstavitve velikosti 64 ter povezave s parametri $k_t=1$, $k_s=1$ in $k_f=3$, kot so definirani v poglavju~\ref{sec:grafovska-predstavitev}.
 Podrobni hiperparametri vseh modelov so podani v dodatku~\ref{app:hiperparametri}.
 
 Nastavitve grafovskih modelov izberemo na podlagi predhodnega kompaktnega mrežnega iskanja.
-To iskanje je bilo izvedeno na 3-razredni valenci in ga poročamo samo kot pomožni poskus za izbiro stabilnih nastavitev.
+To iskanje je bilo izvedeno na 3-razredni valenci in ga v ~\ref{app:hiperparametri} poročamo samo kot pomožni poskus za izbiro stabilnih nastavitev.
 
 \section{Metrike vrednotenja}
 \label{subsec:metrike}
@@ -68,7 +68,7 @@ Za vsak model in vsako množico signalov poročamo povprečje po sedmih testnih 
 Točnost uporabimo kot osnovno metriko, ker ima glavna naloga dva enakovredna in globalno skoraj uravnotežena razreda.
 
 Makro F1 uporabimo kot dopolnilno glavno metriko.
-Čeprav sta razreda globalno skoraj uravnotežena, so lahko posamezne testne razdelitve precej neuravnotežene.
+Čeprav sta razreda globalno skoraj uravnotežena, so lahko posamezne testne razdelitve precej neuravnotežene (tudi do razmerja $1:2$).
 Makro F1 izračuna F1 ločeno za vsak razred in nato razreda povpreči z enako utežjo.
 S tem dopolni točnost predvsem pri modelih, ki lahko dosežejo sprejemljivo točnost, vendar večino primerov napovedujejo v en sam razred.
 
@@ -86,4 +86,4 @@ Krivulje izgub služijo predvsem preverjanju stabilnosti optimizacije in zaznava
 Pri grafovskih modelih spremljamo še nekaj diagnostičnih meritev naučenih predstavitev in napovedi.
 Med njimi so varianca predstavitev grafa, povprečna kosinusna podobnost predstavitev, razpon logitov in entropija napovednih verjetnosti.
 Te meritve uporabimo za preverjanje, ali se med učenjem pojavijo skoraj konstantne napovedi, zaznavanje kolapsa predstavitev ali znakov prekomernega glajenja.
-Te diagnostike ne poročamo v poglavju~\ref{sec:rezultati}, je pa podana v dodatku~\ref{app:diagnostika-prekomerno-glajenje}.
+Te diagnostike ne poročamo med rezultati v poglavju~\ref{sec:rezultati}, temveč le v dodatku~\ref{app:diagnostika-prekomerno-glajenje}.

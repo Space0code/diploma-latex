@@ -104,6 +104,8 @@ Ta podatek imamo zgolj v množici \emph{vsi signali}, zato so te povezave vklju�
 
 \subsubsection{Redčenje povezav znotraj fiksacije}
 
+\END_NOTE{Razmisli, ali to podsekcijo o redčenju skrajšati ali jo v celoti prestaviti v dodatek in tukaj samo omeniti redčenje v 1-2 povedih.}
+
 Znotraj posamezne fiksacije ne povežemo vseh vozlišč med seboj, saj bi to povzročilo preveliko število fiksacijskih povezav.
 Namesto tega uporabimo redkejšo konstrukcijo, ki ohrani informacijo o pripadnosti isti fiksaciji, hkrati pa zmanjša prostorsko in časovno zahtevnost konstrukcije grafa ter učenja na grafu.
 To konstrukcijo sami imenujemo \emph{razširjene povezave znotraj fiksacije} (angl. \emph{dilated intra-fixation edges}).
@@ -150,17 +152,17 @@ Večje vrednosti $k_f$ povečajo gostoto grafa, računsko zahtevnost in možnost
 Povezavam poleg tipa relacije priredimo tudi značilke povezav, ki opisujejo odnos med izvorno meritvijo $v_i$ in ciljno meritvijo $v_j$.
 Osnovne časovne značilke so normalizirani čas izvorne in ciljne meritve, $t_i$ in $t_j$, ter časovna razlika $\Delta t = t_j - t_i$.
 Pri časovnih povezavah dodamo še smer $\rho_{ij}$, kjer ima povezava naprej vrednost $\rho_{ij}=1$, povezava nazaj pa $\rho_{ij}=-1$.
-Značilke povezav so del grafovske predstavitve; eksplicitno jih uporabi utežena stopnja arhitekturne lestvice, opisana v poglavju~\ref{sec:modeli}.
+Značilke povezav so del grafovske predstavitve, uporabi jih končna utežena stopnja arhitekturne lestvice, opisana v poglavju~\ref{sec:modeli}.
 
 Pri grafih, ki vsebujejo koordinate pogleda, povezavam dodamo tudi prostorske značilke.
 To sta razliki v koordinatah pogleda, $\Delta x = x_j - x_i$ in $\Delta y = y_j - y_i$, ter evklidska razdalja med položajema pogleda na zaslonu $d_{ij}^{\text{zaslon}}$.
 Te značilke so zato na voljo pri vseh množicah signalov, razen pri množici \emph{samo zenici}.
 
 Pri grafih, ki vsebujejo velikosti zenic, povezavam dodamo spremembi velikosti leve in desne zenice.
-Značilki $\Delta p^{(l)}_{ij} = p_j^{(l)} - p_i^{(l)}$ in $\Delta p^{(r)}_{ij} = p_j^{(r)} - p_i^{(r)}$ sta na voljo pri množicah \emph{samo zenici}, \emph{pogled in zenici} in \emph{vsi signali}.
+Značilki $\Delta p^{(l)}_{ij} = p_j^{(l)} - p_i^{(l)}$ in $\Delta p^{(r)}_{ij} = p_j^{(r)} - p_i^{(r)}$ sta na voljo pri množicah \emph{samo zenici}, \emph{pogled in zenici} ter \emph{vsi signali}.
 
 Pri množici \emph{vsi signali} povezavam dodamo še značilko, povezano z oddaljenostjo od sledilnika pogleda.
-Značilka $\Delta d^{\text{oči}}_{ij}$ opisuje razliko v oddaljenosti med ciljno in izvorno meritvijo.
+Značilka $\Delta d_{ij} = d_j - d_i$ opisuje razliko v oddaljenosti od sledilnika pogleda med ciljno in izvorno meritvijo.
 
 Pregled vseh značilk povezav in njihove uporabe je podan v tabeli~\ref{tab:znacilke-povezav}.
 
@@ -181,7 +183,7 @@ Pregled vseh značilk povezav in njihove uporabe je podan v tabeli~\ref{tab:znac
         $d_{ij}^{\text{zaslon}}$ & Evklidska razdalja med položajema pogleda na zaslonu. & Grafi s koordinatami pogleda. \\
         $\Delta p^{(l)}_{ij}$ & Razlika v velikosti leve zenice, $\Delta p^{(l)}_{ij} = p_j^{(l)} - p_i^{(l)}$. & Grafi z velikostmi zenic. \\
         $\Delta p^{(r)}_{ij}$ & Razlika v velikosti desne zenice, $\Delta p^{(r)}_{ij} = p_j^{(r)} - p_i^{(r)}$. & Grafi z velikostmi zenic. \\
-        $\Delta d^{\text{oči}}_{ij}$ & Razlika v oddaljenosti od sledilnika pogleda med ciljno in izvorno meritvijo. & Samo \emph{vsi signali}. \\
+        $\Delta d_{ij}$ & Razlika v oddaljenosti od sledilnika pogleda, $\Delta d_{ij} = d_j - d_i$. & Samo \emph{vsi signali}. \\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -190,14 +192,14 @@ Pregled vseh značilk povezav in njihove uporabe je podan v tabeli~\ref{tab:znac
 \section{Grafovska konstrukcija po množicah signalov}
 \label{subsec:grafovska-konstrukcija-po-mnozicah}
 
-Za vsako množico signalov iz tabele~\ref{tab:mnozice-signalov} zgradimo graf po isti osnovni konstrukciji.
+Za vsako množico signalov iz razdelka~\ref{subsec:vhodni-signali} zgradimo graf po isti osnovni konstrukciji.
 Razlika med grafi je v značilkah vozlišč in relacijah, ki jih izbrana množica signalov omogoča.
 Množica \emph{vsi signali} je najbogatejša predstavitev. 
 Ostale množice uporabijo ustrezne podmnožice značilk in povezav.
 
 \begin{table}[H]
     \centering
-    \caption{Grafovska konstrukcija po množicah signalov.}
+    \caption{Množice signalov in pripadajoča grafovska konstrukcija.}
     \label{tab:grafovska-konstrukcija-po-mnozicah}
     \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
         \toprule
@@ -217,11 +219,10 @@ Prikaz združi vozlišča, časovne, prostorske in fiksacijske povezave v isti g
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/vse_povezave.png}
-    \caption{Primer grafovske konstrukcije za množico \emph{vsi signali}. Vozlišča predstavljajo meritve v izseku časovnega okna, povezave pa prikazujejo časovne, prostorske in fiksacijske relacije.}
+    \caption{Primer grafovske konstrukcije za množico \emph{vsi signali}. Vozlišča predstavljajo meritve v izseku časovnega okna, povezave pa prikazujejo časovne, prostorske in fiksacijske relacije. Ločeni prikazi posameznih relacij so zbrani v dodatku~\ref{app:grafi}.}
     \label{fig:konstrukcija-grafa-primer}
 \end{figure}
 
-Ločeni prikazi posameznih relacij so zbrani v dodatku~\ref{app:grafi}.
 
 \section{Statistika konstruiranih grafov}
 \label{subsec:statistika-grafov}

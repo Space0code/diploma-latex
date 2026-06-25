@@ -5,7 +5,7 @@ To poglavje umešča nalogo med obstoječe pristope za delo s podatki sledilnika
 Sorodna dela v tem poglavju obravnavamo z vidika vprašanja, kako podatke sledilnika pogleda predstaviti za klasifikacijo čustvenih oznak.
 Najprej povzamemo uporabo podatkov sledilnika pogleda pri klasifikaciji čustvenih oznak in vlogo podatkovne zbirke \MAHNOB{}.
 Nato predstavimo grafovske nevronske mreže za časovne vrste in časovno-prostorske podatke, saj je osrednji del naloge pretvorba časovnega okna meritev v graf.
-Na koncu povzamemo še učenje predstavitev iz zaporedij pogleda ter položaj te naloge glede na sorodna dela.
+Na koncu povzamemo še učenje predstavitev iz zaporedij meritev pogleda ter položaj te naloge glede na sorodna dela.
 
 \section{Podatki sledilnika pogleda pri klasifikaciji čustvenih oznak}
 
@@ -37,7 +37,7 @@ Za to nalogo je pomembna predvsem formulacija, pri kateri posamezno časovno okn
 
 Pri podatkih sledilnika pogleda imajo meritve poleg časovnega vrstnega reda tudi prostorsko komponento, saj je vsaka veljavna meritev vezana na položaj pogleda na zaslonu.
 Podobno ločevanje časovnih in prostorskih odvisnosti uporabljajo časovno-prostorske grafovske mreže, na primer ST-GCN pri napovedovanju prometa, kjer grafovska konvolucija modelira prostorske povezave med senzorji, časovna konvolucija pa dinamiko signala skozi čas~\cite{yu2018stgcn}.
-V tej nalogi je ta pristop uporaben kot metodološka analogija: ne napovedujemo prihodnjih meritev, temveč klasificiramo oznako časovnega okna meritev.
+V tej nalogi je ta pristop uporaben kot metodološka analogija, saj ne napovedujemo prihodnjih meritev, temveč klasificiramo oznako časovnega okna meritev.
 
 \section{Učenje predstavitev iz signalov}
 \label{subsec:sorodna-predstavitve}

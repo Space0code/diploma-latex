@@ -4,8 +4,6 @@
 \section{Podatkovna zbirka \MAHNOB{}}
 \label{subsec:podatkovna-zbirka}
 
-\subsection{Izvirna zbirka}
-
 V delu uporabljamo podatke iz podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
 Gre za večmodalno zbirko, namenjeno raziskavam prepoznavanja čustev in implicitnega označevanja multimedijskih vsebin.
 Zbirka vsebuje dva glavna eksperimentalna sklopa: prepoznavanje čustvenih stanj iz odzivov na čustvene videoposnetke in implicitno označevanje na podlagi odzivov na pravilne oziroma napačne oznake pod sliko ali posnetkom.
@@ -33,8 +31,6 @@ Zato smo glavno eksperimentalno evalvacijo izvedli na podatkovni zbirki \MAHNOB{
 \section{Ciljne oznake}
 \label{subsec:ciljne-oznake}
 
-\subsection{Izvor čustvenih oznak}
-
 Oznake v tej nalogi izhajajo iz udeleženčevih samoocen čustvenega razreda po ogledu videoposnetka.
 Diskretne čustvene razrede preslikamo v razrede valence po preslikavi iz izvirnega članka~\cite{soleymani2012mahnob}, ki je prikazana v dodatku~\ref{app:preslikava-valence}.
 S tem najprej dobimo tri razrede: neprijetno, nevtralno in prijetno valenco.
@@ -51,7 +47,7 @@ Kot kaže matrika zmede v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se sam
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.82\textwidth]{porazdelitev_razredov_stevila_retain_2026-06-12.png}
-    \caption{Delovna porazdelitev končnih 10-sekundnih oken po razredih binarne valence.}
+    \caption{Porazdelitev 10-sekundnih oken po razredih binarne valence.}
     \label{fig:porazdelitev-valenca-stevila}
 \end{figure}
 
@@ -62,7 +58,7 @@ Kot kaže matrika zmede v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se sam
 
 \subsection{Skupine signalov}
 
-Splošen opis meritev sledilnika pogleda je podan v razdelku~\ref{subsec:eye-tracking}; tukaj navedemo konkretne skupine signalov, ki jih uporabimo v eksperimentih.
+Tukaj navedemo konkretne skupine signalov, ki jih uporabimo v eksperimentih.
 V uporabljeni podatkovni zbirki imamo na voljo pet osnovnih vrst signalov. To so:
 \begin{itemize}
     \item časovni žig meritve $t_i$,
@@ -72,27 +68,12 @@ V uporabljeni podatkovni zbirki imamo na voljo pet osnovnih vrst signalov. To so
     \item informacija o fiksacijah, tj. pripadnost fiksaciji ter trajanje fiksacije.
 \end{itemize}
 
-Večina podatkovnih zbirk s podatki sledilnika pogleda vsebuje bodisi le koordinate pogleda bodisi le velikost zenic bodisi oboje.
-Nekatere zbirke pa ponujajo tudi dodatne signale, kot sta v našem primeru oddaljenost ter informacije o fiksacijah.
-Da bi s primerjalno študijo pokrili čim širši razpon različnih tipov zbirk, \MAHNOB podatke razdelimo v štiri delno prekrivajoče se eksperimentalne množice signalov, prikazane v tabeli~\ref{tab:mnozice-signalov}.
-V vseh štirih množicah uporabimo tudi informacijo o času, zato v tabeli navedemo le preostale vključene signale.
-
-\begin{table}[t]
-    \centering
-    \caption{Množice signalov, uporabljene v eksperimentalni primerjavi.}
-    \label{tab:mnozice-signalov}
-    \small
-    \begin{tabularx}{\textwidth}{@{}lX@{}}
-        \toprule
-        Množica & Vključeni signali \\
-        \midrule
-        \emph{samo pogled} & koordinati pogleda $(x_i, y_i)$ \\
-        \emph{samo zenici} & velikosti leve in desne zenice $(p_i^{(l)}, p_i^{(r)})$ \\
-        \emph{pogled in zenici} & koordinati pogleda ter velikosti leve in desne zenice \\
-        \emph{vsi signali} & koordinati pogleda, velikosti zenic, oddaljenost od sledilnika pogleda in informacija o fiksacijah \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+Večina podatkovnih zbirk s podatki sledilnika pogleda vsebuje bodisi le koordinate pogleda bodisi le velikosti zenic bodisi oboje.
+Nekatere zbirke pa ponujajo tudi dodatne signale, kot sta v našem primeru oddaljenost od sledilnika ter informacije o fiksacijah.
+Da bi s primerjalno študijo pokrili čim širši razpon različnih tipov zbirk, \MAHNOB{} podatke razdelimo v štiri delno prekrivajoče se eksperimentalne množice signalov.
+V vseh štirih množicah uporabimo tudi informacijo o času.
+Množica \emph{samo pogled} poleg časa vsebuje koordinati pogleda, množica \emph{samo zenici} vsebuje velikosti leve in desne zenice, množica \emph{pogled in zenici} združi koordinati pogleda in velikosti zenic, množica \emph{vsi signali} pa doda še oddaljenost od sledilnika pogleda in informacijo o fiksacijah.
+Podrobna povezava med temi množicami, značilkami vozlišč in razpoložljivimi tipi povezav je podana pri opisu grafovske konstrukcije v razdelku~\ref{subsec:grafovska-konstrukcija-po-mnozicah}.
 \END_NOTE{Z zunanjo pomočjo mentorja ali slovenista najdi/potrdi izraze in jih potem uporabljaj konsistentno v diplomi. Posebej preveri, ali naj bodo končna imena množic \emph{samo pogled}, \emph{samo zenici}, \emph{pogled in zenici} in \emph{vsi signali}, ter nato ta imena uporabi enako v besedilu, tabelah in slikah.}
 
 
@@ -149,13 +130,13 @@ Tabela~\ref{tab:mahnob-predobdelava} povzema, kako se skozi opisane korake predo
         \toprule
         Korak & Vrstice & Udeleženci & Opis \\
         \midrule
-        Izvirna zbirka \MAHNOB{} & -- & 30 & Večmodalna zbirka; izvirni članek v analizi uporabi 27 udeležencev. \\
-        Lokalna podmnožica podatkov sledilnika pogleda & 3\,797\,165 & 24 & Lokalna kopija eksperimenta vzbujanja čustev s podatki sledilnika pogleda in oznakami. \\
-        Po izključitvi "slabih" udeležencev & 3\,535\,842 & 22 & Izključeni P9, P12 in P15. \\
-        Veljavno označene vrstice & 2\,995\,632 & 22 & Ohranjeni so samo označeni podatki, uporabljeni za učenje modelov čustvenih stanj. \\
-        Pripravljeno za učenje & 2\,814\,005 & 22 & Odstranjene so vrstice brez ključnih signalov pogleda ali zenic. \\
-        Po filtru osamelcev \texttt{q01}-\texttt{q99} & 2\,639\,048 & 22 & Robustno filtriranje štirih osnovnih signalov pogleda in zenic. \\
-        Uporabna 10-sekundna časovna okna & 5\,158 & 22 & Vsako okno postane en učni primer oziroma graf. \\
+        Izbira izvirne zbirke \MAHNOB{} & -- & 30 & Večmodalna zbirka; izvirni članek v analizi uporabi 27 udeležencev. \\
+        Izbira podmnožice s čustvenimi oznakami & 3\,797\,165 & 24 & Ohranimo le posnetke iz eksperimenta vzbujanja čustev, ki imajo podatke sledilnika pogleda in čustvene oznake. \\
+        Izključitev "slabih" udeležencev & 3\,535\,842 & 22 & Izključeni P9, P12 in P15. \\
+        Izbira veljavno označenih vrstic & 2\,995\,632 & 22 & Ohranjeni so samo označeni podatki, uporabljeni za učenje modelov čustvenih stanj. \\
+        Priprava podatkov za učenje & 2\,814\,005 & 22 & Odstranjene so vrstice brez signalov pogleda ali zenic. \\
+        Filter osamelcev \texttt{q01}-\texttt{q99} & 2\,639\,048 & 22 & Robustno filtriranje štirih osnovnih signalov pogleda in zenic. \\
+        Tvorba uporabnih 10-sekundnih časovnih oken & 5\,158 & 22 & Vsako okno postane en učni primer oziroma graf. \\
         \bottomrule
     \end{tabularx}
 \end{table}

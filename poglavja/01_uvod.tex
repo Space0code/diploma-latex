@@ -19,8 +19,10 @@ Raziskovalni problem naloge je zasnova, implementacija in ovrednotenje grafovske
 
 Glavno raziskovalno vprašanje je:
 
-\begin{enumerate}[label=\textbf{RV\arabic*:}]
-    \item Kakšna je klasifikacijska uspešnost grafovske nevronske mreže za binarno klasifikacijo valence iz podatkov sledilnika pogleda v primerjavi s klasifikacijsko uspešnostjo uveljavljenih negrafovskih pristopov?
+\newcommand{\rvGlavnoBesedilo}{Kakšna je klasifikacijska uspešnost grafovske nevronske mreže za binarno klasifikacijo valence iz podatkov sledilnika pogleda v primerjavi s klasifikacijsko uspešnostjo uveljavljenih negrafovskih pristopov?}
+
+\begin{enumerate}[label=\textbf{RV\arabic*:}, ref=RV\arabic*]
+    \item \label{rv:glavno} \rvGlavnoBesedilo
 \end{enumerate}
 
 Dodatna podvprašanja so:
@@ -49,10 +51,10 @@ Glavni doprinosi diplomske naloge so:
 \label{subsec:struktura}
 
 V poglavju~\ref{sec:ozadje} predstavimo teoretično ozadje grafov, grafovskih nevronskih mrež, podatkov sledilnika pogleda in afektivnega računalništva.
-V poglavju~\ref{sec:sorodna-dela} predstavimo sorodna dela, vključno z uporabo podatkovne zbirke \MAHNOB{} in metodami učenja predstavitev iz podatkov pogleda.
+V poglavju~\ref{sec:sorodna-dela} predstavimo sorodna dela, vključno z uporabljeno podatkovno zbirko \MAHNOB{} in metodami učenja predstavitev iz podatkov pogleda.
 Poglavje~\ref{sec:podatki} opisuje uporabljene podatke, ciljne oznake in predobdelavo.
 V poglavju~\ref{sec:grafovska-predstavitev} opišemo konstrukcijo časovno-prostorskega grafa.
 Poglavje~\ref{sec:modeli} predstavi uporabljene modele.
-V poglavju~\ref{sec:eksperimenti} opišemo eksperimentalni protokol, v poglavju~\ref{sec:rezultati} pa rezultate glavne primerjave modelov in množic signalov.
+V poglavju~\ref{sec:eksperimenti} opišemo eksperimentalni protokol, v poglavju~\ref{sec:rezultati} pa rezultate glavne primerjave modelov na različnih množicah signalov.
 Poglavje~\ref{sec:diskusija} vsebuje interpretacijo rezultatov, omejitve in možnosti nadaljnjega dela.
 Nalogo sklenemo v poglavju~\ref{sec:zakljucek}.

@@ -1,10 +1,10 @@
 This thesis investigates the use of graph neural networks for affective state recognition from eye-tracking data.
-\TODO{Rewrite the abstract after the final experiments: the main task should be binary classification, and the main comparison should cover models under the \emph{gaze}, \emph{gaze+pupil}, and \emph{all} input sets; describe \GazeMAE{} as a \emph{gaze-only} reference and mention MOMENT/\emph{pupil-only} only if the experiment is actually completed.}
+\TODO{Rewrite the abstract after the final experiments: the main task should be binary classification, and the main comparison should cover models under the \emph{gaze}, \emph{gaze+pupil}, and \emph{all} input sets; describe \ModelName{GazeMAE} as a \emph{gaze-only} reference and mention \ModelName{MOMENT}/\emph{pupil-only} only if the experiment is actually completed.}
 The central methodological problem is the representation of a temporal window of gaze measurements as a spatio-temporal graph, where nodes correspond to individual samples and edges encode temporal proximity, spatial proximity, and shared fixation membership.
 Based on this representation, we develop and evaluate a graph-based model for three-class classification of valence and arousal.
 
 The experimental evaluation is performed on the \MAHNOB{} dataset using two validation protocols: leave-one-subject-out and leave-one-recording-out evaluation.
-Graph-based models are compared against non-graph machine learning baselines and against \GazeMAE{} as a representative of modern gaze representation learning methods.
+Graph-based models are compared against non-graph machine learning baselines and against \ModelName{GazeMAE} as a representative of modern gaze representation learning methods.
 In addition to final classification performance, we analyze the contribution of individual components of the graph construction, including temporal edges, spatial edges, fixation edges, pupil features, and edge weights.
 
 The main research question of the thesis is whether a spatio-temporal graph representation of eye-tracking windows can improve affective state classification compared to non-graph models trained on the same input windows.

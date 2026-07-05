@@ -87,15 +87,15 @@ povezav modelira z notranjim mehanizmom pozornosti.
         \toprule
         Arhitektura & Operator & Accuracy & Makro-F1 & Opomba \\
         \midrule
-        Osnovni GCN & \texttt{GCNConv} & $0{,}6474$ & $0{,}6337$ & neuteženi homogeni graf \\
-        Osnovni GCN & \texttt{GATConv} & $0{,}6484$ & $0{,}6336$ & neutežena pozornost \\
-        Osnovni GCN & \texttt{GraphConv} & $0{,}6367$ & $0{,}6192$ & neuteženi homogeni graf \\
-        Osnovni GCN & \texttt{GINConv} & $0{,}6613$ & $0{,}6501$ & najboljši neuteženi rezultat \\
+        Osnovni \ModelName{GCN} & \texttt{GCNConv} & $0{,}6474$ & $0{,}6337$ & neuteženi homogeni graf \\
+        Osnovni \ModelName{GCN} & \texttt{GATConv} & $0{,}6484$ & $0{,}6336$ & neutežena pozornost \\
+        Osnovni \ModelName{GCN} & \texttt{GraphConv} & $0{,}6367$ & $0{,}6192$ & neuteženi homogeni graf \\
+        Osnovni \ModelName{GCN} & \texttt{GINConv} & $0{,}6613$ & $0{,}6501$ & najboljši neuteženi rezultat \\
         \addlinespace
-        HeteroGCN-MLP-w & \texttt{GCNConv} & $0{,}6391$ & $0{,}6103$ & naučene uteži povezav \\
-        HeteroGCN-MLP-w & \texttt{GATConv} & $0{,}6370$ & $0{,}6116$ & pozornost brez skalarnih uteži \\
-        HeteroGCN-MLP-w & \texttt{GraphConv} & $0{,}6606$ & $0{,}6503$ & najboljši uteženi rezultat \\
-        HeteroGCN-MLP-w & \texttt{GINEConv} & $0{,}6325$ & $0{,}6028$ & značilke in uteži povezav \\
+        \ModelName{HeteroGCN-MLP-w} & \texttt{GCNConv} & $0{,}6391$ & $0{,}6103$ & naučene uteži povezav \\
+        \ModelName{HeteroGCN-MLP-w} & \texttt{GATConv} & $0{,}6370$ & $0{,}6116$ & pozornost brez skalarnih uteži \\
+        \ModelName{HeteroGCN-MLP-w} & \texttt{GraphConv} & $0{,}6606$ & $0{,}6503$ & najboljši uteženi rezultat \\
+        \ModelName{HeteroGCN-MLP-w} & \texttt{GINEConv} & $0{,}6325$ & $0{,}6028$ & značilke in uteži povezav \\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -104,7 +104,7 @@ povezav modelira z notranjim mehanizmom pozornosti.
 neuteženem osnovnem modelu izbrali \texttt{GINConv}, pri uteženi heterogeni
 arhitekturi pa \texttt{GraphConv}.
 V glavnih poskusih tega nismo storili, ker bi s tem hkrati spremenili več delov
-arhitekture in otežili primerjavo med osnovnim GCN in uteženo heterogeno
+arhitekture in otežili primerjavo med osnovnim \ModelName{GCN} in uteženo heterogeno
 različico.
 \texttt{GCNConv} se je v obeh skupinah uvrstil približno v sredino: ni bil
 najboljši operator, hkrati pa tudi ni izrazito odstopal navzdol.

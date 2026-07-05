@@ -30,15 +30,15 @@ Klasični primerjalni modeli uporabljajo agregirane tabelarične značilke, nevr
         \midrule
         Naključni model & agregirane tabelarične značilke & enakomerna naključna napoved razreda; seme 42 \\
         Večinski model & agregirane tabelarične značilke & napoved večinskega razreda na učni množici \\
-        SVM & agregirane tabelarične značilke & jedro RBF; $C=1{,}0$; \texttt{probability=true}; \texttt{decision\_function\_shape=ovr}; standardizacija značilk na učni množici \\
-        LightGBM & agregirane tabelarične značilke & \texttt{n\_estimators=100}; \texttt{learning\_rate=0.05}; \texttt{max\_depth=5}; \texttt{random\_state=42} \\
-        MLP & agregirane tabelarične značilke & klasifikacijska glava MLP s skrito velikostjo 64; največ 200 epoh; učna stopnja $10^{-3}$; \texttt{weight\_decay=0.0001}; \texttt{dropout=0.1}; mini-serija 128; zgodnje ustavljanje s potrpežljivostjo 15 epoh \\
-        \GazeMAE{} in MOMENT glave & zamrznjene predstavitve časovnih oken & klasifikacijska glava MLP s skrito velikostjo 128; največ 100 epoh; učna stopnja $10^{-3}$; \texttt{weight\_decay=0.0001}; \texttt{dropout=0.2}; mini-serija 128; zgodnje ustavljanje s potrpežljivostjo 15 epoh \\
+        \ModelName{SVM} & agregirane tabelarične značilke & jedro RBF; $C=1{,}0$; \texttt{probability=true}; \texttt{decision\_function\_shape=ovr}; standardizacija značilk na učni množici \\
+        \ModelName{LightGBM} & agregirane tabelarične značilke & \texttt{n\_estimators=100}; \texttt{learning\_rate=0.05}; \texttt{max\_depth=5}; \texttt{random\_state=42} \\
+        \ModelName{MLP} & agregirane tabelarične značilke & klasifikacijska glava \ModelName{MLP} s skrito velikostjo 64; največ 200 epoh; učna stopnja $10^{-3}$; \texttt{weight\_decay=0.0001}; \texttt{dropout=0.1}; mini-serija 128; zgodnje ustavljanje s potrpežljivostjo 15 epoh \\
+        \ModelName{GazeMAE} in \ModelName{MOMENT} glave & zamrznjene predstavitve časovnih oken & klasifikacijska glava \ModelName{MLP} s skrito velikostjo 128; največ 100 epoh; učna stopnja $10^{-3}$; \texttt{weight\_decay=0.0001}; \texttt{dropout=0.2}; mini-serija 128; zgodnje ustavljanje s potrpežljivostjo 15 epoh \\
         Grafovski modeli & grafovska predstavitev časovnih oken & \texttt{GCNConv}; dve grafovski plasti; \texttt{hidden\_channels=64}; pozornostno združevanje grafa; predobdelavni MLP; \texttt{dropout=0.1}; učna stopnja $5 \cdot 10^{-5}$; mini-serija 256; največ 350 epoh; zgodnje ustavljanje s potrpežljivostjo 20 epoh \\
-        GCN & grafovska predstavitev časovnih oken & homogen graf; relacije niso modelno ločene; brez značilk povezav \\
-        HeteroGCN-mean & grafovska predstavitev časovnih oken & heterogeni graf; ločene časovne, prostorske in fiksacijske relacije; združevanje relacij s povprečenjem \\
-        HeteroGCN-MLP & grafovska predstavitev časovnih oken & heterogeni graf; ločene časovne, prostorske in fiksacijske relacije; združevanje relacij z MLP \\
-        HeteroGCN-MLP-w & grafovska predstavitev časovnih oken & kot HeteroGCN-MLP, dodatno naučene predznačene uteži povezav iz značilk povezav \\
+        \ModelName{GCN} & grafovska predstavitev časovnih oken & homogen graf; relacije niso modelno ločene; brez značilk povezav \\
+        \ModelName{HeteroGCN-mean} & grafovska predstavitev časovnih oken & heterogeni graf; ločene časovne, prostorske in fiksacijske relacije; združevanje relacij s povprečenjem \\
+        \ModelName{HeteroGCN-MLP} & grafovska predstavitev časovnih oken & heterogeni graf; ločene časovne, prostorske in fiksacijske relacije; združevanje relacij z \ModelName{MLP} \\
+        \ModelName{HeteroGCN-MLP-w} & grafovska predstavitev časovnih oken & kot \ModelName{HeteroGCN-MLP}, dodatno naučene predznačene uteži povezav iz značilk povezav \\
         Grafovska konstrukcija & grafovska predstavitev časovnih oken & $k_t=1$; $k_s=1$; $k_f=3$ (\texttt{fixation\_dilation\_k}); standardizacija značilk povezav; značilke povezav odvisne od uporabljene množice signalov \\
         \bottomrule
     \end{tabularx}
@@ -60,7 +60,7 @@ Poskusi so bili poganjani v okolju Conda \texttt{gfm}.
 \section{Naučene uteži povezav}
 \label{app:naucene-utezi-povezav}
 
-V modelu HeteroGCN-MLP-w značilke povezave uporabimo za izračun skalarne uteži povezave.
+V modelu \ModelName{HeteroGCN-MLP-w} značilke povezave uporabimo za izračun skalarne uteži povezave.
 Naj bo $\mathbf{e}_{ij}^{(r)}$ vektor značilk povezave $(v_i, v_j)$ v relaciji $r$.
 Najprej izračunamo surovo oceno:
 \begin{equation}

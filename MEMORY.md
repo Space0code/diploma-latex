@@ -98,6 +98,11 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   ene povedi čez več vrstic samo zaradi širine urejevalnika. Ročno vrstično
   oblikovanje naj sledi stavkom oziroma logičnim enotam, ker Tomi tako lažje
   pregleduje in ureja besedilo.
+- Konkretna imena modelov v besedilu, tabelah in naslovih razdelkov piši z
+  makrom `\ModelName{...}`. To velja za dejanske modelne oznake, kot so
+  `\ModelName{SVM}`, `\ModelName{LightGBM}`, `\ModelName{GCN}` in
+  `\ModelName{HeteroGCN-MLP-w}`, ne pa za opisna poimenovanja, kot so
+  `končni model`, `osnovni grafovski model` ali `predlagani GNN`.
 
 ## Vizualna identiteta diplome
 

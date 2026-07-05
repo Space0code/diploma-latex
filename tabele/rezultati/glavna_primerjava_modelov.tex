@@ -1,24 +1,29 @@
 % Samodejno generirano iz GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/metric_summary_with_std.csv.
-% Celice vsebujejo točnost / makro F1 v odstotkih. Standardni odkloni so v dodatku.
+% Celice vsebujejo točnost/makro F1 v odstotkih. Standardni odkloni so v dodatku.
 \begin{table}[H]
     \centering
-    \caption{Glavna primerjava modelov pri binarni klasifikaciji valence. Celice vsebujejo točnost / makro F1 v odstotkih.}
+    \caption{Glavna primerjava modelov pri binarni klasifikaciji valence. Celice vsebujejo točnost/makro F1 v odstotkih. Odebeljena pisava označuje najboljši rezultat za vsak stolpec, odebeljena poševna pisava pa najboljši rezultat med grafovskimi modeli.}
     \label{tab:rezultati-glavna-primerjava}
     \small
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.23\textwidth} *{4}{>{\centering\arraybackslash}X}@{}}
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth} *{4}{>{\centering\arraybackslash}X}@{}}
         \toprule
         Model & samo pogled & samo zenici & pogled in zenici & vsi signali \\
         \midrule
-        Naključni & 50,2 / 50,1 & 50,7 / 50,6 & 50,8 / 50,6 & 50,9 / 50,7 \\
-        Večinski & 52,5 / 34,4 & 52,2 / 34,2 & 52,1 / 34,2 & 52,2 / 34,2 \\
-        SVM & 67,5 / 67,2 & 62,1 / 60,7 & 70,5 / 69,7 & 68,6 / 67,6 \\
-        LightGBM & 69,7 / 69,4 & 63,1 / 61,9 & 69,6 / 68,8 & 69,0 / 68,3 \\
-        MLP & 67,0 / 66,7 & 62,0 / 60,3 & 68,7 / 67,6 & 67,2 / 66,2 \\
-        GazeMAE/MOMENT & 65,7 / 65,2 & 60,5 / 60,1 & 65,6 / 65,2 & 66,1 / 65,6 \\
-        GCN & 64,4 / 64,1 & 61,0 / 58,4 & 65,4 / 63,9 & 59,6 / 57,6 \\
-        HeteroGCN-mean & 61,7 / 59,2 & 58,6 / 55,7 & 63,8 / 61,1 & 61,8 / 59,7 \\
-        HeteroGCN-MLP & 65,9 / 65,8 & 59,1 / 56,0 & 64,2 / 62,8 & 60,5 / 56,6 \\
-        HeteroGCN-MLP-w & 64,3 / 64,0 & 58,4 / 54,5 & 65,5 / 64,4 & 62,7 / 60,8 \\
+        Naključni & 50,2/50,1 & 50,7/50,6 & 50,8/50,6 & 50,9/50,7 \\
+        Večinski & 52,5/34,4 & 52,2/34,2 & 52,1/34,2 & 52,2/34,2 \\
+        \midrule
+        \ModelName{SVM} & 67,5/67,2 & 62,1/60,7 & \textbf{70,5/69,7} & 68,6/67,6 \\
+        \ModelName{LightGBM} & \textbf{69,7/69,4} & \textbf{63,1/61,9} & 69,6/68,8 & \textbf{69,0/68,3} \\
+        \ModelName{MLP} & 67,0/66,7 & 62,0/60,3 & 68,7/67,6 & 67,2/66,2 \\
+        \midrule
+        \ModelName{GazeMAE/MOMENT}\textsuperscript{*} & 65,7/65,2 & 60,5/60,1 & 65,6/65,2 & 66,1/65,6 \\
+        \midrule
+        \ModelName{GCN} & 64,4/64,1 & \textbf{\emph{61,0/58,4}} & 65,4/63,9 & 59,6/57,6 \\
+        \ModelName{HeteroGCN-mean} & 61,7/59,2 & 58,6/55,7 & 63,8/61,1 & 61,8/59,7 \\
+        \ModelName{HeteroGCN-MLP} & \textbf{\emph{65,9/65,8}} & 59,1/56,0 & 64,2/62,8 & 60,5/56,6 \\
+        \ModelName{HeteroGCN-MLP-w} & 64,3/64,0 & 58,4/54,5 & \textbf{\emph{65,5/64,4}} & \textbf{\emph{62,7/60,8}} \\
         \bottomrule
     \end{tabularx}
+    \vspace{0.4em}
+    \parbox{\textwidth}{\footnotesize \emph{Opomba:} \textsuperscript{*}\ModelName{GazeMAE/MOMENT} označuje enoten prikaz zamrznjenih predstavitvenih modelov: \ModelName{GazeMAE} pri pogledu, \ModelName{MOMENT} pri zenicah in fuzijo obeh pri kombiniranih signalih, kot je pojasnjeno v poglavju~\ref{subsec:zamrznjeni-prednauceni-modeli}.}
 \end{table}

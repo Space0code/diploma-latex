@@ -5,8 +5,8 @@
 \begin{itemize}
     \item Diskusijo preusmeriti iz vprašanja, ali GNN absolutno zmaga, v vprašanje, kako se modeli obnašajo pri različnih naborih signalov.
     \item Posebej interpretirati razlike med \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}: ali zenični signal pomaga nad koordinatami pogleda, ali dodatni signali v \emph{vsi signali} pomagajo ali dodajo šum, ter ali GNN bogatejšo strukturo izkoristi bolje kot negrafovski osnovni modeli.
-    \item \GazeMAE{} obravnavati kot močno referenco za množico \emph{samo pogled}; če premaga modele z več signali, to interpretirati kot pomembno ugotovitev o naučenih predstavitvah pogleda.
-    \item \emph{Samo zenici} in MOMENT opisati samo kot prihodnje delo ali podporni poskus, če ne bosta dokončana.
+    \item \ModelName{GazeMAE} obravnavati kot močno referenco za množico \emph{samo pogled}; če premaga modele z več signali, to interpretirati kot pomembno ugotovitev o naučenih predstavitvah pogleda.
+    \item \emph{Samo zenici} in \ModelName{MOMENT} opisati samo kot prihodnje delo ali podporni poskus, če ne bosta dokončana.
 \end{itemize}
 }
 
@@ -19,7 +19,7 @@
     \item če ne premaga: ali kaže smiselno vedenje;
     \item pri kateri nalogi je graf najbolj koristen;
     \item LOO po subjektih v primerjavi z LOO po posnetkih;
-    \item primerjava proti \GazeMAE{};
+    \item primerjava proti \ModelName{GazeMAE};
     \item povezava z ablations;
     \item konservativen zaključek.
 \end{itemize}
@@ -43,13 +43,13 @@
 \end{itemize}
 }
 
-\section{Primerjava z \GazeMAE{}}
+\section{Primerjava z \ModelName{GazeMAE}}
 \label{subsec:diskusija-gazemae}
 
 \TODO{
 \begin{itemize}
-    \item ali \GazeMAE{} premaga negrafovske osnovne modele;
-    \item ali \GazeMAE{} premaga GNN;
+    \item ali \ModelName{GazeMAE} premaga negrafovske osnovne modele;
+    \item ali \ModelName{GazeMAE} premaga GNN;
     \item samonadzorovano učenje predstavitev kot uporabna smer;
     \item zamrznjena enkoderja position/velocity;
     \item 512-dim okenska predstavitev;
@@ -79,7 +79,7 @@
 \begin{itemize}
     \item izvirni članek: ročno oblikovane značilke pogleda;
     \item izvirni članek: drugačen cevovod izbire značilk;
-    \item izvirni članek: SVM;
+    \item izvirni članek: \ModelName{SVM};
     \item ta naloga: grafi iz časovnih oken surovejših signalov;
     \item primerjava metodološko motivacijska;
     \item ne neposredna reprodukcija;
@@ -97,7 +97,8 @@ Glavne omejitve naloge so:
     \item omejitev na signale sledilnika pogleda brez drugih fizioloških modalnosti;
     \item občutljivost grafovske konstrukcije na hiperparametre;
     \item računska zahtevnost validacije z LOO protokoli;
-    \item možnost prekomernega glajenja v grafovskih modelih.
+    \item možnost prekomernega glajenja v grafovskih modelih;
+    \item zaradi subject kfold model med treniranjem vidi patterne recordingov, tako da se lahko uči le teh. narediti bi bilo potrebno tudi CV po recordingih.
 \end{itemize}
 
 \section{Možnosti nadaljnjega dela}

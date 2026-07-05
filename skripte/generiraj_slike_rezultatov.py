@@ -17,6 +17,7 @@ import argparse
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from matplotlib.colors import LogNorm
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -58,6 +59,19 @@ def parse_args() -> argparse.Namespace:
         / "RETAIN_2026-06-12_16-29-08"
         / "tables"
     )
+    default_signal_snapshot = (
+        workspace_root
+        / "GFM-for-eyetracker"
+        / "results"
+        / "quick_v1_v2_comparison"
+        / "RETAIN_2026-06-12_16-29-08"
+        / "model_runs"
+        / "gaze_pupil"
+        / "2026-06-12_17-31-09"
+        / "experiments"
+        / "multiclass_table6_valence_3class_emotion-elicitation"
+        / "snapshot.csv"
+    )
 
     parser = argparse.ArgumentParser(
         description="Generira reproducibilne Matplotlib slike za poglavje Rezultati."
@@ -79,6 +93,12 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=diploma_root / "slike" / "podatki",
         help="Izhodna mapa za slike porazdelitve podatkov.",
+    )
+    parser.add_argument(
+        "--signal-snapshot",
+        type=Path,
+        default=default_signal_snapshot,
+        help="Snapshot CSV za porazdelitve osnovnih signalov.",
     )
     parser.add_argument("--dpi", type=int, default=300, help="Ločljivost izhodnih PNG slik.")
     return parser.parse_args()
@@ -321,9 +341,91 @@ def generate_label_distribution_plots(df: pd.DataFrame, data_figures_dir: Path, 
         plt.close(fig)
 
 
+def load_signal_snapshot(snapshot_path: Path) -> pd.DataFrame:
+    columns = ["x-avg", "y-avg", "pupil-size-left-avg", "pupil-size-right-avg"]
+    df = pd.read_csv(snapshot_path, usecols=columns)
+    return df.replace([np.inf, -np.inf], np.nan).dropna()
+
+
+def generate_signal_distribution_plots(df: pd.DataFrame, data_figures_dir: Path, dpi: int) -> None:
+    x = df["x-avg"].to_numpy()
+    y = df["y-avg"].to_numpy()
+
+    fig, ax = plt.subplots(figsize=(6.2, 3.8), constrained_layout=True)
+    counts, x_edges, y_edges = np.histogram2d(x, y, bins=[96, 60], range=[[0, 1280], [0, 800]])
+    counts = counts.T
+    masked_counts = np.ma.masked_where(counts == 0, counts)
+    mesh = ax.pcolormesh(
+        x_edges,
+        y_edges,
+        masked_counts,
+        cmap="Blues",
+        norm=LogNorm(vmin=1, vmax=max(1, counts.max())),
+        shading="auto",
+    )
+    ax.set_xlabel("vodoravna koordinata pogleda [px]", fontsize=9)
+    ax.set_ylabel("navpična koordinata pogleda [px]", fontsize=9)
+    ax.set_xlim(0, 1280)
+    ax.set_ylim(800, 0)
+    ax.set_aspect("equal", adjustable="box")
+    ax.tick_params(axis="both", labelsize=8.5)
+    ax.grid(False)
+    for spine in ax.spines.values():
+        spine.set_color("#B0B0B0")
+    cbar = fig.colorbar(mesh, ax=ax, fraction=0.045, pad=0.03)
+    cbar.set_label("število meritev", fontsize=9)
+    cbar.ax.tick_params(labelsize=8.5)
+    output_path = data_figures_dir / "porazdelitev_polozajev_pogleda_retain_2026-06-12.png"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+    plt.close(fig)
+
+    fig, ax = plt.subplots(figsize=(6.2, 3.4), constrained_layout=True)
+    left = df["pupil-size-left-avg"].to_numpy()
+    right = df["pupil-size-right-avg"].to_numpy()
+    lower = float(np.nanpercentile(np.concatenate([left, right]), 0.2))
+    upper = float(np.nanpercentile(np.concatenate([left, right]), 99.8))
+    bins = np.linspace(lower, upper, 70)
+    ax.hist(
+        left,
+        bins=bins,
+        density=True,
+        color="#8ECAE6",
+        alpha=0.65,
+        label="leva zenica",
+        edgecolor="white",
+        linewidth=0.25,
+    )
+    ax.hist(
+        right,
+        bins=bins,
+        density=True,
+        color="#B8A1D9",
+        alpha=0.60,
+        label="desna zenica",
+        edgecolor="white",
+        linewidth=0.25,
+    )
+    ax.set_xlabel("velikost zenice", fontsize=9)
+    ax.set_ylabel("gostota", fontsize=9)
+    ax.legend(frameon=False, fontsize=8.5)
+    ax.grid(axis="y", color="#E6E6E6", linewidth=0.7)
+    ax.set_axisbelow(True)
+    ax.spines["top"].set_visible(False)
+    ax.spines["right"].set_visible(False)
+    ax.spines["left"].set_color("#B0B0B0")
+    ax.spines["bottom"].set_color("#B0B0B0")
+    ax.tick_params(axis="both", labelsize=8.5)
+    output_path = data_figures_dir / "porazdelitev_velikosti_zenic_retain_2026-06-12.png"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> None:
     args = parse_args()
     print(f"tables_dir={args.tables_dir}")
+    print(f"signal_snapshot={args.signal_snapshot}")
     print(f"results_figures_dir={args.results_figures_dir}")
     print(f"data_figures_dir={args.data_figures_dir}")
     print(f"dpi={args.dpi}")
@@ -360,6 +462,9 @@ def main() -> None:
 
     label_distribution = load_label_distribution(args.tables_dir)
     generate_label_distribution_plots(label_distribution, args.data_figures_dir, args.dpi)
+
+    signal_snapshot = load_signal_snapshot(args.signal_snapshot)
+    generate_signal_distribution_plots(signal_snapshot, args.data_figures_dir, args.dpi)
 
 
 if __name__ == "__main__":

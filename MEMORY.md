@@ -90,6 +90,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   konteksta, ga ne posplošuj na slepo, ampak Tomija eksplicitno vprašaj. Konkretna
   potrjena preferenca: razpone tipa `1-2` piši z enim vezajem, ne kot `1--2`,
   razen če Tomi za določen kontekst naroči drugače.
+- Tomijevih ročnih popravkov po svojem prejšnjem predlogu ne spreminjaj nazaj,
+  razen če gre za očitno LaTeX napako ali factualno napako, ki jo lahko
+  nedvoumno preveriš. Če se zdi popravek vsebinsko dvoumen, najprej vprašaj.
 - Pri pisanju in pregledovanju poglavij ne ponavljaj istih idej, definicij in
   razlag iz prejšnjih poglavij. Kadar je dodatna razlaga že podana drugje, uporabi
   kratek sklic na ustrezno poglavje, razdelek, tabelo ali sliko, novo besedilo pa
@@ -247,6 +250,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - GazeMAE/MOMENT v diplomi obravnavaj previdno kot `zamrznjene prednaučene
   predstavitvene modele`, ne kot polno primerjavo z vsemi temeljnimi modeli ali
   kot reprodukcijo njihovega predtreniranja.
+- V tabeli računske zahtevnosti naj ima vrstica `GazeMAE/MOMENT` v stolpcu
+  `Vhod` vrednost `signal`, ker kodirnika kot vhod prejmeta signal, čeprav
+  klasifikacijska glava nato uporablja njune predstavitve.
 - V naslovu, povzetku in motivacijskem kontekstu lahko ostane izraz `prepoznava
   čustev`, v glavnem tehničnem besedilu pa raje uporabljaj `klasifikacija
   čustvenih oznak`, ker modeli napovedujejo eksperimentalno izpeljane oznake.

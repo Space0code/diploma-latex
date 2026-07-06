@@ -1,123 +1,18 @@
 \chapter{Diskusija}
 \label{sec:diskusija}
 
-\TODO{
-\begin{itemize}
-    \item Diskusijo preusmeriti iz vprašanja, ali GNN absolutno zmaga, v vprašanje, kako se modeli obnašajo pri različnih naborih signalov.
-    \item Posebej interpretirati razlike med \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}: ali zenični signal pomaga nad koordinatami pogleda, ali dodatni signali v \emph{vsi signali} pomagajo ali dodajo šum, ter ali GNN bogatejšo strukturo izkoristi bolje kot negrafovski osnovni modeli.
-    \item \ModelName{GazeMAE} obravnavati kot močno referenco za množico \emph{samo pogled}; če premaga modele z več signali, to interpretirati kot pomembno ugotovitev o naučenih predstavitvah pogleda.
-    \item \emph{Samo zenici} in \ModelName{MOMENT} opisati samo kot prihodnje delo ali podporni poskus, če ne bosta dokončana.
-\end{itemize}
-}
+Uporabljena delitev podatkov ima uravnotežene razrede in lepo porazdelitev meritev.
+To poveča možnost, da se modeli naučijo uporabnih signalov namesto šuma.
+Matrike zmede pokažejo, da modeli niso izrazito pristranski do enega razreda.
+Posledično sta točnost in makro F1 v rezultatih podobna.
 
-\section{Ali grafovska predstavitev pomaga?}
-\label{subsec:diskusija-graf-pomaga}
+Grafovski modeli se naučijo uporabnih informacij, saj dosegajo približno deset odstotnih točk višjo točnost od izhodiščnih klasifikatorjev.
+Podoben sklep velja za prednaučena kodirnika, ki dosegata zelo podobne rezultate kot GNN.
+Uporabljene grafovske predstavitve in predstavitve prednaučenih kodirnikov so torej informativne, niso pa za našo nalogo boljše od uveljavljenih pristopov s klasičnimi modeli strojnega učenja in ekspertno oblikovanimi značilkami.
+To je metodološko pomembna in zanimiva ugotovitev.
+Kljub večji izrazni moči globokih in grafovskih parametričnih modelov jih lahko enostavnejši modeli konsistentno prekašajo, poleg tega pa so hitrejši in zasedejo manj pomnilnika.
 
-\TODO{
-\begin{itemize}
-    \item ali finalni GNN premaga negrafovske osnovne modele;
-    \item če ne premaga: ali kaže smiselno vedenje;
-    \item pri kateri nalogi je graf najbolj koristen;
-    \item LOO po subjektih v primerjavi z LOO po posnetkih;
-    \item primerjava proti \ModelName{GazeMAE};
-    \item povezava z ablations;
-    \item konservativen zaključek.
-\end{itemize}
-}
-
-\section{Vloga časovnih in prostorskih povezav}
-\label{subsec:diskusija-edge-types}
-
-\TODO{
-\begin{itemize}
-    \item časovne povezave;
-    \item prostorske povezave;
-    \item fiksacijske povezave;
-    \item ločevanje časovnih povezav naprej in nazaj;
-    \item naučene predznačene uteži povezav;
-    \item \texttt{distance-avg};
-    \item \texttt{fixation-duration};
-    \item značilka povezave \texttt{delta\_distance};
-    \item kaj to pomeni za signale sledilnika pogleda;
-    \item brez kavzalnih trditev.
-\end{itemize}
-}
-
-\section{Primerjava z \ModelName{GazeMAE}}
-\label{subsec:diskusija-gazemae}
-
-\TODO{
-\begin{itemize}
-    \item ali \ModelName{GazeMAE} premaga negrafovske osnovne modele;
-    \item ali \ModelName{GazeMAE} premaga GNN;
-    \item samonadzorovano učenje predstavitev kot uporabna smer;
-    \item zamrznjena enkoderja position/velocity;
-    \item 512-dim okenska predstavitev;
-    \item omejitev: predstavitveni model s prenosom;
-    \item omejitev: ne polna reprodukcija predtreniranja.
-\end{itemize}
-}
-
-\section{Stabilnost učenja in notranje predstavitve}
-\label{subsec:diskusija-stabilnost}
-
-\TODO{
-\begin{itemize}
-    \item Povzemi, ali krivulje izgub kažejo stabilno učenje ali prekomerno prileganje.
-    \item Interpretiraj varianco in kosinusno podobnost predstavitev v povezavi s prekomernim glajenjem.
-    \item Interpretiraj razpon logitov v povezavi z zanesljivostjo oziroma zasičenostjo napovedne glave.
-    \item V eni povedi poročaj, da diagnostika iz dodatka~\ref{app:diagnostika-prekomerno-glajenje} kaže informativno sliko učenja: GNN se uči razločevalnih grafovskih predstavitev in pri glavnih signalnih naborih ne kaže jasnega kolapsa oziroma prekomernega glajenja.
-    \item Če diagnostika ne pokaže jasnega vzorca, to napiši previdno in brez pretiranih sklepov.
-    \item Poveži ugotovitve z arhitekturnimi odločitvami iz poglavja~\ref{subsec:stabilizacija-ucenja}.
-\end{itemize}
-}
-
-\section{Primerjava z izvirnim \MAHNOB{} pristopom}
-\label{subsec:diskusija-mahnob}
-
-\TODO{
-\begin{itemize}
-    \item izvirni članek: ročno oblikovane značilke pogleda;
-    \item izvirni članek: drugačen cevovod izbire značilk;
-    \item izvirni članek: \ModelName{SVM};
-    \item ta naloga: grafi iz časovnih oken surovejših signalov;
-    \item primerjava metodološko motivacijska;
-    \item ne neposredna reprodukcija;
-    \item posebej omeniti uporabo \texttt{distance-avg} in fiksacijskih informacij kot približanje širšemu naboru signalov iz literature.
-\end{itemize}
-}
-
-\section{Omejitve}
-\label{subsec:omejitve}
-
-Glavne omejitve naloge so:
-\begin{itemize}
-    \item uporaba ene glavne podatkovne zbirke;
-    \item subjektivnost čustvenih oznak;
-    \item omejitev na signale sledilnika pogleda brez drugih fizioloških modalnosti;
-    \item občutljivost grafovske konstrukcije na hiperparametre;
-    \item računska zahtevnost validacije z LOO protokoli;
-    \item možnost prekomernega glajenja v grafovskih modelih;
-    \item zaradi subject kfold model med treniranjem vidi patterne recordingov, tako da se lahko uči le teh. narediti bi bilo potrebno tudi CV po recordingih.
-\end{itemize}
-
-\section{Možnosti nadaljnjega dela}
-\label{subsec:future-work}
-
-Možne smeri nadaljnjega dela vključujejo:
-\begin{itemize}
-    \item učenje povezav namesto ročne konstrukcije grafa;
-    \item uporabo grafovskih transformerjev;
-    \item samonadzorovano predtreniranje na neoznačenih signalih sledilnika pogleda;
-    \item razvoj grafovskega temeljnega modela za podatke pogleda;
-    \item razširitev na večmodalne fiziološke podatke;
-    \item evalvacijo na več podatkovnih zbirkah.
-\end{itemize}
-
-\TODO{
-Pri pisanju tega odseka dodaj tudi dve konkretni smeri nadaljnjega dela:
-\begin{itemize}
-    \item razmislek in implementacijo uporabe mežikov, saj literatura mežike obravnava kot informativen signal pri prepoznavi čustvenih stanj iz podatkov pogleda~\cite{lim2020emotion,tarnowski2020eye};
-    \item razširitev grafovske predstavitve s fiksacijskimi meta-vozlišči, torej idejo 3D lift, kjer bi posamezne meritve ostale osnovna vozlišča, fiksacije pa bi bile dodatna vozlišča višje ravni, povezana z meritvami, ki jim pripadajo.
-\end{itemize}
-}
+Izkaže se, da je najinformativnejši signal v tej podatkovni množici signal pogleda, torej koordinati $(x,~y)$ v množici \emph{samo pogled}.
+Velikosti zenic v množici \emph{pogled in zenici} dodajo nekaj koristne informacije, ostali signali iz množice \emph{vsi signali} pa ne pokažejo izrazite dodane vrednosti.
+Čeprav ta množica vsebuje več informacij, so rezultati večinoma slabši, kar kaže, da dodatni signali v uporabljeni zasnovi modelom prej dodajo šum kot koristno strukturo.
+Rezultati torej kažejo, da je uporabljena grafovska predstavitev smiselna in informativna, vendar v tej raziskavi najmočnejši ostajajo klasični modeli z ročno oblikovanimi značilkami.

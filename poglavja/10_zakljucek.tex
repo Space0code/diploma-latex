@@ -1,48 +1,37 @@
 \chapter{Zaključek}
 \label{sec:zakljucek}
 
+
+
+Če bi morali na podlagi teh eksperimentov izbrati model za uporabo v scenariju, kot je spremljanje valence med gledanjem filma, igranjem računalniške igre ali spletnim nakupovanjem, bi bil klasični model z oblikovanimi značilkami najprimernejša izbira.
+Ugotovitev je seveda omejena z eno uporabljeno podatkovno množico, uporabljenimi signali, protokol evalvacije -- izvedli smo samo prečno preverjanje po subjektih, ne pa tudi po posnetkih ali različnih podatkovnih množicah. V prihodnosti bi lahko preizkusili tudi učenje in uporabo v realnem času, ki prinese kopico novih izivov.
+\END_NOTE{Prestavi v zaključek}
+
 \TODO{
+
 \begin{itemize}
-    \item Zaključek na koncu uskladiti z novo zgodbo: glavna naloga je binarna klasifikacija, glavna primerjava pa modeli pri množicah \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}.
-    \item Sklep naj pošteno pove, pri katerih signalih in modelih GNN pomaga oziroma ne pomaga, namesto da predpostavlja, da mora biti GNN najboljši.
-    \item Če \ModelName{GazeMAE} ostane zelo močan, ga omeniti kot pomembno referenco za naučene predstavitve pogleda in motivacijo za nadaljnje delo z združevanjem predstavitev.
-    \item Pri nadaljnjem delu omeni tudi preizkus drugih grafovskih plasti, npr. \texttt{GATConv}, \texttt{GraphSAGE}, \texttt{GIN} in grafovskih transformerjev; v glavnih eksperimentih je bil operator namenoma fiksiran na \texttt{GCNConv}.
+    \item Omeni omejitev oznak: čustvene oznake so izpeljane iz eksperimentalnih samoocen oziroma oznak in zato vsebujejo subjektivnost ter šum; modeli klasificirajo oznake, ne neposredno čustev.
+    \item Omeni omejitev grafovske konstrukcije: uporabljena grafovska predstavitev je ena možna operacionalizacija časovnih, prostorskih in fiksacijskih odnosov, njena učinkovitost pa je odvisna od izbranih pravil povezovanja, značilk in hiperparametrov.
+    \item Ne razvijaj te omejitve preveč v diskusiji; samo nakaži jo kot razlog, zakaj rezultat ne zapira vprašanja grafovskega modeliranja podatkov sledilnika pogleda.
 \end{itemize}
 }
 
-\TODO{
-Zaključek napiši čisto na koncu. Struktura:
-\begin{itemize}
-    \item en odstavek: kaj je bil problem;
-    \item en odstavek: kaj si naredil;
-    \item en odstavek: glavni rezultati;
-    \item en odstavek: kaj rezultati pomenijo;
-    \item en odstavek: omejitve in prihodnje delo.
-\end{itemize}
-}
-
-V diplomski nalogi smo obravnavali uporabo grafovskih nevronskih mrež za prepoznavo afektivnih stanj iz podatkov sledilnika pogleda.
-Časovna okna meritev smo predstavili kot časovno-prostorske grafe, v katerih vozlišča predstavljajo posamezne meritve, povezave pa časovne, prostorske in fiksacijske odnose med njimi.
-Predlagani pristop smo ovrednotili na podatkovni zbirki \MAHNOB{} pri 3-razredni klasifikaciji valence in vzburjenosti.
 
 \TODO{
+Zaključek napiši kratko, brez podpoglavij in brez ponavljanja diskusije.
+Naj bo hiter pregled diplome od začetnega problema do nadaljnjega dela.
+Predlagan vsebinski tok:
 \begin{itemize}
-    \item Zaključek naj grafovsko predstavitev samo kratko povzame; ne ponavljaj definicij grafa, heterogenosti, uteženosti ali pravil konstrukcije povezav.
-    \item Če omenjaš naučene predznačene uteži, jih predstavi kot ugotovitev oziroma komponento modela, ne ponovno kot metodološko definicijo.
-    \item Uskladi z novo glavno nalogo in terminologijo: binarna klasifikacija valence, časovno-prostorski graf, klasifikacija čustvenih oznak.
-\end{itemize}
-}
-
-\TODO{
-\begin{itemize}
-    \item najboljši model;
-    \item ali graf pomaga glede na negrafovske osnovne modele;
-    \item ali predlagani GNN pomaga glede na osnovni \ModelName{GCN} in negrafovske osnovne modele;
-    \item vloga časovnih povezav;
-    \item vloga prostorskih povezav;
-    \item vloga fiksacijskih povezav;
-    \item vloga naučenih predznačenih uteži;
-    \item glavna omejitev;
-    \item najbolj smiselna smer nadaljnjega dela.
+    \item Problem: podatki sledilnika pogleda vsebujejo časovne, prostorske in fiksacijske odnose med meritvami, ki jih klasični tabelarični opisi ne zajamejo neposredno.
+    \item Motivacija: grafovske nevronske mreže omogočajo eksplicitno modeliranje relacij med meritvami, zato so naraven kandidat za preverjanje, ali takšna struktura pomaga pri klasifikaciji čustvenih oznak.
+    \item Umestitev dela: naloga ni razvijala splošnega sistema za prepoznavo čustev, ampak je preverjala uporabnost grafovske predstavitve podatkov sledilnika pogleda v nadzorovanem eksperimentalnem okviru.
+    \item Prvi prispevek: zasnovali smo časovno-prostorsko grafovsko predstavitev oken meritev sledilnika pogleda, kjer vozlišča predstavljajo meritve, povezave pa časovne, prostorske in fiksacijske odnose.
+    \item Drugi prispevek: implementirali in ovrednotili smo arhitekturno lestvico grafovskih modelov za klasifikacijo čustvenih oznak iz teh grafov.
+    \item Tretji prispevek: izvedli smo primerjalno evalvacijo z večinskimi in naključnimi izhodišči, klasičnimi metodami strojnega učenja z oblikovanimi značilkami ter zamrznjenimi prednaučenimi predstavitvenimi modeli.
+    \item Glavna ugotovitev: grafovski modeli so se naučili uporabnega signala in presegli osnovna izhodišča, vendar v uporabljeni eksperimentalni zasnovi niso presegli najboljših klasičnih modelov z oblikovanimi značilkami.
+    \item Pomen ugotovitve: rezultat kaže, da je grafovsko modeliranje podatkov sledilnika pogleda smiselna raziskovalna smer, vendar trenutno ne nadomesti preprostih, učinkovitih in dobro uveljavljenih klasičnih pristopov.
+    \item Omejitve: sklep je omejen na eno glavno podatkovno zbirko, izbrane signalne množice, binarno klasifikacijo valence, subjektivne čustvene oznake in uporabljeno grafovsko konstrukcijo.
+    \item Omejitve grafovske predstavitve: uporabljena predstavitev ni edina možna; drugačna pravila povezovanja, drugačne značilke, naučene povezave ali hierarhična predstavitev fiksacij bi lahko vodili do drugačnih rezultatov.
+    \item Nadaljnje delo: smiselne smeri so učenje povezav, preizkus drugih grafovskih plasti in grafovskih transformerjev, samonadzorovano predtreniranje na signalih sledilnika pogleda, uporaba mežikov in fiksacijskih meta-vozlišč ter evalvacija na več podatkovnih zbirkah oziroma v prenosu med nalogami.
 \end{itemize}
 }

@@ -1,18 +1,18 @@
 \chapter{Diskusija}
 \label{sec:diskusija}
 
-Uporabljena delitev podatkov ima uravnotežene razrede in lepo porazdelitev meritev.
+Kot kažejo slike~\ref{fig:porazdelitev-valenca-stevila}, \ref{fig:porazdelitev-polozajev-pogleda} in~\ref{fig:porazdelitev-velikosti-zenic}, ima glavna naloga skoraj uravnotežene razrede, očiščene meritve pa pričakovane porazdelitve.
 To poveča možnost, da se modeli naučijo uporabnih signalov namesto šuma.
 Matrike zmede pokažejo, da modeli niso izrazito pristranski do enega razreda.
-Posledično sta točnost in makro F1 v rezultatih podobna.
+Posledično imata točnost in makro F1 v rezultatih podobne vrednosti.
 
-Grafovski modeli se naučijo uporabnih informacij, saj dosegajo približno deset odstotnih točk višjo točnost od izhodiščnih klasifikatorjev.
+Grafovski modeli se dokazano naučijo uporabnih informacij, saj dosegajo približno deset odstotnih točk višjo točnost od izhodiščnih klasifikatorjev.
 Podoben sklep velja za prednaučena kodirnika, ki dosegata zelo podobne rezultate kot GNN.
-Uporabljene grafovske predstavitve in predstavitve prednaučenih kodirnikov so torej informativne, niso pa za našo nalogo boljše od uveljavljenih pristopov s klasičnimi modeli strojnega učenja in ekspertno oblikovanimi značilkami.
+Uporabljene grafovske predstavitve in predstavitve prednaučenih kodirnikov so torej informativne, niso pa za naš problem boljše od uveljavljenih pristopov s klasičnimi modeli strojnega učenja in ekspertno oblikovanimi značilkami.
 To je metodološko pomembna in zanimiva ugotovitev.
-Kljub večji izrazni moči globokih in grafovskih parametričnih modelov jih lahko enostavnejši modeli konsistentno prekašajo, poleg tega pa so hitrejši in zasedejo manj pomnilnika.
+Kljub večji izrazni moči globokih in grafovskih parametričnih modelov jih lahko enostavnejši modeli konsistentno prekašajo, poleg tega pa so slednji hitrejši in zasedejo manj pomnilnika.
 
 Izkaže se, da je najinformativnejši signal v tej podatkovni množici signal pogleda, torej koordinati $(x,~y)$ v množici \emph{samo pogled}.
 Velikosti zenic v množici \emph{pogled in zenici} dodajo nekaj koristne informacije, ostali signali iz množice \emph{vsi signali} pa ne pokažejo izrazite dodane vrednosti.
-Čeprav ta množica vsebuje več informacij, so rezultati večinoma slabši, kar kaže, da dodatni signali v uporabljeni zasnovi modelom prej dodajo šum kot koristno strukturo.
-Rezultati torej kažejo, da je uporabljena grafovska predstavitev smiselna in informativna, vendar v tej raziskavi najmočnejši ostajajo klasični modeli z ročno oblikovanimi značilkami.
+Čeprav slednja vsebuje več informacij, so rezultati večinoma slabši, kar kaže, da dodatni signali v našem primeru modelom prej dodajo šum kot koristno strukturo.
+Rezultati torej kažejo, da je uporabljena grafovska predstavitev smiselna in informativna, vendar v tej raziskavi najmočnejši ostajajo klasični modeli z ročno oblikovanimi značilkami iz signalov koordinat pogleda in velikosti zenice.

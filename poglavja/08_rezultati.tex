@@ -10,48 +10,12 @@ Dodatne rezultate in razširjene metrike poročamo v dodatku~\ref{app:dodatni-re
 % Slike rezultatov v tem poglavju so reproducibilno generirane z:
 % diploma-latex/skripte/generiraj_slike_rezultatov.py.
 
-\section{Porazdelitve}
-\label{subsec:rezultati-porazdelitve}
-
-Pred primerjavo modelov prikažemo osnovne porazdelitve podatkov: razredno sestavo glavne naloge za vse množice signalov ter porazdelitvi koordinat pogleda in velikosti zenic v očiščenih podatkih za množico signalov \emph{pogled in zenici}.
-
-Slika~\ref{fig:rezultati-porazdelitev-razredov} kaže, da sta razreda po odstranitvi nevtralne valence pri vseh množicah signalov skoraj uravnotežena.
-Slika~\ref{fig:rezultati-porazdelitev-polozajev-pogleda} povzema prostorsko porazdelitev veljavnih meritev pogleda na zaslonu po čiščenju podatkov.
-Slika~\ref{fig:rezultati-porazdelitev-velikosti-zenic} pa kaže podobni desno asimetrično zvezni porazdelitvi velikosti leve in desne zenice, pri čemer je porazdelitev desne zenice nekoliko zamaknjena proti večjim vrednostim.
-
-% Vir slike: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/label_distribution_aggregate.csv.
-% Slika je generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{porazdelitev_razredov_delezi_retain_2026-06-12.png}
-    \caption{Porazdelitev razredov za glavni binarni eksperiment z valenco.}
-    \label{fig:rezultati-porazdelitev-razredov}
-\end{figure} 
-
-% Vir slik: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/model_runs/gaze_pupil/2026-06-12_17-31-09/experiments/multiclass_table6_valence_3class_emotion-elicitation/snapshot.csv.
-% Sliki sta generirani s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.86\textwidth]{porazdelitev_polozajev_pogleda_retain_2026-06-12.png}
-    \caption{Toplotni prikaz položajev pogleda v očiščenih podatkih za množico signalov pogled in zenici.}
-    \label{fig:rezultati-porazdelitev-polozajev-pogleda}
-\end{figure}
-
-% Vir slike: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/model_runs/gaze_pupil/2026-06-12_17-31-09/experiments/multiclass_table6_valence_3class_emotion-elicitation/snapshot.csv.
-% Slika je generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.82\textwidth]{porazdelitev_velikosti_zenic_retain_2026-06-12.png}
-    \caption{Porazdelitev velikosti leve in desne zenice v očiščenih podatkih za množico signalov pogled in zenici.}
-    \label{fig:rezultati-porazdelitev-velikosti-zenic}
-\end{figure}
-
 \section{Glavni rezultati klasifikacije}
 \label{subsec:rezultati-glavna-primerjava}
  
 Tabela~\ref{tab:rezultati-glavna-primerjava} prikazuje povprečno točnost in makro F1 pri 7-kratnem prečnem preverjanju po subjektih.
 Vse vrednosti so zapisane v odstotkih, štiri signalne množice pa so obravnavane kot enakovredne različice iste klasifikacijske naloge.
-Večinski klasifikator doseže točnost okoli $52~\%$, kar ustreza porazdelitvi razredov na sliki~\ref{fig:rezultati-porazdelitev-razredov}, vendar ima zaradi napovedovanja samo enega razreda makro F1 okoli $34~\%$.
+Večinski klasifikator doseže točnost okoli $52~\%$, kar ustreza porazdelitvi razredov na sliki~\ref{fig:porazdelitev-valenca-stevila}, vendar ima zaradi napovedovanja samo enega razreda makro F1 okoli $34~\%$.
 
 Najvišjo točnost ($70{,}5~\%$) in makro F1 ($69{,}7~\%$) doseže \ModelName{SVM} pri signalni množici \emph{pogled in zenici}.
 \ModelName{LightGBM} doseže najboljši rezultat pri množicah \emph{samo pogled}, \emph{samo zenici} in \emph{vsi signali}.

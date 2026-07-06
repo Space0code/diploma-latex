@@ -4,18 +4,17 @@
 Podatki sledilnika pogleda vsebujejo časovne, prostorske in fiksacijske odnose med meritvami, ki jih klasična tabelarična struktura podatkov ne modelira neposredno.
 Grafovske nevronske mreže omogočajo eksplicitno modeliranje relacij med meritvami, zato so naraven kandidat za obravnavo takšnih podatkov.
 V nalogi smo preverili uporabnost grafovske predstavitve podatkov sledilnika pogleda pri klasifikaciji valence kot čustvene oznake.
-Časovna okna meritev smo predstavili kot časovno-prostorske grafe in jih ovrednotili s štirimi grafovskimi modeli, ki se postopno nadgrajujejo od preprostega modela proti kompleksnejšim.
-Grafovske modele smo primerjali še s tremi družinami modelov: izhodiščnima modeloma (naključni in večinski klasifikator), klasičnimi modeli strojnega učenja (\ModelName{SVM}, \ModelName{LightGBM}) ter prednaučenima kodirnikoma signalov (\ModelName{GazeMAE}, \ModelName{MOMENT}).
+Časovna okna meritev smo predstavili kot časovno-prostorske grafe in jih ovrednotili s štirimi grafovskimi modeli, ki se postopno nadgrajujejo od preproste proti kompleksnejšim različicam.
+Grafovske modele smo primerjali še s tremi družinami modelov: izhodiščnima modeloma (naključni in večinski klasifikator), klasičnimi modeli strojnega učenja (\ModelName{SVM}, \ModelName{LightGBM}, \ModelName{MLP}) ter prednaučenima kodirnikoma signalov (\ModelName{GazeMAE}, \ModelName{MOMENT}).
 Izvedli smo primerjalno evalvacijo vseh modelov na štirih delno prekrivajočih se množicah signalov: \emph{samo pogled}, \emph{samo zenici}, \emph{pogled in zenici} ter \emph{vsi signali}.
 Osrednja ugotovitev naloge je, da so grafovski modeli primerni za kodiranje signalov sledilnika pogleda, vendar v uporabljeni eksperimentalni zasnovi ne presežejo uspešnosti klasičnih modelov strojnega učenja.
 
-
-Če bi morali na podlagi izvedenih eksperimentov izbrati model za uporabo, bi bil klasični model z oblikovanimi značilkami najprimernejša izbira.
+Na podlagi izvedenih eksperimentov se je za najprimernejšo družino modelov za naš problem izkazala družina klasičnih modelov strojnega učenja z ročno oblikovanimi značilkami.
 Ta sklep je omejen na eno uporabljeno podatkovno zbirko, izbrane signalne množice, binarno klasifikacijo ene čustvene dimenzije (valence) in protokol evalvacije, ki ne preverja generalizacije po posnetkih ali različnih podatkovnih zbirkah.
 Čustvene oznake so poleg tega izpeljane iz eksperimentalnih oznak oziroma samoocen, zato vsebujejo subjektivnost in šum.
 Omejitev je tudi sama grafovska predstavitev, saj je uporabljena konstrukcija samo ena izmed možnih predstavitev odnosov med meritvami.
 
-Menimo, da je grafovsko modeliranje podatkov sledilnika pogleda še premalo raziskana, a smiselna nadaljnja raziskovalna smer.
-V nadaljnjem delu bi bilo smiselno preveriti drugačna pravila povezovanja in še več grafovskih arhitektur, predvsem grafovske transformerje.
-Posebej zanimiva smer je tudi samonadzorovano predtreniranje na signalih sledilnika pogleda, saj bi s tem lahko zmanjšali odvisnost od majhnih označenih podatkovnih zbirk.
+Menimo, da je grafovsko modeliranje podatkov sledilnika pogleda še v veliki meri neraziskana, a smiselna nadaljnja raziskovalna smer.
+V nadaljnjem delu bomo preverili drugačna pravila povezovanja in še več grafovskih arhitektur, predvsem grafovske transformerje.
+Posebej zanimiva smer je tudi samonadzorovano predtreniranje na signalih sledilnika pogleda, saj bi s tem lahko zmanjšali odvisnost od majhnih in tudi neoznačenih podatkovnih zbirk.
 Grafovsko predstavitev bi bilo mogoče razširiti še z mežiki, sakadami in fiksacijskimi meta-vozlišči, rezultate pa bi bilo potrebno preveriti na več podatkovnih zbirkah, pri prenosu med nalogami in v pogojih uporabe v realnem času.

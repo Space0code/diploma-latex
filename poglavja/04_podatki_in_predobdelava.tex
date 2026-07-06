@@ -38,11 +38,7 @@ Nevtralni razred odstranimo, da ciljna naloga vsebuje izrazitejši kontrast med 
 
 Oznaka valence je določena na ravni kombinacije udeleženca in videoposnetka.
 Vsa časovna okna in s tem vsi grafi istega ogleda videoposnetka zato prejmejo isto oznako.
-
-Vzburjenosti v tej nalogi ne klasificiramo.
-Razlog je predvsem večja šumnost oznak v uporabljeni podatkovni zbirki.
-Kot kaže matrika zmede v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se samoocene stopnje vzburjenosti slabše ujemajo z definiranimi razredi kot samoocene valence.
-
+Porazdelitev oken po odstranitvi nevtralnega razreda je prikazana na sliki~\ref{fig:porazdelitev-valenca-stevila}; razreda sta pri vseh množicah signalov skoraj uravnotežena.
 
 \begin{figure}[t]
     \centering
@@ -52,6 +48,10 @@ Kot kaže matrika zmede v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se sam
 \end{figure}
 
 \END_NOTE{Slika je delovna verzija iz runa RETAIN_2026-06-12_16-29-08. Pred oddajo preveri, ali je generirana iz končnega protokola, in jo po potrebi regeneriraj v paleti B.}
+
+Vzburjenosti v tej nalogi ne klasificiramo.
+Razlog je predvsem večja šumnost oznak v uporabljeni podatkovni zbirki.
+Kot kaže matrika zmede v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se samoocene stopnje vzburjenosti slabše ujemajo z definiranimi razredi kot samoocene valence.
 
 \section{Priprava vhodnih signalov}
 \label{subsec:vhodni-signali}
@@ -86,6 +86,25 @@ Nato odstranimo vrstice brez signalov pogleda ali velikosti zenic.
 Na voljo imamo tudi signale veljavnosti, na podlagi katerih odstranimo meritve, za katere je sledilnik poročal, da je meritev za vsaj eno oko neveljavna.
 Dodatno uporabimo filter osamelcev \texttt{q01}-\texttt{q99}, s katerim odstranimo izrazite ekstreme, ki izkrivljajo porazdelitve signalov.
 Na koncu kratke vrzeli v numeričnih signalih interpoliramo, signala velikosti leve in desne zenice pa dodatno zgladimo s kratkim drsečim povprečjem.
+Porazdelitvi položajev pogleda in velikosti zenic po čiščenju sta za množico signalov \emph{pogled in zenici} prikazani na slikah~\ref{fig:porazdelitev-polozajev-pogleda} in~\ref{fig:porazdelitev-velikosti-zenic}.
+
+% Vir slik: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/model_runs/gaze_pupil/2026-06-12_17-31-09/experiments/multiclass_table6_valence_3class_emotion-elicitation/snapshot.csv.
+% Sliki sta generirani s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.86\textwidth]{porazdelitev_polozajev_pogleda_retain_2026-06-12.png}
+    \caption{Toplotni prikaz položajev pogleda v očiščenih podatkih za množico signalov pogled in zenici.}
+    \label{fig:porazdelitev-polozajev-pogleda}
+\end{figure}
+
+% Vir slike: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/model_runs/gaze_pupil/2026-06-12_17-31-09/experiments/multiclass_table6_valence_3class_emotion-elicitation/snapshot.csv.
+% Slika je generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.82\textwidth]{porazdelitev_velikosti_zenic_retain_2026-06-12.png}
+    \caption{Porazdelitev velikosti leve in desne zenice v očiščenih podatkih za množico signalov pogled in zenici.}
+    \label{fig:porazdelitev-velikosti-zenic}
+\end{figure}
 
 \section{Normalizacija}
 \label{subsec:normalizacija}

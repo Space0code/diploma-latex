@@ -1,0 +1,26 @@
+\begin{table}[p]
+    \centering
+    \caption{Glavni hiperparametri modelov v končnih eksperimentih.}
+    \label{tab:hiperparametri-modelov}
+    \footnotesize
+    \setlength{\tabcolsep}{3pt}
+    \renewcommand{\arraystretch}{0.9}
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.21\textwidth} >{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Model oziroma družina & Podatkovna predstavitev & Glavni hiperparametri \\
+        \midrule
+        Naključni model & agregirane značilke & enakomerna naključna napoved; seme 42 \\
+        Večinski model & agregirane značilke & napoved večinskega razreda na učni množici \\
+        \ModelName{SVM} & agregirane značilke & RBF; $C=1{,}0$; \texttt{probability=true}; standardizacija značilk \\
+        \ModelName{LightGBM} & agregirane značilke & \texttt{n\_estimators=100}; \texttt{learning\_rate=0.05}; \texttt{max\_depth=5}; seme 42 \\
+        \ModelName{MLP} & agregirane značilke & skrita velikost 64; največ 200 epoh; učna stopnja $10^{-3}$; \texttt{dropout=0.1}; mini-serija 128; potrpežljivost 15 \\
+        \ModelName{GazeMAE}/\ModelName{MOMENT} glave & zamrznjene predstavitve & skrita velikost 128; največ 100 epoh; učna stopnja $10^{-3}$; \texttt{dropout=0.2}; mini-serija 128; potrpežljivost 15 \\
+        Grafovski modeli & grafi časovnih oken & \texttt{GCNConv}; 2 plasti; \texttt{hidden\_channels=64}; pozornostno združevanje; \texttt{dropout=0.1}; učna stopnja $5 \cdot 10^{-5}$; mini-serija 256; največ 350 epoh; potrpežljivost 20 \\
+        \ModelName{GCN} & grafi časovnih oken & homogen graf; brez ločenih relacij in značilk povezav \\
+        \ModelName{HeteroGCN-mean} & grafi časovnih oken & ločene relacije; združevanje s povprečenjem \\
+        \ModelName{HeteroGCN-MLP} & grafi časovnih oken & ločene relacije; združevanje z \ModelName{MLP} \\
+        \ModelName{HeteroGCN-MLP-w} & grafi časovnih oken & kot \ModelName{HeteroGCN-MLP}, z naučenimi utežmi povezav \\
+        Grafovska konstrukcija & grafi časovnih oken & $k_t=1$; $k_s=1$; $k_f=3$; standardizirane značilke povezav \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

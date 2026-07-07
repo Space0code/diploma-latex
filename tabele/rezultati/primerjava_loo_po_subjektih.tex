@@ -1,0 +1,26 @@
+% Vir podatkov za 7-kratni protokol: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/metric_summary_with_std.csv.
+% Vir podatkov za LOO: GFM-for-eyetracker/results/quick_v1_v2_comparison/loo_gaze_pupil_appendix/2026-07-06_16-26-23/tables/metric_summary_with_std.csv.
+% Namenoma so ohranjeni samo modeli, za katere je bil pognan LOO. Ne dodajaj drugih modelov za katere nimamo rezultatov.
+\begin{table}[H]
+    \centering
+    \caption{Primerjava 7-kratnega prečnega preverjanja po subjektih in LOO po subjektih za množico signalov \emph{pogled in zenici} za izbrane modele. LOO nismo poganjali v začetnih fazah za hitro primerjavo, zato nekateri modeli manjkajo. Vrednosti so povprečja v odstotkih.}
+    \label{tab:dodatek-loo-primerjava}
+    \footnotesize
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth} *{4}{>{\centering\arraybackslash}X}@{}}
+        \toprule
+        Model & \multicolumn{2}{c}{Točnost} & \multicolumn{2}{c}{Makro F1} \\
+        \cmidrule(lr){2-3}\cmidrule(l){4-5}
+        & 7-kratno & LOO & 7-kratno & LOO \\
+        \midrule
+        Naključni & $50{,}8$ & $48{,}7$ & $50{,}6$ & $48{,}2$ \\
+        Večinski & $52{,}1$ & $51{,}8$ & $34{,}2$ & $33{,}9$ \\
+        \midrule
+        \ModelName{LightGBM} & $69{,}6$ & $70{,}1$ & $68{,}8$ & $68{,}3$ \\
+        \midrule
+        \ModelName{GazeMAE/MOMENT} & $65{,}6$ & $68{,}6$ & $65{,}2$ & $67{,}8$ \\
+        \midrule
+        \ModelName{GCN} & $65{,}4$ & $64{,}0$ & $63{,}9$ & $61{,}0$ \\
+        \ModelName{HeteroGCN-MLP-w} & $65{,}5$ & $63{,}2$ & $64{,}4$ & $60{,}1$ \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

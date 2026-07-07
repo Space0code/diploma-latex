@@ -22,32 +22,7 @@ Negrafovski osnovni modeli prejmejo agregirano tabelarično predstavitev istega 
 
 V tabeli~\ref{tab:pregled-primerjanih-modelov} je prikazano, katere modele uporabljamo, kateri družini vsak model pripada, kakšne podatke sprejme na vhod in kakšno vlogo ima v naši primerjalni študiji.
 
-\begin{table}[t]
-    \centering
-    \caption{Pregled primerjanih modelov in njihovih vhodnih predstavitev.}
-    \label{tab:pregled-primerjanih-modelov}
-    \small
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.23\textwidth} >{\raggedright\arraybackslash}p{0.22\textwidth} >{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedright\arraybackslash}X@{}}
-        \toprule
-        Model & Družina modelov & Vhod v model & Vloga v primerjavi \\
-        \midrule
-        Naključni & \multirow{2}{=}{izhodiščna klasifikatorja} & \multirow{2}{=}{brez učenja iz značilk} & spodnja meja naključnega ugibanja \\
-        Večinski & & & spodnja meja napovedovanja najpogostejšega razreda \\
-        \cmidrule(lr){1-4}
-        \ModelName{SVM} & \multirow{3}{=}{klasični modeli strojnega učenja} & \multirow{3}{=}{agregirane značilke okna} & \multirow{3}{=}{klasični model strojnega učenja} \\
-        \ModelName{LightGBM} & & & \\
-        \ModelName{MLP} & & & \\
-        \cmidrule(lr){1-4}
-        \ModelName{GazeMAE} & \multirow{2}{=}{zamrznjeni prednaučeni predstavitveni modeli} & koordinati pogleda $(x, y)$ & prednaučena predstavitev za množico \emph{samo pogled} \\
-        \ModelName{MOMENT} & & časovne vrste izbranih signalov & prednaučena predstavitev za množice s signali zenic oziroma več signali \\
-        \cmidrule(lr){1-4}
-        \ModelName{GCN} & \multirow{4}{=}{grafovski modeli} & homogeni graf okna & osnovni grafovski model \\
-        \ModelName{HeteroGCN-mean} & & \multirow{2}{=}{heterogeni graf okna} & ločena obravnava relacij s preprosto fuzijo \\
-        \ModelName{HeteroGCN-MLP} & & & ločena obravnava relacij z naučeno fuzijo \\
-        \ModelName{HeteroGCN-MLP-w} & & heterogeni graf okna in značilke povezav & najkompleksnejša stopnja arhitekturne lestvice \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+\input{tabele/modeli/pregled_primerjanih_modelov.tex}
 
 % TODO: Premisli, ali tabela ostane tukaj ali se skrajša in delno prestavi v
 % poglavje 7. V poglavju 6 naj tabela razlaga arhitekturno vlogo modelov, v
@@ -153,22 +128,7 @@ Razlikujejo se po tem, kako obravnavajo tipe povezav, kako združujejo relacijsk
 Najprej definiramo osnovno GNN, nato pa s tremi nadgradnjami postopno gradimo končni model.
 V tabeli~\ref{tab:arhitekturna-lestvica-gnn} so na kratko predstavljene razlike med vsemi štirimi stopnjami grafovskih modelov.
 
-\begin{table}[t]
-    \centering
-    \caption{Arhitekturna lestvica grafovskih modelov.}
-    \label{tab:arhitekturna-lestvica-gnn}
-    \small
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth} >{\centering\arraybackslash}p{0.10\textwidth} >{\centering\arraybackslash}p{0.12\textwidth} >{\centering\arraybackslash}p{0.10\textwidth} >{\raggedright\arraybackslash}X@{}}
-        \toprule
-        Model & Ločene relacije & Fuzija relacij & Uteži povezav & Namen stopnje \\
-        \midrule
-        \ModelName{GCN} & ne & -- & ne & preveri osnovno grafovsko predstavitev v homogenem grafu \\
-        \ModelName{HeteroGCN-mean} & da & povprečje & ne & preveri vpliv ločene obravnave relacij \\
-        \ModelName{HeteroGCN-MLP} & da & \ModelName{MLP} & ne & preveri vpliv naučene fuzije relacijskih predstavitev \\
-        \ModelName{HeteroGCN-MLP-w} & da & \ModelName{MLP} & da & preveri vpliv naučenih predznačenih uteži povezav \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+\input{tabele/modeli/arhitekturna_lestvica_gnn.tex}
 
 \subsection{Skupni cevovod grafovskih modelov}
 \label{subsec:skupni-deli-grafovske-arhitekture}
@@ -244,10 +204,10 @@ Diagram~\ref{fig:diagram-heterogcn-mlp} prikazuje, kje se zgodi sprememba.
 \label{subsec:model-heterogcn-mlp-w}
 
 \ModelName{HeteroGCN-MLP-w} dobimo tako, da \ModelName{HeteroGCN-MLP} nadgradimo z naučenimi utežmi povezav.
-Za izračun uteži povezav ima model tri večslojne perceptrone: $f_w^{\mathrm{čas}}$, $f_w^{\mathrm{prostor}}$ in $f_w^{\mathrm{fiksacija}}$.
+Za izračun uteži povezav ima model tri večslojne perceptrone: $f_w^{\text{čas}}$, $f_w^{\text{prostor}}$ in $f_w^{\text{fiksacija}}$.
 Ti na podlagi vektorja značilk posamezne povezave, katerega komponente so povzete v tabeli~\ref{tab:znacilke-povezav}, izračunajo skalarno predznačeno utež, ki določa, kako močno posamezna povezava vpliva na posredovanje sporočil.
 Pri posamezni množici signalov se uporabijo le funkcije za relacije, ki so v grafu prisotne.
-Časovne povezave naprej in nazaj si delijo isto funkcijo $f_w^{\mathrm{čas}}$, smer povezave pa je podana kot dodatna značilka povezave $\rho_{ij}$.
+Časovne povezave naprej in nazaj si delijo isto funkcijo $f_w^{\text{čas}}$, smer povezave pa je podana kot dodatna značilka povezave $\rho_{ij}$.
 Formule za izračun in normalizacijo uteži so podane v dodatku~\ref{app:naucene-utezi-povezav}.
 Namen te \emph{končne} stopnje je preveriti, ali modelu koristi razlikovati moč in predznak prispevka posameznih povezav znotraj relacije.
 

@@ -42,16 +42,16 @@ Porazdelitev oken po odstranitvi nevtralnega razreda je prikazana na sliki~\ref{
 
 \begin{figure}[t]
     \centering
+    % Slika je generirana iz GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/label_distribution_aggregate.csv.
+    % Generirana je s skripto diploma-latex/skripte/generiraj_slike_rezultatov.py.
     \includegraphics[width=0.82\textwidth]{porazdelitev_razredov_stevila_retain_2026-06-12.png}
     \caption{Porazdelitev 10-sekundnih oken po razredih binarne valence.}
     \label{fig:porazdelitev-valenca-stevila}
 \end{figure}
 
-\END_NOTE{Slika je delovna verzija iz runa RETAIN_2026-06-12_16-29-08. Pred oddajo preveri, ali je generirana iz končnega protokola, in jo po potrebi regeneriraj v paleti B.}
-
 Vzburjenosti v tej nalogi ne klasificiramo.
 Razlog je predvsem večja šumnost oznak v uporabljeni podatkovni zbirki.
-Kot kaže matrika zmede v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se samoocene stopnje vzburjenosti slabše ujemajo z definiranimi razredi kot samoocene valence.
+Kot kaže prikaz ujemanja oznak v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se samoocene stopnje vzburjenosti slabše ujemajo z definiranimi razredi kot samoocene valence.
 
 \section{Priprava vhodnih signalov}
 \label{subsec:vhodni-signali}
@@ -140,22 +140,4 @@ V tem poglavju opišemo le skupne korake priprave podatkov.
 
 Tabela~\ref{tab:mahnob-predobdelava} povzema, kako se skozi opisane korake predobdelave zmanjša količina podatkov, uporabljena v končni eksperimentalni primerjavi.
 
-\begin{table}[t]
-    \centering
-    \caption{Zmanjševanje količine podatkov od izvirne zbirke \MAHNOB{} do končnih časovnih oken, uporabljenih v eksperimentalnem cevovodu.}
-    \label{tab:mahnob-predobdelava}
-    \small
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.28\textwidth} c c >{\raggedright\arraybackslash}X@{}}
-        \toprule
-        Korak & Vrstice & Udeleženci & Opis \\
-        \midrule
-        Izbira izvirne zbirke \MAHNOB{} & -- & 30 & Večmodalna zbirka; izvirni članek v analizi uporabi 27 udeležencev. \\
-        Izbira podmnožice s čustvenimi oznakami & 3\,797\,165 & 24 & Ohranimo le posnetke iz eksperimenta vzbujanja čustev, ki imajo podatke sledilnika pogleda in čustvene oznake. \\
-        Izključitev "slabih" udeležencev & 3\,535\,842 & 22 & Izključeni P9, P12 in P15. \\
-        Izbira veljavno označenih vrstic & 2\,995\,632 & 22 & Ohranjeni so samo označeni podatki, uporabljeni za učenje modelov čustvenih stanj. \\
-        Priprava podatkov za učenje & 2\,814\,005 & 22 & Odstranjene so vrstice brez signalov pogleda ali zenic. \\
-        Filter osamelcev \texttt{q01}-\texttt{q99} & 2\,639\,048 & 22 & Robustno filtriranje štirih osnovnih signalov pogleda in zenic. \\
-        Tvorba uporabnih 10-sekundnih časovnih oken & 5\,158 & 22 & Vsako okno postane en učni primer oziroma graf. \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+\input{tabele/podatki/mahnob_predobdelava.tex}

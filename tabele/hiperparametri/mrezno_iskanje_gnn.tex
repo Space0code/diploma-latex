@@ -1,0 +1,16 @@
+% Vir podatkov: GFM-for-eyetracker/results/gnn_v2_valence_grid_search_2x64_phase2/2026-05-28_16-54-08/grid_summary.csv.
+\begin{table}[H]
+    \centering
+    \caption{Povzetek predhodnega mrežnega iskanja hiperparametrov grafovske konstrukcije.}
+    \label{tab:mrezno-iskanje-gnn}
+    \footnotesize
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.26\textwidth} >{\centering\arraybackslash}p{0.11\textwidth} >{\centering\arraybackslash}p{0.11\textwidth} >{\centering\arraybackslash}p{0.11\textwidth} >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Nastavitev & $k_t$ & $k_s$ & $k_f$ & Opomba \\
+        \midrule
+        Preiskani prostor & $\{1,2,3\}$ & $\{1,2,3\}$ & $\{1,2,3,5\}$ & $36$ uspešno izvedenih kombinacij \\
+        Najvišji makro F1 & $3$ & $1$ & $5$ & makro F1 $0{,}510$, točnost $0{,}522$ \\
+        Končna nastavitev & $1$ & $1$ & $3$ & redkejši graf in manjša računska zahtevnost \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

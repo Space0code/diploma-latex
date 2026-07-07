@@ -1,0 +1,26 @@
+\begin{table}[t]
+    \centering
+    \caption{Pregled primerjanih modelov in njihovih vhodnih predstavitev.}
+    \label{tab:pregled-primerjanih-modelov}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.23\textwidth} >{\raggedright\arraybackslash}p{0.22\textwidth} >{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Model & Družina modelov & Vhod v model & Vloga v primerjavi \\
+        \midrule
+        Naključni & \multirow{2}{=}{izhodiščna klasifikatorja} & \multirow{2}{=}{brez učenja iz značilk} & spodnja meja naključnega ugibanja \\
+        Večinski & & & spodnja meja napovedovanja najpogostejšega razreda \\
+        \cmidrule(lr){1-4}
+        \ModelName{SVM} & \multirow{3}{=}{klasični modeli strojnega učenja} & \multirow{3}{=}{agregirane značilke okna} & \multirow{3}{=}{klasični model strojnega učenja} \\
+        \ModelName{LightGBM} & & & \\
+        \ModelName{MLP} & & & \\
+        \cmidrule(lr){1-4}
+        \ModelName{GazeMAE} & \multirow{2}{=}{zamrznjeni prednaučeni predstavitveni modeli} & koordinati pogleda $(x, y)$ & prednaučena predstavitev za množico \emph{samo pogled} \\
+        \ModelName{MOMENT} & & časovne vrste izbranih signalov & prednaučena predstavitev za množice s signali zenic oziroma več signali \\
+        \cmidrule(lr){1-4}
+        \ModelName{GCN} & \multirow{4}{=}{grafovski modeli} & homogeni graf okna & osnovni grafovski model \\
+        \ModelName{HeteroGCN-mean} & & \multirow{2}{=}{heterogeni graf okna} & ločena obravnava relacij s preprosto fuzijo \\
+        \ModelName{HeteroGCN-MLP} & & & ločena obravnava relacij z naučeno fuzijo \\
+        \ModelName{HeteroGCN-MLP-w} & & heterogeni graf okna in značilke povezav & najkompleksnejša stopnja arhitekturne lestvice \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

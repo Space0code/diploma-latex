@@ -1,57 +1,24 @@
 \chapter{Dodatni rezultati}
 \label{app:dodatni-rezultati}
 
-\TODO{
-\begin{itemize}
-    \item Sem dodaj dodatne tabele po foldih, rezultate manj pomembnih modelov in rezultate, ki niso šli v glavno besedilo.
-    \item Dodaj rezultate za \textit{LOO po subjektih} in \textit{LOO po posnetkih} pri vseh signalnih naborih: pogled, zenici, pogled+zenici in vsi signali.
-    \item Dodaj vse izračunane metrike rezultatov, ne samo \textit{accuracy} in makro-F1, ki ostaneta v glavnem besedilu.
-    \item Razširjene metrike: balanced accuracy, weighted-F1, AUC, po potrebi precision/recall po razredih in rezultati po posameznih gubah.
-    \item Dodatne matrike zmede: LOO po posnetkih, binarne naloge, najboljši negrafovski osnovni model in primerjave, ki niso nujne za glavno zgodbo.
-    \item Dodaj rezultate primerjave različnih tipov grafovskih konvolucij oziroma GNN slojev, če ostanejo zunaj glavnega besedila.
-    \item Dodaj rezultate 3-razredne klasifikacije in kratek komentar primerjave z izvirnim člankom podatkovne zbirke MAHNOB-HCI oziroma HCI-tagging.
-    \item Dodatne porazdelitve podatkov: porazdelitev razredov po subjektih, po posnetkih, po izvorni čustveni oznaki in za binarni low/high nalogi.
-    \item Dodatne slike ujemanja oznak: podrobnejše heatmape Table 6 razredov proti samoocenam in povzetki label-noise analize, če v glavnem besedilu ostane samo ena skupna slika.
-    \item UMAP procesiranih podatkov dodaj sem samo, če je slika zanimiva, vendar premalo ključna ali premalo čista za glavno besedilo. Če UMAP ne doda interpretativne vrednosti, ga ne vključuj.
-\end{itemize}
-}
-
 \section{Preslikava čustvenih oznak v valenco}
 \label{app:preslikava-valence}
 
 Preslikava čustvenih oznak v razrede valence sledi tabeli~6 izvirnega članka podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
-Razredi niso tvorjeni z neposrednim rezanjem številskih samoocen valence, temveč iz poročane čustvene oznake posnetka.
 Pri binarni nalogi uporabimo samo skrajna razreda valence, nevtralni razred pa izločimo.
+Tako model ločuje med nizko in visoko valenco, primeri z vmesno oziroma nevtralno oznako pa niso del glavne evalvacijske naloge.
 
-\begin{table}[h]
-    \centering
-    \caption{Preslikava čustvenih oznak v razrede valence po izvirnem članku podatkovne zbirke \MAHNOB{}. Pri binarni nalogi uporabimo samo neprijetno in prijetno valenco.}
-    \label{tab:label-mapping}
-    \small
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth} >{\raggedright\arraybackslash}X@{}}
-        \toprule
-        Razred valence & Uporaba v binarni nalogi & Izvorne čustvene oznake \\
-        \midrule
-        Neprijetna valenca & da & \emph{fear}, \emph{anger}, \emph{disgust}, \emph{sadness}, \emph{anxiety} \\
-        Nevtralna valenca & ne & \emph{surprise}, \emph{neutral} \\
-        Prijetna valenca & da & \emph{joy}, \emph{happiness}, \emph{amusement} \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+\input{tabele/rezultati/preslikava_valence.tex}
 
 \section{Razširjeni rezultati binarne klasifikacije valence}
 \label{app:razsirjeni-rezultati-binarna-valenca}
 
-\TODO{
-\begin{itemize}
-    \item Tabele v tem razdelku so razširjena različica glavne primerjave iz poglavja~\ref{sec:rezultati}.
-    \item V besedilu dodatka po potrebi pojasni, da so preciznost, priklic in AUC makro povprečja; Micro-F1 je pri enooznačni klasifikaciji enak točnosti.
-    \item Vrednosti so podane kot povprečje $\pm$ standardni odklon čez sedem gub prečnega preverjanja po subjektih.
-    \item Vir podatkov za vse štiri tabele je \texttt{metric\_summary\_with\_std.csv} iz reteniranega teka \texttt{RETAIN\_2026-06-12\_16-29-08}.
-\end{itemize}
-}
-% Polna pot vira: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/metric_summary_with_std.csv.
+Tabele v tem razdelku razširjajo glavno primerjavo iz poglavja~\ref{sec:rezultati}.
+Vrednosti so povprečje $\pm$ standardni odklon čez sedem testnih množic prečnega preverjanja po subjektih.
+Micro-F1 je pri tej enooznačni klasifikaciji enak točnosti.
+Razširjene metrike so namenjene predvsem preverjanju, ali sklep iz glavne primerjave ostane podoben tudi pri drugih pogledih na napake modelov.
 
+% Vir podatkov za tabele: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/metric_summary_with_std.csv.
 \input{tabele/rezultati/dodatni_rezultati_samo_pogled.tex}
 
 \input{tabele/rezultati/dodatni_rezultati_samo_zenici.tex}
@@ -60,56 +27,215 @@ Pri binarni nalogi uporabimo samo skrajna razreda valence, nevtralni razred pa i
 
 \input{tabele/rezultati/dodatni_rezultati_vsi_signali.tex}
 
+\section{Primerjava z LOO po subjektih}
+\label{app:primerjava-loo-po-subjektih}
+
+LOO po subjektih v vsaki ponovitvi uporabi enega subjekta kot testno množico, vse ostale subjekte pa za učenje oziroma validacijo.
+V primerjavi s 7-kratnim protokolom zato uporabi več ponovitev in manjšo testno množico v posamezni ponovitvi.
+Spodnja tabela primerja oba protokola za množico signalov \emph{pogled in zenici}; LOO je bil izveden za podmnožico modelov, zato pomišljaj označuje, da vrednost ni bila izračunana.
+
+\input{tabele/rezultati/primerjava_loo_po_subjektih.tex}
+
+\section{Matrike zmede}
+\label{app:matrike-zmede-vsi-modeli}
+
+V nadaljevanju so prikazane vrstično normalizirane matrike zmede za vse modele in vse množice signalov.
+Matrike so prikazane po dve v vrstici in sledijo vrstnemu redu modelov iz glavne tabele rezultatov.
+Vrstice predstavljajo dejanski razred, stolpci pa napovedani razred. 
+Vrednosti so deleži znotraj dejanskega razreda.
+
+\newcommand{\DodatekMatrikaEna}[1]{\includegraphics[width=0.47\textwidth,trim=0bp 212.9bp 780bp 18bp,clip]{#1}}
+\newcommand{\DodatekMatrikaDve}[1]{\includegraphics[width=0.47\textwidth,trim=205bp 212.9bp 585bp 18bp,clip]{#1}}
+\newcommand{\DodatekMatrikaTri}[1]{\includegraphics[width=0.47\textwidth,trim=397bp 212.9bp 397bp 26bp,clip]{#1}}
+\newcommand{\DodatekMatrikaStiri}[1]{\includegraphics[width=0.47\textwidth,trim=580bp 212.9bp 205bp 22bp,clip]{#1}}
+\newcommand{\DodatekMatrikaPet}[1]{\includegraphics[width=0.47\textwidth,trim=770bp 212.9bp 0bp 22bp,clip]{#1}}
+\newcommand{\DodatekMatrikaSest}[1]{\includegraphics[width=0.47\textwidth,trim=0bp 0bp 780bp 212.9bp,clip]{#1}}
+\newcommand{\DodatekMatrikaSedem}[1]{\includegraphics[width=0.47\textwidth,trim=205bp 0bp 585bp 212.9bp,clip]{#1}}
+\newcommand{\DodatekMatrikaOsem}[1]{\includegraphics[width=0.47\textwidth,trim=397bp 0bp 397bp 212.9bp,clip]{#1}}
+\newcommand{\DodatekMatrikaDevet}[1]{\includegraphics[width=0.47\textwidth,trim=580bp 0bp 205bp 212.9bp,clip]{#1}}
+\newcommand{\DodatekMatrikaDeset}[1]{\includegraphics[width=0.47\textwidth,trim=770bp 0bp 0bp 212.9bp,clip]{#1}}
+
+% Vir slik: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/confusion_matrices.csv.
+% Slike so generirane s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
+% Spodnji prikazi uporabljajo izreze istih PNG datotek z LaTeX nastavitvama trim in clip.
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaEna{matrike_zmede_dodatek_samo_pogled.png}\hfill
+    \DodatekMatrikaDve{matrike_zmede_dodatek_samo_pogled.png}
+    \caption{Matriki zmede za množico signalov samo pogled: naključni in večinski model.}
+    \label{fig:matrike-zmede-dodatek-samo-pogled}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaTri{matrike_zmede_dodatek_samo_pogled.png}\hfill
+    \DodatekMatrikaStiri{matrike_zmede_dodatek_samo_pogled.png}
+    \caption{Matriki zmede za množico signalov samo pogled: \ModelName{SVM} in \ModelName{LightGBM}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaPet{matrike_zmede_dodatek_samo_pogled.png}\hfill
+    \DodatekMatrikaSest{matrike_zmede_dodatek_samo_pogled.png}
+    \caption{Matriki zmede za množico signalov samo pogled: \ModelName{MLP} in \ModelName{GazeMAE/MOMENT}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaSedem{matrike_zmede_dodatek_samo_pogled.png}\hfill
+    \DodatekMatrikaOsem{matrike_zmede_dodatek_samo_pogled.png}
+    \caption{Matriki zmede za množico signalov samo pogled: \ModelName{GCN} in \ModelName{HeteroGCN-mean}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaDevet{matrike_zmede_dodatek_samo_pogled.png}\hfill
+    \DodatekMatrikaDeset{matrike_zmede_dodatek_samo_pogled.png}
+    \caption{Matriki zmede za množico signalov samo pogled: \ModelName{HeteroGCN-MLP} in \ModelName{HeteroGCN-MLP-w}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaEna{matrike_zmede_dodatek_samo_zenici.png}\hfill
+    \DodatekMatrikaDve{matrike_zmede_dodatek_samo_zenici.png}
+    \caption{Matriki zmede za množico signalov samo zenici: naključni in večinski model.}
+    \label{fig:matrike-zmede-dodatek-samo-zenici}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaTri{matrike_zmede_dodatek_samo_zenici.png}\hfill
+    \DodatekMatrikaStiri{matrike_zmede_dodatek_samo_zenici.png}
+    \caption{Matriki zmede za množico signalov samo zenici: \ModelName{SVM} in \ModelName{LightGBM}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaPet{matrike_zmede_dodatek_samo_zenici.png}\hfill
+    \DodatekMatrikaSest{matrike_zmede_dodatek_samo_zenici.png}
+    \caption{Matriki zmede za množico signalov samo zenici: \ModelName{MLP} in \ModelName{GazeMAE/MOMENT}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaSedem{matrike_zmede_dodatek_samo_zenici.png}\hfill
+    \DodatekMatrikaOsem{matrike_zmede_dodatek_samo_zenici.png}
+    \caption{Matriki zmede za množico signalov samo zenici: \ModelName{GCN} in \ModelName{HeteroGCN-mean}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaDevet{matrike_zmede_dodatek_samo_zenici.png}\hfill
+    \DodatekMatrikaDeset{matrike_zmede_dodatek_samo_zenici.png}
+    \caption{Matriki zmede za množico signalov samo zenici: \ModelName{HeteroGCN-MLP} in \ModelName{HeteroGCN-MLP-w}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaEna{matrike_zmede_dodatek_pogled_zenici.png}\hfill
+    \DodatekMatrikaDve{matrike_zmede_dodatek_pogled_zenici.png}
+    \caption{Matriki zmede za množico signalov pogled in zenici: naključni in večinski model.}
+    \label{fig:matrike-zmede-dodatek-pogled-zenici}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaTri{matrike_zmede_dodatek_pogled_zenici.png}\hfill
+    \DodatekMatrikaStiri{matrike_zmede_dodatek_pogled_zenici.png}
+    \caption{Matriki zmede za množico signalov pogled in zenici: \ModelName{SVM} in \ModelName{LightGBM}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaPet{matrike_zmede_dodatek_pogled_zenici.png}\hfill
+    \DodatekMatrikaSest{matrike_zmede_dodatek_pogled_zenici.png}
+    \caption{Matriki zmede za množico signalov pogled in zenici: \ModelName{MLP} in \ModelName{GazeMAE/MOMENT}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaSedem{matrike_zmede_dodatek_pogled_zenici.png}\hfill
+    \DodatekMatrikaOsem{matrike_zmede_dodatek_pogled_zenici.png}
+    \caption{Matriki zmede za množico signalov pogled in zenici: \ModelName{GCN} in \ModelName{HeteroGCN-mean}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaDevet{matrike_zmede_dodatek_pogled_zenici.png}\hfill
+    \DodatekMatrikaDeset{matrike_zmede_dodatek_pogled_zenici.png}
+    \caption{Matriki zmede za množico signalov pogled in zenici: \ModelName{HeteroGCN-MLP} in \ModelName{HeteroGCN-MLP-w}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaEna{matrike_zmede_dodatek_vsi_signali.png}\hfill
+    \DodatekMatrikaDve{matrike_zmede_dodatek_vsi_signali.png}
+    \caption{Matriki zmede za množico signalov vsi signali: naključni in večinski model.}
+    \label{fig:matrike-zmede-dodatek-vsi-signali}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaTri{matrike_zmede_dodatek_vsi_signali.png}\hfill
+    \DodatekMatrikaStiri{matrike_zmede_dodatek_vsi_signali.png}
+    \caption{Matriki zmede za množico signalov vsi signali: \ModelName{SVM} in \ModelName{LightGBM}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaPet{matrike_zmede_dodatek_vsi_signali.png}\hfill
+    \DodatekMatrikaSest{matrike_zmede_dodatek_vsi_signali.png}
+    \caption{Matriki zmede za množico signalov vsi signali: \ModelName{MLP} in \ModelName{GazeMAE/MOMENT}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaSedem{matrike_zmede_dodatek_vsi_signali.png}\hfill
+    \DodatekMatrikaOsem{matrike_zmede_dodatek_vsi_signali.png}
+    \caption{Matriki zmede za množico signalov vsi signali: \ModelName{GCN} in \ModelName{HeteroGCN-mean}.}
+\end{figure}
+
+\begin{figure}[p]
+    \centering
+    \DodatekMatrikaDevet{matrike_zmede_dodatek_vsi_signali.png}\hfill
+    \DodatekMatrikaDeset{matrike_zmede_dodatek_vsi_signali.png}
+    \caption{Matriki zmede za množico signalov vsi signali: \ModelName{HeteroGCN-MLP} in \ModelName{HeteroGCN-MLP-w}.}
+\end{figure}
+
+\clearpage
+
 \section{Ujemanje izpeljanih oznak s samoocenami}
 \label{app:ujemanje-oznak-s-samoocenami}
 
-\TODO{Dodaj podrobnejše heatmape oziroma povzetke analize ujemanja razredov iz tabele~6 s številskimi samoocenami. Ta dodatek naj utemelji, zakaj je vzburjenost v uporabljenem podnaboru šumnejša ciljna oznaka kot valenca.}
+Slika~\ref{fig:ujemanje-oznak-s-samoocenami} primerja razrede, izpeljane iz tabele~6, z razredi, dobljenimi iz številskih samoocen.
+Primerjava je uporabna kot groba ocena skladnosti med diskretnimi čustvenimi oznakami in številskimi ocenami, ki so bile zbrane v istem eksperimentu.
+Pri binarni valenci je ujemanje na uporabljenem podnaboru $96{,}7\,\%$, pri binarni vzburjenosti pa $70{,}3\,\%$.
+Zato vzburjenosti ne uporabimo kot glavno ciljno nalogo.
+
+% Vir slike: GFM-for-eyetracker/results/label_noise_analysis/2026-05-13_table6_self_report_alignment/table6_vs_rating_crosstab_long.csv.
+% Povzetek ujemanja: GFM-for-eyetracker/results/label_noise_analysis/2026-05-13_table6_self_report_alignment/label_noise_summary.csv.
+% Slika je generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.92\textwidth]{ujemanje_oznak_s_samoocenami.png}
+    \caption{Ujemanje razredov valence in vzburjenosti, izpeljanih iz tabele~6, z razredi iz številskih samoocen. Vrednosti so deleži znotraj izpeljanega razreda.}
+    \label{fig:ujemanje-oznak-s-samoocenami}
+\end{figure}
 
 \section{Izbira tipa grafovske konvolucije}
 \label{app:izbira-grafovske-konvolucije}
 
-Za preverjanje izbire grafovskega operatorja smo izvedli dodatni poskus na binarni
-nalogi valence z naborom signalov pogled+zenici.
-Primerjali smo osnovni homogeni grafovski model in uteženo heterogeno arhitekturo
-z različnimi tipi grafovskih konvolucij.
-Pri osnovnem modelu so bile povezave neutežene, pri uteženi heterogeni arhitekturi
-pa so različice \texttt{GCNConv}, \texttt{GraphConv} in \texttt{GINEConv} uporabile
-naučene skalarne uteži povezav.
-Različica \texttt{GATConv} teh skalarnih uteži ni uporabila, saj pomembnost
-povezav modelira z notranjim mehanizmom pozornosti.
+Izbiro operatorja \texttt{GCNConv} smo preverili z dodatnim poskusom na binarni nalogi valence pri množici signalov pogled in zenici.
+Razlike med operatorji so bile majhne, zato smo v glavnih poskusih ohranili enoten in enostaven operator.
+Ta primerjava ni ločeno iskanje najboljšega GNN, temveč preverjanje, da izbira osnovnega operatorja ne določa glavnega sklepa naloge.
 
-\begin{table}[h]
-    \centering
-    \caption{Primerjava tipov grafovskih konvolucij pri naboru signalov pogled+zenici.}
-    \label{tab:dodatek-izbira-konvolucije}
-    \small
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.28\textwidth} >{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedleft\arraybackslash}p{0.14\textwidth} >{\raggedleft\arraybackslash}p{0.14\textwidth} >{\raggedright\arraybackslash}X@{}}
-        \toprule
-        Arhitektura & Operator & Accuracy & Makro-F1 & Opomba \\
-        \midrule
-        Osnovni \ModelName{GCN} & \texttt{GCNConv} & $0{,}6474$ & $0{,}6337$ & neuteženi homogeni graf \\
-        Osnovni \ModelName{GCN} & \texttt{GATConv} & $0{,}6484$ & $0{,}6336$ & neutežena pozornost \\
-        Osnovni \ModelName{GCN} & \texttt{GraphConv} & $0{,}6367$ & $0{,}6192$ & neuteženi homogeni graf \\
-        Osnovni \ModelName{GCN} & \texttt{GINConv} & $0{,}6613$ & $0{,}6501$ & najboljši neuteženi rezultat \\
-        \addlinespace
-        \ModelName{HeteroGCN-MLP-w} & \texttt{GCNConv} & $0{,}6391$ & $0{,}6103$ & naučene uteži povezav \\
-        \ModelName{HeteroGCN-MLP-w} & \texttt{GATConv} & $0{,}6370$ & $0{,}6116$ & pozornost brez skalarnih uteži \\
-        \ModelName{HeteroGCN-MLP-w} & \texttt{GraphConv} & $0{,}6606$ & $0{,}6503$ & najboljši uteženi rezultat \\
-        \ModelName{HeteroGCN-MLP-w} & \texttt{GINEConv} & $0{,}6325$ & $0{,}6028$ & značilke in uteži povezav \\
-        \bottomrule
-    \end{tabularx}
-\end{table}
+\input{tabele/rezultati/izbira_grafovske_konvolucije.tex}
 
-Če bi izbirali izključno najboljši operator za ta dodatni poskus, bi pri
-neuteženem osnovnem modelu izbrali \texttt{GINConv}, pri uteženi heterogeni
-arhitekturi pa \texttt{GraphConv}.
-V glavnih poskusih tega nismo storili, ker bi s tem hkrati spremenili več delov
-arhitekture in otežili primerjavo med osnovnim \ModelName{GCN} in uteženo heterogeno
-različico.
-\texttt{GCNConv} se je v obeh skupinah uvrstil približno v sredino: ni bil
-najboljši operator, hkrati pa tudi ni izrazito odstopal navzdol.
-Zato smo ga obravnavali kot dober kompromis med enostavnostjo, konsistentnostjo
-eksperimentalne zasnove in rezultati.
-Glavni namen naloge ni bil poiskati absolutno najboljši grafovski operator,
-temveč primerjati grafovsko predstavitev in arhitekturne stopnje pri enakem,
-razmeroma standardnem operatorju posredovanja sporočil.
+\section{Diagnostika predstavitev}
+\label{app:diagnostika-prekomerno-glajenje}
+
+Diagnostika ne kaže jasnega kolapsa predstavitev pri glavnih grafovskih modelih.
+Množica samo zenici ima bolj neodločne napovedi, vendar tega ne obravnavamo kot sistemski kolaps GNN.
+Entropija in razpon logitov opisujeta gotovost napovedi, varianca predstavitev in kosinusna podobnost pa razpršenost naučenih predstavitev grafov.
+
+\input{tabele/diagnostika/diagnostika_predstavitev.tex}

@@ -27,7 +27,7 @@ S tem primerjamo tri različne načine opisa istega časovnega okna: tabelaričn
 \label{subsec:validacijski-protokol}
 
 \subsection{7-kratno prečno preverjanje po subjektih}
-\label{subsec:subject-7fold}
+\label{subsec:subject-7kratno}
 
 Glavno primerjavo izvedemo s 7-kratnim prečnim preverjanjem po subjektih.
 Pri vsaki ponovitvi so testni subjekti popolnoma ločeni od subjektov, ki so uporabljeni za učenje in validacijo.
@@ -44,10 +44,11 @@ Pri nevronskih modelih zato najboljšo različico modela izberemo glede na valid
 \subsection{Predhodna preverjanja z LOO po subjektih}
 \label{subsec:predhodna-loo-preverjanja}
 
-V zgodnejših fazah smo za množico \emph{vsi signali} izvedli tudi LOO po subjektih.
+% pusti napisano v zgodnejših fazah. ne piši, da smo točno ta LOO izvedli kasneje.
+V zgodnejših fazah smo za množico \emph{pogled in zenici} izvedli tudi LOO po subjektih.
 Ker končna primerjava vključuje več modelov in štiri množice signalov, bi polni LOO protokol bistveno povečal število potrebnih eksperimentov.
 Zato ga uporabimo kot podporno preverjanje, glavno primerjavo pa izvedemo s 7-kratnim protokolom.
-Primerjava obeh validacijskih protokolov za valenco in množico \emph{vsi signali} je podana v dodatku~\ref{app:razsirjeni-rezultati-binarna-valenca}, kjer vidimo, da je 7-kratno prečno preverjanje primerljivo z metodo LOO.
+Primerjava obeh validacijskih protokolov za valenco in množico \emph{pogled in zenici} je podana v dodatku~\ref{app:primerjava-loo-po-subjektih}.
 
 \section{Nastavitve učenja in hiperparametri}
 \label{subsec:nastavitve-ucenja}
@@ -58,7 +59,7 @@ Grafovski modeli uporabljajo operator \texttt{GCNConv}, dve grafovski plasti, sk
 Podrobni hiperparametri vseh modelov so podani v dodatku~\ref{app:hiperparametri}.
 
 Nastavitve grafovskih modelov izberemo na podlagi predhodnega kompaktnega mrežnega iskanja.
-To iskanje je bilo izvedeno na 3-razredni valenci in ga v ~\ref{app:hiperparametri} poročamo samo kot pomožni poskus za izbiro stabilnih nastavitev.
+To iskanje je bilo izvedeno na 3-razredni valenci in ga v dodatku~\ref{app:mrezno-iskanje} poročamo samo kot pomožni poskus za izbiro stabilnih nastavitev.
 
 \section{Metrike vrednotenja}
 \label{subsec:metrike}
@@ -74,7 +75,7 @@ S tem dopolni točnost predvsem pri modelih, ki lahko dosežejo sprejemljivo to�
 
 Poleg glavnih metrik spremljamo tudi uravnoteženo točnost, preciznost, priklic oziroma občutljivost, uteženi F1, AUC, izgubo in matrike zmede.
 Te metrike uporabimo predvsem za preverjanje stabilnosti in za podrobnejšo analizo napak.
-V glavnem besedilu se osredotočimo na točnost in makro F1, razširjene metrike pa poročamo v dodatku~\ref{app:razsirjeni-rezultati-binarna-valenca}. % če si podoben stavek napisal v poglavju 8, potem ga tu odstrani.
+V glavnem besedilu se osredotočimo na točnost in makro F1, razširjene metrike pa poročamo v dodatku~\ref{app:razsirjeni-rezultati-binarna-valenca}.
 
 \section{Spremljanje učenja}
 \label{subsec:spremljanje-ucenja}

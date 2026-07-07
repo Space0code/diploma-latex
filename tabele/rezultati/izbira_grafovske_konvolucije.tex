@@ -1,0 +1,22 @@
+% Vir podatkov: GFM-for-eyetracker/results/conv_type_comparison/2026-06-17_09-08-08/conv_type_comparison_summary.csv.
+\begin{table}[H]
+    \centering
+    \caption{Primerjava tipov grafovskih konvolucij pri množici signalov pogled in zenici.}
+    \label{tab:dodatek-izbira-konvolucije}
+    \footnotesize
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.26\textwidth} >{\raggedright\arraybackslash}p{0.16\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedleft\arraybackslash}p{0.11\textwidth} >{\raggedright\arraybackslash}X@{}}
+        \toprule
+        Arhitektura & Operator & Točnost & Makro F1 & Opomba \\
+        \midrule
+        Osnovni \ModelName{GCN} & \texttt{GCNConv} & $0{,}6474$ & $0{,}6337$ & glavni poskusi \\
+        Osnovni \ModelName{GCN} & \texttt{GATConv} & $0{,}6484$ & $0{,}6336$ & pozornost \\
+        Osnovni \ModelName{GCN} & \texttt{GraphConv} & $0{,}6367$ & $0{,}6192$ & neutežen graf \\
+        Osnovni \ModelName{GCN} & \texttt{GINConv} & $0{,}6613$ & $0{,}6501$ & najboljši neuteženi rezultat \\
+        \addlinespace
+        \ModelName{HeteroGCN-MLP-w} & \texttt{GCNConv} & $0{,}6391$ & $0{,}6103$ & glavni poskusi \\
+        \ModelName{HeteroGCN-MLP-w} & \texttt{GATConv} & $0{,}6370$ & $0{,}6116$ & pozornost brez skalarnih uteži \\
+        \ModelName{HeteroGCN-MLP-w} & \texttt{GraphConv} & $0{,}6606$ & $0{,}6503$ & najboljši uteženi rezultat \\
+        \ModelName{HeteroGCN-MLP-w} & \texttt{GINEConv} & $0{,}6325$ & $0{,}6028$ & značilke povezav \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

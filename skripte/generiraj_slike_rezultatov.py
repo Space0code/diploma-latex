@@ -9,6 +9,9 @@ Primer uporabe iz korena repozitorija `diploma-latex` z aktivnim okoljem `gfm`:
 
 Privzeto bere rezultate iz sosednjega repozitorija `GFM-for-eyetracker`:
 `results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables`.
+Iz istega reteniranega teka generira tudi dodatkovne matrike zmede. Sliko
+ujemanja oznak s samoocenami generira iz analize
+`results/label_noise_analysis/2026-05-13_table6_self_report_alignment`.
 """
 
 from __future__ import annotations
@@ -42,8 +45,77 @@ CLASS_SHORT_LABELS = {
 }
 
 CONFUSION_MODEL_LABELS = {
+    "Random": "Naključni",
+    "Majority": "Večinski",
     "SVM": "SVM",
+    "LightGBM": "LightGBM",
+    "MLP": "MLP",
+    "GazeMAE_MLP": "GazeMAE/MOMENT",
+    "MOMENT_pupil": "GazeMAE/MOMENT",
+    "MOMENT_GazeMAE_gaze_pupil": "GazeMAE/MOMENT",
+    "MOMENT_GazeMAE_all_signals": "GazeMAE/MOMENT",
+    "BasicGCN": "GCN",
+    "HeteroGCNMean": "HeteroGCN-mean",
+    "HeteroGCNMLP": "HeteroGCN-MLP",
     "HeteroGCNMLPWeights": "HeteroGCN-MLP-w",
+}
+
+CONFUSION_MODEL_ORDER = {
+    "gaze_only": [
+        "Random",
+        "Majority",
+        "SVM",
+        "LightGBM",
+        "MLP",
+        "GazeMAE_MLP",
+        "BasicGCN",
+        "HeteroGCNMean",
+        "HeteroGCNMLP",
+        "HeteroGCNMLPWeights",
+    ],
+    "pupil_only": [
+        "Random",
+        "Majority",
+        "SVM",
+        "LightGBM",
+        "MLP",
+        "MOMENT_pupil",
+        "BasicGCN",
+        "HeteroGCNMean",
+        "HeteroGCNMLP",
+        "HeteroGCNMLPWeights",
+    ],
+    "gaze_pupil": [
+        "Random",
+        "Majority",
+        "SVM",
+        "LightGBM",
+        "MLP",
+        "MOMENT_GazeMAE_gaze_pupil",
+        "BasicGCN",
+        "HeteroGCNMean",
+        "HeteroGCNMLP",
+        "HeteroGCNMLPWeights",
+    ],
+    "all_signals": [
+        "Random",
+        "Majority",
+        "SVM",
+        "LightGBM",
+        "MLP",
+        "MOMENT_GazeMAE_all_signals",
+        "BasicGCN",
+        "HeteroGCNMean",
+        "HeteroGCNMLP",
+        "HeteroGCNMLPWeights",
+    ],
+}
+
+APPENDIX_CONFUSION_OUTPUTS = {
+    "gaze_only": "matrike_zmede_dodatek_samo_pogled.png",
+    "pupil_only": "matrike_zmede_dodatek_samo_zenici.png",
+    "gaze_pupil": "matrike_zmede_dodatek_pogled_zenici.png",
+    "all_signals": "matrike_zmede_dodatek_vsi_signali.png",
 }
 
 
@@ -72,6 +144,13 @@ def parse_args() -> argparse.Namespace:
         / "multiclass_table6_valence_3class_emotion-elicitation"
         / "snapshot.csv"
     )
+    default_label_noise_dir = (
+        workspace_root
+        / "GFM-for-eyetracker"
+        / "results"
+        / "label_noise_analysis"
+        / "2026-05-13_table6_self_report_alignment"
+    )
 
     parser = argparse.ArgumentParser(
         description="Generira reproducibilne Matplotlib slike za poglavje Rezultati."
@@ -99,6 +178,12 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=default_signal_snapshot,
         help="Snapshot CSV za porazdelitve osnovnih signalov.",
+    )
+    parser.add_argument(
+        "--label-noise-dir",
+        type=Path,
+        default=default_label_noise_dir,
+        help="Mapa z CSV artefakti analize ujemanja Table 6 oznak s samoocenami.",
     )
     parser.add_argument("--dpi", type=int, default=300, help="Ločljivost izhodnih PNG slik.")
     return parser.parse_args()
@@ -208,7 +293,7 @@ def confusion_matrix_values(df: pd.DataFrame, signal_set: str, model_name: str) 
 
 
 def draw_confusion_matrix(ax: plt.Axes, matrix: np.ndarray, title: str) -> None:
-    labels = ["Low valence", "High valence"]
+    labels = ["nizka", "visoka"]
     sns.heatmap(
         matrix,
         annot=True,
@@ -221,8 +306,8 @@ def draw_confusion_matrix(ax: plt.Axes, matrix: np.ndarray, title: str) -> None:
         xticklabels=labels,
         yticklabels=labels,
     )
-    ax.set_xlabel("predicted")
-    ax.set_ylabel("true")
+    ax.set_xlabel("napoved")
+    ax.set_ylabel("dejanski razred")
     ax.set_title(title, fontsize=11)
     ax.tick_params(axis="y", rotation=90)
     for label in ax.get_yticklabels():
@@ -241,7 +326,7 @@ def generate_confusion_matrix(
 
     fig, ax = plt.subplots(figsize=(4.6, 3.7))
     display_model_name = CONFUSION_MODEL_LABELS.get(model_name, model_name)
-    draw_confusion_matrix(ax, matrix, f"{display_model_name}\nsubject_kfold (row-normalized)")
+    draw_confusion_matrix(ax, matrix, f"{display_model_name}\n7-kratno preverjanje\n(vrstično normalizirano)")
     fig.tight_layout()
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -263,9 +348,105 @@ def generate_confusion_matrices_panel(
     for ax, model_name in zip(axes, model_names):
         matrix = confusion_matrix_values(df, signal_set, model_name)
         display_model_name = CONFUSION_MODEL_LABELS.get(model_name, model_name)
-        draw_confusion_matrix(ax, matrix, f"{display_model_name}\nsubject_kfold (row-normalized)")
+        draw_confusion_matrix(ax, matrix, f"{display_model_name}\n7-kratno preverjanje\n(vrstično normalizirano)")
 
     fig.tight_layout()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+    plt.close(fig)
+
+
+def generate_appendix_confusion_matrices(
+    df: pd.DataFrame,
+    output_dir: Path,
+    dpi: int,
+) -> None:
+    """Generira po eno dodatkovno sliko matrik zmede za vsako množico signalov."""
+    for signal_set in SIGNAL_ORDER:
+        model_names = CONFUSION_MODEL_ORDER[signal_set]
+        fig, axes = plt.subplots(2, 5, figsize=(13.2, 5.8), constrained_layout=True)
+        for ax, model_name in zip(axes.ravel(), model_names):
+            matrix = confusion_matrix_values(df, signal_set, model_name)
+            display_model_name = CONFUSION_MODEL_LABELS.get(model_name, model_name)
+            draw_confusion_matrix(ax, matrix, display_model_name)
+            ax.set_xlabel("")
+            ax.set_ylabel("")
+
+        for ax in axes[:, 0]:
+            ax.set_ylabel("dejanski razred", fontsize=9)
+        for ax in axes[-1, :]:
+            ax.set_xlabel("napoved", fontsize=9)
+
+        fig.suptitle(f"Matrike zmede za množico signalov {SIGNAL_LABELS[signal_set]}", fontsize=12)
+        output_path = output_dir / APPENDIX_CONFUSION_OUTPUTS[signal_set]
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+        plt.close(fig)
+
+
+def load_label_noise_crosstab(label_noise_dir: Path) -> pd.DataFrame:
+    path = label_noise_dir / "table6_vs_rating_crosstab_long.csv"
+    df = pd.read_csv(path)
+    expected_columns = {
+        "dimension",
+        "table6_class",
+        "rating_3class",
+        "proportion_within_table6_class",
+        "count",
+    }
+    missing = expected_columns.difference(df.columns)
+    if missing:
+        raise ValueError(f"V {path} manjkajo stolpci: {sorted(missing)}")
+    return df
+
+
+def generate_label_noise_alignment_plot(df: pd.DataFrame, output_path: Path, dpi: int) -> None:
+    class_order = ["low", "medium/neutral", "high"]
+    class_labels = ["nizka", "srednja/nevtralna", "visoka"]
+    dimension_labels = {"valence": "valenca", "arousal": "vzburjenost"}
+
+    fig, axes = plt.subplots(1, 2, figsize=(8.2, 3.9), constrained_layout=True)
+    for ax, dimension in zip(axes, ["valence", "arousal"]):
+        subset = df[df["dimension"] == dimension]
+        proportions = (
+            subset.pivot(
+                index="table6_class",
+                columns="rating_3class",
+                values="proportion_within_table6_class",
+            )
+            .loc[class_order, class_order]
+        )
+        counts = (
+            subset.pivot(index="table6_class", columns="rating_3class", values="count")
+            .loc[class_order, class_order]
+            .astype(int)
+        )
+        annotations = proportions.copy().astype(object)
+        for row in proportions.index:
+            for col in proportions.columns:
+                annotations.loc[row, col] = f"{proportions.loc[row, col]:.2f}\n(n={counts.loc[row, col]})"
+
+        sns.heatmap(
+            proportions,
+            annot=annotations,
+            fmt="",
+            cmap="Blues",
+            vmin=0.0,
+            vmax=1.0,
+            linewidths=0.5,
+            linecolor="white",
+            cbar=dimension == "arousal",
+            cbar_kws={"label": "delež znotraj izpeljanega razreda"},
+            xticklabels=class_labels,
+            yticklabels=class_labels,
+            ax=ax,
+        )
+        ax.set_title(dimension_labels[dimension], fontsize=11)
+        ax.set_xlabel("razred iz številske samoocene")
+        ax.set_ylabel("izpeljani razred po tabeli 6")
+        ax.tick_params(axis="x", rotation=20)
+        ax.tick_params(axis="y", rotation=0)
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
     plt.close(fig)
@@ -426,6 +607,7 @@ def main() -> None:
     args = parse_args()
     print(f"tables_dir={args.tables_dir}")
     print(f"signal_snapshot={args.signal_snapshot}")
+    print(f"label_noise_dir={args.label_noise_dir}")
     print(f"results_figures_dir={args.results_figures_dir}")
     print(f"data_figures_dir={args.data_figures_dir}")
     print(f"dpi={args.dpi}")
@@ -459,12 +641,24 @@ def main() -> None:
         output_path=args.results_figures_dir / "matrike_zmede_pogled_zenici_svm_heterogcn_mlp_w.png",
         dpi=args.dpi,
     )
+    generate_appendix_confusion_matrices(
+        confusion_matrices,
+        output_dir=args.results_figures_dir,
+        dpi=args.dpi,
+    )
 
     label_distribution = load_label_distribution(args.tables_dir)
     generate_label_distribution_plots(label_distribution, args.data_figures_dir, args.dpi)
 
     signal_snapshot = load_signal_snapshot(args.signal_snapshot)
     generate_signal_distribution_plots(signal_snapshot, args.data_figures_dir, args.dpi)
+
+    label_noise = load_label_noise_crosstab(args.label_noise_dir)
+    generate_label_noise_alignment_plot(
+        label_noise,
+        args.results_figures_dir / "ujemanje_oznak_s_samoocenami.png",
+        args.dpi,
+    )
 
 
 if __name__ == "__main__":

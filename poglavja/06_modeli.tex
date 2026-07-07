@@ -144,7 +144,7 @@ Vse povezave združi v en homogen graf, posredovanje sporočil pa izvede z obič
 Model ne uporablja značilk povezav in posledično naučenih uteži povezav.
 
 Tehnično lahko model zapišemo kot:
-\begin{equation}
+\begin{equation} % TODO: razmisli, ali boš to in podobne pustil kot equation ali boš dal slike diagramov. bolje bi bilo diagram, ker z diagramom lažje prikažeš že samo razliko med tem in naslednjim modelom. in imaš potem majhen diagram v vsaki subsekciji in obkrožiš razlike pri vsaki nadgradnji
     X
     \rightarrow
     MLP_{preprocess}
@@ -156,6 +156,7 @@ Tehnično lahko model zapišemo kot:
     f_{\text{head}},
 \end{equation}
 kjer je $X$ matrika značilk vozlišč, $MLP_{preprocess}$ predprocesirni dvoslojni perceptron, $f_{\GCN}$ zaporedje grafovskih konvolucijskih plasti, korak $READOUT$ združi predstavitve vozlišč v predstavitev celotnega grafa, $f_{\text{head}}$ pa iz te predstavitve izračuna napoved razreda.
+\END_NOTE{Zamenjaj to enačbo z diagramom, ko ga imaš. Z diagramom lažje prikažeš že samo razliko med tem in naslednjim modelom in imaš potem majhen diagram v vsaki subsekciji in obkrožiš razlike pri vsaki nadgradnji}
 
 \subsection{\ModelName{HeteroGCN-mean}}
 \label{subsec:model-heterogcn-mean}
@@ -164,7 +165,9 @@ kjer je $X$ matrika značilk vozlišč, $MLP_{preprocess}$ predprocesirni dvoslo
 Kot opisano v~\ref{sec:grafovska-predstavitev} tukaj ločimo različne tipe relacij.
 Relacijske predstavitve vozlišč združimo v skupno predstavitev vozlišča s preprostim povprečenjem.
 Namen te stopnje je izolirati vpliv ločevanja relacij.
-V primerjavi z osnovnim \ModelName{GCN} je ključna sprememba torej ločeno posredovanje sporočil po posameznih relacijah in nato neparametrično združevanje relacijskih predstavitev.
+Diagram~\ref{fig:diagram-heterogcn-mean} prikazuje, kje se zgodi sprememba.
+
+\TODO{ko bom naredil diagram, ga dodam tu}
 
 \subsection{\ModelName{HeteroGCN-MLP}}
 \label{subsec:model-heterogcn-mlp}
@@ -172,7 +175,9 @@ V primerjavi z osnovnim \ModelName{GCN} je ključna sprememba torej ločeno posr
 \ModelName{HeteroGCN-MLP} dobimo tako, da \ModelName{HeteroGCN-mean} nadgradimo z naučeno fuzijo relacijskih predstavitev.
 Različne predstavitve vozlišč -- tiste, ki so v danem modelu na voljo izmed časovne naprej, časovne nazaj, prostorske ter fiksacijske -- najprej konkateniramo, nato pa jih z dvoslojnim perceptronom združimo v skupno predstavitev vozlišča.
 S tem dopuščamo, da model sam določi, kateri deli katere relacije so pomembnejši za končno predstavitev.
-V primerjavi z \ModelName{HeteroGCN-mean} je ključna sprememba naučena fuzija relacij namesto povprečenja.
+Diagram~\ref{fig:diagram-heterogcn-mlp} prikazuje, kje se zgodi sprememba.
+
+\TODO{ko bom naredil diagram, ga dodam tu}
 
 \subsection{\ModelName{HeteroGCN-MLP-w}}
 \label{subsec:model-heterogcn-mlp-w}

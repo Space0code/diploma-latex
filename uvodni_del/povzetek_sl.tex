@@ -1,5 +1,8 @@
-\TODO{
-\begin{itemize}
-    \item Uporabi enako terminologijo kot v glavnem besedilu.
-\end{itemize}
-}
+Podatki sledilnika pogleda vsebujejo časovno-prostorske odnose med meritvami, ki jih klasična tabelarična predstavitev ne modelira neposredno.
+V diplomski nalogi preverimo, ali lahko grafovske nevronske mreže te odnose uporabijo pri binarni klasifikaciji valence.
+Časovna okna meritev sledilnika pogleda predstavimo kot časovno-prostorske grafe, v katerih vozlišča ustrezajo meritvam, povezave pa opisujejo časovno bližino, prostorsko bližino in pripadnost isti fiksaciji.
+Grafovske modele primerjamo z izhodiščnima klasifikatorjema, klasičnimi modeli strojnega učenja ter prednaučenima kodirnikoma signalov.
+Eksperimente izvedemo s 7-kratnim prečnim preverjanjem po subjektih na štirih množicah signalov: \emph{samo pogled}, \emph{samo zenici}, \emph{pogled in zenici} ter \emph{vsi signali}.
+Rezultati kažejo, da so grafovske predstavitve informativne, saj grafovski modeli pri vseh množicah signalov presežejo naključni in večinski klasifikator.
+Najboljši grafovski model doseže $65{,}5~\%$ točnosti in $64{,}4~\%$ makro F1 pri množici \emph{pogled in zenici}, vendar ostane pod najboljšim rezultatom modela \ModelName{SVM}, ki doseže $70{,}5~\%$ točnosti in $69{,}7~\%$ makro F1.
+V tej eksperimentalni zasnovi so zato najuspešnejši klasični modeli z ročno oblikovanimi značilkami, grafovsko modeliranje pa ostaja smiselna raziskovalna smer za podatke sledilnika pogleda.

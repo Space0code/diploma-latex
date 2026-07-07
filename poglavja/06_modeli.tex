@@ -1,14 +1,6 @@
 \chapter{Primerjani modeli}
 \label{sec:modeli}
 
-% TODO: Napiši kratek uvod v poglavje:
-% - poglavje predstavi modele, ne eksperimentalnega protokola;
-% - vsi modeli uporabljajo ista 10-sekundna okna in isto ciljno nalogo;
-% - razlikujejo se po predstavitvi okna: agregirane značilke, zamrznjene
-%   prednaučene predstavitve ali grafovska predstavitev;
-% - osrednji namen poglavja je pripraviti pošteno primerjavo za raziskovalno
-%   vprašanje.
-
 V nalogi se osredotočamo na primerjavo štirih družin modelov strojnega učenja za klasifikacijo čustvenih oznak iz podatkov sledilnika pogleda.
 V tem poglavju razložimo, katere so te družine in na kratko opišemo vsak uporabljen model znotraj družine.
 Grafovske modele opišemo podrobneje, saj predstavljajo metodološko jedro naloge, poleg tega pa so za podatke sledilnika pogleda manj standardiziran pristop kot uveljavljeni klasični modeli.
@@ -24,10 +16,6 @@ V tabeli~\ref{tab:pregled-primerjanih-modelov} je prikazano, katere modele upora
 
 \input{tabele/modeli/pregled_primerjanih_modelov.tex}
 
-% TODO: Premisli, ali tabela ostane tukaj ali se skrajša in delno prestavi v
-% poglavje 7. V poglavju 6 naj tabela razlaga arhitekturno vlogo modelov, v
-% poglavju 7 pa eksperimentalno konfiguracijo in hiperparametre.
-
 \section{Negrafovski osnovni modeli}
 \label{subsec:negrafovski-osnovni-modeli}
 
@@ -41,11 +29,6 @@ Pri binarni klasifikaciji to pomeni verjetnost $50~\%$ za vsak razred.
 
 \subsection{Klasični modeli strojnega učenja}
 \label{subsec:klasicni-modeli-strojnega-ucenja}
-
-% TODO: V tem podrazdelku jasno loči:
-% - vhodno predstavitev okna, ki je skupna za \ModelName{SVM}, \ModelName{LightGBM} in \ModelName{MLP};
-% - kratek opis posameznega modela;
-% - dejstvo, da ti modeli služijo kot močni negrafovski osnovni modeli.
 
 Za pravično primerjavo negrafovskim osnovnim modelom podamo agregirane značilke istih signalov, kot jih prejme GNN.
 V primeru množice \emph{vsi signali} so to koordinati pogleda $(x,~y)$, velikosti leve in desne zenice, oddaljenost od sledilnika pogleda ter informacija o fiksacijah.
@@ -73,10 +56,6 @@ Osnovni \ModelName{MLP} uporabimo kot primer osnovnega nevronskega modela~\cite{
 Vhod modela je vektor agregiranih značilk enega 10-sekundnega okna, izhod pa logiti za razrede ciljne naloge.
 Arhitektura je namerno preprosta: dve skriti polno povezani plasti z aktivacijo ReLU in izpuščanjem, za njima pa izhodna linearna plast.
 Model učimo z navzkrižno entropijo.
-
-% TODO: Po preverjanju trenutne konfiguracije dopiši konkretne vrednosti
-% arhitekture in regularizacije ali pa jih pusti za poglavje 7. Če ostanejo v
-% poglavju 7, tukaj zapiši samo princip.
 
 \section{Zamrznjeni prednaučeni predstavitveni modeli}
 \label{subsec:zamrznjeni-prednauceni-modeli}
@@ -165,7 +144,7 @@ Vse povezave združi v en homogen graf, posredovanje sporočil pa izvede z obič
 Model ne uporablja značilk povezav in posledično naučenih uteži povezav.
 
 Tehnično lahko model zapišemo kot:
-\begin{equation} % TODO: razmisli, ali boš to in podobne pustil kot equation ali boš dal slike diagramov. bolje bi bilo diagram, ker z diagramom lažje prikažeš že samo razliko med tem in naslednjim modelom. in imaš potem majhen diagram v vsaki subsekciji in obkrožiš razlike pri vsaki nadgradnji
+\begin{equation}
     X
     \rightarrow
     MLP_{preprocess}
@@ -177,7 +156,6 @@ Tehnično lahko model zapišemo kot:
     f_{\text{head}},
 \end{equation}
 kjer je $X$ matrika značilk vozlišč, $MLP_{preprocess}$ predprocesirni dvoslojni perceptron, $f_{\GCN}$ zaporedje grafovskih konvolucijskih plasti, korak $READOUT$ združi predstavitve vozlišč v predstavitev celotnega grafa, $f_{\text{head}}$ pa iz te predstavitve izračuna napoved razreda.
-\END_NOTE{Zamenjaj to enačbo z diagramom, ko ga imaš. Z diagramom lažje prikažeš že samo razliko med tem in naslednjim modelom in imaš potem majhen diagram v vsaki subsekciji in obkrožiš razlike pri vsaki nadgradnji}
 
 \subsection{\ModelName{HeteroGCN-mean}}
 \label{subsec:model-heterogcn-mean}
@@ -186,9 +164,7 @@ kjer je $X$ matrika značilk vozlišč, $MLP_{preprocess}$ predprocesirni dvoslo
 Kot opisano v~\ref{sec:grafovska-predstavitev} tukaj ločimo različne tipe relacij.
 Relacijske predstavitve vozlišč združimo v skupno predstavitev vozlišča s preprostim povprečenjem.
 Namen te stopnje je izolirati vpliv ločevanja relacij.
-Diagram~\ref{fig:diagram-heterogcn-mean} prikazuje, kje se zgodi sprememba.
-
-\TODO{ko bom naredil diagram, ga dodam tu}
+V primerjavi z osnovnim \ModelName{GCN} je ključna sprememba torej ločeno posredovanje sporočil po posameznih relacijah in nato neparametrično združevanje relacijskih predstavitev.
 
 \subsection{\ModelName{HeteroGCN-MLP}}
 \label{subsec:model-heterogcn-mlp}
@@ -196,9 +172,7 @@ Diagram~\ref{fig:diagram-heterogcn-mean} prikazuje, kje se zgodi sprememba.
 \ModelName{HeteroGCN-MLP} dobimo tako, da \ModelName{HeteroGCN-mean} nadgradimo z naučeno fuzijo relacijskih predstavitev.
 Različne predstavitve vozlišč -- tiste, ki so v danem modelu na voljo izmed časovne naprej, časovne nazaj, prostorske ter fiksacijske -- najprej konkateniramo, nato pa jih z dvoslojnim perceptronom združimo v skupno predstavitev vozlišča.
 S tem dopuščamo, da model sam določi, kateri deli katere relacije so pomembnejši za končno predstavitev.
-Diagram~\ref{fig:diagram-heterogcn-mlp} prikazuje, kje se zgodi sprememba.
-
-\TODO{ko bom naredil diagram, ga dodam tu}
+V primerjavi z \ModelName{HeteroGCN-mean} je ključna sprememba naučena fuzija relacij namesto povprečenja.
 
 \subsection{\ModelName{HeteroGCN-MLP-w}}
 \label{subsec:model-heterogcn-mlp-w}

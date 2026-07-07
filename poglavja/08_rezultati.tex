@@ -25,13 +25,13 @@ Dodajanje zeničnih signalov k pogledu prinese najvišji posamični rezultat, me
 Grafovski modeli so pri vseh signalnih množicah zanesljivo nad obema izhodiščnima klasifikatorjema, vendar ostanejo pod najboljšima modeloma \ModelName{SVM} in \ModelName{LightGBM}.
 Najboljši grafovski rezultat je odvisen od signalne množice~--~pri \emph{samo pogled} je najuspešnejši \ModelName{HeteroGCN-MLP}, pri \emph{samo zenici} osnovni \ModelName{GCN}, pri \emph{pogled in zenici} in \emph{vsi signali} pa \ModelName{HeteroGCN-MLP-w}.
 Rezultati torej ne kažejo monotonega izboljševanja z večanjem arhitekturne kompleksnosti grafovskih modelov.
-V nadaljevanju podrobnejše rezultate matrike zmede ter računsko zahtevnost modelov prikažemo na primeru, kjer modeli dosegajo najboljše rezultate, to je na množici \emph{pogled in zenici}.
-Dodatne matrike zmede za vse modele in vse množice signalov so prikazane v dodatku~\ref{app:matrike-zmede-vsi-modeli}.
+V nadaljevanju podrobnejše rezultate matrike zamenjav ter računsko zahtevnost modelov prikažemo na primeru, kjer modeli dosegajo najboljše rezultate, to je na množici \emph{pogled in zenici}.
+Dodatne matrike zamenjav za vse modele in vse množice signalov so prikazane v dodatku~\ref{app:matrike-zamenjav-vsi-modeli}.
 
 
 \input{tabele/rezultati/glavna_primerjava_modelov.tex}
 
-Slika~\ref{fig:rezultati-matrike-zmede} prikazuje napake za signalno množico \emph{pogled in zenici}, pri kateri je dosežen najboljši skupni rezultat.
+Slika~\ref{fig:rezultati-matrike-zamenjav} prikazuje napake za signalno množico \emph{pogled in zenici}, pri kateri je dosežen najboljši skupni rezultat.
 Najuspešnejši model \ModelName{SVM} pravilno razvrsti $73{,}0~\%$ vzorcev nizke valence in $67{,}7~\%$ vzorcev visoke valence, najuspešnejši grafovski model, \ModelName{HeteroGCN-MLP-w}, pa $64{,}8~\%$ oziroma $65{,}8~\%$.
 
 
@@ -40,9 +40,9 @@ Najuspešnejši model \ModelName{SVM} pravilno razvrsti $73{,}0~\%$ vzorcev nizk
 % Konkretni skript: diploma-latex/skripte/generiraj_slike_rezultatov.py.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{matrike_zmede_pogled_zenici_svm_heterogcn_mlp_w.png}
-    \caption{Vrstično normalizirani matriki zmede za najboljši model \ModelName{SVM} in najboljši grafovski model \ModelName{HeteroGCN-MLP-w} pri množici signalov pogled in zenici.}
-    \label{fig:rezultati-matrike-zmede}
+    \includegraphics[width=\textwidth]{matrike_zamenjav_pogled_zenici_svm_heterogcn_mlp_w.pdf}
+    \caption{Vrstično normalizirani matriki zamenjav za najboljši model \ModelName{SVM} in najboljši grafovski model \ModelName{HeteroGCN-MLP-w} pri množici signalov pogled in zenici.}
+    \label{fig:rezultati-matrike-zamenjav}
 \end{figure}
 
 \section{Velikost in računska zahtevnost modelov}

@@ -9,7 +9,7 @@ Primer uporabe iz korena repozitorija `diploma-latex` z aktivnim okoljem `gfm`:
 
 Privzeto bere rezultate iz sosednjega repozitorija `GFM-for-eyetracker`:
 `results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables`.
-Iz istega reteniranega teka generira tudi dodatkovne matrike zmede. Sliko
+Iz istega reteniranega teka generira tudi dodatkovne matrike zamenjav. Sliko
 ujemanja oznak s samoocenami generira iz analize
 `results/label_noise_analysis/2026-05-13_table6_self_report_alignment`.
 """
@@ -112,11 +112,19 @@ CONFUSION_MODEL_ORDER = {
 }
 
 APPENDIX_CONFUSION_OUTPUTS = {
-    "gaze_only": "matrike_zmede_dodatek_samo_pogled.png",
-    "pupil_only": "matrike_zmede_dodatek_samo_zenici.png",
-    "gaze_pupil": "matrike_zmede_dodatek_pogled_zenici.png",
-    "all_signals": "matrike_zmede_dodatek_vsi_signali.png",
+    "gaze_only": "matrike_zamenjav_dodatek_samo_pogled",
+    "pupil_only": "matrike_zamenjav_dodatek_samo_zenici",
+    "gaze_pupil": "matrike_zamenjav_dodatek_pogled_zenici",
+    "all_signals": "matrike_zamenjav_dodatek_vsi_signali",
 }
+
+AXIS_LABEL_FONTSIZE = 14
+TICK_LABEL_FONTSIZE = 13
+COLORBAR_LABEL_FONTSIZE = 14
+COLORBAR_TICK_FONTSIZE = 13
+PUPIL_AXIS_LABEL_FONTSIZE = 18
+PUPIL_TICK_LABEL_FONTSIZE = 17
+PUPIL_LEGEND_FONTSIZE = 17
 
 
 def parse_args() -> argparse.Namespace:
@@ -194,9 +202,24 @@ def format_decimal(value: float) -> str:
 
 
 def style_axes(ax: plt.Axes) -> None:
-    ax.tick_params(axis="both", length=0, labelsize=9)
+    ax.tick_params(axis="both", length=0, labelsize=TICK_LABEL_FONTSIZE)
     for spine in ax.spines.values():
         spine.set_visible(False)
+
+
+def save_figure(fig: plt.Figure, output_path: Path, dpi: int) -> None:
+    """Shrani sliko v zahtevani obliki ter ob njej ustvari še PNG/PDF par."""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    suffix = output_path.suffix.lower()
+    if suffix:
+        fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+        stem = output_path.with_suffix("")
+    else:
+        stem = output_path
+    for extension in [".png", ".pdf"]:
+        paired_path = stem.with_suffix(extension)
+        if paired_path != output_path:
+            fig.savefig(paired_path, dpi=dpi, bbox_inches="tight")
 
 
 def load_main_metrics(tables_dir: Path) -> pd.DataFrame:
@@ -232,12 +255,9 @@ def generate_main_comparison_heatmap(df: pd.DataFrame, output_path: Path, dpi: i
     annotations = accuracy.copy().astype(object)
     for row_label in accuracy.index:
         for column_label in accuracy.columns:
-            annotations.loc[row_label, column_label] = (
-                f"{accuracy.loc[row_label, column_label]:.3f} / "
-                f"{macro_f1.loc[row_label, column_label]:.3f}"
-            )
+            annotations.loc[row_label, column_label] = f"{accuracy.loc[row_label, column_label]:.3f}"
 
-    fig, ax = plt.subplots(figsize=(8.6, 6.4))
+    fig, ax = plt.subplots(figsize=(9.2, 6.8))
     sns.heatmap(
         accuracy,
         annot=annotations,
@@ -248,17 +268,19 @@ def generate_main_comparison_heatmap(df: pd.DataFrame, output_path: Path, dpi: i
         linewidths=0.5,
         linecolor="white",
         cbar_kws={"label": "točnost"},
+        annot_kws={"fontsize": 16, "fontweight": "bold"},
         ax=ax,
     )
-    ax.set_title("Primerjava modelov po signalnih množicah - točnost", fontsize=12, pad=10)
-    ax.set_xlabel("množica signalov")
-    ax.set_ylabel("model")
-    ax.tick_params(axis="x", rotation=0)
-    ax.tick_params(axis="y", rotation=0)
+    ax.set_title("Primerjava modelov po signalnih množicah - točnost", fontsize=17, pad=12)
+    ax.set_xlabel("množica signalov", fontsize=AXIS_LABEL_FONTSIZE)
+    ax.set_ylabel("model", fontsize=AXIS_LABEL_FONTSIZE)
+    ax.tick_params(axis="x", rotation=0, labelsize=TICK_LABEL_FONTSIZE)
+    ax.tick_params(axis="y", rotation=0, labelsize=TICK_LABEL_FONTSIZE)
+    ax.collections[0].colorbar.ax.tick_params(labelsize=COLORBAR_TICK_FONTSIZE)
+    ax.collections[0].colorbar.set_label("točnost", fontsize=COLORBAR_LABEL_FONTSIZE)
     fig.tight_layout()
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+    save_figure(fig, output_path, dpi)
     plt.close(fig)
 
 
@@ -279,10 +301,10 @@ def load_confusion_matrices(tables_dir: Path) -> pd.DataFrame:
 
 
 def confusion_matrix_values(df: pd.DataFrame, signal_set: str, model_name: str) -> np.ndarray:
-    """Vrne vrstično normalizirano matriko zmede v vrstnem redu razredov iz runnerja."""
+    """Vrne vrstično normalizirano matriko zamenjav v vrstnem redu razredov iz runnerja."""
     subset = df[(df["signal_set"] == signal_set) & (df["summary_model_name"] == model_name)]
     if subset.empty:
-        raise ValueError(f"Ni matrike zmede za signal_set={signal_set}, model={model_name}.")
+        raise ValueError(f"Ni matrike zamenjav za signal_set={signal_set}, model={model_name}.")
 
     class_order = ["Low valence", "High valence"]
     return (
@@ -292,7 +314,17 @@ def confusion_matrix_values(df: pd.DataFrame, signal_set: str, model_name: str) 
     )
 
 
-def draw_confusion_matrix(ax: plt.Axes, matrix: np.ndarray, title: str) -> None:
+def draw_confusion_matrix(
+    ax: plt.Axes,
+    matrix: np.ndarray,
+    title: str,
+    *,
+    title_fontsize: float = 13.0,
+    tick_fontsize: float = 11.0,
+    label_fontsize: float = 12.0,
+    annot_fontsize: float = 16.0,
+    title_weight: str = "normal",
+) -> None:
     labels = ["nizka", "visoka"]
     sns.heatmap(
         matrix,
@@ -305,11 +337,15 @@ def draw_confusion_matrix(ax: plt.Axes, matrix: np.ndarray, title: str) -> None:
         ax=ax,
         xticklabels=labels,
         yticklabels=labels,
+        linewidths=0.8,
+        linecolor="white",
+        annot_kws={"fontsize": annot_fontsize, "fontweight": "bold"},
     )
-    ax.set_xlabel("napoved")
-    ax.set_ylabel("dejanski razred")
-    ax.set_title(title, fontsize=11)
-    ax.tick_params(axis="y", rotation=90)
+    ax.set_xlabel("napoved", fontsize=label_fontsize)
+    ax.set_ylabel("dejanski razred", fontsize=label_fontsize)
+    ax.set_title(title, fontsize=title_fontsize, fontweight=title_weight, pad=9)
+    ax.tick_params(axis="x", rotation=0, labelsize=tick_fontsize)
+    ax.tick_params(axis="y", rotation=90, labelsize=tick_fontsize)
     for label in ax.get_yticklabels():
         label.set_horizontalalignment("center")
         label.set_verticalalignment("center")
@@ -324,13 +360,12 @@ def generate_confusion_matrix(
 ) -> None:
     matrix = confusion_matrix_values(df, signal_set, model_name)
 
-    fig, ax = plt.subplots(figsize=(4.6, 3.7))
+    fig, ax = plt.subplots(figsize=(4.8, 4.0))
     display_model_name = CONFUSION_MODEL_LABELS.get(model_name, model_name)
     draw_confusion_matrix(ax, matrix, f"{display_model_name}\n7-kratno preverjanje\n(vrstično normalizirano)")
     fig.tight_layout()
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+    save_figure(fig, output_path, dpi)
     plt.close(fig)
 
 
@@ -341,18 +376,26 @@ def generate_confusion_matrices_panel(
     output_path: Path,
     dpi: int,
 ) -> None:
-    fig, axes = plt.subplots(1, len(model_names), figsize=(9.6, 3.8))
+    fig, axes = plt.subplots(1, len(model_names), figsize=(10.6, 4.25))
     if len(model_names) == 1:
         axes = np.asarray([axes])
 
     for ax, model_name in zip(axes, model_names):
         matrix = confusion_matrix_values(df, signal_set, model_name)
         display_model_name = CONFUSION_MODEL_LABELS.get(model_name, model_name)
-        draw_confusion_matrix(ax, matrix, f"{display_model_name}\n7-kratno preverjanje\n(vrstično normalizirano)")
+        draw_confusion_matrix(
+            ax,
+            matrix,
+            f"{display_model_name}\n7-kratno preverjanje\n(vrstično normalizirano)",
+            title_fontsize=15,
+            tick_fontsize=13,
+            label_fontsize=13,
+            annot_fontsize=22,
+            title_weight="bold",
+        )
 
     fig.tight_layout()
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+    save_figure(fig, output_path, dpi)
     plt.close(fig)
 
 
@@ -361,26 +404,37 @@ def generate_appendix_confusion_matrices(
     output_dir: Path,
     dpi: int,
 ) -> None:
-    """Generira po eno dodatkovno sliko matrik zmede za vsako množico signalov."""
+    """Generira po eno dodatkovno sliko matrik zamenjav za vsako množico signalov."""
     for signal_set in SIGNAL_ORDER:
         model_names = CONFUSION_MODEL_ORDER[signal_set]
-        fig, axes = plt.subplots(2, 5, figsize=(13.2, 5.8), constrained_layout=True)
-        for ax, model_name in zip(axes.ravel(), model_names):
+        fig, axes = plt.subplots(5, 2, figsize=(7.4, 11.8), constrained_layout=True)
+        for panel_index, (ax, model_name) in enumerate(zip(axes.ravel(), model_names)):
             matrix = confusion_matrix_values(df, signal_set, model_name)
             display_model_name = CONFUSION_MODEL_LABELS.get(model_name, model_name)
-            draw_confusion_matrix(ax, matrix, display_model_name)
+            draw_confusion_matrix(
+                ax,
+                matrix,
+                display_model_name,
+                title_fontsize=10.5,
+                tick_fontsize=9.2,
+                label_fontsize=9.5,
+                annot_fontsize=13.5,
+                title_weight="bold",
+            )
             ax.set_xlabel("")
             ax.set_ylabel("")
+            if panel_index % 2 == 1:
+                ax.set_yticklabels([])
+                ax.tick_params(axis="y", length=0)
 
         for ax in axes[:, 0]:
-            ax.set_ylabel("dejanski razred", fontsize=9)
+            ax.set_ylabel("dejanski razred", fontsize=9.5)
         for ax in axes[-1, :]:
-            ax.set_xlabel("napoved", fontsize=9)
+            ax.set_xlabel("napoved", fontsize=9.5)
 
-        fig.suptitle(f"Matrike zmede za množico signalov {SIGNAL_LABELS[signal_set]}", fontsize=12)
+        fig.suptitle(f"Matrike zamenjav za množico signalov {SIGNAL_LABELS[signal_set]}", fontsize=14, fontweight="bold")
         output_path = output_dir / APPENDIX_CONFUSION_OUTPUTS[signal_set]
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+        save_figure(fig, output_path, dpi)
         plt.close(fig)
 
 
@@ -402,10 +456,10 @@ def load_label_noise_crosstab(label_noise_dir: Path) -> pd.DataFrame:
 
 def generate_label_noise_alignment_plot(df: pd.DataFrame, output_path: Path, dpi: int) -> None:
     class_order = ["low", "medium/neutral", "high"]
-    class_labels = ["nizka", "srednja/nevtralna", "visoka"]
+    class_labels = ["nizka", "srednja", "visoka"]
     dimension_labels = {"valence": "valenca", "arousal": "vzburjenost"}
 
-    fig, axes = plt.subplots(1, 2, figsize=(8.2, 3.9), constrained_layout=True)
+    fig, axes = plt.subplots(1, 2, figsize=(9.4, 4.7), constrained_layout=True)
     for ax, dimension in zip(axes, ["valence", "arousal"]):
         subset = df[df["dimension"] == dimension]
         proportions = (
@@ -439,16 +493,21 @@ def generate_label_noise_alignment_plot(df: pd.DataFrame, output_path: Path, dpi
             cbar_kws={"label": "delež znotraj izpeljanega razreda"},
             xticklabels=class_labels,
             yticklabels=class_labels,
+            annot_kws={"fontsize": 12.5},
             ax=ax,
         )
-        ax.set_title(dimension_labels[dimension], fontsize=11)
-        ax.set_xlabel("razred iz številske samoocene")
-        ax.set_ylabel("izpeljani razred po tabeli 6")
-        ax.tick_params(axis="x", rotation=20)
-        ax.tick_params(axis="y", rotation=0)
+        ax.set_title(dimension_labels[dimension], fontsize=14, fontweight="bold", pad=10)
+        ax.set_xlabel("")
+        ax.set_ylabel("")
+        ax.tick_params(axis="x", rotation=0, labelsize=TICK_LABEL_FONTSIZE)
+        ax.tick_params(axis="y", rotation=90, labelsize=TICK_LABEL_FONTSIZE)
+        if dimension == "arousal":
+            ax.collections[0].colorbar.ax.tick_params(labelsize=COLORBAR_TICK_FONTSIZE)
+            ax.collections[0].colorbar.set_label("delež znotraj izpeljanega razreda", fontsize=COLORBAR_LABEL_FONTSIZE)
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+    fig.supxlabel("razred iz številske samoocene", fontsize=AXIS_LABEL_FONTSIZE)
+    fig.supylabel("izpeljani razred po preslikavi oznak", fontsize=AXIS_LABEL_FONTSIZE)
+    save_figure(fig, output_path, dpi)
     plt.close(fig)
 
 
@@ -482,7 +541,7 @@ def generate_label_distribution_plots(df: pd.DataFrame, data_figures_dir: Path, 
         (proportions, "delež oken [%]", "porazdelitev_razredov_delezi_retain_2026-06-12.png", True),
         (counts, "število oken", "porazdelitev_razredov_stevila_retain_2026-06-12.png", False),
     ]:
-        fig, ax = plt.subplots(figsize=(6.2, 3.6), constrained_layout=True)
+        fig, ax = plt.subplots(figsize=(7.1, 4.2), constrained_layout=True)
         x = np.arange(len(signals))
         bottom = np.zeros(len(signals))
         for class_index, class_label in enumerate(classes):
@@ -498,15 +557,17 @@ def generate_label_distribution_plots(df: pd.DataFrame, data_figures_dir: Path, 
                     text,
                     ha="center",
                     va="center",
-                    fontsize=8,
+                    fontsize=12,
+                    fontweight="bold",
                     color="#2F3437",
                 )
             bottom += values[:, class_index]
 
         ax.set_xticks(x)
-        ax.set_xticklabels(signals, fontsize=8.5)
-        ax.set_ylabel(ylabel, fontsize=9)
-        ax.legend(frameon=False, ncol=2, loc="upper center", bbox_to_anchor=(0.5, 1.12), fontsize=8.5)
+        ax.set_xticklabels(signals, fontsize=TICK_LABEL_FONTSIZE)
+        ax.set_ylabel(ylabel, fontsize=AXIS_LABEL_FONTSIZE)
+        ax.tick_params(axis="y", labelsize=TICK_LABEL_FONTSIZE)
+        ax.legend(frameon=False, ncol=2, loc="upper center", bbox_to_anchor=(0.5, 1.13), fontsize=TICK_LABEL_FONTSIZE)
         ax.grid(axis="y", color="#E6E6E6", linewidth=0.7)
         ax.set_axisbelow(True)
         ax.spines["top"].set_visible(False)
@@ -517,8 +578,7 @@ def generate_label_distribution_plots(df: pd.DataFrame, data_figures_dir: Path, 
             ax.set_ylim(0, 100)
 
         output_path = data_figures_dir / output_name
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+        save_figure(fig, output_path, dpi)
         plt.close(fig)
 
 
@@ -532,7 +592,7 @@ def generate_signal_distribution_plots(df: pd.DataFrame, data_figures_dir: Path,
     x = df["x-avg"].to_numpy()
     y = df["y-avg"].to_numpy()
 
-    fig, ax = plt.subplots(figsize=(6.2, 3.8), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(6.6, 4.3), constrained_layout=True)
     counts, x_edges, y_edges = np.histogram2d(x, y, bins=[96, 60], range=[[0, 1280], [0, 800]])
     counts = counts.T
     masked_counts = np.ma.masked_where(counts == 0, counts)
@@ -544,24 +604,23 @@ def generate_signal_distribution_plots(df: pd.DataFrame, data_figures_dir: Path,
         norm=LogNorm(vmin=1, vmax=max(1, counts.max())),
         shading="auto",
     )
-    ax.set_xlabel("vodoravna koordinata pogleda [px]", fontsize=9)
-    ax.set_ylabel("navpična koordinata pogleda [px]", fontsize=9)
-    ax.set_xlim(0, 1280)
-    ax.set_ylim(800, 0)
+    ax.set_xlabel("vodoravna koordinata pogleda [px]", fontsize=AXIS_LABEL_FONTSIZE)
+    ax.set_ylabel("navpična koordinata pogleda [px]", fontsize=AXIS_LABEL_FONTSIZE)
+    ax.set_xlim(130, 1130)
+    ax.set_ylim(830, 30)
     ax.set_aspect("equal", adjustable="box")
-    ax.tick_params(axis="both", labelsize=8.5)
+    ax.tick_params(axis="both", labelsize=TICK_LABEL_FONTSIZE)
     ax.grid(False)
     for spine in ax.spines.values():
         spine.set_color("#B0B0B0")
     cbar = fig.colorbar(mesh, ax=ax, fraction=0.045, pad=0.03)
-    cbar.set_label("število meritev", fontsize=9)
-    cbar.ax.tick_params(labelsize=8.5)
+    cbar.set_label("število meritev", fontsize=COLORBAR_LABEL_FONTSIZE)
+    cbar.ax.tick_params(labelsize=COLORBAR_TICK_FONTSIZE)
     output_path = data_figures_dir / "porazdelitev_polozajev_pogleda_retain_2026-06-12.png"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+    save_figure(fig, output_path, dpi)
     plt.close(fig)
 
-    fig, ax = plt.subplots(figsize=(6.2, 3.4), constrained_layout=True)
+    fig, ax = plt.subplots(figsize=(7.1, 4.0), constrained_layout=True)
     left = df["pupil-size-left-avg"].to_numpy()
     right = df["pupil-size-right-avg"].to_numpy()
     lower = float(np.nanpercentile(np.concatenate([left, right]), 0.2))
@@ -587,19 +646,18 @@ def generate_signal_distribution_plots(df: pd.DataFrame, data_figures_dir: Path,
         edgecolor="white",
         linewidth=0.25,
     )
-    ax.set_xlabel("velikost zenice", fontsize=9)
-    ax.set_ylabel("gostota", fontsize=9)
-    ax.legend(frameon=False, fontsize=8.5)
+    ax.set_xlabel("velikost zenice", fontsize=PUPIL_AXIS_LABEL_FONTSIZE)
+    ax.set_ylabel("gostota", fontsize=PUPIL_AXIS_LABEL_FONTSIZE)
+    ax.legend(frameon=False, fontsize=PUPIL_LEGEND_FONTSIZE)
     ax.grid(axis="y", color="#E6E6E6", linewidth=0.7)
     ax.set_axisbelow(True)
     ax.spines["top"].set_visible(False)
     ax.spines["right"].set_visible(False)
     ax.spines["left"].set_color("#B0B0B0")
     ax.spines["bottom"].set_color("#B0B0B0")
-    ax.tick_params(axis="both", labelsize=8.5)
+    ax.tick_params(axis="both", labelsize=PUPIL_TICK_LABEL_FONTSIZE)
     output_path = data_figures_dir / "porazdelitev_velikosti_zenic_retain_2026-06-12.png"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_path, dpi=dpi, bbox_inches="tight")
+    save_figure(fig, output_path, dpi)
     plt.close(fig)
 
 
@@ -624,21 +682,21 @@ def main() -> None:
         confusion_matrices,
         signal_set="gaze_pupil",
         model_name="SVM",
-        output_path=args.results_figures_dir / "matrika_zmede_pogled_zenici_svm.png",
+        output_path=args.results_figures_dir / "matrika_zamenjav_pogled_zenici_svm.png",
         dpi=args.dpi,
     )
     generate_confusion_matrix(
         confusion_matrices,
         signal_set="gaze_pupil",
         model_name="HeteroGCNMLPWeights",
-        output_path=args.results_figures_dir / "matrika_zmede_pogled_zenici_koncni_gnn.png",
+        output_path=args.results_figures_dir / "matrika_zamenjav_pogled_zenici_koncni_gnn.png",
         dpi=args.dpi,
     )
     generate_confusion_matrices_panel(
         confusion_matrices,
         signal_set="gaze_pupil",
         model_names=["SVM", "HeteroGCNMLPWeights"],
-        output_path=args.results_figures_dir / "matrike_zmede_pogled_zenici_svm_heterogcn_mlp_w.png",
+        output_path=args.results_figures_dir / "matrike_zamenjav_pogled_zenici_svm_heterogcn_mlp_w.png",
         dpi=args.dpi,
     )
     generate_appendix_confusion_matrices(

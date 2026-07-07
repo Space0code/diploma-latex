@@ -36,173 +36,45 @@ Spodnja tabela primerja oba protokola za množico signalov \emph{pogled in zenic
 
 \input{tabele/rezultati/primerjava_loo_po_subjektih.tex}
 
-\section{Matrike zmede}
-\label{app:matrike-zmede-vsi-modeli}
+\section{Matrike zamenjav}
+\label{app:matrike-zamenjav-vsi-modeli}
 
-V nadaljevanju so prikazane vrstično normalizirane matrike zmede za vse modele in vse množice signalov.
-Matrike so prikazane po dve v vrstici in sledijo vrstnemu redu modelov iz glavne tabele rezultatov.
+V nadaljevanju so prikazane vrstično normalizirane matrike zamenjav za vse modele in vse množice signalov.
+Za vsako množico signalov je pripravljen en prikaz z desetimi matrikami zamenjav v vrstnem redu modelov iz glavne tabele rezultatov.
 Vrstice predstavljajo dejanski razred, stolpci pa napovedani razred. 
 Vrednosti so deleži znotraj dejanskega razreda.
 Matrike dopolnjujejo agregirane metrike iz prejšnjih tabel, ker pokažejo, ali model napake dela približno simetrično ali pa sistematično preferira en razred.
 Večinski model pričakovano napoveduje samo najpogostejši razred, pri naučenih modelih pa je razlika med diagonalnima celicama manj izrazita.
 Pri množici \emph{samo zenici} so napake bolj uravnotežene z naključnim ugibanjem kot pri množicah s koordinatami pogleda, kar podpira sklep, da same zenice v tej podatkovni zbirki nosijo šibkejši signal za binarno valenco.
 
-\newcommand{\DodatekMatrikaEna}[1]{\includegraphics[width=0.47\textwidth,trim=0bp 212.9bp 780bp 18bp,clip]{#1}}
-\newcommand{\DodatekMatrikaDve}[1]{\includegraphics[width=0.47\textwidth,trim=205bp 212.9bp 585bp 18bp,clip]{#1}}
-\newcommand{\DodatekMatrikaTri}[1]{\includegraphics[width=0.47\textwidth,trim=397bp 212.9bp 397bp 26bp,clip]{#1}}
-\newcommand{\DodatekMatrikaStiri}[1]{\includegraphics[width=0.47\textwidth,trim=580bp 212.9bp 205bp 22bp,clip]{#1}}
-\newcommand{\DodatekMatrikaPet}[1]{\includegraphics[width=0.47\textwidth,trim=770bp 212.9bp 0bp 22bp,clip]{#1}}
-\newcommand{\DodatekMatrikaSest}[1]{\includegraphics[width=0.47\textwidth,trim=0bp 0bp 780bp 212.9bp,clip]{#1}}
-\newcommand{\DodatekMatrikaSedem}[1]{\includegraphics[width=0.47\textwidth,trim=205bp 0bp 585bp 212.9bp,clip]{#1}}
-\newcommand{\DodatekMatrikaOsem}[1]{\includegraphics[width=0.47\textwidth,trim=397bp 0bp 397bp 212.9bp,clip]{#1}}
-\newcommand{\DodatekMatrikaDevet}[1]{\includegraphics[width=0.47\textwidth,trim=580bp 0bp 205bp 212.9bp,clip]{#1}}
-\newcommand{\DodatekMatrikaDeset}[1]{\includegraphics[width=0.47\textwidth,trim=770bp 0bp 0bp 212.9bp,clip]{#1}}
-
 % Vir slik: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/confusion_matrices.csv.
 % Slike so generirane s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
-% Spodnji prikazi uporabljajo izreze istih PNG datotek z LaTeX nastavitvama trim in clip.
 \begin{figure}[p]
     \centering
-    \DodatekMatrikaEna{matrike_zmede_dodatek_samo_pogled.png}\hfill
-    \DodatekMatrikaDve{matrike_zmede_dodatek_samo_pogled.png}
-    \caption{Matriki zmede za množico signalov samo pogled: naključni in večinski model.}
-    \label{fig:matrike-zmede-dodatek-samo-pogled}
+    \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_samo_pogled.pdf}
+    \caption{Matrike zamenjav za množico signalov samo pogled. Prikaz vključuje naključni in večinski model, klasične modele \ModelName{SVM}, \ModelName{LightGBM} in \ModelName{MLP}, zamrznjene predstavitve \ModelName{GazeMAE/MOMENT} ter štiri grafovske modele od osnovnega \ModelName{GCN} do \ModelName{HeteroGCN-MLP-w}.}
+    \label{fig:matrike-zamenjav-dodatek-samo-pogled}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \DodatekMatrikaTri{matrike_zmede_dodatek_samo_pogled.png}\hfill
-    \DodatekMatrikaStiri{matrike_zmede_dodatek_samo_pogled.png}
-    \caption{Matriki zmede za množico signalov samo pogled: \ModelName{SVM} in \ModelName{LightGBM}.}
+    \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_samo_zenici.pdf}
+    \caption{Matrike zamenjav za množico signalov samo zenici. Razporeditev modelov je enaka kot pri drugih množicah signalov: izhodiščna modela, trije klasični oziroma nevronski primerjalni modeli, zamrznjene predstavitve in štiri grafovske arhitekture.}
+    \label{fig:matrike-zamenjav-dodatek-samo-zenici}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \DodatekMatrikaPet{matrike_zmede_dodatek_samo_pogled.png}\hfill
-    \DodatekMatrikaSest{matrike_zmede_dodatek_samo_pogled.png}
-    \caption{Matriki zmede za množico signalov samo pogled: \ModelName{MLP} in \ModelName{GazeMAE/MOMENT}.}
+    \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_pogled_zenici.pdf}
+    \caption{Matrike zamenjav za množico signalov pogled in zenici. Ta množica doseže najboljši skupni rezultat v glavni primerjavi, zato prikaz omogoča neposredno primerjavo napak med najuspešnejšim \ModelName{SVM} in grafovskimi modeli.}
+    \label{fig:matrike-zamenjav-dodatek-pogled-zenici}
 \end{figure}
 
 \begin{figure}[p]
     \centering
-    \DodatekMatrikaSedem{matrike_zmede_dodatek_samo_pogled.png}\hfill
-    \DodatekMatrikaOsem{matrike_zmede_dodatek_samo_pogled.png}
-    \caption{Matriki zmede za množico signalov samo pogled: \ModelName{GCN} in \ModelName{HeteroGCN-mean}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaDevet{matrike_zmede_dodatek_samo_pogled.png}\hfill
-    \DodatekMatrikaDeset{matrike_zmede_dodatek_samo_pogled.png}
-    \caption{Matriki zmede za množico signalov samo pogled: \ModelName{HeteroGCN-MLP} in \ModelName{HeteroGCN-MLP-w}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaEna{matrike_zmede_dodatek_samo_zenici.png}\hfill
-    \DodatekMatrikaDve{matrike_zmede_dodatek_samo_zenici.png}
-    \caption{Matriki zmede za množico signalov samo zenici: naključni in večinski model.}
-    \label{fig:matrike-zmede-dodatek-samo-zenici}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaTri{matrike_zmede_dodatek_samo_zenici.png}\hfill
-    \DodatekMatrikaStiri{matrike_zmede_dodatek_samo_zenici.png}
-    \caption{Matriki zmede za množico signalov samo zenici: \ModelName{SVM} in \ModelName{LightGBM}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaPet{matrike_zmede_dodatek_samo_zenici.png}\hfill
-    \DodatekMatrikaSest{matrike_zmede_dodatek_samo_zenici.png}
-    \caption{Matriki zmede za množico signalov samo zenici: \ModelName{MLP} in \ModelName{GazeMAE/MOMENT}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaSedem{matrike_zmede_dodatek_samo_zenici.png}\hfill
-    \DodatekMatrikaOsem{matrike_zmede_dodatek_samo_zenici.png}
-    \caption{Matriki zmede za množico signalov samo zenici: \ModelName{GCN} in \ModelName{HeteroGCN-mean}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaDevet{matrike_zmede_dodatek_samo_zenici.png}\hfill
-    \DodatekMatrikaDeset{matrike_zmede_dodatek_samo_zenici.png}
-    \caption{Matriki zmede za množico signalov samo zenici: \ModelName{HeteroGCN-MLP} in \ModelName{HeteroGCN-MLP-w}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaEna{matrike_zmede_dodatek_pogled_zenici.png}\hfill
-    \DodatekMatrikaDve{matrike_zmede_dodatek_pogled_zenici.png}
-    \caption{Matriki zmede za množico signalov pogled in zenici: naključni in večinski model.}
-    \label{fig:matrike-zmede-dodatek-pogled-zenici}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaTri{matrike_zmede_dodatek_pogled_zenici.png}\hfill
-    \DodatekMatrikaStiri{matrike_zmede_dodatek_pogled_zenici.png}
-    \caption{Matriki zmede za množico signalov pogled in zenici: \ModelName{SVM} in \ModelName{LightGBM}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaPet{matrike_zmede_dodatek_pogled_zenici.png}\hfill
-    \DodatekMatrikaSest{matrike_zmede_dodatek_pogled_zenici.png}
-    \caption{Matriki zmede za množico signalov pogled in zenici: \ModelName{MLP} in \ModelName{GazeMAE/MOMENT}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaSedem{matrike_zmede_dodatek_pogled_zenici.png}\hfill
-    \DodatekMatrikaOsem{matrike_zmede_dodatek_pogled_zenici.png}
-    \caption{Matriki zmede za množico signalov pogled in zenici: \ModelName{GCN} in \ModelName{HeteroGCN-mean}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaDevet{matrike_zmede_dodatek_pogled_zenici.png}\hfill
-    \DodatekMatrikaDeset{matrike_zmede_dodatek_pogled_zenici.png}
-    \caption{Matriki zmede za množico signalov pogled in zenici: \ModelName{HeteroGCN-MLP} in \ModelName{HeteroGCN-MLP-w}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaEna{matrike_zmede_dodatek_vsi_signali.png}\hfill
-    \DodatekMatrikaDve{matrike_zmede_dodatek_vsi_signali.png}
-    \caption{Matriki zmede za množico signalov vsi signali: naključni in večinski model.}
-    \label{fig:matrike-zmede-dodatek-vsi-signali}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaTri{matrike_zmede_dodatek_vsi_signali.png}\hfill
-    \DodatekMatrikaStiri{matrike_zmede_dodatek_vsi_signali.png}
-    \caption{Matriki zmede za množico signalov vsi signali: \ModelName{SVM} in \ModelName{LightGBM}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaPet{matrike_zmede_dodatek_vsi_signali.png}\hfill
-    \DodatekMatrikaSest{matrike_zmede_dodatek_vsi_signali.png}
-    \caption{Matriki zmede za množico signalov vsi signali: \ModelName{MLP} in \ModelName{GazeMAE/MOMENT}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaSedem{matrike_zmede_dodatek_vsi_signali.png}\hfill
-    \DodatekMatrikaOsem{matrike_zmede_dodatek_vsi_signali.png}
-    \caption{Matriki zmede za množico signalov vsi signali: \ModelName{GCN} in \ModelName{HeteroGCN-mean}.}
-\end{figure}
-
-\begin{figure}[p]
-    \centering
-    \DodatekMatrikaDevet{matrike_zmede_dodatek_vsi_signali.png}\hfill
-    \DodatekMatrikaDeset{matrike_zmede_dodatek_vsi_signali.png}
-    \caption{Matriki zmede za množico signalov vsi signali: \ModelName{HeteroGCN-MLP} in \ModelName{HeteroGCN-MLP-w}.}
+    \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_vsi_signali.pdf}
+    \caption{Matrike zamenjav za množico signalov vsi signali. Prikaz povzema napake modelov pri najbogatejši vhodni predstavitvi, ki poleg pogleda in zenic vključuje še oddaljenost od sledilnika pogleda ter fiksacijske informacije.}
+    \label{fig:matrike-zamenjav-dodatek-vsi-signali}
 \end{figure}
 
 \clearpage
@@ -222,7 +94,7 @@ To ne pomeni, da so oznake valence brez šuma, vendar je za glavno primerjavo mo
 % Slika je generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.92\textwidth]{ujemanje_oznak_s_samoocenami.png}
+    \includegraphics[width=0.92\textwidth]{ujemanje_oznak_s_samoocenami.pdf}
     \caption{Ujemanje razredov valence in vzburjenosti, izpeljanih iz preslikave v tabeli~\ref{tab:label-mapping}, z razredi iz številskih samoocen. Vrednosti so deleži znotraj izpeljanega razreda.}
     \label{fig:ujemanje-oznak-s-samoocenami}
 \end{figure}
@@ -231,7 +103,13 @@ To ne pomeni, da so oznake valence brez šuma, vendar je za glavno primerjavo mo
 \label{app:izbira-grafovske-konvolucije}
 
 Izbiro operatorja \texttt{GCNConv} smo preverili z dodatnim poskusom na binarni nalogi valence pri množici signalov pogled in zenici.
-Razlike med operatorji so bile majhne, zato smo v glavnih poskusih ohranili enoten in enostaven operator.
+\texttt{GCNConv} je najpreprostejša izbira in ustreza osnovnemu posredovanju sporočil po normalizirani sosednosti.
+\texttt{GATConv} doda pozornost nad sosedi in je uporaben, kadar želimo, da model sam uteži prispevke sosednjih vozlišč.
+\texttt{GraphConv} uporabi ločen prispevek lastnega vozlišča in sosedov, zato je nekoliko prožnejši neutežen operator.
+\texttt{GINConv} oziroma \texttt{GINEConv} sta izrazitejša agregacijska operatorja; \texttt{GINEConv} lahko neposredno uporabi značilke povezav.
+V naših poskusih so bile razlike majhne.
+Pri osnovnem \ModelName{GCN} je najvišjo vrednost dosegel \texttt{GINConv}, pri \ModelName{HeteroGCN-MLP-w} pa \texttt{GraphConv}, vendar razlika ni bila dovolj velika, da bi spreminjala glavno eksperimentalno zgodbo.
+Zato smo v glavnih poskusih ohranili enoten in enostaven operator \texttt{GCNConv}.
 Ta primerjava ni ločeno iskanje najboljšega GNN, temveč preverjanje, da izbira osnovnega operatorja ne določa glavnega sklepa naloge.
 
 \input{tabele/rezultati/izbira_grafovske_konvolucije.tex}

@@ -7,6 +7,14 @@ Meritvam sledilnika pogleda lahko smiselno določimo časovne in prostorske odno
 Na tem grafu se z grafovsko nevronsko mrežo učimo predstavitev vozlišč in grafov, ki jih uporabimo za klasifikacijo grafa.
 Podatki, uporabljeni v tej nalogi, imajo ciljne oznake valence, izpeljane iz samoocen udeležencev, zato GNN učimo binarno klasifikacijo valence, rezultate pa primerjamo z rezultati uveljavljenih negrafovskih pristopov.
 Eksperimentalno primerjavo izvedemo na štirih množicah signalov: samo koordinatah pogleda (\emph{samo pogled}), samo velikostih zenic (\emph{samo zenici}), združenih koordinatah pogleda in velikostih zenic (\emph{pogled in zenici}) ter vseh razpoložljivih signalih (\emph{vsi signali}).
+Pregled celotnega eksperimentalnega toka je prikazan na sliki~\ref{fig:uvod-pregled-naloge}: iz iste podatkovne zbirke izpeljemo več vhodnih predstavitev, jih ovrednotimo z različnimi družinami modelov in rezultate primerjamo na problemu klasifikacije valence.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{thesis_diagrams_svg/diploma_diagram_v1.png}
+    \caption{Pregled naloge: priprava podatkov \MAHNOB{}, tri glavne poti modeliranja, štiri množice signalov in povzetek eksperimentalne primerjave  binarne klasifikacije valence iz podatkov sledilnika pogleda.}
+    \label{fig:uvod-pregled-naloge}
+\end{figure}
 
 \section{Raziskovalni problem}
 \label{subsec:raziskovalni-problem}

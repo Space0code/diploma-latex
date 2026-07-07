@@ -62,6 +62,8 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Za `overfitting` uporabljaj "prekomerno prileganje", ne "preprileganje".
 - Za `arousal` dosledno uporabljaj "vzburjenost", ne "vzburjenje". Samo pri prvi
   omembi v diplomi dodaj angleški izraz v oklepaju: `vzburjenost (ang. arousal)`.
+- Za `confusion matrix` dosledno uporabljaj "matrika zamenjav" oziroma v množini
+  "matrike zamenjav", ne "matrika zmede" ali "matrike zmede".
 - Za primerjave razpoložljivih signalov sledilnika pogleda uporabljaj izraz
   `množica signalov` oziroma `podmnožica signalov`, ne `nabor signalov`. Imena
   glavnih množic so zaenkrat: `samo pogled`, `samo zenici`, `pogled in zenici` in
@@ -117,9 +119,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   v LaTeX komentarju zapiši izvorne podatke in skript, ki sliko generira.
 - Slike rezultatov naj slogovno sledijo slikam, ki jih generira glavni
   eksperimentalni runner oziroma njegov postprocesirni skript. Posebej za
-  toplotne karte in matrike zmede uporabljaj isti `seaborn.heatmap` slog,
+  toplotne karte in matrike zamenjav uporabljaj isti `seaborn.heatmap` slog,
   barvno shemo `Blues`, bele mrežne črte oziroma runnerjeve nastavitve, format
-  deležev med $0$ in $1$ ter vrstično normalizacijo matrik zmede. Izjema sta
+  deležev med $0$ in $1$ ter vrstično normalizacijo matrik zamenjav. Izjema sta
   trenutni sliki porazdelitve razredov za poglavji 4 in 8, ki sta Tomiju všeč in
   ostaneta v posebej pripravljenem diploma slogu.
 - Za vse diagrame, TikZ slike, SVG slike, grafe, sheme cevovodov in druge
@@ -325,8 +327,8 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Uredniški plan vizualizacij: glavno besedilo naj ima omejeno število močnih
   slik, približno eno sliko porazdelitve podatkov, eno osrednjo sliko grafovske
   predstavitve, eno do dve sliki glavnih rezultatov, eno sliko napak oziroma
-  matrik zmede, eno ablacijsko sliko in po potrebi eno diagnostično sliko.
-  Podrobne porazdelitve, dodatne metrike, per-fold grafe, dodatne matrike zmede,
+  matrik zamenjav, eno ablacijsko sliko in po potrebi eno diagnostično sliko.
+  Podrobne porazdelitve, dodatne metrike, per-fold grafe, dodatne matrike zamenjav,
   ločene relacijske vizualizacije grafov in sekundarne diagnostike sodijo v
   dodatke. UMAP je kandidatna kvalitativna slika: v glavno besedilo gre samo, če
   je berljiva, stabilna in interpretativno koristna; sicer gre v dodatek ali se

@@ -13,7 +13,10 @@ Klasični primerjalni modeli uporabljajo agregirane tabelarične značilke, nevr
 \label{app:mrezno-iskanje}
 
 Nastavitve grafovske konstrukcije smo izbrali po majhnem predhodnem mrežnem iskanju na 3-razredni valenci, glede na izvorne razrede definirane v~\ref{tab:label-mapping}.
-Iskanje je spreminjalo $k_t \in \{1,2,3\}$, $k_s \in \{1,2,3\}$ in $k_f \in \{1,2,3,5\}$ pri dveh grafovskih plasteh in skritih predstavitvah velikosti 64.
+Iskanje je spreminjalo število grafovskih plasti, velikost skritih predstavitev ter parametre konstrukcije $k_t$, $k_s$ in $k_f$.
+Primerjali smo več nastavitev števila plasti in skrite razsežnosti, vendar med njimi ni bilo velikih razlik.
+Ker je bil najmanjši model med najboljšimi in najstabilnejšimi, hkrati pa je računsko najvarčnejši, smo za končne poskuse izbrali $L=2$ (število skritih plasti GNN) in $d=64$ (razsežnost skritih plasti).
+Pri tej arhitekturni nastavitvi smo v mrežnem iskanju variirali $k_t \in \{1,2,3\}$, $k_s \in \{1,2,3\}$ in $k_f \in \{1,2,3,5\}$.
 Najvišji rezultat v tem pomožnem iskanju je dosegla nastavitev $k_t=3$, $k_s=1$ in $k_f=5$, vendar so bile razlike majhne.
 V končnih poskusih smo uporabili redkejšo nastavitev $k_t=1$, $k_s=1$ in $k_f=3$, ker zmanjša gostoto grafa in računsko zahtevnost ter ohrani stabilno delovanje.
 

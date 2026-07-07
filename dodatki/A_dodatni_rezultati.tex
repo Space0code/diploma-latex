@@ -43,6 +43,9 @@ V nadaljevanju so prikazane vrstično normalizirane matrike zmede za vse modele 
 Matrike so prikazane po dve v vrstici in sledijo vrstnemu redu modelov iz glavne tabele rezultatov.
 Vrstice predstavljajo dejanski razred, stolpci pa napovedani razred. 
 Vrednosti so deleži znotraj dejanskega razreda.
+Matrike dopolnjujejo agregirane metrike iz prejšnjih tabel, ker pokažejo, ali model napake dela približno simetrično ali pa sistematično preferira en razred.
+Večinski model pričakovano napoveduje samo najpogostejši razred, pri naučenih modelih pa je razlika med diagonalnima celicama manj izrazita.
+Pri množici \emph{samo zenici} so napake bolj uravnotežene z naključnim ugibanjem kot pri množicah s koordinatami pogleda, kar podpira sklep, da same zenice v tej podatkovni zbirki nosijo šibkejši signal za binarno valenco.
 
 \newcommand{\DodatekMatrikaEna}[1]{\includegraphics[width=0.47\textwidth,trim=0bp 212.9bp 780bp 18bp,clip]{#1}}
 \newcommand{\DodatekMatrikaDve}[1]{\includegraphics[width=0.47\textwidth,trim=205bp 212.9bp 585bp 18bp,clip]{#1}}
@@ -207,10 +210,12 @@ Vrednosti so deleži znotraj dejanskega razreda.
 \section{Ujemanje izpeljanih oznak s samoocenami}
 \label{app:ujemanje-oznak-s-samoocenami}
 
-Slika~\ref{fig:ujemanje-oznak-s-samoocenami} primerja razrede, izpeljane iz tabele~6, z razredi, dobljenimi iz številskih samoocen.
+Slika~\ref{fig:ujemanje-oznak-s-samoocenami} primerja razrede, izpeljane iz preslikave v tabeli~\ref{tab:label-mapping}, z razredi, dobljenimi iz številskih samoocen.
 Primerjava je uporabna kot groba ocena skladnosti med diskretnimi čustvenimi oznakami in številskimi ocenami, ki so bile zbrane v istem eksperimentu.
 Pri binarni valenci je ujemanje na uporabljenem podnaboru $96{,}7\,\%$, pri binarni vzburjenosti pa $70{,}3\,\%$.
 Zato vzburjenosti ne uporabimo kot glavno ciljno nalogo.
+Slike kažejo, da izpeljane oznake valence bolje sledijo samoocenam udeležencev kot izpeljane oznake vzburjenosti.
+To ne pomeni, da so oznake valence brez šuma, vendar je za glavno primerjavo modelov bolj smiselna in stabilna ciljna naloga.
 
 % Vir slike: GFM-for-eyetracker/results/label_noise_analysis/2026-05-13_table6_self_report_alignment/table6_vs_rating_crosstab_long.csv.
 % Povzetek ujemanja: GFM-for-eyetracker/results/label_noise_analysis/2026-05-13_table6_self_report_alignment/label_noise_summary.csv.
@@ -218,7 +223,7 @@ Zato vzburjenosti ne uporabimo kot glavno ciljno nalogo.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.92\textwidth]{ujemanje_oznak_s_samoocenami.png}
-    \caption{Ujemanje razredov valence in vzburjenosti, izpeljanih iz tabele~6, z razredi iz številskih samoocen. Vrednosti so deleži znotraj izpeljanega razreda.}
+    \caption{Ujemanje razredov valence in vzburjenosti, izpeljanih iz preslikave v tabeli~\ref{tab:label-mapping}, z razredi iz številskih samoocen. Vrednosti so deleži znotraj izpeljanega razreda.}
     \label{fig:ujemanje-oznak-s-samoocenami}
 \end{figure}
 
@@ -237,5 +242,9 @@ Ta primerjava ni ločeno iskanje najboljšega GNN, temveč preverjanje, da izbir
 Diagnostika ne kaže jasnega kolapsa predstavitev pri glavnih grafovskih modelih.
 Množica samo zenici ima bolj neodločne napovedi, vendar tega ne obravnavamo kot sistemski kolaps GNN.
 Entropija in razpon logitov opisujeta gotovost napovedi, varianca predstavitev in kosinusna podobnost pa razpršenost naučenih predstavitev grafov.
+Pri množici \emph{samo zenici} sta razpon logitov in varianca predstavitev manjša, entropija pa večja, kar je skladno z manj odločnimi napovedmi.
+Pri množicah s koordinatami pogleda so logiti izrazitejši in predstavitve bolj razpršene.
+Slabši rezultati grafovskih modelov v glavni primerjavi torej niso posledica očitnega kolapsa predstavitev v skoraj enake vektorje.
+Diagnostiko razumemo predvsem kot podporno preverjanje stabilnosti učenja, ne kot dokaz, da je izbrana grafovska arhitektura optimalna.
 
 \input{tabele/diagnostika/diagnostika_predstavitev.tex}

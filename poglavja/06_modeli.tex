@@ -142,21 +142,14 @@ V nadaljevanju opišemo specifike vsake arhitekture v štiri-stopenjski arhitekt
 Uporablja isto grafovsko predstavitev okna, kot je bila opisana v poglavju~\ref{sec:grafovska-predstavitev}, vendar ne ločuje časovnih, prostorskih in fiksacijskih relacij.
 Vse povezave združi v en homogen graf, posredovanje sporočil pa izvede z običajnimi plastmi \texttt{GCNConv}.
 Model ne uporablja značilk povezav in posledično naučenih uteži povezav.
+Slika~\ref{fig:diagram-gcn} prikazuje osnovni cevovod tega modela.
 
-Tehnično lahko model zapišemo kot:
-\begin{equation}
-    X
-    \rightarrow
-        MLP_{\text{vhod}}
-    \rightarrow
-    f_{\GCN}
-    \rightarrow
-    \text{READOUT}
-    \rightarrow
-    f_{\text{head}},
-\end{equation}
-kjer je $X$ matrika značilk vozlišč, $MLP_{\text{vhod}}$ vhodni dvoslojni perceptron, $f_{\GCN}$ zaporedje grafovskih konvolucijskih plasti, korak $READOUT$ združi predstavitve vozlišč v predstavitev celotnega grafa, $f_{\text{head}}$ pa iz te predstavitve izračuna napoved razreda.
-TODO{Zamenjaj to enačbo z diagramom, ko ga imaš. Z diagramom lažje prikažeš že samo razliko med tem in naslednjim modelom in imaš potem majhen diagram v vsaki subsekciji in obkrožiš razlike pri vsaki nadgradnji}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.82\textwidth]{\detokenize{GCN final.png}}
+    \caption[Diagram arhitekture \ModelName{GCN}.]{Diagram arhitekture \ModelName{GCN}. Model vse povezave obravnava kot en homogen graf, zato se sporočila posredujejo prek ene skupne grafovske konvolucije.}
+    \label{fig:diagram-gcn}
+\end{figure}
 
 \subsection{\ModelName{HeteroGCN-mean}}
 \label{subsec:model-heterogcn-mean}
@@ -165,8 +158,14 @@ TODO{Zamenjaj to enačbo z diagramom, ko ga imaš. Z diagramom lažje prikažeš
 Kot opisano v~\ref{sec:grafovska-predstavitev} tukaj ločimo različne tipe relacij.
 Relacijske predstavitve vozlišč združimo v skupno predstavitev vozlišča s preprostim povprečenjem.
 Namen te stopnje je izolirati vpliv ločevanja relacij.
-Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mean} je torej sprememba glede na homogeni \ModelName{GCN} je zato samo v tem, da se sporočila najprej izračunajo ločeno po relacijah, nato pa združijo s povprečenjem.
-\TODO{ko bom naredil diagram, ga dodam tu}
+Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mean}, je sprememba glede na homogeni \ModelName{GCN} samo v tem, da se sporočila najprej izračunajo ločeno po relacijah, nato pa združijo s povprečenjem.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.82\textwidth]{\detokenize{HeteroGCN-mean final.png}}
+    \caption[Diagram arhitekture \ModelName{HeteroGCN-mean}.]{Diagram arhitekture \ModelName{HeteroGCN-mean}. Model ločeno izračuna sporočila po časovnih, prostorskih in fiksacijskih relacijah, relacijske predstavitve pa združi s povprečenjem.}
+    \label{fig:diagram-heterogcn-mean}
+\end{figure}
 
 \subsection{\ModelName{HeteroGCN-MLP}}
 \label{subsec:model-heterogcn-mlp}
@@ -174,8 +173,14 @@ Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mean} je torej sprememba gle
 \ModelName{HeteroGCN-MLP} dobimo tako, da \ModelName{HeteroGCN-mean} nadgradimo z naučeno fuzijo relacijskih predstavitev.
 Različne predstavitve vozlišč -- tiste, ki so v danem modelu na voljo izmed časovne naprej, časovne nazaj, prostorske ter fiksacijske -- najprej konkateniramo, nato pa jih z dvoslojnim perceptronom združimo v skupno predstavitev vozlišča.
 S tem dopuščamo, da model sam določi, kateri deli katere relacije so pomembnejši za končno predstavitev.
-Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mlp} je torej sprememba  glede na \ModelName{HeteroGCN-mean} je torej v zamenjavi ročno določene fuzije z naučeno fuzijo relacijskih predstavitev.
-\TODO{ko bom naredil diagram, ga dodam tu}
+Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mlp}, je sprememba glede na \ModelName{HeteroGCN-mean} v zamenjavi ročno določene fuzije z naučeno fuzijo relacijskih predstavitev.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.82\textwidth]{\detokenize{HeteroGCN-MLP final.png}}
+    \caption[Diagram arhitekture \ModelName{HeteroGCN-MLP}.]{Diagram arhitekture \ModelName{HeteroGCN-MLP}. Model relacijske predstavitve najprej konkatenira, nato pa jih združi z naučeno fuzijo prek dvoslojnega perceptrona.}
+    \label{fig:diagram-heterogcn-mlp}
+\end{figure}
 
 \subsection{\ModelName{HeteroGCN-MLP-w}}
 \label{subsec:model-heterogcn-mlp-w}
@@ -187,7 +192,14 @@ Pri posamezni množici signalov se uporabijo le funkcije za relacije, ki so v gr
 Časovne povezave naprej in nazaj si delijo isto funkcijo $f_w^{\text{čas}}$, smer povezave pa je podana kot dodatna značilka povezave $\rho_{ij}$.
 Formule za izračun in normalizacijo uteži so podane v dodatku~\ref{app:naucene-utezi-povezav}.
 Namen te \emph{končne} stopnje je preveriti, ali modelu koristi razlikovati moč in predznak prispevka posameznih povezav znotraj relacije.
-\TODO{ko bom naredil diagram, ga dodam tu}
+Slika~\ref{fig:diagram-heterogcn-mlp-w} prikazuje dodano vejo za izračun naučenih uteži povezav.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.82\textwidth]{\detokenize{HeteroGCN-MLP-w final.png}}
+    \caption[Diagram arhitekture \ModelName{HeteroGCN-MLP-w}.]{Diagram arhitekture \ModelName{HeteroGCN-MLP-w}. Model poleg naučene fuzije relacij uporablja še značilke povezav, iz katerih z relacijsko odvisnimi perceptroni izračuna naučene predznačene uteži povezav.}
+    \label{fig:diagram-heterogcn-mlp-w}
+\end{figure}
 
 \subsection{Izbira grafovske konvolucije}
 \label{subsec:izbira-grafovske-konvolucije}

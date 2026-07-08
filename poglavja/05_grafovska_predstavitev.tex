@@ -131,18 +131,19 @@ Za vsak odmik $d \in D$ dodamo neusmerjene povezave
 Pri zapisu grafa za posredovanje sporočil vsako neusmerjeno povezavo predstavimo z dvema usmerjenima povezavama.
 Podvojene povezave znotraj relacije $E_f$ odstranimo.
 
-Na primer, pri fiksaciji dolžine $F=30$ in parametru $k_f=3$ dobimo $s=10$.
-Vozlišče z lokalnim indeksom $0$ torej povežemo z vozlišči $1, 11$ in $21$.
+Na primer, pri fiksaciji dolžine $F=21$ in parametru $k_f=3$ dobimo $s=7$.
+Vozlišče z lokalnim indeksom $0$ torej povežemo z vozlišči $1, 8$ in $15$.
 Odmik $1$ ohrani časovno lokalno komunikacijo znotraj fiksacije, večji odmiki pa omogočijo širjenje informacij tudi med časovno bolj oddaljenimi meritvami iste fiksacije.
 
 Razširjene povezave imajo večji doseg kot zgolj zaporedne fiksacijske povezave, hkrati pa se izognejo kombinatorični eksploziji, ki bi nastala pri polnem kliku.
 Pri polnem kliku bi namreč število povezav naraščalo kvadratno z dolžino fiksacije.
-Pri analiziranih 10-sekundnih oknih dobimo približno $1.956$ fiksacijskih povezav na graf pri $k_f=2$, $2.908$ pri $k_f=3$, $4.163$ pri $k_f=5$ in $7.273$ pri $k_f=10$.
 Končno gostoto grafov pri izbrani nastavitvi povzemamo v tabeli~\ref{tab:statistika-konstruiranih-grafov}.
 
+Večje vrednosti $k_f$ povečajo gostoto grafa, računsko zahtevnost in možnosti za prekomerno glajenje, manjše vrednosti pa graf dodatno razredčijo.
 Izbira $k_f=3$ je zato kompromis med dosegom in gostoto grafa.
 Ker vsaka plast GNN omogoča izmenjavo informacij med neposredno povezanimi vozlišči, se doseg znotraj fiksacije povečuje tudi z večanjem števila plasti. 
 Pri $k_f=3$ vozlišče že v eni plasti prejme informacije iz več delov iste fiksacije, večplastni model pa lahko te informacije dodatno propagira po fiksacijski relaciji.
+To je lepo vidno na sliki~\ref{fig:razsirjene-fiksacijske-povezave}
 
 % Vir slike: GFM-for-eyetracker/scripts/create_thesis_fixation_dilated_edges_figure.py.
 \begin{figure}[htbp]
@@ -158,7 +159,7 @@ Pri $k_f=3$ vozlišče že v eni plasti prejme informacije iz več delov iste fi
     \label{fig:razsirjene-fiksacijske-povezave}
 \end{figure}
 
-Večje vrednosti $k_f$ povečajo gostoto grafa, računsko zahtevnost in možnosti za prekomerno glajenje, manjše vrednosti pa graf dodatno razredčijo.
+
 
 \subsection{Značilke povezav}
 \label{subsec:utezi-povezav}

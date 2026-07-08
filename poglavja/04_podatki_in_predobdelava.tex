@@ -64,7 +64,7 @@ V uporabljeni podatkovni zbirki imamo na voljo pet osnovnih vrst signalov. To so
     \item časovni žig meritve $t_i$,
     \item koordinati pogleda na zaslonu $(x_i,~y_i)$ -- povprečje med meritvama levega in desnega očesa,
     \item velikost leve in desne zenice $(p_i^{(l)},~p_i^{(r)})$,
-    \item oddaljenost oči od sledilnika pogleda $d_i$ ter
+    \item oddaljenost od sledilnika pogleda $d_i$ ter
     \item informacija o fiksacijah, tj. pripadnost fiksaciji ter trajanje fiksacije.
 \end{itemize}
 
@@ -128,8 +128,8 @@ Uporabnost okna določimo glede na kakovost podatkov v oknu.
 
 Pri vzorčni frekvenci 60~Hz bi 10-sekundno okno brez manjkajočih vrednosti vsebovalo 600 vzorcev.
 Zaradi čiščenja, odstranjevanja neveljavnih vzorcev in filtriranja je dejansko število vzorcev v oknih manjše.
-Povprečno število meritev v uporabnem oknu po čiščenju znaša približno 506-543, odvisno od uporabljene množice signalov.
-Pri množici \emph{pogled in zenici}, ki jo uporabljamo tudi za prikaz porazdelitev signalov, je povprečje približno 526 meritev na okno.
+Po filtru osamelcev imamo $2\,639\,048$ vrstic in $5\,158$ uporabnih 10-sekundnih časovnih oken, kar pomeni povprečno približno 512 meritev na uporabno okno.
+Pri kasnejši gradnji grafov se število vozlišč nekoliko razlikuje med množicami signalov; te vrednosti povzemamo v tabeli~\ref{tab:statistika-konstruiranih-grafov}.
 
 Po tvorbi časovnih oken se cevovod razdeli glede na uporabljeno predstavitev.
 Negrafovski osnovni modeli iz okna dobijo agregirane tabelarične značilke, zamrznjeni prednaučeni predstavitveni modeli neposredno prejmejo časovne vrste izbranih signalov sledilnika pogleda, grafovski modeli pa grafovsko predstavitev okna.

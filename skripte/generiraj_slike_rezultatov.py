@@ -35,13 +35,13 @@ SIGNAL_LABELS = {
 }
 
 CLASS_LABELS = {
-    "Low valence": "nizka valenca",
-    "High valence": "visoka valenca",
+    "Low valence": "neprijetna valenca",
+    "High valence": "prijetna valenca",
 }
 
 CLASS_SHORT_LABELS = {
-    "Low valence": "nizka",
-    "High valence": "visoka",
+    "Low valence": "neprijetna",
+    "High valence": "prijetna",
 }
 
 CONFUSION_MODEL_LABELS = {
@@ -325,7 +325,7 @@ def draw_confusion_matrix(
     annot_fontsize: float = 16.0,
     title_weight: str = "normal",
 ) -> None:
-    labels = ["nizka", "visoka"]
+    labels = [CLASS_SHORT_LABELS["Low valence"], CLASS_SHORT_LABELS["High valence"]]
     sns.heatmap(
         matrix,
         annot=True,
@@ -456,7 +456,7 @@ def load_label_noise_crosstab(label_noise_dir: Path) -> pd.DataFrame:
 
 def generate_label_noise_alignment_plot(df: pd.DataFrame, output_path: Path, dpi: int) -> None:
     class_order = ["low", "medium/neutral", "high"]
-    class_labels = ["nizka", "srednja", "visoka"]
+    class_labels = ["neprijetna", "nevtralna", "prijetna"]
     dimension_labels = {"valence": "valenca", "arousal": "vzburjenost"}
 
     fig, axes = plt.subplots(1, 2, figsize=(9.4, 4.7), constrained_layout=True)

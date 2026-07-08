@@ -5,11 +5,13 @@ V prejšnjih poglavjih smo definirali podatke, ciljne oznake, časovna okna,
 grafovsko predstavitev in primerjane modele.
 V tem poglavju določimo, kako te komponente ovrednotimo v skupni eksperimentalni
 primerjavi.
-Glavna evalvacijska naloga je binarna klasifikacija nizke proti visoki valenci.
+Glavna evalvacijska naloga je binarna klasifikacija neprijetne proti prijetni valenci.
 Primerjava je zasnovana kot kombinacija modelov iz poglavja~\ref{sec:modeli} in
 množic signalov iz razdelka~\ref{subsec:vhodni-signali}.
 Vsi modeli uporabljajo iste 10-sekundne učne vzorce in iste delitve na učno,
 validacijsko in testno množico.
+Koda za predobdelavo, konstrukcijo grafov, učenje modelov, evalvacijo in generiranje rezultatov je javno dostopna v repozitoriju projekta~\cite{bozak2026gfmrepo}.
+Podatkovna zbirka \MAHNOB{} v repozitorij ni vključena, ker ni del tega dela in je ne smemo distribuirati.
 
 \section{Zasnova glavne primerjave}
 \label{subsec:zasnova-glavne-primerjave}
@@ -17,7 +19,7 @@ validacijsko in testno množico.
 Cilj glavne primerjave je odgovoriti na raziskovalno vprašanje~\ref{rv:glavno}: \rvGlavnoBesedilo
 Zato v primerjavi spreminjamo le način predstavitve okna in model, ki to predstavitev uporabi.
 
-Ciljna oznaka je binarni razred valence, pri kateri model ločuje med nizko in visoko valenco.
+Ciljna oznaka je binarni razred valence, pri kateri model ločuje med neprijetno in prijetno valenco.
 Vse štiri množice iz tabele~\ref{tab:grafovska-konstrukcija-po-mnozicah} obravnavamo kot enakovreden del primerjave, saj nas zanima tudi, kako se klasifikacijska uspešnost spreminja z razpoložljivostjo različnih signalov sledilnika pogleda.
 
 V primerjavi nastopajo vsi modeli iz tabele~\ref{tab:pregled-primerjanih-modelov}: izhodiščna klasifikatorja, klasični modeli nad agregiranimi značilkami, zamrznjeni prednaučeni predstavitveni modeli in grafovski modeli.

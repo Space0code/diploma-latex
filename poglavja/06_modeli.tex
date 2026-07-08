@@ -126,7 +126,7 @@ Ker napovedujemo oznako celotnega okna, predstavitve vozlišč združimo v preds
 Uporabimo $\mathbf{h}_G = \sum_{v \in V} \alpha_v \mathbf{h}_v$, kjer je $\mathbf{h}_G$ predstavitev grafa, $\alpha_v$ utež pozornosti za vozlišče $v$, $\mathbf{h}_v$ pa predstavitev vozlišča $v$.
 Uteži pozornosti izračunamo s softmax normalizacijo: $\alpha_v = \exp(g(\mathbf{h}_v)) / \sum_{u \in V} \exp(g(\mathbf{h}_u))$, kjer je $g$ naučena funkcija, ki predstavitvi vozlišča priredi skalarno oceno pomembnosti.
 } izračunamo predstavitev celotnega grafa, to pa pošljemo skozi klasifikacijsko glavo \ModelName{MLP}.
-Glava izračuna dva logita, enega za nizko in enega za visoko valenco.
+Glava izračuna dva logita, enega za neprijetno in enega za prijetno valenco.
 Napoved je razred z večjim logitom.
 Pri poročanju verjetnosti logite normaliziramo s softmaxom.
 Podrobnosti o številu plasti, velikosti skritih predstavitev, verjetnosti izpuščanja in ostalih hiperparametrih so opisane v dodatku~\ref{app:hiperparametri}.
@@ -144,10 +144,10 @@ Vse povezave združi v en homogen graf, posredovanje sporočil pa izvede z obič
 Model ne uporablja značilk povezav in posledično naučenih uteži povezav.
 
 Tehnično lahko model zapišemo kot:
-\begin{equation} % TODO: razmisli, ali boš to in podobne pustil kot equation ali boš dal slike diagramov. bolje bi bilo diagram, ker z diagramom lažje prikažeš že samo razliko med tem in naslednjim modelom. in imaš potem majhen diagram v vsaki subsekciji in obkrožiš razlike pri vsaki nadgradnji
+\begin{equation}
     X
     \rightarrow
-    MLP_{preprocess}
+        MLP_{\text{vhod}}
     \rightarrow
     f_{\GCN}
     \rightarrow
@@ -155,7 +155,7 @@ Tehnično lahko model zapišemo kot:
     \rightarrow
     f_{\text{head}},
 \end{equation}
-kjer je $X$ matrika značilk vozlišč, $MLP_{preprocess}$ predprocesirni dvoslojni perceptron, $f_{\GCN}$ zaporedje grafovskih konvolucijskih plasti, korak $READOUT$ združi predstavitve vozlišč v predstavitev celotnega grafa, $f_{\text{head}}$ pa iz te predstavitve izračuna napoved razreda.
+kjer je $X$ matrika značilk vozlišč, $MLP_{\text{vhod}}$ vhodni dvoslojni perceptron, $f_{\GCN}$ zaporedje grafovskih konvolucijskih plasti, korak $READOUT$ združi predstavitve vozlišč v predstavitev celotnega grafa, $f_{\text{head}}$ pa iz te predstavitve izračuna napoved razreda.
 \END_NOTE{Zamenjaj to enačbo z diagramom, ko ga imaš. Z diagramom lažje prikažeš že samo razliko med tem in naslednjim modelom in imaš potem majhen diagram v vsaki subsekciji in obkrožiš razlike pri vsaki nadgradnji}
 
 \subsection{\ModelName{HeteroGCN-mean}}
@@ -165,8 +165,7 @@ kjer je $X$ matrika značilk vozlišč, $MLP_{preprocess}$ predprocesirni dvoslo
 Kot opisano v~\ref{sec:grafovska-predstavitev} tukaj ločimo različne tipe relacij.
 Relacijske predstavitve vozlišč združimo v skupno predstavitev vozlišča s preprostim povprečenjem.
 Namen te stopnje je izolirati vpliv ločevanja relacij.
-Diagram~\ref{fig:diagram-heterogcn-mean} prikazuje, kje se zgodi sprememba.
-
+Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mean} je torej sprememba glede na homogeni \ModelName{GCN} je zato samo v tem, da se sporočila najprej izračunajo ločeno po relacijah, nato pa združijo s povprečenjem.
 \TODO{ko bom naredil diagram, ga dodam tu}
 
 \subsection{\ModelName{HeteroGCN-MLP}}
@@ -175,8 +174,7 @@ Diagram~\ref{fig:diagram-heterogcn-mean} prikazuje, kje se zgodi sprememba.
 \ModelName{HeteroGCN-MLP} dobimo tako, da \ModelName{HeteroGCN-mean} nadgradimo z naučeno fuzijo relacijskih predstavitev.
 Različne predstavitve vozlišč -- tiste, ki so v danem modelu na voljo izmed časovne naprej, časovne nazaj, prostorske ter fiksacijske -- najprej konkateniramo, nato pa jih z dvoslojnim perceptronom združimo v skupno predstavitev vozlišča.
 S tem dopuščamo, da model sam določi, kateri deli katere relacije so pomembnejši za končno predstavitev.
-Diagram~\ref{fig:diagram-heterogcn-mlp} prikazuje, kje se zgodi sprememba.
-
+Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mlp} je torej sprememba  glede na \ModelName{HeteroGCN-mean} je torej v zamenjavi ročno določene fuzije z naučeno fuzijo relacijskih predstavitev.
 \TODO{ko bom naredil diagram, ga dodam tu}
 
 \subsection{\ModelName{HeteroGCN-MLP-w}}
@@ -189,6 +187,7 @@ Pri posamezni množici signalov se uporabijo le funkcije za relacije, ki so v gr
 Časovne povezave naprej in nazaj si delijo isto funkcijo $f_w^{\text{čas}}$, smer povezave pa je podana kot dodatna značilka povezave $\rho_{ij}$.
 Formule za izračun in normalizacijo uteži so podane v dodatku~\ref{app:naucene-utezi-povezav}.
 Namen te \emph{končne} stopnje je preveriti, ali modelu koristi razlikovati moč in predznak prispevka posameznih povezav znotraj relacije.
+\TODO{ko bom naredil diagram, ga dodam tu}
 
 \subsection{Izbira grafovske konvolucije}
 \label{subsec:izbira-grafovske-konvolucije}
@@ -206,5 +205,5 @@ Podrobnosti primerjave so podane v dodatku~\ref{app:izbira-grafovske-konvolucije
 
 V delu primerjamo štiri družine modelov različnih kompleksnosti in različnih arhitektur: izhodiščna klasifikatorja, klasične modele strojnega učenja, zamrznjena prednaučena kodirnika in grafovske modele.
 Vhodne predstavitve za te modele posledično razdelimo na tri vrste: agregirane tabelarične značilke, neagregirane časovne vrste signalov in grafovske predstavitve podatkov sledilnika pogleda.
-Grafovska lestvica štirih GNN preverja, kaj prispevajo sama grafovska struktura, ločena obravnava relacij, naučena fuzija relacijskih predstavitev in uteženost povezav.
+Grafovska lestvica štirih arhitektur preverja, kaj prispevajo sama grafovska struktura, ločena obravnava relacij, naučena fuzija relacijskih predstavitev in uteženost povezav.
 V naslednjem poglavju opišemo evalvacijski protokol za primerjavo opisanih modelov na štirih množicah signalov.

@@ -171,6 +171,12 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-08 Za razdelek o fiksacijskih povezavah v poglavju 5 je dodana slika
+  `slike/konstrukcija_grafa/razsirjene_fiksacijske_povezave_F21_kf3_L2_v0.pdf`,
+  generirana s skriptom
+  `GFM-for-eyetracker/scripts/create_thesis_fixation_dilated_edges_figure.py`.
+  Uporablja $F=21$ kot zaokroženo povprečno velikost fiksacijske skupine iz
+  analize fiksacijskih povezav, $k_f=3$, $L=2$ in izbrano vozlišče $v=0$.
 - 2026-06-22 Tomi je zaklenil strukturo končnega eksperimentalnega protokola za
   poglavje 7: glavna naloga je binarna klasifikacija valence, 3-razredne naloge
   in vzburjenost se ne poročajo kot glavni eksperimenti, temveč se po potrebi

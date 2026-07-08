@@ -6,7 +6,7 @@
 
 Preslikava čustvenih oznak v razrede valence sledi tabeli~6 izvirnega članka podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
 Pri binarni nalogi uporabimo samo skrajna razreda valence, nevtralni razred pa izločimo.
-Tako model ločuje med nizko in visoko valenco, primeri z vmesno oziroma nevtralno oznako pa niso del glavne evalvacijske naloge.
+Tako model ločuje med neprijetno in prijetno valenco, primeri z vmesno oziroma nevtralno oznako pa niso del glavne evalvacijske naloge.
 
 \input{tabele/rezultati/preslikava_valence.tex}
 
@@ -95,7 +95,7 @@ To ne pomeni, da so oznake valence brez šuma, vendar je za glavno primerjavo mo
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.92\textwidth]{ujemanje_oznak_s_samoocenami.pdf}
-    \caption{Ujemanje razredov valence in vzburjenosti, izpeljanih iz preslikave v tabeli~\ref{tab:label-mapping}, z razredi iz številskih samoocen. Vrednosti so deleži znotraj izpeljanega razreda.}
+    \caption[Ujemanje izpeljanih razredov s številskimi samoocenami.]{Ujemanje razredov valence in vzburjenosti, izpeljanih iz preslikave v tabeli~\ref{tab:label-mapping}, z razredi iz številskih samoocen. Vrednosti so deleži znotraj izpeljanega razreda.}
     \label{fig:ujemanje-oznak-s-samoocenami}
 \end{figure}
 
@@ -110,7 +110,7 @@ Izbiro operatorja \texttt{GCNConv} smo preverili z dodatnim poskusom na binarni 
 V naših poskusih so bile razlike majhne.
 Pri osnovnem \ModelName{GCN} je najvišjo vrednost dosegel \texttt{GINConv}, pri \ModelName{HeteroGCN-MLP-w} pa \texttt{GraphConv}, vendar razlika ni bila dovolj velika, da bi spreminjala glavno eksperimentalno zgodbo.
 Zato smo v glavnih poskusih ohranili enoten in enostaven operator \texttt{GCNConv}.
-Ta primerjava ni ločeno iskanje najboljšega GNN, temveč preverjanje, da izbira osnovnega operatorja ne določa glavnega sklepa naloge.
+Ta primerjava ni ločeno iskanje najboljše grafovske arhitekture, temveč preverjanje, da izbira osnovnega operatorja ne določa glavnega sklepa naloge.
 
 \input{tabele/rezultati/izbira_grafovske_konvolucije.tex}
 
@@ -118,7 +118,7 @@ Ta primerjava ni ločeno iskanje najboljšega GNN, temveč preverjanje, da izbir
 \label{app:diagnostika-prekomerno-glajenje}
 
 Diagnostika ne kaže jasnega kolapsa predstavitev pri glavnih grafovskih modelih.
-Množica samo zenici ima bolj neodločne napovedi, vendar tega ne obravnavamo kot sistemski kolaps GNN.
+Množica samo zenici ima bolj neodločne napovedi, vendar tega ne obravnavamo kot sistemski kolaps grafovskih modelov.
 Entropija in razpon logitov opisujeta gotovost napovedi, varianca predstavitev in kosinusna podobnost pa razpršenost naučenih predstavitev grafov.
 Pri množici \emph{samo zenici} sta razpon logitov in varianca predstavitev manjša, entropija pa večja, kar je skladno z manj odločnimi napovedmi.
 Pri množicah s koordinatami pogleda so logiti izrazitejši in predstavitve bolj razpršene.

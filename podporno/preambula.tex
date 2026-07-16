@@ -17,6 +17,7 @@
 \usepackage{float}
 \usepackage{subcaption}
 \usepackage{tabularx}
+\usepackage{makecell}
 \usepackage{enumitem}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning}
@@ -119,6 +120,7 @@
 \newcommand{\GazeMAE}{GazeMAE}
 \newcommand{\LOSO}{LOSO}
 \newcommand{\LORO}{LORO}
+\DeclareRobustCommand{\ModelName}[1]{\texorpdfstring{\texttt{#1}}{#1}}
 
 \newcommand{\TODO}[1]{%
     \par\noindent

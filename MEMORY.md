@@ -62,6 +62,8 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Za `overfitting` uporabljaj "prekomerno prileganje", ne "preprileganje".
 - Za `arousal` dosledno uporabljaj "vzburjenost", ne "vzburjenje". Samo pri prvi
   omembi v diplomi dodaj angleški izraz v oklepaju: `vzburjenost (ang. arousal)`.
+- Za `confusion matrix` dosledno uporabljaj "matrika zamenjav" oziroma v množini
+  "matrike zamenjav", ne "matrika zmede" ali "matrike zmede".
 - Za primerjave razpoložljivih signalov sledilnika pogleda uporabljaj izraz
   `množica signalov` oziroma `podmnožica signalov`, ne `nabor signalov`. Imena
   glavnih množic so zaenkrat: `samo pogled`, `samo zenici`, `pogled in zenici` in
@@ -90,6 +92,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   konteksta, ga ne posplošuj na slepo, ampak Tomija eksplicitno vprašaj. Konkretna
   potrjena preferenca: razpone tipa `1-2` piši z enim vezajem, ne kot `1--2`,
   razen če Tomi za določen kontekst naroči drugače.
+- Tomijevih ročnih popravkov po svojem prejšnjem predlogu ne spreminjaj nazaj,
+  razen če gre za očitno LaTeX napako ali factualno napako, ki jo lahko
+  nedvoumno preveriš. Če se zdi popravek vsebinsko dvoumen, najprej vprašaj.
 - Pri pisanju in pregledovanju poglavij ne ponavljaj istih idej, definicij in
   razlag iz prejšnjih poglavij. Kadar je dodatna razlaga že podana drugje, uporabi
   kratek sklic na ustrezno poglavje, razdelek, tabelo ali sliko, novo besedilo pa
@@ -98,6 +103,11 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   ene povedi čez več vrstic samo zaradi širine urejevalnika. Ročno vrstično
   oblikovanje naj sledi stavkom oziroma logičnim enotam, ker Tomi tako lažje
   pregleduje in ureja besedilo.
+- Konkretna imena modelov v besedilu, tabelah in naslovih razdelkov piši z
+  makrom `\ModelName{...}`. To velja za dejanske modelne oznake, kot so
+  `\ModelName{SVM}`, `\ModelName{LightGBM}`, `\ModelName{GCN}` in
+  `\ModelName{HeteroGCN-MLP-w}`, ne pa za opisna poimenovanja, kot so
+  `končni model`, `osnovni grafovski model` ali `predlagani GNN`.
 
 ## Vizualna identiteta diplome
 
@@ -109,9 +119,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   v LaTeX komentarju zapiši izvorne podatke in skript, ki sliko generira.
 - Slike rezultatov naj slogovno sledijo slikam, ki jih generira glavni
   eksperimentalni runner oziroma njegov postprocesirni skript. Posebej za
-  toplotne karte in matrike zmede uporabljaj isti `seaborn.heatmap` slog,
+  toplotne karte in matrike zamenjav uporabljaj isti `seaborn.heatmap` slog,
   barvno shemo `Blues`, bele mrežne črte oziroma runnerjeve nastavitve, format
-  deležev med $0$ in $1$ ter vrstično normalizacijo matrik zmede. Izjema sta
+  deležev med $0$ in $1$ ter vrstično normalizacijo matrik zamenjav. Izjema sta
   trenutni sliki porazdelitve razredov za poglavji 4 in 8, ki sta Tomiju všeč in
   ostaneta v posebej pripravljenem diploma slogu.
 - Za vse diagrame, TikZ slike, SVG slike, grafe, sheme cevovodov in druge
@@ -161,6 +171,12 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-08 Za razdelek o fiksacijskih povezavah v poglavju 5 je dodana slika
+  `slike/konstrukcija_grafa/razsirjene_fiksacijske_povezave_F21_kf3_L2_v0.pdf`,
+  generirana s skriptom
+  `GFM-for-eyetracker/scripts/create_thesis_fixation_dilated_edges_figure.py`.
+  Uporablja $F=21$ kot zaokroženo povprečno velikost fiksacijske skupine iz
+  analize fiksacijskih povezav, $k_f=3$, $L=2$ in izbrano vozlišče $v=0$.
 - 2026-06-22 Tomi je zaklenil strukturo končnega eksperimentalnega protokola za
   poglavje 7: glavna naloga je binarna klasifikacija valence, 3-razredne naloge
   in vzburjenost se ne poročajo kot glavni eksperimenti, temveč se po potrebi
@@ -242,6 +258,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - GazeMAE/MOMENT v diplomi obravnavaj previdno kot `zamrznjene prednaučene
   predstavitvene modele`, ne kot polno primerjavo z vsemi temeljnimi modeli ali
   kot reprodukcijo njihovega predtreniranja.
+- V tabeli računske zahtevnosti naj ima vrstica `GazeMAE/MOMENT` v stolpcu
+  `Vhod` vrednost `signal`, ker kodirnika kot vhod prejmeta signal, čeprav
+  klasifikacijska glava nato uporablja njune predstavitve.
 - V naslovu, povzetku in motivacijskem kontekstu lahko ostane izraz `prepoznava
   čustev`, v glavnem tehničnem besedilu pa raje uporabljaj `klasifikacija
   čustvenih oznak`, ker modeli napovedujejo eksperimentalno izpeljane oznake.
@@ -314,8 +333,8 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Uredniški plan vizualizacij: glavno besedilo naj ima omejeno število močnih
   slik, približno eno sliko porazdelitve podatkov, eno osrednjo sliko grafovske
   predstavitve, eno do dve sliki glavnih rezultatov, eno sliko napak oziroma
-  matrik zmede, eno ablacijsko sliko in po potrebi eno diagnostično sliko.
-  Podrobne porazdelitve, dodatne metrike, per-fold grafe, dodatne matrike zmede,
+  matrik zamenjav, eno ablacijsko sliko in po potrebi eno diagnostično sliko.
+  Podrobne porazdelitve, dodatne metrike, per-fold grafe, dodatne matrike zamenjav,
   ločene relacijske vizualizacije grafov in sekundarne diagnostike sodijo v
   dodatke. UMAP je kandidatna kvalitativna slika: v glavno besedilo gre samo, če
   je berljiva, stabilna in interpretativno koristna; sicer gre v dodatek ali se

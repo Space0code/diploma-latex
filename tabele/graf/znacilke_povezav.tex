@@ -1,0 +1,21 @@
+\begin{table}[H]
+    \centering
+    \caption{Značilke povezav v grafovski predstavitvi.}
+    \label{tab:znacilke-povezav}
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.18\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.30\textwidth}@{}}
+        \toprule
+        \textbf{Značilka} & \textbf{Opis} & \textbf{Uporaba} \\
+        \midrule
+        $t_i$ & Normaliziran čas izvorne meritve znotraj časovnega okna. & Vse povezave. \\
+        $t_j$ & Normaliziran čas ciljne meritve znotraj časovnega okna. & Vse povezave. \\
+        $\Delta t$ & Časovna razlika med ciljno in izvorno meritvijo, $\Delta t = t_j - t_i$. & Vse povezave. \\
+        $\rho_{ij}$ & Smer časovne povezave; pri povezavi naprej je $\rho_{ij}=1$, pri povezavi nazaj pa $\rho_{ij}=-1$. & Samo časovne povezave. \\
+        $\Delta x$ & Razlika v vodoravni koordinati pogleda, $\Delta x = x_j - x_i$. & Grafi s koordinatami pogleda. \\
+        $\Delta y$ & Razlika v navpični koordinati pogleda, $\Delta y = y_j - y_i$. & Grafi s koordinatami pogleda. \\
+        $d_{ij}^{\text{zaslon}}$ & Evklidska razdalja med položajema pogleda na zaslonu. & Grafi s koordinatami pogleda. \\
+        $\Delta p^{(l)}_{ij}$ & Razlika v velikosti leve zenice, $\Delta p^{(l)}_{ij} = p_j^{(l)} - p_i^{(l)}$. & Grafi z velikostmi zenic. \\
+        $\Delta p^{(r)}_{ij}$ & Razlika v velikosti desne zenice, $\Delta p^{(r)}_{ij} = p_j^{(r)} - p_i^{(r)}$. & Grafi z velikostmi zenic. \\
+        $\Delta d_{ij}$ & Razlika v oddaljenosti od sledilnika pogleda, $\Delta d_{ij} = d_j - d_i$. & Samo \emph{vsi signali}. \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

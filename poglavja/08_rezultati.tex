@@ -1,140 +1,60 @@
 \chapter{Rezultati}
 \label{sec:rezultati}
 
-\TODO{
-\begin{itemize}
-    \item To poglavje je začrtano okoli glavnega eksperimenta: binarna klasifikacija valence z $7$-kratnim prečnim preverjanjem po subjektih.
-    \item Vir rezultatov je retenirani tek \texttt{RETAIN\_2026-06-12\_16-29-08}.
-    \item V besedilu na začetku na kratko zapiši, da ime artefakta še vsebuje staro oznako \texttt{3class}, vendar metapodatki razredov potrjujejo binarno nalogo z razredoma nizka in visoka valenca.
-    \item Povej, da so v glavnem besedilu prikazani samo ključni rezultati, razširjene metrike pa so v dodatku~\ref{app:razsirjeni-rezultati-binarna-valenca}.
-\end{itemize}
-}
+V tem poglavju predstavimo rezultate, ki odgovarjajo na raziskovalna vprašanja te naloge.
+To so rezultati primerjave različnih modelov za binarno klasifikacijo valence pri 7-kratnem prečnem preverjanju po subjektih.
+Dodatne rezultate in razširjene metrike poročamo v dodatku~\ref{app:dodatni-rezultati}.
+
+
 % Polna pot vira: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08.
 % Slike rezultatov v tem poglavju so reproducibilno generirane z:
 % diploma-latex/skripte/generiraj_slike_rezultatov.py.
 
-\section{Porazdelitev razredov in zanesljivost oznak}
-\label{subsec:rezultati-porazdelitev-razredov}
-
-\TODO{
-\begin{itemize}
-    \item Opiši, da so po odstranitvi nevtralnega razreda razredi nizka/visoka valenca skoraj uravnoteženi pri vseh štirih množicah signalov.
-    \item Uporabi številke iz tabele \texttt{label\_distribution\_aggregate.csv}: delež nizke valence je približno $52~\%$, delež visoke valence pa približno $48~\%$.
-    \item Poveži večinski klasifikator s porazdelitvijo razredov: visoka točnost večinskega modela ne pomeni dobrega razločevanja, kar pokaže nizek makro F1.
-    \item Kratko utemelji, zakaj je binarna valenca glavna ciljna naloga: analiza ujemanja oznak s samoocenami pokaže samo $3{,}3~\%$ neujemanja za binarno valenco, medtem ko je neujemanje pri binarni vzburjenosti približno $29{,}7~\%$.
-\end{itemize}
-}
-
-% Vir slike: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/label_distribution_aggregate.csv.
-% Slika je generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.85\textwidth]{porazdelitev_razredov_delezi_retain_2026-06-12.png}
-    \caption{Porazdelitev razredov za glavni binarni eksperiment z valenco.}
-    \label{fig:rezultati-porazdelitev-razredov}
-\end{figure}
-
-\section{Glavna primerjava modelov}
+\section{Glavni rezultati klasifikacije}
 \label{subsec:rezultati-glavna-primerjava}
+ 
+Tabela~\ref{tab:rezultati-glavna-primerjava} prikazuje povprečno točnost in makro F1 pri 7-kratnem prečnem preverjanju po subjektih.
+Vse vrednosti so zapisane v odstotkih, štiri signalne množice pa so obravnavane kot enakovredne različice iste klasifikacijske naloge.
+Večinski klasifikator doseže točnost okoli $52~\%$, kar ustreza porazdelitvi razredov na sliki~\ref{fig:porazdelitev-valenca-stevila}, vendar ima zaradi napovedovanja samo enega razreda makro F1 okoli $34~\%$.
 
-\TODO{
-\begin{itemize}
-    \item Najprej razloži zapis v celicah: prva številka je točnost, druga je makro F1; obe sta v odstotkih.
-    \item Poudari, da tabela primerja isto ciljno nalogo za štiri enakovredne množice signalov: samo pogled, samo zenici, pogled in zenici ter vsi signali.
-    \item Zapiši glavno ugotovitev: najboljše rezultate dosežejo negrafovski modeli nad agregiranimi značilkami, grafovski modeli pa so večinoma pod najboljšima SVM in LightGBM.
-    \item Posebej omeni, da množica pogled in zenici doseže najvišji posamični rezultat, medtem ko dodajanje vseh signalov ne prinese izboljšanja.
-    \item Pri \GazeMAE{}/MOMENT pojasni, da je to enoten prikaz zamrznjenih predstavitvenih modelov: \GazeMAE{} pri pogledu, MOMENT pri zenicah in fuzija obeh pri kombiniranih signalih.
-\end{itemize}
-}
+Najvišjo točnost ($70{,}5~\%$) in makro F1 ($69{,}7~\%$) doseže \ModelName{SVM} pri signalni množici \emph{pogled in zenici}.
+\ModelName{LightGBM} doseže najboljši rezultat pri množicah \emph{samo pogled}, \emph{samo zenici} in \emph{vsi signali}.
+Med posameznimi signalnimi množicami je \emph{samo zenici} najšibkejša, vendar vsi naučeni modeli tudi pri tej množici presežejo naključni in večinski klasifikator.
+Dodajanje zeničnih signalov k pogledu prinese najvišji posamični rezultat, medtem ko množica \emph{vsi signali} v tej primerjavi ne preseže množice \emph{pogled in zenici}.
+
+Grafovski modeli so pri vseh signalnih množicah zanesljivo nad obema izhodiščnima klasifikatorjema, vendar ostanejo pod najboljšima modeloma \ModelName{SVM} in \ModelName{LightGBM}.
+Najboljši grafovski rezultat je odvisen od signalne množice~--~pri \emph{samo pogled} je najuspešnejši \ModelName{HeteroGCN-MLP}, pri \emph{samo zenici} osnovni \ModelName{GCN}, pri \emph{pogled in zenici} in \emph{vsi signali} pa \ModelName{HeteroGCN-MLP-w}.
+Rezultati torej ne kažejo monotonega izboljševanja z večanjem arhitekturne kompleksnosti grafovskih modelov.
+V nadaljevanju podrobnejše rezultate matrike zamenjav ter računsko zahtevnost modelov prikažemo na primeru, kjer modeli dosegajo najboljše rezultate, to je na množici \emph{pogled in zenici}.
+Dodatne matrike zamenjav za vse modele in vse množice signalov so prikazane v dodatku~\ref{app:matrike-zamenjav-vsi-modeli}.
+
 
 \input{tabele/rezultati/glavna_primerjava_modelov.tex}
 
-\TODO{
-\begin{itemize}
-    \item Spodnja slika prikazuje iste rezultate kot tabela~\ref{tab:rezultati-glavna-primerjava}, vendar v slogu grafov iz eksperimentalnega cevovoda: vrednosti so zapisane kot deleži med $0$ in $1$, barva celice pa sledi točnosti kot glavni metriki.
-    \item Po pisanju se odloči, ali v glavnem besedilu obdržiš tabelo, heatmap ali oboje. Če obdržiš oboje, naj besedilo jasno pove, da gre za alternativna prikaza istih rezultatov.
-\end{itemize}
-}
+Slika~\ref{fig:rezultati-matrike-zamenjav} prikazuje napake za signalno množico \emph{pogled in zenici}, pri kateri je dosežen najboljši skupni rezultat.
+Najuspešnejši model \ModelName{SVM} pravilno razvrsti $73{,}0~\%$ vzorcev neprijetne valence in $67{,}7~\%$ vzorcev prijetne valence, najuspešnejši grafovski model, \ModelName{HeteroGCN-MLP-w}, pa $64{,}8~\%$ oziroma $65{,}8~\%$.
 
-% Slika je generirana iz:
-% GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/thesis_signal_set_model_metrics.csv.
-% Konkretni skript: diploma-latex/skripte/generiraj_slike_rezultatov.py.
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{glavna_primerjava_modelov_heatmap.png}
-    \caption{Toplotni prikaz glavne primerjave modelov. V celicah sta zapisani točnost / makro F1 kot deleža, barva pa prikazuje točnost.}
-    \label{fig:rezultati-glavna-primerjava-heatmap}
-\end{figure}
-
-\section{Vpliv množice signalov}
-\label{subsec:rezultati-signalne-mnozice}
-
-\TODO{
-\begin{itemize}
-    \item Opiši razliko med štirimi signalnimi množicami in jih obravnavaj enakovredno.
-    \item Izpostavi, da je samo zenici šibkejša, vendar informativna signalna množica; ni pomožni ali nedokončan eksperiment.
-    \item Primerjaj samo pogled in pogled in zenici: dodajanje zeničnih signalov izboljša najboljši rezultat pri SVM, manj jasno pa pomaga grafovskim modelom.
-    \item Pojasni, da vsi signali ne pomenijo nujno boljšega rezultata, saj dodatni signali lahko dodajo šum ali povečajo težavnost modeliranja.
-    \item Pri interpretaciji ne sklepaj, da so zenice ali razdalja nepomembne na splošno; sklep velja za uporabljeno predstavitev, podatkovno zbirko in protokol.
-\end{itemize}
-}
-
-\section{Matrike zmede}
-\label{subsec:rezultati-matrike-zmede}
-
-\TODO{
-\begin{itemize}
-    \item Matrike zmede so prikazane samo za množico pogled in zenici, ker tam nastopi najboljši skupni rezultat.
-    \item Primerjaj najboljši splošni model SVM in najboljši grafovski model, tj. končni GNN.
-    \item Opiši, kateri razred je pogosteje zamenjan in ali model kaže izrazit zamik proti nizki ali visoki valenci.
-    \item Povej, da so prikazane samo vrstično normalizirane vrednosti; absolutne matrike zmede sodijo v dodatek, če jih bomo sploh vključili.
-\end{itemize}
-}
 
 % Matrike so generirane iz:
 % GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/confusion_matrices.csv.
 % Konkretni skript: diploma-latex/skripte/generiraj_slike_rezultatov.py.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{matrike_zmede_pogled_zenici_svm_heterogcn_mlp_w.png}
-    \caption{Vrstično normalizirani matriki zmede za najboljši model SVM in najboljši grafovski model HeteroGCN-MLP-w pri množici signalov pogled in zenici.}
-    \label{fig:rezultati-matrike-zmede}
+    \includegraphics[width=\textwidth]{matrike_zamenjav_pogled_zenici_svm_heterogcn_mlp_w.pdf}
+    \caption{Vrstično normalizirani matriki zamenjav za najboljši model \ModelName{SVM} in najboljši grafovski model \ModelName{HeteroGCN-MLP-w} pri množici signalov pogled in zenici.}
+    \label{fig:rezultati-matrike-zamenjav}
 \end{figure}
 
 \section{Velikost in računska zahtevnost modelov}
 \label{subsec:rezultati-racunska-zahtevnost}
 
-\TODO{
-\begin{itemize}
-    \item Tabela naj bo uporabljena za praktično interpretacijo rezultatov: ali bolj zapleteni modeli prinesejo dovolj boljše rezultate glede na svojo ceno.
-    \item Pojasni, da za SVM, LightGBM, večinski in naključni model število nevronskih parametrov ni smiselna primerjava, zato je označeno z \texttt{--}.
-    \item Pri \GazeMAE{}/MOMENT loči učljive parametre glave in vse parametre zamrznjenih kodirnikov.
-    \item Izpostavi, da so grafovski modeli računsko dražji na okno kot tabelarični modeli, čeprav v glavnih metrikah ne dosežejo najboljših rezultatov.
-\end{itemize}
-}
+Za odgovor na podvprašanje~\ref{pv:racunska-zahtevnost} smo poleg klasifikacijske uspešnosti primerjali tudi velikost modelov ter izmerjeni čas učenja in sklepanja.
+Tabela~\ref{tab:rezultati-racunska-zahtevnost} prikazuje te vrednosti za množico signalov \emph{pogled in zenici}, kjer je bil dosežen najboljši skupni rezultat.
+Stolpec \emph{Vhod} loči modele, ki uporabljajo agregirane značilke okna, zamrznjene predstavitve prednaučenih kodirnikov oziroma grafovsko predstavitev okna.
+
+Izhodiščna klasifikatorja ter modela \ModelName{SVM} in \ModelName{LightGBM} nimajo števila nevronskih parametrov, zato je pri njih ta vrednost označena z~\texttt{--}.
+Pri \ModelName{GazeMAE/MOMENT} stolpec učljivih parametrov zajema samo klasifikacijsko glavo, stolpec vseh parametrov pa tudi zamrznjena kodirnika.
+Grafovski modeli imajo bistveno manj parametrov kot zamrznjena prednaučena kodirnika, vendar je njihov izmerjeni čas učenja na okno za približno dva velikostna razreda večji kot pri negrafovskih modelih.
+Glede na razmerje med točnostjo in izmerjenim časom sta v tej primerjavi najugodnejša klasična modela \ModelName{SVM} in \ModelName{LightGBM}.
 
 \input{tabele/rezultati/racunska_zahtevnost_pogled_zenici.tex}
-
-\section{Dodatna preverjanja}
-\label{subsec:rezultati-dodatna-preverjanja}
-
-\TODO{
-\begin{itemize}
-    \item Kratko omeni dodatni poskus izbire grafovske konvolucije iz dodatka~\ref{app:izbira-grafovske-konvolucije}.
-    \item Povej samo bistvo: \texttt{GCNConv} ni bil absolutno najboljši operator v dodatnem poskusu, vendar je bil dovolj stabilen in poenostavi primerjavo arhitekturnih stopenj.
-    \item Ne razširjaj tega dela v novo glavno primerjavo modelov; podrobne številke naj ostanejo v dodatku.
-\end{itemize}
-}
-
-\section{Povzetek rezultatov}
-\label{subsec:rezultati-povzetek}
-
-\TODO{
-\begin{itemize}
-    \item V nekaj odstavkih povzemi odgovore na raziskovalno vprašanje.
-    \item Prvi odstavek: najboljši rezultati pripadajo negrafovskim modelom, predvsem SVM in LightGBM.
-    \item Drugi odstavek: grafovska predstavitev dosega rezultate nad naključnim in večinskim izhodiščem, vendar trenutna grafovska arhitektura ne izboljša klasifikacije glede na agregirane tabelarične značilke.
-    \item Tretji odstavek: signalna množica pogled in zenici je najboljša v tej evalvaciji, samo zenici pa ostane smiselna samostojna primerjava.
-    \item Zaključi previdno: rezultati ne zavračajo uporabnosti grafovskega modeliranja podatkov sledilnika pogleda, kažejo pa, da uporabljena grafovska arhitektura in konstrukcija povezav v tej nalogi nista presegli močnejših negrafovskih primerjav.
-\end{itemize}
-}

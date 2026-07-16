@@ -2,23 +2,26 @@
 % Micro-F1 je pri enooznacni klasifikaciji enak tocnosti, zato je prevzet iz istega stolpca.
 \begin{table}[H]
     \centering
-    \caption{Razširjeni rezultati za množico signalov samo pogled. Vrednosti so povprečje $\pm$ standardni odklon čez sedem gub, v odstotkih.}
+    \caption{Razširjeni rezultati za množico signalov samo pogled. Vrednosti so povprečje $\pm$ standardni odklon čez sedem testnih množic, v odstotkih.}
     \label{tab:dodatek-rezultati-dodatni-rezultati-samo-pogled}
-    \scriptsize
+    \footnotesize
     \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.21\textwidth} *{6}{>{\centering\arraybackslash}X}@{}}
         \toprule
-        Model & Točnost & Preciznost & Priklic & Makro F1 & Micro-F1 & AUC \\
+        \textbf{Model} & \textbf{Točnost} & \makecell{\textbf{Preciz-}\\\textbf{nost}} & \textbf{Priklic} & \textbf{Makro F1} & \textbf{Micro-F1} & \textbf{AUC} \\
         \midrule
         Naključni & $50,2 \pm 1,8$ & $50,2 \pm 1,7$ & $50,2 \pm 1,7$ & $50,1 \pm 1,6$ & $50,2 \pm 1,8$ & $50,2 \pm 1,7$ \\
         Večinski & $52,5 \pm 4,7$ & $26,2 \pm 2,4$ & $50,0 \pm 0,0$ & $34,4 \pm 1,9$ & $52,5 \pm 4,7$ & $50,0 \pm 0,0$ \\
-        SVM & $67,5 \pm 1,8$ & $67,5 \pm 1,7$ & $67,4 \pm 1,7$ & $67,2 \pm 1,7$ & $67,5 \pm 1,8$ & $72,6 \pm 2,5$ \\
-        LightGBM & $69,7 \pm 2,2$ & $69,6 \pm 2,5$ & $69,6 \pm 2,1$ & $69,4 \pm 2,3$ & $69,7 \pm 2,2$ & $76,6 \pm 2,0$ \\
-        MLP & $67,0 \pm 2,1$ & $67,0 \pm 2,0$ & $66,9 \pm 2,1$ & $66,7 \pm 2,3$ & $67,0 \pm 2,1$ & $72,6 \pm 2,7$ \\
-        GazeMAE/MOMENT & $65,7 \pm 3,2$ & $66,5 \pm 3,0$ & $65,8 \pm 2,8$ & $65,2 \pm 3,5$ & $65,7 \pm 3,2$ & $71,9 \pm 4,9$ \\
-        GCN & $64,4 \pm 4,8$ & $64,6 \pm 4,5$ & $64,6 \pm 4,7$ & $64,1 \pm 5,2$ & $64,4 \pm 4,8$ & $70,7 \pm 6,3$ \\
-        HeteroGCN-mean & $61,7 \pm 6,3$ & $60,1 \pm 9,9$ & $61,3 \pm 6,9$ & $59,2 \pm 11,2$ & $61,7 \pm 6,3$ & $64,7 \pm 11,2$ \\
-        HeteroGCN-MLP & $65,9 \pm 3,9$ & $66,1 \pm 3,8$ & $66,2 \pm 3,6$ & $65,8 \pm 4,0$ & $65,9 \pm 3,9$ & $72,2 \pm 4,7$ \\
-        HeteroGCN-MLP-w & $64,3 \pm 5,0$ & $64,8 \pm 4,8$ & $64,6 \pm 4,8$ & $64,0 \pm 5,2$ & $64,3 \pm 5,0$ & $70,3 \pm 5,8$ \\
+        \midrule
+        \ModelName{SVM} & $67,5 \pm 1,8$ & $67,5 \pm 1,7$ & $67,4 \pm 1,7$ & $67,2 \pm 1,7$ & $67,5 \pm 1,8$ & $72,6 \pm 2,5$ \\
+        \ModelName{LightGBM} & $69,7 \pm 2,2$ & $69,6 \pm 2,5$ & $69,6 \pm 2,1$ & $69,4 \pm 2,3$ & $69,7 \pm 2,2$ & $76,6 \pm 2,0$ \\
+        \ModelName{MLP} & $67,0 \pm 2,1$ & $67,0 \pm 2,0$ & $66,9 \pm 2,1$ & $66,7 \pm 2,3$ & $67,0 \pm 2,1$ & $72,6 \pm 2,7$ \\
+        \midrule
+        \ModelName{GazeMAE/MOMENT} & $65,7 \pm 3,2$ & $66,5 \pm 3,0$ & $65,8 \pm 2,8$ & $65,2 \pm 3,5$ & $65,7 \pm 3,2$ & $71,9 \pm 4,9$ \\
+        \midrule
+        \ModelName{GCN} & $64,4 \pm 4,8$ & $64,6 \pm 4,5$ & $64,6 \pm 4,7$ & $64,1 \pm 5,2$ & $64,4 \pm 4,8$ & $70,7 \pm 6,3$ \\
+        \ModelName{HeteroGCN-mean} & $61,7 \pm 6,3$ & $60,1 \pm 9,9$ & $61,3 \pm 6,9$ & $59,2 \pm 11,2$ & $61,7 \pm 6,3$ & $64,7 \pm 11,2$ \\
+        \ModelName{HeteroGCN-MLP} & $65,9 \pm 3,9$ & $66,1 \pm 3,8$ & $66,2 \pm 3,6$ & $65,8 \pm 4,0$ & $65,9 \pm 3,9$ & $72,2 \pm 4,7$ \\
+        \ModelName{HeteroGCN-MLP-w} & $64,3 \pm 5,0$ & $64,8 \pm 4,8$ & $64,6 \pm 4,8$ & $64,0 \pm 5,2$ & $64,3 \pm 5,0$ & $70,3 \pm 5,8$ \\
         \bottomrule
     \end{tabularx}
 \end{table}

@@ -1,0 +1,18 @@
+% Vir podatkov: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/training_diagnostics_summary.csv.
+\begin{table}[H]
+    \centering
+    \caption{Diagnostika naučenih predstavitev in izhodov najboljšega grafovskega modela po množicah signalov. Makro F1 in uravnotežena točnost opisujeta uspešnost klasifikacije, razpon logitov in entropija gotovost napovedi, varianca predstavitev razpršenost naučenih vektorjev, kos. pod. pa povprečno kosinusno podobnost med predstavitvami.}
+    \label{tab:diagnostika-prekomerno-glajenje}
+    \footnotesize
+    \setlength{\tabcolsep}{2pt}
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.13\textwidth} >{\raggedright\arraybackslash}p{0.16\textwidth} *{6}{>{\centering\arraybackslash}X}@{}}
+        \toprule
+        \textbf{Množica signalov} & \textbf{Najboljša GNN} & \makecell{\textbf{Makro}\\\textbf{F1}} & \makecell{\textbf{Urav.}\\\textbf{točnost}} & \makecell{\textbf{Razpon}\\\textbf{logitov}} & \makecell{\textbf{Entro-}\\\textbf{pija}} & \makecell{\textbf{Varianca}\\\textbf{predst.}} & \makecell{\textbf{Kos.}\\\textbf{pod.}} \\
+        \midrule
+        vsi signali & \makecell[l]{\ModelName{HeteroGCN-}\\\ModelName{MLP-w}} & $0{,}608$ & $0{,}623$ & $3{,}31$ & $0{,}545$ & $0{,}352$ & $0{,}409$ \\
+        samo pogled & \makecell[l]{\ModelName{HeteroGCN-}\\\ModelName{MLP}} & $0{,}658$ & $0{,}662$ & $3{,}93$ & $0{,}583$ & $0{,}291$ & $0{,}307$ \\
+        pogled in zenici & \makecell[l]{\ModelName{HeteroGCN-}\\\ModelName{MLP-w}} & $0{,}644$ & $0{,}652$ & $3{,}38$ & $0{,}582$ & $0{,}336$ & $0{,}360$ \\
+        samo zenici & \ModelName{GCN} & $0{,}584$ & $0{,}607$ & $1{,}40$ & $0{,}653$ & $0{,}258$ & $0{,}569$ \\
+        \bottomrule
+    \end{tabularx}
+\end{table}

@@ -146,7 +146,7 @@ Slika~\ref{fig:diagram-gcn} prikazuje osnovni cevovod tega modela.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.82\textwidth]{\detokenize{GCN final.png}}
+    \includegraphics[width=\textwidth]{\detokenize{GCN final.png}}
     \caption[Diagram arhitekture \ModelName{GCN}.]{Diagram arhitekture \ModelName{GCN}. Model vse povezave obravnava kot en homogen graf, zato se sporočila posredujejo prek ene skupne grafovske konvolucije.}
     \label{fig:diagram-gcn}
 \end{figure}
@@ -177,7 +177,7 @@ Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mlp}, je sprememba glede na 
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.82\textwidth]{\detokenize{HeteroGCN-MLP final.png}}
+    \includegraphics[width=\textwidth]{\detokenize{HeteroGCN-MLP final.png}}
     \caption[Diagram arhitekture \ModelName{HeteroGCN-MLP}.]{Diagram arhitekture \ModelName{HeteroGCN-MLP}. Model relacijske predstavitve najprej konkatenira, nato pa jih združi z naučeno fuzijo prek dvoslojnega perceptrona.}
     \label{fig:diagram-heterogcn-mlp}
 \end{figure}
@@ -194,9 +194,9 @@ Formule za izračun in normalizacijo uteži so podane v dodatku~\ref{app:naucene
 Namen te \emph{končne} stopnje je preveriti, ali modelu koristi razlikovati moč in predznak prispevka posameznih povezav znotraj relacije.
 Slika~\ref{fig:diagram-heterogcn-mlp-w} prikazuje dodano vejo za izračun naučenih uteži povezav.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.82\textwidth]{\detokenize{HeteroGCN-MLP-w final.png}}
+    \includegraphics[width=\textwidth]{\detokenize{HeteroGCN-MLP-w final.png}}
     \caption[Diagram arhitekture \ModelName{HeteroGCN-MLP-w}.]{Diagram arhitekture \ModelName{HeteroGCN-MLP-w}. Model poleg naučene fuzije relacij uporablja še značilke povezav, iz katerih z relacijsko odvisnimi perceptroni izračuna naučene predznačene uteži povezav.}
     \label{fig:diagram-heterogcn-mlp-w}
 \end{figure}

@@ -191,7 +191,7 @@ Za vsako množico signalov iz razdelka~\ref{subsec:vhodni-signali} zgradimo graf
 Razlika med grafi je v značilkah vozlišč in relacijah, ki jih izbrana množica signalov omogoča.
 Množica \emph{vsi signali} je najbogatejša predstavitev. 
 Ostale množice uporabijo ustrezne podmnožice značilk in povezav.
-
+\newpage
 \input{tabele/graf/konstrukcija_po_mnozicah_signalov.tex}
 
 Slika~\ref{fig:konstrukcija-grafa-primer} prikazuje primer najbogatejše konstrukcije na majhnem izseku časovnega okna za množico \emph{vsi signali}.
@@ -199,7 +199,7 @@ Prikaz združi vozlišča, časovne, prostorske in fiksacijske povezave v isti g
 
 % Vir slike: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/model_runs/all_signals/2026-06-12_18-09-29/experiments/multiclass_table6_valence_3class_emotion-elicitation/snapshot.csv.
 % Slika je generirana s skriptom GFM-for-eyetracker/scripts/create_thesis_gnn_graph_examples.py.
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/vse_povezave.pdf}
     \caption[Primer grafovske konstrukcije za množico \emph{vsi signali}.]{Primer grafovske konstrukcije za množico \emph{vsi signali}. Vozlišča predstavljajo meritve v izseku časovnega okna, povezave pa prikazujejo časovne, prostorske in fiksacijske relacije. Ločeni prikazi posameznih relacij so zbrani v dodatku~\ref{app:grafi}.}
@@ -211,7 +211,7 @@ Prikaz združi vozlišča, časovne, prostorske in fiksacijske povezave v isti g
 \label{subsec:statistika-grafov}
 
 Tabela~\ref{tab:statistika-konstruiranih-grafov} prikazuje osnovne statistike grafov, ki nastanejo pri končni konfiguraciji konstrukcije.
-Vrednosti so izračunane za osrednjo eksperimentalno nalogo, tj. binarno klasifikacijo neprijetne in prijetne valence.
+Vrednosti so izračunane za osrednjo eksperimentalno nalogo, t.j. binarno klasifikacijo neprijetne in prijetne valence.
 Ker se posamezne množice signalov filtrirajo glede na razpoložljivost uporabljenih signalov, število konstruiranih grafov med stolpci ni povsem enako.
 
 \input{tabele/graf/statistika_konstruiranih_grafov.tex}

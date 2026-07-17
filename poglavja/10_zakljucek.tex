@@ -5,7 +5,7 @@ Podatki sledilnika pogleda vsebujejo časovne, prostorske in fiksacijske odnose 
 Grafovske nevronske mreže omogočajo eksplicitno modeliranje relacij med meritvami, zato so naraven kandidat za obravnavo takšnih podatkov.
 V nalogi smo preverili uporabnost grafovske predstavitve podatkov sledilnika pogleda pri klasifikaciji valence kot čustvene oznake.
 Časovna okna meritev smo predstavili kot časovno-prostorske grafe in jih ovrednotili s štirimi grafovskimi modeli, ki se postopno nadgrajujejo od preproste proti kompleksnejšim različicam.
-Grafovske modele smo primerjali še s tremi družinami modelov: izhodiščnima modeloma (naključni in večinski klasifikator), klasičnimi modeli strojnega učenja (\ModelName{SVM}, \ModelName{LightGBM}, \ModelName{MLP}) ter prednaučenima kodirnikoma signalov (\ModelName{GazeMAE}, \ModelName{MOMENT}).
+Grafovske modele smo primerjali s še tremi družinami modelov: izhodiščnima modeloma (naključni in večinski klasifikator), klasičnimi modeli strojnega učenja (\ModelName{SVM}, \ModelName{LightGBM}, \ModelName{MLP}) ter prednaučenima kodirnikoma signalov (\ModelName{GazeMAE}, \ModelName{MOMENT}).
 Izvedli smo primerjalno evalvacijo vseh modelov na štirih delno prekrivajočih se množicah signalov: \emph{samo pogled}, \emph{samo zenici}, \emph{pogled in zenici} ter \emph{vsi signali}.
 Osrednja ugotovitev naloge je, da so grafovski modeli primerni za kodiranje signalov sledilnika pogleda, vendar v uporabljeni eksperimentalni zasnovi ne presežejo uspešnosti klasičnih modelov strojnega učenja.
 

@@ -49,28 +49,28 @@ Pri množici \emph{samo zenici} so napake bolj uravnotežene z naključnim ugiba
 
 % Vir slik: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/confusion_matrices.csv.
 % Slike so generirane s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
-\begin{figure}[p]
+\begin{figure}
     \centering
     \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_samo_pogled.pdf}
     \caption{Matrike zamenjav za množico signalov samo pogled. Prikaz vključuje naključni in večinski model, klasične modele \ModelName{SVM}, \ModelName{LightGBM} in \ModelName{MLP}, zamrznjene predstavitve \ModelName{GazeMAE/MOMENT} ter štiri grafovske modele od osnovnega \ModelName{GCN} do \ModelName{HeteroGCN-MLP-w}.}
     \label{fig:matrike-zamenjav-dodatek-samo-pogled}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}
     \centering
     \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_samo_zenici.pdf}
     \caption{Matrike zamenjav za množico signalov samo zenici. Razporeditev modelov je enaka kot pri drugih množicah signalov: izhodiščna modela, trije klasični oziroma nevronski primerjalni modeli, zamrznjene predstavitve in štiri grafovske arhitekture.}
     \label{fig:matrike-zamenjav-dodatek-samo-zenici}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}
     \centering
     \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_pogled_zenici.pdf}
     \caption{Matrike zamenjav za množico signalov pogled in zenici. Ta množica doseže najboljši skupni rezultat v glavni primerjavi, zato prikaz omogoča neposredno primerjavo napak med najuspešnejšim \ModelName{SVM} in grafovskimi modeli.}
     \label{fig:matrike-zamenjav-dodatek-pogled-zenici}
 \end{figure}
 
-\begin{figure}[p]
+\begin{figure}
     \centering
     \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_vsi_signali.pdf}
     \caption{Matrike zamenjav za množico signalov vsi signali. Prikaz povzema napake modelov pri najbogatejši vhodni predstavitvi, ki poleg pogleda in zenic vključuje še oddaljenost od sledilnika pogleda ter fiksacijske informacije.}
@@ -92,7 +92,7 @@ To ne pomeni, da so oznake valence brez šuma, vendar je za glavno primerjavo mo
 % Vir slike: GFM-for-eyetracker/results/label_noise_analysis/2026-05-13_table6_self_report_alignment/table6_vs_rating_crosstab_long.csv.
 % Povzetek ujemanja: GFM-for-eyetracker/results/label_noise_analysis/2026-05-13_table6_self_report_alignment/label_noise_summary.csv.
 % Slika je generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.92\textwidth]{ujemanje_oznak_s_samoocenami.pdf}
     \caption[Ujemanje izpeljanih razredov s številskimi samoocenami.]{Ujemanje razredov valence in vzburjenosti, izpeljanih iz preslikave v tabeli~\ref{tab:label-mapping}, z razredi iz številskih samoocen. Vrednosti so deleži znotraj izpeljanega razreda.}

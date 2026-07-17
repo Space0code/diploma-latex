@@ -5,7 +5,7 @@ V tem poglavju predstavimo metodološke pojme, ki so potrebni za razumevanje gra
 
 \section{Grafi}
 \label{subsec:grafi}
-
+% TODO: potem, ko prestavljamo sekcijo drugam, oz. združujemo z drugimi sekcijami in poglavji, poskusi delati tako, da imaš vsaj malo smiselnega teksta med dvemi enumerated deli (sekcijo in podsekcijo). ni pa nujno. ne forsiraj.
 \subsection{Osnovna definicija grafa}
 
 Graf definiramo kot
@@ -31,7 +31,7 @@ Za neutežene povezave si lahko predstavljamo, da imajo utež $w_{ij}=1$.
 Če imajo povezave več uteži, jih zapišemo kot vektor $\mathbf{e}_{ij}$~\cite{gilmer2017mpnn}.
 
 \subsubsection{Homogeni in heterogeni grafi}
-
+% TODO: prej jih že omenjaš in šele tu opišeš. popravi vrstni red, ampak po pameti.
 Homogeni graf je graf, ki ne loči različnih vrst vozlišč in povezav.
 Heterogeni graf vsebuje vsaj dve različni vrsti vozlišč ali povezav.
 V tej nalogi uporabljamo heterogeno grafovsko predstavitev, saj ločimo več tipov povezav.
@@ -39,15 +39,11 @@ V tej nalogi uporabljamo heterogeno grafovsko predstavitev, saj ločimo več tip
 \section{Grafovske nevronske mreže}
 \label{subsec:gnn}
 
-Grafovske nevronske mreže so razred nevronskih mrež, namenjen učenju nad podatki, ki jih naravno predstavimo z grafom~\cite{gilmer2017mpnn,kipf2017gcn,velickovic2018gat}.
+Grafovske nevronske mreže (GNN) so razred nevronskih mrež, namenjen učenju nad podatki, ki jih lahko predstavimo z grafom~\cite{gilmer2017mpnn,kipf2017gcn,velickovic2018gat}.
 Cilj GNN je naučiti se predstavitev vozlišč, povezav ali celotnega grafa tako, da model pri izračunu predstavitve posameznega vozlišča upošteva tudi njegovo lokalno okolico.
-
-\subsection{Posredovanje sporočil}
 
 Osnovna ideja GNN je \emph{posredovanje sporočil}~\cite{gilmer2017mpnn}.
 Vsako vozlišče v posamezni plasti prejme informacije od svojih sosedov, jih agregira in na podlagi zbranih informacij posodobi svojo predstavitev.
-
-\subsubsection{Splošna oblika plasti}
 
 Splošno plast posredovanja sporočil lahko zapišemo kot
 \begin{equation}
@@ -65,8 +61,11 @@ Splošno plast posredovanja sporočil lahko zapišemo kot
     \right),
 \end{equation}
 kjer je $\mathcal{N}(v)$ množica sosedov vozlišča $v$, $\psi^{(k)}$ funkcija sporočila, $\oplus$ agregacijska funkcija, $\phi^{(k)}$ funkcija posodobitve, $\mathbf{h}_v^{(k)}$ pa predstavitev vozlišča $v$ v plasti $k$.
-
-\subsubsection{Posredovanje sporočil v heterogenih grafih}
+Funkcija $\psi^{(k)}$ je lahko linearna preslikava ali večslojni perceptron nad predstavitvama vozlišč in značilkami povezave, $\phi^{(k)}$ pa preprosta vsota prejšnje predstavitve vozlišča in agregiranega sporočila, večslojni perceptron ali rekurentna enota.
+Isti funkciji $\psi^{(k)}$ in $\phi^{(k)}$ uporabimo pri vseh vozliščih, zato je plast ob invariantni agregaciji ekvivariantna na permutacijo vozlišč, kar pomeni, da preureditev vozlišč le enako preuredi njihove izhodne predstavitve.
+Agregacijska funkcija $\oplus$ mora biti invariantna na vrstni red sosedov.
+To lastnost imajo na primer vsota, povprečje in maksimum, zato lahko ista GNN plast deluje na grafih različnih velikosti.
+Pri časovnih vrstah je ureditev meritev sicer naravno določena s časom, vendar jo mora model zajeti eksplicitno, na primer s časovnimi povezavami ali časovnimi značilkami, saj se z grafovsko predstavitvijo sicer izgubi.
 
 Pri heterogenem grafu, kjer povezave razdelimo po tipih oziroma relacijah $r \in \mathcal{R}$, namesto ene same množice sosedov obravnavamo množice $\mathcal{N}_r(v)$, ki vsebujejo sosede vozlišča $v$ po relaciji $r$.
 Sporočila se najprej agregirajo ločeno znotraj posamezne relacije:
@@ -80,25 +79,20 @@ Sporočila se najprej agregirajo ločeno znotraj posamezne relacije:
     \right).
 \end{equation}
 Pri tem je $\psi_r^{(k)}$ funkcija sporočila za relacijo $r$, $\mathbf{m}_{v,r}^{(k)}$ pa agregirano sporočilo, ki ga vozlišče $v$ prejme po tej relaciji v plasti $k$.
+Za vsako relacijo lahko uporabimo ločeno linearno preslikavo ali večslojni perceptron $\psi_r^{(k)}$, agregacija znotraj posamezne relacije pa mora biti, tako kot prej, invariantna na vrstni red sosedov.
 Relacijska sporočila $\mathbf{m}_{v,r}^{(k)}$ se nato združijo v skupno sporočilo za vozlišče.
-Združevanje relacij je lahko preprosta vsota ali povprečje, lahko pa vključuje konkatenacijo oziroma naučeno fuzijo relacijskih predstavitev.
-
-\subsubsection{Agregacijska funkcija}
-
-Agregacijska funkcija mora biti praviloma invariantna na vrstni red sosedov, saj graf v splošnem nima naravne ureditve vozlišč.
-Zato se pogosto uporabljajo operacije, kot so vsota, povprečje ali maksimum.
-Ta lastnost omogoča, da ista GNN plast deluje na grafih različnih velikosti.
+Združevanje relacij je lahko vsota ali povprečje, lahko pa vključuje konkatenacijo oziroma naučeno fuzijo relacijskih predstavitev; pri zadnjih dveh mora biti vrstni red relacij vnaprej določen.
 
 \subsection{Klasifikacija na ravni grafa}
 \label{subsec:grafovska-klasifikacija}
 
-Če želimo napovedati oznako celotnega časovnega okna, lahko nalogo obravnavamo kot klasifikacijo grafa.
-Po več plasteh grafovske nevronske mreže dobimo končne predstavitve vozlišč $\mathbf{h}_v^{(K)}$, ki jih združimo v predstavitev celotnega grafa:
+Če želimo napovedati oznako celotnega grafa, lahko nalogo obravnavamo kot klasifikacijo na ravni grafa.
+Naj bo $L$ število plasti grafovske nevronske mreže. Na zadnji, $L$-ti plasti dobimo končne predstavitve vozlišč $\mathbf{h}_v^{(L)}$, ki jih združimo v predstavitev celotnega grafa:
 \begin{equation}
     \mathbf{h}_G =
     \text{READOUT}
     \left(
-        \{\mathbf{h}_v^{(K)} : v \in V\}
+        \{\mathbf{h}_v^{(L)} : v \in V\}
     \right).
 \end{equation}
 Funkcija $\text{READOUT}$ je agregacijska funkcija na ravni grafa.
@@ -112,10 +106,10 @@ Pri grafovskih nevronskih mrežah lahko več zaporednih agregacij povzroči, da 
 Ta pojav imenujemo prekomerno glajenje.
 V praksi se lahko pokaže kot zmanjšanje variance predstavitev, visoka medsebojna podobnost vozliščnih vektorjev in skoraj konstantni izhodi klasifikacijske glave.
 
-Zato med treniranjem in evalvacijo modelov spremljamo statistike predstavitev na različnih delih modela.
-Varianca predstavitev kaže, ali model še ohranja razlike med vozlišči in grafi.
+Zato smo med treniranjem in evalvacijo modelov spremljali statistike predstavitev na različnih delih modela.
+Varianca predstavitev nam pokaže, ali model še ohranja razlike med vozlišči in grafi.
 Kosinusna podobnost pokaže, ali predstavitve postajajo usmerjene v podobno smer.
-Razpon logitov pa pokaže, ali klasifikacijska glava proizvaja dovolj raznolike napovedi ali se približuje skoraj konstantnemu izhodu.
+Razpon logitov pa pokaže, ali klasifikacijska glava daje dovolj raznolike napovedi ali se približuje skoraj konstantnemu izhodu.
 
 \section{Podatki sledilnika pogleda}
 \label{subsec:eye-tracking}
@@ -124,20 +118,6 @@ Sledilnik pogleda je naprava, ki meri, kam v prostoru ali na zaslonu oseba usmer
 Poleg lokacije pogleda lahko meri tudi velikost zenic, ki jo običajno opišemo s premerom zenice.
 Signal pogleda navadno opišemo s koordinatama $x$ in $y$ na zaslonu.
 Iz dinamike teh dveh signalov nekateri sledilniki zaznavajo in poročajo tudi informacije o fiksacijah, sakadah in mežikih, ki nas v tej domeni pogosto zanimajo.
-Meritve se izvajajo zaporedno z določeno vzorčno frekvenco, ki je odvisna od zmogljivosti naprave in namena uporabe.
-Pogoste vzorčne frekvence raziskovalnih sledilnikov pogleda so 60~Hz, 100~Hz, 500~Hz in 1000~Hz~\cite{lim2020emotion,tarnowski2020eye}.
-
-\section{Čustvena stanja: valenca in vzburjenost}
-\label{subsec:valenca-vzburjenost}
-
-\subsection{Dimenzijski opis čustev}
-
-Čustvena stanja pogosto opisujemo z dimenzijama valence in vzburjenosti.
-Valenca opisuje prijetnost oziroma neprijetnost čustvenega odziva, vzburjenost pa stopnjo aktivacije odziva~\cite{soleymani2012mahnob}.
-
-\subsection{Binarna klasifikacija}
-
-V uporabljeni podatkovni zbirki \MAHNOB{} so po ogledu posnetkov na voljo številske samoocene valence in vzburjenosti ter udeleženčeve samoocene diskretnega čustvenega razreda, kot so žalost, jeza, strah in druge~\cite{soleymani2012mahnob}.
-V tej nalogi se omejimo na binarno klasifikacijo valence, pri čemer razrede določimo po vzoru izvirnega članka podatkovne zbirke \MAHNOB{}; natančen postopek priprave ciljnih oznak opišemo v poglavju~\ref{sec:podatki}.
-Vzburjenosti v glavni nalogi ne obravnavamo, ker se izpeljani razredi v uporabljenem podnaboru slabše ujemajo s samoocenami kot pri valenci.
-Podrobnejša razlaga tega neskladja je podana v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}.
+Fiksacija je obdobje razmeroma stabilnega pogleda na omejenem območju, sakada hiter premik pogleda med fiksacijama, mežik pa kratkotrajno zaprtje oči~\cite{lim2020emotion}.
+Meritve se izvajajo zaporedno z določeno frekvenco vzorčenja, ki je odvisna od zmogljivosti naprave in namena uporabe.
+Pogoste frekvence raziskovalnih sledilnikov pogleda so 60~Hz, 100~Hz, 500~Hz in 1000~Hz~\cite{lim2020emotion,tarnowski2020eye}.

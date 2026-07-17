@@ -14,7 +14,7 @@ Udeleženci P9, P12 in P15 so bili izključeni zaradi tehničnih težav oziroma 
 V tej nalogi po vzoru izvirnega članka izključimo iste tri udeležence.
 V eksperimentu vzbujanja čustev so udeleženci gledali 20 čustveno vzbujajočih videoposnetkov.
 Pred vsakim čustvenim posnetkom je bil prikazan še kratek nevtralni posnetek, odziv nanj pa je bil shranjen ločeno.
-Po ogledu posameznega posnetka so udeleženci podali samoocene čustvene oznake, vzburjenosti, valence, dominantnosti in predvidljivosti.
+Po ogledu posameznega posnetka so udeleženci podali številske samoocene valence, vzburjenosti, dominantnosti in predvidljivosti ter samooceno diskretne čustvene oznake.
 
 Čeprav je \MAHNOB{} večmodalna zbirka, v tej nalogi uporabljamo izključno signale sledilnika pogleda.
 Uporabljeni signali so podrobneje opisani v razdelku~\ref{subsec:vhodni-signali}.
@@ -59,6 +59,7 @@ Kot kaže prikaz ujemanja oznak v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}
 \subsection{Skupine signalov}
 
 Tukaj navedemo konkretne skupine signalov, ki jih uporabimo v eksperimentih.
+Indeks $i$ označuje posamezno meritev sledilnika pogleda.
 V uporabljeni podatkovni zbirki imamo na voljo pet osnovnih vrst signalov. To so:
 \begin{itemize}
     \item časovni žig meritve $t_i$,
@@ -83,15 +84,16 @@ Podatke pred uporabo očistimo.
 Najprej iz lokalne kopije zbirke \MAHNOB{} odstranimo podatke, ki jih v tej nalogi ne uporabljamo, in ohranimo le podatke eksperimenta vzbujanja čustev.
 Nato odstranimo vrstice brez signalov pogleda ali velikosti zenic.
 Na voljo imamo tudi signale veljavnosti, na podlagi katerih odstranimo meritve, za katere je sledilnik poročal, da je meritev za vsaj eno oko neveljavna.
-Dodatno uporabimo filter osamelcev \texttt{q01}-\texttt{q99}, s katerim odstranimo izrazite ekstreme, ki izkrivljajo porazdelitve signalov.
-Na koncu kratke vrzeli v numeričnih signalih interpoliramo, signala velikosti leve in desne zenice pa dodatno zgladimo s kratkim drsečim povprečjem.
+Dodatno uporabimo filter osamelcev \texttt{q01}-\texttt{q99}, ki odstrani meritve, pri katerih je vsaj eden od štirih osnovnih signalov pod prvim ali nad devetindevetdesetim percentilom, saj te vrednosti močno izkrivljajo porazdelitve signalov.
+Na koncu kratke vrzeli v numeričnih signalih linearno interpoliramo, signala velikosti leve in desne zenice pa dodatno zgladimo s kratkim centriranim drsečim povprečjem treh meritev.
 Porazdelitvi položajev pogleda in velikosti zenic po čiščenju sta za množico signalov \emph{pogled in zenici} prikazani na slikah~\ref{fig:porazdelitev-polozajev-pogleda} in~\ref{fig:porazdelitev-velikosti-zenic}.
+
 
 % Vir slik: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/model_runs/gaze_pupil/2026-06-12_17-31-09/experiments/multiclass_table6_valence_3class_emotion-elicitation/snapshot.csv.
 % Sliki sta generirani s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.86\textwidth]{porazdelitev_polozajev_pogleda_retain_2026-06-12.png}
+    \includegraphics[width=0.95\textwidth]{porazdelitev_polozajev_pogleda_retain_2026-06-12.png}
     \caption{Toplotni prikaz položajev pogleda v očiščenih podatkih za množico signalov pogled in zenici.}
     \label{fig:porazdelitev-polozajev-pogleda}
 \end{figure}
@@ -100,7 +102,7 @@ Porazdelitvi položajev pogleda in velikosti zenic po čiščenju sta za množic
 % Slika je generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.82\textwidth]{porazdelitev_velikosti_zenic_retain_2026-06-12.pdf}
+    \includegraphics[width=0.95\textwidth]{porazdelitev_velikosti_zenic_retain_2026-06-12.pdf}
     \caption{Porazdelitev velikosti leve in desne zenice v očiščenih podatkih za množico signalov pogled in zenici.}
     \label{fig:porazdelitev-velikosti-zenic}
 \end{figure}
@@ -109,9 +111,9 @@ Porazdelitvi položajev pogleda in velikosti zenic po čiščenju sta za množic
 \label{subsec:normalizacija}
 
 Posamezne skupine signalov so izražene v različnih velikostnih redih.
-Modeli strojnega učenja, kot so \ModelName{SVM}, \ModelName{MLP} ter GNN, so občutljivi na merilo značilk.
-Zato signale standardiziramo.
-Povprečje in standardni odklon izračunamo na učni podmnožici, nato pa na validacijski in testni podmnožici standardizacijo uporabimo z istimi parametri kot na učni.
+Modeli strojnega učenja, kot so \ModelName{SVM}, \ModelName{MLP} ter GNN, so občutljivi na velikostni red vhodnih značilk oz. signalov.
+Zato signale standardiziramo z znano formulo $\frac{x-\mu}{\sigma}$.
+Povprečje $\mu$ in standardni odklon $\sigma$ izračunamo na učni podmnožici, nato pa na validacijski in testni podmnožici standardizacijo uporabimo z istimi parametri kot na učni.
 Pri grafovskih modelih na enak način standardiziramo tudi značilke povezav, kadar jih uporabljena množica signalov vsebuje.
 
 \section{Segmentacija v časovna okna}
@@ -121,12 +123,12 @@ Pri grafovskih modelih na enak način standardiziramo tudi značilke povezav, ka
 Vsako uporabno časovno okno predstavlja en učni primer.
 Za $10~s$ smo se odločili na podlagi sorodnega dela na podatkih sledilnika pogleda, kjer so se daljša okna med dolžinami $1$, $3$, $5$ in $10~s$ praviloma izkazala za bolj informativna~\cite{bozak2024feature}.
 Daljših oken ne uporabimo, ker bi težje predpostavili, da celotno okno opisuje enoten čustveni odziv, saj se lahko ta med ogledom posnetka že opazno spremeni~\cite{zhang2020rcea}.
-Tudi sorodna dela na prepoznavanju čustev iz očesnih signalov pogosto uporabljajo krajša okna, na primer $1$-$2~s$~\cite{wang2018automatic,wu2021emotion}.
+Tudi sorodna dela na prepoznavanju čustev iz očesnih signalov pogosto uporabljajo krajša okna~\cite{wang2018automatic,wu2021emotion}.
 
-Oznaka okna je določena s parom udeleženec-posnetek, zato so vsa okna istega ogleda videoposnetka označena z isto čustveno oznako.
-Uporabnost okna določimo glede na kakovost podatkov v oknu.
+Oznaka okna je določena s parom udeleženec-posnetek, saj so udeleženci vprašalnike izpolnjevali le po vsakem ogledu videoposnetka in ne vmes.
+Okno uporabimo, če po predhodnem čiščenju in filtru osamelcev vsebuje vsaj 60 veljavnih meritev.
 
-Pri vzorčni frekvenci 60~Hz bi 10-sekundno okno brez manjkajočih vrednosti vsebovalo 600 vzorcev.
+Pri frekvenci vzorčenja 60~Hz bi 10-sekundno okno brez manjkajočih vrednosti vsebovalo 600 vzorcev.
 Zaradi čiščenja, odstranjevanja neveljavnih vzorcev in filtriranja je dejansko število vzorcev v oknih manjše.
 Po filtru osamelcev imamo $2\,639\,048$ vrstic in $5\,158$ uporabnih 10-sekundnih časovnih oken, kar pomeni povprečno približno 512 meritev na uporabno okno.
 Pri kasnejši gradnji grafov se število vozlišč nekoliko razlikuje med množicami signalov; te vrednosti povzemamo v tabeli~\ref{tab:statistika-konstruiranih-grafov}.

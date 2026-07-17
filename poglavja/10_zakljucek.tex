@@ -3,11 +3,20 @@
 
 Podatki sledilnika pogleda vsebujejo časovne, prostorske in fiksacijske odnose med meritvami, ki jih klasična tabelarična struktura podatkov ne modelira neposredno.
 Grafovske nevronske mreže omogočajo eksplicitno modeliranje relacij med meritvami, zato so naraven kandidat za obravnavo takšnih podatkov.
-V nalogi smo preverili uporabnost grafovske predstavitve podatkov sledilnika pogleda pri klasifikaciji valence kot čustvene oznake.
+V nalogi smo preverili uporabnost grafovske predstavitve podatkov sledilnika pogleda pri binarni klasifikaciji valence kot čustvene oznake.
 Časovna okna meritev smo predstavili kot časovno-prostorske grafe in jih ovrednotili s štirimi grafovskimi modeli, ki se postopno nadgrajujejo od preproste proti kompleksnejšim različicam.
 Grafovske modele smo primerjali s še tremi družinami modelov: izhodiščnima modeloma (naključni in večinski klasifikator), klasičnimi modeli strojnega učenja (\ModelName{SVM}, \ModelName{LightGBM}, \ModelName{MLP}) ter prednaučenima kodirnikoma signalov (\ModelName{GazeMAE}, \ModelName{MOMENT}).
 Izvedli smo primerjalno evalvacijo vseh modelov na štirih delno prekrivajočih se množicah signalov: \emph{samo pogled}, \emph{samo zenici}, \emph{pogled in zenici} ter \emph{vsi signali}.
 Osrednja ugotovitev naloge je, da so grafovski modeli primerni za kodiranje signalov sledilnika pogleda, vendar v uporabljeni eksperimentalni zasnovi ne presežejo uspešnosti klasičnih modelov strojnega učenja.
+
+Glavni doprinosi naloge izhajajo direktno iz raziskovalnih vprašanj in so:
+
+\begin{enumerate}
+    \item časovno-prostorska grafovska predstavitev časovnih oken podatkov sledilnika pogleda;
+    \item ovrednotenje arhitekturne lestvice grafovskih modelov za binarno klasifikacijo valence iz podatkov sledilnika pogleda;
+    \item primerjava klasifikacijske uspešnosti med štirimi množicami signalov sledilnika pogleda;
+    \item primerjava grafovskih modelov z negrafovskimi osnovnimi modeli in zamrznjenimi prednaučenimi predstavitvenimi modeli.
+\end{enumerate}
 
 Na podlagi izvedenih eksperimentov se je za najprimernejšo družino modelov za naš problem izkazala družina klasičnih modelov strojnega učenja z ročno oblikovanimi značilkami.
 Ta sklep je omejen na eno uporabljeno podatkovno zbirko, izbrane signalne množice, binarno klasifikacijo ene čustvene dimenzije (valence) in protokol evalvacije, ki ne preverja generalizacije po posnetkih ali različnih podatkovnih zbirkah.

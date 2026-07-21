@@ -87,6 +87,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   prejšnje predloge. Če Tomi popravi vezaje, veznike (`in`/`ter`), formulacije
   ali poenostavi zapis, to obravnavaj kot aktualen slogovni signal in ga ohrani,
   razen če gre za očitno LaTeX ali factualno napako.
+- Za pretvorbo vhodnih signalov z izračunom povprečja in standardnega odklona na
+  učni množici uporabljaj izraz `standardizacija`, ne `normalizacija`.
+  `Normalizacija` ostane za druge postopke, kot so softmax, normalizacija uteži,
+  normalizacija plasti, relativni čas v intervalu okna in matrike zamenjav.
 - Ko Tomi ročno popravi besedilo za predlogom, iz popravka sklepaj o slogovni
   preferenci in jo uporabljaj v nadaljevanju. Če je vzorec dvoumen ali odvisen od
   konteksta, ga ne posplošuj na slepo, ampak Tomija eksplicitno vprašaj. Konkretna
@@ -171,6 +175,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-21 V poglavju 4 so bile vsebine nekdanjih sekcij `Priprava vhodnih signalov`, `Normalizacija`, `Segmentacija v časovna okna` in `Povzetek predobdelave` združene v sekcijo `Priprava podatkov za učenje` z dvema podsekcijama: `Množice signalov in čiščenje podatkov` ter `Standardizacija in tvorba časovnih oken`. Povzetna tabela predobdelave je na koncu druge podsekcije brez samostojnega naslova.
 - 2026-07-21 Sekciji o podatkih sledilnika pogleda in MAHNOB-HCI sta iz poglavja 3 združeni v sekcijo `Podatkovne zbirke sledilnika pogleda` v poglavju 4. V poglavje 3 ju ne vračaj; poglavje 4 naj ostane edino mesto za splošni pregled zbirk, kratek opis eSEEd in podrobnejši opis MAHNOB-HCI.
 - 2026-07-08 Za razdelek o fiksacijskih povezavah v poglavju 5 je dodana slika
   `slike/konstrukcija_grafa/razsirjene_fiksacijske_povezave_F21_kf3_L2_v0.pdf`,

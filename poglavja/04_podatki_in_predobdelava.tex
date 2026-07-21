@@ -62,10 +62,12 @@ Vzburjenosti v tej nalogi ne klasificiramo.
 Razlog je predvsem večja šumnost oznak v uporabljeni podatkovni zbirki.
 Kot kaže prikaz ujemanja oznak v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se samoocene stopnje vzburjenosti slabše ujemajo z definiranimi razredi kot samoocene valence.
 
-\section{Priprava vhodnih signalov}
+\section{Priprava podatkov za učenje}
 \label{subsec:vhodni-signali}
 
-\subsection{Skupine signalov}
+V tem razdelku opišemo skupne korake priprave podatkov: izbiro in čiščenje signalov, standardizacijo ter tvorbo časovnih oken.
+
+\subsection{Množice signalov in čiščenje podatkov}
 
 Tukaj navedemo konkretne skupine signalov, ki jih uporabimo v eksperimentih.
 Indeks $i$ označuje posamezno meritev sledilnika pogleda.
@@ -86,10 +88,9 @@ Množica \emph{samo pogled} poleg časa vsebuje koordinati pogleda, množica \em
 Podrobna povezava med temi množicami, značilkami vozlišč in razpoložljivimi tipi povezav je podana pri opisu grafovske konstrukcije v razdelku~\ref{subsec:grafovska-konstrukcija-po-mnozicah}.
 
 
-\subsection{Čiščenje podatkov}
 \label{subsec:ciscenje}
 
-Podatke pred uporabo očistimo.
+Izbrane podatke pred uporabo očistimo.
 Najprej iz lokalne kopije zbirke \MAHNOB{} odstranimo podatke, ki jih v tej nalogi ne uporabljamo, in ohranimo le podatke eksperimenta vzbujanja čustev.
 Nato odstranimo vrstice brez signalov pogleda ali velikosti zenic.
 Na voljo imamo tudi signale veljavnosti, na podlagi katerih odstranimo meritve, za katere je sledilnik poročal, da je meritev za vsaj eno oko neveljavna.
@@ -116,8 +117,8 @@ Porazdelitvi položajev pogleda in velikosti zenic po čiščenju sta za množic
     \label{fig:porazdelitev-velikosti-zenic}
 \end{figure}
 
-\section{Normalizacija}
-\label{subsec:normalizacija}
+\subsection{Standardizacija in tvorba časovnih oken}
+\label{subsec:standardizacija}
 
 Posamezne skupine signalov so izražene v različnih velikostnih redih.
 Modeli strojnega učenja, kot so \ModelName{SVM}, \ModelName{MLP} ter GNN, so občutljivi na velikostni red vhodnih značilk oz. signalov.
@@ -125,10 +126,9 @@ Zato signale standardiziramo z znano formulo $\frac{x-\mu}{\sigma}$.
 Povprečje $\mu$ in standardni odklon $\sigma$ izračunamo na učni podmnožici, nato pa na validacijski in testni podmnožici standardizacijo uporabimo z istimi parametri kot na učni.
 Pri grafovskih modelih na enak način standardiziramo tudi značilke povezav, kadar jih uporabljena množica signalov vsebuje.
 
-\section{Segmentacija v časovna okna}
 \label{subsec:windowing}
 
-Časovno vrsto razdelimo na neprekrivajoča se časovna okna dolžine $T=10~s$.
+Nato časovno vrsto razdelimo na neprekrivajoča se časovna okna dolžine $T=10~s$.
 Vsako uporabno časovno okno predstavlja en učni primer.
 Za $10~s$ smo se odločili na podlagi sorodnega dela na podatkih sledilnika pogleda, kjer so se daljša okna med dolžinami $1$, $3$, $5$ in $10~s$ praviloma izkazala za bolj informativna~\cite{bozak2024feature}.
 Daljših oken ne uporabimo, ker bi težje predpostavili, da celotno okno opisuje enoten čustveni odziv, saj se lahko ta med ogledom posnetka že opazno spremeni~\cite{zhang2020rcea}.
@@ -145,9 +145,6 @@ Pri kasnejši gradnji grafov se število vozlišč nekoliko razlikuje med množi
 Po tvorbi časovnih oken se cevovod razdeli glede na uporabljeno predstavitev.
 Negrafovski osnovni modeli iz okna dobijo agregirane tabelarične značilke, zamrznjeni prednaučeni predstavitveni modeli neposredno prejmejo časovne vrste izbranih signalov sledilnika pogleda, grafovski modeli pa grafovsko predstavitev okna.
 Podrobnosti teh predstavitev so opisane v poglavjih~\ref{sec:grafovska-predstavitev} in~\ref{sec:modeli}.
-V tem poglavju opišemo le skupne korake priprave podatkov.
-
-\section{Povzetek predobdelave}
 
 Tabela~\ref{tab:mahnob-predobdelava} povzema, kako se skozi opisane korake predobdelave zmanjša količina podatkov, uporabljena v končni eksperimentalni primerjavi.
 

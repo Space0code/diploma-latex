@@ -33,11 +33,10 @@ Pri predtreniranju naključno zakrije nekatere dele signala in se uči njihove r
 
 Pregled sorodnih del kaže, da se podatki sledilnika pogleda pri prepoznavanju čustvenih stanj najpogosteje uporabljajo v obliki ročno oblikovanih značilk ali zaporedij meritev~\cite{lim2020emotion,tarnowski2020eye,lu2015combining_eye_eeg}.
 Grafovski modeli so pogosteje uporabljeni pri drugih vrstah časovno-prostorskih podatkov oziroma pri fizioloških signalih, predvsem pri EEG, kjer vozlišča običajno predstavljajo elektrode ali možganska področja~\cite{song2020dgcnn,zhong2022rgnn,liu2024gnn_eeg_survey}.
-Obstajajo tudi pristopi, ki grafovske modele uporabljajo pri večmodalni prepoznavi čustev iz EEG in podatkov očesnih gibov~\cite{wu2021emotion,lu2015combining_eye_eeg}, vendar nismo našli dela, ki bi obravnavalo izključno podatke sledilnika pogleda kot časovno-prostorski graf posameznih meritev.
-
-Ta naloga se zato osredotoča na primerjavo različnih predstavitev podatkov sledilnika pogleda.
-Čustvene oznake uporablja kot evalvacijsko nalogo, s katero primerjamo predstavitve istega časovnega okna: agregirane značilke za klasične modele, naučene predstavitve iz prednaučenih kodirnikov~\cite{bautista2021gazemae} in časovno-prostorsko grafovsko predstavitev za GNN.
+Obstajajo tudi pristopi, ki grafovske modele uporabljajo pri večmodalni prepoznavi čustev iz EEG in podatkov očesnih gibov~\cite{wu2021emotion,lu2015combining_eye_eeg}.
+Ker v pregledu sorodnih del nismo našli pristopa, ki bi izključno podatke sledilnika pogleda obravnaval kot časovno-prostorski graf posameznih meritev, se ta naloga osredotoča na primerjavo različnih predstavitev (izključno) podatkov sledilnika pogleda.
+Čustvene oznake uporabljamo kot evalvacijsko nalogo, s katero primerjamo različne predstavitve istega časovnega okna: agregirane značilke za klasične modele, predstavitve iz prednaučenih kodirnikov~\cite{bautista2021gazemae} in časovno-prostorsko grafovsko predstavitev za GNN.
 
 Grafovski del naloge preverja, ali eksplicitne časovne, prostorske in fiksacijske relacije med meritvami pogleda prispevajo k uporabnejši predstavitvi okna.
 V predlagani predstavitvi vozlišča predstavljajo posamezne meritve, povezave pa časovno bližino, prostorsko bližino in pripadnost isti fiksaciji.
-Naloga torej povezuje (1) binarno klasifikacijo čustvenih oznak iz podatkov sledilnika pogleda, (2) GNN za časovno-prostorske podatke ter (3) primerjavo ročno oblikovanih, naučenih in grafovskih predstavitev časovnih oken.
+Naloga torej povezuje (1) binarno klasifikacijo čustvenih oznak iz podatkov sledilnika pogleda, (2) GNN za časovno-prostorske podatke ter (3) primerjavo ročno oblikovanih, prednaučenih in grafovskih predstavitev časovnih oken.

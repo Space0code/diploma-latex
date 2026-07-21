@@ -1,13 +1,28 @@
 \chapter{Podatki in predobdelava}
 \label{sec:podatki}
 
-\section{Podatkovna zbirka \MAHNOB{}}
-\label{subsec:podatkovna-zbirka}
+\section{Podatkovne zbirke sledilnika pogleda}
+\label{sec:podatkovne-zbirke}
 
-V delu uporabljamo podatke iz podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
-Gre za večmodalno zbirko, namenjeno raziskavam prepoznavanja čustev in implicitnega označevanja multimedijskih vsebin.
+Podatki sledilnika pogleda se med drugim uporabljajo kot vedenjski in psihofiziološki signal pri nalogah prepoznave čustvenih stanj.
+V literaturi se pojavljajo različne ciljne naloge: klasifikacija diskretnih čustvenih stanj, regresija valence in vzburjenosti, binarna klasifikacija valence in vzburjenosti ter druge~\cite{lim2020emotion,tarnowski2020eye}.
+
+Na voljo je več prosto dostopnih podatkovnih zbirk sledilnika pogleda, ki se razlikujejo po vrsti zajetih signalov. 
+Tukaj naštejemo le nekatere.
+Najpogosteje vsebujejo koordinate pogleda in velikosti zenic, vendar so nekateri podatki omejeni zgolj na velikosti zenic~\cite{pedrotti2014stress} ali koordinate pogleda~\cite{bellet2019saccade}.
+Zbirki COLET in GazeBase vsebujejo podatke o pogledu in velikosti zenic~\cite{ktistakis2022colet,griffith2021gazebase}, zbirki \MAHNOB{} in \ESEED{} pa poleg njih vključujeta še informacije o fiksacijah, sakadah in mežikih~\cite{soleymani2012mahnob,skaramagkas2023eseed}.
+
+Za to nalogo smo izbrali podatke s čustvenimi oznakami in s čim več vrstami signalov sledilnika pogleda.
+Prve poskuse smo izvedli na podatkovni zbirki \ESEED{}, vendar so se pokazale težave z zanesljivostjo oznak, kakovostjo signalov in stabilnostjo učenja.
+Zato smo glavno eksperimentalno evalvacijo izvedli na podatkovni zbirki \MAHNOB{}.
+
+\subsection{Podatkovna zbirka \MAHNOB{}}
+
+Podatkovna zbirka \MAHNOB{} je večmodalna zbirka za prepoznavanje čustev in implicitno označevanje multimedijskih vsebin~\cite{soleymani2012mahnob}.
 Zbirka vsebuje dva glavna eksperimentalna sklopa: prepoznavanje čustvenih stanj iz odzivov na čustvene videoposnetke in implicitno označevanje na podlagi odzivov na pravilne oziroma napačne oznake pod sliko ali posnetkom.
-V tej nalogi uporabljamo samo prvi sklop, to je eksperiment vzbujanja čustev z videoposnetki.
+Vsebuje odzive udeležencev na video posnetke, katerih cilj je bil vzbuditi določena čustva v udeležencu.
+Odzive sinhrono zajame z videoposnetkom obraza, zvokom, elektroencefalogramom (EEG), fiziološkimi signali -- elektrokardiogramom (EKG), galvanskim odzivom kože (GSR), amplitudo dihanja in temperaturo kože -- ter signali sledilnika pogleda.
+V tej nalogi uporabljamo samo prvi sklop, to je eksperiment vzbujanja čustev z videoposnetki, in izključno signale sledilnika pogleda.
 
 Izvirni članek poroča o 30 rekrutiranih udeležencih, od katerih je bilo v analizi uporabljenih 27.
 Udeleženci P9, P12 in P15 so bili izključeni zaradi tehničnih težav oziroma nepopolnega zajema podatkov.
@@ -16,17 +31,11 @@ V eksperimentu vzbujanja čustev so udeleženci gledali 20 čustveno vzbujajoči
 Pred vsakim čustvenim posnetkom je bil prikazan še kratek nevtralni posnetek, odziv nanj pa je bil shranjen ločeno.
 Po ogledu posameznega posnetka so udeleženci podali številske samoocene valence, vzburjenosti, dominantnosti in predvidljivosti ter samooceno diskretne čustvene oznake.
 
-Čeprav je \MAHNOB{} večmodalna zbirka, v tej nalogi uporabljamo izključno signale sledilnika pogleda.
 Uporabljeni signali so podrobneje opisani v razdelku~\ref{subsec:vhodni-signali}.
 Meritve so bile zajete s sledilnikom Tobii X120 pri frekvenci 60~Hz.
 
-\section{Predhodni poskus z zbirko \ESEED{}}
-\label{subsec:eseed}
-
-Pred prehodom na \MAHNOB{} je bil del razvoja izveden na podatkovni zbirki \ESEED{}.
-Ta del ni osrednji eksperimentalni prispevek naloge, temveč služi kot zgodovinska motivacija za spremembo podatkovne zbirke.
-Začetni poskusi so pokazali težave z zanesljivostjo oznak, kakovostjo signalov in stabilnostjo učenja.
-Zato smo glavno eksperimentalno evalvacijo izvedli na podatkovni zbirki \MAHNOB{}, ki ima za naš primer uporabnejšo množico signalov sledilnika pogleda.
+V izvirnem članku so pri trirazredni klasifikaciji valence iz ročno oblikovanih značilk pogleda po protokolu LOO po udeležencih dosegli točnost $68{,}8\,\%$ in povprečni F1 $0{,}68$~\cite{soleymani2012mahnob}.
+Vrednosti so referenčni okvir, vendar niso neposredno primerljive z rezultati te naloge zaradi različnih vhodnih značilk, dolžine obravnavanega odziva in eksperimentalnega cevovoda.
 
 \section{Ciljne oznake}
 \label{subsec:ciljne-oznake}

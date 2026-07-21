@@ -3,37 +3,8 @@
 
 To poglavje umešča nalogo med obstoječe pristope za delo s podatki sledilnika pogleda.
 Sorodna dela v tem poglavju obravnavamo z vidika vprašanja, kako podatke sledilnika pogleda predstaviti za klasifikacijo čustvenih oznak in kakšno klasifikacijsko uspešnost pri tem dosegajo.
-Najprej povzamemo uporabo podatkov sledilnika pogleda pri klasifikaciji čustvenih oznak in vlogo podatkovne zbirke \MAHNOB{}.
-Nato predstavimo grafovske nevronske mreže za časovne vrste in časovno-prostorske podatke, saj je osrednji del naloge pretvorba časovnega okna meritev sledilnika pogleda v graf.
+Najprej predstavimo grafovske nevronske mreže za časovne vrste in časovno-prostorske podatke, saj je osrednji del naloge pretvorba časovnega okna meritev sledilnika pogleda v graf.
 Na koncu povzamemo še učenje predstavitev iz signala sledilnika pogleda ter položaj te naloge glede na sorodna dela.
-
-\section{Podatki sledilnika pogleda pri klasifikaciji čustev}
-
-Podatki sledilnika pogleda se med drugim uporabljajo kot vedenjski in psihofiziološki signal pri nalogah prepoznave čustvenih stanj.
-V literaturi se pojavljajo različne ciljne naloge: klasifikacija diskretnih čustvenih stanj, regresija valence in vzburjenosti, binarna klasifikacija valence in vzburjenosti ter druge~\cite{lim2020emotion,tarnowski2020eye}.
-
-Med pogosto uporabljenimi signali so velikost zenic, dinamika pogleda, fiksacije, sakade, mežiki in oddaljenost oči od sledilnika pogleda.
-Vhod v klasične napovedne modele za čustvena stanja so pogosto ročno oblikovane statistične značilke, kot so povprečja, variance in ekstremi časovnih oken meritev velikosti zenic, signalov pogleda, fiksacij, sakad in mežikov~\cite{bozak2024feature,lim2020emotion,tarnowski2020eye}. 
-Novejši modeli, na primer samokodirniki, pa kot vhod vzamejo tudi časovna okna neagregiranih signalov pogleda, na primer zaporedja koordinat pogleda, iz katerih lahko izpeljejo tudi dinamiko gibanja pogleda~\cite{bautista2021gazemae}.
-
-\section{Podatkovna zbirka \MAHNOB{}}
-\label{subsec:sorodna-mahnob}
-
-Podatkovna zbirka \MAHNOB{} je večmodalna zbirka za prepoznavanje čustev in implicitno označevanje multimedijskih vsebin~\cite{soleymani2012mahnob}.
-Vsebuje odzive udeležencev na video posnetke, katerih cilj je bil vzbuditi določena čustva v udeležencu. 
-Odzive sinhrono zajame z videoposnetkom obraza, zvokom, elektroencefalogramom (EEG), fiziološkimi signali -- elektrokardiogramom (EKG), galvanskim odzivom kože (GSR), amplitudo dihanja in temperaturo kože -- ter signali sledilnika pogleda.
-V tej nalogi uporabljamo samo signale sledilnika pogleda, ker je osrednji cilj raziskati grafovsko predstavitev tega tipa časovne vrste.
-
-Pregledali in preizkusili smo več podatkovnih zbirk (na primer \ESEED{}). \MAHNOB{} se je za našo nalogo izkazal kot najprimernejši predvsem zaradi kakovosti in količine podatkov ter dobre dokumentacije.
-
-Za to nalogo je pomemben del zbirke z odzivi na video posnetke namenjene vzbuditvi čustvenih odzivov, kjer so poleg signalov sledilnika pogleda na voljo tudi samoocene udeležencev.
-Te oznake uporabimo kot ciljno nalogo za evalvacijo predstavitev podatkov sledilnika pogleda. 
-V izvirnem članku so pri trirazredni klasifikaciji valence iz ročno oblikovanih značilk pogleda po protokolu LOO po udeležencih dosegli točnost $68{,}8\,\%$ in povprečni F1 $0{,}68$~\cite{soleymani2012mahnob}.
-Vrednosti so referenčni okvir, vendar niso neposredno primerljive z rezultati te naloge zaradi različnih vhodnih značilk, dolžine obravnavanega odziva in eksperimentalnega cevovoda.
-Podrobno pripravo ciljnih oznak opišemo v poglavju~\ref{sec:podatki}. 
-% Gašper Slapničar
-% 16 July, 10:19 am
-% Kot prej omenjeno - tu rečeš "podrobneje bomo povedali v poglavju "PODATKI"" in to ravno, ko govoriš o podatkih.
 
 \section{Grafovske nevronske mreže za časovno-\linebreak prostorske podatke}
 

@@ -171,6 +171,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-21 Sekciji o podatkih sledilnika pogleda in MAHNOB-HCI sta iz poglavja 3 združeni v sekcijo `Podatkovne zbirke sledilnika pogleda` v poglavju 4. V poglavje 3 ju ne vračaj; poglavje 4 naj ostane edino mesto za splošni pregled zbirk, kratek opis eSEEd in podrobnejši opis MAHNOB-HCI.
 - 2026-07-08 Za razdelek o fiksacijskih povezavah v poglavju 5 je dodana slika
   `slike/konstrukcija_grafa/razsirjene_fiksacijske_povezave_F21_kf3_L2_v0.pdf`,
   generirana s skriptom

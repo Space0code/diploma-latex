@@ -5,7 +5,8 @@ Za učenje iz podatkov, kjer niso pomembne zgolj lastnosti posameznih elementov,
 Primer takšnih podatkov so podatki sledilnika pogleda.
 Meritvam sledilnika pogleda lahko smiselno določimo časovne in prostorske odnose in jim s tem priredimo časovno-prostorski graf. 
 Na tem grafu se z grafovsko nevronsko mrežo učimo predstavitev vozlišč in grafov, ki jih uporabimo za klasifikacijo grafa.
-Podatki, uporabljeni v tej nalogi, imajo oznake valence, izpeljane iz samoocen udeležencev, zato GNN učimo klasificirati valenco v dva razreda (binarno), rezultate pa primerjamo z rezultati uveljavljenih negrafovskih pristopov.
+Podatki, uporabljeni v tej nalogi, vsebujejo samoocene čustvenega stanja udeležencev, iz katerih izpeljemo razrede valence.
+GNN zato učimo binarno klasificirati valenco, rezultate pa primerjamo z rezultati uveljavljenih negrafovskih pristopov.
 Z izrazom \emph{množica signalov} v tej nalogi označujemo izbor vrst podatkov sledilnika pogleda, ki jih uporabimo kot vhod modela.
 Eksperimentalno primerjavo izvedemo na štirih množicah signalov: samo koordinatah pogleda (\emph{samo pogled}), samo velikostih zenic (\emph{samo zenici}), združenih koordinatah pogleda in velikostih zenic (\emph{pogled in zenici}) ter vseh razpoložljivih signalih (\emph{vsi signali}).
 Pregled celotnega eksperimentalnega toka je prikazan na sliki~\ref{fig:uvod-pregled-naloge}: iz iste podatkovne zbirke izpeljemo več vhodnih predstavitev, jih ovrednotimo z različnimi družinami modelov in rezultate primerjamo na problemu binarne klasifikacije valence.
@@ -46,7 +47,7 @@ Dodatna podvprašanja so:
 
 V poglavju~\ref{sec:ozadje} predstavimo teoretično ozadje grafov, grafovskih nevronskih mrež in afektivnega računalništva.
 V poglavju~\ref{sec:sorodna-dela} predstavimo sorodna dela in metode učenja predstavitev iz podatkov pogleda.
-Poglavje~\ref{sec:podatki} opisuje uporabljene podatke, ciljne oznake in predobdelavo.
+Poglavje~\ref{sec:podatki} opisuje uporabljene podatke, samoocene čustvenega stanja, ciljne razrede in predobdelavo.
 V poglavju~\ref{sec:grafovska-predstavitev} opišemo konstrukcijo časovno-prostorskega grafa.
 Poglavje~\ref{sec:modeli} predstavi uporabljene modele.
 V poglavju~\ref{sec:eksperimenti} opišemo eksperimentalni protokol, v poglavju~\ref{sec:rezultati} pa rezultate glavne primerjave modelov na različnih množicah signalov.

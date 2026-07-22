@@ -62,6 +62,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Za `overfitting` uporabljaj "prekomerno prileganje", ne "preprileganje".
 - Za `arousal` dosledno uporabljaj "vzburjenost", ne "vzburjenje". Samo pri prvi
   omembi v diplomi dodaj angleški izraz v oklepaju: `vzburjenost (ang. arousal)`.
+- Podatke, ki jih udeleženci podajo po ogledu posnetka, dosledno poimenuj
+  `samoocene čustvenega stanja`, ne `čustvene oznake`. Kadar gre za operativni
+  izhod klasifikacije po preslikavi teh samoocen, uporabi `ciljni razred` oziroma
+  `razred valence`.
 - Razreda valence dosledno poimenuj `negativna valenca` in `pozitivna valenca`,
   ne `neprijetna valenca` in `prijetna valenca`. Enaki kratki oznaki `negativna`
   in `pozitivna` naj bosta uporabljeni tudi na slikah in v matrikah zamenjav.

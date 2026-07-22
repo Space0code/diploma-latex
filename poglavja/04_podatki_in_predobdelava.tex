@@ -16,7 +16,7 @@ Tukaj naštejemo le nekatere.
 Najpogosteje vsebujejo koordinate pogleda in velikosti zenic, vendar so nekateri podatki omejeni zgolj na velikosti zenic~\cite{pedrotti2014stress} ali koordinate pogleda~\cite{bellet2019saccade}.
 Zbirki COLET in GazeBase vsebujejo podatke o pogledu in velikosti zenic~\cite{ktistakis2022colet,griffith2021gazebase}, zbirki \MAHNOB{} in \ESEED{} pa poleg njih vključujeta še informacije o fiksacijah, sakadah in mežikih~\cite{soleymani2012mahnob,skaramagkas2023eseed}.
 
-Za to nalogo smo izbrali podatke s samoocenami čustvenega stanja in s čim več vrstami signalov sledilnika pogleda.
+Za to nalogo smo izbrali podatke z oznakami čustev in s čim več vrstami signalov sledilnika pogleda.
 Prve poskuse smo izvedli na podatkovni zbirki \ESEED{}, vendar so se pokazale težave z zanesljivostjo samoocen čustvenega stanja, kakovostjo signalov in stabilnostjo učenja.
 Zato smo glavno eksperimentalno evalvacijo izvedli na podatkovni zbirki \MAHNOB{}.
 
@@ -34,18 +34,18 @@ Udeleženci P9, P12 in P15 so bili izključeni zaradi tehničnih težav oziroma 
 V tej nalogi po vzoru izvirnega članka izključimo iste tri udeležence.
 V eksperimentu vzbujanja čustev so udeleženci gledali 20 čustveno vzbujajočih videoposnetkov.
 Pred vsakim čustvenim posnetkom je bil prikazan še kratek nevtralni posnetek, odziv nanj pa je bil shranjen ločeno.
-Po ogledu posameznega posnetka so udeleženci podali številske samoocene čustvenega stanja valence in vzburjenosti, samooceno diskretne čustvene oznake ter še nekaj drugih ocen.
+Po ogledu posameznega posnetka so udeleženci podali samoocene čustvenega stanja: številski oceni valence in vzburjenosti, diskretno samooceno čustvenega stanja ter še nekaj drugih ocen.
 
-\section{Ciljne oznake}
+\section{Samoocene čustvenega stanja in ciljni razredi}
 \label{subsec:ciljne-oznake}
 
-Oznake v tej nalogi izhajajo iz udeleženčevih samoocen čustvenega razreda po ogledu videoposnetka.
-Diskretne čustvene razrede preslikamo v razrede valence po preslikavi iz izvirnega članka~\cite{soleymani2012mahnob}, ki je prikazana v dodatku~\ref{app:preslikava-valence}.
+Ciljni razredi v tej nalogi izhajajo iz diskretnih samoocen čustvenega stanja, ki so jih udeleženci podali po ogledu videoposnetka.
+Diskretne samoocene čustvenega stanja preslikamo v razrede valence skladno s preslikavo iz izvirnega članka~\cite{soleymani2012mahnob}, ki je prikazana v dodatku~\ref{app:preslikava-valence}.
 S tem najprej dobimo tri razrede: negativno, nevtralno in pozitivno valenco.
 Nevtralni razred odstranimo, da ciljna naloga vsebuje izrazitejši kontrast med razredoma in s tem modelom omogočimo boljše pogoje za učenje vzorcev v podatkih.
 
-Oznaka valence je določena na ravni kombinacije udeleženca in videoposnetka.
-Vsa časovna okna in s tem vsi grafi istega ogleda videoposnetka zato prejmejo isto oznako.
+Razred valence je določen na ravni kombinacije udeleženca in videoposnetka.
+Vsa časovna okna in s tem vsi grafi istega ogleda videoposnetka zato pripadajo istemu razredu.
 Porazdelitev oken po odstranitvi nevtralnega razreda je prikazana na sliki~\ref{fig:porazdelitev-valenca-stevila}; razreda sta pri vseh množicah signalov skoraj uravnotežena.
 
 \begin{figure}
@@ -58,8 +58,8 @@ Porazdelitev oken po odstranitvi nevtralnega razreda je prikazana na sliki~\ref{
 \end{figure}
 
 Vzburjenosti v tej nalogi ne klasificiramo.
-Razlog je predvsem večja šumnost oznak v uporabljeni podatkovni zbirki.
-Kot kaže prikaz ujemanja oznak v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se samoocene stopnje vzburjenosti slabše ujemajo z definiranimi razredi kot samoocene valence.
+Razlog je predvsem večja šumnost razredov v uporabljeni podatkovni zbirki.
+Kot kaže prikaz ujemanja izpeljanih razredov s samoocenami v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se samoocene stopnje vzburjenosti slabše ujemajo z definiranimi razredi kot samoocene valence.
 
 \section{Priprava podatkov za učenje}
 \label{subsec:vhodni-signali}
@@ -135,7 +135,7 @@ Za $10~s$ smo se odločili na podlagi sorodnega dela na podatkih sledilnika pogl
 Daljših oken ne uporabimo, ker bi težje predpostavili, da celotno okno opisuje enoten čustveni odziv, saj se lahko ta med ogledom posnetka že opazno spremeni~\cite{zhang2020rcea}.
 Tudi sorodna dela na prepoznavanju čustev iz očesnih signalov pogosto uporabljajo razmeroma kratka okna~\cite{wang2018automatic,wu2021emotion}.
 
-Oznaka okna je določena s parom udeleženec-posnetek, saj so udeleženci vprašalnike izpolnjevali le po vsakem ogledu videoposnetka in ne vmes.
+Ciljni razred okna je določen s parom udeleženec-posnetek, saj so udeleženci vprašalnike izpolnjevali le po vsakem ogledu videoposnetka in ne vmes.
 Okno uporabimo, če po predhodnem čiščenju in filtru osamelcev vsebuje vsaj 60 veljavnih meritev.
 
 Pri frekvenci vzorčenja $60~Hz$ bi 10-sekundno okno brez manjkajočih vrednosti vsebovalo 600 vzorcev.

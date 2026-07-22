@@ -11,11 +11,11 @@ Na koncu povzamemo še učenje predstavitev iz signala sledilnika pogleda ter po
 Za modeliranje časovnih vrst se pogosto uporabljajo rekurentne nevronske mreže, kot so mreže LSTM, in transformerji, ki modelirajo časovne odvisnosti med meritvami~\cite{jin2024gnn4ts}.
 Grafovska predstavitev je smiselna, kadar želimo poleg časovne urejenosti eksplicitno modelirati tudi odnose med več časovnimi vrstami ali prostorske odnose med meritvami~\cite{jin2024gnn4ts}.
 Pregled GNN za časovne vrste to področje obravnava skozi naloge napovedovanja, klasifikacije, imputacije in zaznavanja anomalij.
-Za to nalogo je pomembna predvsem formulacija, pri kateri posamezno časovno okno pretvorimo v grafovsko predstavitev in oznako napovemo na ravni celotnega grafa in s tem torej časovnega okna.
+Za to nalogo je pomembna predvsem formulacija, pri kateri posamezno časovno okno pretvorimo v grafovsko predstavitev in njegov razred napovemo na ravni celotnega grafa.
 
 Pri podatkih sledilnika pogleda imajo meritve poleg časovnega vrstnega reda tudi prostorsko komponento, saj je vsaka veljavna meritev vezana na položaj pogleda na zaslonu.
 Podobno ločevanje časovnih in prostorskih odvisnosti uporabljajo časovno-prostorske grafovske mreže, na primer ST-GCN pri napovedovanju prometa, kjer grafovska konvolucija modelira prostorske povezave med senzorji, časovna konvolucija pa dinamiko signala skozi čas~\cite{yu2018stgcn}.
-V tej nalogi je ta pristop uporaben kot metodološka analogija, saj ne napovedujemo prihodnjih meritev, temveč klasificiramo oznako časovnega okna meritev.
+V tej nalogi je ta pristop uporaben kot metodološka analogija, saj ne napovedujemo prihodnjih meritev, temveč klasificiramo razred časovnega okna meritev.
 
 \section{Učenje predstavitev iz signalov}
 \label{subsec:sorodna-predstavitve}
@@ -37,8 +37,8 @@ Ti rezultati niso neposredno primerljivi z rezultati te naloge, saj uporabljamo 
 Grafovski modeli so pogosteje uporabljeni pri drugih vrstah časovno-prostorskih podatkov oziroma pri fizioloških signalih, predvsem pri EEG, kjer vozlišča običajno predstavljajo elektrode ali možganska področja~\cite{song2020dgcnn,zhong2022rgnn,liu2024gnn_eeg_survey}.
 Obstajajo tudi pristopi, ki grafovske modele uporabljajo pri večmodalni prepoznavi čustev iz EEG in podatkov očesnih gibov~\cite{wu2021emotion,lu2015combining_eye_eeg}.
 Ker v pregledu sorodnih del nismo našli pristopa, ki bi izključno podatke sledilnika pogleda obravnaval kot časovno-prostorski graf posameznih meritev, se ta naloga osredotoča na primerjavo različnih predstavitev (izključno) podatkov sledilnika pogleda.
-Čustvene oznake uporabljamo kot evalvacijsko nalogo, s katero primerjamo različne predstavitve istega časovnega okna: agregirane značilke za klasične modele, predstavitve iz prednaučenih kodirnikov~\cite{bautista2021gazemae} in časovno-prostorsko grafovsko predstavitev za GNN.
+Samoocene čustvenega stanja uporabimo kot evalvacijsko nalogo, s katero primerjamo različne predstavitve istega časovnega okna: agregirane značilke za klasične modele, predstavitve iz prednaučenih kodirnikov~\cite{bautista2021gazemae} in časovno-prostorsko grafovsko predstavitev za GNN.
 
 Grafovski del naloge preverja, ali eksplicitne časovne, prostorske in fiksacijske relacije med meritvami pogleda prispevajo višji klasifikacijski točnosti.
 V predlagani predstavitvi vozlišča predstavljajo posamezne meritve, povezave pa časovno bližino, prostorsko bližino in pripadnost isti fiksaciji.
-Naloga torej povezuje (1) binarno klasifikacijo čustvenih oznak iz podatkov sledilnika pogleda, (2) GNN za časovno-prostorske podatke ter (3) primerjavo ročno oblikovanih, samonaučenih in grafovskih predstavitev časovnih oken.
+Naloga torej povezuje (1) binarno klasifikacijo valence iz podatkov sledilnika pogleda, (2) GNN za časovno-prostorske podatke ter (3) primerjavo ročno oblikovanih, samonaučenih in grafovskih predstavitev časovnih oken.

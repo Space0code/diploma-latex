@@ -1,12 +1,12 @@
 \chapter{Dodatni rezultati}
 \label{app:dodatni-rezultati}
 
-\section{Preslikava čustvenih oznak v valenco}
+\section{Preslikava diskretnih samoocen čustvenega stanja v valenco}
 \label{app:preslikava-valence}
 
-Preslikava čustvenih oznak v razrede valence sledi tabeli~6 izvirnega članka podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
+Preslikava diskretnih samoocen čustvenega stanja v razrede valence sledi tabeli~6 izvirnega članka podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
 Pri binarni nalogi uporabimo samo skrajna razreda valence, nevtralni razred pa izločimo.
-Tako model ločuje med negativno in pozitivno valenco, primeri z vmesno oziroma nevtralno oznako pa niso del glavne evalvacijske naloge.
+Tako model ločuje med negativno in pozitivno valenco, primeri z vmesnim oziroma nevtralnim razredom pa niso del glavne evalvacijske naloge.
 
 \input{tabele/rezultati/preslikava_valence.tex}
 
@@ -30,7 +30,7 @@ V poročanih binarnih rezultatih sta preciznost in priklic makro povprečji po r
 Uteženi F1 je povprečje F1 po razredih, uteženo s številom dejanskih primerov posameznega razreda.
 
 AUC (angl. \emph{area under the ROC curve}) je ploščina pod krivuljo ROC in meri, kako dobro napovedne verjetnosti razvrstijo pozitivne primere pred negativne neodvisno od izbranega klasifikacijskega praga.
-Izguba je povprečna negativna logaritemska verjetnost pravilnega razreda, tj. križna entropija; manjša vrednost pomeni boljše ujemanje napovednih verjetnosti z oznakami.
+Izguba je povprečna negativna logaritemska verjetnost pravilnega razreda, tj. križna entropija; manjša vrednost pomeni boljše ujemanje napovednih verjetnosti s ciljnimi razredi.
 Matrika zamenjav vsebuje števila primerov za vse pare dejanskih vrstic in napovedanih stolpcev; diagonalne celice so pravilne napovedi, preostale pa napake.
 
 Med učenjem shranjujemo učno in validacijsko izgubo po epohah, najboljšo epoho z najmanjšo validacijsko izgubo, podatek o zgodnjem ustavljanju, čas epohe ter povprečno in največjo $L_2$-normo gradientov parametrov.
@@ -107,15 +107,15 @@ Pri množici \emph{samo zenici} so napake bolj uravnotežene z naključnim ugiba
 
 \clearpage
 
-\section{Ujemanje izpeljanih oznak s samoocenami}
+\section{Ujemanje izpeljanih razredov s samoocenami}
 \label{app:ujemanje-oznak-s-samoocenami}
 
 Slika~\ref{fig:ujemanje-oznak-s-samoocenami} primerja razrede, izpeljane iz preslikave v tabeli~\ref{tab:label-mapping}, z razredi, dobljenimi iz številskih samoocen.
-Primerjava je uporabna kot groba ocena skladnosti med diskretnimi čustvenimi oznakami in številskimi ocenami, ki so bile zbrane v istem eksperimentu.
+Primerjava je uporabna kot groba ocena skladnosti med diskretnimi in številskimi samoocenami čustvenega stanja, ki so bile zbrane v istem eksperimentu.
 Pri binarni valenci je ujemanje na uporabljenem podnaboru $96{,}7\,\%$, pri binarni vzburjenosti pa $70{,}3\,\%$.
 Zato vzburjenosti ne uporabimo kot glavno ciljno nalogo.
-Slike kažejo, da izpeljane oznake valence bolje sledijo samoocenam udeležencev kot izpeljane oznake vzburjenosti.
-To ne pomeni, da so oznake valence brez šuma, vendar je za glavno primerjavo modelov bolj smiselna in stabilna ciljna naloga.
+Slike kažejo, da izpeljani razredi valence bolje sledijo samoocenam udeležencev kot izpeljani razredi vzburjenosti.
+To ne pomeni, da so razredi valence brez šuma, vendar je za glavno primerjavo modelov bolj smiselna in stabilna ciljna naloga.
 
 % Vir slike: GFM-for-eyetracker/results/label_noise_analysis/2026-05-13_table6_self_report_alignment/table6_vs_rating_crosstab_long.csv.
 % Povzetek ujemanja: GFM-for-eyetracker/results/label_noise_analysis/2026-05-13_table6_self_report_alignment/label_noise_summary.csv.

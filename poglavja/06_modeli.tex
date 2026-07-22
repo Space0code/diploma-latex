@@ -1,7 +1,7 @@
 \chapter{Primerjani modeli}
 \label{sec:modeli}
 
-V nalogi se osredotočamo na primerjavo štirih družin modelov strojnega učenja za klasifikacijo čustvenih oznak iz podatkov sledilnika pogleda.
+V nalogi se osredotočamo na primerjavo štirih družin modelov strojnega učenja za klasifikacijo valence iz podatkov sledilnika pogleda.
 V tem poglavju razložimo, katere so te družine in na kratko opišemo vsak uporabljen model znotraj družine.
 Grafovske modele opišemo podrobneje, saj predstavljajo metodološko jedro naloge, poleg tega pa so za podatke sledilnika pogleda manj standardiziran pristop kot uveljavljeni klasični modeli.
 
@@ -124,7 +124,7 @@ Rezidualna povezava vhod bloka prišteje njegovi izhodni preslikavi, normalizaci
 Izpuščanje med učenjem z določeno verjetnostjo nastavi posamezne aktivacije na nič, s čimer omejuje prekomerno prileganje.
 Ti gradniki niso predmet primerjave med grafovskimi modeli.
 Primerjava se osredotoča na obravnavo relacij, fuzijo relacijskih predstavitev in uporabo značilk povezav.
-Ker napovedujemo oznako celotnega okna, iz končnih predstavitev vozlišč s pozornostnim združevanjem izračunamo predstavitev celotnega grafa.
+Ker napovedujemo razred celotnega okna, iz končnih predstavitev vozlišč s pozornostnim združevanjem izračunamo predstavitev celotnega grafa.
 Uporabimo $\mathbf{h}_G = \sum_{v \in V} \alpha_v \mathbf{h}_v$, kjer je $\mathbf{h}_G$ predstavitev grafa, $\alpha_v$ utež pozornosti za vozlišče $v$, $\mathbf{h}_v$ pa predstavitev vozlišča $v$.
 Uteži pozornosti normaliziramo s softmax normalizacijo:
 \begin{equation}

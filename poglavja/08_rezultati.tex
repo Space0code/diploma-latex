@@ -1,8 +1,7 @@
 \chapter{Rezultati}
 \label{sec:rezultati}
 
-V tem poglavju predstavimo rezultate, ki odgovarjajo na raziskovalna vprašanja te naloge.
-To so rezultati primerjave različnih modelov za binarno klasifikacijo valence pri 7-kratnem prečnem preverjanju po subjektih.
+V tem poglavju predstavimo rezultate primerjave različnih modelov za binarno klasifikacijo valence pri 7-kratnem prečnem preverjanju po subjektih.
 Dodatne rezultate in razširjene metrike poročamo v dodatku~\ref{app:dodatni-rezultati}.
 
 
@@ -70,7 +69,7 @@ Najuspešnejši model \ModelName{SVM} pravilno razvrsti $73{,}0~\%$ vzorcev nega
 
 Za odgovor na podvprašanje~\ref{pv:racunska-zahtevnost} smo poleg klasifikacijske uspešnosti primerjali tudi velikost modelov ter izmerjeni čas učenja in sklepanja.
 Tabela~\ref{tab:rezultati-racunska-zahtevnost} prikazuje te vrednosti za množico signalov \emph{pogled in zenici}, kjer je bil dosežen najboljši skupni rezultat.
-Stolpec \emph{Vhod} loči modele, ki uporabljajo agregirane značilke okna, zamrznjene predstavitve prednaučenih kodirnikov oziroma grafovsko predstavitev okna.
+Stolpec \emph{Vhod} označuje različne predstavitve istih podatkov, ki uporabljajo agregirane značilke okna, zamrznjene predstavitve prednaučenih kodirnikov oziroma grafovsko predstavitev okna.
 
 Izhodiščna klasifikatorja ter modela \ModelName{SVM} in \ModelName{LightGBM} nimajo števila nevronskih parametrov, zato je pri njih ta vrednost označena z~\texttt{--}.
 Pri \ModelName{GazeMAE/MOMENT} stolpec učljivih parametrov zajema samo klasifikacijsko glavo, stolpec vseh parametrov pa tudi zamrznjena kodirnika.

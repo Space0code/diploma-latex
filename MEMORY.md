@@ -195,6 +195,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-22 Omejitve eksperimentalne zasnove sodijo v diskusijo, ne v zaključek.
+  Zaključek naj po kratkem povzetku izvedbe in rezultatov konča jasna sintezna
+  poved o uporabnosti grafovske predstavitve in doseženi točnosti GNN.
 - 2026-07-22 V poglavju 5 naj opis razširjenih povezav znotraj fiksacije ostane
   konceptualen; formalna definicija z enačbami je v dodatku C. Shematska slika
   konstrukcije ostane v glavnem besedilu.

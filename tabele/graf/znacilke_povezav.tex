@@ -1,26 +1,27 @@
 \begin{table}[!htbp]
     \centering
-    \caption{Značilke povezav v grafovski predstavitvi.}
+    \caption{Značilke povezav v grafovski predstavitvi. Izraz \emph{vse relacije} pomeni vse relacije, ki so prisotne pri navedeni množici signalov.}
     \label{tab:znacilke-povezav}
     \begingroup
     \definecolor{tableTime}{HTML}{E76F00}
     \definecolor{tableGaze}{HTML}{0077B6}
     \definecolor{tablePupil}{HTML}{008A8A}
     \definecolor{tableFixation}{HTML}{7B2CBF}
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.18\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.30\textwidth}@{}}
+    \small
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.14\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{0.16\textwidth} >{\raggedright\arraybackslash}p{0.25\textwidth}@{}}
         \toprule
-        \textbf{Značilka} & \textbf{Opis} & \textbf{Uporaba} \\
+        \textbf{Značilka} & \textbf{Opis} & \textbf{Relacije} & \textbf{Množice signalov} \\
         \midrule
-        \textcolor{tableTime}{$t_i$} & Normaliziran čas izvorne meritve znotraj časovnega okna. & Vse povezave. \\
-        \textcolor{tableTime}{$t_j$} & Normaliziran čas ciljne meritve znotraj časovnega okna. & Vse povezave. \\
-        \textcolor{tableTime}{$\Delta t$} & Časovna razlika med ciljno in izvorno meritvijo, \textcolor{tableTime}{$\Delta t = t_j - t_i$}. & Vse povezave. \\
-        \textcolor{tableTime}{$\rho_{ij}$} & Smer časovne povezave; pri povezavi naprej je \textcolor{tableTime}{$\rho_{ij}=1$}, pri povezavi nazaj pa \textcolor{tableTime}{$\rho_{ij}=-1$}. & Samo časovne povezave. \\
-        \textcolor{tableGaze}{$\Delta x$} & Razlika v vodoravni koordinati pogleda, \textcolor{tableGaze}{$\Delta x = x_j - x_i$}. & Grafi s koordinatami pogleda. \\
-        \textcolor{tableGaze}{$\Delta y$} & Razlika v navpični koordinati pogleda, \textcolor{tableGaze}{$\Delta y = y_j - y_i$}. & Grafi s koordinatami pogleda. \\
-        \textcolor{tableGaze}{$d_{ij}^{\text{zaslon}}$} & Evklidska razdalja med položajema pogleda na zaslonu. & Grafi s koordinatami pogleda. \\
-        \textcolor{tablePupil}{$\Delta p^{(l)}_{ij}$} & Razlika v velikosti leve zenice, \textcolor{tablePupil}{$\Delta p^{(l)}_{ij} = p_j^{(l)} - p_i^{(l)}$}. & Grafi z velikostmi zenic. \\
-        \textcolor{tablePupil}{$\Delta p^{(r)}_{ij}$} & Razlika v velikosti desne zenice, \textcolor{tablePupil}{$\Delta p^{(r)}_{ij} = p_j^{(r)} - p_i^{(r)}$}. & Grafi z velikostmi zenic. \\
-        \textcolor{tableFixation}{$\Delta d_{ij}$} & Razlika v oddaljenosti od sledilnika pogleda, \textcolor{tableFixation}{$\Delta d_{ij} = d_j - d_i$}. & Samo \emph{vsi signali}. \\
+        \textcolor{tableTime}{$t_i$} & Normaliziran čas izvorne meritve znotraj časovnega okna. & Vse relacije. & Vse štiri množice. \\
+        \textcolor{tableTime}{$t_j$} & Normaliziran čas ciljne meritve znotraj časovnega okna. & Vse relacije. & Vse štiri množice. \\
+        \textcolor{tableTime}{$\Delta t$} & Časovna razlika med ciljno in izvorno meritvijo, \textcolor{tableTime}{$\Delta t = t_j - t_i$}. & Vse relacije. & Vse štiri množice. \\
+        \textcolor{tableTime}{$\rho_{ij}$} & Smer časovne povezave; pri povezavi naprej je \textcolor{tableTime}{$\rho_{ij}=1$}, pri povezavi nazaj pa \textcolor{tableTime}{$\rho_{ij}=-1$}. & Samo časovne. & Vse štiri množice. \\
+        \textcolor{tableGaze}{$\Delta x$} & Razlika v vodoravni koordinati pogleda, \textcolor{tableGaze}{$\Delta x = x_j - x_i$}. & Vse relacije. & \emph{samo pogled}, \emph{pogled in zenici}, \emph{vsi signali}. \\
+        \textcolor{tableGaze}{$\Delta y$} & Razlika v navpični koordinati pogleda, \textcolor{tableGaze}{$\Delta y = y_j - y_i$}. & Vse relacije. & \emph{samo pogled}, \emph{pogled in zenici}, \emph{vsi signali}. \\
+        \textcolor{tableGaze}{$d_{ij}^{\text{zaslon}}$} & Evklidska razdalja med položajema pogleda na zaslonu. & Vse relacije. & \emph{samo pogled}, \emph{pogled in zenici}, \emph{vsi signali}. \\
+        \textcolor{tablePupil}{$\Delta p^{(l)}_{ij}$} & Razlika v velikosti leve zenice, \textcolor{tablePupil}{$\Delta p^{(l)}_{ij} = p_j^{(l)} - p_i^{(l)}$}. & Vse relacije. & \emph{samo zenici}, \emph{pogled in zenici}, \emph{vsi signali}. \\
+        \textcolor{tablePupil}{$\Delta p^{(r)}_{ij}$} & Razlika v velikosti desne zenice, \textcolor{tablePupil}{$\Delta p^{(r)}_{ij} = p_j^{(r)} - p_i^{(r)}$}. & Vse relacije. & \emph{samo zenici}, \emph{pogled in zenici}, \emph{vsi signali}. \\
+        \textcolor{tableFixation}{$\Delta d_{ij}$} & Razlika v oddaljenosti od sledilnika pogleda, \textcolor{tableFixation}{$\Delta d_{ij} = d_j - d_i$}. & Vse relacije. & \emph{vsi signali}. \\
         \bottomrule
     \end{tabularx}
     \par\smallskip

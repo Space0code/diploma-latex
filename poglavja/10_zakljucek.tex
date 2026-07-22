@@ -7,7 +7,6 @@ V nalogi smo preverili uporabnost grafovske predstavitve podatkov sledilnika pog
 Časovna okna meritev smo predstavili kot časovno-prostorske grafe in jih ovrednotili s štirimi grafovskimi modeli, ki se postopno nadgrajujejo od preproste proti kompleksnejšim različicam.
 Grafovske modele smo primerjali s še tremi družinami modelov: izhodiščnima modeloma (naključni in večinski klasifikator), klasičnimi modeli strojnega učenja (\ModelName{SVM}, \ModelName{LightGBM}, \ModelName{MLP}) ter prednaučenima kodirnikoma signalov (\ModelName{GazeMAE}, \ModelName{MOMENT}).
 Izvedli smo primerjalno evalvacijo vseh modelov na štirih delno prekrivajočih se množicah signalov: \emph{samo pogled}, \emph{samo zenici}, \emph{pogled in zenici} ter \emph{vsi signali}.
-Osrednja ugotovitev naloge je, da so grafovski modeli primerni za kodiranje signalov sledilnika pogleda, vendar v uporabljeni eksperimentalni zasnovi ne presežejo uspešnosti klasičnih modelov strojnega učenja.
 
 Glavni doprinosi naloge izhajajo direktno iz raziskovalnih vprašanj in so:
 
@@ -18,12 +17,14 @@ Glavni doprinosi naloge izhajajo direktno iz raziskovalnih vprašanj in so:
     \item primerjava grafovskih modelov z negrafovskimi osnovnimi modeli in zamrznjenimi prednaučenimi predstavitvenimi modeli.
 \end{enumerate}
 
-Na podlagi izvedenih eksperimentov se je za najprimernejšo družino modelov za naš problem izkazala družina klasičnih modelov strojnega učenja z ročno oblikovanimi značilkami.
-Ta sklep je omejen na eno uporabljeno podatkovno zbirko, izbrane signalne množice, binarno klasifikacijo ene čustvene dimenzije (valence) in protokol evalvacije, ki ne preverja generalizacije po posnetkih ali različnih podatkovnih zbirkah.
-Ciljni razredi so izpeljani iz samoocen čustvenega stanja, zato vsebujejo subjektivnost in šum.
-Omejitev je tudi sama grafovska predstavitev, saj je uporabljena konstrukcija samo ena izmed možnih predstavitev odnosov med meritvami.
+Rezultati kažejo, da grafovski modeli iz meritev sledilnika pogleda izluščijo uporaben signal in presegajo izhodiščna klasifikatorja, njihova uspešnost pa je primerljiva z uspešnostjo zamrznjenih prednaučenih kodirnikov.
+Kljub temu so se pri obravnavanem problemu najbolje izkazali klasični modeli strojnega učenja z ročno oblikovanimi značilkami.
+Med preizkušenimi množicami signalov so bile najinformativnejše koordinate pogleda, velikosti zenic so prispevale nekaj dodatnih informacij, drugi razpoložljivi signali pa niso pokazali izrazite dodane vrednosti.
 
-Menimo, da je grafovsko modeliranje podatkov sledilnika pogleda še v veliki meri neraziskana, a smiselna nadaljnja raziskovalna smer.
-V nadaljnjem delu bomo preverili drugačna pravila povezovanja in še več grafovskih arhitektur, predvsem grafovske transformerje.
-Posebej zanimiva smer je tudi samonadzorovano predtreniranje na signalih sledilnika pogleda, saj bi s tem lahko zmanjšali odvisnost od majhnih in tudi neoznačenih podatkovnih zbirk.
-Grafovsko predstavitev bi bilo mogoče razširiti še z mežiki, sakadami in fiksacijskimi meta-vozlišči, rezultate pa bi bilo potrebno preveriti na več podatkovnih zbirkah, pri prenosu med nalogami in v pogojih uporabe v realnem času.
+Grafovsko modeliranje podatkov sledilnika pogleda je še v veliki meri neraziskana, vendar smiselna nadaljnja raziskovalna smer.
+V nadaljnjem delu bomo preverili drugačna pravila povezovanja, na primer povezovanje vozlišč s podobno dinamiko pogleda ali povezovanje meritev iste fiksacije z metavozliščem, s čimer bi graf razširili v tretjo dimenzijo.
+Grafovsko predstavitev bi bilo mogoče dopolniti tudi z mežiki in sakadami ter preizkusiti dodatne grafovske arhitekture, predvsem grafovske transformerje.
+Posebej zanimivo je samonadzorovano predtreniranje na signalih sledilnika pogleda, ki bi lahko zmanjšalo odvisnost od majhnih označenih podatkovnih zbirk in omogočilo uporabo neoznačenih podatkov.
+Rezultate bi bilo treba preveriti še na več podatkovnih zbirkah, pri prenosu med nalogami in v pogojih uporabe v realnem času.
+
+V nalogi smo tako pokazali, da je grafovska predstavitev smiselna za podatke sledilnika pogleda, saj je najboljši GNN pri klasifikaciji binarne valence dosegel točnost $65{,}9\,\%$.

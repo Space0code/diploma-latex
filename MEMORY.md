@@ -188,6 +188,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-22 V poglavju 5 naj opis razširjenih povezav znotraj fiksacije ostane
+  konceptualen; formalna definicija z enačbami je v dodatku C. Shematska slika
+  konstrukcije ostane v glavnem besedilu.
 - 2026-07-22 Pri opisu štirih množic signalov poudari primerjavo robustnosti
   modelov glede na razpoložljivost vhodnih signalov in klasifikacijske uspešnosti
   po njihovih tipih. Ne utemeljuj je s pokrivanjem različnih podatkovnih zbirk.

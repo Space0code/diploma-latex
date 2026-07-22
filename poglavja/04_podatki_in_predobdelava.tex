@@ -26,6 +26,7 @@ Podatkovna zbirka \MAHNOB{} je večmodalna zbirka za prepoznavanje čustev in im
 Zbirka vsebuje dva glavna eksperimentalna sklopa: prepoznavanje čustvenih stanj iz odzivov na čustvene videoposnetke in implicitno označevanje na podlagi odzivov na pravilne oziroma napačne oznake pod sliko ali posnetkom.
 Vsebuje odzive udeležencev na video posnetke, katerih cilj je bil vzbuditi določena čustva v udeležencu.
 Odzive sinhrono zajame z videoposnetkom obraza, zvokom, elektroencefalogramom (EEG), fiziološkimi signali -- elektrokardiogramom (EKG), galvanskim odzivom kože (GSR), amplitudo dihanja in temperaturo kože -- ter signali sledilnika pogleda.
+Meritve sledilnika pogleda so bile zajete s sledilnikom Tobii X120 pri frekvenci $60~Hz$.
 V tej nalogi uporabljamo samo prvi sklop, to je eksperiment vzbujanja čustev z videoposnetki, in izključno signale sledilnika pogleda.
 
 Izvirni članek poroča o 30 rekrutiranih udeležencih, od katerih je bilo v analizi uporabljenih 27.
@@ -33,10 +34,7 @@ Udeleženci P9, P12 in P15 so bili izključeni zaradi tehničnih težav oziroma 
 V tej nalogi po vzoru izvirnega članka izključimo iste tri udeležence.
 V eksperimentu vzbujanja čustev so udeleženci gledali 20 čustveno vzbujajočih videoposnetkov.
 Pred vsakim čustvenim posnetkom je bil prikazan še kratek nevtralni posnetek, odziv nanj pa je bil shranjen ločeno.
-Po ogledu posameznega posnetka so udeleženci podali številske samoocene valence, vzburjenosti, dominantnosti in predvidljivosti ter samooceno diskretne čustvene oznake.
-
-Uporabljeni signali so podrobneje opisani v razdelku~\ref{subsec:vhodni-signali}.
-Meritve so bile zajete s sledilnikom Tobii X120 pri frekvenci $60~Hz$.
+Po ogledu posameznega posnetka so udeleženci podali številske samoocene čustvenega stanja valence in vzburjenosti, samooceno diskretne čustvene oznake ter še nekaj drugih ocen.
 
 V izvirnem članku so pri trirazredni klasifikaciji valence iz ročno oblikovanih značilk pogleda po protokolu LOSO (angl. \emph{leave-one-subject-out}), pri katerem je vsak udeleženec enkrat uporabljen kot testna množica, dosegli točnost $68{,}8\,\%$ in povprečni F1 $0{,}68$~\cite{soleymani2012mahnob}.
 Vrednosti so referenčni okvir, vendar niso neposredno primerljive z rezultati te naloge zaradi različnih vhodnih značilk, dolžine obravnavanega odziva in eksperimentalnega cevovoda.
@@ -110,7 +108,7 @@ Ker zamik ni vezan na posameznega udeleženca, je naša hipoteza, da to ni fizio
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{porazdelitev_polozajev_pogleda_retain_2026-06-12.png}
-    \caption{Toplotni prikaz položajev pogleda v očiščenih podatkih za množico signalov pogled in zenici.}
+    \caption{Toplotni prikaz položajev pogleda v očiščenih podatkih za množico signalov \emph{pogled in zenici}.}
     \label{fig:porazdelitev-polozajev-pogleda}
 \end{figure}
 
@@ -119,7 +117,7 @@ Ker zamik ni vezan na posameznega udeleženca, je naša hipoteza, da to ni fizio
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{porazdelitev_velikosti_zenic_retain_2026-06-12.pdf}
-    \caption{Porazdelitev velikosti leve in desne zenice v očiščenih podatkih za množico signalov pogled in zenici.}
+    \caption{Porazdelitev velikosti leve in desne zenice v očiščenih podatkih za množico signalov \emph{pogled in zenici}.}
     \label{fig:porazdelitev-velikosti-zenic}
 \end{figure}
 
@@ -128,7 +126,7 @@ Ker zamik ni vezan na posameznega udeleženca, je naša hipoteza, da to ni fizio
 
 Posamezne skupine signalov so izražene v različnih velikostnih redih.
 Modeli strojnega učenja, kot so \ModelName{SVM}, \ModelName{MLP} ter GNN, so občutljivi na velikostni red vhodnih značilk oz. signalov.
-Zato signale standardiziramo z znano formulo $\frac{x-\mu}{\sigma}$.
+Zato signale standardiziramo z znano formulo~$\frac{x-\mu}{\sigma}$.
 Povprečje $\mu$ in standardni odklon $\sigma$ izračunamo na učni podmnožici, nato pa na validacijski in testni podmnožici standardizacijo uporabimo z istimi parametri kot na učni.
 Pri grafovskih modelih na enak način standardiziramo tudi značilke povezav, kadar jih uporabljena množica signalov vsebuje.
 

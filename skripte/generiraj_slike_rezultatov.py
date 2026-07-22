@@ -12,6 +12,8 @@ Privzeto bere rezultate iz sosednjega repozitorija `GFM-for-eyetracker`:
 Iz istega reteniranega teka generira tudi dodatkovne matrike zamenjav. Sliko
 ujemanja oznak s samoocenami generira iz analize
 `results/label_noise_analysis/2026-05-13_table6_self_report_alignment`.
+Iz tabele `training_history.csv` generira tudi zgoščen prikaz učne in
+validacijske izgube grafovskih modelov za množico signalov `pogled in zenici`.
 """
 
 from __future__ import annotations
@@ -109,6 +111,20 @@ CONFUSION_MODEL_ORDER = {
         "HeteroGCNMLP",
         "HeteroGCNMLPWeights",
     ],
+}
+
+TRAINING_MODEL_ORDER = [
+    "BasicGCN",
+    "HeteroGCNMean",
+    "HeteroGCNMLP",
+    "HeteroGCNMLPWeights",
+]
+
+TRAINING_MODEL_LABELS = {
+    "BasicGCN": "GCN",
+    "HeteroGCNMean": "HeteroGCN-mean",
+    "HeteroGCNMLP": "HeteroGCN-MLP",
+    "HeteroGCNMLPWeights": "HeteroGCN-MLP-w",
 }
 
 APPENDIX_CONFUSION_OUTPUTS = {
@@ -285,6 +301,137 @@ def generate_main_comparison_heatmap(df: pd.DataFrame, output_path: Path, dpi: i
     ax.collections[0].colorbar.set_label("točnost", fontsize=COLORBAR_LABEL_FONTSIZE)
     fig.tight_layout()
 
+    save_figure(fig, output_path, dpi)
+    plt.close(fig)
+
+
+def load_training_history(tables_dir: Path) -> pd.DataFrame:
+    path = tables_dir / "training_history.csv"
+    df = pd.read_csv(path)
+    expected_columns = {
+        "signal_set",
+        "model",
+        "fold_id",
+        "history_kind",
+        "epoch",
+        "train_loss",
+        "val_loss",
+    }
+    missing = expected_columns.difference(df.columns)
+    if missing:
+        raise ValueError(f"V {path} manjkajo stolpci: {sorted(missing)}")
+    return df
+
+
+def generate_training_loss_plot(
+    df: pd.DataFrame,
+    output_path: Path,
+    dpi: int,
+    signal_set: str = "gaze_pupil",
+) -> None:
+    """Generira povprečni potek učne in validacijske izgube GNN-modelov."""
+    subset = df[
+        (df["signal_set"] == signal_set)
+        & (df["history_kind"] == "gnn")
+        & (df["model"].isin(TRAINING_MODEL_ORDER))
+    ].copy()
+    if subset.empty:
+        raise ValueError(f"Ni učnih zgodovin za signal_set={signal_set}.")
+
+    for column in ["epoch", "train_loss", "val_loss"]:
+        subset[column] = pd.to_numeric(subset[column], errors="coerce")
+    subset = subset.dropna(subset=["epoch", "train_loss", "val_loss"])
+
+    fig, axes = plt.subplots(
+        2,
+        2,
+        figsize=(10.6, 6.9),
+        sharex=True,
+        sharey=True,
+    )
+    axes = axes.ravel()
+
+    train_color = "#8ECAE6"
+    validation_color = "#F4A261"
+    all_losses = subset[["train_loss", "val_loss"]].to_numpy(dtype=float)
+    loss_min = float(np.nanmin(all_losses))
+    loss_max = float(np.nanmax(all_losses))
+    loss_margin = max(0.02, 0.06 * (loss_max - loss_min))
+    y_min = max(0.0, loss_min - loss_margin)
+    y_max = loss_max + loss_margin
+    max_epoch = int(subset["epoch"].max())
+
+    for ax, model_name in zip(axes, TRAINING_MODEL_ORDER):
+        model_subset = subset[subset["model"] == model_name]
+        stats = (
+            model_subset.groupby("epoch")
+            .agg(
+                train_mean=("train_loss", "mean"),
+                train_std=("train_loss", "std"),
+                validation_mean=("val_loss", "mean"),
+                validation_std=("val_loss", "std"),
+            )
+            .sort_index()
+        )
+        epochs = stats.index.to_numpy(dtype=float)
+        train_mean = stats["train_mean"].to_numpy(dtype=float)
+        train_std = stats["train_std"].fillna(0.0).to_numpy(dtype=float)
+        validation_mean = stats["validation_mean"].to_numpy(dtype=float)
+        validation_std = stats["validation_std"].fillna(0.0).to_numpy(dtype=float)
+
+        ax.plot(epochs, train_mean, color=train_color, linewidth=2.0, label="učna izguba")
+        ax.fill_between(
+            epochs,
+            train_mean - train_std,
+            train_mean + train_std,
+            color=train_color,
+            alpha=0.25,
+            linewidth=0,
+        )
+        ax.plot(
+            epochs,
+            validation_mean,
+            color=validation_color,
+            linewidth=2.0,
+            label="validacijska izguba",
+        )
+        ax.fill_between(
+            epochs,
+            validation_mean - validation_std,
+            validation_mean + validation_std,
+            color=validation_color,
+            alpha=0.25,
+            linewidth=0,
+        )
+        ax.set_title(TRAINING_MODEL_LABELS[model_name], fontsize=14, fontweight="bold", pad=8)
+        ax.set_xlim(1, max_epoch)
+        ax.set_ylim(y_min, y_max)
+        ax.grid(axis="both", color="#E6E6E6", linewidth=0.7)
+        ax.set_axisbelow(True)
+        ax.tick_params(axis="both", labelsize=11)
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+        ax.spines["left"].set_color("#B0B0B0")
+        ax.spines["bottom"].set_color("#B0B0B0")
+
+    fig.supxlabel("epoha", fontsize=14, y=0.075)
+    fig.supylabel("izguba", fontsize=14)
+    fig.suptitle(
+        "Potek učne in validacijske izgube pri množici pogled in zenici",
+        fontsize=17,
+        y=0.99,
+    )
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(
+        handles,
+        labels,
+        loc="lower center",
+        bbox_to_anchor=(0.5, 0.015),
+        ncol=2,
+        frameon=False,
+        fontsize=12,
+    )
+    fig.tight_layout(rect=(0.02, 0.12, 1.0, 0.95))
     save_figure(fig, output_path, dpi)
     plt.close(fig)
 
@@ -609,7 +756,7 @@ def generate_signal_distribution_plots(df: pd.DataFrame, data_figures_dir: Path,
         x_edges,
         y_edges,
         masked_counts,
-        cmap="Blues",
+        cmap="RdBu_r",
         norm=LogNorm(vmin=1, vmax=max(1, counts.max())),
         shading="auto",
     )
@@ -683,6 +830,13 @@ def main() -> None:
     generate_main_comparison_heatmap(
         main_metrics,
         args.results_figures_dir / "glavna_primerjava_modelov_heatmap.png",
+        args.dpi,
+    )
+
+    training_history = load_training_history(args.tables_dir)
+    generate_training_loss_plot(
+        training_history,
+        args.results_figures_dir / "potek_izgube_gnn_pogled_zenici",
         args.dpi,
     )
 

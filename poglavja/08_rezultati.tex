@@ -31,6 +31,26 @@ Dodatne matrike zamenjav za vse modele in vse množice signalov so prikazane v d
 
 \input{tabele/rezultati/glavna_primerjava_modelov.tex}
 
+Poleg končnih klasifikacijskih meritev smo preverili tudi potek učenja modelov.
+Slika~\ref{fig:potek-izgube-gnn} prikazuje učno in validacijsko izgubo vseh štirih grafovskih arhitektur pri množici signalov \emph{pogled in zenici}.
+Za berljivost so prikazane povprečne vrednosti čez sedem delitev po subjektih, zasenčeno območje pa predstavlja standardni odklon med delitvami.
+Ker se delitve zaradi zgodnjega ustavljanja končajo po različnem številu epoh, se dolžina krivulj med modeli razlikuje in se posledično zasenčeno območje pri večjem številu epoh skrči vse do 0, saj se je le v enem primeru model učil največ epoh.
+
+% Vir podatkov: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/training_history.csv.
+% Slika je reproducibilno generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\textwidth]{potek_izgube_gnn_pogled_zenici.pdf}
+    \caption{Povprečni potek učne in validacijske izgube grafovskih modelov pri množici signalov \emph{pogled in zenici}. Zasenčena območja predstavljajo standardni odklon čez sedem delitev po subjektih.}
+    \label{fig:potek-izgube-gnn}
+\end{figure}
+
+Pri vseh arhitekturah učna izguba na začetku hitro upade, nato pa se spremembe umirijo.
+Validacijska izguba se po začetnem izboljšanju večinoma stabilizira, pri čemer med delitvami ostaja opazna variabilnost.
+Validacijska izguba je pri večini modelov nižja od učne, kar je lahko posledica merjenja v različnih načinih delovanja modela. 
+Modele učimo z izpuščanjem, ki poveča šum in s tem učno izgubo, med validacijo pa izpuščanja ni. 
+Poleg tega je učna izguba povprečje med posodabljanjem uteži skozi epoho, validacijska izguba pa se izračuna po koncu epohe, ko so uteži že prilagojene.
+
 Slika~\ref{fig:rezultati-matrike-zamenjav} prikazuje napake za signalno množico \emph{pogled in zenici}, pri kateri je dosežen najboljši skupni rezultat.
 Najuspešnejši model \ModelName{SVM} pravilno razvrsti $73{,}0~\%$ vzorcev negativne valence in $67{,}7~\%$ vzorcev pozitivne valence, najuspešnejši grafovski model, \ModelName{HeteroGCN-MLP-w}, pa $64{,}8~\%$ oziroma $65{,}8~\%$.
 
@@ -41,7 +61,7 @@ Najuspešnejši model \ModelName{SVM} pravilno razvrsti $73{,}0~\%$ vzorcev nega
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{matrike_zamenjav_pogled_zenici_svm_heterogcn_mlp_w.pdf}
-    \caption{Vrstično normalizirani matriki zamenjav za najboljši model \ModelName{SVM} in najboljši grafovski model \ModelName{HeteroGCN-MLP-w} pri množici signalov pogled in zenici.}
+    \caption{Vrstično normalizirani matriki zamenjav za najboljši model \ModelName{SVM} in najboljši grafovski model \ModelName{HeteroGCN-MLP-w} pri množici signalov \emph{pogled in zenici}.}
     \label{fig:rezultati-matrike-zamenjav}
 \end{figure}
 

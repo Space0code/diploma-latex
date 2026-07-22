@@ -184,6 +184,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-22 Toplotni prikaz porazdelitve položajev pogleda na Sliki~4.2 uporablja
+  divergirajočo lestvico `RdBu_r`: modra pomeni majhno, rdeča pa veliko število
+  meritev. Ta izjema od privzete lestvice `Blues` je namenjena semantično jasnemu
+  prikazu gostote.
 - 2026-07-22 Za validacijski protokol, pri katerem je testni subjekt v posamezni ponovitvi izpuščen, uporabljaj izključno kratico `LOSO` (angl. `leave-one-subject-out`). Izraza `LOO po subjektih` in `LOO po posnetkih` v diplomi ne uporabljaj in ne omenjaj.
 - 2026-07-22 Mentor želi, da je pri vsakem od štirih GNN v poglavju 6 podana glavna enačba. Enačbe naj neposredno pokažejo razlikovalni korak posamezne stopnje: homogeno konvolucijo, relacijsko povprečenje, naučeno MLP-fuzijo in uteženo relacijsko posredovanje sporočil.
 - 2026-07-21 V poglavju 4 so bile vsebine nekdanjih sekcij `Priprava vhodnih signalov`, `Normalizacija`, `Segmentacija v časovna okna` in `Povzetek predobdelave` združene v sekcijo `Priprava podatkov za učenje` z dvema podsekcijama: `Množice signalov in čiščenje podatkov` ter `Standardizacija in tvorba časovnih oken`. Povzetna tabela predobdelave je na koncu druge podsekcije brez samostojnega naslova.

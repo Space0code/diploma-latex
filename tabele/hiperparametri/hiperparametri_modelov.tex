@@ -10,16 +10,27 @@
         \textbf{Model oziroma družina} & \textbf{Podatkovna predstavitev} & \textbf{Glavni hiperparametri} \\
         \midrule
         Naključni model & agregirane značilke & enakomerna naključna napoved; seme 42 \\
+        \midrule
         Večinski model & agregirane značilke & napoved večinskega razreda na učni množici \\
+        \midrule
         \ModelName{SVM} & agregirane značilke & RBF; $C=1{,}0$; \texttt{probability=true}; standardizacija značilk \\
+        \midrule
         \ModelName{LightGBM} & agregirane značilke & \texttt{n\_estimators=100}; \texttt{learning\_rate=0.05}; \texttt{max\_depth=5}; seme 42 \\
+        \midrule
         \ModelName{MLP} & agregirane značilke & skrita velikost 64; največ 200 epoh; učna stopnja $10^{-3}$; \texttt{dropout=0.1}; mini-serija 128; potrpežljivost 15 \\
+        \midrule
         \ModelName{GazeMAE}/\ModelName{MOMENT} glave & zamrznjene predstavitve & skrita velikost 128; največ 100 epoh; učna stopnja $10^{-3}$; \texttt{dropout=0.2}; mini-serija 128; potrpežljivost 15 \\
+        \midrule
         Grafovski modeli & grafi časovnih oken & \texttt{GCNConv}; 2 plasti; \texttt{hidden\_channels=64}; pozornostno združevanje; \texttt{dropout=0.1}; učna stopnja $5 \cdot 10^{-5}$; mini-serija 256; največ 350 epoh; potrpežljivost 20 \\
+        \midrule
         \ModelName{GCN} & grafi časovnih oken & homogen graf; brez ločenih relacij in značilk povezav \\
+        \midrule
         \ModelName{HeteroGCN-mean} & grafi časovnih oken & ločene relacije; združevanje s povprečenjem \\
+        \midrule
         \ModelName{HeteroGCN-MLP} & grafi časovnih oken & ločene relacije; združevanje z \ModelName{MLP} \\
+        \midrule
         \ModelName{HeteroGCN-MLP-w} & grafi časovnih oken & kot \ModelName{HeteroGCN-MLP}, z naučenimi utežmi povezav \\
+        \midrule
         Grafovska konstrukcija & grafi časovnih oken & $k_t=1$; $k_s=1$; $k_f=3$; standardizirane značilke povezav \\
         \bottomrule
     \end{tabularx}

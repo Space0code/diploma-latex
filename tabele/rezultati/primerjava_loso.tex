@@ -3,10 +3,11 @@
 % Namenoma so ohranjeni samo modeli, za katere je bil pognan LOSO. Ne dodajaj drugih modelov, za katere nimamo rezultatov.
 \begin{table}
     \centering
-    \caption{Primerjava 7-kratnega prečnega preverjanja po subjektih in LOSO za množico signalov \emph{pogled in zenici} za izbrane modele. LOSO nismo poganjali v začetnih fazah za hitro primerjavo, zato nekateri modeli manjkajo. Vrednosti so povprečja v odstotkih.}
+    \caption{Primerjava 7-kratnega prečnega preverjanja po subjektih in LOSO za množico signalov \emph{pogled in zenici} za izbrane modele. LOSO nismo poganjali v začetnih fazah za hitro primerjavo, zato nekateri modeli manjkajo. Vrednosti so povprečja v odstotkih. Krepko je označen najboljši rezultat v posameznem stolpcu, krepko poševno pa najboljši rezultat med grafovskimi modeli.}
     \label{tab:dodatek-loso-primerjava}
-    \footnotesize
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth} *{4}{>{\centering\arraybackslash}X}@{}}
+    \scriptsize
+    \setlength{\tabcolsep}{2pt}
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.28\textwidth} *{4}{>{\centering\arraybackslash}X}@{}}
         \toprule
         \textbf{Model} & \multicolumn{2}{c}{\textbf{Točnost}} & \multicolumn{2}{c}{\textbf{Makro F1}} \\
         \cmidrule(lr){2-3}\cmidrule(l){4-5}
@@ -15,12 +16,12 @@
         Naključni & $50{,}8$ & $48{,}7$ & $50{,}6$ & $48{,}2$ \\
         Večinski & $52{,}1$ & $51{,}8$ & $34{,}2$ & $33{,}9$ \\
         \midrule
-        \ModelName{LightGBM} & $69{,}6$ & $70{,}1$ & $68{,}8$ & $68{,}3$ \\
+        \mbox{\ModelName{LightGBM}} & \mbox{\boldmath$69{,}6$} & \mbox{\boldmath$70{,}1$} & \mbox{\boldmath$68{,}8$} & \mbox{\boldmath$68{,}3$} \\
         \midrule
-        \ModelName{GazeMAE/MOMENT} & $65{,}6$ & $68{,}6$ & $65{,}2$ & $67{,}8$ \\
+        \mbox{\ModelName{GazeMAE/MOMENT}} & \mbox{$65{,}6$} & \mbox{$68{,}6$} & \mbox{$65{,}2$} & \mbox{$67{,}8$} \\
         \midrule
-        \ModelName{GCN} & $65{,}4$ & $64{,}0$ & $63{,}9$ & $61{,}0$ \\
-        \ModelName{HeteroGCN-MLP-w} & $65{,}5$ & $63{,}2$ & $64{,}4$ & $60{,}1$ \\
+        \mbox{\ModelName{GCN}} & \mbox{$65{,}4$} & \mbox{\boldmath$\mathit{64{,}0}$} & \mbox{$63{,}9$} & \mbox{\boldmath$\mathit{61{,}0}$} \\
+        \mbox{\ModelName{HeteroGCN-MLP-w}} & \mbox{\boldmath$\mathit{65{,}5}$} & \mbox{$63{,}2$} & \mbox{\boldmath$\mathit{64{,}4}$} & \mbox{$60{,}1$} \\
         \bottomrule
     \end{tabularx}
 \end{table}

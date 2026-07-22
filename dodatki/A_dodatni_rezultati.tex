@@ -27,8 +27,7 @@ Preciznost pove, kolikšen delež napovedi razreda $c$ je pravilen, priklic ozir
     \mathrm{priklic}_c = \frac{\mathrm{TP}_c}{\mathrm{TP}_c + \mathrm{FN}_c}.
 \]
 V poročanih binarnih rezultatih sta preciznost in priklic makro povprečji po razredih.
-Uteženi F1 je povprečje F1 po razredih, uteženo s številom dejanskih primerov posameznega razreda; Micro-F1 pa metriko izračuna iz skupnih vrednosti $\mathrm{TP}$, $\mathrm{FP}$ in $\mathrm{FN}$ vseh razredov.
-Pri enooznačni klasifikaciji je Micro-F1 enak točnosti.
+Uteženi F1 je povprečje F1 po razredih, uteženo s številom dejanskih primerov posameznega razreda.
 
 AUC (angl. \emph{area under the ROC curve}) je ploščina pod krivuljo ROC in meri, kako dobro napovedne verjetnosti razvrstijo pozitivne primere pred negativne neodvisno od izbranega klasifikacijskega praga.
 Izguba je povprečna negativna logaritemska verjetnost pravilnega razreda, tj. križna entropija; manjša vrednost pomeni boljše ujemanje napovednih verjetnosti z oznakami.
@@ -43,8 +42,9 @@ Nizka varianca oziroma majhen razpon logitov skupaj z visoko podobnostjo lahko k
 
 Tabele v tem razdelku razširjajo glavno primerjavo iz poglavja~\ref{sec:rezultati}.
 Vrednosti so povprečje $\pm$ standardni odklon čez sedem testnih množic prečnega preverjanja po subjektih.
+% Micro-F1 je enak točnosti; tega izraza v diplomi ne omenjajmo drugje.
 Micro-F1 je pri tej enooznačni klasifikaciji enak točnosti.
-Razširjene metrike so namenjene predvsem preverjanju, ali sklep iz glavne primerjave ostane podoben tudi pri drugih pogledih na napake modelov.
+Razširjene metrike dodatno potrjujejo sklep iz glavne primerjave, saj ostane podoben tudi pri drugih pogledih na napake modelov.
 
 % Vir podatkov za tabele: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/metric_summary_with_std.csv.
 \input{tabele/rezultati/dodatni_rezultati_samo_pogled.tex}
@@ -80,28 +80,28 @@ Pri množici \emph{samo zenici} so napake bolj uravnotežene z naključnim ugiba
 \begin{figure}
     \centering
     \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_samo_pogled.pdf}
-    \caption{Matrike zamenjav za množico signalov samo pogled. Prikaz vključuje naključni in večinski model, klasične modele \ModelName{SVM}, \ModelName{LightGBM} in \ModelName{MLP}, zamrznjene predstavitve \ModelName{GazeMAE/MOMENT} ter štiri grafovske modele od osnovnega \ModelName{GCN} do \ModelName{HeteroGCN-MLP-w}.}
+    \caption{Matrike zamenjav za množico signalov\emph{samo pogled}. Prikaz vključuje naključni in večinski model, klasične modele \ModelName{SVM}, \ModelName{LightGBM} in \ModelName{MLP}, zamrznjene predstavitve \ModelName{GazeMAE/MOMENT} ter štiri grafovske modele od osnovnega \ModelName{GCN} do \ModelName{HeteroGCN-MLP-w}.}
     \label{fig:matrike-zamenjav-dodatek-samo-pogled}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_samo_zenici.pdf}
-    \caption{Matrike zamenjav za množico signalov samo zenici. Razporeditev modelov je enaka kot pri drugih množicah signalov: izhodiščna modela, trije klasični oziroma nevronski primerjalni modeli, zamrznjene predstavitve in štiri grafovske arhitekture.}
+    \caption{Matrike zamenjav za množico signalov \emph{samo zenici}. Razporeditev modelov je enaka kot pri drugih množicah signalov: izhodiščna modela, trije klasični oziroma nevronski primerjalni modeli, zamrznjene predstavitve in štiri grafovske arhitekture.}
     \label{fig:matrike-zamenjav-dodatek-samo-zenici}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_pogled_zenici.pdf}
-    \caption{Matrike zamenjav za množico signalov pogled in zenici. Ta množica doseže najboljši skupni rezultat v glavni primerjavi, zato prikaz omogoča neposredno primerjavo napak med najuspešnejšim \ModelName{SVM} in grafovskimi modeli.}
+    \caption{Matrike zamenjav za množico signalov \emph{pogled in zenici}. Ta množica doseže najboljši skupni rezultat v glavni primerjavi, zato prikaz omogoča neposredno primerjavo napak med najuspešnejšim \ModelName{SVM} in grafovskimi modeli.}
     \label{fig:matrike-zamenjav-dodatek-pogled-zenici}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_vsi_signali.pdf}
-    \caption{Matrike zamenjav za množico signalov vsi signali. Prikaz povzema napake modelov pri najbogatejši vhodni predstavitvi, ki poleg pogleda in zenic vključuje še oddaljenost od sledilnika pogleda ter fiksacijske informacije.}
+    \caption{Matrike zamenjav za množico signalov\emph{vsi signali}. Prikaz povzema napake modelov pri najbogatejši vhodni predstavitvi, ki poleg pogleda in zenic vključuje še oddaljenost od sledilnika pogleda ter fiksacijske informacije.}
     \label{fig:matrike-zamenjav-dodatek-vsi-signali}
 \end{figure}
 
@@ -130,7 +130,7 @@ To ne pomeni, da so oznake valence brez šuma, vendar je za glavno primerjavo mo
 \section{Izbira tipa grafovske konvolucije}
 \label{app:izbira-grafovske-konvolucije}
 
-Izbiro operatorja \texttt{GCNConv} smo preverili z dodatnim poskusom na binarni nalogi valence pri množici signalov pogled in zenici.
+Izbiro operatorja \texttt{GCNConv} smo preverili z dodatnim poskusom na binarni nalogi valence pri množici signalov \emph{pogled in zenici}.
 \texttt{GCNConv} je najpreprostejša izbira in ustreza osnovnemu posredovanju sporočil po normalizirani sosednosti.
 \texttt{GATConv} doda pozornost nad sosedi in je uporaben, kadar želimo, da model sam uteži prispevke sosednjih vozlišč.
 \texttt{GraphConv} uporabi ločen prispevek lastnega vozlišča in sosedov; pri osnovnem modelu deluje brez uteži povezav.
@@ -148,7 +148,7 @@ Ta primerjava ni ločeno iskanje najboljše grafovske arhitekture, temveč preve
 \label{app:diagnostika-prekomerno-glajenje}
 
 Diagnostika ne kaže jasnega kolapsa predstavitev pri glavnih grafovskih modelih.
-Množica samo zenici ima bolj neodločne napovedi, vendar tega ne obravnavamo kot sistemski kolaps grafovskih modelov.
+Množica \emph{samo zenici} ima bolj neodločne napovedi, vendar tega ne obravnavamo kot sistemski kolaps grafovskih modelov.
 Entropija in razpon logitov opisujeta gotovost napovedi, varianca predstavitev in kosinusna podobnost pa razpršenost naučenih predstavitev grafov.
 Pri množici \emph{samo zenici} sta razpon logitov in varianca predstavitev manjša, entropija pa večja, kar je skladno z manj odločnimi napovedmi.
 Pri množicah s koordinatami pogleda so logiti izrazitejši in predstavitve bolj razpršene.

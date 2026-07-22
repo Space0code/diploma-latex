@@ -1,27 +1,27 @@
 % Samodejno generirano iz .../tables/metric_summary_with_std.csv.
-% Micro-F1 je pri enooznacni klasifikaciji enak tocnosti, zato je prevzet iz istega stolpca.
 \begin{table}
     \centering
-    \caption{Razširjeni rezultati za množico signalov vsi signali. Vrednosti so povprečje $\pm$ standardni odklon čez sedem testnih množic, v odstotkih.}
+    \caption{Razširjeni rezultati za množico signalov\emph{vsi signali}. Vrednosti so povprečje $\pm$ standardni odklon čez sedem testnih množic (v odstotkih). Krepko je označen najboljši rezultat v posameznem stolpcu, krepko poševno pa najboljši rezultat med grafovskimi modeli.}
     \label{tab:dodatek-rezultati-dodatni-rezultati-vsi-signali}
     \footnotesize
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.21\textwidth} *{6}{>{\centering\arraybackslash}X}@{}}
+    \setlength{\tabcolsep}{2pt}
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.23\textwidth} *{5}{>{\centering\arraybackslash}X}@{}}
         \toprule
-        \textbf{Model} & \textbf{Točnost} & \makecell{\textbf{Preciz-}\\\textbf{nost}} & \textbf{Priklic} & \textbf{Makro F1} & \textbf{Micro-F1} & \textbf{AUC} \\
+        \textbf{Model} & \textbf{Točnost} & \makecell{\textbf{Preciz-}\\\textbf{nost}} & \textbf{Priklic} & \textbf{Makro F1} & \textbf{AUC} \\
         \midrule
-        Naključni & $50,9 \pm 2,0$ & $50,8 \pm 1,9$ & $50,9 \pm 1,9$ & $50,7 \pm 1,8$ & $50,9 \pm 2,0$ & $50,9 \pm 1,9$ \\
-        Večinski & $52,2 \pm 4,8$ & $26,1 \pm 2,4$ & $50,0 \pm 0,0$ & $34,2 \pm 2,0$ & $52,2 \pm 4,8$ & $50,0 \pm 0,0$ \\
+        Naključni & $50{,}9 \pm 2{,}0$ & $50{,}8 \pm 1{,}9$ & $50{,}9 \pm 1{,}9$ & $50{,}7 \pm 1{,}8$ & $50{,}9 \pm 1{,}9$ \\
+        Večinski & $52{,}2 \pm 4{,}8$ & $26{,}1 \pm 2{,}4$ & $50{,}0 \pm 0{,}0$ & $34{,}2 \pm 2{,}0$ & $50{,}0 \pm 0{,}0$ \\
         \midrule
-        \ModelName{SVM} & $68,6 \pm 3,3$ & $69,9 \pm 2,1$ & $68,3 \pm 2,3$ & $67,6 \pm 3,3$ & $68,6 \pm 3,3$ & $76,2 \pm 2,6$ \\
-        \ModelName{LightGBM} & $69,0 \pm 3,0$ & $70,4 \pm 2,2$ & $69,0 \pm 2,5$ & $68,3 \pm 3,2$ & $69,0 \pm 3,0$ & $77,6 \pm 2,7$ \\
-        \ModelName{MLP} & $67,2 \pm 3,0$ & $68,9 \pm 2,6$ & $67,1 \pm 2,2$ & $66,2 \pm 2,7$ & $67,2 \pm 3,0$ & $75,4 \pm 3,6$ \\
+        \mbox{\ModelName{SVM}} & \mbox{$68{,}6 \pm 3{,}3$} & \mbox{$69{,}9 \pm 2{,}1$} & \mbox{$68{,}3 \pm 2{,}3$} & \mbox{$67{,}6 \pm 3{,}3$} & \mbox{$76{,}2 \pm 2{,}6$} \\
+        \mbox{\ModelName{LightGBM}} & \mbox{\boldmath$69{,}0 \pm 3{,}0$} & \mbox{\boldmath$70{,}4 \pm 2{,}2$} & \mbox{\boldmath$69{,}0 \pm 2{,}5$} & \mbox{\boldmath$68{,}3 \pm 3{,}2$} & \mbox{\boldmath$77{,}6 \pm 2{,}7$} \\
+        \mbox{\ModelName{MLP}} & \mbox{$67{,}2 \pm 3{,}0$} & \mbox{$68{,}9 \pm 2{,}6$} & \mbox{$67{,}1 \pm 2{,}2$} & \mbox{$66{,}2 \pm 2{,}7$} & \mbox{$75{,}4 \pm 3{,}6$} \\
         \midrule
-        \ModelName{GazeMAE/MOMENT} & $66,1 \pm 3,1$ & $66,8 \pm 2,6$ & $66,3 \pm 3,0$ & $65,6 \pm 3,4$ & $66,1 \pm 3,1$ & $72,2 \pm 4,2$ \\
+        \mbox{\ModelName{GazeMAE/MOMENT}} & \mbox{$66{,}1 \pm 3{,}1$} & \mbox{$66{,}8 \pm 2{,}6$} & \mbox{$66{,}3 \pm 3{,}0$} & \mbox{$65{,}6 \pm 3{,}4$} & \mbox{$72{,}2 \pm 4{,}2$} \\
         \midrule
-        \ModelName{GCN} & $59,6 \pm 8,4$ & $61,5 \pm 8,9$ & $59,3 \pm 8,0$ & $57,6 \pm 8,5$ & $59,6 \pm 8,4$ & $65,7 \pm 12,3$ \\
-        \ModelName{HeteroGCN-mean} & $61,8 \pm 3,9$ & $63,8 \pm 3,7$ & $61,3 \pm 2,5$ & $59,7 \pm 4,0$ & $61,8 \pm 3,9$ & $69,6 \pm 3,1$ \\
-        \ModelName{HeteroGCN-MLP} & $60,5 \pm 6,7$ & $61,3 \pm 9,3$ & $59,9 \pm 6,3$ & $56,6 \pm 10,7$ & $60,5 \pm 6,7$ & $69,0 \pm 6,2$ \\
-        \ModelName{HeteroGCN-MLP-w} & $62,7 \pm 4,5$ & $64,6 \pm 3,0$ & $62,3 \pm 3,1$ & $60,8 \pm 5,1$ & $62,7 \pm 4,5$ & $70,2 \pm 3,4$ \\
+        \mbox{\ModelName{GCN}} & \mbox{$59{,}6 \pm 8{,}4$} & \mbox{$61{,}5 \pm 8{,}9$} & \mbox{$59{,}3 \pm 8{,}0$} & \mbox{$57{,}6 \pm 8{,}5$} & \mbox{$65{,}7 \pm 12{,}3$} \\
+        \mbox{\ModelName{HeteroGCN-mean}} & \mbox{$61{,}8 \pm 3{,}9$} & \mbox{$63{,}8 \pm 3{,}7$} & \mbox{$61{,}3 \pm 2{,}5$} & \mbox{$59{,}7 \pm 4{,}0$} & \mbox{$69{,}6 \pm 3{,}1$} \\
+        \mbox{\ModelName{HeteroGCN-MLP}} & \mbox{$60{,}5 \pm 6{,}7$} & \mbox{$61{,}3 \pm 9{,}3$} & \mbox{$59{,}9 \pm 6{,}3$} & \mbox{$56{,}6 \pm 10{,}7$} & \mbox{$69{,}0 \pm 6{,}2$} \\
+        \mbox{\ModelName{HeteroGCN-MLP-w}} & \mbox{\boldmath$\mathit{62{,}7 \pm 4{,}5}$} & \mbox{\boldmath$\mathit{64{,}6 \pm 3{,}0}$} & \mbox{\boldmath$\mathit{62{,}3 \pm 3{,}1}$} & \mbox{\boldmath$\mathit{60{,}8 \pm 5{,}1}$} & \mbox{\boldmath$\mathit{70{,}2 \pm 3{,}4}$} \\
         \bottomrule
     \end{tabularx}
 \end{table}

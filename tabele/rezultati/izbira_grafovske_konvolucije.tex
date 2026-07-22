@@ -1,21 +1,21 @@
 % Vir podatkov: GFM-for-eyetracker/results/conv_type_comparison/2026-06-17_09-08-08/conv_type_comparison_summary.csv.
 \begin{table}
     \centering
-    \caption{Primerjava tipov grafovskih konvolucij pri množici signalov pogled in zenici. Stolpec arhitektura označuje grafovski model, v katerem je bil zamenjan operator posredovanja sporočil, stolpec operator pa uporabljeno grafovsko konvolucijo. Točnost in makro F1 sta povprečni vrednosti čez sedem testnih množic.}
+    \caption{Primerjava tipov grafovskih konvolucij pri množici signalov \emph{pogled in zenici}. Stolpec arhitektura označuje grafovski model, v katerem je bil zamenjan operator posredovanja sporočil, stolpec operator pa uporabljeno grafovsko konvolucijo. Točnost in makro F1 sta povprečni vrednosti čez sedem testnih množic. Krepko je označen najboljši rezultat za posamezno metriko znotraj vsake arhitekturne skupine, krepko poševno pa drugi najboljši rezultat.}
     \label{tab:dodatek-izbira-konvolucije}
     \footnotesize
     \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.34\textwidth} >{\raggedright\arraybackslash}p{0.21\textwidth} >{\raggedleft\arraybackslash}X >{\raggedleft\arraybackslash}X@{}}
         \toprule
         \textbf{Arhitektura} & \textbf{Operator} & \textbf{Točnost} & \textbf{Makro F1} \\
         \midrule
-        Osnovni \ModelName{GCN} & \texttt{GCNConv} & $0{,}6474$ & $0{,}6337$ \\
-        Osnovni \ModelName{GCN} & \texttt{GATConv} & $0{,}6484$ & $0{,}6336$ \\
+        Osnovni \ModelName{GCN} & \texttt{GCNConv} & $0{,}6474$ & \mbox{\boldmath$\mathit{0{,}6337}$} \\
+        Osnovni \ModelName{GCN} & \texttt{GATConv} & \mbox{\boldmath$\mathit{0{,}6484}$} & $0{,}6336$ \\
         Osnovni \ModelName{GCN} & \texttt{GraphConv} & $0{,}6367$ & $0{,}6192$ \\
-        Osnovni \ModelName{GCN} & \texttt{GINConv} & $0{,}6613$ & $0{,}6501$ \\
+        Osnovni \ModelName{GCN} & \texttt{GINConv} & \mbox{\boldmath$0{,}6613$} & \mbox{\boldmath$0{,}6501$} \\
         \addlinespace
-        \ModelName{HeteroGCN-MLP-w} & \texttt{GCNConv} & $0{,}6391$ & $0{,}6103$ \\
-        \ModelName{HeteroGCN-MLP-w} & \texttt{GATConv} & $0{,}6370$ & $0{,}6116$ \\
-        \ModelName{HeteroGCN-MLP-w} & \texttt{GraphConv} & $0{,}6606$ & $0{,}6503$ \\
+        \ModelName{HeteroGCN-MLP-w} & \texttt{GCNConv} & \mbox{\boldmath$\mathit{0{,}6391}$} & $0{,}6103$ \\
+        \ModelName{HeteroGCN-MLP-w} & \texttt{GATConv} & $0{,}6370$ & \mbox{\boldmath$\mathit{0{,}6116}$} \\
+        \ModelName{HeteroGCN-MLP-w} & \texttt{GraphConv} & \mbox{\boldmath$0{,}6606$} & \mbox{\boldmath$0{,}6503$} \\
         \ModelName{HeteroGCN-MLP-w} & \texttt{GINEConv} & $0{,}6325$ & $0{,}6028$ \\
         \bottomrule
     \end{tabularx}

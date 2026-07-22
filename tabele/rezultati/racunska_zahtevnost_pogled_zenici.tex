@@ -1,7 +1,7 @@
-% Samodejno generirano iz .../tables/main_model_complexity_report.csv za signalno množico pogled in zenici.
+% Samodejno generirano iz .../tables/main_model_complexity_report.csv za signalno množico \emph{pogled in zenici}.
 \begin{table}
     \centering
-    \caption{Velikost in računska zahtevnost modelov pri množici signalov pogled in zenici. Zadnji stolpec vsebuje točnost v odstotkih; makro F1 za iste modele je podan v glavni primerjalni tabeli.}
+    \caption{Velikost in računska zahtevnost modelov pri množici signalov \emph{pogled in zenici}. Zadnji stolpec vsebuje točnost v odstotkih; makro F1 za iste modele je podan v glavni primerjalni tabeli.}
     \label{tab:rezultati-racunska-zahtevnost}
     \footnotesize
     \setlength{\tabcolsep}{2.5pt}
@@ -23,19 +23,19 @@
         \makecell[r]{\textbf{Inferenca}\\\textbf{[ms/ok.]}} &
         \textbf{Točnost} \\
         \midrule
-        Naključni & brez značilk & -- & -- & 0,00 & 0,00 & 50,8 \\
-        Večinski & brez značilk & -- & -- & 0,00 & 0,00 & 52,1 \\
+        Naključni & brez značilk & -- & -- & 0{,}00 & 0{,}00 & 50{,}8 \\
+        Večinski & brez značilk & -- & -- & 0{,}00 & 0{,}00 & 52{,}1 \\
         \midrule
-        \ModelName{SVM} & agreg. znač. & -- & -- & 0,39 & 0,08 & \textbf{70,5} \\
-        \ModelName{LightGBM} & agreg. znač. & -- & -- & 0,04 & 0,00 & 69,6 \\
-        \ModelName{MLP} & agreg. znač. & 7 & 7 & 0,39 & 0,00 & 68,7 \\
+        \ModelName{SVM} & agreg. znač. & -- & -- & 0{,}39 & 0{,}08 & \textbf{70{,}5} \\
+        \ModelName{LightGBM} & agreg. znač. & -- & -- & 0{,}04 & 0{,}00 & 69{,}6 \\
+        \ModelName{MLP} & agreg. znač. & 7 & 7 & 0{,}39 & 0{,}00 & 68{,}7 \\
         \midrule
-        \ModelName{GazeMAE/MOMENT} & signal & 181 & 127.217 & 0,26 & 0,00 & 65,6 \\
+        \ModelName{GazeMAE/MOMENT} & signal & 181 & 127.217 & 0{,}26 & 0{,}00 & 65{,}6 \\
         \midrule
-        \ModelName{GCN} & grafi & 26 & 26 & 20,73 & 0,19 & 65,4  \\
-        \ModelName{HeteroGCN-mean} & grafi & 43 & 43 & 26,64 & 0,20 & 63,8  \\
-        \ModelName{HeteroGCN-MLP} & grafi & 76 & 76 & 22,27 & 0,20 & 64,2 \\
-        \ModelName{HeteroGCN-MLP-w} & grafi & 76 & 76 & 21,74 & 0,19 & \textbf{\emph{65,5}} \\
+        \ModelName{GCN} & grafi & 26 & 26 & 20{,}73 & 0{,}19 & 65{,}4  \\
+        \ModelName{HeteroGCN-mean} & grafi & 43 & 43 & 26{,}64 & 0{,}20 & 63{,}8  \\
+        \ModelName{HeteroGCN-MLP} & grafi & 76 & 76 & 22{,}27 & 0{,}20 & 64{,}2 \\
+        \ModelName{HeteroGCN-MLP-w} & grafi & 76 & 76 & 21{,}74 & 0{,}19 & \textbf{\emph{65{,}5}} \\
         \bottomrule
     \end{tabular}
 \end{table}

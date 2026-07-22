@@ -62,6 +62,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Za `overfitting` uporabljaj "prekomerno prileganje", ne "preprileganje".
 - Za `arousal` dosledno uporabljaj "vzburjenost", ne "vzburjenje". Samo pri prvi
   omembi v diplomi dodaj angleški izraz v oklepaju: `vzburjenost (ang. arousal)`.
+- Razreda valence dosledno poimenuj `negativna valenca` in `pozitivna valenca`,
+  ne `neprijetna valenca` in `prijetna valenca`. Enaki kratki oznaki `negativna`
+  in `pozitivna` naj bosta uporabljeni tudi na slikah in v matrikah zamenjav.
 - Za `confusion matrix` dosledno uporabljaj "matrika zamenjav" oziroma v množini
   "matrike zamenjav", ne "matrika zmede" ali "matrike zmede".
 - Za primerjave razpoložljivih signalov sledilnika pogleda uporabljaj izraz
@@ -74,8 +77,8 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   pogleda`, `signali sledilnika pogleda` ali `okna meritev sledilnika pogleda`,
   `gaze` kot `pogled`, `gaze-only` kot `samo pogled`, `pupil-only` kot `samo
   zenici`, `gaze+pupil` kot `pogled in zenici`, `all` kot `vsi signali`,
-  `baseline` kot `primerjalni model` oziroma `izhodiščni model`, `subject LOO`
-  kot `LOO po subjektih`, `recording LOO` kot `LOO po posnetkih`, `k-fold` kot
+  `baseline` kot `primerjalni model` oziroma `izhodiščni model`,
+  `leave-one-subject-out` kot `LOSO`, `k-fold` kot
   `k-kratno prečno preverjanje`, `plot` kot `graf` ali `prikaz`, `pipeline` kot
   `cevovod`, `edge feature` kot `značilka povezave`, `forward/backward temporal
   separation` kot `ločevanje časovnih povezav naprej in nazaj`, `learned signed
@@ -181,6 +184,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-22 Za validacijski protokol, pri katerem je testni subjekt v posamezni ponovitvi izpuščen, uporabljaj izključno kratico `LOSO` (angl. `leave-one-subject-out`). Izraza `LOO po subjektih` in `LOO po posnetkih` v diplomi ne uporabljaj in ne omenjaj.
 - 2026-07-22 Mentor želi, da je pri vsakem od štirih GNN v poglavju 6 podana glavna enačba. Enačbe naj neposredno pokažejo razlikovalni korak posamezne stopnje: homogeno konvolucijo, relacijsko povprečenje, naučeno MLP-fuzijo in uteženo relacijsko posredovanje sporočil.
 - 2026-07-21 V poglavju 4 so bile vsebine nekdanjih sekcij `Priprava vhodnih signalov`, `Normalizacija`, `Segmentacija v časovna okna` in `Povzetek predobdelave` združene v sekcijo `Priprava podatkov za učenje` z dvema podsekcijama: `Množice signalov in čiščenje podatkov` ter `Standardizacija in tvorba časovnih oken`. Povzetna tabela predobdelave je na koncu druge podsekcije brez samostojnega naslova.
 - 2026-07-21 Sekciji o podatkih sledilnika pogleda in MAHNOB-HCI sta iz poglavja 3, osnovni opis podatkov sledilnika pogleda pa iz poglavja 2, združeni v sekcijo `Podatkovne zbirke sledilnika pogleda` v poglavju 4. V poglavji 2 in 3 ju ne vračaj; poglavje 4 naj ostane edino mesto za opis signalov, splošni pregled zbirk, kratek opis eSEEd in podrobnejši opis MAHNOB-HCI.

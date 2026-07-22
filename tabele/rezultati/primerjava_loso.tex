@@ -1,16 +1,16 @@
 % Vir podatkov za 7-kratni protokol: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/metric_summary_with_std.csv.
-% Vir podatkov za LOO: GFM-for-eyetracker/results/quick_v1_v2_comparison/loo_gaze_pupil_appendix/2026-07-06_16-26-23/tables/metric_summary_with_std.csv.
-% Namenoma so ohranjeni samo modeli, za katere je bil pognan LOO. Ne dodajaj drugih modelov za katere nimamo rezultatov.
+% Vir podatkov za LOSO: GFM-for-eyetracker/results/quick_v1_v2_comparison/loo_gaze_pupil_appendix/2026-07-06_16-26-23/tables/metric_summary_with_std.csv.
+% Namenoma so ohranjeni samo modeli, za katere je bil pognan LOSO. Ne dodajaj drugih modelov, za katere nimamo rezultatov.
 \begin{table}
     \centering
-    \caption{Primerjava 7-kratnega prečnega preverjanja po subjektih in LOO po subjektih za množico signalov \emph{pogled in zenici} za izbrane modele. LOO nismo poganjali v začetnih fazah za hitro primerjavo, zato nekateri modeli manjkajo. Vrednosti so povprečja v odstotkih.}
-    \label{tab:dodatek-loo-primerjava}
+    \caption{Primerjava 7-kratnega prečnega preverjanja po subjektih in LOSO za množico signalov \emph{pogled in zenici} za izbrane modele. LOSO nismo poganjali v začetnih fazah za hitro primerjavo, zato nekateri modeli manjkajo. Vrednosti so povprečja v odstotkih.}
+    \label{tab:dodatek-loso-primerjava}
     \footnotesize
     \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth} *{4}{>{\centering\arraybackslash}X}@{}}
         \toprule
         \textbf{Model} & \multicolumn{2}{c}{\textbf{Točnost}} & \multicolumn{2}{c}{\textbf{Makro F1}} \\
         \cmidrule(lr){2-3}\cmidrule(l){4-5}
-        & \textbf{7-kratno} & \textbf{LOO} & \textbf{7-kratno} & \textbf{LOO} \\
+        & \textbf{7-kratno} & \textbf{LOSO} & \textbf{7-kratno} & \textbf{LOSO} \\
         \midrule
         Naključni & $50{,}8$ & $48{,}7$ & $50{,}6$ & $48{,}2$ \\
         Večinski & $52{,}1$ & $51{,}8$ & $34{,}2$ & $33{,}9$ \\

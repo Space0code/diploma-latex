@@ -6,9 +6,37 @@
 
 Preslikava čustvenih oznak v razrede valence sledi tabeli~6 izvirnega članka podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
 Pri binarni nalogi uporabimo samo skrajna razreda valence, nevtralni razred pa izločimo.
-Tako model ločuje med neprijetno in prijetno valenco, primeri z vmesno oziroma nevtralno oznako pa niso del glavne evalvacijske naloge.
+Tako model ločuje med negativno in pozitivno valenco, primeri z vmesno oziroma nevtralno oznako pa niso del glavne evalvacijske naloge.
 
 \input{tabele/rezultati/preslikava_valence.tex}
+
+\section{Dodatne metrike in diagnostične meritve}
+\label{app:dodatne-metrike}
+
+V nadaljevanju so kratko opredeljene mere, uporabljene poleg točnosti in makro F1, ki sta definirani v poglavju~\ref{subsec:metrike}.
+Za razred $c$ naj bodo $\mathrm{TP}_c$, $\mathrm{FP}_c$ in $\mathrm{FN}_c$ števila pravilnih pozitivnih, lažno pozitivnih oziroma lažno negativnih napovedi.
+
+Uravnotežena točnost je povprečje priklicev po razredih, zato vsakemu razredu pripiše enako težo:
+\[
+    \text{uravnotežena točnost} = \frac{1}{C} \sum_{c=1}^{C} \frac{\mathrm{TP}_c}{\mathrm{TP}_c + \mathrm{FN}_c}.
+\]
+Preciznost pove, kolikšen delež napovedi razreda $c$ je pravilen, priklic oziroma občutljivost pa, kolikšen delež dejanskih primerov tega razreda model prepozna:
+\[
+    \mathrm{preciznost}_c = \frac{\mathrm{TP}_c}{\mathrm{TP}_c + \mathrm{FP}_c},
+    \qquad
+    \mathrm{priklic}_c = \frac{\mathrm{TP}_c}{\mathrm{TP}_c + \mathrm{FN}_c}.
+\]
+V poročanih binarnih rezultatih sta preciznost in priklic makro povprečji po razredih.
+Uteženi F1 je povprečje F1 po razredih, uteženo s številom dejanskih primerov posameznega razreda; Micro-F1 pa metriko izračuna iz skupnih vrednosti $\mathrm{TP}$, $\mathrm{FP}$ in $\mathrm{FN}$ vseh razredov.
+Pri enooznačni klasifikaciji je Micro-F1 enak točnosti.
+
+AUC (angl. \emph{area under the ROC curve}) je ploščina pod krivuljo ROC in meri, kako dobro napovedne verjetnosti razvrstijo pozitivne primere pred negativne neodvisno od izbranega klasifikacijskega praga.
+Izguba je povprečna negativna logaritemska verjetnost pravilnega razreda, tj. križna entropija; manjša vrednost pomeni boljše ujemanje napovednih verjetnosti z oznakami.
+Matrika zamenjav vsebuje števila primerov za vse pare dejanskih vrstic in napovedanih stolpcev; diagonalne celice so pravilne napovedi, preostale pa napake.
+
+Med učenjem shranjujemo učno in validacijsko izgubo po epohah, najboljšo epoho z najmanjšo validacijsko izgubo, podatek o zgodnjem ustavljanju, čas epohe ter povprečno in največjo $L_2$-normo gradientov parametrov.
+Pri grafovskih modelih dodatno spremljamo povprečno varianco komponent predstavitev grafa, povprečno kosinusno podobnost vseh parov predstavitev, razpon logitov kot razliko med največjim in najmanjšim logitom ter povprečno entropijo napovednih verjetnosti.
+Nizka varianca oziroma majhen razpon logitov skupaj z visoko podobnostjo lahko kažeta na skoraj konstantne predstavitve ali napovedi; entropija pove njihovo povprečno gotovost.
 
 \section{Razširjeni rezultati binarne klasifikacije valence}
 \label{app:razsirjeni-rezultati-binarna-valenca}
@@ -27,14 +55,14 @@ Razširjene metrike so namenjene predvsem preverjanju, ali sklep iz glavne prime
 
 \input{tabele/rezultati/dodatni_rezultati_vsi_signali.tex}
 
-\section{Primerjava z LOO po subjektih}
-\label{app:primerjava-loo-po-subjektih}
+\section{Primerjava z LOSO}
+\label{app:primerjava-loso}
 
-LOO po subjektih v vsaki ponovitvi uporabi enega subjekta kot testno množico, vse ostale subjekte pa za učenje oziroma validacijo.
+LOSO v vsaki ponovitvi uporabi enega subjekta kot testno množico, vse ostale subjekte pa za učenje oziroma validacijo.
 V primerjavi s 7-kratnim protokolom zato uporabi več ponovitev in manjšo testno množico v posamezni ponovitvi.
-Spodnja tabela primerja oba protokola za množico signalov \emph{pogled in zenici}; LOO je bil izveden za podmnožico modelov, zato pomišljaj označuje, da vrednost ni bila izračunana.
+Spodnja tabela primerja oba protokola za množico signalov \emph{pogled in zenici}; LOSO je bil izveden za podmnožico modelov, zato pomišljaj označuje, da vrednost ni bila izračunana.
 
-\input{tabele/rezultati/primerjava_loo_po_subjektih.tex}
+\input{tabele/rezultati/primerjava_loso.tex}
 
 \section{Matrike zamenjav}
 \label{app:matrike-zamenjav-vsi-modeli}
@@ -105,8 +133,10 @@ To ne pomeni, da so oznake valence brez šuma, vendar je za glavno primerjavo mo
 Izbiro operatorja \texttt{GCNConv} smo preverili z dodatnim poskusom na binarni nalogi valence pri množici signalov pogled in zenici.
 \texttt{GCNConv} je najpreprostejša izbira in ustreza osnovnemu posredovanju sporočil po normalizirani sosednosti.
 \texttt{GATConv} doda pozornost nad sosedi in je uporaben, kadar želimo, da model sam uteži prispevke sosednjih vozlišč.
-\texttt{GraphConv} uporabi ločen prispevek lastnega vozlišča in sosedov, zato je nekoliko prožnejši neutežen operator.
-\texttt{GINConv} oziroma \texttt{GINEConv} sta izrazitejša agregacijska operatorja; \texttt{GINEConv} lahko neposredno uporabi značilke povezav.
+\texttt{GraphConv} uporabi ločen prispevek lastnega vozlišča in sosedov; pri osnovnem modelu deluje brez uteži povezav.
+\texttt{GINConv} agregirano predstavitev obdela z večslojnim perceptronom, \texttt{GINEConv} pa v agregacijo vključi tudi značilke povezav.
+Pri modelu \ModelName{HeteroGCN-MLP-w} plasti \texttt{GCNConv} in \texttt{GraphConv} uporabljata naučene skalarne uteži povezav.
+\texttt{GATConv} namesto njih značilke povezav vključi v izračun pozornosti, \texttt{GINEConv} pa je razširjen kot \texttt{WeightedGINEConv}, ki uporabi značilke povezav in naučene skalarne uteži.
 V naših poskusih so bile razlike majhne.
 Pri osnovnem \ModelName{GCN} je najvišjo vrednost dosegel \texttt{GINConv}, pri \ModelName{HeteroGCN-MLP-w} pa \texttt{GraphConv}, vendar razlika ni bila dovolj velika, da bi spreminjala glavno eksperimentalno zgodbo.
 Zato smo v glavnih poskusih ohranili enoten in enostaven operator \texttt{GCNConv}.

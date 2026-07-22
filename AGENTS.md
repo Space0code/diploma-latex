@@ -280,7 +280,7 @@ Prednostna struktura je raziskovalno usmerjena:
    povezav, značilke povezav in uteži.
 6. **Modeli in metodologija**: primerjalni modeli, GNN arhitektura, učenje.
 7. **Eksperimentalni protokol**: delitve, metrike, izbira hiperparametrov.
-8. **Rezultati**: glavna primerjava, protokoli LOO, metrike, matrike zamenjav.
+8. **Rezultati**: glavna primerjava, protokol LOSO, metrike, matrike zamenjav.
 9. **Diskusija**: kaj deluje, omejitve, negotovosti podatkov, interpretacijske meje.
 10. **Zaključek**: kratek odgovor na raziskovalno vprašanje in prihodnje delo.
 
@@ -358,7 +358,7 @@ Interpretiraj previdno:
 - primerjaj z izhodiščnimi modeli, ne z intuicijo;
 - pri neuravnoteženih razredih poudari balanced accuracy in macro-F1;
 - majhnih razlik ne označi kot statistično značilnih brez testa;
-- pri LOO jasno loči posploševanje na subjekte in posploševanje na posnetke;
+- pri LOSO jasno opiši posploševanje na nove subjekte;
 - uteži pozornosti lahko uporabiš kot pomožen vpogled, ne kot dokaz vzročnosti.
 
 ## Ablacije
@@ -422,7 +422,7 @@ Uporabljaj konkretne TODO komentarje:
 
 ```latex
 % TODO: Preveri, ali aktivna konfiguracija uporablja fiksacijske povezave.
-% TODO: Dodaj končne rezultate za subject LOO po zaključeni evalvaciji.
+% TODO: Dodaj končne rezultate za LOSO po zaključeni evalvaciji.
 % TODO: Dodaj BibTeX za GazeMAE po preverjanju uradnega članka ali repozitorija.
 ```
 

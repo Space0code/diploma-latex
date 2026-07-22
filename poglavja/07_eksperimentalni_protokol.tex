@@ -5,21 +5,22 @@ V prejšnjih poglavjih smo definirali podatke, ciljne oznake, časovna okna,
 grafovsko predstavitev in primerjane modele.
 V tem poglavju določimo, kako te komponente ovrednotimo v skupni eksperimentalni
 primerjavi.
-Glavna evalvacijska naloga je binarna klasifikacija neprijetne proti prijetni valenci.
+Glavna evalvacijska naloga je binarna klasifikacija negativne proti pozitivni valenci.
 Primerjava je zasnovana kot kombinacija modelov iz poglavja~\ref{sec:modeli} in
 množic signalov iz razdelka~\ref{subsec:vhodni-signali}.
-Vsi modeli uporabljajo iste 10-sekundne učne vzorce in iste delitve na učno,
-validacijsko in testno množico.
+Vsi modeli uporabljajo iste učne vzorce in iste delitve na učno, validacijsko in
+testno množico.
 Koda za predobdelavo, konstrukcijo grafov, učenje modelov, evalvacijo in generiranje rezultatov je javno dostopna v repozitoriju projekta~\cite{bozak2026gfmrepo}.
-Podatkovna zbirka \MAHNOB{} v repozitorij ni vključena, ker ni del tega dela in je ne smemo distribuirati.
+Podatkovna zbirka \MAHNOB{} v repozitorij ni vključena. 
+Pridobili smo jo preko uradnega spletnega mesta podatkovne zbirke~\cite{mahnobwebsite}.
 
 \section{Zasnova glavne primerjave}
 \label{subsec:zasnova-glavne-primerjave}
 
-Cilj glavne primerjave je odgovoriti na raziskovalno vprašanje~\ref{sec:uvod}: \rvGlavnoBesedilo
+Cilj glavne primerjave je odgovoriti na raziskovalno vprašanje~\ref{sec:uvod}: \rvGlavnoBesedilo{}
 Zato v primerjavi spreminjamo le način predstavitve okna in model, ki to predstavitev uporabi.
 
-Ciljna oznaka je binarni razred valence, pri kateri model ločuje med neprijetno in prijetno valenco.
+Ciljna oznaka je binarni razred valence, pri kateri model ločuje med negativno in pozitivno valenco.
 Vse štiri množice iz tabele~\ref{tab:grafovska-konstrukcija-po-mnozicah} obravnavamo kot enakovreden del primerjave, saj nas zanima tudi, kako se klasifikacijska uspešnost spreminja z razpoložljivostjo različnih signalov sledilnika pogleda.
 
 V primerjavi nastopajo vsi modeli iz tabele~\ref{tab:pregled-primerjanih-modelov}: izhodiščna klasifikatorja, klasični modeli nad agregiranimi značilkami, zamrznjeni prednaučeni predstavitveni modeli in grafovski modeli.
@@ -43,14 +44,14 @@ Ker 22 subjektov ni deljivo s sedem, imajo posamezne testne razdelitve različno
 Validacijska množica se uporablja med učenjem, testna množica pa samo za končno oceno v posamezni ponovitvi.
 Pri nevronskih modelih zato najboljšo različico modela izberemo glede na validacijsko izgubo, nato pa njeno delovanje izmerimo na pripadajoči testni množici.
 
-\subsection{Predhodna preverjanja z LOO po subjektih}
-\label{subsec:predhodna-loo-preverjanja}
+\subsection{Predhodna preverjanja z LOSO}
+\label{subsec:predhodna-loso-preverjanja}
 
-% pusti napisano v zgodnejših fazah. ne piši, da smo točno ta LOO izvedli kasneje.
-V zgodnejših fazah smo za množico \emph{pogled in zenici} izvedli tudi LOO po subjektih.
-Ker končna primerjava vključuje več modelov in štiri množice signalov, bi polni LOO protokol bistveno povečal število potrebnih eksperimentov.
+% Pusti napisano v zgodnejših fazah. Ne piši, da smo točno ta LOSO izvedli kasneje.
+V zgodnejših fazah smo za množico \emph{pogled in zenici} izvedli tudi LOSO.
+Ker končna primerjava vključuje več modelov in štiri množice signalov, bi polni LOSO protokol bistveno povečal število potrebnih eksperimentov.
 Zato ga uporabimo kot podporno preverjanje, glavno primerjavo pa izvedemo s 7-kratnim protokolom.
-Primerjava obeh validacijskih protokolov za valenco in množico \emph{pogled in zenici} je podana v dodatku~\ref{app:primerjava-loo-po-subjektih}.
+Primerjava obeh validacijskih protokolov za valenco in množico \emph{pogled in zenici} je podana v dodatku~\ref{app:primerjava-loso}.
 
 \section{Nastavitve učenja in hiperparametri}
 \label{subsec:nastavitve-ucenja}
@@ -69,14 +70,24 @@ To iskanje je bilo izvedeno na 3-razredni valenci in ga v dodatku~\ref{app:mrezn
 Glavni metriki vrednotenja sta točnost in makro F1.
 Za vsak model in vsako množico signalov poročamo povprečje po sedmih testnih razdelitvah.
 Točnost uporabimo kot osnovno metriko, ker ima glavna naloga dva enakovredna in globalno skoraj uravnotežena razreda, kot kaže slika~\ref{fig:porazdelitev-valenca-stevila}.
+Za $C$ razredov in $N$ primerov jo izračunamo kot
+\begin{equation}
+    \mathrm{točnost} = \frac{1}{N} \sum_{c=1}^{C} \mathrm{TP}_c,
+\end{equation}
+kjer je $\mathrm{TP}_c$ število pravilno razvrščenih primerov razreda $c$.
 
 Makro F1 uporabimo kot dopolnilno glavno metriko.
 Čeprav sta razreda globalno skoraj uravnotežena, so lahko posamezne testne razdelitve precej neuravnotežene (tudi do razmerja $1:2$).
-Makro F1 izračuna F1 ločeno za vsak razred in nato razreda povpreči z enako utežjo.
+Makro F1 izračuna F1 ločeno za vsak razred in nato rezultate povpreči z enako utežjo:
+\begin{equation}
+    \mathrm{makro\ F1} = \frac{1}{C} \sum_{c=1}^{C} \frac{2\mathrm{TP}_c}{2\mathrm{TP}_c + \mathrm{FP}_c + \mathrm{FN}_c},
+\end{equation}
+kjer $\mathrm{FP}_c$ in $\mathrm{FN}_c$ označujeta število lažno pozitivnih oziroma lažno negativnih napovedi za razred $c$.
 S tem dopolni točnost predvsem pri modelih, ki lahko dosežejo sprejemljivo točnost, vendar večino primerov napovedujejo v en sam razred.
 
 Poleg glavnih metrik spremljamo tudi uravnoteženo točnost, preciznost, priklic oziroma občutljivost, uteženi F1, AUC, izgubo in matrike zamenjav.
 Te metrike uporabimo predvsem za preverjanje stabilnosti in za podrobnejšo analizo napak.
+Njihove definicije so podane v dodatku~\ref{app:dodatne-metrike}.
 V glavnem besedilu se osredotočimo na točnost in makro F1, razširjene metrike pa poročamo v dodatku~\ref{app:razsirjeni-rezultati-binarna-valenca}.
 
 \section{Spremljanje učenja}
@@ -89,4 +100,5 @@ Krivulje izgub služijo predvsem preverjanju stabilnosti optimizacije in zaznava
 Pri grafovskih modelih spremljamo še nekaj diagnostičnih meritev naučenih predstavitev in napovedi.
 Med njimi so varianca predstavitev grafa, povprečna kosinusna podobnost predstavitev, razpon logitov in entropija napovednih verjetnosti.
 Te meritve uporabimo za preverjanje, ali se med učenjem pojavijo skoraj konstantne napovedi, zaznavanje kolapsa predstavitev ali znakov prekomernega glajenja.
+Definicije spremljanih učnih in diagnostičnih meritev so podane v dodatku~\ref{app:dodatne-metrike}.
 Te diagnostike ne poročamo med rezultati v poglavju~\ref{sec:rezultati}, temveč le v dodatku~\ref{app:diagnostika-prekomerno-glajenje}.

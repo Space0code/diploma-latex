@@ -35,13 +35,13 @@ SIGNAL_LABELS = {
 }
 
 CLASS_LABELS = {
-    "Low valence": "neprijetna valenca",
-    "High valence": "prijetna valenca",
+    "Low valence": "negativna valenca",
+    "High valence": "pozitivna valenca",
 }
 
 CLASS_SHORT_LABELS = {
-    "Low valence": "neprijetna",
-    "High valence": "prijetna",
+    "Low valence": "negativna",
+    "High valence": "pozitivna",
 }
 
 CONFUSION_MODEL_LABELS = {
@@ -201,6 +201,11 @@ def format_decimal(value: float) -> str:
     return f"{value:.1f}".replace(".", ",")
 
 
+def format_confusion_matrix_annotations(matrix: np.ndarray) -> np.ndarray:
+    """Oblikuje deleže matrike z decimalno vejico in dvema decimalkama."""
+    return np.asarray([[f"{value:.2f}".replace(".", ",") for value in row] for row in matrix])
+
+
 def style_axes(ax: plt.Axes) -> None:
     ax.tick_params(axis="both", length=0, labelsize=TICK_LABEL_FONTSIZE)
     for spine in ax.spines.values():
@@ -326,10 +331,11 @@ def draw_confusion_matrix(
     title_weight: str = "normal",
 ) -> None:
     labels = [CLASS_SHORT_LABELS["Low valence"], CLASS_SHORT_LABELS["High valence"]]
+    annotations = format_confusion_matrix_annotations(matrix)
     sns.heatmap(
         matrix,
-        annot=True,
-        fmt=".2f",
+        annot=annotations,
+        fmt="",
         cmap="Blues",
         vmin=0.0,
         vmax=1.0,
@@ -456,7 +462,10 @@ def load_label_noise_crosstab(label_noise_dir: Path) -> pd.DataFrame:
 
 def generate_label_noise_alignment_plot(df: pd.DataFrame, output_path: Path, dpi: int) -> None:
     class_order = ["low", "medium/neutral", "high"]
-    class_labels = ["neprijetna", "nevtralna", "prijetna"]
+    class_labels = {
+        "valence": ["negativna", "nevtralna", "pozitivna"],
+        "arousal": ["nizka", "srednja", "visoka"],
+    }
     dimension_labels = {"valence": "valenca", "arousal": "vzburjenost"}
 
     fig, axes = plt.subplots(1, 2, figsize=(9.4, 4.7), constrained_layout=True)
@@ -491,8 +500,8 @@ def generate_label_noise_alignment_plot(df: pd.DataFrame, output_path: Path, dpi
             linecolor="white",
             cbar=dimension == "arousal",
             cbar_kws={"label": "delež znotraj izpeljanega razreda"},
-            xticklabels=class_labels,
-            yticklabels=class_labels,
+            xticklabels=class_labels[dimension],
+            yticklabels=class_labels[dimension],
             annot_kws={"fontsize": 12.5},
             ax=ax,
         )

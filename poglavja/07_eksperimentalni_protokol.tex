@@ -23,7 +23,7 @@ Zato v primerjavi spreminjamo le način predstavitve okna in model, ki to predst
 Ciljni razred je binarni razred valence, pri katerem model ločuje med negativno in pozitivno valenco.
 Vse štiri množice iz tabele~\ref{tab:grafovska-konstrukcija-po-mnozicah} obravnavamo kot enakovreden del primerjave, saj nas zanima tudi, kako se klasifikacijska uspešnost spreminja z razpoložljivostjo različnih signalov sledilnika pogleda.
 
-V primerjavi nastopajo vsi modeli iz tabele~\ref{tab:pregled-primerjanih-modelov}: izhodiščna klasifikatorja, klasični modeli nad agregiranimi značilkami, zamrznjeni prednaučeni predstavitveni modeli in grafovski modeli.
+V primerjavi smo uporabili vse modeli iz tabele~\ref{tab:pregled-primerjanih-modelov}: izhodiščna klasifikatorja, klasični modeli nad agregiranimi značilkami, zamrznjeni prednaučeni predstavitveni modeli in grafovski modeli.
 S tem primerjamo tri različne načine opisa istega časovnega okna: tabelarični povzetek signalov, vektorsko predstavitev časovne vrste in grafovsko predstavitev meritev.
 
 \section{Validacijski protokol}
@@ -38,7 +38,7 @@ Iz učnega dela izberemo eno skupino subjektov za validacijsko množico, preosta
 Delitve so pri vseh modelih in vseh množicah signalov enake, določene s fiksnim naključnim semenom.
 
 Takšna delitev ocenjuje posploševanje na nove udeležence.
-To je za uporabljeno nalogo pomembno, saj so signali sledilnika pogleda močno odvisni od specifik posameznika.
+To je za našo nalogo pomembno, saj so signali sledilnika pogleda močno odvisni od specifik posameznika~\cite{lim2020emotion}.
 Ker 22 subjektov ni deljivo s sedem, imajo posamezne testne razdelitve različno velikost -- nekatere vsebujejo tri, druge pa štiri testne subjekte.
 
 Validacijska množica se uporablja med učenjem, testna množica pa samo za končno oceno v posamezni ponovitvi.
@@ -50,7 +50,7 @@ Pri nevronskih modelih zato najboljšo različico modela izberemo glede na valid
 % Pusti napisano v zgodnejših fazah. Ne piši, da smo točno ta LOSO izvedli kasneje.
 V zgodnejših fazah smo za množico \emph{pogled in zenici} izvedli tudi LOSO.
 Ker končna primerjava vključuje več modelov in štiri množice signalov, bi polni LOSO protokol bistveno povečal število potrebnih eksperimentov.
-Zato ga uporabimo kot podporno preverjanje, glavno primerjavo pa izvedemo s 7-kratnim protokolom.
+Zato ga uporabimo kot podporno preverjanje na podmnožici podatkovne zbirke, glavno primerjavo pa izvedemo s 7-kratnim protokolom.
 Primerjava obeh validacijskih protokolov za valenco in množico \emph{pogled in zenici} je podana v dodatku~\ref{app:primerjava-loso}.
 
 \section{Nastavitve učenja in hiperparametri}
@@ -62,12 +62,13 @@ Grafovski modeli uporabljajo operator \texttt{GCNConv}, dve grafovski plasti, sk
 Podrobni hiperparametri vseh modelov so podani v dodatku~\ref{app:hiperparametri}.
 
 Nastavitve grafovskih modelov izberemo na podlagi predhodnega kompaktnega mrežnega iskanja.
-To iskanje je bilo izvedeno na 3-razredni valenci in ga v dodatku~\ref{app:mrezno-iskanje} poročamo samo kot pomožni poskus za izbiro stabilnih nastavitev.
+To iskanje smo izvedli v zgodnejši fazi raziskave, ko je klasifikacijska naloga bila še trirazredna, saj je poleg negativne in pozitivne vključevala tudi nevtralno valenco.
+V dodatku~\ref{app:mrezno-iskanje} rezultate iskanja poročamo le kot podporni poskus pri izbiri stabilnih nastavitev.
 
 \section{Metrike vrednotenja}
 \label{subsec:metrike}
 
-Glavni metriki vrednotenja sta točnost in makro F1.
+Za vrednotenje uporabimo več standardnih metrik, pri čemer sta glavni točnost in makro F1.
 Za vsak model in vsako množico signalov poročamo povprečje po sedmih testnih razdelitvah.
 Točnost uporabimo kot osnovno metriko, ker ima glavna naloga dva enakovredna in globalno skoraj uravnotežena razreda, kot kaže slika~\ref{fig:porazdelitev-valenca-stevila}.
 Za $C$ razredov in $N$ primerov jo izračunamo kot
@@ -101,4 +102,4 @@ Pri grafovskih modelih spremljamo še nekaj diagnostičnih meritev naučenih pre
 Med njimi so varianca predstavitev grafa, povprečna kosinusna podobnost predstavitev, razpon logitov in entropija napovednih verjetnosti.
 Te meritve uporabimo za preverjanje, ali se med učenjem pojavijo skoraj konstantne napovedi, zaznavanje kolapsa predstavitev ali znakov prekomernega glajenja.
 Definicije spremljanih učnih in diagnostičnih meritev so podane v dodatku~\ref{app:dodatne-metrike}.
-Te diagnostike ne poročamo med rezultati v poglavju~\ref{sec:rezultati}, temveč le v dodatku~\ref{app:diagnostika-prekomerno-glajenje}.
+Krivulje učne in validacijske izgube poročamo med rezultati v poglavju~\ref{sec:rezultati}, diagnostiko naučenih predstavitev in napovedi pa v dodatku~\ref{app:diagnostika-prekomerno-glajenje}.

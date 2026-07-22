@@ -101,6 +101,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   učni množici uporabljaj izraz `standardizacija`, ne `normalizacija`.
   `Normalizacija` ostane za druge postopke, kot so softmax, normalizacija uteži,
   normalizacija plasti, relativni čas v intervalu okna in matrike zamenjav.
+- `Predobdelava` označuje celoten postopek priprave podatkov pred učenjem modelov,
+  vključno z izbiro signalov, čiščenjem, standardizacijo in tvorbo časovnih oken.
+  `Čiščenje` je njen ožji del: izbor uporabnih zapisov ter obravnava neveljavnih,
+  manjkajočih in osamelih meritev.
 - Ko Tomi ročno popravi besedilo za predlogom, iz popravka sklepaj o slogovni
   preferenci in jo uporabljaj v nadaljevanju. Če je vzorec dvoumen ali odvisen od
   konteksta, ga ne posplošuj na slepo, ampak Tomija eksplicitno vprašaj. Konkretna

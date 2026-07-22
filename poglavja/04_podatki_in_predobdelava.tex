@@ -4,8 +4,12 @@
 \section{Podatkovne zbirke sledilnika pogleda}
 \label{sec:podatkovne-zbirke}
 
-Podatki sledilnika pogleda se med drugim uporabljajo kot vedenjski in psihofiziološki signal pri nalogah prepoznave čustvenih stanj.
-V literaturi se pojavljajo različne ciljne naloge: klasifikacija diskretnih čustvenih stanj, regresija valence in vzburjenosti, binarna klasifikacija valence in vzburjenosti ter druge~\cite{lim2020emotion,tarnowski2020eye}.
+Sledilnik pogleda je naprava, ki meri, kam v prostoru ali na zaslonu oseba usmerja pogled.
+Poleg lokacije pogleda lahko meri tudi velikost zenic, ki jo običajno opišemo s premerom zenice.
+Signal pogleda navadno opišemo s koordinatama $x$ in $y$ na zaslonu.
+Iz dinamike teh dveh signalov nekateri sledilniki zaznavajo in poročajo tudi informacije o fiksacijah, sakadah in mežikih, ki nas v tej domeni pogosto zanimajo.
+Fiksacija je obdobje razmeroma stabilnega pogleda na omejenem območju, sakada hiter premik pogleda med fiksacijama, mežik pa kratkotrajno zaprtje oči~\cite{lim2020emotion}.
+Meritve se izvajajo zaporedno z določeno frekvenco vzorčenja (pogosto med $60~Hz$ in $1000~Hz$), ki je odvisna od zmogljivosti naprave in namena uporabe.
 
 Na voljo je več prosto dostopnih podatkovnih zbirk sledilnika pogleda, ki se razlikujejo po vrsti zajetih signalov. 
 Tukaj naštejemo le nekatere.
@@ -32,7 +36,7 @@ Pred vsakim čustvenim posnetkom je bil prikazan še kratek nevtralni posnetek, 
 Po ogledu posameznega posnetka so udeleženci podali številske samoocene valence, vzburjenosti, dominantnosti in predvidljivosti ter samooceno diskretne čustvene oznake.
 
 Uporabljeni signali so podrobneje opisani v razdelku~\ref{subsec:vhodni-signali}.
-Meritve so bile zajete s sledilnikom Tobii X120 pri frekvenci 60~Hz.
+Meritve so bile zajete s sledilnikom Tobii X120 pri frekvenci $60~Hz$.
 
 V izvirnem članku so pri trirazredni klasifikaciji valence iz ročno oblikovanih značilk pogleda po protokolu LOO po udeležencih dosegli točnost $68{,}8\,\%$ in povprečni F1 $0{,}68$~\cite{soleymani2012mahnob}.
 Vrednosti so referenčni okvir, vendar niso neposredno primerljive z rezultati te naloge zaradi različnih vhodnih značilk, dolžine obravnavanega odziva in eksperimentalnega cevovoda.
@@ -137,7 +141,7 @@ Tudi sorodna dela na prepoznavanju čustev iz očesnih signalov pogosto uporablj
 Oznaka okna je določena s parom udeleženec-posnetek, saj so udeleženci vprašalnike izpolnjevali le po vsakem ogledu videoposnetka in ne vmes.
 Okno uporabimo, če po predhodnem čiščenju in filtru osamelcev vsebuje vsaj 60 veljavnih meritev.
 
-Pri frekvenci vzorčenja 60~Hz bi 10-sekundno okno brez manjkajočih vrednosti vsebovalo 600 vzorcev.
+Pri frekvenci vzorčenja $60~Hz$ bi 10-sekundno okno brez manjkajočih vrednosti vsebovalo 600 vzorcev.
 Zaradi čiščenja, odstranjevanja neveljavnih vzorcev in filtriranja je dejansko število vzorcev v oknih manjše.
 Po filtru osamelcev imamo $2\,639\,048$ vrstic in $5\,158$ uporabnih 10-sekundnih časovnih oken, kar pomeni povprečno približno 512 meritev na uporabno okno.
 Pri kasnejši gradnji grafov se število vozlišč nekoliko razlikuje med množicami signalov; te vrednosti povzemamo v tabeli~\ref{tab:statistika-konstruiranih-grafov}.

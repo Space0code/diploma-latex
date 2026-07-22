@@ -1,7 +1,7 @@
 \chapter{Teoretično ozadje}
 \label{sec:ozadje}
 
-V tem poglavju predstavimo metodološke pojme, ki so potrebni za razumevanje grafov, grafovskih nevronskih mrež, podatkov sledilnika pogleda ter valence.
+V tem poglavju predstavimo metodološke pojme, ki so potrebni za razumevanje grafov, grafovskih nevronskih mrež in valence.
 
 \section{Grafi}
 \label{subsec:grafi}
@@ -110,14 +110,3 @@ Zato smo med treniranjem in evalvacijo modelov spremljali statistike predstavite
 Varianca predstavitev nam pokaže, ali model še ohranja razlike med vozlišči in grafi.
 Kosinusna podobnost pokaže, ali predstavitve postajajo usmerjene v podobno smer.
 Razpon logitov pa pokaže, ali klasifikacijska glava daje dovolj raznolike napovedi ali se približuje skoraj konstantnemu izhodu.
-
-\section{Podatki sledilnika pogleda}
-\label{subsec:eye-tracking}
-
-Sledilnik pogleda je naprava, ki meri, kam v prostoru ali na zaslonu oseba usmerja pogled.
-Poleg lokacije pogleda lahko meri tudi velikost zenic, ki jo običajno opišemo s premerom zenice.
-Signal pogleda navadno opišemo s koordinatama $x$ in $y$ na zaslonu.
-Iz dinamike teh dveh signalov nekateri sledilniki zaznavajo in poročajo tudi informacije o fiksacijah, sakadah in mežikih, ki nas v tej domeni pogosto zanimajo.
-Fiksacija je obdobje razmeroma stabilnega pogleda na omejenem območju, sakada hiter premik pogleda med fiksacijama, mežik pa kratkotrajno zaprtje oči~\cite{lim2020emotion}.
-Meritve se izvajajo zaporedno z določeno frekvenco vzorčenja, ki je odvisna od zmogljivosti naprave in namena uporabe.
-Pogoste frekvence raziskovalnih sledilnikov pogleda so 60~Hz, 100~Hz, 500~Hz in 1000~Hz~\cite{lim2020emotion,tarnowski2020eye}.

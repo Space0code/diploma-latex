@@ -17,6 +17,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   načinu decimalno vejico piši kot `{,}`, npr. `$45{,}7\,\%$`.
 - Za angleški izraz `signed value` ne uporabljaj izraza "podpisana vrednost",
   temveč "predznačena vrednost".
+- Za parametre in mehanizme, ki se med učenjem optimizirajo, uporabljaj
+  `učljiv` (npr. `učljive uteži` oziroma `učljiva fuzija`); za njihove konkretne
+  vrednosti po učenju pa `naučen` (npr. `naučene uteži`).
 - Kratico SOTA v diplomi uporabljaj kot SOTA. Samo ob prvi pojavitvi jo definiraj
   z besedilom "predstavnik najsodobnejših modelov (angl. \emph{state of the
   art}, SOTA) za podatke sledilnika pogleda". Ne prevajaj je kot "stanje
@@ -85,8 +88,8 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   `leave-one-subject-out` kot `LOSO`, `k-fold` kot
   `k-kratno prečno preverjanje`, `plot` kot `graf` ali `prikaz`, `pipeline` kot
   `cevovod`, `edge feature` kot `značilka povezave`, `forward/backward temporal
-  separation` kot `ločevanje časovnih povezav naprej in nazaj`, `learned signed
-  edge weights` kot `naučene predznačene uteži povezav`, `self-supervised
+  separation` kot `ločevanje časovnih povezav naprej in nazaj`, `learnable signed
+  edge weights` kot `učljive predznačene uteži povezav`, `self-supervised
   representation learning` kot `samonadzorovano učenje predstavitev` in
   `foundation model` kot `temeljni model`. Izrazu `heatmap` se po možnosti
   izogibaj; kadar je res potreben, uporabi `toplotna karta`.
@@ -191,6 +194,15 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - 2026-07-22 V poglavju 5 naj opis razširjenih povezav znotraj fiksacije ostane
   konceptualen; formalna definicija z enačbami je v dodatku C. Shematska slika
   konstrukcije ostane v glavnem besedilu.
+- 2026-07-22 Tabela glavnega besedila za množice signalov združuje značilke
+  vozlišč, relacije in značilke povezav v simbolnem zapisu. Podrobna tabela
+  značilk povezav je v dodatku C in se uporablja tudi kot sklic pri opisu
+  modela \ModelName{HeteroGCN-MLP-w}.
+- 2026-07-22 V tabelah grafov uporabljaj semantično barvno kodiranje: časovne
+  komponente oranžno, pogled in prostorske komponente modro, zenične komponente
+  teal ter dodatne signale in fiksacije vijolično. Barva naj bo uporabljena za
+  besedilo oziroma simbole (brez barvne podlage) in naj ne bo edini nosilec
+  pomena.
 - 2026-07-22 Pri opisu štirih množic signalov poudari primerjavo robustnosti
   modelov glede na razpoložljivost vhodnih signalov in klasifikacijske uspešnosti
   po njihovih tipih. Ne utemeljuj je s pokrivanjem različnih podatkovnih zbirk.
@@ -199,7 +211,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   meritev. Ta izjema od privzete lestvice `Blues` je namenjena semantično jasnemu
   prikazu gostote.
 - 2026-07-22 Za validacijski protokol, pri katerem je testni subjekt v posamezni ponovitvi izpuščen, uporabljaj izključno kratico `LOSO` (angl. `leave-one-subject-out`). Izraza `LOO po subjektih` in `LOO po posnetkih` v diplomi ne uporabljaj in ne omenjaj.
-- 2026-07-22 Mentor želi, da je pri vsakem od štirih GNN v poglavju 6 podana glavna enačba. Enačbe naj neposredno pokažejo razlikovalni korak posamezne stopnje: homogeno konvolucijo, relacijsko povprečenje, naučeno MLP-fuzijo in uteženo relacijsko posredovanje sporočil.
+- 2026-07-22 Mentor želi, da je pri vsakem od štirih GNN v poglavju 6 podana glavna enačba. Enačbe naj neposredno pokažejo razlikovalni korak posamezne stopnje: homogeno konvolucijo, relacijsko povprečenje, učljivo MLP-fuzijo in uteženo relacijsko posredovanje sporočil.
 - 2026-07-21 V poglavju 4 so bile vsebine nekdanjih sekcij `Priprava vhodnih signalov`, `Normalizacija`, `Segmentacija v časovna okna` in `Povzetek predobdelave` združene v sekcijo `Priprava podatkov za učenje` z dvema podsekcijama: `Množice signalov in čiščenje podatkov` ter `Standardizacija in tvorba časovnih oken`. Povzetna tabela predobdelave je na koncu druge podsekcije brez samostojnega naslova.
 - 2026-07-21 Sekciji o podatkih sledilnika pogleda in MAHNOB-HCI sta iz poglavja 3, osnovni opis podatkov sledilnika pogleda pa iz poglavja 2, združeni v sekcijo `Podatkovne zbirke sledilnika pogleda` v poglavju 4. V poglavji 2 in 3 ju ne vračaj; poglavje 4 naj ostane edino mesto za opis signalov, splošni pregled zbirk, kratek opis eSEEd in podrobnejši opis MAHNOB-HCI.
 - 2026-07-08 Za razdelek o fiksacijskih povezavah v poglavju 5 je dodana slika
@@ -343,7 +355,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Odločitev za grafovske primerjave v poglavju 6: osnovni grafovski model naj bo
   arhitekturni baseline, ki uporablja iste signale kot predlagani GNN, vendar
   poenostavi arhitekturo. Načrtovana implementacija je majhen ločen modelni
-  razred s homogenim `GCNConv`, enotno potjo posredovanja sporočil, brez naučenih
+  razred s homogenim `GCNConv`, enotno potjo posredovanja sporočil, brez učljivih
   skalarnih uteži povezav in zaenkrat brez različice `GATConv`. Ablacijska
   študija naj bo ločena: tam arhitektura ostane finalna, odstranjuje pa se en
   informacijski vir naenkrat. Ko odstranimo signal, odstranimo vse informacije,
@@ -407,7 +419,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   arhitekturna lestvica grafovskih modelov: `BasicGCN`, `HeteroGCNMean`,
   `HeteroGCNMLP` in `HeteroGCNMLPWeights`. Vsi uporabljajo attention readout,
   enako globino/širino in enako grafovsko konstrukcijo; razlika je postopno
-  dodajanje heterogenih relacij, MLP združevanja relacij in naučenih
+  dodajanje heterogenih relacij, MLP združevanja relacij in učljivih
   predznačenih uteži povezav. Deskriptivno ime končnega modela v kodi je
   `HeteroGCNMLPWeights`, ne `ProposedGNN` ali `GNN_v2`.
 - Izbira `GCNConv` naj bo v glavnem besedilu utemeljena kratko v poglavju 7,

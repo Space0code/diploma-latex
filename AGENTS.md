@@ -367,7 +367,7 @@ Ablacije naj odgovarjajo na konkretna modelirna vprašanja. Smiselne kategorije:
 
 - prispevek posameznih značilk;
 - časovne, prostorske in fiksacijske povezave;
-- naučene proti fiksnim utežem povezav;
+- učljive proti fiksnim utežem povezav;
 - attention pooling proti preprostejšemu združevanju;
 - relacijski fusion proti enostavnejši agregaciji.
 

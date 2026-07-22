@@ -1,15 +1,45 @@
 \begin{table}[!htbp]
     \centering
-    \caption{Množice signalov in pripadajoča grafovska konstrukcija.}
+    \caption{Množice signalov in pripadajoča grafovska konstrukcija. Značilke povezav uporabi le model \ModelName{HeteroGCN-MLP-w} pri izračunu učljivih predznačenih uteži povezav. Smer $\rho_{ij}$ velja samo za časovne povezave.}
     \label{tab:grafovska-konstrukcija-po-mnozicah}
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.20\textwidth} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X@{}}
+    \begingroup
+    % Za besedilo uporabimo nasičene različice barv, da ostanejo razločne na
+    % belem ozadju.
+    \definecolor{tableTime}{HTML}{E76F00}
+    \definecolor{tableGaze}{HTML}{0077B6}
+    \definecolor{tablePupil}{HTML}{008A8A}
+    \definecolor{tableFixation}{HTML}{7B2CBF}
+    \small
+    \begin{tabularx}{\textwidth}{@{}
+        >{\raggedright\arraybackslash}p{0.19\textwidth}
+        >{\raggedright\arraybackslash}p{0.20\textwidth}
+        >{\raggedright\arraybackslash}p{0.20\textwidth}
+        >{\raggedright\arraybackslash}X@{}}
         \toprule
-        \textbf{Množica signalov} & \textbf{Značilke vozlišč} & \textbf{Tipi povezav} \\
+        \textbf{Množica signalov} & \textbf{Značilke vozlišč} & \textbf{Relacije} & \textbf{Značilke povezav} \\
         \midrule
-        \emph{samo pogled} & čas in koordinati pogleda & časovne naprej, časovne nazaj, prostorske \\
-        \emph{samo zenici} & čas in velikosti obeh zenic & časovne naprej, časovne nazaj \\
-        \emph{pogled in zenici} & čas, koordinati pogleda in velikosti obeh zenic & časovne naprej, časovne nazaj, prostorske \\
-        \emph{vsi signali} & čas, koordinati pogleda, velikosti obeh zenic, oddaljenost od sledilnika pogleda in fiksacijska informacija & časovne naprej, časovne nazaj, prostorske, fiksacijske \\
+        \emph{samo pogled} &
+        \textcolor{tableTime}{$t_i$}, \textcolor{tableGaze}{$x_i$, $y_i$} &
+        \textcolor{tableTime}{$E_t^+$, $E_t^-$}, \textcolor{tableGaze}{$E_s$} &
+        \textcolor{tableTime}{$t_i$, $t_j$, $\Delta t$, $\rho_{ij}$}, \textcolor{tableGaze}{$\Delta x$, $\Delta y$, $d_{ij}^{\text{zaslon}}$} \\
+        \midrule
+        \emph{samo zenici} &
+        \textcolor{tableTime}{$t_i$}, \textcolor{tablePupil}{$p_i^{(l)}$, $p_i^{(r)}$} &
+        \textcolor{tableTime}{$E_t^+$, $E_t^-$} &
+        \textcolor{tableTime}{$t_i$, $t_j$, $\Delta t$, $\rho_{ij}$}, \textcolor{tablePupil}{$\Delta p_{ij}^{(l)}$, $\Delta p_{ij}^{(r)}$} \\
+        \midrule
+        \emph{pogled in zenici} &
+        \textcolor{tableTime}{$t_i$}, \textcolor{tableGaze}{$x_i$, $y_i$}, \textcolor{tablePupil}{$p_i^{(l)}$, $p_i^{(r)}$} &
+        \textcolor{tableTime}{$E_t^+$, $E_t^-$}, \textcolor{tableGaze}{$E_s$} &
+        \textcolor{tableTime}{$t_i$, $t_j$, $\Delta t$, $\rho_{ij}$}, \textcolor{tableGaze}{$\Delta x$, $\Delta y$, $d_{ij}^{\text{zaslon}}$}, \textcolor{tablePupil}{$\Delta p_{ij}^{(l)}$, $\Delta p_{ij}^{(r)}$} \\
+        \midrule
+        \emph{vsi signali} &
+        \textcolor{tableTime}{$t_i$}, \textcolor{tableGaze}{$x_i$, $y_i$}, \textcolor{tablePupil}{$p_i^{(l)}$, $p_i^{(r)}$}, \textcolor{tableFixation}{$d_i$, $f_{dur,i}$} &
+        \textcolor{tableTime}{$E_t^+$, $E_t^-$}, \textcolor{tableGaze}{$E_s$}, \textcolor{tableFixation}{$E_f$} &
+        \textcolor{tableTime}{$t_i$, $t_j$, $\Delta t$, $\rho_{ij}$}, \textcolor{tableGaze}{$\Delta x$, $\Delta y$, $d_{ij}^{\text{zaslon}}$}, \textcolor{tablePupil}{$\Delta p_{ij}^{(l)}$, $\Delta p_{ij}^{(r)}$}, \textcolor{tableFixation}{$\Delta d_{ij}$} \\
         \bottomrule
     \end{tabularx}
+    \par\smallskip
+    \footnotesize\textit{Barve:} \textcolor{tableTime}{čas}, \textcolor{tableGaze}{pogled in prostorske značilke}, \textcolor{tablePupil}{zenici}, \textcolor{tableFixation}{in dodatni signali}.
+    \endgroup
 \end{table}

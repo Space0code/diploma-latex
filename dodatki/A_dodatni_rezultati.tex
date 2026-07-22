@@ -135,8 +135,8 @@ Izbiro operatorja \texttt{GCNConv} smo preverili z dodatnim poskusom na binarni 
 \texttt{GATConv} doda pozornost nad sosedi in je uporaben, kadar želimo, da model sam uteži prispevke sosednjih vozlišč.
 \texttt{GraphConv} uporabi ločen prispevek lastnega vozlišča in sosedov; pri osnovnem modelu deluje brez uteži povezav.
 \texttt{GINConv} agregirano predstavitev obdela z večslojnim perceptronom, \texttt{GINEConv} pa v agregacijo vključi tudi značilke povezav.
-Pri modelu \ModelName{HeteroGCN-MLP-w} plasti \texttt{GCNConv} in \texttt{GraphConv} uporabljata naučene skalarne uteži povezav.
-\texttt{GATConv} namesto njih značilke povezav vključi v izračun pozornosti, \texttt{GINEConv} pa je razširjen kot \texttt{WeightedGINEConv}, ki uporabi značilke povezav in naučene skalarne uteži.
+Pri modelu \ModelName{HeteroGCN-MLP-w} plasti \texttt{GCNConv} in \texttt{GraphConv} uporabljata učljive skalarne uteži povezav.
+\texttt{GATConv} namesto njih značilke povezav vključi v izračun pozornosti, \texttt{GINEConv} pa je razširjen kot \texttt{WeightedGINEConv}, ki uporabi značilke povezav in učljive skalarne uteži.
 V naših poskusih so bile razlike majhne.
 Pri osnovnem \ModelName{GCN} je najvišjo vrednost dosegel \texttt{GINConv}, pri \ModelName{HeteroGCN-MLP-w} pa \texttt{GraphConv}, vendar razlika ni bila dovolj velika, da bi spreminjala glavno eksperimentalno zgodbo.
 Zato smo v glavnih poskusih ohranili enoten in enostaven operator \texttt{GCNConv}.

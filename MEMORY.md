@@ -188,6 +188,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-22 Pri opisu štirih množic signalov poudari primerjavo robustnosti
+  modelov glede na razpoložljivost vhodnih signalov in klasifikacijske uspešnosti
+  po njihovih tipih. Ne utemeljuj je s pokrivanjem različnih podatkovnih zbirk.
 - 2026-07-22 Toplotni prikaz porazdelitve položajev pogleda na Sliki~4.2 uporablja
   divergirajočo lestvico `RdBu_r`: modra pomeni majhno, rdeča pa veliko število
   meritev. Ta izjema od privzete lestvice `Blues` je namenjena semantično jasnemu

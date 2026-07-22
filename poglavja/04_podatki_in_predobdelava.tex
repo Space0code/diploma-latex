@@ -23,18 +23,18 @@ Zato smo glavno eksperimentalno evalvacijo izvedli na podatkovni zbirki \MAHNOB{
 \subsection{Podatkovna zbirka \MAHNOB{}}
 
 Podatkovna zbirka \MAHNOB{} je večmodalna zbirka za prepoznavanje čustev in implicitno označevanje multimedijskih vsebin~\cite{soleymani2012mahnob}.
-Zbirka vsebuje dva glavna eksperimentalna sklopa: prepoznavanje čustvenih stanj iz odzivov na čustvene videoposnetke in implicitno označevanje na podlagi odzivov na pravilne oziroma napačne oznake pod sliko ali posnetkom.
+Zbirka vsebuje dva glavna eksperimentalna sklopa: prepoznavanje čustvenih stanj iz odzivov na videoposnetke in implicitno označevanje na podlagi odzivov na pravilne oziroma napačne oznake pod sliko ali posnetkom.
 Vsebuje odzive udeležencev na video posnetke, katerih cilj je bil vzbuditi določena čustva v udeležencu.
 Odzive sinhrono zajame z videoposnetkom obraza, zvokom, elektroencefalogramom (EEG), fiziološkimi signali -- elektrokardiogramom (EKG), galvanskim odzivom kože (GSR), amplitudo dihanja in temperaturo kože -- ter signali sledilnika pogleda.
 Meritve sledilnika pogleda so bile zajete s sledilnikom Tobii X120 pri frekvenci $60~Hz$.
 V tej nalogi uporabljamo samo prvi sklop, to je eksperiment vzbujanja čustev z videoposnetki, in izključno signale sledilnika pogleda.
 
-Izvirni članek poroča o 30 rekrutiranih udeležencih, od katerih je bilo v analizi uporabljenih 27.
-Udeleženci P9, P12 in P15 so bili izključeni zaradi tehničnih težav oziroma nepopolnega zajema podatkov.
-V tej nalogi po vzoru izvirnega članka izključimo iste tri udeležence.
-V eksperimentu vzbujanja čustev so udeleženci gledali 20 čustveno vzbujajočih videoposnetkov.
-Pred vsakim čustvenim posnetkom je bil prikazan še kratek nevtralni posnetek, odziv nanj pa je bil shranjen ločeno.
-Po ogledu posameznega posnetka so udeleženci podali samoocene čustvenega stanja: številski oceni valence in vzburjenosti, diskretno samooceno čustvenega stanja ter še nekaj drugih ocen.
+Izvirni članek poroča o 30 rekrutiranih udeležencih.
+Udeležence P9, P12 in P15 so avtorji izključili zaradi tehničnih težav oziroma nepopolnega zajema podatkov.
+V tej nalogi po vzoru izvirnega članka izključimo iste tri udeležence, poleg tega pa izključimo tudi udeležence, za katere ni na voljo podatkov iz eksperimentov vzbujanja čustev.
+V eksperimentu vzbujanja čustev so udeleženci gledali 20 videoposnetkov, katerih namen je bil vzbuditi različna čustva v gledalcu.
+Pred vsakim posnetkom, ki naj bi vzbujal določeno čustvo, je bil prikazan še kratek nevtralni posnetek, odziv nanj pa je bil shranjen ločeno.
+Po ogledu posameznega posnetka so udeleženci podali samoocene čustvenega stanja -- številski oceni valence in vzburjenosti, diskretno samooceno čustvenega stanja ter še nekaj dodatnih ocen, ki jih ne uporabimo.
 
 \section{Samoocene čustvenega stanja in ciljni razredi}
 \label{subsec:ciljne-oznake}
@@ -79,15 +79,10 @@ V uporabljeni podatkovni zbirki imamo na voljo pet osnovnih vrst signalov. To so
     \item informacija o fiksacijah, tj. pripadnost fiksaciji ter trajanje fiksacije.
 \end{itemize}
 
-Večina podatkovnih zbirk s podatki sledilnika pogleda vsebuje bodisi le koordinate pogleda bodisi le velikosti zenic bodisi oboje.
-Nekatere zbirke pa ponujajo tudi dodatne signale, kot sta v našem primeru oddaljenost od sledilnika ter informacije o fiksacijah.
-Da bi s primerjalno študijo pokrili čim širši razpon različnih tipov zbirk, \MAHNOB{} podatke razdelimo v štiri delno prekrivajoče se eksperimentalne množice signalov.
+Da preverimo robustnost modelov glede na razpoložljivost vhodnih signalov ter primerjamo njihovo klasifikacijsko uspešnost za posamezne tipe vhodnih signalov, podatke \MAHNOB{} razdelimo v štiri delno prekrivajoče se eksperimentalne množice signalov.
 V vseh štirih množicah uporabimo tudi informacijo o času.
 Množica \emph{samo pogled} poleg časa vsebuje koordinati pogleda, množica \emph{samo zenici} vsebuje velikosti leve in desne zenice, množica \emph{pogled in zenici} združi koordinati pogleda in velikosti zenic, množica \emph{vsi signali} pa doda še oddaljenost od sledilnika pogleda in informacijo o fiksacijah.
 Podrobna povezava med temi množicami, značilkami vozlišč in razpoložljivimi tipi povezav je podana pri opisu grafovske konstrukcije v razdelku~\ref{subsec:grafovska-konstrukcija-po-mnozicah}.
-
-
-\label{subsec:ciscenje}
 
 Izbrane podatke pred uporabo očistimo.
 Najprej iz lokalne kopije zbirke \MAHNOB{} odstranimo podatke, ki jih v tej nalogi ne uporabljamo, in ohranimo le podatke eksperimenta vzbujanja čustev.

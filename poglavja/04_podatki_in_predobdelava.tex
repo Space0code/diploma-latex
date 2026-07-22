@@ -101,6 +101,8 @@ Na voljo imamo tudi signale veljavnosti, na podlagi katerih odstranimo meritve, 
 Dodatno uporabimo filter osamelcev \texttt{q01}-\texttt{q99}, ki odstrani meritve, pri katerih je vsaj eden od štirih osnovnih signalov pod prvim ali nad devetindevetdesetim percentilom, saj te vrednosti močno izkrivljajo porazdelitve signalov.
 Na koncu kratke vrzeli v numeričnih signalih linearno interpoliramo, signala velikosti leve in desne zenice pa dodatno zgladimo s kratkim centriranim drsečim povprečjem treh meritev.
 Porazdelitvi položajev pogleda in velikosti zenic po čiščenju sta za množico signalov \emph{pogled in zenici} prikazani na slikah~\ref{fig:porazdelitev-polozajev-pogleda} in~\ref{fig:porazdelitev-velikosti-zenic}.
+Na sliki~\ref{fig:porazdelitev-velikosti-zenic} je opazen tudi rahel sistematični zamik med porazdelitvama velikosti leve in desne zenice, ki ga izvirni članek o zbirki \MAHNOB{} ne obravnava~\cite{soleymani2012mahnob}. 
+Ker zamik ni vezan na posameznega udeleženca, je naša hipoteza, da to ni fiziološka asimetrija, temveč merilni artefakt sledilnika pogleda.
 
 
 % Vir slik: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/model_runs/gaze_pupil/2026-06-12_17-31-09/experiments/multiclass_table6_valence_3class_emotion-elicitation/snapshot.csv.
@@ -136,7 +138,7 @@ Nato časovno vrsto razdelimo na neprekrivajoča se časovna okna dolžine $T=10
 Vsako uporabno časovno okno predstavlja en učni primer.
 Za $10~s$ smo se odločili na podlagi sorodnega dela na podatkih sledilnika pogleda, kjer so se daljša okna med dolžinami $1$, $3$, $5$ in $10~s$ praviloma izkazala za bolj informativna~\cite{bozak2024feature}.
 Daljših oken ne uporabimo, ker bi težje predpostavili, da celotno okno opisuje enoten čustveni odziv, saj se lahko ta med ogledom posnetka že opazno spremeni~\cite{zhang2020rcea}.
-Tudi sorodna dela na prepoznavanju čustev iz očesnih signalov pogosto uporabljajo krajša okna~\cite{wang2018automatic,wu2021emotion}.
+Tudi sorodna dela na prepoznavanju čustev iz očesnih signalov pogosto uporabljajo razmeroma kratka okna~\cite{wang2018automatic,wu2021emotion}.
 
 Oznaka okna je določena s parom udeleženec-posnetek, saj so udeleženci vprašalnike izpolnjevali le po vsakem ogledu videoposnetka in ne vmes.
 Okno uporabimo, če po predhodnem čiščenju in filtru osamelcev vsebuje vsaj 60 veljavnih meritev.

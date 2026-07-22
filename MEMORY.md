@@ -110,6 +110,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   ene povedi čez več vrstic samo zaradi širine urejevalnika. Ročno vrstično
   oblikovanje naj sledi stavkom oziroma logičnim enotam, ker Tomi tako lažje
   pregleduje in ureja besedilo.
+- Oznak za postavitev okolij `figure` in `table` (npr. `[htbp]`, `[!htbp]`,
+  `[H]`, `[t]` ali privzeta postavitev brez oglatih oklepajev) ne spreminjaj.
+  
 - Konkretna imena modelov v besedilu, tabelah in naslovih razdelkov piši z
   makrom `\ModelName{...}`. To velja za dejanske modelne oznake, kot so
   `\ModelName{SVM}`, `\ModelName{LightGBM}`, `\ModelName{GCN}` in
@@ -178,6 +181,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-22 Mentor želi, da je pri vsakem od štirih GNN v poglavju 6 podana glavna enačba. Enačbe naj neposredno pokažejo razlikovalni korak posamezne stopnje: homogeno konvolucijo, relacijsko povprečenje, naučeno MLP-fuzijo in uteženo relacijsko posredovanje sporočil.
 - 2026-07-21 V poglavju 4 so bile vsebine nekdanjih sekcij `Priprava vhodnih signalov`, `Normalizacija`, `Segmentacija v časovna okna` in `Povzetek predobdelave` združene v sekcijo `Priprava podatkov za učenje` z dvema podsekcijama: `Množice signalov in čiščenje podatkov` ter `Standardizacija in tvorba časovnih oken`. Povzetna tabela predobdelave je na koncu druge podsekcije brez samostojnega naslova.
 - 2026-07-21 Sekciji o podatkih sledilnika pogleda in MAHNOB-HCI sta iz poglavja 3, osnovni opis podatkov sledilnika pogleda pa iz poglavja 2, združeni v sekcijo `Podatkovne zbirke sledilnika pogleda` v poglavju 4. V poglavji 2 in 3 ju ne vračaj; poglavje 4 naj ostane edino mesto za opis signalov, splošni pregled zbirk, kratek opis eSEEd in podrobnejši opis MAHNOB-HCI.
 - 2026-07-08 Za razdelek o fiksacijskih povezavah v poglavju 5 je dodana slika

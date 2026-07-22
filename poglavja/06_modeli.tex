@@ -23,7 +23,7 @@ V tabeli~\ref{tab:pregled-primerjanih-modelov} je prikazano, katere modele upora
 \label{subsec:izhodiscna-klasifikatorja}
 
 Večinski in naključni klasifikator predstavljata spodnjo primerjalno mejo.
-Večinski klasifikator vedno napove večinski razred učne množice, naključni klasifikator pa razrede napoveduje z enako verjetnostjo ne glede na distribucijo podatkov.
+Večinski klasifikator vedno napove večinski razred učne množice, naključni klasifikator pa razrede napoveduje z enako verjetnostjo ne glede na porazdelitev podatkov.
 Pri binarni klasifikaciji to pomeni verjetnost $50~\%$ za vsak razred.
 Če model ne preseže rezultatov teh dveh klasifikatorjev, težko trdimo, da se iz vhodnih podatkov nauči uporabnih vzorcev.
 
@@ -44,18 +44,18 @@ Takšna pretvorba časovnega signala v opisne statistike na ravni okna oziroma o
 RBF jedro modelu omogoča nelinearno ločevanje razredov, zato je \ModelName{SVM} uporaben kot močan negrafovski osnovni model.
 Ker je \ModelName{SVM} občutljiv na velikostni red vhodnih značilk, agregirane značilke pred učenjem standardiziramo.
 
-\subsubsection{\ModelName{LightGBM}}
-
-\ModelName{LightGBM} uporabimo kot predstavnika gradientno spodbujenih odločitvenih dreves~\cite{ke2017lightgbm}.
-Model je primeren za tabelarične podatke, zato je naravna primerjava za agregirane značilke časovnih oken.
-Za razliko od \ModelName{SVM} in \ModelName{MLP} standardizacije vhodnih značilk ne potrebuje, saj odločitvena drevesa delujejo na pragovih posameznih značilk.
-
 \subsubsection{\ModelName{MLP}}
 
 Osnovni \ModelName{MLP} uporabimo kot primer osnovnega nevronskega modela~\cite{goodfellow2016deep}.
 Vhod modela je vektor agregiranih značilk enega 10-sekundnega okna, izhod pa logiti za razrede ciljne naloge.
 Arhitektura je namerno preprosta: dve skriti polno povezani plasti z aktivacijo ReLU in izpuščanjem, za njima pa izhodna linearna plast.
 Model učimo z navzkrižno entropijo.
+
+\subsubsection{\ModelName{LightGBM}}
+
+\ModelName{LightGBM} uporabimo kot predstavnika gradientno spodbujenih odločitvenih dreves~\cite{ke2017lightgbm}.
+Model je primeren za tabelarične podatke, zato je naravna primerjava za agregirane značilke časovnih oken.
+Za razliko od \ModelName{SVM} in \ModelName{MLP} standardizacije vhodnih značilk ne potrebuje, saj odločitvena drevesa delujejo na pragovih posameznih značilk.
 
 \section{Zamrznjeni prednaučeni predstavitveni modeli}
 \label{subsec:zamrznjeni-prednauceni-modeli}
@@ -102,6 +102,7 @@ Pri množici \emph{samo pogled} ta vrstica pomeni uporabo \ModelName{GazeMAE}, p
 \label{subsec:grafovski-modeli}
 
 Grafovski modeli uporabljajo grafovsko predstavitev okna iz poglavja~\ref{sec:grafovska-predstavitev}.
+Štiri grafovske modele uredimo v arhitekturno lestvico, tj. zaporedje postopnih nadgradenj, v katerem vsaka naslednja stopnja doda eno obravnavano zmožnost modela.
 Pri isti množici signalov vse stopnje uporabljajo iste vozliščne značilke, iste relacije in ista časovna okna.
 Razlikujejo se po tem, kako obravnavajo tipe povezav, kako združujejo relacijske predstavitve in ali uporabljajo značilke povezav za izračun naučenih uteži povezav.
 Najprej definiramo osnovno GNN, nato pa s tremi nadgradnjami postopno gradimo končni model.
@@ -112,36 +113,57 @@ V tabeli~\ref{tab:arhitekturna-lestvica-gnn} so na kratko predstavljene razlike 
 \subsection{Skupni cevovod grafovskih modelov}
 \label{subsec:skupni-deli-grafovske-arhitekture}
 
-Grafovski modeli na vhod prejmejo graf glede na izbrano množico signalov, kot definirano v~\ref{sec:grafovska-predstavitev}.
+Grafovski modeli na vhod prejmejo graf glede na izbrano množico signalov, kot definirano v poglavju~\ref{sec:grafovska-predstavitev}.
 Razsežnost vhodnih preslikav prilagodimo izbrani množici signalov -- ločeno za značilke vozlišč, pri modelu \ModelName{HeteroGCN-MLP-w} pa tudi za značilke povezav.
 
 Vhodne vektorje najprej preslikamo v skupni latentni prostor z dvoslojnim \ModelName{MLP}.
 Tako dobimo začetno predstavitev vsakega vozlišča, ki jo nato posodabljajo grafovske plasti.
 Te plasti posredujejo sporočila po povezavah grafa in pri vsakem vozlišču združijo informacije iz njegove okolice.
 V grafovskih blokih uporabimo aktivacijo GELU, rezidualne povezave, normalizacijo plasti in izpuščanje.
+Aktivacijska funkcija GELU je določena kot $\operatorname{GELU}(x)=x\Phi(x)$, kjer  $\Phi(x)$ označuje porazdelitveno funkcijo standardne normalne porazdelitve.
+Rezidualna povezava vhod bloka prišteje njegovi izhodni preslikavi, normalizacija plasti pa za vsako vozlišče normalizira komponente predstavitve z njihovim povprečjem in varianco.
+Izpuščanje med učenjem z določeno verjetnostjo nastavi posamezne aktivacije na nič, s čimer omejuje prekomerno prileganje.
 Ti gradniki niso predmet primerjave med grafovskimi modeli.
 Primerjava se osredotoča na obravnavo relacij, fuzijo relacijskih predstavitev in uporabo značilk povezav.
-Iz končnih predstavitev vozlišč nato s pozornostnim združevanjem\footnote{
-Ker napovedujemo oznako celotnega okna, predstavitve vozlišč združimo v predstavitev grafa.
+Ker napovedujemo oznako celotnega okna, iz končnih predstavitev vozlišč s pozornostnim združevanjem izračunamo predstavitev celotnega grafa.
 Uporabimo $\mathbf{h}_G = \sum_{v \in V} \alpha_v \mathbf{h}_v$, kjer je $\mathbf{h}_G$ predstavitev grafa, $\alpha_v$ utež pozornosti za vozlišče $v$, $\mathbf{h}_v$ pa predstavitev vozlišča $v$.
-Uteži pozornosti izračunamo s softmax normalizacijo: $\alpha_v = \exp(g(\mathbf{h}_v)) / \sum_{u \in V} \exp(g(\mathbf{h}_u))$, kjer je $g$ naučena funkcija, ki predstavitvi vozlišča priredi skalarno oceno pomembnosti.
-} izračunamo predstavitev celotnega grafa, to pa pošljemo skozi klasifikacijsko glavo \ModelName{MLP}.
+Uteži pozornosti normaliziramo s softmax normalizacijo:
+\begin{equation}
+    \alpha_v = \frac{\exp(g(\mathbf{h}_v))}{\sum_{u \in V} \exp(g(\mathbf{h}_u))}.
+\end{equation}
+Pri tem je $g$ naučena funkcija, ki predstavitvi vozlišča priredi skalarno oceno pomembnosti.
+Predstavitev grafa nato pošljemo skozi klasifikacijsko glavo \ModelName{MLP}.
 Glava izračuna dva logita, enega za neprijetno in enega za prijetno valenco.
 Napoved je razred z večjim logitom.
 Pri poročanju verjetnosti logite normaliziramo s softmaxom.
 Podrobnosti o številu plasti, velikosti skritih predstavitev, verjetnosti izpuščanja in ostalih hiperparametrih so opisane v dodatku~\ref{app:hiperparametri}.
 
-Vse GNN treniramo od začetka do konca (ang. \emph{end-to-end}), kar pomeni, da se vsi učljivi deli modela optimizirajo hkrati glede na klasifikacijsko izgubo.
+Vse GNN učimo od začetka do konca (ang. \emph{end-to-end}), kar pomeni, da se vsi učljivi deli modela optimizirajo hkrati glede na klasifikacijsko izgubo.
 To vključuje začetno preslikavo značilk vozlišč, grafovske plasti, morebitno fuzijo relacij, pozornostno združevanje in klasifikacijsko glavo.
 V nadaljevanju opišemo specifike vsake arhitekture v štiri-stopenjski arhitekturni lestvici, začenši z najenostavnejšim -- s homogenim \ModelName{GCN}.
+V enačbah posameznih modelov je $\mathbf{H}^{(k-1)}$ matrika vhodnih predstavitev vozlišč v $k$-ti grafovski plasti, $\mathbf{Z}^{(k)}$ pa njen izhod pred skupno rezidualno povezavo, normalizacijo plasti in izpuščanjem.
 
 \subsection{\ModelName{GCN}}
 \label{subsec:model-gcn}
 
 \ModelName{GCN} je v osnovi homogeni grafovski model.
 Uporablja isto grafovsko predstavitev okna, kot je bila opisana v poglavju~\ref{sec:grafovska-predstavitev}, vendar ne ločuje časovnih, prostorskih in fiksacijskih relacij.
-Vse povezave združi v en homogen graf, posredovanje sporočil pa izvede z običajnimi plastmi \texttt{GCNConv}.
+Vse povezave združi v en homogen graf, posredovanje sporočil pa izvede s plastmi \texttt{GCNConv} iz knjižnice PyTorch Geometric (PyG)~\cite{fey2019pyg}.
 Model ne uporablja značilk povezav in posledično naučenih uteži povezav.
+Glavni korak ene plasti modela zapišemo kot~\cite{kipf2017gcn}
+\begin{equation}
+    \mathbf{Z}^{(k)} = \operatorname{GELU}\!\left(
+        \mathbf{D}^{-\frac{1}{2}}
+        \mathbf{A}
+        \mathbf{D}^{-\frac{1}{2}}
+        \mathbf{H}^{(k-1)}
+        \boldsymbol{\Theta}^{(k)}
+        + \mathbf{b}^{(k)}
+    \right),
+    \label{eq:model-gcn}
+\end{equation}
+kjer je $\mathbf{A}$ matrika sosednosti homogenega grafa, $\mathbf{D}$ pripadajoča diagonalna matrika stopenj, $\boldsymbol{\Theta}^{(k)}$ matrika učljivih parametrov in $\mathbf{b}^{(k)}$ pristranskost.
+V grafovski konvoluciji ne dodajamo zank iz vozlišča vase, saj se lastna predstavitev vozlišča ohranja prek rezidualne povezave.
 Slika~\ref{fig:diagram-gcn} prikazuje osnovni cevovod tega modela.
 
 \begin{figure}[htbp]
@@ -158,6 +180,25 @@ Slika~\ref{fig:diagram-gcn} prikazuje osnovni cevovod tega modela.
 Kot opisano v~\ref{sec:grafovska-predstavitev} tukaj ločimo različne tipe relacij.
 Relacijske predstavitve vozlišč združimo v skupno predstavitev vozlišča s preprostim povprečenjem.
 Namen te stopnje je izolirati vpliv ločevanja relacij.
+Za vsako relacijo $r \in \mathcal{R}$ uporabimo ločeno grafovsko konvolucijo, nato pa njihove izhode povprečimo:
+\begin{equation}
+    \begin{aligned}
+        \mathbf{Z}_r^{(k)}
+        &= \operatorname{GELU}\!\left(
+            \mathbf{D}_r^{-\frac{1}{2}}
+            \mathbf{A}_r
+            \mathbf{D}_r^{-\frac{1}{2}}
+            \mathbf{H}^{(k-1)}
+            \boldsymbol{\Theta}_r^{(k)}
+            + \mathbf{b}_r^{(k)}
+        \right), \\
+        \mathbf{Z}^{(k)}
+        &= \frac{1}{|\mathcal{R}|}
+        \sum_{r \in \mathcal{R}} \mathbf{Z}_r^{(k)},
+    \end{aligned}
+    \label{eq:model-heterogcn-mean}
+\end{equation}
+kjer $\mathbf{A}_r$ in $\mathbf{D}_r$ opisujeta povezave in stopnje vozlišč znotraj relacije $r$, vsaka relacija pa ima svoje parametre $\boldsymbol{\Theta}_r^{(k)}$ in $\mathbf{b}_r^{(k)}$.
 Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mean}, je sprememba glede na homogeni \ModelName{GCN} samo v tem, da se sporočila najprej izračunajo ločeno po relacijah, nato pa združijo s povprečenjem.
 
 \begin{figure}[htbp]
@@ -173,9 +214,18 @@ Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mean}, je sprememba glede na
 \ModelName{HeteroGCN-MLP} dobimo tako, da \ModelName{HeteroGCN-mean} nadgradimo z naučeno fuzijo relacijskih predstavitev.
 Različne predstavitve vozlišč -- tiste, ki so v danem modelu na voljo izmed časovne naprej, časovne nazaj, prostorske ter fiksacijske -- najprej konkateniramo, nato pa jih z dvoslojnim perceptronom združimo v skupno predstavitev vozlišča.
 S tem dopuščamo, da model sam določi, kateri deli katere relacije so pomembnejši za končno predstavitev.
+Relacijski izhodi $\mathbf{Z}_r^{(k)}$ se izračunajo kot v enačbi~\eqref{eq:model-heterogcn-mean}, njihovo naučeno fuzijo pa zapišemo kot
+\begin{equation}
+    \mathbf{Z}^{(k)} =
+    f_{\mathrm{fuz}}^{(k)}\!\left(
+        \mathop{\Vert}_{r \in \mathcal{R}} \mathbf{Z}_r^{(k)}
+    \right),
+    \label{eq:model-heterogcn-mlp}
+\end{equation}
+kjer $\Vert$ označuje konkatenacijo v vnaprej določenem vrstnem redu relacij, $f_{\mathrm{fuz}}^{(k)}$ pa dvoslojni perceptron $k$-te grafovske plasti.
 Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mlp}, je sprememba glede na \ModelName{HeteroGCN-mean} v zamenjavi ročno določene fuzije z naučeno fuzijo relacijskih predstavitev.
 
-\begin{figure}[htbp]
+\begin{figure}
     \centering
     \includegraphics[width=\textwidth]{\detokenize{HeteroGCN-MLP final.png}}
     \caption[Diagram arhitekture \ModelName{HeteroGCN-MLP}.]{Diagram arhitekture \ModelName{HeteroGCN-MLP}. Model relacijske predstavitve najprej konkatenira, nato pa jih združi z naučeno fuzijo prek dvoslojnega perceptrona.}
@@ -191,10 +241,30 @@ Ti na podlagi vektorja značilk posamezne povezave, katerega komponente so povze
 Pri posamezni množici signalov se uporabijo le funkcije za relacije, ki so v grafu prisotne.
 Časovne povezave naprej in nazaj si delijo isto funkcijo $f_w^{\text{čas}}$, smer povezave pa je podana kot dodatna značilka povezave $\rho_{ij}$.
 Formule za izračun in normalizacijo uteži so podane v dodatku~\ref{app:naucene-utezi-povezav}.
+Za vozlišče $v$ in relacijo $r$ je glavni korak uteženega posredovanja sporočil
+\begin{equation}
+    \begin{aligned}
+        \mathbf{z}_{v,r}^{(k)}
+        &= \operatorname{GELU}\!\left(
+            \sum_{u \in \mathcal{N}_r(v)}
+            w_{uv}^{(r)}
+            \boldsymbol{\Theta}_r^{(k)}
+            \mathbf{h}_u^{(k-1)}
+            + \mathbf{b}_r^{(k)}
+        \right), \\
+        \mathbf{z}_v^{(k)}
+        &= f_{\mathrm{fuz}}^{(k)}\!\left(
+            \mathop{\Vert}_{r \in \mathcal{R}}
+            \mathbf{z}_{v,r}^{(k)}
+        \right).
+    \end{aligned}
+    \label{eq:model-heterogcn-mlp-w}
+\end{equation}
+Uteži $w_{uv}^{(r)}$ so že normalizirane po vhodnih povezavah vozlišča $v$ znotraj relacije, zato pri tej različici ne uporabimo dodatne normalizacije s stopnjami vozlišč.
 Namen te \emph{končne} stopnje je preveriti, ali modelu koristi razlikovati moč in predznak prispevka posameznih povezav znotraj relacije.
 Slika~\ref{fig:diagram-heterogcn-mlp-w} prikazuje dodano vejo za izračun naučenih uteži povezav.
 
-\begin{figure}[!htbp]
+\begin{figure}
     \centering
     \includegraphics[width=\textwidth]{\detokenize{HeteroGCN-MLP-w final.png}}
     \caption[Diagram arhitekture \ModelName{HeteroGCN-MLP-w}.]{Diagram arhitekture \ModelName{HeteroGCN-MLP-w}. Model poleg naučene fuzije relacij uporablja še značilke povezav, iz katerih z relacijsko odvisnimi perceptroni izračuna naučene predznačene uteži povezav.}

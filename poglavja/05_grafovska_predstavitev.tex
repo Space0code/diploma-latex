@@ -13,7 +13,7 @@ Graf zato v vseh primerih predstavlja isto vrsto učnega vzorca, razlikuje pa se
 \section{Vozlišča}
 \subsection{Definicija}
 
-Vsako vozlišče predstavlja eno meritev sledilnika pogleda znotraj časovnega okna:
+Vsako vozlišče $v_i$ predstavlja eno meritev sledilnika pogleda $x_i$ v trenutku $i$ znotraj časovnega okna:
 \begin{equation}
     v_i \leftrightarrow \mathbf{x}_i.
 \end{equation}
@@ -49,7 +49,7 @@ Prostorske in fiksacijske povezave pa obravnavamo kot neusmerjene.
 \subsection{Zakaj ločimo relacije}
 
 Vsaka povezava ima določen tip relacije, saj časovna povezava, prostorska povezava in fiksacijska povezava opisujejo različne odnose med meritvami.
-Ta zapis omogoča, da kasnejše stopnje arhitekturne lestvice relacije obravnavajo ločeno.
+Ta zapis heterogenim grafovskim modelom, opisanim v poglavju~\ref{sec:modeli}, omogoča ločeno obravnavo relacij.
 Osnovni \ModelName{GCN} uporabi isti nabor povezav, vendar relacij modelno ne loči; v tem primeru dobimo enostaven homogen graf.
 Podrobnosti o uporabi relacij v posameznih modelih so opisane v poglavju~\ref{sec:modeli}.
 
@@ -135,14 +135,14 @@ Na primer, pri fiksaciji dolžine $F=21$ in parametru $k_f=3$ dobimo $s=7$.
 Vozlišče z lokalnim indeksom $0$ torej povežemo z vozlišči $1, 8$ in $15$.
 Odmik $1$ ohrani časovno lokalno komunikacijo znotraj fiksacije, večji odmiki pa omogočijo širjenje informacij tudi med časovno bolj oddaljenimi meritvami iste fiksacije.
 
-Razširjene povezave imajo večji doseg kot zgolj zaporedne fiksacijske povezave, hkrati pa se izognejo kombinatorični eksploziji, ki bi nastala pri polnem kliku.
-Pri polnem kliku bi namreč število povezav naraščalo kvadratno z dolžino fiksacije.
+Razširjene povezave imajo večji doseg kot zgolj zaporedne fiksacijske povezave, hkrati pa se izognejo kombinatorični eksploziji, ki bi nastala pri polni kliki.
+Pri polni kliki bi namreč število povezav naraščalo kvadratno z dolžino fiksacije.
 Končno gostoto grafov pri izbrani nastavitvi povzemamo v tabeli~\ref{tab:statistika-konstruiranih-grafov}.
 
 Večje vrednosti $k_f$ povečajo gostoto grafa, računsko zahtevnost in možnosti za prekomerno glajenje, manjše vrednosti pa graf dodatno razredčijo.
 Izbira $k_f=3$ je zato kompromis med dosegom in gostoto grafa.
 Ker vsaka plast GNN omogoča izmenjavo informacij med neposredno povezanimi vozlišči, se doseg znotraj fiksacije povečuje tudi z večanjem števila plasti. 
-Pri $k_f=3$ vozlišče že v eni plasti prejme informacije iz več delov iste fiksacije, večplastni model pa lahko te informacije dodatno propagira po fiksacijski relaciji.
+Pri $k_f=3$ vozlišče že v eni plasti prejme informacije iz več delov iste fiksacije, večplastni model pa lahko te informacije dodatno razširja po fiksacijski relaciji.
 To je lepo vidno na sliki~\ref{fig:razsirjene-fiksacijske-povezave}
 
 % Vir slike: GFM-for-eyetracker/scripts/create_thesis_fixation_dilated_edges_figure.py.
@@ -167,7 +167,8 @@ To je lepo vidno na sliki~\ref{fig:razsirjene-fiksacijske-povezave}
 Povezavam poleg tipa relacije priredimo tudi značilke povezav, ki opisujejo odnos med izvorno meritvijo $v_i$ in ciljno meritvijo $v_j$.
 Osnovne časovne značilke so normalizirani čas izvorne in ciljne meritve, $t_i$ in $t_j$, ter časovna razlika $\Delta t = t_j - t_i$.
 Pri časovnih povezavah dodamo še smer $\rho_{ij}$, kjer ima povezava naprej vrednost $\rho_{ij}=1$, povezava nazaj pa $\rho_{ij}=-1$.
-Značilke povezav so del grafovske predstavitve, uporabi jih končna utežena stopnja arhitekturne lestvice, opisana v poglavju~\ref{sec:modeli}.
+Značilke povezav so del grafovske predstavitve.
+Uporabi jih le model \ModelName{HeteroGCN-MLP-w}, opisan v poglavju~\ref{sec:modeli}.
 
 Pri grafih, ki vsebujejo koordinate pogleda, povezavam dodamo tudi prostorske značilke.
 To sta razliki v koordinatah pogleda, $\Delta x = x_j - x_i$ in $\Delta y = y_j - y_i$, ter evklidska razdalja med položajema pogleda na zaslonu $d_{ij}^{\text{zaslon}}$.
@@ -191,6 +192,7 @@ Za vsako množico signalov iz razdelka~\ref{subsec:vhodni-signali} zgradimo graf
 Razlika med grafi je v značilkah vozlišč in relacijah, ki jih izbrana množica signalov omogoča.
 Množica \emph{vsi signali} je najbogatejša predstavitev. 
 Ostale množice uporabijo ustrezne podmnožice značilk in povezav.
+Pregled grafovske konstrukcije za vse štiri množice signalov je podan v tabeli~\ref{tab:grafovska-konstrukcija-po-mnozicah}.
 \newpage
 \input{tabele/graf/konstrukcija_po_mnozicah_signalov.tex}
 

@@ -12,6 +12,7 @@ Negrafovski osnovni modeli prejmejo agregirano tabelarično predstavitev posamez
 \label{subsec:pregled-primerjanih-pristopov}
 
 V tabeli~\ref{tab:pregled-primerjanih-modelov} je prikazano, katere modele smo uporabili, kateri družini vsak model pripada, kakšne podatke sprejme na vhod in kakšno vlogo ima v naši primerjalni študiji.
+\newpage
 
 \input{tabele/modeli/pregled_primerjanih_modelov.tex}
 
@@ -21,9 +22,8 @@ V tabeli~\ref{tab:pregled-primerjanih-modelov} je prikazano, katere modele smo u
 \subsubsection*{Izhodiščna klasifikatorja}
 \label{subsec:izhodiscna-klasifikatorja}
 
-Večinski in naključni klasifikator predstavljata spodnjo primerjalno mejo.
+Večinski in naključni klasifikator sta enostavna klasifikatorja, ki predstavljata spodnjo primerjalno mejo oziroma izhodišče.
 Večinski klasifikator vedno napove večinski razred učne množice, naključni klasifikator pa razrede napoveduje z enako verjetnostjo ne glede na porazdelitev podatkov.
-Pri binarni klasifikaciji to pomeni verjetnost $50~\%$ za vsak razred.
 Cilj je, da naučeni modeli presežejo rezultate izhodiščnih klasifikatorjev, saj s tem pokažemo uspešno prepoznavanje vzorcev.
 
 \subsubsection*{Klasični modeli strojnega učenja}
@@ -32,23 +32,24 @@ Cilj je, da naučeni modeli presežejo rezultate izhodiščnih klasifikatorjev, 
 Za pravično primerjavo smo negrafovskim osnovnim modelom podali agregirane značilke istih signalov, kot so jih prejele GNN.
 V primeru množice \emph{vsi signali} so to koordinati pogleda $(x,~y)$, velikosti leve in desne zenice, oddaljenost od sledilnika pogleda ter informacija o fiksacijah.
 Dodali smo tudi normaliziran čas meritve znotraj okna.
-Za vsak signal smo izračunali opisne statistike na ravni okna: povprečje, standardni odklon, minimum, maksimum, razpon, mediano, prvi kvartil, tretji kvartil in medkvartilni razmik.
+Za vsak signal smo izračunali opisne statistike na ravni okna.
+To so povprečje, standardni odklon, minimum, maksimum, razpon, mediana, prvi kvartil, tretji kvartil in medkvartilni razmik.
 Pri fiksacijah smo dodali še število fiksacij, delež meritev v oknu, ki pripadajo fiksacijam, vsoto trajanj, povprečno trajanje in največje trajanje fiksacije.
 V primeru množice \emph{vsi signali} je eno okno v tabelarični predstavitvi opisano z 68 agregiranimi značilkami.
 Takšna pretvorba časovnega signala v opisne statistike na ravni okna oziroma odziva je običajen pristop pri klasičnih modelih strojnega učenja za podatke pogleda~\cite{bozak2024feature,lim2020emotion,tarnowski2020eye}.
 
 \subsubsection*{\ModelName{SVM}}
 
-\ModelName{SVM} smo uporabili kot klasični model z jedrom radialne bazne funkcije (RBF) nad agregiranimi značilkami okna~\cite{cortes1995support}.
-RBF jedro modelu omogoča nelinearno ločevanje razredov, zato je \ModelName{SVM} uporaben kot močan negrafovski osnovni model.
+\ModelName{SVM} smo uporabili kot klasični model z nelinearnim jedrom radialne bazne funkcije (RBF) nad agregiranimi značilkami okna~\cite{cortes1995support}.
 Ker je \ModelName{SVM} občutljiv na velikostni red vhodnih značilk, smo agregirane značilke pred učenjem standardizirali, da značilke z večjimi številskimi vrednostmi niso nesorazmerno vplivale na odločanje modela.
 
 \subsubsection*{\ModelName{MLP}}
 
 Osnovni \ModelName{MLP} smo uporabili kot primer osnovnega nevronskega modela~\cite{goodfellow2016deep}.
 Vhod modela je vektor agregiranih značilk enega časovnega okna, izhod pa logiti za razrede ciljne naloge.
-Arhitektura je namerno preprosta: dve skriti polno povezani plasti z aktivacijo ReLU (angl. \emph{rectified linear unit}) in izpuščanjem, za njima pa izhodna linearna plast.
-Model smo učili z izgubo križne entropije, ki kaznuje majhno napovedano verjetnost pravilnega razreda.
+Tudi \ModelName{MLP} je občutljiv na velikostni red značilk, zato smo tudi tukaj zanj značilke standardizirali.
+Ker cilj naloge ni ustvariti nov globok nevronski model, smo namenoma sestavili preprost perceptron z dvema skritima polno povezanima plastema z aktivacijo ReLU (angl. \emph{rectified linear unit}) in izpuščanjem, za njima pa izhodno linearno plastjo.
+\ModelName{MLP} smo učili z izgubo križne entropije, ki kaznuje majhno napovedano verjetnost pravilnega razreda.
 
 \subsubsection*{\ModelName{LightGBM}}
 
@@ -63,13 +64,14 @@ Poleg modelov nad ročno agregiranimi značilkami smo uporabili tudi dva prednau
 Takšni modeli vhodnega okna ne pretvorijo v vnaprej določene statistike, temveč neposredno iz signala izračunajo vektorsko predstavitev.
 V tej nalogi smo ju uporabili kot zamrznjena kodirnika, zato njunih parametrov med učenjem nismo spreminjali.
 Na izračunanih predstavitvah smo nato učili ločeno klasifikacijsko glavo \ModelName{MLP}.
-Ta \ModelName{MLP} je arhitekturno drugačen, vendar ločen in nepovezan s samostojnim klasifikatorjem \ModelName{MLP} iz družine klasičnih modelov strojnega učenja.
+Ta \ModelName{MLP} je arhitekturno drugačen, ločen in nepovezan s samostojnim klasifikatorjem \ModelName{MLP} iz družine klasičnih modelov strojnega učenja.
+\newpage
 
 \subsubsection*{\ModelName{GazeMAE}}
 \label{subsec:gazemae-model}
 
 Za podatke pogleda smo uporabili odprtokodni prednaučeni kodirnik \ModelName{GazeMAE}~\cite{bautista2021gazemae}.
-Model prejme samo koordinati pogleda $(x,~y)$, zato smo ga samostojno uporabili le za množico \emph{samo pogled}.
+Model prejme zgolj koordinati pogleda $(x,~y)$, zato smo ga samostojno uporabili le za množico \emph{samo pogled}.
 Ker je bil \ModelName{GazeMAE} učen na $2~s$ oknih, vzorčenih s frekvenco $500~Hz$, smo uporabljena $10~s$ okna najprej pretvorili v obliko, ki jo model pričakuje.
 Koordinati pogleda smo razdelili na pet neprekrivajočih se $2~s$ kosov in ju prevzorčili na ciljno frekvenco $500~Hz$.
 Kodirnik temelji na časovno-konvolucijskih mrežah, ki ločeno kodirajo položaj in hitrost pogleda.
@@ -82,7 +84,6 @@ Iz predstavitev posameznih kosov smo nato z združevanjem pridobili predstavitev
 V nasprotju z \ModelName{GazeMAE} ni vezan samo na koordinate pogleda, zato smo ga uporabili za večkanalne časovne vrste signalov, ki so pripadali izbrani množici signalov v posameznem eksperimentu.
 To so lahko velikosti zenic, oddaljenost od sledilnika pogleda in trajanje fiksacije.
 Samostojno smo ga uporabili le za množico \emph{samo zenici}.
-V primerih \emph{pogled in zenici} ter \emph{vsi signali} pa smo ga uporabili skupaj z \ModelName{GazeMAE}.
 Vhodno okno smo pred uporabo prevzorčili na 512 časovnih korakov.
 \ModelName{MOMENT} temelji na arhitekturi transformerjev za časovne vrste in v uporabljeni nastavitvi izračuna predstavitev okna s~768 razsežnostmi.
 
@@ -91,11 +92,9 @@ Vhodno okno smo pred uporabo prevzorčili na 512 časovnih korakov.
 Pri množicah \emph{pogled in zenici} ter \emph{vsi signali} smo uporabili združeno predstavitev obeh kodirnikov.
 Predstavitev \ModelName{GazeMAE} in predstavitev \ModelName{MOMENT} smo konkatenirali v en skupni vektor, ki je bil nato vhod v klasifikacijsko glavo \ModelName{MLP}.
 
-V rezultatih zamrznjene prednaučene predstavitvene modele obravnavamo kot eno
-družino modelov \ModelName{GazeMAE/MOMENT}.
-Pri množici \emph{samo pogled} ta vrstica pomeni uporabo \ModelName{GazeMAE}, pri množici
-\emph{samo zenici} uporabo \ModelName{MOMENT}, pri množicah \emph{pogled in zenici} ter
-\emph{vsi signali} pa združeno predstavitev obeh kodirnikov. Za to smo se odločili zato, da ohranimo tabelo rezultatov pregledno.
+V rezultatih zamrznjene prednaučene predstavitvene modele obravnavamo kot eno družino modelov \ModelName{GazeMAE/MOMENT}.
+Pri množici \emph{samo pogled} ta vrstica pomeni uporabo \ModelName{GazeMAE}, pri množici \emph{samo zenici} uporabo \ModelName{MOMENT}, pri množicah \emph{pogled in zenici} ter \emph{vsi signali} pa združeno predstavitev obeh kodirnikov. 
+Za ta pristop smo se odločili zato, da ohranimo tabelo rezultatov pregledno.
 
 
 \section{Grafovski modeli}

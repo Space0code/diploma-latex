@@ -5,27 +5,35 @@
     \footnotesize
     \setlength{\aboverulesep}{0.25ex}
     \setlength{\belowrulesep}{0.4ex}
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}m{0.22\textwidth} >{\raggedright\arraybackslash}m{0.23\textwidth} >{\raggedright\arraybackslash}m{0.20\textwidth} >{\raggedright\arraybackslash}X@{}}
+
+    % Stolpci X naj bodo navpično sredinsko poravnani.
+    \renewcommand{\tabularxcolumn}[1]{m{#1}}
+
+    \begin{tabularx}{\textwidth}{@{}
+        >{\centering\arraybackslash}m{0.22\textwidth}
+        >{\centering\arraybackslash}m{0.23\textwidth}
+        >{\centering\arraybackslash}m{0.20\textwidth}
+        >{\centering\arraybackslash}X@{}}
         \toprule
         \textbf{Družina modelov} & \textbf{Model} & \textbf{Vhod v model} & \textbf{Vloga v primerjavi} \\
         \midrule
-        \multirow[c]{6}{=}{\raggedright izhodiščna klasifikatorja} & Naključni & \multirow[c]{6}{=}{\raggedright brez učenja iz značilk} & spodnja meja naključnega ugibanja \\
+        \multirow[c]{6}{=}{\centering izhodiščna klasifikatorja} & Naključni & \multirow[c]{6}{=}{\centering brez učenja iz značilk} & spodnja meja naključnega ugibanja \\
         \cmidrule(lr){2-2}\cmidrule(l){4-4}
         & Večinski & & spodnja meja napovedovanja najpogostejšega razreda \\
         \cmidrule{1-4}
-        \multirow[c]{3.6}{=}{\raggedright klasični modeli strojnega učenja} & \ModelName{SVM} & \multirow[c]{3}{=}{\raggedright agregirane značilke okna} & \multirow[c]{3}{=}{\raggedright klasični model strojnega učenja} \\
+        \multirow[c]{3.6}{=}{\centering klasični modeli strojnega učenja} & \ModelName{SVM} & \multirow[c]{3}{=}{\centering agregirane značilke okna} & \multirow[c]{3}{=}{\centering klasični model strojnega učenja} \\
         \cmidrule(lr){2-2}
         & \ModelName{LightGBM} & & \\
         \cmidrule(lr){2-2}
         & \ModelName{MLP} & & \\
         \cmidrule{1-4}
-        \multirow[c]{6}{=}{\raggedright zamrznjeni prednaučeni predstavitveni modeli} & \ModelName{GazeMAE} & koordinati pogleda $(x, y)$ & prednaučena predstavitev za množico \emph{samo pogled} \\
+        \multirow[c]{6}{=}{\centering zamrznjeni prednaučeni predstavitveni modeli} & \ModelName{GazeMAE} & koordinati pogleda $(x, y)$ & prednaučena predstavitev za množico \emph{samo pogled} \\
         \cmidrule(l){2-4}
         & \ModelName{MOMENT} & časovne vrste izbranih signalov & prednaučena predstavitev za množice s signali zenic oziroma več signali \\
         \cmidrule{1-4}
-        \multirow[c]{10.5}{=}{\raggedright grafovski modeli} & \ModelName{GCN} & homogeni graf okna & osnovni grafovski model \\
+        \multirow[c]{10.5}{=}{\centering grafovski modeli} & \ModelName{GCN} & homogeni graf okna & osnovni grafovski model \\
         \cmidrule(l){2-4}
-        & \ModelName{HeteroGCN-mean} & \multirow[c]{3.5}{=}{\raggedright heterogeni graf okna} & ločena obravnava relacij s preprosto fuzijo \\
+        & \ModelName{HeteroGCN-mean} & \multirow[c]{3.5}{=}{\centering heterogeni graf okna} & ločena obravnava relacij s preprosto fuzijo \\
         \cmidrule(lr){2-2}\cmidrule(l){4-4}
         & \ModelName{HeteroGCN-MLP} & & ločena obravnava relacij z učljivo fuzijo \\
         \cmidrule(l){2-4}

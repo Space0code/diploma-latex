@@ -134,7 +134,7 @@ Splošno plast posredovanja sporočil lahko zapišemo kot
     \right),
 \end{equation}
 kjer je $\mathcal{N}(v)$ množica sosedov vozlišča $v$, $\psi^{(k)}$ funkcija sporočila, $\oplus$ agregacijska funkcija, $\phi^{(k)}$ funkcija posodobitve, $\mathbf{h}_v^{(k)}$ pa predstavitev vozlišča $v$ v plasti $k$.
-Funkcija $\psi^{(k)}$ je lahko linearna preslikava ali večslojni perceptron nad predstavitvama vozlišč in značilkami povezave, $\phi^{(k)}$ pa preprosta vsota prejšnje predstavitve vozlišča in agregiranega sporočila, večslojni perceptron ali rekurentna enota.
+Funkcija $\psi^{(k)}$ je lahko na primer linearna preslikava ali večslojni perceptron nad predstavitvama vozlišč in značilkami povezave, $\phi^{(k)}$ pa preprosta vsota prejšnje predstavitve vozlišča in agregiranega sporočila, večslojni perceptron ali rekurentna enota.
 Isti funkciji $\psi^{(k)}$ in $\phi^{(k)}$ uporabimo pri vseh vozliščih, zato je plast ob invariantni agregaciji ekvivariantna na permutacijo vozlišč, kar pomeni, da preureditev vozlišč le enako preuredi njihove izhodne predstavitve.
 Agregacijska funkcija $\oplus$ mora biti invariantna na vrstni red sosedov.
 To lastnost imajo na primer vsota, povprečje in maksimum, zato lahko ista GNN plast deluje na grafih različnih velikosti.
@@ -171,7 +171,7 @@ Pogoste izbire so povprečje, vsota, maksimum ali združevanje s pozornostjo.
 Predstavitev grafa $\mathbf{h}_G$ nato uporabimo v klasifikacijski glavi, ki napove razred celotnega grafa.
 
 Grafovski modeli na vhod prejmejo graf glede na izbrano množico signalov, kot definirano v poglavju~\ref{sec:grafovska-predstavitev}.
-Razsežnost vhodnih preslikav prilagodimo izbrani množici signalov -- ločeno za značilke vozlišč, pri modelu \ModelName{HeteroGCN-MLP-w} pa tudi za značilke povezav.
+Razsežnost vhodnih preslikav prilagodimo izbrani množici signalov -- ločeno za značilke vozlišč, pri modelu \ModelName{HeteroGCN-MLP-w}, ki ga bomo kmalu predstavili, pa tudi za značilke povezav.
 
 Vhodne vektorje najprej preslikamo v skupni latentni prostor oziroma prostor skritih predstavitev z dvoslojnim \ModelName{MLP}.
 Tako dobimo začetno predstavitev vsakega vozlišča, ki jo nato posodabljajo grafovske plasti.
@@ -208,7 +208,7 @@ V enačbah posameznih modelov je $\mathbf{H}^{(k-1)}$ matrika vhodnih predstavit
 Uporablja isto grafovsko predstavitev okna, kot je bila opisana v poglavju~\ref{sec:grafovska-predstavitev}, vendar ne ločuje časovnih, prostorskih in fiksacijskih relacij.
 Vse povezave združi v en homogen graf, posredovanje sporočil pa izvede s plastmi \texttt{GCNConv} iz knjižnice PyTorch Geometric (PyG)~\cite{fey2019pyg}.
 Model ne uporablja značilk povezav in posledično učljivih uteži povezav.
-Glavni korak ene plasti modela zapišemo kot~\cite{kipf2017gcn}
+Glavni korak ene plasti modela zapišemo kot
 \begin{equation}
     \mathbf{Z}^{(k)} = \operatorname{GELU}\!\left(
         \mathbf{D}^{-\frac{1}{2}}
@@ -220,7 +220,7 @@ Glavni korak ene plasti modela zapišemo kot~\cite{kipf2017gcn}
     \right),
     \label{eq:model-gcn}
 \end{equation}
-kjer je $\mathbf{A}$ matrika sosednosti homogenega grafa, $\mathbf{D}$ pripadajoča diagonalna matrika stopenj, $\boldsymbol{\Theta}^{(k)}$ matrika učljivih parametrov in $\mathbf{b}^{(k)}$ pristranskost.
+kjer je $\mathbf{A}$ matrika sosednosti homogenega grafa, $\mathbf{D}$ pripadajoča diagonalna matrika stopenj, $\boldsymbol{\Theta}^{(k)}$ matrika učljivih parametrov in $\mathbf{b}^{(k)}$ pristranskost~\cite{kipf2017gcn}.
 V grafovski konvoluciji ne dodajamo zank iz vozlišča vase, saj se lastna predstavitev vozlišča ohranja prek rezidualne povezave.
 Slika~\ref{fig:diagram-gcn} prikazuje osnovni cevovod tega modela.
 
@@ -236,8 +236,8 @@ Slika~\ref{fig:diagram-gcn} prikazuje osnovni cevovod tega modela.
 
 \subsubsection*{\ModelName{HeteroGCN-mean}}
 
-Z \ModelName{HeteroGCN-mean} preidemo od homogenega modela k ločeni obravnavi različnih tipov relacij.
-Kot opisano v~\ref{sec:grafovska-predstavitev} tukaj ločimo različne tipe relacij.
+S \ModelName{HeteroGCN-mean} preidemo od homogenega modela k ločeni obravnavi različnih tipov relacij.
+Kot opisano v poglavju~\ref{sec:grafovska-predstavitev} tukaj ločimo različne tipe relacij.
 Relacijske predstavitve vozlišč združimo v skupno predstavitev vozlišča s preprostim povprečenjem.
 Ker časovne, prostorske in fiksacijske povezave opisujejo različne odnose med meritvami, pričakujemo, da bo njihova ločena obdelava ohranila informacije, ki se pri homogenem združevanju povezav lahko izgubijo.
 Za vsako relacijo $r \in \mathcal{R}$ uporabimo ločeno grafovsko konvolucijo, nato pa njihove izhode povprečimo:
@@ -272,8 +272,8 @@ Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mean}, je sprememba glede na
 \label{subsec:model-heterogcn-mlp}
 
 V naslednjem koraku \ModelName{HeteroGCN-MLP} namesto fiksnega povprečenja uvede učljivo fuzijo relacijskih predstavitev.
-Različne predstavitve vozlišč -- tiste, ki so v danem modelu na voljo izmed časovne naprej, časovne nazaj, prostorske ter fiksacijske -- najprej konkateniramo, nato pa jih z dvoslojnim perceptronom združimo v skupno predstavitev vozlišča.
-Preprosto povprečenje vsem relacijam pripiše enako vlogo, učljiva fuzija pa modelu omogoči, da glede na klasifikacijsko nalogo različne relacijske predstavitve uporabi različno.
+Različne predstavitve vozlišč -- za vsako razpoložljivo relacijo eno -- najprej konkateniramo, nato pa jih z dvoslojnim perceptronom združimo v skupno predstavitev vozlišča.
+Preprosto povprečenje je v \ModelName{HeteroGCN-mean} vsem relacijam pripisalo enako vlogo, v \ModelName{HeteroGCN-MLP} pa učljiva fuzija omogoči, da model različne relacijske predstavitve uporabi različno.
 Relacijski izhodi $\mathbf{Z}_r^{(k)}$ se izračunajo kot v enačbi~\eqref{eq:model-heterogcn-mean}, njihovo učljivo fuzijo pa zapišemo kot
 \begin{equation}
     \mathbf{Z}^{(k)} =

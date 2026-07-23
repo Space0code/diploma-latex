@@ -18,7 +18,7 @@ V tabeli~\ref{tab:pregled-primerjanih-modelov} je prikazano, katere modele upora
 \section{Negrafovski osnovni modeli}
 \label{subsec:negrafovski-osnovni-modeli}
 
-\subsection{Izhodiščna klasifikatorja}
+\subsubsection*{Izhodiščna klasifikatorja}
 \label{subsec:izhodiscna-klasifikatorja}
 
 Večinski in naključni klasifikator predstavljata spodnjo primerjalno mejo.
@@ -26,7 +26,7 @@ Večinski klasifikator vedno napove večinski razred učne množice, naključni 
 Pri binarni klasifikaciji to pomeni verjetnost $50~\%$ za vsak razred.
 Cilj je, da naučeni modeli presežejo rezultate izhodiščnih klasifikatorjev, saj s tem pokažemo uspešno prepoznavanje vzorcev.
 
-\subsection{Klasični modeli strojnega učenja}
+\subsubsection*{Klasični modeli strojnega učenja}
 \label{subsec:klasicni-modeli-strojnega-ucenja}
 
 Za pravično primerjavo negrafovskim osnovnim modelom podamo agregirane značilke istih signalov, kot jih prejme GNN.
@@ -37,20 +37,20 @@ Pri fiksacijah dodamo še število fiksacij, delež meritev v oknu, ki pripadajo
 V primeru množice \emph{vsi signali} je eno okno v tabelarični predstavitvi opisano z 68 agregiranimi značilkami.
 Takšna pretvorba časovnega signala v opisne statistike na ravni okna oziroma odziva je običajen pristop pri klasičnih modelih strojnega učenja za podatke pogleda~\cite{bozak2024feature,lim2020emotion,tarnowski2020eye}.
 
-\subsubsection{\ModelName{SVM}}
+\subsubsection*{\ModelName{SVM}}
 
 \ModelName{SVM} uporabimo kot klasični model z RBF jedrom nad agregiranimi značilkami okna~\cite{cortes1995support}.
 RBF jedro modelu omogoča nelinearno ločevanje razredov, zato je \ModelName{SVM} uporaben kot močan negrafovski osnovni model.
 Ker je \ModelName{SVM} občutljiv na velikostni red vhodnih značilk, agregirane značilke pred učenjem standardiziramo, da značilke z večjimi številskimi vrednostmi ne vplivajo nesorazmerno na odločanje modela.
 
-\subsubsection{\ModelName{MLP}}
+\subsubsection*{\ModelName{MLP}}
 
 Osnovni \ModelName{MLP} uporabimo kot primer osnovnega nevronskega modela~\cite{goodfellow2016deep}.
 Vhod modela je vektor agregiranih značilk enega časovnega okna, izhod pa logiti za razrede ciljne naloge.
 Arhitektura je namerno preprosta: dve skriti polno povezani plasti z aktivacijo ReLU in izpuščanjem, za njima pa izhodna linearna plast.
 Model učimo s prečno entropijo.
 
-\subsubsection{\ModelName{LightGBM}}
+\subsubsection*{\ModelName{LightGBM}}
 
 \ModelName{LightGBM} uporabimo kot predstavnika gradientno spodbujenih odločitvenih dreves~\cite{ke2017lightgbm}.
 Model je primeren za tabelarične podatke, zato je naravna primerjava za agregirane značilke časovnih oken.
@@ -65,7 +65,7 @@ V tej nalogi ju uporabimo kot zamrznjena kodirnika, zato njunih parametrov med u
 Na izračunanih predstavitvah nato učimo ločeno klasifikacijsko glavo \ModelName{MLP}.
 Ta \ModelName{MLP} je arhitekturno drugačen, vendar ločen in nepovezan s samostojnim klasifikatorjem \ModelName{MLP} iz družine klasičnih modelov strojnega učenja.
 
-\subsection{\ModelName{GazeMAE}}
+\subsubsection*{\ModelName{GazeMAE}}
 \label{subsec:gazemae-model}
 
 Za podatke pogleda uporabimo odprtokodni prednaučeni kodirnik \ModelName{GazeMAE}~\cite{bautista2021gazemae}.
@@ -75,7 +75,7 @@ Koordinati pogleda razdelimo na pet neprekrivajočih se $2~s$ kosov in ju prevzo
 Kodirnik temelji na časovno-konvolucijskih mrežah, ki ločeno kodirajo položaj in hitrost pogleda.
 Iz predstavitev posameznih kosov nato z združevanjem pridobimo predstavitev celotnega okna s~512 razsežnostmi.
 
-\subsection{\ModelName{MOMENT}}
+\subsubsection*{\ModelName{MOMENT}}
 \label{subsec:moment-model}
 
 \ModelName{MOMENT} uporabimo kot splošni prednaučeni model za časovne vrste~\cite{goswami2024moment}.
@@ -86,7 +86,7 @@ V primerih \emph{pogled in zenici} ter \emph{vsi signali} pa ga uporabimo skupaj
 Vhodno okno pred uporabo prevzorčimo na 512 časovnih korakov.
 \ModelName{MOMENT} temelji na arhitekturi transformerjev za časovne vrste in v uporabljeni nastavitvi izračuna predstavitev okna s~768 razsežnostmi.
 
-\subsection{Združene predstavitve \ModelName{GazeMAE} in \ModelName{MOMENT}}
+\subsubsection*{Združene predstavitve \ModelName{GazeMAE} in \ModelName{MOMENT}}
 
 Pri množicah \emph{pogled in zenici} ter \emph{vsi signali} uporabimo združeno predstavitev obeh kodirnikov.
 Predstavitev \ModelName{GazeMAE} in predstavitev \ModelName{MOMENT} konkateniramo v en skupni vektor, ki je nato vhod v klasifikacijsko glavo \ModelName{MLP}.
@@ -110,7 +110,7 @@ V tabeli~\ref{tab:arhitekturna-lestvica-gnn} so na kratko predstavljene razlike 
 
 \input{tabele/modeli/arhitekturna_lestvica_gnn.tex}
 
-\subsection{Posredovanje sporočil in skupni cevovod}
+\subsubsection*{Posredovanje sporočil in skupni cevovod}
 \label{subsec:skupni-deli-grafovske-arhitekture}
 
 Grafovske nevronske mreže (GNN) so razred nevronskih mrež, namenjen učenju nad podatki, ki jih lahko predstavimo z grafom~\cite{gilmer2017mpnn,kipf2017gcn,velickovic2018gat}.
@@ -202,7 +202,7 @@ To vključuje začetno preslikavo značilk vozlišč, grafovske plasti, morebitn
 V nadaljevanju opišemo specifike vsake arhitekture v štiri-stopenjski arhitekturni lestvici, začenši z najenostavnejšim -- s homogenim \ModelName{GCN}.
 V enačbah posameznih modelov je $\mathbf{H}^{(k-1)}$ matrika vhodnih predstavitev vozlišč v $k$-ti grafovski plasti, $\mathbf{Z}^{(k)}$ pa njen izhod pred skupno rezidualno povezavo, normalizacijo plasti in izpuščanjem.
 
-\subsection{\ModelName{GCN}}
+\subsection{Homogena GNN}
 \label{subsec:model-gcn}
 
 \ModelName{GCN} je v osnovi homogeni grafovski model.
@@ -225,15 +225,17 @@ kjer je $\mathbf{A}$ matrika sosednosti homogenega grafa, $\mathbf{D}$ pripadajo
 V grafovski konvoluciji ne dodajamo zank iz vozlišča vase, saj se lastna predstavitev vozlišča ohranja prek rezidualne povezave.
 Slika~\ref{fig:diagram-gcn} prikazuje osnovni cevovod tega modela.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth]{\detokenize{GCN final.png}}
+    \includegraphics[width=0.9\textwidth]{\detokenize{GCN final.png}}
     \caption[Diagram arhitekture \ModelName{GCN}.]{Diagram arhitekture \ModelName{GCN}. Model vse povezave obravnava kot en homogen graf, zato se sporočila posredujejo prek ene skupne grafovske konvolucije.}
     \label{fig:diagram-gcn}
 \end{figure}
 
-\subsection{\ModelName{HeteroGCN-mean}}
+\subsection{Heterogene GNN}
 \label{subsec:model-heterogcn-mean}
+
+\subsubsection*{\ModelName{HeteroGCN-mean}}
 
 \ModelName{HeteroGCN-mean} dobimo tako, da \ModelName{GCN} nadgradimo s heterogeno grafovsko predstavitvijo.
 Kot opisano v~\ref{sec:grafovska-predstavitev} tukaj ločimo različne tipe relacij.
@@ -260,14 +262,14 @@ Za vsako relacijo $r \in \mathcal{R}$ uporabimo ločeno grafovsko konvolucijo, n
 kjer $\mathbf{A}_r$ in $\mathbf{D}_r$ opisujeta povezave in stopnje vozlišč znotraj relacije $r$, vsaka relacija pa ima svoje parametre $\boldsymbol{\Theta}_r^{(k)}$ in $\mathbf{b}_r^{(k)}$.
 Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mean}, je sprememba glede na homogeni \ModelName{GCN} samo v tem, da se sporočila najprej izračunajo ločeno po relacijah, nato pa združijo s povprečenjem.
 
-\begin{figure}[htbp]
+\begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth]{\detokenize{HeteroGCN-mean final.png}}
+    \includegraphics[width=0.9\textwidth]{\detokenize{HeteroGCN-mean final.png}}
     \caption[Diagram arhitekture \ModelName{HeteroGCN-mean}.]{Diagram arhitekture \ModelName{HeteroGCN-mean}. Model ločeno izračuna sporočila po časovnih, prostorskih in fiksacijskih relacijah, relacijske predstavitve pa združi s povprečenjem.}
     \label{fig:diagram-heterogcn-mean}
 \end{figure}
 
-\subsection{\ModelName{HeteroGCN-MLP}}
+\subsubsection*{\ModelName{HeteroGCN-MLP}}
 \label{subsec:model-heterogcn-mlp}
 
 \ModelName{HeteroGCN-MLP} dobimo tako, da \ModelName{HeteroGCN-mean} nadgradimo z učljivo fuzijo relacijskih predstavitev.
@@ -284,14 +286,14 @@ Relacijski izhodi $\mathbf{Z}_r^{(k)}$ se izračunajo kot v enačbi~\eqref{eq:mo
 kjer $\Vert$ označuje konkatenacijo v vnaprej določenem vrstnem redu relacij, $f_{\mathrm{fuz}}^{(k)}$ pa dvoslojni perceptron $k$-te grafovske plasti.
 Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mlp}, je sprememba glede na \ModelName{HeteroGCN-mean} v zamenjavi ročno določene fuzije z učljivo fuzijo relacijskih predstavitev.
 
-\begin{figure}
+\begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth]{\detokenize{HeteroGCN-MLP final.png}}
+    \includegraphics[width=0.9\textwidth]{\detokenize{HeteroGCN-MLP final.png}}
     \caption[Diagram arhitekture \ModelName{HeteroGCN-MLP}.]{Diagram arhitekture \ModelName{HeteroGCN-MLP}. Model relacijske predstavitve najprej konkatenira, nato pa jih združi z učljivo fuzijo prek dvoslojnega perceptrona.}
     \label{fig:diagram-heterogcn-mlp}
 \end{figure}
 
-\subsection{\ModelName{HeteroGCN-MLP-w}}
+\subsubsection*{\ModelName{HeteroGCN-MLP-w}}
 \label{subsec:model-heterogcn-mlp-w}
 
 \ModelName{HeteroGCN-MLP-w} dobimo tako, da \ModelName{HeteroGCN-MLP} nadgradimo z učljivimi utežmi povezav.
@@ -323,25 +325,17 @@ Uteži $w_{uv}^{(r)}$ so že normalizirane po vhodnih povezavah vozlišča $v$ z
 Ker tudi povezave istega tipa niso nujno enako informativne, lahko model v tej \emph{končni} stopnji z utežmi na podlagi njihovih značilk poudari koristnejše povezave ter oslabi ali predznačeno spremeni prispevek manj koristnih.
 Slika~\ref{fig:diagram-heterogcn-mlp-w} prikazuje dodano vejo za izračun učljivih uteži povezav.
 
-\begin{figure}
+\begin{figure}[!htbp]
     \centering
-    \includegraphics[width=\textwidth]{\detokenize{HeteroGCN-MLP-w final.png}}
+    \includegraphics[width=0.9\textwidth]{\detokenize{HeteroGCN-MLP-w final.png}}
     \caption[Diagram arhitekture \ModelName{HeteroGCN-MLP-w}.]{Diagram arhitekture \ModelName{HeteroGCN-MLP-w}. Model poleg učljive fuzije relacij uporablja še značilke povezav, iz katerih z relacijsko odvisnimi perceptroni izračuna učljive predznačene uteži povezav.}
     \label{fig:diagram-heterogcn-mlp-w}
 \end{figure}
 
-\subsection{Izbira grafovske konvolucije}
+\subsubsection*{Izbira grafovske konvolucije}
 \label{subsec:izbira-grafovske-konvolucije}
 
 V glavnih poskusih v vseh grafovskih modelih uporabimo plast \texttt{GCNConv}~\cite{kipf2017gcn}.
 \texttt{GCNConv} je enostaven in uveljavljen operator posredovanja sporočil, ki ga lahko ohranimo nespremenjenega skozi celotno arhitekturno lestvico.
-V dodatnem poskusu smo ga primerjali s plastmi \texttt{GATConv}~\cite{velickovic2018gat}, \texttt{GraphConv}~\cite{morris2019weisfeiler} ter \texttt{GINConv} oziroma \texttt{GINEConv}~\cite{xu2019powerful,hu2020strategies}.
-\texttt{GATConv} z mehanizmom pozornosti nauči uteži prispevkov sosednjih vozlišč, \texttt{GraphConv} pa ločeno preslika predstavitev ciljnega vozlišča in agregirane predstavitve njegovih sosedov.
-\texttt{GINConv} agregirano predstavitev obdela z večslojnim perceptronom, \texttt{GINEConv} pa isti pristop razširi z značilkami povezav.
-Pri osnovnem \ModelName{GCN} smo preizkusili \texttt{GINConv}, pri modelu \ModelName{HeteroGCN-MLP-w} pa \texttt{GINEConv}.
-Pri heterogenem modelu plasti \texttt{GCNConv} in \texttt{GraphConv} uporabljata učljive skalarne uteži povezav, \texttt{GATConv} pa značilke povezav vključi neposredno v izračun pozornosti in ločenih skalarnih uteži ne uporablja.
-Plast \texttt{GINEConv} je v implementaciji razširjena kot \texttt{WeightedGINEConv}, ki poleg značilk povezav uporabi tudi učljive skalarne uteži.
-
-Poskus smo izvedli na binarni nalogi valence z množico signalov \emph{pogled in zenici}.
-Razlike med operatorji so bile razmeroma majhne, \texttt{GCNConv} pa je dosegel primerljive in konsistentne rezultate tako pri osnovnem homogenem modelu kot pri uteženi heterogeni arhitekturi.
+V dodatnem poskusu smo ga primerjali z drugimi operatorji, razlike med njimi pa so bile razmeroma majhne.
 Podrobnosti primerjave so podane v dodatku~\ref{app:izbira-grafovske-konvolucije}.

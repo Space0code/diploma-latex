@@ -454,3 +454,9 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   `LightGBM`, `MLP`). Zamrznjene prednaučene predstavitvene modele obravnavaj
   ločeno; v glavnem besedilu jih poimenuj `GazeMAE` oziroma `MOMENT`, brez
   dodatka `+ MLP`, čeprav se za klasifikacijo tehnično uči MLP glava.
+- 2026-07-23 je bilo poglavje `Primerjani modeli` strukturno skrčeno. V kazalu
+  imajo grafovski modeli le podsekciji `Homogeni GNN` in `Heterogeni GNN-ji`,
+  imena posameznih modelov pa so neštevilčeni mednaslovi. Izbira operatorja
+  `GCNConv` ostane na kratko v grafovskem delu tega poglavja in se sklicuje na
+  podrobnejšo primerjavo v dodatku. Diagrami štirih GNN naj ostanejo neposredno
+  ob opisih pripadajočih modelov.

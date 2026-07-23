@@ -269,20 +269,18 @@ Uporabne opombe iz trenutnega pregleda:
 
 Prednostna struktura je raziskovalno usmerjena:
 
-1. **Uvod**: motivacija, problem, raziskovalno vprašanje, prispevki, struktura.
-2. **Teoretično ozadje**: samo potrebno ozadje; sledilnik pogleda, reprezentacija
-   čustev, GNN in klasifikacija grafov.
-3. **Sorodna dela**: prepoznava čustev iz pogleda, GNN za časovne oziroma
+1. **Uvod**: motivacija, problem, raziskovalno vprašanje in struktura.
+2. **Sorodna dela**: prepoznava čustev iz pogleda, GNN za časovne oziroma
    fiziološke podatke, GazeMAE ali samonadzorovane predstavitve, če so uporabljene.
-4. **Podatki in predobdelava**: MAHNOB-HCI, lokalna podmnožica, oznake, čiščenje,
+3. **Podatki in predobdelava**: MAHNOB-HCI, lokalna podmnožica, oznake, čiščenje,
    oknenje, delitve in preprečevanje uhajanja podatkov.
-5. **Grafovska predstavitev podatkov**: učni vzorec, vozlišča, značilke, tipi
+4. **Grafovska predstavitev podatkov**: učni vzorec, vozlišča, značilke, tipi
    povezav, značilke povezav in uteži.
-6. **Modeli in metodologija**: primerjalni modeli, GNN arhitektura, učenje.
-7. **Eksperimentalni protokol**: delitve, metrike, izbira hiperparametrov.
-8. **Rezultati**: glavna primerjava, protokol LOSO, metrike, matrike zamenjav.
-9. **Diskusija**: kaj deluje, omejitve, negotovosti podatkov, interpretacijske meje.
-10. **Zaključek**: kratek odgovor na raziskovalno vprašanje in prihodnje delo.
+5. **Primerjani modeli**: primerjalni modeli in GNN-arhitekture.
+6. **Eksperimentalni protokol in rezultati**: zasnova primerjave, delitve,
+   metrike, izbira hiperparametrov, glavna primerjava in matrike zamenjav.
+7. **Diskusija**: kaj deluje, omejitve, negotovosti podatkov in interpretacijske meje.
+8. **Zaključek**: kratek odgovor na raziskovalno vprašanje in prihodnje delo.
 
 Teorija naj razlaga pojme. Metodološka poglavja naj opisujejo dejanski cevovod.
 Implementacijskih podrobnosti ne razprši po teoretičnih poglavjih.

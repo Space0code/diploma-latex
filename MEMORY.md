@@ -455,8 +455,13 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   ločeno; v glavnem besedilu jih poimenuj `GazeMAE` oziroma `MOMENT`, brez
   dodatka `+ MLP`, čeprav se za klasifikacijo tehnično uči MLP glava.
 - 2026-07-23 je bilo poglavje `Primerjani modeli` strukturno skrčeno. V kazalu
-  imajo grafovski modeli le podsekciji `Homogeni GNN` in `Heterogeni GNN-ji`,
+  imajo grafovski modeli le podsekciji `Homogena GNN` in `Heterogene GNN`,
   imena posameznih modelov pa so neštevilčeni mednaslovi. Izbira operatorja
   `GCNConv` ostane na kratko v grafovskem delu tega poglavja in se sklicuje na
   podrobnejšo primerjavo v dodatku. Diagrami štirih GNN naj ostanejo neposredno
   ob opisih pripadajočih modelov.
+- 2026-07-23 sta bila eksperimentalni protokol in rezultati združena v eno
+  poglavje s tremi sekcijami: `Zasnova in validacijski protokol`, `Nastavitve in
+  vrednotenje` ter `Rezultati`. LOSO je v glavnem besedilu le kratko omenjen s
+  sklicem na dodatek, definiciji točnosti in makro F1 pa ostaneta v glavnem
+  besedilu.

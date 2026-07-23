@@ -1,10 +1,11 @@
-\chapter{Eksperimentalni protokol}
+\chapter{Eksperimentalni protokol in rezultati}
 \label{sec:eksperimenti}
+\label{sec:rezultati}
 
 V prejšnjih poglavjih smo definirali podatke, ciljne razrede, časovna okna,
 grafovsko predstavitev in primerjane modele.
 V tem poglavju določimo, kako te komponente ovrednotimo v skupni eksperimentalni
-primerjavi.
+primerjavi, in predstavimo rezultate.
 Glavna evalvacijska naloga je binarna klasifikacija negativne proti pozitivni valenci.
 Primerjava je zasnovana kot kombinacija modelov iz poglavja~\ref{sec:modeli} in
 množic signalov iz razdelka~\ref{subsec:vhodni-signali}.
@@ -14,8 +15,11 @@ Koda za predobdelavo, konstrukcijo grafov, učenje modelov, evalvacijo in generi
 Podatkovna zbirka \MAHNOB{} v repozitorij ni vključena. 
 Pridobili smo jo preko uradnega spletnega mesta podatkovne zbirke~\cite{mahnobwebsite}.
 
-\section{Zasnova glavne primerjave}
+\section{Zasnova in validacijski protokol}
 \label{subsec:zasnova-glavne-primerjave}
+\label{subsec:validacijski-protokol}
+
+\subsubsection*{Zasnova glavne primerjave}
 
 Cilj glavne primerjave je odgovoriti na raziskovalno vprašanje~\ref{sec:uvod}: \rvGlavnoBesedilo{}
 Zato v primerjavi spreminjamo le način predstavitve okna in model, ki to predstavitev uporabi.
@@ -23,13 +27,10 @@ Zato v primerjavi spreminjamo le način predstavitve okna in model, ki to predst
 Ciljni razred je binarni razred valence, pri katerem model ločuje med negativno in pozitivno valenco.
 Vse štiri množice iz tabele~\ref{tab:grafovska-konstrukcija-po-mnozicah} obravnavamo kot enakovreden del primerjave, saj nas zanima tudi, kako se klasifikacijska uspešnost spreminja z razpoložljivostjo različnih signalov sledilnika pogleda.
 
-V primerjavi smo uporabili vse modeli iz tabele~\ref{tab:pregled-primerjanih-modelov}: izhodiščna klasifikatorja, klasični modeli nad agregiranimi značilkami, zamrznjeni prednaučeni predstavitveni modeli in grafovski modeli.
+V primerjavi smo uporabili vse modele iz tabele~\ref{tab:pregled-primerjanih-modelov}: izhodiščna klasifikatorja, klasični modeli nad agregiranimi značilkami, zamrznjeni prednaučeni predstavitveni modeli in grafovski modeli.
 S tem primerjamo tri različne načine opisa istega časovnega okna: tabelarični povzetek signalov, vektorsko predstavitev časovne vrste in grafovsko predstavitev meritev.
 
-\section{Validacijski protokol}
-\label{subsec:validacijski-protokol}
-
-\subsection{7-kratno prečno preverjanje po subjektih}
+\subsubsection*{7-kratno prečno preverjanje po subjektih}
 \label{subsec:subject-7kratno}
 
 Glavno primerjavo izvedemo s 7-kratnim prečnim preverjanjem po subjektih.
@@ -44,17 +45,12 @@ Ker 22 subjektov ni deljivo s sedem, imajo posamezne testne razdelitve različno
 Validacijska množica se uporablja med učenjem, testna množica pa samo za končno oceno v posamezni ponovitvi.
 Pri nevronskih modelih zato najboljšo različico modela izberemo glede na validacijsko izgubo, nato pa njeno delovanje izmerimo na pripadajoči testni množici.
 
-\subsection{Predhodna preverjanja z LOSO}
-\label{subsec:predhodna-loso-preverjanja}
+V zgodnejših fazah smo izvedli tudi podporno preverjanje z LOSO, ki je skupaj s primerjavo obeh validacijskih protokolov podano v dodatku~\ref{app:primerjava-loso}.
 
-% Pusti napisano v zgodnejših fazah. Ne piši, da smo točno ta LOSO izvedli kasneje.
-V zgodnejših fazah smo za množico \emph{pogled in zenici} izvedli tudi LOSO.
-Ker končna primerjava vključuje več modelov in štiri množice signalov, bi polni LOSO protokol bistveno povečal število potrebnih eksperimentov.
-Zato ga uporabimo kot podporno preverjanje na podmnožici podatkovne zbirke, glavno primerjavo pa izvedemo s 7-kratnim protokolom.
-Primerjava obeh validacijskih protokolov za valenco in množico \emph{pogled in zenici} je podana v dodatku~\ref{app:primerjava-loso}.
-
-\section{Nastavitve učenja in hiperparametri}
+\section{Nastavitve in vrednotenje}
 \label{subsec:nastavitve-ucenja}
+
+\subsubsection*{Nastavitve učenja in hiperparametri}
 
 V tem razdelku navedemo nastavitve učenja, ki vplivajo na izvedbo eksperimentov.
 Nevronske modele učimo z zgodnjim ustavljanjem na validacijski izgubi.
@@ -65,7 +61,7 @@ Nastavitve grafovskih modelov izberemo na podlagi predhodnega kompaktnega mrežn
 To iskanje smo izvedli v zgodnejši fazi raziskave, ko je klasifikacijska naloga bila še trirazredna, saj je poleg negativne in pozitivne vključevala tudi nevtralno valenco.
 V dodatku~\ref{app:mrezno-iskanje} rezultate iskanja poročamo le kot podporni poskus pri izbiri stabilnih nastavitev.
 
-\section{Metrike vrednotenja}
+\subsubsection*{Metrike vrednotenja}
 \label{subsec:metrike}
 
 Za vrednotenje uporabimo več standardnih metrik, pri čemer sta glavni točnost in makro F1.
@@ -73,7 +69,7 @@ Za vsak model in vsako množico signalov poročamo povprečje po sedmih testnih 
 Točnost uporabimo kot osnovno metriko, ker ima glavna naloga dva enakovredna in globalno skoraj uravnotežena razreda, kot kaže slika~\ref{fig:porazdelitev-valenca-stevila}.
 Za $C$ razredov in $N$ primerov jo izračunamo kot
 \begin{equation}
-    \mathrm{točnost} = \frac{1}{N} \sum_{c=1}^{C} \mathrm{TP}_c,
+    \text{točnost} = \frac{1}{N} \sum_{c=1}^{C} \mathrm{TP}_c,
 \end{equation}
 kjer je $\mathrm{TP}_c$ število pravilno razvrščenih primerov razreda $c$.
 
@@ -91,7 +87,7 @@ Te metrike uporabimo predvsem za preverjanje stabilnosti in za podrobnejšo anal
 Njihove definicije so podane v dodatku~\ref{app:dodatne-metrike}.
 V glavnem besedilu se osredotočimo na točnost in makro F1, razširjene metrike pa poročamo v dodatku~\ref{app:razsirjeni-rezultati-binarna-valenca}.
 
-\section{Spremljanje učenja}
+\subsubsection*{Spremljanje učenja}
 \label{subsec:spremljanje-ucenja}
 
 Poleg končnih metrik shranjujemo tudi podatke o poteku učenja.
@@ -105,4 +101,80 @@ Pri grafovskih modelih spremljamo še nekaj diagnostičnih meritev naučenih pre
 Med njimi so varianca predstavitev grafa, povprečna kosinusna podobnost predstavitev, razpon logitov in entropija napovednih verjetnosti.
 Te meritve uporabimo za preverjanje, ali se med učenjem pojavijo skoraj konstantne napovedi, zaznavanje kolapsa predstavitev ali znakov prekomernega glajenja.
 Definicije spremljanih učnih in diagnostičnih meritev so podane v dodatku~\ref{app:dodatne-metrike}.
-Krivulje učne in validacijske izgube poročamo med rezultati v poglavju~\ref{sec:rezultati}, diagnostiko naučenih predstavitev in napovedi pa v dodatku~\ref{app:diagnostika-prekomerno-glajenje}.
+Krivulje učne in validacijske izgube poročamo med rezultati v nadaljevanju, diagnostiko naučenih predstavitev in napovedi pa v dodatku~\ref{app:diagnostika-prekomerno-glajenje}.
+
+\section{Rezultati}
+
+V nadaljevanju predstavimo rezultate primerjave različnih modelov za binarno klasifikacijo valence pri 7-kratnem prečnem preverjanju po subjektih.
+Dodatne rezultate in razširjene metrike poročamo v dodatku~\ref{app:dodatni-rezultati}.
+
+% Polna pot vira: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08.
+% Slike rezultatov v tem poglavju so reproducibilno generirane z:
+% diploma-latex/skripte/generiraj_slike_rezultatov.py.
+
+Tabela~\ref{tab:rezultati-glavna-primerjava} prikazuje povprečno točnost in makro F1 pri 7-kratnem prečnem preverjanju po subjektih.
+Vse vrednosti so zapisane v odstotkih, štiri signalne množice pa so obravnavane kot enakovredne različice iste klasifikacijske naloge.
+Večinski klasifikator doseže točnost okoli $52~\%$, kar ustreza porazdelitvi razredov na sliki~\ref{fig:porazdelitev-valenca-stevila}, vendar ima zaradi napovedovanja samo enega razreda makro F1 okoli $34~\%$.
+
+Najvišjo točnost ($70{,}5~\%$) in makro F1 ($69{,}7~\%$) doseže \ModelName{SVM} pri signalni množici \emph{pogled in zenici}.
+\ModelName{LightGBM} doseže najboljši rezultat pri množicah \emph{samo pogled}, \emph{samo zenici} in \emph{vsi signali}.
+Med posameznimi signalnimi množicami je \emph{samo zenici} najšibkejša, vendar vsi naučeni modeli tudi pri tej množici presežejo naključni in večinski klasifikator.
+Dodajanje zeničnih signalov k pogledu prinese najvišji posamični rezultat, medtem ko množica \emph{vsi signali} v tej primerjavi ne preseže množice \emph{pogled in zenici}.
+
+Grafovski modeli so pri vseh signalnih množicah zanesljivo nad obema izhodiščnima klasifikatorjema, vendar ostanejo pod najboljšima modeloma \ModelName{SVM} in \ModelName{LightGBM}.
+Najboljši grafovski rezultat je odvisen od signalne množice~--~pri \emph{samo pogled} je najuspešnejši \ModelName{HeteroGCN-MLP}, pri \emph{samo zenici} osnovni \ModelName{GCN}, pri \emph{pogled in zenici} in \emph{vsi signali} pa \ModelName{HeteroGCN-MLP-w}.
+Rezultati torej ne kažejo monotonega izboljševanja z večanjem arhitekturne kompleksnosti grafovskih modelov.
+V nadaljevanju podrobnejše rezultate matrike zamenjav ter računsko zahtevnost modelov prikažemo na primeru, kjer modeli dosegajo najboljše rezultate, to je na množici \emph{pogled in zenici}.
+Dodatne matrike zamenjav za vse modele in vse množice signalov so prikazane v dodatku~\ref{app:matrike-zamenjav-vsi-modeli}.
+
+\input{tabele/rezultati/glavna_primerjava_modelov.tex}
+
+\subsubsection*{Potek učenja}
+
+Poleg končnih klasifikacijskih meritev smo preverili tudi potek učenja modelov.
+Slika~\ref{fig:potek-izgube-gnn} prikazuje učno in validacijsko izgubo vseh štirih grafovskih arhitektur pri množici signalov \emph{pogled in zenici}.
+Za berljivost so prikazane povprečne vrednosti čez sedem delitev po subjektih, zasenčeno območje pa predstavlja standardni odklon med delitvami.
+Ker se delitve zaradi zgodnjega ustavljanja končajo po različnem številu epoh, se dolžina krivulj med modeli razlikuje in se posledično zasenčeno območje pri večjem številu epoh skrči vse do 0, saj se je le v enem primeru model učil največ epoh.
+
+% Vir podatkov: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/training_history.csv.
+% Slika je reproducibilno generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{potek_izgube_gnn_pogled_zenici.pdf}
+    \caption{Povprečni potek učne in validacijske izgube grafovskih modelov pri množici signalov \emph{pogled in zenici}. Zasenčena območja predstavljajo standardni odklon čez sedem delitev po subjektih.}
+    \label{fig:potek-izgube-gnn}
+\end{figure}
+
+Pri vseh arhitekturah učna izguba na začetku hitro upade, nato pa se spremembe umirijo.
+Validacijska izguba se po začetnem izboljšanju večinoma stabilizira, pri čemer med delitvami ostaja opazna variabilnost.
+Validacijska izguba je pri večini modelov nižja od učne, kar je lahko posledica merjenja v različnih načinih delovanja modela.
+Modele učimo z izpuščanjem, ki poveča šum in s tem učno izgubo, med validacijo pa izpuščanja ni.
+Poleg tega je učna izguba povprečje med posodabljanjem uteži skozi epoho, validacijska izguba pa se izračuna po koncu epohe, ko so uteži že prilagojene.
+
+\subsubsection*{Matriki zamenjav}
+
+Slika~\ref{fig:rezultati-matrike-zamenjav} prikazuje napake za signalno množico \emph{pogled in zenici}, pri kateri je dosežen najboljši skupni rezultat.
+Najuspešnejši model \ModelName{SVM} pravilno razvrsti $73{,}0~\%$ vzorcev negativne valence in $67{,}7~\%$ vzorcev pozitivne valence, najuspešnejši grafovski model, \ModelName{HeteroGCN-MLP-w}, pa $64{,}8~\%$ oziroma $65{,}8~\%$.
+
+% Matrike so generirane iz:
+% GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/confusion_matrices.csv.
+% Konkretni skript: diploma-latex/skripte/generiraj_slike_rezultatov.py.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{matrike_zamenjav_pogled_zenici_svm_heterogcn_mlp_w.pdf}
+    \caption{Vrstično normalizirani matriki zamenjav za najboljši model \ModelName{SVM} in najboljši grafovski model \ModelName{HeteroGCN-MLP-w} pri množici signalov \emph{pogled in zenici}.}
+    \label{fig:rezultati-matrike-zamenjav}
+\end{figure}
+
+\subsubsection*{Računska zahtevnost}
+
+Za odgovor na podvprašanje~\ref{pv:racunska-zahtevnost} smo poleg klasifikacijske uspešnosti primerjali tudi velikost modelov ter izmerjeni čas učenja in sklepanja.
+Tabela~\ref{tab:rezultati-racunska-zahtevnost} prikazuje te vrednosti za množico signalov \emph{pogled in zenici}, kjer je bil dosežen najboljši skupni rezultat.
+Stolpec \emph{Vhod} označuje različne predstavitve istih podatkov, ki uporabljajo agregirane značilke okna, zamrznjene predstavitve prednaučenih kodirnikov oziroma grafovsko predstavitev okna.
+
+Izhodiščna klasifikatorja ter modela \ModelName{SVM} in \ModelName{LightGBM} nimajo števila nevronskih parametrov, zato je pri njih ta vrednost označena z~\texttt{--}.
+Pri \ModelName{GazeMAE}, \ModelName{MOMENT} in njuni združeni različici stolpec učljivih parametrov zajema samo klasifikacijsko glavo, stolpec vseh parametrov pa tudi uporabljena zamrznjena kodirnika.
+Grafovski modeli imajo bistveno manj parametrov kot zamrznjeni prednaučeni kodirniki, vendar je njihov izmerjeni čas učenja na okno za približno dva velikostna razreda večji kot pri negrafovskih modelih.
+Glede na razmerje med točnostjo in izmerjenim časom sta v tej primerjavi najugodnejša klasična modela \ModelName{SVM} in \ModelName{LightGBM}.
+
+\input{tabele/rezultati/racunska_zahtevnost_pogled_zenici.tex}

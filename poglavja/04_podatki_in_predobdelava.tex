@@ -27,22 +27,22 @@ Zbirka vsebuje dva glavna eksperimentalna sklopa: prepoznavanje čustvenih stanj
 Vsebuje odzive udeležencev na video posnetke, katerih cilj je bil vzbuditi določena čustva v udeležencu.
 Odzive sinhrono zajame z videoposnetkom obraza, zvokom, elektroencefalogramom (EEG), fiziološkimi signali -- elektrokardiogramom (EKG), galvanskim odzivom kože (GSR), amplitudo dihanja in temperaturo kože -- ter signali sledilnika pogleda.
 Meritve sledilnika pogleda so bile zajete s sledilnikom Tobii X120 pri frekvenci $60~Hz$.
-V tej nalogi uporabljamo samo prvi sklop, to je eksperiment vzbujanja čustev z videoposnetki, in izključno signale sledilnika pogleda.
+V tej nalogi smo uporabili samo prvi sklop, to je eksperiment vzbujanja čustev z videoposnetki, in izključno signale sledilnika pogleda.
 
 Izvirni članek poroča o 30 rekrutiranih udeležencih.
 Udeležence P9, P12 in P15 so avtorji izključili zaradi tehničnih težav oziroma nepopolnega zajema podatkov.
-V tej nalogi po vzoru izvirnega članka izključimo iste tri udeležence, poleg tega pa izključimo tudi udeležence, za katere ni na voljo podatkov iz eksperimentov vzbujanja čustev.
+Po vzoru izvirnega članka smo izključili iste tri udeležence, poleg tega pa tudi udeležence, za katere ni bilo na voljo podatkov iz eksperimentov vzbujanja čustev.
 V eksperimentu vzbujanja čustev so udeleženci gledali 20 videoposnetkov, katerih namen je bil vzbuditi različna čustva v gledalcu.
 Pred vsakim posnetkom, ki naj bi vzbujal določeno čustvo, je bil prikazan še kratek nevtralni posnetek, odziv nanj pa je bil shranjen ločeno.
-Po ogledu posameznega posnetka so udeleženci podali samoocene čustvenega stanja -- številski oceni valence in vzburjenosti, diskretno samooceno čustvenega stanja ter še nekaj dodatnih ocen, ki jih ne uporabimo.
+Po ogledu posameznega posnetka so udeleženci podali samoocene čustvenega stanja -- številski oceni valence in vzburjenosti, diskretno samooceno čustvenega stanja ter še nekaj dodatnih ocen, ki jih nismo uporabili.
 
 \section{Samoocene čustvenega stanja in ciljni razredi}
 \label{subsec:ciljne-oznake}
 
 Ciljni razredi v tej nalogi izhajajo iz diskretnih samoocen čustvenega stanja, ki so jih udeleženci podali po ogledu videoposnetka.
-Diskretne samoocene čustvenega stanja preslikamo v razrede valence skladno s preslikavo iz izvirnega članka~\cite{soleymani2012mahnob}, ki je prikazana v dodatku~\ref{app:preslikava-valence}.
-S tem najprej dobimo tri razrede: negativno, nevtralno in pozitivno valenco.
-Nevtralni razred odstranimo, da ciljna naloga vsebuje izrazitejši kontrast med razredoma in s tem modelom omogočimo boljše pogoje za učenje vzorcev v podatkih.
+Diskretne samoocene čustvenega stanja smo preslikali v razrede valence skladno s preslikavo iz izvirnega članka~\cite{soleymani2012mahnob}, ki je prikazana v dodatku~\ref{app:preslikava-valence}.
+S tem smo najprej dobili tri razrede: negativno, nevtralno in pozitivno valenco.
+Nevtralni razred smo odstranili, da ciljna naloga vsebuje izrazitejši kontrast med razredoma in imajo modeli boljše pogoje za učenje vzorcev v podatkih.
 
 Razred valence je določen na ravni kombinacije udeleženca in videoposnetka.
 Vsa časovna okna in s tem vsi grafi istega ogleda videoposnetka zato pripadajo istemu razredu.
@@ -57,7 +57,7 @@ Porazdelitev oken po odstranitvi nevtralnega razreda prikazana na sliki~\ref{fig
     \label{fig:porazdelitev-valenca-stevila}
 \end{figure}
 
-Vzburjenosti v tej nalogi ne klasificiramo.
+Vzburjenosti v tej nalogi nismo klasificirali.
 Razlog je predvsem večja šumnost razredov v uporabljeni podatkovni zbirki.
 Kot kaže prikaz ujemanja izpeljanih razredov s samoocenami v dodatku~\ref{app:ujemanje-oznak-s-samoocenami}, se samoocene stopnje vzburjenosti slabše ujemajo z definiranimi razredi kot samoocene valence.
 
@@ -69,7 +69,7 @@ Predobdelava pri tem označuje celoten postopek priprave podatkov pred učenjem 
 
 \subsection{Množice signalov in čiščenje podatkov}
 
-Tukaj navedemo konkretne skupine signalov, ki jih uporabimo v eksperimentih.
+Tukaj navedemo konkretne skupine signalov, ki smo jih uporabili v eksperimentih.
 Indeks $i$ označuje posamezno meritev sledilnika pogleda.
 V uporabljeni podatkovni zbirki imamo na voljo pet osnovnih vrst signalov. To so:
 \begin{itemize}
@@ -80,17 +80,17 @@ V uporabljeni podatkovni zbirki imamo na voljo pet osnovnih vrst signalov. To so
     \item informacija o fiksacijah, tj. pripadnost fiksaciji ter trajanje fiksacije.
 \end{itemize}
 
-Da preverimo robustnost modelov glede na razpoložljivost vhodnih signalov ter primerjamo njihovo klasifikacijsko uspešnost za posamezne tipe vhodnih signalov, podatke \MAHNOB{} razdelimo v štiri delno prekrivajoče se eksperimentalne množice signalov.
-V vseh štirih množicah uporabimo tudi informacijo o času.
+Da bi preverili robustnost modelov glede na razpoložljivost vhodnih signalov ter primerjali njihovo klasifikacijsko uspešnost za posamezne tipe vhodnih signalov, smo podatke \MAHNOB{} razdelili v štiri delno prekrivajoče se eksperimentalne množice signalov.
+V vseh štirih množicah smo uporabili tudi informacijo o času.
 Množica \emph{samo pogled} poleg časa vsebuje koordinati pogleda, množica \emph{samo zenici} vsebuje velikosti leve in desne zenice, množica \emph{pogled in zenici} združi koordinati pogleda in velikosti zenic, množica \emph{vsi signali} pa doda še oddaljenost od sledilnika pogleda in informacijo o fiksacijah.
 Podrobna povezava med temi množicami, značilkami vozlišč in razpoložljivimi tipi povezav je podana pri opisu grafovske konstrukcije v razdelku~\ref{subsec:grafovska-konstrukcija-po-mnozicah}.
 
-Izbrane podatke pred uporabo očistimo.
-Najprej iz lokalne kopije zbirke \MAHNOB{} odstranimo podatke, ki jih v tej nalogi ne uporabljamo, in ohranimo le podatke eksperimenta vzbujanja čustev.
-Nato odstranimo vrstice brez signalov pogleda ali velikosti zenic.
-Na voljo imamo tudi signale veljavnosti, na podlagi katerih odstranimo meritve, za katere je sledilnik poročal, da je meritev za vsaj eno oko neveljavna.
-Dodatno uporabimo filter osamelcev \texttt{q01}-\texttt{q99}, ki odstrani meritve, pri katerih je vsaj eden od štirih osnovnih signalov pod prvim ali nad devetindevetdesetim percentilom, saj te vrednosti močno izkrivljajo porazdelitve signalov.
-Na koncu kratke vrzeli v numeričnih signalih linearno interpoliramo, signala velikosti leve in desne zenice pa dodatno zgladimo s kratkim centriranim drsečim povprečjem treh meritev.
+Izbrane podatke smo pred uporabo očistili.
+Najprej smo iz lokalne kopije zbirke \MAHNOB{} odstranili podatke, ki jih v tej nalogi nismo uporabili, in ohranili le podatke eksperimenta vzbujanja čustev.
+Nato smo odstranili vrstice brez signalov pogleda ali velikosti zenic.
+Na voljo smo imeli tudi signale veljavnosti, na podlagi katerih smo odstranili meritve, za katere je sledilnik poročal, da je meritev za vsaj eno oko neveljavna.
+Dodatno smo uporabili filter osamelcev \texttt{q01}-\texttt{q99}, ki je odstranil meritve, pri katerih je bil vsaj eden od štirih osnovnih signalov pod prvim ali nad devetindevetdesetim percentilom, saj te vrednosti močno izkrivljajo porazdelitve signalov.
+Na koncu smo kratke vrzeli v numeričnih signalih linearno interpolirali, signala velikosti leve in desne zenice pa dodatno zgladili s kratkim centriranim drsečim povprečjem treh meritev.
 Porazdelitvi položajev pogleda in velikosti zenic po čiščenju sta za množico signalov \emph{pogled in zenici} prikazani na slikah~\ref{fig:porazdelitev-polozajev-pogleda} in~\ref{fig:porazdelitev-velikosti-zenic}.
 Na sliki~\ref{fig:porazdelitev-velikosti-zenic} je opazen tudi rahel sistematični zamik med porazdelitvama velikosti leve in desne zenice, ki ga izvirni članek o zbirki \MAHNOB{} ne obravnava~\cite{soleymani2012mahnob}. 
 Ker zamik ni vezan na posameznega udeleženca, je naša hipoteza, da to ni fiziološka asimetrija, temveč merilni artefakt sledilnika pogleda.
@@ -118,25 +118,25 @@ Ker zamik ni vezan na posameznega udeleženca, je naša hipoteza, da to ni fizio
 \label{subsec:standardizacija}
 
 Posamezne skupine signalov so izražene v različnih velikostnih redih.
-Modeli strojnega učenja, kot so \ModelName{SVM}, \ModelName{MLP} ter GNN, so občutljivi na velikostni red vhodnih značilk oz. signalov.
-Zato signale standardiziramo z znano formulo~$\frac{x-\mu}{\sigma}$.
-Povprečje $\mu$ in standardni odklon $\sigma$ izračunamo na učni podmnožici, nato pa na validacijski in testni podmnožici standardizacijo uporabimo z istimi parametri kot na učni.
-Pri grafovskih modelih na enak način standardiziramo tudi značilke povezav, kadar jih uporabljena množica signalov vsebuje.
+Modeli strojnega učenja, kot so metoda podpornih vektorjev (SVM), večslojni perceptron (MLP) in GNN, so občutljivi na velikostni red vhodnih značilk oz. signalov.
+Zato smo signale standardizirali po formuli~$\frac{x-\mu}{\sigma}$.
+Povprečje $\mu$ in standardni odklon $\sigma$ smo izračunali na učni podmnožici, nato pa na validacijski in testni podmnožici standardizacijo uporabili z istimi parametri kot na učni.
+Pri grafovskih modelih smo na enak način standardizirali tudi značilke povezav, kadar jih je uporabljena množica signalov vsebovala.
 
 \label{subsec:windowing}
 
-Nato časovno vrsto razdelimo na neprekrivajoča se časovna okna dolžine $T=10~s$.
-Vsako uporabno časovno okno predstavlja en učni primer.
+Nato smo časovno vrsto razdelili na neprekrivajoča se časovna okna dolžine $T=10~s$.
+Vsako uporabno časovno okno je predstavljalo en učni primer.
 Za $10~s$ smo se odločili na podlagi sorodnega dela na podatkih sledilnika pogleda, kjer so se daljša okna med dolžinami $1$, $3$, $5$ in $10~s$ praviloma izkazala za bolj informativna~\cite{bozak2024feature}.
-Daljših oken ne uporabimo, ker bi težje predpostavili, da celotno okno opisuje enoten čustveni odziv, saj se lahko ta med ogledom posnetka že opazno spremeni~\cite{zhang2020rcea}.
+Daljših oken nismo uporabili, ker bi težje predpostavili, da celotno okno opisuje enoten čustveni odziv, saj se lahko ta med ogledom posnetka že opazno spremeni~\cite{zhang2020rcea}.
 Tudi sorodna dela na prepoznavanju čustev iz očesnih signalov pogosto uporabljajo razmeroma kratka okna~\cite{wang2018automatic,wu2021emotion}.
 
 Ciljni razred okna je določen s parom udeleženec-posnetek, saj so udeleženci vprašalnike izpolnjevali le po vsakem ogledu videoposnetka in ne vmes.
-Okno uporabimo, če po predhodnem čiščenju in filtru osamelcev vsebuje vsaj 60 veljavnih meritev.
+Okno smo uporabili, če je po predhodnem čiščenju in filtru osamelcev vsebovalo vsaj 60 veljavnih meritev.
 
 Pri frekvenci vzorčenja $60~Hz$ bi 10-sekundno okno brez manjkajočih vrednosti vsebovalo 600 vzorcev.
 Zaradi čiščenja, odstranjevanja neveljavnih vzorcev in filtriranja je dejansko število vzorcev v oknih manjše.
-Po filtru osamelcev imamo $2\,639\,048$ vrstic in $5\,158$ uporabnih 10-sekundnih časovnih oken, kar pomeni povprečno približno 512 meritev na uporabno okno.
+Po filtru osamelcev je ostalo $2\,639\,048$ vrstic in $5\,158$ uporabnih 10-sekundnih časovnih oken, kar pomeni povprečno približno 512 meritev na uporabno okno.
 Pri kasnejši gradnji grafov se število vozlišč nekoliko razlikuje med množicami signalov; te vrednosti povzemamo v tabeli~\ref{tab:statistika-konstruiranih-grafov}.
 
 Po tvorbi časovnih oken se cevovod razdeli glede na uporabljeno predstavitev.

@@ -4,7 +4,7 @@
 
 V prejšnjih poglavjih smo definirali podatke, ciljne razrede, časovna okna,
 grafovsko predstavitev in primerjane modele.
-V tem poglavju določimo, kako te komponente ovrednotimo v skupni eksperimentalni
+V tem poglavju opišemo, kako smo te komponente ovrednotili v skupni eksperimentalni
 primerjavi, in predstavimo rezultate.
 Glavna evalvacijska naloga je binarna klasifikacija negativne proti pozitivni valenci.
 Primerjava je zasnovana kot kombinacija modelov iz poglavja~\ref{sec:modeli} in
@@ -22,28 +22,28 @@ Pridobili smo jo preko uradnega spletnega mesta podatkovne zbirke~\cite{mahnobwe
 \subsubsection*{Zasnova glavne primerjave}
 
 Cilj glavne primerjave je odgovoriti na raziskovalno vprašanje~\ref{sec:uvod}: \rvGlavnoBesedilo{}
-Zato v primerjavi spreminjamo le način predstavitve okna in model, ki to predstavitev uporabi.
+Zato smo v primerjavi spreminjali le način predstavitve okna in model, ki je to predstavitev uporabil.
 
 Ciljni razred je binarni razred valence, pri katerem model ločuje med negativno in pozitivno valenco.
-Vse štiri množice iz tabele~\ref{tab:grafovska-konstrukcija-po-mnozicah} obravnavamo kot enakovreden del primerjave, saj nas zanima tudi, kako se klasifikacijska uspešnost spreminja z razpoložljivostjo različnih signalov sledilnika pogleda.
+Vse štiri množice iz tabele~\ref{tab:grafovska-konstrukcija-po-mnozicah} smo obravnavali kot enakovreden del primerjave, saj nas je zanimalo tudi, kako se klasifikacijska uspešnost spreminja z razpoložljivostjo različnih signalov sledilnika pogleda.
 
 V primerjavi smo uporabili vse modele iz tabele~\ref{tab:pregled-primerjanih-modelov}: izhodiščna klasifikatorja, klasični modeli nad agregiranimi značilkami, zamrznjeni prednaučeni predstavitveni modeli in grafovski modeli.
-S tem primerjamo tri različne načine opisa istega časovnega okna: tabelarični povzetek signalov, vektorsko predstavitev časovne vrste in grafovsko predstavitev meritev.
+S tem smo primerjali tri različne načine opisa istega časovnega okna: tabelarični povzetek signalov, vektorsko predstavitev časovne vrste in grafovsko predstavitev meritev.
 
 \subsubsection*{7-kratno prečno preverjanje po subjektih}
 \label{subsec:subject-7kratno}
 
-Glavno primerjavo izvedemo s 7-kratnim prečnim preverjanjem po subjektih.
-Pri vsaki ponovitvi so testni subjekti popolnoma ločeni od subjektov, ki so uporabljeni za učenje in validacijo.
-Iz učnega dela izberemo eno skupino subjektov za validacijsko množico, preostali subjekti pa sestavljajo učno množico.
-Delitve so pri vseh modelih in vseh množicah signalov enake, določene s fiksnim naključnim semenom.
+Glavno primerjavo smo izvedli s 7-kratnim prečnim preverjanjem po subjektih.
+Pri vsaki ponovitvi so bili testni subjekti popolnoma ločeni od subjektov, uporabljenih za učenje in validacijo.
+Iz učnega dela smo izbrali eno skupino subjektov za validacijsko množico, preostali subjekti pa so sestavljali učno množico.
+Delitve so bile pri vseh modelih in vseh množicah signalov enake ter določene s fiksnim naključnim semenom.
 
 Takšna delitev ocenjuje posploševanje na nove udeležence.
 To je za našo nalogo pomembno, saj so signali sledilnika pogleda močno odvisni od specifik posameznika~\cite{lim2020emotion}.
 Ker 22 subjektov ni deljivo s sedem, imajo posamezne testne razdelitve različno velikost -- nekatere vsebujejo tri, druge pa štiri testne subjekte.
 
-Validacijska množica se uporablja med učenjem, testna množica pa samo za končno oceno v posamezni ponovitvi.
-Pri nevronskih modelih zato najboljšo različico modela izberemo glede na validacijsko izgubo, nato pa njeno delovanje izmerimo na pripadajoči testni množici.
+Validacijska množica se je uporabljala med učenjem, testna množica pa samo za končno oceno v posamezni ponovitvi.
+Pri nevronskih modelih smo zato najboljšo različico modela izbrali glede na validacijsko izgubo, nato pa njeno delovanje izmerili na pripadajoči testni množici.
 
 V zgodnejših fazah smo izvedli tudi podporno preverjanje z LOSO, ki je skupaj s primerjavo obeh validacijskih protokolov podano v dodatku~\ref{app:primerjava-loso}.
 
@@ -53,27 +53,26 @@ V zgodnejših fazah smo izvedli tudi podporno preverjanje z LOSO, ki je skupaj s
 \subsubsection*{Nastavitve učenja in hiperparametri}
 
 V tem razdelku navedemo nastavitve učenja, ki vplivajo na izvedbo eksperimentov.
-Nevronske modele učimo z zgodnjim ustavljanjem na validacijski izgubi.
-Grafovski modeli uporabljajo operator \texttt{GCNConv}, dve grafovski plasti, skrite predstavitve velikosti 64 ter povezave s parametri $k_t=1$, $k_s=1$ in $k_f=3$, kot so definirani v poglavju~\ref{sec:grafovska-predstavitev}.
+Nevronske modele smo učili z zgodnjim ustavljanjem na validacijski izgubi.
+Grafovski modeli so uporabljali operator \texttt{GCNConv}, dve grafovski plasti, skrite predstavitve velikosti 64 ter povezave s parametri $k_t=1$, $k_s=1$ in $k_f=3$, kot so definirani v poglavju~\ref{sec:grafovska-predstavitev}.
 Podrobni hiperparametri vseh modelov so podani v dodatku~\ref{app:hiperparametri}.
 
-Nastavitve grafovskih modelov izberemo na podlagi predhodnega kompaktnega mrežnega iskanja.
+Nastavitve grafovskih modelov smo izbrali na podlagi predhodnega kompaktnega mrežnega iskanja.
 To iskanje smo izvedli v zgodnejši fazi raziskave, ko je klasifikacijska naloga bila še trirazredna, saj je poleg negativne in pozitivne vključevala tudi nevtralno valenco.
 V dodatku~\ref{app:mrezno-iskanje} rezultate iskanja poročamo le kot podporni poskus pri izbiri stabilnih nastavitev.
 
 \subsubsection*{Metrike vrednotenja}
 \label{subsec:metrike}
 
-Za vrednotenje uporabimo več standardnih metrik, pri čemer sta glavni točnost in makro F1.
-Za vsak model in vsako množico signalov poročamo povprečje po sedmih testnih razdelitvah.
-Točnost uporabimo kot osnovno metriko, ker ima glavna naloga dva enakovredna in globalno skoraj uravnotežena razreda, kot kaže slika~\ref{fig:porazdelitev-valenca-stevila}.
-Za $C$ razredov in $N$ primerov jo izračunamo kot
+Za vrednotenje smo uporabili več standardnih metrik, pri čemer sta bili glavni točnost in makro F1.
+Za vsak model in vsako množico signalov smo izračunali povprečje po sedmih testnih razdelitvah.
+Točnost smo uporabili kot osnovno metriko, ker ima glavna naloga dva enakovredna in globalno skoraj uravnotežena razreda, kot kaže slika~\ref{fig:porazdelitev-valenca-stevila}.
+Za $C$ razredov in $N$ primerov, kjer je $\mathrm{TP}_c$ število pravilno razvrščenih primerov razreda $c$, jo izračunamo kot
 \begin{equation}
     \text{točnost} = \frac{1}{N} \sum_{c=1}^{C} \mathrm{TP}_c,
 \end{equation}
-kjer je $\mathrm{TP}_c$ število pravilno razvrščenih primerov razreda $c$.
 
-Makro F1 uporabimo kot dopolnilno glavno metriko.
+Makro F1 smo uporabili kot dopolnilno glavno metriko.
 Čeprav sta razreda globalno skoraj uravnotežena, so lahko posamezne testne razdelitve precej neuravnotežene (tudi do razmerja $1:2$).
 Makro F1 izračuna F1 ločeno za vsak razred in nato rezultate povpreči z enako utežjo:
 \begin{equation}
@@ -82,24 +81,24 @@ Makro F1 izračuna F1 ločeno za vsak razred in nato rezultate povpreči z enako
 kjer $\mathrm{FP}_c$ in $\mathrm{FN}_c$ označujeta število lažno pozitivnih oziroma lažno negativnih napovedi za razred $c$.
 S tem dopolni točnost predvsem pri modelih, ki lahko dosežejo sprejemljivo točnost, vendar večino primerov napovedujejo v en sam razred.
 
-Poleg glavnih metrik spremljamo tudi uravnoteženo točnost, preciznost, priklic oziroma občutljivost, uteženi F1, AUC, izgubo in matrike zamenjav.
-Te metrike uporabimo predvsem za preverjanje stabilnosti in za podrobnejšo analizo napak.
+Poleg glavnih metrik smo spremljali tudi uravnoteženo točnost, preciznost, priklic oziroma občutljivost, uteženi F1, ploščino pod krivuljo ROC (AUC, angl. \emph{area under the receiver operating characteristic curve}), izgubo in matrike zamenjav.
+Te metrike smo uporabili predvsem za preverjanje stabilnosti in za podrobnejšo analizo napak.
 Njihove definicije so podane v dodatku~\ref{app:dodatne-metrike}.
 V glavnem besedilu se osredotočimo na točnost in makro F1, razširjene metrike pa poročamo v dodatku~\ref{app:razsirjeni-rezultati-binarna-valenca}.
 
 \subsubsection*{Spremljanje učenja}
 \label{subsec:spremljanje-ucenja}
 
-Poleg končnih metrik shranjujemo tudi podatke o poteku učenja.
-Pri nevronskih modelih spremljamo učno in validacijsko izgubo, najboljšo epoho, informacijo o zgodnjem ustavljanju, čas epohe in norme gradientov.
+Poleg končnih metrik smo shranjevali tudi podatke o poteku učenja.
+Pri nevronskih modelih smo spremljali učno in validacijsko izgubo, najboljšo epoho, informacijo o zgodnjem ustavljanju, čas epohe in norme gradientov.
 Krivulje izgub služijo predvsem preverjanju stabilnosti optimizacije in zaznavanju potencialnega prekomernega prileganja.
 
 Pri grafovskih nevronskih mrežah lahko več zaporednih agregacij povzroči, da si predstavitve vozlišč postanejo preveč podobne.
 Ta pojav imenujemo prekomerno glajenje.
 V praksi se lahko pokaže kot zmanjšanje variance predstavitev, visoka medsebojna podobnost vozliščnih vektorjev in skoraj konstantni izhodi klasifikacijske glave.
-Pri grafovskih modelih spremljamo še nekaj diagnostičnih meritev naučenih predstavitev in napovedi.
+Pri grafovskih modelih smo spremljali še nekaj diagnostičnih meritev naučenih predstavitev in napovedi.
 Med njimi so varianca predstavitev grafa, povprečna kosinusna podobnost predstavitev, razpon logitov in entropija napovednih verjetnosti.
-Te meritve uporabimo za preverjanje, ali se med učenjem pojavijo skoraj konstantne napovedi, zaznavanje kolapsa predstavitev ali znakov prekomernega glajenja.
+Te meritve smo uporabili za preverjanje, ali so se med učenjem pojavile skoraj konstantne napovedi, kolaps predstavitev ali znaki prekomernega glajenja.
 Definicije spremljanih učnih in diagnostičnih meritev so podane v dodatku~\ref{app:dodatne-metrike}.
 Krivulje učne in validacijske izgube poročamo med rezultati v nadaljevanju, diagnostiko naučenih predstavitev in napovedi pa v dodatku~\ref{app:diagnostika-prekomerno-glajenje}.
 
@@ -148,7 +147,7 @@ Ker se delitve zaradi zgodnjega ustavljanja končajo po različnem številu epoh
 Pri vseh arhitekturah učna izguba na začetku hitro upade, nato pa se spremembe umirijo.
 Validacijska izguba se po začetnem izboljšanju večinoma stabilizira, pri čemer med delitvami ostaja opazna variabilnost.
 Validacijska izguba je pri večini modelov nižja od učne, kar je lahko posledica merjenja v različnih načinih delovanja modela.
-Modele učimo z izpuščanjem, ki poveča šum in s tem učno izgubo, med validacijo pa izpuščanja ni.
+Modele smo učili z izpuščanjem, ki je povečalo šum in s tem učno izgubo, med validacijo pa izpuščanja ni bilo.
 Poleg tega je učna izguba povprečje med posodabljanjem uteži skozi epoho, validacijska izguba pa se izračuna po koncu epohe, ko so uteži že prilagojene.
 
 \subsubsection*{Matriki zamenjav}

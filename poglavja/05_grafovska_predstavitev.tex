@@ -2,7 +2,7 @@
 \label{sec:grafovska-predstavitev}
 
 V prejšnjem poglavju smo podatke sledilnika pogleda pripravili za učenje modelov strojnega učenja.
-V tem poglavju opišemo, kako posamezno časovno okno meritev pretvorimo v graf, ki ga uporabimo kot vhod za grafovske modele.
+V tem poglavju opišemo, kako smo posamezno časovno okno meritev pretvorili v graf, ki smo ga uporabili kot vhod za grafovske modele.
 Vozlišča predstavljajo veljavne meritve znotraj okna, povezave pa izbrane odnose med meritvami.
 
 Najprej podamo najbogatejšo grafovsko predstavitev učnega vzorca, ki uporablja vse razpoložljive signale.
@@ -34,7 +34,7 @@ Za neutežene povezave si lahko predstavljamo, da imajo utež $w_{ij}=1$.
 
 Homogeni graf je graf, ki ne loči različnih vrst vozlišč in povezav.
 Heterogeni graf vsebuje vsaj dve različni vrsti vozlišč ali povezav.
-V tej nalogi uporabljamo heterogeno grafovsko predstavitev, saj ločimo več tipov povezav.
+V tej nalogi smo uporabili heterogeno grafovsko predstavitev, saj smo ločili več tipov povezav.
 
 \subsection{Vozlišča in njihove značilke}
 
@@ -78,7 +78,7 @@ Prostorske in fiksacijske povezave pa obravnavamo kot neusmerjene.
 
 Vsaka povezava ima določen tip relacije, saj časovna povezava, prostorska povezava in fiksacijska povezava opisujejo različne odnose med meritvami.
 Ta zapis heterogenim grafovskim modelom, opisanim v poglavju~\ref{sec:modeli}, omogoča ločeno obravnavo relacij.
-Osnovni \ModelName{GCN} uporabi isti nabor povezav, vendar relacij modelno ne loči.
+Osnovni \ModelName{GCN} (angl. \emph{graph convolutional network}) uporabi isti nabor povezav, vendar relacij modelno ne loči.
 V tem primeru dobimo enostaven homogen graf.
 Podrobnosti o uporabi relacij v posameznih modelih so opisane v poglavju~\ref{sec:modeli}.
 
@@ -111,7 +111,7 @@ Prostorsko razdaljo med meritvama $i$ in $j$ definiramo evklidsko:
     d_{ij}^{(s)} =
     \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}.
 \end{equation}
-Za vsako vozlišče $v_i$ poiščemo $k_s$ najbližjih sosedov v prostoru koordinat pogleda $(x,~y)$ z uporabo k-d drevesa. Če je $v_j$ med temi sosedi, dodamo povezavo med vozliščema $v_i$ in $v_j$.
+Za vsako vozlišče $v_i$ poiščemo $k_s$ najbližjih sosedov v prostoru koordinat pogleda $(x,~y)$ z uporabo k-d drevesa, podatkovne strukture za učinkovito iskanje sosedov v večrazsežnem prostoru. Če je $v_j$ med temi sosedi, dodamo povezavo med vozliščema $v_i$ in $v_j$.
 Ker prostorske povezave obravnavamo kot neusmerjene, povezavo predstavimo z dvema usmerjenima povezavama $(v_i,v_j)$ in $(v_j,v_i)$.
 Na koncu odstranimo podvojene povezave znotraj relacije $E_s$.
 
@@ -156,20 +156,20 @@ Shematski prikaz je na sliki~\ref{fig:razsirjene-fiksacijske-povezave}, formalna
 \subsection{Značilke povezav}
 \label{subsec:utezi-povezav}
 
-Povezavam poleg tipa relacije priredimo tudi značilke povezav, ki opisujejo odnos med izvorno meritvijo $v_i$ in ciljno meritvijo $v_j$.
+Povezavam smo poleg tipa relacije priredili tudi značilke povezav, ki opisujejo odnos med izvorno meritvijo $v_i$ in ciljno meritvijo $v_j$.
 Osnovne časovne značilke so normalizirani čas izvorne in ciljne meritve, $t_i$ in $t_j$, ter časovna razlika $\Delta t = t_j - t_i$.
-Čeprav bi model te časovne značilke načeloma lahko izpeljal iz značilk obeh vozlišč, jih vključimo neposredno, da mu olajšamo učenje časovnih odnosov med meritvama.
-Pri časovnih povezavah dodamo še smer $\rho_{ij}$, kjer ima povezava naprej vrednost $\rho_{ij}=1$, povezava nazaj pa $\rho_{ij}=-1$.
+Čeprav bi model te časovne značilke načeloma lahko izpeljal iz značilk obeh vozlišč, smo jih vključili neposredno, da bi mu olajšali učenje časovnih odnosov med meritvama.
+Pri časovnih povezavah smo dodali še smer $\rho_{ij}$, kjer ima povezava naprej vrednost $\rho_{ij}=1$, povezava nazaj pa $\rho_{ij}=-1$.
 Značilke povezav so del grafovske predstavitve, vendar jih uporabi le model \ModelName{HeteroGCN-MLP-w}, opisan v poglavju~\ref{sec:modeli}.
 
-Pri grafih, ki vsebujejo koordinate pogleda, povezavam dodamo tudi prostorske značilke.
+Pri grafih, ki vsebujejo koordinate pogleda, smo povezavam dodali tudi prostorske značilke.
 To sta razliki v koordinatah pogleda, $\Delta x = x_j - x_i$ in $\Delta y = y_j - y_i$, ter evklidska razdalja med položajema pogleda na zaslonu $d_{ij}^{\text{zaslon}}$.
 Te značilke so zato na voljo pri vseh množicah signalov, razen pri množici \emph{samo zenici}.
 
-Pri grafih, ki vsebujejo velikosti zenic, povezavam dodamo spremembi velikosti leve in desne zenice.
+Pri grafih, ki vsebujejo velikosti zenic, smo povezavam dodali spremembi velikosti leve in desne zenice.
 Značilki $\Delta p^{(l)}_{ij} = p_j^{(l)} - p_i^{(l)}$ in $\Delta p^{(r)}_{ij} = p_j^{(r)} - p_i^{(r)}$ sta na voljo pri množicah \emph{samo zenici}, \emph{pogled in zenici} ter \emph{vsi signali}.
 
-Pri množici \emph{vsi signali} povezavam dodamo še značilko, povezano z oddaljenostjo od sledilnika pogleda.
+Pri množici \emph{vsi signali} smo povezavam dodali še značilko, povezano z oddaljenostjo od sledilnika pogleda.
 Značilka $\Delta d_{ij} = d_j - d_i$ opisuje razliko v oddaljenosti od sledilnika pogleda med ciljno in izvorno meritvijo.
 
 Podroben pregled značilk povezav je podan v tabeli~\ref{tab:znacilke-povezav} v dodatku~\ref{app:grafi}.
@@ -178,7 +178,7 @@ Podroben pregled značilk povezav je podan v tabeli~\ref{tab:znacilke-povezav} v
 \section{Grafovska predstavitev po množicah signalov}
 \label{subsec:grafovska-konstrukcija-po-mnozicah}
 
-Za vsako množico signalov iz razdelka~\ref{subsec:vhodni-signali} zgradimo graf po isti osnovni konstrukciji.
+Za vsako množico signalov iz razdelka~\ref{subsec:vhodni-signali} smo zgradili graf po isti osnovni konstrukciji.
 Razlika med grafi je v značilkah vozlišč, relacijah in značilkah povezav, ki jih izbrana množica signalov omogoča.
 Množica \emph{vsi signali} je najbogatejša predstavitev. 
 Ostale množice uporabijo ustrezne podmnožice značilk in relacij.

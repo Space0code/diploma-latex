@@ -11,7 +11,7 @@ Negrafovski osnovni modeli prejmejo agregirano tabelarično predstavitev posamez
 \section{Pregled primerjanih pristopov}
 \label{subsec:pregled-primerjanih-pristopov}
 
-V tabeli~\ref{tab:pregled-primerjanih-modelov} je prikazano, katere modele uporabljamo, kateri družini vsak model pripada, kakšne podatke sprejme na vhod in kakšno vlogo ima v naši primerjalni študiji.
+V tabeli~\ref{tab:pregled-primerjanih-modelov} je prikazano, katere modele smo uporabili, kateri družini vsak model pripada, kakšne podatke sprejme na vhod in kakšno vlogo ima v naši primerjalni študiji.
 
 \input{tabele/modeli/pregled_primerjanih_modelov.tex}
 
@@ -29,67 +29,67 @@ Cilj je, da naučeni modeli presežejo rezultate izhodiščnih klasifikatorjev, 
 \subsubsection*{Klasični modeli strojnega učenja}
 \label{subsec:klasicni-modeli-strojnega-ucenja}
 
-Za pravično primerjavo negrafovskim osnovnim modelom podamo agregirane značilke istih signalov, kot jih prejme GNN.
+Za pravično primerjavo smo negrafovskim osnovnim modelom podali agregirane značilke istih signalov, kot so jih prejele GNN.
 V primeru množice \emph{vsi signali} so to koordinati pogleda $(x,~y)$, velikosti leve in desne zenice, oddaljenost od sledilnika pogleda ter informacija o fiksacijah.
-Dodamo tudi normaliziran čas meritve znotraj okna.
-Za vsak signal izračunamo opisne statistike na ravni okna: povprečje, standardni odklon, minimum, maksimum, razpon, mediano, prvi kvartil, tretji kvartil in medkvartilni razmik.
-Pri fiksacijah dodamo še število fiksacij, delež meritev v oknu, ki pripadajo fiksacijam, vsoto trajanj, povprečno trajanje in največje trajanje fiksacije.
+Dodali smo tudi normaliziran čas meritve znotraj okna.
+Za vsak signal smo izračunali opisne statistike na ravni okna: povprečje, standardni odklon, minimum, maksimum, razpon, mediano, prvi kvartil, tretji kvartil in medkvartilni razmik.
+Pri fiksacijah smo dodali še število fiksacij, delež meritev v oknu, ki pripadajo fiksacijam, vsoto trajanj, povprečno trajanje in največje trajanje fiksacije.
 V primeru množice \emph{vsi signali} je eno okno v tabelarični predstavitvi opisano z 68 agregiranimi značilkami.
 Takšna pretvorba časovnega signala v opisne statistike na ravni okna oziroma odziva je običajen pristop pri klasičnih modelih strojnega učenja za podatke pogleda~\cite{bozak2024feature,lim2020emotion,tarnowski2020eye}.
 
 \subsubsection*{\ModelName{SVM}}
 
-\ModelName{SVM} uporabimo kot klasični model z RBF jedrom nad agregiranimi značilkami okna~\cite{cortes1995support}.
+\ModelName{SVM} smo uporabili kot klasični model z jedrom radialne bazne funkcije (RBF) nad agregiranimi značilkami okna~\cite{cortes1995support}.
 RBF jedro modelu omogoča nelinearno ločevanje razredov, zato je \ModelName{SVM} uporaben kot močan negrafovski osnovni model.
-Ker je \ModelName{SVM} občutljiv na velikostni red vhodnih značilk, agregirane značilke pred učenjem standardiziramo, da značilke z večjimi številskimi vrednostmi ne vplivajo nesorazmerno na odločanje modela.
+Ker je \ModelName{SVM} občutljiv na velikostni red vhodnih značilk, smo agregirane značilke pred učenjem standardizirali, da značilke z večjimi številskimi vrednostmi niso nesorazmerno vplivale na odločanje modela.
 
 \subsubsection*{\ModelName{MLP}}
 
-Osnovni \ModelName{MLP} uporabimo kot primer osnovnega nevronskega modela~\cite{goodfellow2016deep}.
+Osnovni \ModelName{MLP} smo uporabili kot primer osnovnega nevronskega modela~\cite{goodfellow2016deep}.
 Vhod modela je vektor agregiranih značilk enega časovnega okna, izhod pa logiti za razrede ciljne naloge.
-Arhitektura je namerno preprosta: dve skriti polno povezani plasti z aktivacijo ReLU in izpuščanjem, za njima pa izhodna linearna plast.
-Model učimo s prečno entropijo.
+Arhitektura je namerno preprosta: dve skriti polno povezani plasti z aktivacijo ReLU (angl. \emph{rectified linear unit}) in izpuščanjem, za njima pa izhodna linearna plast.
+Model smo učili z izgubo križne entropije, ki kaznuje majhno napovedano verjetnost pravilnega razreda.
 
 \subsubsection*{\ModelName{LightGBM}}
 
-\ModelName{LightGBM} uporabimo kot predstavnika gradientno spodbujenih odločitvenih dreves~\cite{ke2017lightgbm}.
+\ModelName{LightGBM} smo uporabili kot predstavnika gradientno spodbujenih odločitvenih dreves~\cite{ke2017lightgbm}.
 Model je primeren za tabelarične podatke, zato je naravna primerjava za agregirane značilke časovnih oken.
 Za razliko od \ModelName{SVM} in \ModelName{MLP} standardizacije vhodnih značilk ne potrebuje, saj odločitvena drevesa delujejo na pragovih posameznih značilk.
 
 \section{Zamrznjeni prednaučeni predstavitveni modeli}
 \label{subsec:zamrznjeni-prednauceni-modeli}
 
-Poleg modelov nad ročno agregiranimi značilkami uporabimo tudi dva prednaučena kodirnika signalov: \ModelName{GazeMAE} za podatke pogleda in \ModelName{MOMENT} za ostale časovne vrste~\cite{bautista2021gazemae,goswami2024moment}.
+Poleg modelov nad ročno agregiranimi značilkami smo uporabili tudi dva prednaučena kodirnika signalov: \ModelName{GazeMAE} za podatke pogleda in \ModelName{MOMENT} za ostale časovne vrste.
 Takšni modeli vhodnega okna ne pretvorijo v vnaprej določene statistike, temveč neposredno iz signala izračunajo vektorsko predstavitev.
-V tej nalogi ju uporabimo kot zamrznjena kodirnika, zato njunih parametrov med učenjem ne spreminjamo.
-Na izračunanih predstavitvah nato učimo ločeno klasifikacijsko glavo \ModelName{MLP}.
+V tej nalogi smo ju uporabili kot zamrznjena kodirnika, zato njunih parametrov med učenjem nismo spreminjali.
+Na izračunanih predstavitvah smo nato učili ločeno klasifikacijsko glavo \ModelName{MLP}.
 Ta \ModelName{MLP} je arhitekturno drugačen, vendar ločen in nepovezan s samostojnim klasifikatorjem \ModelName{MLP} iz družine klasičnih modelov strojnega učenja.
 
 \subsubsection*{\ModelName{GazeMAE}}
 \label{subsec:gazemae-model}
 
-Za podatke pogleda uporabimo odprtokodni prednaučeni kodirnik \ModelName{GazeMAE}~\cite{bautista2021gazemae}.
-Model prejme samo koordinati pogleda $(x,~y)$, zato ga samostojno uporabimo le za množico \emph{samo pogled}.
-Ker je bil \ModelName{GazeMAE} učen na $2~s$ oknih, vzorčenih s frekvenco $500~Hz$, uporabljena $10~s$ okna najprej pretvorimo v obliko, ki jo model pričakuje.
-Koordinati pogleda razdelimo na pet neprekrivajočih se $2~s$ kosov in ju prevzorčimo na ciljno frekvenco $500~Hz$.
+Za podatke pogleda smo uporabili odprtokodni prednaučeni kodirnik \ModelName{GazeMAE}~\cite{bautista2021gazemae}.
+Model prejme samo koordinati pogleda $(x,~y)$, zato smo ga samostojno uporabili le za množico \emph{samo pogled}.
+Ker je bil \ModelName{GazeMAE} učen na $2~s$ oknih, vzorčenih s frekvenco $500~Hz$, smo uporabljena $10~s$ okna najprej pretvorili v obliko, ki jo model pričakuje.
+Koordinati pogleda smo razdelili na pet neprekrivajočih se $2~s$ kosov in ju prevzorčili na ciljno frekvenco $500~Hz$.
 Kodirnik temelji na časovno-konvolucijskih mrežah, ki ločeno kodirajo položaj in hitrost pogleda.
-Iz predstavitev posameznih kosov nato z združevanjem pridobimo predstavitev celotnega okna s~512 razsežnostmi.
+Iz predstavitev posameznih kosov smo nato z združevanjem pridobili predstavitev celotnega okna s~512 razsežnostmi.
 
 \subsubsection*{\ModelName{MOMENT}}
 \label{subsec:moment-model}
 
-\ModelName{MOMENT} uporabimo kot splošni prednaučeni model za časovne vrste~\cite{goswami2024moment}.
-V nasprotju z \ModelName{GazeMAE} ni vezan samo na koordinate pogleda, zato ga uporabimo za večkanalne časovne vrste signalov, ki pripadajo izbrani množici signalov v posameznem eksperimentu.
+\ModelName{MOMENT} smo uporabili kot splošni prednaučeni model za časovne vrste~\cite{goswami2024moment}.
+V nasprotju z \ModelName{GazeMAE} ni vezan samo na koordinate pogleda, zato smo ga uporabili za večkanalne časovne vrste signalov, ki so pripadali izbrani množici signalov v posameznem eksperimentu.
 To so lahko velikosti zenic, oddaljenost od sledilnika pogleda in trajanje fiksacije.
-Samostojno ga uporabimo le za množico \emph{samo zenici}.
-V primerih \emph{pogled in zenici} ter \emph{vsi signali} pa ga uporabimo skupaj z \ModelName{GazeMAE}.
-Vhodno okno pred uporabo prevzorčimo na 512 časovnih korakov.
+Samostojno smo ga uporabili le za množico \emph{samo zenici}.
+V primerih \emph{pogled in zenici} ter \emph{vsi signali} pa smo ga uporabili skupaj z \ModelName{GazeMAE}.
+Vhodno okno smo pred uporabo prevzorčili na 512 časovnih korakov.
 \ModelName{MOMENT} temelji na arhitekturi transformerjev za časovne vrste in v uporabljeni nastavitvi izračuna predstavitev okna s~768 razsežnostmi.
 
 \subsubsection*{Združene predstavitve \ModelName{GazeMAE} in \ModelName{MOMENT}}
 
-Pri množicah \emph{pogled in zenici} ter \emph{vsi signali} uporabimo združeno predstavitev obeh kodirnikov.
-Predstavitev \ModelName{GazeMAE} in predstavitev \ModelName{MOMENT} konkateniramo v en skupni vektor, ki je nato vhod v klasifikacijsko glavo \ModelName{MLP}.
+Pri množicah \emph{pogled in zenici} ter \emph{vsi signali} smo uporabili združeno predstavitev obeh kodirnikov.
+Predstavitev \ModelName{GazeMAE} in predstavitev \ModelName{MOMENT} smo konkatenirali v en skupni vektor, ki je bil nato vhod v klasifikacijsko glavo \ModelName{MLP}.
 
 V rezultatih zamrznjene prednaučene predstavitvene modele obravnavamo kot eno
 družino modelov \ModelName{GazeMAE/MOMENT}.
@@ -113,7 +113,7 @@ V tabeli~\ref{tab:arhitekturna-lestvica-gnn} so na kratko predstavljene razlike 
 \subsubsection*{Posredovanje sporočil in skupni cevovod}
 \label{subsec:skupni-deli-grafovske-arhitekture}
 
-Grafovske nevronske mreže (GNN) so razred nevronskih mrež, namenjen učenju nad podatki, ki jih lahko predstavimo z grafom~\cite{gilmer2017mpnn,kipf2017gcn,velickovic2018gat}.
+Grafovske nevronske mreže (GNN) so razred nevronskih mrež, namenjen učenju nad podatki, ki jih lahko predstavimo z grafom~\cite{gilmer2017mpnn,kipf2017gcn}.
 Cilj GNN je naučiti se predstavitev vozlišč, povezav ali celotnega grafa tako, da model pri izračunu predstavitve posameznega vozlišča upošteva tudi njegovo lokalno okolico.
 
 Osnovna ideja GNN je \emph{posredovanje sporočil}~\cite{gilmer2017mpnn}.
@@ -174,7 +174,7 @@ Predstavitev grafa $\mathbf{h}_G$ nato uporabimo v klasifikacijski glavi, ki nap
 Grafovski modeli na vhod prejmejo graf glede na izbrano množico signalov, kot definirano v poglavju~\ref{sec:grafovska-predstavitev}.
 Razsežnost vhodnih preslikav prilagodimo izbrani množici signalov -- ločeno za značilke vozlišč, pri modelu \ModelName{HeteroGCN-MLP-w} pa tudi za značilke povezav.
 
-Vhodne vektorje najprej preslikamo v skupni latentni prostor z dvoslojnim \ModelName{MLP}.
+Vhodne vektorje najprej preslikamo v skupni latentni prostor oziroma prostor skritih predstavitev z dvoslojnim \ModelName{MLP}.
 Tako dobimo začetno predstavitev vsakega vozlišča, ki jo nato posodabljajo grafovske plasti.
 Te plasti posredujejo sporočila po povezavah grafa in pri vsakem vozlišču združijo informacije iz njegove okolice.
 V grafovskih blokih uporabimo aktivacijo GELU, rezidualne povezave, normalizacijo plasti in izpuščanje.
@@ -197,7 +197,7 @@ Napoved je razred z večjim logitom.
 Pri poročanju verjetnosti logite normaliziramo s softmaxom.
 Podrobnosti o številu plasti, velikosti skritih predstavitev, verjetnosti izpuščanja in ostalih hiperparametrih so opisane v dodatku~\ref{app:hiperparametri}.
 
-Vse GNN učimo od začetka do konca (ang. \emph{end-to-end}), kar pomeni, da se vsi učljivi deli modela optimizirajo hkrati glede na klasifikacijsko izgubo.
+Vse GNN smo učili od začetka do konca (ang. \emph{end-to-end}), kar pomeni, da so se vsi učljivi deli modela optimizirali hkrati glede na klasifikacijsko izgubo.
 To vključuje začetno preslikavo značilk vozlišč, grafovske plasti, morebitno fuzijo relacij, pozornostno združevanje in klasifikacijsko glavo.
 V nadaljevanju opišemo specifike vsake arhitekture v štiri-stopenjski arhitekturni lestvici, začenši z najenostavnejšim -- s homogenim \ModelName{GCN}.
 V enačbah posameznih modelov je $\mathbf{H}^{(k-1)}$ matrika vhodnih predstavitev vozlišč v $k$-ti grafovski plasti, $\mathbf{Z}^{(k)}$ pa njen izhod pred skupno rezidualno povezavo, normalizacijo plasti in izpuščanjem.
@@ -335,7 +335,7 @@ Slika~\ref{fig:diagram-heterogcn-mlp-w} prikazuje dodano vejo za izračun učlji
 \subsubsection*{Izbira grafovske konvolucije}
 \label{subsec:izbira-grafovske-konvolucije}
 
-V glavnih poskusih v vseh grafovskih modelih uporabimo plast \texttt{GCNConv}~\cite{kipf2017gcn}.
-\texttt{GCNConv} je enostaven in uveljavljen operator posredovanja sporočil, ki ga lahko ohranimo nespremenjenega skozi celotno arhitekturno lestvico.
+V glavnih poskusih smo v vseh grafovskih modelih uporabili plast \texttt{GCNConv}~\cite{kipf2017gcn}.
+\texttt{GCNConv} je enostaven in uveljavljen operator posredovanja sporočil, ki smo ga lahko ohranili nespremenjenega skozi celotno arhitekturno lestvico.
 V dodatnem poskusu smo ga primerjali z drugimi operatorji, razlike med njimi pa so bile razmeroma majhne.
 Podrobnosti primerjave so podane v dodatku~\ref{app:izbira-grafovske-konvolucije}.

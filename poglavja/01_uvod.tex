@@ -5,11 +5,12 @@ Za učenje iz podatkov, kjer niso pomembne zgolj lastnosti posameznih elementov,
 Primer takšnih podatkov so podatki sledilnika pogleda.
 Meritvam sledilnika pogleda lahko smiselno določimo časovne in prostorske odnose in jim s tem priredimo časovno-prostorski graf. 
 Na tem grafu se z grafovsko nevronsko mrežo učimo predstavitev vozlišč in grafov, ki jih uporabimo za klasifikacijo grafa.
-Podatki, uporabljeni v tej nalogi, vsebujejo samoocene čustvenega stanja udeležencev, iz katerih izpeljemo razrede valence.
-GNN zato učimo binarno klasificirati valenco, rezultate pa primerjamo z rezultati uveljavljenih negrafovskih pristopov.
-Z izrazom \emph{množica signalov} v tej nalogi označujemo izbor vrst podatkov sledilnika pogleda, ki jih uporabimo kot vhod modela.
-Eksperimentalno primerjavo izvedemo na štirih množicah signalov: samo koordinatah pogleda (\emph{samo pogled}), samo velikostih zenic (\emph{samo zenici}), združenih koordinatah pogleda in velikostih zenic (\emph{pogled in zenici}) ter vseh razpoložljivih signalih (\emph{vsi signali}).
-Pregled celotnega eksperimentalnega toka je prikazan na sliki~\ref{fig:uvod-pregled-naloge}: iz iste podatkovne zbirke izpeljemo več vhodnih predstavitev, jih ovrednotimo z različnimi družinami modelov in rezultate primerjamo na problemu binarne klasifikacije valence.
+Podatki, uporabljeni v tej nalogi, vsebujejo samoocene čustvenega stanja udeležencev, iz katerih smo izpeljali razrede valence.
+Valenca pri tem opisuje razpon čustvenega odziva od negativnega do pozitivnega.
+GNN smo zato učili binarno klasificirati valenco, rezultate pa smo primerjali z rezultati uveljavljenih negrafovskih pristopov.
+Z izrazom \emph{množica signalov} v tej nalogi označujemo izbor vrst podatkov sledilnika pogleda, uporabljenih kot vhod modela.
+Eksperimentalno primerjavo smo izvedli na štirih množicah signalov: samo koordinatah pogleda (\emph{samo pogled}), samo velikostih zenic (\emph{samo zenici}), združenih koordinatah pogleda in velikostih zenic (\emph{pogled in zenici}) ter vseh razpoložljivih signalih (\emph{vsi signali}).
+Pregled celotnega eksperimentalnega toka je prikazan na sliki~\ref{fig:uvod-pregled-naloge}: iz iste podatkovne zbirke smo izpeljali več vhodnih predstavitev, jih ovrednotili z različnimi družinami modelov in rezultate primerjali na problemu binarne klasifikacije valence.
 
 \begin{figure}[!t]
     \centering

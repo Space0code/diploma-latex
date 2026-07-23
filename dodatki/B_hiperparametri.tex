@@ -1,7 +1,12 @@
-\chapter{Hiperparametri}
+\chapter{Dodatne metodološke podrobnosti}
 \label{app:hiperparametri}
+\label{app:grafi}
 
-\section{Hiperparametri modelov}
+V tem dodatku podamo podrobnejše nastavitve eksperimentov in modelov ter dopolnimo opis grafovske konstrukcije iz poglavja~\ref{sec:grafovska-predstavitev}.
+
+\section{Hiperparametri in izbira nastavitev}
+
+\subsubsection*{Hiperparametri modelov}
 \label{app:hiperparametri-modelov}
 
 Tabela~\ref{tab:hiperparametri-modelov} povzema glavne hiperparametre modelov v končnih eksperimentih.
@@ -9,7 +14,7 @@ Klasični primerjalni modeli uporabljajo agregirane tabelarične značilke, nevr
 
 \input{tabele/hiperparametri/hiperparametri_modelov.tex}
 
-\section{Predhodno mrežno iskanje}
+\subsubsection*{Predhodno mrežno iskanje}
 \label{app:mrezno-iskanje}
 
 Nastavitve grafovske konstrukcije smo izbrali po majhnem predhodnem mrežnem iskanju na 3-razredni valenci, glede na izvorne razrede definirane v tabeli~\ref{tab:label-mapping}.
@@ -22,7 +27,9 @@ V končnih poskusih smo uporabili redkejšo nastavitev $k_t=1$, $k_s=1$ in $k_f=
 
 \input{tabele/hiperparametri/mrezno_iskanje_gnn.tex}
 
-\section{Strojna in programska oprema}
+\section{Izvedbene podrobnosti}
+
+\subsubsection*{Strojna in programska oprema}
 \label{app:strojna-programska-oprema}
 
 Glavni eksperimenti so bili izvedeni na računalniku z operacijskim sistemom Linux
@@ -32,7 +39,7 @@ SSD 990 PRO NVMe.
 Poskusi so bili poganjani v okolju Conda \texttt{gfm}.
 Uporabljene so bile različice: Python 3.10.19, PyTorch 2.9.1+cu126, CUDA 12.6, PyG 2.7.0, scikit-learn 1.7.2, LightGBM 4.6.0, NumPy 1.25.2, pandas 2.3.3, Matplotlib 3.10.6 in seaborn 0.13.2.
 
-\section{Učljive uteži povezav}
+\subsubsection*{Učljive uteži povezav}
 \label{app:naucene-utezi-povezav}
 
 V modelu \ModelName{HeteroGCN-MLP-w} značilke povezave uporabimo za izračun skalarne uteži povezave.
@@ -76,3 +83,66 @@ Končno utež normaliziramo po vhodnih povezavah ciljne meritve $v_j$ znotraj is
 \end{equation}
 kjer je $\epsilon=10^{-8}$ majhna konstanta za numerično stabilnost.
 Ker normalizacija ohrani predznak uteži, lahko povezava prispevek sosednjega vozlišča tudi zmanjša, ne le poveča.
+
+\section{Konstrukcija in značilke povezav}
+
+\subsubsection*{Razširjene povezave znotraj fiksacije}
+\label{app:razsirjene-fiksacijske-povezave}
+
+Fiksacijo obravnavamo kot neprekinjeno zaporedje vozlišč z istim veljavnim identifikatorjem fiksacije.
+Če ima taka fiksacija $F$ vozlišč, jim priredimo lokalne indekse $0,\ldots,F-1$.
+Parameter $k_f$ določa število fiksacijskih povezav, ki jih generira vsako vozlišče.
+Za posamezno fiksacijo najprej izračunamo korak razširitve
+\begin{equation}
+    s = \max(1, \lfloor F/k_f + 0{,}5 \rfloor).
+\end{equation}
+Množico kandidatnih odmikov določimo kot
+\begin{equation}
+    D = \{(1 + q s) \bmod F \mid q = 0,\ldots,k_f-1\}.
+\end{equation}
+Morebitni odmik $0$ in podvojene odmike odstranimo.
+Za vsak odmik $d \in D$ dodamo neusmerjene povezave
+\begin{equation}
+    \{v_i, v_{(i+d)\bmod F}\},
+    \qquad i = 0,\ldots,F-1.
+\end{equation}
+Pri zapisu grafa za posredovanje sporočil vsako neusmerjeno povezavo predstavimo z dvema usmerjenima povezavama in odstranimo podvojene povezave znotraj relacije $E_f$.
+
+Pri fiksaciji dolžine $F=21$ in parametru $k_f=3$ dobimo $s=7$.
+Vozlišče z lokalnim indeksom $0$ se zato poveže z vozlišči $1$, $8$ in $15$.
+Odmik $1$ ohrani časovno lokalno komunikacijo, večji odmiki pa omogočijo širjenje informacij tudi med časovno bolj oddaljenimi meritvami iste fiksacije.
+Ker vsaka plast GNN omogoča izmenjavo informacij med neposredno povezanimi vozlišči, se doseg znotraj fiksacije dodatno povečuje s številom plasti.
+
+\subsubsection*{Značilke povezav}
+
+Tabela~\ref{tab:znacilke-povezav} podrobno opisuje simbole značilk povezav, uporabljene v tabeli~\ref{tab:grafovska-konstrukcija-po-mnozicah}.
+
+\input{tabele/graf/znacilke_povezav.tex}
+
+\section{Ločeni prikazi tipov povezav}
+
+Slike prikazujejo isti izsek časovnega okna, vendar ločeno za posamezne tipe povezav.
+Namenjene so predvsem lažjemu branju slike~\ref{fig:konstrukcija-grafa-primer}: časovne povezave pokažejo lokalni red meritev, prostorske povezave sosednost položajev pogleda na zaslonu, fiksacijske povezave pa povezovanje meritev znotraj iste zaznane fiksacije.
+
+% Vir slik: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/model_runs/all_signals/2026-06-12_18-09-29/experiments/multiclass_table6_valence_3class_emotion-elicitation/snapshot.csv.
+% Slike so generirane s skriptom GFM-for-eyetracker/scripts/create_thesis_gnn_graph_examples.py.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/casovne.png}
+    \caption{Časovne povezave v izseku grafa. Oranžne povezave vodijo naprej po zaporedju meritev, rožnate pa nazaj, zato prikaz poudari lokalno časovno okolico vsakega vozlišča.}
+    \label{fig:casovne-povezave-primer}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/prostorske.png}
+    \caption{Prostorske povezave v izseku grafa. Povezujejo meritve s podobnim položajem pogleda na zaslonu, zato lahko povežejo tudi časovno bolj oddaljena vozlišča.}
+    \label{fig:prostorske-povezave-primer}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/fiksacijske.png}
+    \caption{Fiksacijske povezave v izseku grafa. Povezujejo meritve iz iste zaznane fiksacije, vendar z omejenim številom odmikov, da graf ne postane preveč gost.}
+    \label{fig:fiksacijske-povezave-primer}
+\end{figure}

@@ -1,5 +1,8 @@
-\chapter{Diskusija}
+\chapter{Diskusija in zaključek}
 \label{sec:diskusija}
+\label{sec:zakljucek}
+
+\section{Interpretacija rezultatov}
 
 Kot kažejo slike~\ref{fig:porazdelitev-valenca-stevila}, \ref{fig:porazdelitev-polozajev-pogleda} in~\ref{fig:porazdelitev-velikosti-zenic}, ima glavna naloga skoraj uravnotežene razrede, očiščene meritve pa pričakovane porazdelitve.
 To poveča možnost, da se modeli naučijo uporabnih signalov namesto šuma.
@@ -18,6 +21,34 @@ Velikosti zenic v množici \emph{pogled in zenici} dodajo nekaj koristne informa
 Čeprav slednja vsebuje več informacij, so rezultati večinoma slabši, kar kaže, da dodatni signali v našem primeru modelom prej dodajo šum kot koristno strukturo.
 Rezultati torej kažejo, da je uporabljena grafovska predstavitev smiselna in informativna, vendar v tej raziskavi najmočnejši ostajajo klasični modeli z ročno oblikovanimi značilkami iz signalov koordinat pogleda in velikosti zenice.
 
+\section{Omejitve in doprinosi}
+
 Ugotovitve so omejene na uporabljeno podatkovno zbirko, izbrane množice signalov, binarno klasifikacijo valence in protokol evalvacije, ki ne preverja generalizacije na druge posnetke ali podatkovne zbirke.
 Ciljni razredi so izpeljani iz samoocen čustvenega stanja, zato vsebujejo določeno mero subjektivnosti in šuma.
 Omejitev je tudi uporabljena grafovska konstrukcija, saj predstavlja le enega izmed možnih načinov modeliranja odnosov med meritvami sledilnika pogleda.
+
+V nalogi smo preverili uporabnost grafovske predstavitve podatkov sledilnika pogleda pri binarni klasifikaciji valence.
+Časovna okna meritev smo predstavili kot časovno-prostorske grafe in jih ovrednotili s štirimi grafovskimi modeli, ki se postopno nadgrajujejo od preproste proti kompleksnejšim različicam.
+Grafovske modele smo primerjali z izhodiščnima modeloma, klasičnimi modeli strojnega učenja in prednaučenima kodirnikoma signalov na štirih delno prekrivajočih se množicah signalov.
+
+\begin{samepage}
+Glavni doprinosi naloge izhajajo direktno iz raziskovalnih vprašanj in so:
+
+\begin{enumerate}
+    \item časovno-prostorska grafovska predstavitev časovnih oken podatkov sledilnika pogleda;
+    \item ovrednotenje arhitekturne lestvice grafovskih modelov za binarno klasifikacijo valence iz podatkov sledilnika pogleda;
+    \item primerjava klasifikacijske uspešnosti med štirimi množicami signalov sledilnika pogleda;
+    \item primerjava grafovskih modelov z negrafovskimi osnovnimi modeli in zamrznjenimi prednaučenimi predstavitvenimi modeli.
+\end{enumerate}
+\end{samepage}
+
+\section{Nadaljnje delo in zaključek}
+
+Grafovsko modeliranje podatkov sledilnika pogleda je še v veliki meri neraziskano, vendar pomeni smiselno nadaljnjo raziskovalno smer.
+V nadaljnjem delu bomo preverili drugačna pravila povezovanja, na primer povezovanje vozlišč s podobno dinamiko pogleda ali povezovanje meritev iste fiksacije z metavozliščem, s čimer bi graf razširili v tretjo dimenzijo.
+Grafovsko predstavitev bi bilo mogoče dopolniti tudi z mežiki in sakadami ter preizkusiti dodatne grafovske arhitekture, predvsem grafovske transformerje.
+Posebej zanimivo je samonadzorovano predtreniranje na signalih sledilnika pogleda, ki bi lahko zmanjšalo odvisnost od majhnih označenih podatkovnih zbirk in omogočilo uporabo neoznačenih podatkov.
+Rezultate bi bilo treba preveriti še na več podatkovnih zbirkah, pri prenosu med nalogami in v pogojih uporabe v realnem času.
+
+Grafovska predstavitev se je izkazala kot informativna, saj je najboljši GNN pri binarni klasifikaciji valence dosegel točnost $65{,}9\,\%$ in presegel izhodiščna klasifikatorja.
+Ni pa izboljšala klasifikacije v primerjavi z vsemi negrafovskimi modeli, saj je najboljši rezultat, točnost $70{,}5\,\%$, dosegel \ModelName{SVM} z ročno oblikovanimi značilkami.

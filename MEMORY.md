@@ -199,7 +199,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
-- 2026-07-23 Pri strukturnem urejanju je glavni cilj krajše in približno uravnoteženo kazalo, ne odstranitev vseh vidnih ločnic. Kjer pomagajo toku, uporabi kratke poudarjene mednaslove, ki niso vključeni v kazalo in stojijo v svoji vrstici, besedilo pa se začne v naslednji. Hkrati v primernih poglavjih ohrani nekaj pravih podrazdelkov. V poglavju o modelih morajo imena vseh štirih GNN ostati hitro vidna, arhitekturne slike pa morajo biti čim bliže pripadajočim opisom. Izbira operatorja `GCNConv` ostane zelo kratko v grafovskem delu s sklicem na dodatek. V eksperimentalnem protokolu se LOSO samo omeni s sklicem na dodatek, glavne definicije metrik pa morajo zaradi mentorjeve zahteve ostati v glavnem besedilu. Dodatka o hiperparametrih in grafovski konstrukciji se lahko združita.
+- 2026-07-23 Pri strukturnem urejanju je glavni cilj krajše in približno uravnoteženo kazalo, ne odstranitev vseh vidnih ločnic. Kjer pomagajo toku, uporabi kratke poudarjene mednaslove, ki niso vključeni v kazalo in stojijo v svoji vrstici, besedilo pa se začne v naslednji. Hkrati v primernih poglavjih ohrani nekaj pravih podrazdelkov. V poglavju o modelih morajo imena vseh štirih GNN ostati hitro vidna, arhitekturne slike pa morajo biti čim bliže pripadajočim opisom. Izbira operatorja `GCNConv` ostane zelo kratko v grafovskem delu s sklicem na dodatek. V eksperimentalnem protokolu se LOSO samo omeni s sklicem na dodatek, glavne definicije metrik pa morajo zaradi mentorjeve zahteve ostati v glavnem besedilu. Hiperparametri in podrobnosti grafovske konstrukcije so združeni v skupnem metodološkem dodatku.
 - 2026-07-23 V Tabeli 8.2 čas sklepanja pomeni celoten napovedni prehod od
   pripravljenega vhoda modela do razrednih verjetnosti. Za GazeMAE je ta čas
   `2,64 ms/okno`, z naknadno meritvijo prek vseh sedmih pregibov pa sta bila
@@ -442,10 +442,11 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   dodajanje heterogenih relacij, MLP združevanja relacij in učljivih
   predznačenih uteži povezav. Deskriptivno ime končnega modela v kodi je
   `HeteroGCNMLPWeights`, ne `ProposedGNN` ali `GNN_v2`.
-- Izbira `GCNConv` naj bo v glavnem besedilu utemeljena kratko v poglavju 7,
+- Izbira `GCNConv` naj bo v glavnem besedilu utemeljena kratko v poglavju o modelih,
   podrobnejša primerjava operatorjev pa sodi v dodatek z dodatnimi rezultati.
-  Poglavje 10 lahko druge plasti (`GATConv`, `GraphSAGE`, `GIN`, grafovski
-  transformerji) omeni samo previdno kot nadaljnje delo.
+  Skupno poglavje diskusije in zaključka lahko druge plasti (`GATConv`,
+  `GraphSAGE`, `GIN`, grafovski transformerji) omeni samo previdno kot
+  nadaljnje delo.
 - 2026-06-21 pri preurejanju poglavja 6 je Tomi potrdil, da je `samo zenici`
   ena od glavnih množic signalov. Negrafovske modele brez grafovske predstavitve
   in brez zamrznjenega prednaučenega kodirnika imenuj `negrafovski osnovni
@@ -465,3 +466,8 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   vrednotenje` ter `Rezultati`. LOSO je v glavnem besedilu le kratko omenjen s
   sklicem na dodatek, definiciji točnosti in makro F1 pa ostaneta v glavnem
   besedilu.
+- 2026-07-23 sta bila diskusija in zaključek združena v poglavje `Diskusija in
+  zaključek`, ki se konča z neposrednim odgovorom na raziskovalno vprašanje.
+  Dodatki so skrčeni na `Dodatni rezultati` in `Dodatne metodološke
+  podrobnosti`; slednji združuje nekdanja dodatka o hiperparametrih in grafovski
+  konstrukciji.

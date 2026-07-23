@@ -1,7 +1,9 @@
 \chapter{Dodatni rezultati}
 \label{app:dodatni-rezultati}
 
-\section{Preslikava diskretnih samoocen čustvenega stanja v valenco}
+\section{Oznake in dodatne metrike}
+
+\subsubsection*{Preslikava diskretnih samoocen čustvenega stanja v valenco}
 \label{app:preslikava-valence}
 
 Preslikava diskretnih samoocen čustvenega stanja v razrede valence sledi tabeli~6 izvirnega članka podatkovne zbirke \MAHNOB{}~\cite{soleymani2012mahnob}.
@@ -10,7 +12,7 @@ Tako model ločuje med negativno in pozitivno valenco, primeri z vmesnim oziroma
 
 \input{tabele/rezultati/preslikava_valence.tex}
 
-\section{Dodatne metrike in diagnostične meritve}
+\subsubsection*{Dodatne metrike in diagnostične meritve}
 \label{app:dodatne-metrike}
 
 V nadaljevanju so kratko opredeljene mere, uporabljene poleg točnosti in makro F1, ki sta definirani v poglavju~\ref{subsec:metrike}.
@@ -37,7 +39,7 @@ Med učenjem shranjujemo učno in validacijsko izgubo po epohah, najboljšo epoh
 Pri grafovskih modelih dodatno spremljamo povprečno varianco komponent predstavitev grafa, povprečno kosinusno podobnost vseh parov predstavitev, razpon logitov kot razliko med največjim in najmanjšim logitom ter povprečno entropijo napovednih verjetnosti.
 Nizka varianca oziroma majhen razpon logitov skupaj z visoko podobnostjo lahko kažeta na skoraj konstantne predstavitve ali napovedi; entropija pove njihovo povprečno gotovost.
 
-\section{Razširjeni rezultati binarne klasifikacije valence}
+\section{Razširjeni rezultati}
 \label{app:razsirjeni-rezultati-binarna-valenca}
 
 Tabele v tem razdelku razširjajo glavno primerjavo iz poglavja~\ref{sec:rezultati}.
@@ -55,16 +57,18 @@ Razširjene metrike dodatno potrjujejo sklep iz glavne primerjave, saj ostane po
 
 \input{tabele/rezultati/dodatni_rezultati_vsi_signali.tex}
 
-\section{Primerjava z LOSO}
+\subsubsection*{Primerjava z LOSO}
 \label{app:primerjava-loso}
 
 LOSO v vsaki ponovitvi uporabi enega subjekta kot testno množico, vse ostale subjekte pa za učenje oziroma validacijo.
 V primerjavi s 7-kratnim protokolom zato uporabi več ponovitev in manjšo testno množico v posamezni ponovitvi.
-Spodnja tabela primerja oba protokola za množico signalov \emph{pogled in zenici}; LOSO je bil izveden za podmnožico modelov, zato pomišljaj označuje, da vrednost ni bila izračunana.
+LOSO smo uporabili kot podporno preverjanje, ne kot glavni evalvacijski protokol.
+Ker bi njegova izvedba za vse modele in štiri množice signalov bistveno povečala število potrebnih poskusov, smo ga izvedli le za izbrane modele pri množici \emph{pogled in zenici}.
+Spodnja tabela primerja oba protokola, pomišljaj pa označuje, da vrednost za posamezni model ni bila izračunana.
 
 \input{tabele/rezultati/primerjava_loso.tex}
 
-\section{Matrike zamenjav}
+\subsubsection*{Matrike zamenjav}
 \label{app:matrike-zamenjav-vsi-modeli}
 
 V nadaljevanju so prikazane vrstično normalizirane matrike zamenjav za vse modele in vse množice signalov.
@@ -80,7 +84,7 @@ Pri množici \emph{samo zenici} so napake bolj uravnotežene z naključnim ugiba
 \begin{figure}
     \centering
     \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_samo_pogled.pdf}
-    \caption{Matrike zamenjav za množico signalov\emph{samo pogled}. Prikaz vključuje naključni in večinski model, klasične modele \ModelName{SVM}, \ModelName{LightGBM} in \ModelName{MLP}, zamrznjene predstavitve \ModelName{GazeMAE/MOMENT} ter štiri grafovske modele od osnovnega \ModelName{GCN} do \ModelName{HeteroGCN-MLP-w}.}
+    \caption{Matrike zamenjav za množico signalov \emph{samo pogled}. Prikaz vključuje naključni in večinski model, klasične modele \ModelName{SVM}, \ModelName{LightGBM} in \ModelName{MLP}, zamrznjene predstavitve \ModelName{GazeMAE/MOMENT} ter štiri grafovske modele od osnovnega \ModelName{GCN} do \ModelName{HeteroGCN-MLP-w}.}
     \label{fig:matrike-zamenjav-dodatek-samo-pogled}
 \end{figure}
 
@@ -101,13 +105,15 @@ Pri množici \emph{samo zenici} so napake bolj uravnotežene z naključnim ugiba
 \begin{figure}
     \centering
     \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_vsi_signali.pdf}
-    \caption{Matrike zamenjav za množico signalov\emph{vsi signali}. Prikaz povzema napake modelov pri najbogatejši vhodni predstavitvi, ki poleg pogleda in zenic vključuje še oddaljenost od sledilnika pogleda ter fiksacijske informacije.}
+    \caption{Matrike zamenjav za množico signalov \emph{vsi signali}. Prikaz povzema napake modelov pri najbogatejši vhodni predstavitvi, ki poleg pogleda in zenic vključuje še oddaljenost od sledilnika pogleda ter fiksacijske informacije.}
     \label{fig:matrike-zamenjav-dodatek-vsi-signali}
 \end{figure}
 
 \clearpage
 
-\section{Ujemanje izpeljanih razredov s samoocenami}
+\section{Dodatne analize}
+
+\subsubsection*{Ujemanje izpeljanih razredov s samoocenami}
 \label{app:ujemanje-oznak-s-samoocenami}
 
 Slika~\ref{fig:ujemanje-oznak-s-samoocenami} primerja razrede, izpeljane iz preslikave v tabeli~\ref{tab:label-mapping}, z razredi, dobljenimi iz številskih samoocen.
@@ -120,14 +126,14 @@ To ne pomeni, da so razredi valence brez šuma, vendar je za glavno primerjavo m
 % Vir slike: GFM-for-eyetracker/results/label_noise_analysis/2026-05-13_table6_self_report_alignment/table6_vs_rating_crosstab_long.csv.
 % Povzetek ujemanja: GFM-for-eyetracker/results/label_noise_analysis/2026-05-13_table6_self_report_alignment/label_noise_summary.csv.
 % Slika je generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
-\begin{figure}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=\textwidth]{ujemanje_oznak_s_samoocenami.pdf}
     \caption[Ujemanje izpeljanih razredov s številskimi samoocenami.]{Ujemanje razredov valence in vzburjenosti, izpeljanih iz preslikave v tabeli~\ref{tab:label-mapping}, z razredi iz številskih samoocen. Vrednosti so deleži znotraj izpeljanega razreda.}
     \label{fig:ujemanje-oznak-s-samoocenami}
 \end{figure}
 
-\section{Izbira tipa grafovske konvolucije}
+\subsubsection*{Izbira tipa grafovske konvolucije}
 \label{app:izbira-grafovske-konvolucije}
 
 Izbiro operatorja \texttt{GCNConv} smo preverili z dodatnim poskusom na binarni nalogi valence pri množici signalov \emph{pogled in zenici}.
@@ -144,7 +150,7 @@ Ta primerjava ni ločeno iskanje najboljše grafovske arhitekture, temveč preve
 
 \input{tabele/rezultati/izbira_grafovske_konvolucije.tex}
 
-\section{Diagnostika predstavitev}
+\subsubsection*{Diagnostika predstavitev}
 \label{app:diagnostika-prekomerno-glajenje}
 
 Diagnostika ne kaže jasnega kolapsa predstavitev pri glavnih grafovskih modelih.

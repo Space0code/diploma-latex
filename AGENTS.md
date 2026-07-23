@@ -279,8 +279,8 @@ Prednostna struktura je raziskovalno usmerjena:
 5. **Primerjani modeli**: primerjalni modeli in GNN-arhitekture.
 6. **Eksperimentalni protokol in rezultati**: zasnova primerjave, delitve,
    metrike, izbira hiperparametrov, glavna primerjava in matrike zamenjav.
-7. **Diskusija**: kaj deluje, omejitve, negotovosti podatkov in interpretacijske meje.
-8. **Zaključek**: kratek odgovor na raziskovalno vprašanje in prihodnje delo.
+7. **Diskusija in zaključek**: interpretacija rezultatov, omejitve, doprinosi,
+   nadaljnje delo in neposreden odgovor na raziskovalno vprašanje.
 
 Teorija naj razlaga pojme. Metodološka poglavja naj opisujejo dejanski cevovod.
 Implementacijskih podrobnosti ne razprši po teoretičnih poglavjih.

@@ -54,10 +54,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   red prilagodi kontekstu, npr. časovne naprej/nazaj pred prostorskimi in
   fiksacijskimi.
 - Za model, ki je prispevek naloge, privzeto uporabljaj izraz "predlagani model".
-  Kadar je treba poudariti grafovski tip modela, uporabi "predlagani GNN"; kadar
+  Kadar je treba poudariti grafovski tip modela, uporabi "predlagana GNN"; kadar
   opisuješ notranjo zgradbo, uporabi "predlagana arhitektura". Izraz "končni
-  model" uporabi samo, ko ga je treba ločiti od osnovnega GNN, ablacijske
-  različice ali vmesnih poskusov. Izrazom "naš model" in "naš GNN" se v končnem
+  model" uporabi samo, ko ga je treba ločiti od osnovne GNN, ablacijske
+  različice ali vmesnih poskusov. Izrazom "naš model" in "naša GNN" se v končnem
   besedilu izogibaj.
 - Za `latent space` uporabljaj "latentni prostor". Kadar je slogovno bolj
   nevtralno ali konkretno, je dopusten tudi izraz "prostor predstavitev".
@@ -135,7 +135,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   makrom `\ModelName{...}`. To velja za dejanske modelne oznake, kot so
   `\ModelName{SVM}`, `\ModelName{LightGBM}`, `\ModelName{GCN}` in
   `\ModelName{HeteroGCN-MLP-w}`, ne pa za opisna poimenovanja, kot so
-  `končni model`, `osnovni grafovski model` ali `predlagani GNN`.
+  `končni model`, `osnovni grafovski model` ali `predlagana GNN`.
 
 ## Vizualna identiteta diplome
 
@@ -315,8 +315,8 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   model. Pri tehničnih primerjavah uporabljaj konkretna imena modelov:
   `GCN`, `HeteroGCN-mean`, `HeteroGCN-MLP` in `HeteroGCN-MLP-w`.
 - Kadar tabela, slika ali stavek našteva več GNN modelov skupaj, za zadnjo
-  različico vedno uporabi tehnično ime `HeteroGCN-MLP-w`, ne `končni GNN`.
-  Izraz `končni GNN` uporabi samo v tekočem besedilu, ko omenjaš samo ta model
+  različico vedno uporabi tehnično ime `HeteroGCN-MLP-w`, ne `končna GNN`.
+  Izraz `končna GNN` uporabi samo v tekočem besedilu, ko omenjaš samo ta model
   oziroma ga ne postavljaš neposredno ob ostale GNN različice.
 - GazeMAE/MOMENT v diplomi obravnavaj previdno kot `zamrznjene prednaučene
   predstavitvene modele`, ne kot polno primerjavo z vsemi temeljnimi modeli ali
@@ -330,11 +330,11 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - 2026-06-09 je Tomi poslal Lovru, v CC tudi Gašperju, mentorski update o
   stanju diplome. V mailu je povedal, da je diploma v grobem napisana do
   rezultatov, da so po pravičnejšem eksperimentalnem protokolu tabularni modeli
-  bistveno boljši, predlagani GNN pa je med slabšimi po opazovanih metrikah.
+  bistveno boljši, predlagana GNN pa je med slabšimi po opazovanih metrikah.
   Predlagana nova zgodba diplome je primerjalna in ablacijska študija: ne
   dokazovati na silo, da je GNN najboljši, temveč analizirati, kateri signali,
   grafovska predstavitev in arhitekturne komponente pomagajo ali škodijo. GNN
-  ostane metodološki fokus diplome, sklep pa mora biti pošten: trenutni GNN ni
+  ostane metodološki fokus diplome, sklep pa mora biti pošten: trenutna GNN ni
   premagal močnejših tabularnih modelov, vendar naloga pokaže smiselno grafovsko
   predstavitev podatkov sledilnika pogleda, njene omejitve in smeri za nadaljnje
   delo. Če Lovro ne odgovori z vsebinsko močno spremembo, to ostane delovni plan
@@ -373,7 +373,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   signalov kot GNN, vključno z informacijo o oddaljenosti od zaslona in
   fiksacijah/trajanju fiksacij.
 - Odločitev za grafovske primerjave v poglavju 6: osnovni grafovski model naj bo
-  arhitekturni baseline, ki uporablja iste signale kot predlagani GNN, vendar
+  arhitekturni baseline, ki uporablja iste signale kot predlagana GNN, vendar
   poenostavi arhitekturo. Načrtovana implementacija je majhen ločen modelni
   razred s homogenim `GCNConv`, enotno potjo posredovanja sporočil, brez učljivih
   skalarnih uteži povezav in zaenkrat brez različice `GATConv`. Ablacijska
@@ -419,7 +419,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Za glavno primerjavo velikosti in praktične zahtevnosti modelov poročamo o
   končnih 3-razrednih `subject LOO` eksperimentih za valenco in vzburjenost.
   Primerjani modeli so `LightGBM`, `SVM`, `MLP`, `GazeMAE_MLP`, `Osnovni GCN` in
-  `predlagani GNN`. V glavno besedilo naj gre ozek nabor: število učljivih
+  `predlagana GNN`. V glavno besedilo naj gre ozek nabor: število učljivih
   parametrov, število vseh parametrov, čas učenja na okno/graf, čas inference na
   okno/graf ter skupni stolpec `accuracy`/`macro-F1`. Za `GazeMAE_MLP` zabeleži
   učljive parametre glave in skupno število parametrov zamrznjenih enkoderjev z
@@ -429,11 +429,11 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Implementacija poročanja v `GFM-for-eyetracker` zdaj ob končnih multiclass
   tekih z `benchmarking.enabled=true` zapiše fold-level benchmark JSON-e,
   agregirane CSV-je in glavni `main_model_complexity_report.csv/.md`.
-- Grid search hiperparametrov predlaganega GNN naj v diplomi ostane majhen
+- Grid search hiperparametrov predlagane GNN naj v diplomi ostane majhen
   podporni poskus za izbiro konfiguracije. Metodološki opis in utemeljitev izbire
   sodita v poglavje 7 pri glavni primerjavi modelov; v poglavju 8 ga omeni le
   kratko ali ga po potrebi prestavi v dodatek. Izbrana konfiguracija je
-  `num_layers=2`, `hidden_channels=64`, `kt=1`, `ks=1`, `kf=3`; predlagani GNN
+  `num_layers=2`, `hidden_channels=64`, `kt=1`, `ks=1`, `kf=3`; predlagana GNN
   ima pri tej nastavitvi 101.143 učljivih parametrov.
 - 2026-06-10 je bila v eksperimentalnem repozitoriju zaklenjena čista
   arhitekturna lestvica grafovskih modelov: `BasicGCN`, `HeteroGCNMean`,

@@ -5,10 +5,11 @@ V prejšnjem poglavju smo podatke sledilnika pogleda pripravili za učenje model
 V tem poglavju opišemo, kako smo posamezno časovno okno meritev pretvorili v graf, ki smo ga uporabili kot vhod za grafovske modele.
 Vozlišča predstavljajo veljavne meritve znotraj okna, povezave pa izbrane odnose med meritvami.
 
-Najprej podamo najbogatejšo grafovsko predstavitev učnega vzorca, ki uporablja vse razpoložljive signale.
-Nato pokažemo, kako se ista osnovna konstrukcija prilagodi štirim množicam signalov iz poglavja~\ref{subsec:vhodni-signali}.
+Najprej podamo najbogatejšo grafovsko predstavitev učnega vzorca, ki uporablja vse razpoložljive signale množice \emph{vsi signali}.
+Nato pokažemo, kako se ista osnovna konstrukcija prilagodi ostalim trem množicam signalov iz poglavja~\ref{subsec:vhodni-signali}.
 Kadar določena množica signalov ne vsebuje informacije, potrebne za posamezno značilko ali relacijo, ta del predstavitve izpustimo.
 Graf zato v štirih primerih predstavlja isti učni vzorec, razlikuje pa se po količini vhodne informacije in po razpoložljivih relacijah med meritvami.
+\newpage
 
 \section{Graf in vozlišča}
 
@@ -21,11 +22,10 @@ Vozlišča praviloma vsebujejo značilke $\mathbf{x}_v$, ki jih zapišemo v matr
 \begin{equation}
     X \in \mathbb{R}^{|V| \times d},
 \end{equation}
-kjer je $d$ število značilk posameznega vozlišča.
+kjer je $d$ število značilk posameznega vozlišča, operator $|\cdot|$ pa moč množice oziroma število njenih elementov.
 Povezavo med vozliščema $i$ in $j$ označimo z $e_{ij} \in E$.
-
 V usmerjenih grafih ima povezava določeno izvorno in ponorno vozlišče, zato velja $e_{ij} \ne e_{ji}$.
-V neusmerjenih grafih povezave nimajo smeri, zato velja $e_{ij} = e_{ji}$.
+V neusmerjenih grafih pa povezave nimajo smeri, zato velja $e_{ij} = e_{ji}$.
 
 Povezave lahko vsebujejo tudi uteži.
 Utež povezave med vozliščema $i$ in $j$ označimo z $w_{ij}$.
@@ -33,7 +33,7 @@ Za neutežene povezave si lahko predstavljamo, da imajo utež $w_{ij}=1$.
 Če imajo povezave več uteži, jih zapišemo kot vektor $\mathbf{e}_{ij}$~\cite{gilmer2017mpnn}.
 
 Homogeni graf je graf, ki ne loči različnih vrst vozlišč in povezav.
-Heterogeni graf vsebuje vsaj dve različni vrsti vozlišč ali povezav.
+Heterogeni graf pa vsebuje vsaj dve različni vrsti vozlišč ali povezav.
 V tej nalogi smo uporabili heterogeno grafovsko predstavitev, saj smo ločili več tipov povezav.
 
 \subsection{Vozlišča in njihove značilke}
@@ -43,55 +43,46 @@ Vsako vozlišče $v_i$ predstavlja eno meritev sledilnika pogleda $x_i$ v trenut
     v_i \leftrightarrow \mathbf{x}_i.
 \end{equation}
 Če okno vsebuje $n$ veljavnih meritev, potem graf vsebuje $n$ vozlišč.
-Vrednost $n$ se lahko med okni razlikuje, saj po čiščenju in filtriranju niso vsa okna popolna.
-Grafovska predstavitev naravno podpira spremenljivo število vozlišč.
+Kot omenjeno, se $n$ lahko med okni zaradi čiščenja in filtriranja razlikuje, vendar to ni težava, saj grafovska predstavitev naravno podpira spremenljivo število vozlišč.
 
 Vektor značilk vozlišča za končni graf za množico \emph{vsi signali} je
 \begin{equation}
     \mathbf{x}_i =
     \left[
-        t_i,
-        x_i,
-        y_i,
-        p_i^{(l)},
-        p_i^{(r)},
-        d_i,
-        f_{dur,i}
+        {\textcolor{tableTime}{t_i}},
+        {\textcolor{tableGaze}{x_i}},
+        {\textcolor{tableGaze}{y_i}},
+        {\textcolor{tablePupil}{p_i^{(l)}}},
+        {\textcolor{tablePupil}{p_i^{(r)}}},
+        {\textcolor{tableFixation}{d_i^{\text{sled}}}},
+        {\textcolor{tableFixation}{f_{dur,i}}}
     \right],
 \end{equation}
-kjer je $t_i$ normaliziran časovni žig za vozlišče $i$, $x_i$ in $y_i$ sta koordinati pogleda, $p_i^{(l)}$ in $p_i^{(r)}$ velikosti leve in desne zenice, $d_i$ je oddaljenost od sledilnika pogleda, $f_{dur,i}$ pa trajanje fiksacije.
+Oznake signalov so uvedene v razdelku~\ref{subsec:vhodni-signali}, dodatna značilka $f_{dur,i}$ pa pomeni trajanje fiksacije.
 
 Naj bo $\tilde{t}_i$ izvirni relativni časovni žig meritve, $\tilde{t}_0$ časovni žig prve veljavne meritve v oknu, $T=10~s$ pa dolžina okna.
-Normaliziran časovni žig izračunamo kot
+Normaliziran časovni žig izračunamo s formulo
 \begin{equation}
     t_i = \frac{\tilde{t}_i - \tilde{t}_0}{T}.
 \end{equation}
 Tako ima prva veljavna meritev v oknu časovno značilko $t_0=0$, preostale meritve pa so izražene relativno na dolžino okna.
 
-Za ostale podgrafe se vektor značilk ustrezno filtrira.
-V vseh primerih ohranimo časovno značilko $t_i$, ostale podatke pa ohranimo glede na obravnavano množico signalov.
-
 \section{Relacije in značilke povezav}
 Definiramo tri relacije med meritvami: časovno, prostorsko in fiksacijsko.
-Posledično v grafu oblikujemo štiri tipe povezav, saj je časovni tip povezave usmerjen -- bodisi naprej ali nazaj.
-Prostorske in fiksacijske povezave pa obravnavamo kot neusmerjene.
+Posledično v grafu oblikujemo štiri tipe povezav, saj je časovni tip povezave usmerjen -- bodisi naprej bodisi nazaj.
+Prostorske in fiksacijske povezave obravnavamo kot neusmerjene.
 
-Vsaka povezava ima določen tip relacije, saj časovna povezava, prostorska povezava in fiksacijska povezava opisujejo različne odnose med meritvami.
+Vsaka povezava ima določen tip relacije, saj časovna, prostorska in fiksacijska povezava opisujejo različne odnose med meritvami.
 Ta zapis heterogenim grafovskim modelom, opisanim v poglavju~\ref{sec:modeli}, omogoča ločeno obravnavo relacij.
-Osnovni \ModelName{GCN} (angl. \emph{graph convolutional network}) uporabi isti nabor povezav, vendar relacij modelno ne loči.
-V tem primeru dobimo enostaven homogen graf.
-Podrobnosti o uporabi relacij v posameznih modelih so opisane v poglavju~\ref{sec:modeli}.
 
 \subsection{Časovne povezave}
 Časovne povezave povezujejo meritve zaporedne v času.
 Naj bodo vozlišča v posameznem oknu urejena po času, tako da je $v_i$ $i$-ta meritev v časovnem zaporedju.
-
-Ločimo usmerjene časovne povezave naprej in nazaj:
-\begin{align}
-    E_t^+ &= \{(v_i, v_j) : 1 \leq j - i \leq k_t\}, \\
-    E_t^- &= \{(v_i, v_j) : 1 \leq i - j \leq k_t\}.
-\end{align}
-
+Ločimo usmerjene časovne povezave:
+\begin{itemize}
+    \item naprej $E_t^+ = \{(v_i, v_j) : 1 \leq j - i \leq k_t\}$ in
+    \item nazaj $E_t^- = \{(v_i, v_j) : 1 \leq i - j \leq k_t\}$.
+\end{itemize}
 Parameter $k_t \in \mathbb{N}$ določa število časovnih sosedov na vsako stran.
 Končna konfiguracija uporablja $k_t=1$, zato je vozlišče $v_i$ povezano samo z neposredno predhodno in neposredno naslednjo meritvijo, kadar ti vozlišči obstajata.
 
@@ -102,39 +93,40 @@ Za polno 10-sekundno okno s pričakovanimi $600$ meritvami je to $599$ povezav v
 
 \subsection{Prostorske povezave}
 \label{subsec:prostorske-povezave}
-
-Prostorske povezave so neusmerjene povezave, ki povezujejo meritve s podobnim položajem pogleda znotraj istega časovnega okna.
+Prostorske povezave tvorijo množico $E_s$ neusmerjenih povezav, ki povezujejo meritve s podobnim položajem pogleda znotraj istega časovnega okna.
 Zato so na voljo le pri množicah signalov \emph{samo pogled}, \emph{pogled in zenici} in \emph{vsi signali}, ki vsebujejo koordinati pogleda $(x,~y)$.
 
 Prostorsko razdaljo med meritvama $i$ in $j$ definiramo evklidsko:
 \begin{equation}
-    d_{ij}^{(s)} =
+    d_{ij}^{\text{zaslon}} =
     \sqrt{(x_i - x_j)^2 + (y_i - y_j)^2}.
 \end{equation}
 Za vsako vozlišče $v_i$ poiščemo $k_s$ najbližjih sosedov v prostoru koordinat pogleda $(x,~y)$ z uporabo k-d drevesa, podatkovne strukture za učinkovito iskanje sosedov v večrazsežnem prostoru. Če je $v_j$ med temi sosedi, dodamo povezavo med vozliščema $v_i$ in $v_j$.
 Ker prostorske povezave obravnavamo kot neusmerjene, povezavo predstavimo z dvema usmerjenima povezavama $(v_i,v_j)$ in $(v_j,v_i)$.
-Na koncu odstranimo podvojene povezave znotraj relacije $E_s$.
+Na koncu iz množice $E_s$ odstranimo podvojene povezave.
 
-Število prostorskih povezav zato ni določeno samo z $n$ in $k_s$, ampak tudi z geometrijo položajev pogleda.
+Število prostorskih povezav torej ni določeno samo z $n$ in $k_s$, ampak tudi z geometrijo položajev pogleda.
 Pred simetrizacijo vsako vozlišče prispeva $k_s$ sosedskih izbir, po simetrizaciji in odstranitvi podvojenih parov pa za usmerjeni zapis neusmerjene relacije velja
 \begin{equation}
     n k_s \leq |E_s| \leq 2 n k_s.
 \end{equation}
-Dejansko gostoto prostorskih povezav zato poročamo z opazovanimi statistikami grafov.
+Dejansko gostoto prostorskih povezav poročamo z opazovanimi statistikami grafov v tabeli~\ref{tab:statistika-konstruiranih-grafov}.
+\newpage
 
 \subsection{Fiksacijske povezave}
 \label{subsec:fiksacijske-povezave}
 
-Fiksacijske povezave povezujejo meritve, ki pripadajo isti zaznani fiksaciji.
+Fiksacijske povezave tvorijo množico $E_f$ in povezujejo meritve, ki pripadajo isti zaznani fiksaciji.
 Pripadnost fiksaciji določimo z identifikatorjem fiksacije, podanim v \MAHNOB{} podatkih.
-Ta podatek imamo zgolj v množici \emph{vsi signali}, zato so te povezave vključene le v končni graf.
+Ta podatek imamo zgolj v množici \emph{vsi~signali}, zato so te povezave vključene le v končni graf.
 
 \subsubsection*{Redčenje povezav znotraj fiksacije}
 
 Znotraj posamezne fiksacije ne povežemo vseh vozlišč med seboj, saj bi to povzročilo preveliko število fiksacijskih povezav.
-Za to nalogo smo zato definirali redkejšo konstrukcijo \emph{razširjenih povezav znotraj fiksacije} (angl. \emph{dilated intra-fixation edges}), ki ohrani pripadnost isti fiksaciji, ne da bi graf postal pregost.
+Za to nalogo smo zato definirali redkejšo konstrukcijo, ki jo imenujemo \emph{razširjene povezave znotraj fiksacije} (angl. \emph{dilated intra-fixation edges}).
+Ta ohrani pripadnost isti fiksaciji, ne da bi graf postal pregost.
 Parameter $k_f=3$ iz vsakega vozlišča generira tri povezave -- eno do neposrednega naslednika in dve do meritev na približno enakomerno razporejenih položajih znotraj iste fiksacije.
-Tako konstrukcija združi lokalne in bolj oddaljene povezave znotraj fiksacije, hkrati pa se izogne kvadratni rasti števila povezav pri polni kliki.
+Na ta način združimo lokalne in bolj oddaljene povezave znotraj fiksacije, hkrati pa se izognemo kvadratni rasti števila povezav pri polni kliki.
 Shematski prikaz je na sliki~\ref{fig:razsirjene-fiksacijske-povezave}, formalna definicija konstrukcije pa v dodatku~\ref{app:razsirjene-fiksacijske-povezave}.
 
 % Vir slike: GFM-for-eyetracker/scripts/create_thesis_fixation_dilated_edges_figure.py.
@@ -170,7 +162,7 @@ Pri grafih, ki vsebujejo velikosti zenic, smo povezavam dodali spremembi velikos
 Značilki $\Delta p^{(l)}_{ij} = p_j^{(l)} - p_i^{(l)}$ in $\Delta p^{(r)}_{ij} = p_j^{(r)} - p_i^{(r)}$ sta na voljo pri množicah \emph{samo zenici}, \emph{pogled in zenici} ter \emph{vsi signali}.
 
 Pri množici \emph{vsi signali} smo povezavam dodali še značilko, povezano z oddaljenostjo od sledilnika pogleda.
-Značilka $\Delta d_{ij} = d_j - d_i$ opisuje razliko v oddaljenosti od sledilnika pogleda med ciljno in izvorno meritvijo.
+Značilka $\Delta d_{ij}^{\text{sled}} = d_j^{\text{sled}} - d_i^{\text{sled}}$ opisuje razliko v oddaljenosti od sledilnika pogleda med ciljno in izvorno meritvijo.
 
 Podroben pregled značilk povezav je podan v tabeli~\ref{tab:znacilke-povezav} v dodatku~\ref{app:grafi}.
 
@@ -178,24 +170,13 @@ Podroben pregled značilk povezav je podan v tabeli~\ref{tab:znacilke-povezav} v
 \section{Grafovska predstavitev po množicah signalov}
 \label{subsec:grafovska-konstrukcija-po-mnozicah}
 
-Za vsako množico signalov iz razdelka~\ref{subsec:vhodni-signali} smo zgradili graf po isti osnovni konstrukciji.
-Razlika med grafi je v značilkah vozlišč, relacijah in značilkah povezav, ki jih izbrana množica signalov omogoča.
-Množica \emph{vsi signali} je najbogatejša predstavitev. 
-Ostale množice uporabijo ustrezne podmnožice značilk in relacij.
-Tabela~\ref{tab:grafovska-konstrukcija-po-mnozicah} prikazuje uporabljene komponente grafovske predstavitve za vse štiri množice signalov.
+
+Za vsako množico signalov, definirano v razdelku~\ref{subsec:vhodni-signali}, smo graf zgradili po zgoraj opisani osnovni konstrukciji. Tabela~\ref{tab:grafovska-konstrukcija-po-mnozicah} povzema razlike v uporabljenih značilkah vozlišč, relacijah in značilkah povezav.
+Na sliki~\ref{fig:konstrukcija-grafa-primer} vidimo podgraf za množico \emph{vsi signali} na majhnem izseku časovnega okna.
+Razvidni so vsi tipi povezav in za eno vozlišče primer vektorja značilk vozlišča.
+
 \input{tabele/graf/konstrukcija_po_mnozicah_signalov.tex}
 
-Slika~\ref{fig:konstrukcija-grafa-primer} prikazuje primer najbogatejše konstrukcije na majhnem izseku časovnega okna za množico \emph{vsi signali}.
-Prikaz združi vozlišča, časovne, prostorske in fiksacijske povezave v isti graf.
-
-% Vir slike: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/model_runs/all_signals/2026-06-12_18-09-29/experiments/multiclass_table6_valence_3class_emotion-elicitation/snapshot.csv.
-% Slika je generirana s skriptom GFM-for-eyetracker/scripts/create_thesis_gnn_graph_examples.py.
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/vse_povezave.png}
-    \caption[Primer grafovske konstrukcije za množico \emph{vsi signali}.]{Primer grafovske konstrukcije za množico \emph{vsi signali}. Vozlišča predstavljajo meritve v izseku časovnega okna, povezave pa prikazujejo časovne, prostorske in fiksacijske relacije. Ločeni prikazi posameznih relacij so zbrani v dodatku~\ref{app:grafi}.}
-    \label{fig:konstrukcija-grafa-primer}
-\end{figure}
 
 
 \subsubsection*{Statistika konstruiranih grafov}
@@ -204,10 +185,20 @@ Tabela~\ref{tab:statistika-konstruiranih-grafov} prikazuje osnovne statistike gr
 Vrednosti so izračunane za osrednjo eksperimentalno nalogo, t.j. binarno klasifikacijo negativne in pozitivne valence.
 Ker se posamezne množice signalov filtrirajo glede na razpoložljivost uporabljenih signalov, število konstruiranih grafov med stolpci ni povsem enako.
 
-\input{tabele/graf/statistika_konstruiranih_grafov.tex}
-
 Ničelne vrednosti pri prostorskih in fiksacijskih povezavah pomenijo, da ta relacija pri posamezni množici signalov ni del konstrukcije.
 Največjo razliko v gostoti grafa povzroči fiksacijska relacija pri množici \emph{vsi signali}, kjer fiksacijske povezave doprinesejo $62{,}4\,\%$ vseh povezav.
+
+\input{tabele/graf/statistika_konstruiranih_grafov.tex}
+
+% Vir slike: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/model_runs/all_signals/2026-06-12_18-09-29/experiments/multiclass_table6_valence_3class_emotion-elicitation/snapshot.csv.
+% Slika je generirana s skriptom GFM-for-eyetracker/scripts/create_thesis_gnn_graph_examples.py.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/vse_povezave.png}
+    \caption[Primer grafovske konstrukcije za množico \emph{vsi signali}.]{Primer grafovske konstrukcije za množico \emph{vsi signali}. Vozlišča predstavljajo meritve v izseku časovnega okna, povezave pa prikazujejo časovne, prostorske in fiksacijske relacije. Ločeni prikazi posameznih relacij so zbrani v dodatku~\ref{app:grafi}.}
+    \label{fig:konstrukcija-grafa-primer}
+\end{figure}
+
 
 % Statistike v tabeli so bile izračunane s Python v conda okolju `gfm`.
 % Za vsako množico signalov je bil naložen ustrezni `config.yaml` in `snapshot.csv` iz:

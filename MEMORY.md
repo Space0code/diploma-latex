@@ -40,6 +40,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Za velikosti leve in desne zenice uporabljaj notacijo `$p_i^{(l)}$` in
   `$p_i^{(r)}$`, ne `$p_{l,i}$`, `$p_{r,i}$` ali `$p^l_i$`. Indeks `$i$`
   označuje meritev oziroma vozlišče, nadpis v oklepaju pa levo/desno oko.
+- Za razdalje uporabljaj razločen zapis: `$d_{ij}^{\text{zaslon}}$` je
+  evklidska razdalja med položajema pogleda na zaslonu, `$d_i^{\text{sled}}$`
+  je oddaljenost meritve od sledilnika pogleda, `$\Delta d_{ij}^{\text{sled}}$`
+  pa razlika teh oddaljenosti med meritvama.
 - Pri sklicih uporabljaj nedeljivi presledek: `Slika~1`, `Tabela~2`,
   `Poglavje~3`, `enačba~(4)`. Za vire uporabljaj `\cite{...}`, ne `\ref{...}`;
   `\ref{...}` uporabljaj samo za označene slike, tabele, enačbe, poglavja ali

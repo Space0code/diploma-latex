@@ -7,10 +7,11 @@ Meritvam sledilnika pogleda lahko smiselno določimo časovne in prostorske odno
 Na tem grafu se z grafovsko nevronsko mrežo učimo predstavitev vozlišč in grafov, ki jih uporabimo za klasifikacijo grafa.
 Podatki, uporabljeni v tej nalogi, vsebujejo samoocene čustvenega stanja udeležencev, iz katerih smo izpeljali razrede valence.
 Valenca pri tem opisuje razpon čustvenega odziva od negativnega do pozitivnega.
-GNN smo zato učili binarno klasificirati valenco, rezultate pa smo primerjali z rezultati uveljavljenih negrafovskih pristopov.
-Z izrazom \emph{množica signalov} v tej nalogi označujemo izbor vrst podatkov sledilnika pogleda, uporabljenih kot vhod modela.
+GNN smo učili binarno klasificirati valenco, rezultate pa smo primerjali z rezultati uveljavljenih negrafovskih pristopov.
+
+Z izrazom \emph{množica signalov} v tej nalogi označujemo podmnožico podatkov sledilnika pogleda, ki jo uporabimo v dotičnem poskusu.
 Eksperimentalno primerjavo smo izvedli na štirih množicah signalov: samo koordinatah pogleda (\emph{samo pogled}), samo velikostih zenic (\emph{samo zenici}), združenih koordinatah pogleda in velikostih zenic (\emph{pogled in zenici}) ter vseh razpoložljivih signalih (\emph{vsi signali}).
-Pregled celotnega eksperimentalnega toka je prikazan na sliki~\ref{fig:uvod-pregled-naloge}: iz iste podatkovne zbirke smo izpeljali več vhodnih predstavitev, jih ovrednotili z različnimi družinami modelov in rezultate primerjali na problemu binarne klasifikacije valence.
+Pregled celotnega eksperimentalnega toka je prikazan na sliki~\ref{fig:uvod-pregled-naloge} -- iz podatkovne zbirke smo izpeljali več vhodnih predstavitev, jih ovrednotili z različnimi družinami modelov in rezultate primerjali na problemu binarne klasifikacije valence.
 
 \begin{figure}[!t]
     \centering
@@ -30,7 +31,7 @@ Dodatna podvprašanja so:
 \begin{enumerate}
     \item \label{pv:grafovska-predstavitev} Kako podatke sledilnika pogleda smiselno predstaviti kot časovno-prostorski graf?
     \item \label{pv:mnozice-signalov} Kako se klasifikacijska uspešnost modelov razlikuje med posameznimi množicami signalov sledilnika pogleda?
-    \item \label{pv:kompleksnost-gnn} Kako se klasifikacijska uspešnost grafovskih modelov spreminja z večjo arhitekturno kompleksnostjo?
+    \item \label{pv:kompleksnost-gnn} Kako se klasifikacijska uspešnost grafovskih modelov spreminja z večanjem arhitekturne kompleksnosti?
     \item \label{pv:racunska-zahtevnost} Kakšno je razmerje med klasifikacijsko uspešnostjo ter velikostjo in računsko zahtevnostjo primerjanih modelov?
 \end{enumerate}
 
@@ -40,13 +41,11 @@ V poglavju~\ref{sec:modeli} predstavimo primerjane modele.
 Poglavje~\ref{sec:eksperimenti} združuje eksperimentalni protokol in rezultate glavne primerjave modelov na različnih množicah signalov.
 Nalogo sklenemo z interpretacijo rezultatov, omejitvami, doprinosi in možnostmi nadaljnjega dela v poglavju~\ref{sec:diskusija}.
 
-Pri pripravi diplomskega dela sem kot podporno orodje uporabljal ChatGPT
-(GPT-5.5 Thinking)~\cite{openai_chatgpt_2026}. Orodje sem uporabljal za
-pisanje in razlago programske kode, pomoč pri strukturiranju poglavij,
+Pri pripravi diplomskega dela sem kot podporno orodje uporabljal \mbox{ChatGPT} (GPT-5.5 Thinking)~\cite{openai_chatgpt_2026}. Orodje sem uporabljal za
+pisanje programske kode, pomoč pri strukturiranju poglavij,
 jezikovno in slogovno izboljševanje lastnega besedila, preverjanje
 razumljivosti razlage, iskanje terminoloških možnosti in prevodov, pripravo
 slik in tabel ter oblikovanje zapisov v okolju \LaTeX.
-
 Orodje ni bilo uporabljeno kot samostojen vir znanstvenih trditev. Vse
 vsebinske trditve, uporabljeni viri, eksperimentalni rezultati, programska
 koda in končne odločitve so bili preverjeni, dopolnjeni, popravljeni in

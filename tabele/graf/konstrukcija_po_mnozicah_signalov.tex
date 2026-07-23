@@ -3,12 +3,6 @@
     \caption{Množice signalov in pripadajoča grafovska konstrukcija. Značilke povezav uporabi le model \ModelName{HeteroGCN-MLP-w} pri izračunu učljivih predznačenih uteži povezav. Smer $\rho_{ij}$ velja samo za časovne povezave.}
     \label{tab:grafovska-konstrukcija-po-mnozicah}
     \begingroup
-    % Za besedilo uporabimo nasičene različice barv, da ostanejo razločne na
-    % belem ozadju.
-    \definecolor{tableTime}{HTML}{E76F00}
-    \definecolor{tableGaze}{HTML}{0077B6}
-    \definecolor{tablePupil}{HTML}{008A8A}
-    \definecolor{tableFixation}{HTML}{7B2CBF}
     \small
     \begin{tabularx}{\textwidth}{@{}
         >{\raggedright\arraybackslash}p{0.19\textwidth}
@@ -34,9 +28,9 @@
         \textcolor{tableTime}{$t_i$, $t_j$, $\Delta t$, $\rho_{ij}$}, \textcolor{tableGaze}{$\Delta x$, $\Delta y$, $d_{ij}^{\text{zaslon}}$}, \textcolor{tablePupil}{$\Delta p_{ij}^{(l)}$, $\Delta p_{ij}^{(r)}$} \\
         \midrule
         \emph{vsi signali} &
-        \textcolor{tableTime}{$t_i$}, \textcolor{tableGaze}{$x_i$, $y_i$}, \textcolor{tablePupil}{$p_i^{(l)}$, $p_i^{(r)}$}, \textcolor{tableFixation}{$d_i$, $f_{dur,i}$} &
+        \textcolor{tableTime}{$t_i$}, \textcolor{tableGaze}{$x_i$, $y_i$}, \textcolor{tablePupil}{$p_i^{(l)}$, $p_i^{(r)}$}, \textcolor{tableFixation}{$d_i^{\text{sled}}$, $f_{dur,i}$} &
         \textcolor{tableTime}{$E_t^+$, $E_t^-$}, \textcolor{tableGaze}{$E_s$}, \textcolor{tableFixation}{$E_f$} &
-        \textcolor{tableTime}{$t_i$, $t_j$, $\Delta t$, $\rho_{ij}$}, \textcolor{tableGaze}{$\Delta x$, $\Delta y$, $d_{ij}^{\text{zaslon}}$}, \textcolor{tablePupil}{$\Delta p_{ij}^{(l)}$, $\Delta p_{ij}^{(r)}$}, \textcolor{tableFixation}{$\Delta d_{ij}$} \\
+        \textcolor{tableTime}{$t_i$, $t_j$, $\Delta t$, $\rho_{ij}$}, \textcolor{tableGaze}{$\Delta x$, $\Delta y$, $d_{ij}^{\text{zaslon}}$}, \textcolor{tablePupil}{$\Delta p_{ij}^{(l)}$, $\Delta p_{ij}^{(r)}$}, \textcolor{tableFixation}{$\Delta d_{ij}^{\text{sled}}$} \\
         \bottomrule
     \end{tabularx}
     \vspace{0.4em}

@@ -1,6 +1,8 @@
 \chapter{Podatki in predobdelava}
 \label{sec:podatki}
 
+V tem poglavju opišemo podatke sledilnika pogleda, katero podatkovno zbirko smo izbrali in zakaj ter kako smo podatke predprocesirali.
+
 \section{Podatkovne zbirke sledilnika pogleda}
 \label{sec:podatkovne-zbirke}
 
@@ -14,17 +16,12 @@ Meritve se izvajajo zaporedno z določeno frekvenco vzorčenja (pogosto med $60~
 Na voljo je več prosto dostopnih podatkovnih zbirk sledilnika pogleda, ki se razlikujejo po vrsti zajetih signalov. 
 Tukaj naštejemo le nekatere.
 Najpogosteje vsebujejo koordinate pogleda in velikosti zenic, vendar so nekateri podatki omejeni zgolj na velikosti zenic~\cite{pedrotti2014stress} ali koordinate pogleda~\cite{bellet2019saccade}.
-Zbirki COLET in GazeBase vsebujejo podatke o pogledu in velikosti zenic~\cite{ktistakis2022colet,griffith2021gazebase}, zbirki \MAHNOB{} in \ESEED{} pa poleg njih vključujeta še informacije o fiksacijah, sakadah in mežikih~\cite{soleymani2012mahnob,skaramagkas2023eseed}.
-
-Za to nalogo smo izbrali podatke z oznakami čustev in s čim več vrstami signalov sledilnika pogleda.
-Prve poskuse smo izvedli na podatkovni zbirki \ESEED{}, vendar so se pokazale težave z zanesljivostjo samoocen čustvenega stanja, kakovostjo signalov in stabilnostjo učenja.
-Zato smo glavno eksperimentalno evalvacijo izvedli na podatkovni zbirki \MAHNOB{}.
+Zbirki COLET in GazeBase vsebujejo podatke o pogledu in velikosti zenic~\cite{ktistakis2022colet,griffith2021gazebase}, zbirki \MAHNOB{} in \ESEED{} pa poleg njih vključujeta še dodatne informacije~\cite{soleymani2012mahnob,skaramagkas2023eseed}.
 
 \subsubsection*{Podatkovna zbirka \MAHNOB{}}
 
 Podatkovna zbirka \MAHNOB{} je večmodalna zbirka za prepoznavanje čustev in implicitno označevanje multimedijskih vsebin~\cite{soleymani2012mahnob}.
-Zbirka vsebuje dva glavna eksperimentalna sklopa: prepoznavanje čustvenih stanj iz odzivov na videoposnetke in implicitno označevanje na podlagi odzivov na pravilne oziroma napačne oznake pod sliko ali posnetkom.
-Vsebuje odzive udeležencev na video posnetke, katerih cilj je bil vzbuditi določena čustva v udeležencu.
+Zbirka vsebuje dva glavna eksperimentalna sklopa: (1) prepoznavanje čustvenih stanj iz odzivov na videoposnetke in (2) implicitno označevanje na podlagi odzivov na pravilne oziroma napačne oznake pod sliko ali posnetkom.
 Odzive sinhrono zajame z videoposnetkom obraza, zvokom, elektroencefalogramom (EEG), fiziološkimi signali -- elektrokardiogramom (EKG), galvanskim odzivom kože (GSR), amplitudo dihanja in temperaturo kože -- ter signali sledilnika pogleda.
 Meritve sledilnika pogleda so bile zajete s sledilnikom Tobii X120 pri frekvenci $60~Hz$.
 V tej nalogi smo uporabili samo prvi sklop, to je eksperiment vzbujanja čustev z videoposnetki, in izključno signale sledilnika pogleda.
@@ -32,9 +29,10 @@ V tej nalogi smo uporabili samo prvi sklop, to je eksperiment vzbujanja čustev 
 Izvirni članek poroča o 30 rekrutiranih udeležencih.
 Udeležence P9, P12 in P15 so avtorji izključili zaradi tehničnih težav oziroma nepopolnega zajema podatkov.
 Po vzoru izvirnega članka smo izključili iste tri udeležence, poleg tega pa tudi udeležence, za katere ni bilo na voljo podatkov iz eksperimentov vzbujanja čustev.
-V eksperimentu vzbujanja čustev so udeleženci gledali 20 videoposnetkov, katerih namen je bil vzbuditi različna čustva v gledalcu.
+V eksperimentu vzbujanja čustev so udeleženci gledali 20 videoposnetkov.
 Pred vsakim posnetkom, ki naj bi vzbujal določeno čustvo, je bil prikazan še kratek nevtralni posnetek, odziv nanj pa je bil shranjen ločeno.
-Po ogledu posameznega posnetka so udeleženci podali samoocene čustvenega stanja -- številski oceni valence in vzburjenosti, diskretno samooceno čustvenega stanja ter še nekaj dodatnih ocen, ki jih nismo uporabili.
+Po ogledu posameznega posnetka so udeleženci podali samoocene čustvenega stanja -- številski oceni valence in vzburjenosti, diskretno samooceno čustvenega stanja ter nekaj dodatnih ocen, ki jih nismo uporabili.
+\newpage
 
 \section{Samoocene čustvenega stanja in ciljni razredi}
 \label{subsec:ciljne-oznake}
@@ -42,10 +40,10 @@ Po ogledu posameznega posnetka so udeleženci podali samoocene čustvenega stanj
 Ciljni razredi v tej nalogi izhajajo iz diskretnih samoocen čustvenega stanja, ki so jih udeleženci podali po ogledu videoposnetka.
 Diskretne samoocene čustvenega stanja smo preslikali v razrede valence skladno s preslikavo iz izvirnega članka~\cite{soleymani2012mahnob}, ki je prikazana v dodatku~\ref{app:preslikava-valence}.
 S tem smo najprej dobili tri razrede: negativno, nevtralno in pozitivno valenco.
-Nevtralni razred smo odstranili, da ciljna naloga vsebuje izrazitejši kontrast med razredoma in imajo modeli boljše pogoje za učenje vzorcev v podatkih.
+Nevtralni razred smo odstranili, da ciljna naloga vsebuje izrazitejši kontrast med razredoma in da imajo modeli boljše pogoje za učenje vzorcev v podatkih.
 
 Razred valence je določen na ravni kombinacije udeleženca in videoposnetka.
-Vsa časovna okna in s tem vsi grafi istega ogleda videoposnetka zato pripadajo istemu razredu.
+Vsa časovna okna in s tem vsi grafi istega ogleda videoposnetka posledično pripadajo istemu razredu.
 Porazdelitev oken po odstranitvi nevtralnega razreda prikazana na sliki~\ref{fig:porazdelitev-valenca-stevila} kaže, da sta končna razreda pri vseh množicah signalov skoraj uravnotežena.
 
 \begin{figure}
@@ -73,15 +71,15 @@ Tukaj navedemo konkretne skupine signalov, ki smo jih uporabili v eksperimentih.
 Indeks $i$ označuje posamezno meritev sledilnika pogleda.
 V uporabljeni podatkovni zbirki imamo na voljo pet osnovnih vrst signalov. To so:
 \begin{itemize}
-    \item časovni žig meritve $t_i$,
-    \item koordinati pogleda na zaslonu $(x_i,~y_i)$ -- povprečje med meritvama levega in desnega očesa,
-    \item velikost leve in desne zenice $(p_i^{(l)},~p_i^{(r)})$,
-    \item oddaljenost od sledilnika pogleda $d_i$ ter
-    \item informacija o fiksacijah, tj. pripadnost fiksaciji ter trajanje fiksacije.
+    \item časovni žig meritve \textcolor{tableTime}{$t_i$},
+    \item koordinati pogleda na zaslonu \textcolor{tableGaze}{$(x_i,~y_i)$} -- povprečje med meritvama levega in desnega očesa,
+    \item velikost leve in desne zenice \textcolor{tablePupil}{$(p_i^{(l)},~p_i^{(r)})$},
+    \item oddaljenost od sledilnika pogleda \textcolor{tableFixation}{$d_i^{\text{sled}}$} ter
+    \item \textcolor{tableFixation}{informacija o fiksacijah}, tj. pripadnost fiksaciji ter trajanje fiksacije.
 \end{itemize}
 
 Da bi preverili robustnost modelov glede na razpoložljivost vhodnih signalov ter primerjali njihovo klasifikacijsko uspešnost za posamezne tipe vhodnih signalov, smo podatke \MAHNOB{} razdelili v štiri delno prekrivajoče se eksperimentalne množice signalov.
-V vseh štirih množicah smo uporabili tudi informacijo o času.
+V vseh štirih množicah smo uporabili informacijo o času.
 Množica \emph{samo pogled} poleg časa vsebuje koordinati pogleda, množica \emph{samo zenici} vsebuje velikosti leve in desne zenice, množica \emph{pogled in zenici} združi koordinati pogleda in velikosti zenic, množica \emph{vsi signali} pa doda še oddaljenost od sledilnika pogleda in informacijo o fiksacijah.
 Podrobna povezava med temi množicami, značilkami vozlišč in razpoložljivimi tipi povezav je podana pri opisu grafovske konstrukcije v razdelku~\ref{subsec:grafovska-konstrukcija-po-mnozicah}.
 
@@ -91,6 +89,8 @@ Nato smo odstranili vrstice brez signalov pogleda ali velikosti zenic.
 Na voljo smo imeli tudi signale veljavnosti, na podlagi katerih smo odstranili meritve, za katere je sledilnik poročal, da je meritev za vsaj eno oko neveljavna.
 Dodatno smo uporabili filter osamelcev \texttt{q01}-\texttt{q99}, ki je odstranil meritve, pri katerih je bil vsaj eden od štirih osnovnih signalov pod prvim ali nad devetindevetdesetim percentilom, saj te vrednosti močno izkrivljajo porazdelitve signalov.
 Na koncu smo kratke vrzeli v numeričnih signalih linearno interpolirali, signala velikosti leve in desne zenice pa dodatno zgladili s kratkim centriranim drsečim povprečjem treh meritev.
+Okno smo uporabili, če je po čiščenju in filtriranju vsebovalo vsaj 60 veljavnih meritev.
+
 Porazdelitvi položajev pogleda in velikosti zenic po čiščenju sta za množico signalov \emph{pogled in zenici} prikazani na slikah~\ref{fig:porazdelitev-polozajev-pogleda} in~\ref{fig:porazdelitev-velikosti-zenic}.
 Na sliki~\ref{fig:porazdelitev-velikosti-zenic} je opazen tudi rahel sistematični zamik med porazdelitvama velikosti leve in desne zenice, ki ga izvirni članek o zbirki \MAHNOB{} ne obravnava~\cite{soleymani2012mahnob}. 
 Ker zamik ni vezan na posameznega udeleženca, je naša hipoteza, da to ni fiziološka asimetrija, temveč merilni artefakt sledilnika pogleda.
@@ -119,7 +119,7 @@ Ker zamik ni vezan na posameznega udeleženca, je naša hipoteza, da to ni fizio
 
 Posamezne skupine signalov so izražene v različnih velikostnih redih.
 Modeli strojnega učenja, kot so metoda podpornih vektorjev (SVM), večslojni perceptron (MLP) in GNN, so občutljivi na velikostni red vhodnih značilk oz. signalov.
-Zato smo signale standardizirali po formuli~$\frac{x-\mu}{\sigma}$.
+Zato smo vsako meritev $x$ za vsak signal standardizirali po formuli~$\frac{x-\mu}{\sigma}$.
 Povprečje $\mu$ in standardni odklon $\sigma$ smo izračunali na učni podmnožici, nato pa na validacijski in testni podmnožici standardizacijo uporabili z istimi parametri kot na učni.
 Pri grafovskih modelih smo na enak način standardizirali tudi značilke povezav, kadar jih je uporabljena množica signalov vsebovala.
 
@@ -128,21 +128,17 @@ Pri grafovskih modelih smo na enak način standardizirali tudi značilke povezav
 Nato smo časovno vrsto razdelili na neprekrivajoča se časovna okna dolžine $T=10~s$.
 Vsako uporabno časovno okno je predstavljalo en učni primer.
 Za $10~s$ smo se odločili na podlagi sorodnega dela na podatkih sledilnika pogleda, kjer so se daljša okna med dolžinami $1$, $3$, $5$ in $10~s$ praviloma izkazala za bolj informativna~\cite{bozak2024feature}.
-Daljših oken nismo uporabili, ker bi težje predpostavili, da celotno okno opisuje enoten čustveni odziv, saj se lahko ta med ogledom posnetka že opazno spremeni~\cite{zhang2020rcea}.
-Tudi sorodna dela na prepoznavanju čustev iz očesnih signalov pogosto uporabljajo razmeroma kratka okna~\cite{wang2018automatic,wu2021emotion}.
-
-Ciljni razred okna je določen s parom udeleženec-posnetek, saj so udeleženci vprašalnike izpolnjevali le po vsakem ogledu videoposnetka in ne vmes.
-Okno smo uporabili, če je po predhodnem čiščenju in filtru osamelcev vsebovalo vsaj 60 veljavnih meritev.
+Daljših oken nismo uporabili, ker bi težje predpostavili, da celotno okno opisuje enoten čustveni odziv, saj se lahko ta (iz fiziološkega vidika) med ogledom posnetka že opazno spremeni~\cite{zhang2020rcea}.
+Tudi sorodna dela, ki prepoznavajo čustva iz očesnih signalov, pogosto uporabljajo razmeroma kratka okna~\cite{wang2018automatic,wu2021emotion}.
 
 Pri frekvenci vzorčenja $60~Hz$ bi 10-sekundno okno brez manjkajočih vrednosti vsebovalo 600 vzorcev.
 Zaradi čiščenja, odstranjevanja neveljavnih vzorcev in filtriranja je dejansko število vzorcev v oknih manjše.
-Po filtru osamelcev je ostalo $2\,639\,048$ vrstic in $5\,158$ uporabnih 10-sekundnih časovnih oken, kar pomeni povprečno približno 512 meritev na uporabno okno.
+Po filtru osamelcev je ostalo $2\,639\,048$ meritev in $5\,158$ uporabnih 10-sekundnih časovnih oken, kar pomeni povprečno približno 512 meritev na uporabno okno.
 Pri kasnejši gradnji grafov se število vozlišč nekoliko razlikuje med množicami signalov; te vrednosti povzemamo v tabeli~\ref{tab:statistika-konstruiranih-grafov}.
 
 Po tvorbi časovnih oken se cevovod razdeli glede na uporabljeno predstavitev.
 Negrafovski osnovni modeli iz okna dobijo agregirane tabelarične značilke, zamrznjeni prednaučeni predstavitveni modeli neposredno prejmejo časovne vrste izbranih signalov sledilnika pogleda, grafovski modeli pa grafovsko predstavitev okna.
 Podrobnosti teh predstavitev so opisane v poglavjih~\ref{sec:grafovska-predstavitev} in~\ref{sec:modeli}.
-
-Tabela~\ref{tab:mahnob-predobdelava} povzema, kako se skozi opisane korake predobdelave zmanjša količina podatkov, uporabljena v končni eksperimentalni primerjavi.
+Tabela~\ref{tab:mahnob-predobdelava} povzema, kako se skozi opisane korake predobdelave zmanjša količina podatkov.
 
 \input{tabele/podatki/mahnob_predobdelava.tex}

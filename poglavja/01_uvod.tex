@@ -14,23 +14,15 @@ Pregled celotnega eksperimentalnega toka je prikazan na sliki~\ref{fig:uvod-preg
 \begin{figure}[!t]
     \centering
     \includegraphics[width=\textwidth]{thesis_diagrams_svg/diploma_diagram_v1.png}
-    \caption{Pregled naloge: priprava podatkov \MAHNOB{}, tri glavne poti modeliranja, štiri množice signalov in povzetek eksperimentalne primerjave  binarne klasifikacije valence iz podatkov sledilnika pogleda.}
+    \caption{Pregled naloge: priprava podatkov \MAHNOB{}, tri glavne poti modeliranja, štiri množice signalov in povzetek eksperimentalne primerjave binarne klasifikacije valence iz podatkov sledilnika pogleda.}
     \label{fig:uvod-pregled-naloge}
 \end{figure}
 
-\section{Raziskovalni problem}
-\label{subsec:raziskovalni-problem}
-
 Raziskovalni problem naloge je zasnova, implementacija in ovrednotenje grafovske predstavitve podatkov sledilnika pogleda za binarno klasifikacijo valence.
-
-
-\subsection{Raziskovalna vprašanja}
-\label{subsec:raziskovalna-vprasanja}
 
 \newcommand{\rvGlavnoBesedilo}{Kakšna je klasifikacijska uspešnost grafovske nevronske mreže za binarno klasifikacijo valence iz podatkov sledilnika pogleda v primerjavi s klasifikacijsko uspešnostjo uveljavljenih negrafovskih pristopov?}
 
 Glavno raziskovalno vprašanje je: \rvGlavnoBesedilo
-
 
 Dodatna podvprašanja so:
 
@@ -41,20 +33,11 @@ Dodatna podvprašanja so:
     \item \label{pv:racunska-zahtevnost} Kakšno je razmerje med klasifikacijsko uspešnostjo ter velikostjo in računsko zahtevnostjo primerjanih modelov?
 \end{enumerate}
 
-
-\section{Struktura naloge}
-\label{subsec:struktura}
-
-V poglavju~\ref{sec:ozadje} predstavimo teoretično ozadje grafov in grafovskih nevronskih mrež.
-V poglavju~\ref{sec:sorodna-dela} predstavimo sorodna dela in metode učenja predstavitev iz podatkov pogleda.
-Poglavje~\ref{sec:podatki} opisuje uporabljene podatke, samoocene čustvenega stanja, ciljne razrede in predobdelavo.
-V poglavju~\ref{sec:grafovska-predstavitev} opišemo konstrukcijo časovno-prostorskega grafa.
-Poglavje~\ref{sec:modeli} predstavi uporabljene modele.
-V poglavju~\ref{sec:eksperimenti} opišemo eksperimentalni protokol, v poglavju~\ref{sec:rezultati} pa rezultate glavne primerjave modelov na različnih množicah signalov.
-Poglavje~\ref{sec:diskusija} vsebuje interpretacijo rezultatov, omejitve in možnosti nadaljnjega dela.
-Nalogo sklenemo v poglavju~\ref{sec:zakljucek}.
-
-\section{Uporaba podpornih orodij}
+V nadaljevanju v poglavju~\ref{sec:sorodna-dela} najprej predstavimo sorodna dela in metode učenja predstavitev iz podatkov pogleda.
+Poglavje~\ref{sec:podatki} opisuje uporabljene podatke, samoocene čustvenega stanja, ciljne razrede in predobdelavo, v poglavju~\ref{sec:grafovska-predstavitev} pa opišemo konstrukcijo časovno-prostorskega grafa.
+V poglavju~\ref{sec:modeli} predstavimo primerjane modele.
+Poglavje~\ref{sec:eksperimenti} združuje eksperimentalni protokol in rezultate glavne primerjave modelov na različnih množicah signalov.
+Nalogo sklenemo z interpretacijo rezultatov, omejitvami, doprinosi in možnostmi nadaljnjega dela v poglavju~\ref{sec:diskusija}.
 
 Pri pripravi diplomskega dela sem kot podporno orodje uporabljal ChatGPT
 (GPT-5.5 Thinking)~\cite{openai_chatgpt_2026}. Orodje sem uporabljal za

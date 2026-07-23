@@ -5,6 +5,13 @@ V prejšnjem poglavju smo podatke sledilnika pogleda pripravili za učenje model
 V tem poglavju opišemo, kako posamezno časovno okno meritev pretvorimo v graf, ki ga uporabimo kot vhod za grafovske modele.
 Vozlišča predstavljajo veljavne meritve znotraj okna, povezave pa izbrane odnose med meritvami.
 
+Najprej podamo najbogatejšo grafovsko predstavitev učnega vzorca, ki uporablja vse razpoložljive signale.
+Nato pokažemo, kako se ista osnovna konstrukcija prilagodi štirim množicam signalov iz poglavja~\ref{subsec:vhodni-signali}.
+Kadar določena množica signalov ne vsebuje informacije, potrebne za posamezno značilko ali relacijo, ta del predstavitve izpustimo.
+Graf zato v štirih primerih predstavlja isti učni vzorec, razlikuje pa se po količini vhodne informacije in po razpoložljivih relacijah med meritvami.
+
+\section{Graf in vozlišča}
+
 Graf definiramo kot
 \begin{equation}
     G = (V, E),
@@ -29,13 +36,7 @@ Homogeni graf je graf, ki ne loči različnih vrst vozlišč in povezav.
 Heterogeni graf vsebuje vsaj dve različni vrsti vozlišč ali povezav.
 V tej nalogi uporabljamo heterogeno grafovsko predstavitev, saj ločimo več tipov povezav.
 
-Najprej podamo najbogatejšo grafovsko predstavitev učnega vzorca, ki uporablja vse razpoložljive signale.
-Nato pokažemo, kako se ista osnovna konstrukcija prilagodi štirim množicam signalov iz poglavja~\ref{subsec:vhodni-signali}.
-Kadar določena množica signalov ne vsebuje informacije, potrebne za posamezno značilko ali relacijo, ta del predstavitve izpustimo.
-Graf zato v štirih primerih predstavlja isti učni vzorec, razlikuje pa se po količini vhodne informacije in po razpoložljivih relacijah med meritvami.
-
-\section{Vozlišča}
-\subsection{Definicija}
+\subsection{Vozlišča in njihove značilke}
 
 Vsako vozlišče $v_i$ predstavlja eno meritev sledilnika pogleda $x_i$ v trenutku $i$ znotraj časovnega okna:
 \begin{equation}
@@ -45,7 +46,6 @@ Vsako vozlišče $v_i$ predstavlja eno meritev sledilnika pogleda $x_i$ v trenut
 Vrednost $n$ se lahko med okni razlikuje, saj po čiščenju in filtriranju niso vsa okna popolna.
 Grafovska predstavitev naravno podpira spremenljivo število vozlišč.
 
-\subsection{Vektor značilk vozlišča}
 Vektor značilk vozlišča za končni graf za množico \emph{vsi signali} je
 \begin{equation}
     \mathbf{x}_i =
@@ -71,14 +71,15 @@ Tako ima prva veljavna meritev v oknu časovno značilko $t_0=0$, preostale meri
 Za ostale podgrafe se vektor značilk ustrezno filtrira.
 V vseh primerih ohranimo časovno značilko $t_i$, ostale podatke pa ohranimo glede na obravnavano množico signalov.
 
-\section{Relacije}
+\section{Relacije in značilke povezav}
 Definiramo tri relacije med meritvami: časovno, prostorsko in fiksacijsko.
 Posledično v grafu oblikujemo štiri tipe povezav, saj je časovni tip povezave usmerjen -- bodisi naprej ali nazaj.
 Prostorske in fiksacijske povezave pa obravnavamo kot neusmerjene.
 
 Vsaka povezava ima določen tip relacije, saj časovna povezava, prostorska povezava in fiksacijska povezava opisujejo različne odnose med meritvami.
 Ta zapis heterogenim grafovskim modelom, opisanim v poglavju~\ref{sec:modeli}, omogoča ločeno obravnavo relacij.
-Osnovni \ModelName{GCN} uporabi isti nabor povezav, vendar relacij modelno ne loči; v tem primeru dobimo enostaven homogen graf.
+Osnovni \ModelName{GCN} uporabi isti nabor povezav, vendar relacij modelno ne loči.
+V tem primeru dobimo enostaven homogen graf.
 Podrobnosti o uporabi relacij v posameznih modelih so opisane v poglavju~\ref{sec:modeli}.
 
 \subsection{Časovne povezave}
@@ -128,7 +129,7 @@ Fiksacijske povezave povezujejo meritve, ki pripadajo isti zaznani fiksaciji.
 Pripadnost fiksaciji določimo z identifikatorjem fiksacije, podanim v \MAHNOB{} podatkih.
 Ta podatek imamo zgolj v množici \emph{vsi signali}, zato so te povezave vključene le v končni graf.
 
-\subsubsection{Redčenje povezav znotraj fiksacije}
+\subsubsection*{Redčenje povezav znotraj fiksacije}
 
 Znotraj posamezne fiksacije ne povežemo vseh vozlišč med seboj, saj bi to povzročilo preveliko število fiksacijskih povezav.
 Za to nalogo smo zato definirali redkejšo konstrukcijo \emph{razširjenih povezav znotraj fiksacije} (angl. \emph{dilated intra-fixation edges}), ki ohrani pripadnost isti fiksaciji, ne da bi graf postal pregost.
@@ -174,7 +175,7 @@ Značilka $\Delta d_{ij} = d_j - d_i$ opisuje razliko v oddaljenosti od sledilni
 Podroben pregled značilk povezav je podan v tabeli~\ref{tab:znacilke-povezav} v dodatku~\ref{app:grafi}.
 
 
-\section{Grafi po množicah signalov}
+\section{Grafovska predstavitev po množicah signalov}
 \label{subsec:grafovska-konstrukcija-po-mnozicah}
 
 Za vsako množico signalov iz razdelka~\ref{subsec:vhodni-signali} zgradimo graf po isti osnovni konstrukciji.
@@ -197,8 +198,7 @@ Prikaz združi vozlišča, časovne, prostorske in fiksacijske povezave v isti g
 \end{figure}
 
 
-\section{Statistika konstruiranih grafov}
-\label{subsec:statistika-grafov}
+\subsubsection*{Statistika konstruiranih grafov}
 
 Tabela~\ref{tab:statistika-konstruiranih-grafov} prikazuje osnovne statistike grafov, ki nastanejo pri končni konfiguraciji konstrukcije.
 Vrednosti so izračunane za osrednjo eksperimentalno nalogo, t.j. binarno klasifikacijo negativne in pozitivne valence.

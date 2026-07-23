@@ -120,6 +120,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 - Pri strukturnem urejanju naj bodo posegi minimalistični: ne uvajaj novih sekcij,
   kadar je mogoče vsebino smiselno vključiti v obstoječe odstavke. Prednost ima
   ohranitev Tomijevega obstoječega besedila z le potrebnimi spremembami.
+- Pri prestavljanju vsebine med poglavji ohrani obstoječe besedilo čim bolj
+  dobesedno. Ne poenostavljaj ali odstranjuj matematičnih simbolov, definicij in
+  enačb, razen če je ista vsebina že ustrezno definirana drugje. Podpičjem se
+  izogibaj, kadar lahko poved naravno razdeliš ali povežeš brez njih.
 - Pri pisanju LaTeX poglavij naj bo praviloma ena poved v eni vrstici. Ne lomi
   ene povedi čez več vrstic samo zaradi širine urejevalnika. Ročno vrstično
   oblikovanje naj sledi stavkom oziroma logičnim enotam, ker Tomi tako lažje
@@ -195,6 +199,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-23 Pri strukturnem urejanju je glavni cilj krajše in približno uravnoteženo kazalo, ne odstranitev vseh vidnih ločnic. Kjer pomagajo toku, uporabi kratke poudarjene mednaslove, ki niso vključeni v kazalo, hkrati pa v primernih poglavjih ohrani nekaj pravih podrazdelkov. V poglavju o modelih morajo imena vseh štirih GNN ostati hitro vidna, arhitekturne slike pa morajo biti čim bliže pripadajočim opisom. Izbira operatorja `GCNConv` ostane zelo kratko v grafovskem delu s sklicem na dodatek. V eksperimentalnem protokolu se LOSO samo omeni s sklicem na dodatek, glavne definicije metrik pa morajo zaradi mentorjeve zahteve ostati v glavnem besedilu. Dodatka o hiperparametrih in grafovski konstrukciji se lahko združita.
 - 2026-07-23 V Tabeli 8.2 čas sklepanja pomeni celoten napovedni prehod od
   pripravljenega vhoda modela do razrednih verjetnosti. Za GazeMAE je ta čas
   `2,64 ms/okno`, z naknadno meritvijo prek vseh sedmih pregibov pa sta bila

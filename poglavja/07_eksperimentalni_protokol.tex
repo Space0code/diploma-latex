@@ -98,6 +98,9 @@ Poleg končnih metrik shranjujemo tudi podatke o poteku učenja.
 Pri nevronskih modelih spremljamo učno in validacijsko izgubo, najboljšo epoho, informacijo o zgodnjem ustavljanju, čas epohe in norme gradientov.
 Krivulje izgub služijo predvsem preverjanju stabilnosti optimizacije in zaznavanju potencialnega prekomernega prileganja.
 
+Pri grafovskih nevronskih mrežah lahko več zaporednih agregacij povzroči, da si predstavitve vozlišč postanejo preveč podobne.
+Ta pojav imenujemo prekomerno glajenje.
+V praksi se lahko pokaže kot zmanjšanje variance predstavitev, visoka medsebojna podobnost vozliščnih vektorjev in skoraj konstantni izhodi klasifikacijske glave.
 Pri grafovskih modelih spremljamo še nekaj diagnostičnih meritev naučenih predstavitev in napovedi.
 Med njimi so varianca predstavitev grafa, povprečna kosinusna podobnost predstavitev, razpon logitov in entropija napovednih verjetnosti.
 Te meritve uporabimo za preverjanje, ali se med učenjem pojavijo skoraj konstantne napovedi, zaznavanje kolapsa predstavitev ali znakov prekomernega glajenja.

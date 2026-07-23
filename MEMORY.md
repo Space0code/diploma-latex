@@ -195,6 +195,14 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-23 V Tabeli 8.2 čas sklepanja pomeni celoten napovedni prehod od
+  pripravljenega vhoda modela do razrednih verjetnosti. Za GazeMAE je ta čas
+  `2,64 ms/okno`, z naknadno meritvijo prek vseh sedmih pregibov pa sta bila
+  določena še časa `1,69 ms/okno` za MOMENT in `6,12 ms/okno` za
+  GazeMAE+MOMENT.
+- 2026-07-23 Opombe pod tabelami naj bodo poenotene v obliki `\emph{Opomba:}`
+  v pisavi `\footnotesize` pod tabelo. Kadar opomba pojasnjuje posamezno označeno
+  mesto, uporabi zvezdico `\textsuperscript{*}` pri mestu in na začetku opombe.
 - 2026-07-22 Omejitve eksperimentalne zasnove sodijo v diskusijo, ne v zaključek.
   Zaključek naj po kratkem povzetku izvedbe in rezultatov konča jasna sintezna
   poved o uporabnosti grafovske predstavitve in doseženi točnosti GNN.

@@ -1,8 +1,10 @@
-Eye-tracking data contain temporal and spatial relations between measurements that are not modeled directly by a classical tabular representation.
+% če kaj spreminjaš, se drži British English!
+% na koncu preveri, da je konsistenten s slovensko verzijo povzetka!
+Eye-tracking data contain temporal and spatial relations between measurements that are not modelled directly by a classical tabular representation.
 This thesis investigates whether graph neural networks can use these relations for binary valence classification.
 Temporal windows of eye-tracking data are represented as spatio-temporal graphs, where nodes correspond to individual measurements and edges encode temporal proximity, spatial proximity, and shared fixation membership.
 Graph-based models are compared with baseline classifiers, classical machine learning models, and frozen pretrained signal encoders.
 The experiments use 7-fold cross-validation by subject and evaluate four signal sets: \emph{gaze}, \emph{pupil only}, \emph{gaze and pupil}, and \emph{all signals}.
 The results show that graph representations are informative, since graph-based models outperform random and majority classifiers for all signal sets.
 The best graph-based model achieves $65.5~\%$ accuracy and $64.4~\%$ macro F1 on the \emph{gaze and pupil} signal set, but remains below the best \ModelName{SVM} result, which reaches $70.5~\%$ accuracy and $69.7~\%$ macro F1.
-In the evaluated experimental setting, classical models with hand-crafted features are therefore the strongest approach, while graph-based modeling remains a meaningful research direction for eye-tracking data.
+In the evaluated experimental setting, classical models with hand-crafted features are therefore the strongest approach, while graph-based modelling remains a meaningful research direction for eye-tracking data.

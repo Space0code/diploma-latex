@@ -72,8 +72,8 @@ Tabela~\ref{tab:rezultati-racunska-zahtevnost} prikazuje te vrednosti za množic
 Stolpec \emph{Vhod} označuje različne predstavitve istih podatkov, ki uporabljajo agregirane značilke okna, zamrznjene predstavitve prednaučenih kodirnikov oziroma grafovsko predstavitev okna.
 
 Izhodiščna klasifikatorja ter modela \ModelName{SVM} in \ModelName{LightGBM} nimajo števila nevronskih parametrov, zato je pri njih ta vrednost označena z~\texttt{--}.
-Pri \ModelName{GazeMAE/MOMENT} stolpec učljivih parametrov zajema samo klasifikacijsko glavo, stolpec vseh parametrov pa tudi zamrznjena kodirnika.
-Grafovski modeli imajo bistveno manj parametrov kot zamrznjena prednaučena kodirnika, vendar je njihov izmerjeni čas učenja na okno za približno dva velikostna razreda večji kot pri negrafovskih modelih.
+Pri \ModelName{GazeMAE}, \ModelName{MOMENT} in njuni združeni različici stolpec učljivih parametrov zajema samo klasifikacijsko glavo, stolpec vseh parametrov pa tudi uporabljena zamrznjena kodirnika.
+Grafovski modeli imajo bistveno manj parametrov kot zamrznjeni prednaučeni kodirniki, vendar je njihov izmerjeni čas učenja na okno za približno dva velikostna razreda večji kot pri negrafovskih modelih.
 Glede na razmerje med točnostjo in izmerjenim časom sta v tej primerjavi najugodnejša klasična modela \ModelName{SVM} in \ModelName{LightGBM}.
 
 \input{tabele/rezultati/racunska_zahtevnost_pogled_zenici.tex}

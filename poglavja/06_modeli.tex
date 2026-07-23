@@ -237,7 +237,7 @@ Slika~\ref{fig:diagram-gcn} prikazuje osnovni cevovod tega modela.
 
 \subsubsection*{\ModelName{HeteroGCN-mean}}
 
-\ModelName{HeteroGCN-mean} dobimo tako, da \ModelName{GCN} nadgradimo s heterogeno grafovsko predstavitvijo.
+Z \ModelName{HeteroGCN-mean} preidemo od homogenega modela k ločeni obravnavi različnih tipov relacij.
 Kot opisano v~\ref{sec:grafovska-predstavitev} tukaj ločimo različne tipe relacij.
 Relacijske predstavitve vozlišč združimo v skupno predstavitev vozlišča s preprostim povprečenjem.
 Ker časovne, prostorske in fiksacijske povezave opisujejo različne odnose med meritvami, pričakujemo, da bo njihova ločena obdelava ohranila informacije, ki se pri homogenem združevanju povezav lahko izgubijo.
@@ -272,7 +272,7 @@ Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mean}, je sprememba glede na
 \subsubsection*{\ModelName{HeteroGCN-MLP}}
 \label{subsec:model-heterogcn-mlp}
 
-\ModelName{HeteroGCN-MLP} dobimo tako, da \ModelName{HeteroGCN-mean} nadgradimo z učljivo fuzijo relacijskih predstavitev.
+V naslednjem koraku \ModelName{HeteroGCN-MLP} namesto fiksnega povprečenja uvede učljivo fuzijo relacijskih predstavitev.
 Različne predstavitve vozlišč -- tiste, ki so v danem modelu na voljo izmed časovne naprej, časovne nazaj, prostorske ter fiksacijske -- najprej konkateniramo, nato pa jih z dvoslojnim perceptronom združimo v skupno predstavitev vozlišča.
 Preprosto povprečenje vsem relacijam pripiše enako vlogo, učljiva fuzija pa modelu omogoči, da glede na klasifikacijsko nalogo različne relacijske predstavitve uporabi različno.
 Relacijski izhodi $\mathbf{Z}_r^{(k)}$ se izračunajo kot v enačbi~\eqref{eq:model-heterogcn-mean}, njihovo učljivo fuzijo pa zapišemo kot
@@ -296,7 +296,7 @@ Kot prikazano v diagramu~\ref{fig:diagram-heterogcn-mlp}, je sprememba glede na 
 \subsubsection*{\ModelName{HeteroGCN-MLP-w}}
 \label{subsec:model-heterogcn-mlp-w}
 
-\ModelName{HeteroGCN-MLP-w} dobimo tako, da \ModelName{HeteroGCN-MLP} nadgradimo z učljivimi utežmi povezav.
+Arhitekturno lestvico sklene \ModelName{HeteroGCN-MLP-w}, ki učljivi fuziji doda še uteži povezav, izračunane iz njihovih značilk.
 Za izračun uteži povezav ima model tri večslojne perceptrone: $f_w^{\text{čas}}$, $f_w^{\text{prostor}}$ in $f_w^{\text{fiksacija}}$.
 Ti na podlagi vektorja značilk posamezne povezave, katerega komponente so povzete v tabeli~\ref{tab:znacilke-povezav}, izračunajo skalarno predznačeno utež, ki določa, kako močno posamezna povezava vpliva na posredovanje sporočil.
 Pri posamezni množici signalov se uporabijo le funkcije za relacije, ki so v grafu prisotne.

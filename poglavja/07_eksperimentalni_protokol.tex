@@ -2,15 +2,10 @@
 \label{sec:eksperimenti}
 \label{sec:rezultati}
 
-V prejšnjih poglavjih smo definirali podatke, ciljne razrede, časovna okna,
-grafovsko predstavitev in primerjane modele.
-V tem poglavju opišemo, kako smo te komponente ovrednotili v skupni eksperimentalni
-primerjavi, in predstavimo rezultate.
+V prejšnjih poglavjih smo definirali podatke, ciljne razrede, časovna okna, grafovsko predstavitev in primerjane modele.
+V tem poglavju opišemo, kako smo te komponente ovrednotili v skupni eksperimentalni primerjavi, in predstavimo rezultate.
 Glavna evalvacijska naloga je binarna klasifikacija negativne proti pozitivni valenci.
-Primerjava je zasnovana kot kombinacija modelov iz poglavja~\ref{sec:modeli} in
-množic signalov iz razdelka~\ref{subsec:vhodni-signali}.
-Vsi modeli uporabljajo iste učne vzorce in iste delitve na učno, validacijsko in
-testno množico.
+Vsi modeli uporabljajo iste učne vzorce in iste delitve na učno, validacijsko in testno množico.
 Koda za predobdelavo, konstrukcijo grafov, učenje modelov, evalvacijo in generiranje rezultatov je javno dostopna v repozitoriju projekta~\cite{bozak2026gfmrepo}.
 Podatkovna zbirka \MAHNOB{} v repozitorij ni vključena. 
 Pridobili smo jo preko uradnega spletnega mesta podatkovne zbirke~\cite{mahnobwebsite}.
@@ -21,14 +16,12 @@ Pridobili smo jo preko uradnega spletnega mesta podatkovne zbirke~\cite{mahnobwe
 
 \subsubsection*{Zasnova glavne primerjave}
 
-Cilj glavne primerjave je odgovoriti na raziskovalno vprašanje~\ref{sec:uvod}: \rvGlavnoBesedilo{}
-Zato smo v primerjavi spreminjali le način predstavitve okna in model, ki je to predstavitev uporabil.
-
-Ciljni razred je binarni razred valence, pri katerem model ločuje med negativno in pozitivno valenco.
-Vse štiri množice iz tabele~\ref{tab:grafovska-konstrukcija-po-mnozicah} smo obravnavali kot enakovreden del primerjave, saj nas je zanimalo tudi, kako se klasifikacijska uspešnost spreminja z razpoložljivostjo različnih signalov sledilnika pogleda.
-
+Cilj glavne primerjave je odgovoriti na glavno raziskovalno vprašanje iz uvoda: \rvGlavnoBesedilo{}
 V primerjavi smo uporabili vse modele iz tabele~\ref{tab:pregled-primerjanih-modelov}: izhodiščna klasifikatorja, klasični modeli nad agregiranimi značilkami, zamrznjeni prednaučeni predstavitveni modeli in grafovski modeli.
 S tem smo primerjali tri različne načine opisa istega časovnega okna: tabelarični povzetek signalov, vektorsko predstavitev časovne vrste in grafovsko predstavitev meritev.
+
+Vse štiri množice iz tabele~\ref{tab:grafovska-konstrukcija-po-mnozicah} smo obravnavali kot enakovreden del primerjave, saj nas je zanimalo tudi, kako se klasifikacijska uspešnost spreminja z razpoložljivostjo različnih signalov sledilnika pogleda.
+
 
 \subsubsection*{7-kratno prečno preverjanje po subjektih}
 \label{subsec:subject-7kratno}
@@ -42,10 +35,9 @@ Takšna delitev ocenjuje posploševanje na nove udeležence.
 To je za našo nalogo pomembno, saj so signali sledilnika pogleda močno odvisni od specifik posameznika~\cite{lim2020emotion}.
 Ker 22 subjektov ni deljivo s sedem, imajo posamezne testne razdelitve različno velikost -- nekatere vsebujejo tri, druge pa štiri testne subjekte.
 
-Validacijska množica se je uporabljala med učenjem, testna množica pa samo za končno oceno v posamezni ponovitvi.
-Pri nevronskih modelih smo zato najboljšo različico modela izbrali glede na validacijsko izgubo, nato pa njeno delovanje izmerili na pripadajoči testni množici.
-
+Pri nevronskih modelih smo najboljšo različico modela izbrali glede na validacijsko izgubo, nato pa njeno delovanje izmerili na pripadajoči testni množici.
 V zgodnejših fazah smo izvedli tudi podporno preverjanje z LOSO, ki je skupaj s primerjavo obeh validacijskih protokolov podano v dodatku~\ref{app:primerjava-loso}.
+
 
 \section{Nastavitve in vrednotenje}
 \label{subsec:nastavitve-ucenja}
@@ -58,7 +50,7 @@ Grafovski modeli so uporabljali operator \texttt{GCNConv}, dve grafovski plasti,
 Podrobni hiperparametri vseh modelov so podani v dodatku~\ref{app:hiperparametri}.
 
 Nastavitve grafovskih modelov smo izbrali na podlagi predhodnega kompaktnega mrežnega iskanja.
-To iskanje smo izvedli v zgodnejši fazi raziskave, ko je klasifikacijska naloga bila še trirazredna, saj je poleg negativne in pozitivne vključevala tudi nevtralno valenco.
+To iskanje smo izvedli v zgodnejši fazi raziskave, ko je klasifikacijska naloga bila še trirazredna in je poleg negativne in pozitivne vključevala tudi nevtralno valenco.
 V dodatku~\ref{app:mrezno-iskanje} rezultate iskanja poročamo le kot podporni poskus pri izbiri stabilnih nastavitev.
 
 \subsubsection*{Metrike vrednotenja}
@@ -101,7 +93,7 @@ Med njimi so varianca predstavitev grafa, povprečna kosinusna podobnost predsta
 Te meritve smo uporabili za preverjanje, ali so se med učenjem pojavile skoraj konstantne napovedi, kolaps predstavitev ali znaki prekomernega glajenja.
 Definicije spremljanih učnih in diagnostičnih meritev so podane v dodatku~\ref{app:dodatne-metrike}.
 Krivulje učne in validacijske izgube poročamo med rezultati v nadaljevanju, diagnostiko naučenih predstavitev in napovedi pa v dodatku~\ref{app:diagnostika-prekomerno-glajenje}.
-
+\newpage
 \section{Rezultati}
 
 V nadaljevanju predstavimo rezultate primerjave različnih modelov za binarno klasifikacijo valence pri 7-kratnem prečnem preverjanju po subjektih.
@@ -113,7 +105,7 @@ Dodatne rezultate in razširjene metrike poročamo v dodatku~\ref{app:dodatni-re
 
 Tabela~\ref{tab:rezultati-glavna-primerjava} prikazuje povprečno točnost in makro F1 pri 7-kratnem prečnem preverjanju po subjektih.
 Vse vrednosti so zapisane v odstotkih, štiri signalne množice pa so obravnavane kot enakovredne različice iste klasifikacijske naloge.
-Večinski klasifikator doseže točnost okoli $52~\%$, kar ustreza porazdelitvi razredov na sliki~\ref{fig:porazdelitev-valenca-stevila}, vendar ima zaradi napovedovanja samo enega razreda makro F1 okoli $34~\%$.
+Večinski klasifikator doseže točnost približno $52~\%$, kar ustreza porazdelitvi razredov na sliki~\ref{fig:porazdelitev-valenca-stevila}, vendar ima zaradi napovedovanja samo enega razreda makro F1 približno $34~\%$.
 
 Najvišjo točnost ($70{,}5~\%$) in makro F1 ($69{,}7~\%$) doseže \ModelName{SVM} pri signalni množici \emph{pogled in zenici}.
 \ModelName{LightGBM} doseže najboljši rezultat pri množicah \emph{samo pogled}, \emph{samo zenici} in \emph{vsi signali}.
@@ -125,6 +117,7 @@ Najboljši grafovski rezultat je odvisen od signalne množice~--~pri \emph{samo 
 Rezultati torej ne kažejo monotonega izboljševanja z večanjem arhitekturne kompleksnosti grafovskih modelov.
 V nadaljevanju podrobnejše rezultate matrike zamenjav ter računsko zahtevnost modelov prikažemo na primeru, kjer modeli dosegajo najboljše rezultate, to je na množici \emph{pogled in zenici}.
 Dodatne matrike zamenjav za vse modele in vse množice signalov so prikazane v dodatku~\ref{app:matrike-zamenjav-vsi-modeli}.
+\newpage
 
 \input{tabele/rezultati/glavna_primerjava_modelov.tex}
 
@@ -134,7 +127,7 @@ Poleg končnih klasifikacijskih meritev smo preverili tudi potek učenja modelov
 Slika~\ref{fig:potek-izgube-gnn} prikazuje učno in validacijsko izgubo vseh štirih grafovskih arhitektur pri množici signalov \emph{pogled in zenici}.
 Za berljivost so prikazane povprečne vrednosti čez sedem delitev po subjektih, zasenčeno območje pa predstavlja standardni odklon med delitvami.
 Ker se delitve zaradi zgodnjega ustavljanja končajo po različnem številu epoh, se dolžina krivulj med modeli razlikuje in se posledično zasenčeno območje pri večjem številu epoh skrči vse do 0, saj se je le v enem primeru model učil največ epoh.
-
+\newpage
 % Vir podatkov: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/training_history.csv.
 % Slika je reproducibilno generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
 \begin{figure}[H]
@@ -158,7 +151,7 @@ Najuspešnejši model \ModelName{SVM} pravilno razvrsti $73{,}0~\%$ vzorcev nega
 % Matrike so generirane iz:
 % GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/confusion_matrices.csv.
 % Konkretni skript: diploma-latex/skripte/generiraj_slike_rezultatov.py.
-\begin{figure}[H]
+\begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{matrike_zamenjav_pogled_zenici_svm_heterogcn_mlp_w.pdf}
     \caption{Vrstično normalizirani matriki zamenjav za najboljši model \ModelName{SVM} in najboljši grafovski model \ModelName{HeteroGCN-MLP-w} pri množici signalov \emph{pogled in zenici}.}
@@ -169,11 +162,11 @@ Najuspešnejši model \ModelName{SVM} pravilno razvrsti $73{,}0~\%$ vzorcev nega
 
 Za odgovor na podvprašanje~\ref{pv:racunska-zahtevnost} smo poleg klasifikacijske uspešnosti primerjali tudi velikost modelov ter izmerjeni čas učenja in sklepanja.
 Tabela~\ref{tab:rezultati-racunska-zahtevnost} prikazuje te vrednosti za množico signalov \emph{pogled in zenici}, kjer je bil dosežen najboljši skupni rezultat.
-Stolpec \emph{Vhod} označuje različne predstavitve istih podatkov, ki uporabljajo agregirane značilke okna, zamrznjene predstavitve prednaučenih kodirnikov oziroma grafovsko predstavitev okna.
 
 Izhodiščna klasifikatorja ter modela \ModelName{SVM} in \ModelName{LightGBM} nimajo števila nevronskih parametrov, zato je pri njih ta vrednost označena z~\texttt{--}.
 Pri \ModelName{GazeMAE}, \ModelName{MOMENT} in njuni združeni različici stolpec učljivih parametrov zajema samo klasifikacijsko glavo, stolpec vseh parametrov pa tudi uporabljena zamrznjena kodirnika.
 Grafovski modeli imajo bistveno manj parametrov kot zamrznjeni prednaučeni kodirniki, vendar je njihov izmerjeni čas učenja na okno za približno dva velikostna razreda večji kot pri negrafovskih modelih.
 Glede na razmerje med točnostjo in izmerjenim časom sta v tej primerjavi najugodnejša klasična modela \ModelName{SVM} in \ModelName{LightGBM}.
+\newpage
 
 \input{tabele/rezultati/racunska_zahtevnost_pogled_zenici.tex}

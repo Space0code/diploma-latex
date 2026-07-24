@@ -49,7 +49,7 @@ Osnovni \ModelName{MLP} smo uporabili kot primer osnovnega nevronskega modela~\c
 Vhod modela je vektor agregiranih značilk enega časovnega okna, izhod pa logiti za razrede ciljne naloge.
 Tudi \ModelName{MLP} je občutljiv na velikostni red značilk, zato smo tudi tukaj zanj značilke standardizirali.
 Ker cilj naloge ni ustvariti nov globok nevronski model, smo namenoma sestavili preprost perceptron z dvema skritima polno povezanima plastema z aktivacijo ReLU (angl. \emph{rectified linear unit}) in izpuščanjem, za njima pa izhodno linearno plastjo.
-\ModelName{MLP} smo učili z izgubo križne entropije, ki kaznuje majhno napovedano verjetnost pravilnega razreda.
+\ModelName{MLP} smo učili z izgubo križne entropije, tj. s povprečno negativno logaritemsko verjetnostjo pravilnega razreda, ki kaznuje majhno napovedano verjetnost pravilnega razreda.
 
 \subsubsection*{\ModelName{LightGBM}}
 
@@ -74,8 +74,9 @@ Za podatke pogleda smo uporabili odprtokodni prednaučeni kodirnik \ModelName{Ga
 Model prejme zgolj koordinati pogleda $(x,~y)$, zato smo ga samostojno uporabili le za množico \emph{samo pogled}.
 Ker je bil \ModelName{GazeMAE} učen na $2~s$ oknih, vzorčenih s frekvenco $500~Hz$, smo uporabljena $10~s$ okna najprej pretvorili v obliko, ki jo model pričakuje.
 Koordinati pogleda smo razdelili na pet neprekrivajočih se $2~s$ kosov in ju prevzorčili na ciljno frekvenco $500~Hz$.
-Kodirnik temelji na časovno-konvolucijskih mrežah, ki ločeno kodirajo položaj in hitrost pogleda.
-Iz predstavitev posameznih kosov smo nato z združevanjem pridobili predstavitev celotnega okna s~512 razsežnostmi.
+Kodirnika znotraj modela temeljita na časovno-konvolucijskih mrežah ter ločeno kodirata položaj in hitrost pogleda.
+Za vsak kos vrneta po eno predstavitev s~128 razsežnostmi, ki ju združimo v predstavitev s~256 razsežnostmi~\cite{bautista2021gazemae}.
+V naši implementaciji smo nato po petih kosih izračunali povprečje in standardni odklon vsake razsežnosti ter oba vektorja združili v predstavitev celotnega okna s~512 razsežnostmi.
 
 \subsubsection*{\ModelName{MOMENT}}
 \label{subsec:moment-model}

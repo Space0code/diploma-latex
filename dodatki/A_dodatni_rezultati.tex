@@ -18,10 +18,6 @@ Tako model ločuje med negativno in pozitivno valenco, primeri z vmesnim oziroma
 V nadaljevanju so na kratko opredeljene mere, uporabljene poleg točnosti in makro F1, ki sta definirani v poglavju~\ref{subsec:metrike}.
 Za razred $c$ naj bodo $\mathrm{TP}_c$, $\mathrm{FP}_c$ in $\mathrm{FN}_c$ števila pravilnih pozitivnih, lažno pozitivnih oziroma lažno negativnih napovedi.
 
-Uravnotežena točnost je povprečje priklicev po razredih, zato vsakemu razredu pripiše enako težo:
-\[
-    \text{uravnotežena točnost} = \frac{1}{C} \sum_{c=1}^{C} \frac{\mathrm{TP}_c}{\mathrm{TP}_c + \mathrm{FN}_c}.
-\]
 Preciznost pove, kolikšen delež napovedi razreda $c$ je pravilen, priklic oziroma občutljivost pa, kolikšen delež dejanskih primerov tega razreda model prepozna:
 \[
     \mathrm{preciznost}_c = \frac{\mathrm{TP}_c}{\mathrm{TP}_c + \mathrm{FP}_c},
@@ -29,11 +25,18 @@ Preciznost pove, kolikšen delež napovedi razreda $c$ je pravilen, priklic ozir
     \mathrm{priklic}_c = \frac{\mathrm{TP}_c}{\mathrm{TP}_c + \mathrm{FN}_c}.
 \]
 V poročanih binarnih rezultatih sta preciznost in priklic makro povprečji po razredih.
-Uteženi F1 je povprečje F1 po razredih, uteženo s številom dejanskih primerov posameznega razreda.
+Uteženi F1 je povprečje F1 po razredih, pri katerem je prispevek posameznega razreda utežen z njegovim številom primerov:
+\[
+    \mathrm{uteženi\ F1}
+    =
+    \sum_{c=1}^{C}
+    \frac{n_c}{N}
+    \frac{2\mathrm{TP}_c}
+         {2\mathrm{TP}_c+\mathrm{FP}_c+\mathrm{FN}_c},
+\]
+kjer je $n_c$ število dejanskih primerov razreda $c$, $N$ pa skupno število primerov.
 
 AUC (angl. \emph{area under the ROC curve}) je ploščina pod krivuljo ROC in meri, kako dobro napovedne verjetnosti razvrstijo pozitivne primere pred negativne neodvisno od izbranega klasifikacijskega praga.
-Izguba je povprečna negativna logaritemska verjetnost pravilnega razreda, tj. križna entropija.
-Manjša vrednost pomeni boljše ujemanje napovednih verjetnosti s ciljnimi razredi.
 Matrika zamenjav vsebuje števila primerov za vse pare dejanskih vrstic in napovedanih stolpcev, diagonalne celice so pravilne napovedi, preostale pa napake.
 
 Med učenjem smo shranjevali učno in validacijsko izgubo po epohah, najboljšo epoho z najmanjšo validacijsko izgubo, podatek o zgodnjem ustavljanju, čas epohe ter povprečno in največjo $L_2$-normo gradientov parametrov.

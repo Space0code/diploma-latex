@@ -3,25 +3,25 @@
     \centering
     \caption{Razširjeni rezultati za množico signalov \emph{pogled in zenici}. Vrednosti so povprečje $\pm$ standardni odklon čez sedem testnih množic (v odstotkih). Krepko je označen najboljši rezultat v posameznem stolpcu, krepko poševno pa najboljši rezultat med grafovskimi modeli.}
     \label{tab:dodatek-rezultati-dodatni-rezultati-pogled-zenici}
-    \footnotesize
-    \setlength{\tabcolsep}{2pt}
-    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.23\textwidth} *{5}{>{\centering\arraybackslash}X}@{}}
+    \scriptsize
+    \setlength{\tabcolsep}{1pt}
+    \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.22\textwidth} *{6}{>{\centering\arraybackslash}X}@{}}
         \toprule
-        \textbf{Model} & \textbf{Točnost} & \mbox{\textbf{Preciznost}} & \textbf{Priklic} & \textbf{Makro F1} & \textbf{AUC} \\
+        \textbf{Model} & \textbf{Točnost} & \mbox{\textbf{Preciznost}} & \textbf{Priklic} & \textbf{Makro F1} & \makecell{\textbf{Uteženi}\\\textbf{F1}} & \textbf{AUC} \\
         \midrule
-        Naključni & $50{,}8 \pm 2{,}2$ & $50{,}7 \pm 2{,}1$ & $50{,}7 \pm 2{,}1$ & $50{,}6 \pm 2{,}0$ & $50{,}7 \pm 2{,}1$ \\
-        Večinski & $52{,}1 \pm 4{,}9$ & $26{,}0 \pm 2{,}4$ & $50{,}0 \pm 0{,}0$ & $34{,}2 \pm 2{,}0$ & $50{,}0 \pm 0{,}0$ \\
+        Naključni & $50{,}8 \pm 2{,}2$ & $50{,}7 \pm 2{,}1$ & $50{,}7 \pm 2{,}1$ & $50{,}6 \pm 2{,}0$ & $50{,}9 \pm 2{,}3$ & $50{,}7 \pm 2{,}1$ \\
+        Večinski & $52{,}1 \pm 4{,}9$ & $26{,}0 \pm 2{,}4$ & $50{,}0 \pm 0{,}0$ & $34{,}2 \pm 2{,}0$ & $35{,}8 \pm 5{,}8$ & $50{,}0 \pm 0{,}0$ \\
         \midrule
-        \mbox{\ModelName{SVM}} & \mbox{\boldmath$70{,}5 \pm 2{,}9$} & \mbox{\boldmath$71{,}9 \pm 2{,}1$} & \mbox{\boldmath$70{,}3 \pm 2{,}6$} & \mbox{\boldmath$69{,}7 \pm 3{,}4$} & \mbox{$78{,}1 \pm 1{,}9$} \\
-        \mbox{\ModelName{LightGBM}} & \mbox{$69{,}6 \pm 2{,}7$} & \mbox{$71{,}0 \pm 2{,}0$} & \mbox{$69{,}5 \pm 2{,}3$} & \mbox{$68{,}8 \pm 3{,}1$} & \mbox{\boldmath$78{,}2 \pm 2{,}2$} \\
-        \mbox{\ModelName{MLP}} & \mbox{$68{,}7 \pm 1{,}9$} & \mbox{$70{,}6 \pm 1{,}8$} & \mbox{$68{,}5 \pm 1{,}6$} & \mbox{$67{,}6 \pm 2{,}5$} & \mbox{$77{,}8 \pm 2{,}4$} \\
+        \mbox{\ModelName{SVM}} & \mbox{\boldmath$70{,}5 \pm 2{,}9$} & \mbox{\boldmath$71{,}9 \pm 2{,}1$} & \mbox{\boldmath$70{,}3 \pm 2{,}6$} & \mbox{\boldmath$69{,}7 \pm 3{,}4$} & \mbox{\boldmath$69{,}9 \pm 3{,}5$} & \mbox{$78{,}1 \pm 1{,}9$} \\
+        \mbox{\ModelName{LightGBM}} & \mbox{$69{,}6 \pm 2{,}7$} & \mbox{$71{,}0 \pm 2{,}0$} & \mbox{$69{,}5 \pm 2{,}3$} & \mbox{$68{,}8 \pm 3{,}1$} & \mbox{$69{,}0 \pm 3{,}3$} & \mbox{\boldmath$78{,}2 \pm 2{,}2$} \\
+        \mbox{\ModelName{MLP}} & \mbox{$68{,}7 \pm 1{,}9$} & \mbox{$70{,}6 \pm 1{,}8$} & \mbox{$68{,}5 \pm 1{,}6$} & \mbox{$67{,}6 \pm 2{,}5$} & \mbox{$67{,}9 \pm 2{,}8$} & \mbox{$77{,}8 \pm 2{,}4$} \\
         \midrule
-        \mbox{\ModelName{GazeMAE/MOMENT}} & \mbox{$65{,}6 \pm 4{,}7$} & \mbox{$66{,}5 \pm 4{,}3$} & \mbox{$65{,}9 \pm 4{,}0$} & \mbox{$65{,}2 \pm 4{,}7$} & \mbox{$73{,}0 \pm 6{,}9$} \\
+        \mbox{\ModelName{GazeMAE/MOMENT}} & \mbox{$65{,}6 \pm 4{,}7$} & \mbox{$66{,}5 \pm 4{,}3$} & \mbox{$65{,}9 \pm 4{,}0$} & \mbox{$65{,}2 \pm 4{,}7$} & \mbox{$65{,}4 \pm 4{,}5$} & \mbox{$73{,}0 \pm 6{,}9$} \\
         \midrule
-        \mbox{\ModelName{GCN}} & \mbox{$65{,}4 \pm 2{,}8$} & \mbox{\boldmath$\mathit{67{,}2 \pm 1{,}4}$} & \mbox{$65{,}1 \pm 1{,}8$} & \mbox{$63{,}9 \pm 3{,}2$} & \mbox{$73{,}1 \pm 2{,}2$} \\
-        \mbox{\ModelName{HeteroGCN-mean}} & \mbox{$63{,}8 \pm 4{,}0$} & \mbox{$66{,}6 \pm 2{,}0$} & \mbox{$63{,}3 \pm 4{,}0$} & \mbox{$61{,}1 \pm 6{,}9$} & \mbox{$72{,}8 \pm 2{,}7$} \\
-        \mbox{\ModelName{HeteroGCN-MLP}} & \mbox{$64{,}2 \pm 3{,}7$} & \mbox{$65{,}5 \pm 3{,}1$} & \mbox{$63{,}8 \pm 2{,}8$} & \mbox{$62{,}8 \pm 3{,}6$} & \mbox{$72{,}3 \pm 3{,}7$} \\
-        \mbox{\ModelName{HeteroGCN-MLP-w}} & \mbox{\boldmath$\mathit{65{,}5 \pm 2{,}3}$} & \mbox{$66{,}6 \pm 1{,}3$} & \mbox{\boldmath$\mathit{65{,}2 \pm 1{,}5}$} & \mbox{\boldmath$\mathit{64{,}4 \pm 2{,}6}$} & \mbox{\boldmath$\mathit{73{,}2 \pm 1{,}6}$} \\
+        \mbox{\ModelName{GCN}} & \mbox{$65{,}4 \pm 2{,}8$} & \mbox{\boldmath$\mathit{67{,}2 \pm 1{,}4}$} & \mbox{$65{,}1 \pm 1{,}8$} & \mbox{$63{,}9 \pm 3{,}2$} & \mbox{$64{,}3 \pm 3{,}8$} & \mbox{$73{,}1 \pm 2{,}2$} \\
+        \mbox{\ModelName{HeteroGCN-mean}} & \mbox{$63{,}8 \pm 4{,}0$} & \mbox{$66{,}6 \pm 2{,}0$} & \mbox{$63{,}3 \pm 4{,}0$} & \mbox{$61{,}1 \pm 6{,}9$} & \mbox{$61{,}6 \pm 7{,}0$} & \mbox{$72{,}8 \pm 2{,}7$} \\
+        \mbox{\ModelName{HeteroGCN-MLP}} & \mbox{$64{,}2 \pm 3{,}7$} & \mbox{$65{,}5 \pm 3{,}1$} & \mbox{$63{,}8 \pm 2{,}8$} & \mbox{$62{,}8 \pm 3{,}6$} & \mbox{$63{,}2 \pm 4{,}2$} & \mbox{$72{,}3 \pm 3{,}7$} \\
+        \mbox{\ModelName{HeteroGCN-MLP-w}} & \mbox{\boldmath$\mathit{65{,}5 \pm 2{,}3}$} & \mbox{$66{,}6 \pm 1{,}3$} & \mbox{\boldmath$\mathit{65{,}2 \pm 1{,}5}$} & \mbox{\boldmath$\mathit{64{,}4 \pm 2{,}6}$} & \mbox{\boldmath$\mathit{64{,}7 \pm 3{,}1}$} & \mbox{\boldmath$\mathit{73{,}2 \pm 1{,}6}$} \\
         \bottomrule
     \end{tabularx}
 \end{table}

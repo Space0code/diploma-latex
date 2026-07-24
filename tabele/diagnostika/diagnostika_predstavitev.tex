@@ -1,23 +1,23 @@
 % Vir podatkov: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/training_diagnostics_summary.csv.
 \begin{table}
     \centering
-    \caption{Diagnostika naučenih predstavitev in izhodov najboljšega grafovskega modela po množicah signalov. Makro F1 in uravnotežena točnost opisujeta uspešnost klasifikacije, razpon logitov in entropija gotovost napovedi, varianca predstavitev razpršenost naučenih vektorjev, kos. pod. pa povprečno kosinusno podobnost med predstavitvami. Krepko sta označena najboljši makro F1 in najboljša uravnotežena točnost.}
+    \caption{Diagnostika naučenih predstavitev in izhodov najboljšega grafovskega modela po množicah signalov. Makro F1 opisuje uspešnost klasifikacije, razpon logitov in entropija gotovost napovedi, varianca predstavitev razpršenost naučenih vektorjev, kos. pod. pa povprečno kosinusno podobnost med predstavitvami. Krepko je označen najboljši makro F1.}
     \label{tab:diagnostika-prekomerno-glajenje}
     \scriptsize
     \setlength{\tabcolsep}{1pt}
     \begin{tabularx}{\textwidth}{@{}
         >{\raggedright\arraybackslash}p{0.20\textwidth} 
         >{\raggedright\arraybackslash}p{0.22\textwidth} 
-        *{4}{>{\centering\arraybackslash}X}
+        *{3}{>{\centering\arraybackslash}X}
         >{\centering\arraybackslash}p{0.115\textwidth}
         >{\centering\arraybackslash}X@{}}
         \toprule
-        \textbf{Množica signalov} & \textbf{Najboljša GNN} & \makecell{\textbf{Makro}\\\textbf{F1}} & \makecell{\textbf{Urav.}\\\textbf{točnost}} & \makecell{\textbf{Razpon}\\\textbf{logitov}} & \makecell{\textbf{Entro-}\\\textbf{pija}} & \makecell[c]{\textbf{Varianca}\\\textbf{predst.}} & \makecell{\textbf{Kos.}\\\textbf{pod.}} \\
+        \textbf{Množica signalov} & \textbf{Najboljša GNN} & \makecell{\textbf{Makro}\\\textbf{F1}} & \makecell{\textbf{Razpon}\\\textbf{logitov}} & \makecell{\textbf{Entro-}\\\textbf{pija}} & \makecell[c]{\textbf{Varianca}\\\textbf{predst.}} & \makecell{\textbf{Kos.}\\\textbf{pod.}} \\
         \midrule
-        \mbox{\emph{vsi signali}} & \mbox{\ModelName{HeteroGCN-MLP-w}} & \mbox{$0{,}608$} & \mbox{$0{,}623$} & \mbox{$3{,}31$} & \mbox{$0{,}545$} & \mbox{$0{,}352$} & \mbox{$0{,}409$} \\
-        \mbox{\emph{samo pogled}} & \mbox{\ModelName{HeteroGCN-MLP}} & \mbox{\boldmath$0{,}658$} & \mbox{\boldmath$0{,}662$} & \mbox{$3{,}93$} & \mbox{$0{,}583$} & \mbox{$0{,}291$} & \mbox{$0{,}307$} \\
-        \mbox{\emph{pogled in zenici}} & \mbox{\ModelName{HeteroGCN-MLP-w}} & \mbox{$0{,}644$} & \mbox{$0{,}652$} & \mbox{$3{,}38$} & \mbox{$0{,}582$} & \mbox{$0{,}336$} & \mbox{$0{,}360$} \\
-        \mbox{\emph{samo zenici}} & \mbox{\ModelName{GCN}} & \mbox{$0{,}584$} & \mbox{$0{,}607$} & \mbox{$1{,}40$} & \mbox{$0{,}653$} & \mbox{$0{,}258$} & \mbox{$0{,}569$} \\
+        \mbox{\emph{vsi signali}} & \mbox{\ModelName{HeteroGCN-MLP-w}} & \mbox{$0{,}608$} & \mbox{$3{,}31$} & \mbox{$0{,}545$} & \mbox{$0{,}352$} & \mbox{$0{,}409$} \\
+        \mbox{\emph{samo pogled}} & \mbox{\ModelName{HeteroGCN-MLP}} & \mbox{\boldmath$0{,}658$} & \mbox{$3{,}93$} & \mbox{$0{,}583$} & \mbox{$0{,}291$} & \mbox{$0{,}307$} \\
+        \mbox{\emph{pogled in zenici}} & \mbox{\ModelName{HeteroGCN-MLP-w}} & \mbox{$0{,}644$} & \mbox{$3{,}38$} & \mbox{$0{,}582$} & \mbox{$0{,}336$} & \mbox{$0{,}360$} \\
+        \mbox{\emph{samo zenici}} & \mbox{\ModelName{GCN}} & \mbox{$0{,}584$} & \mbox{$1{,}40$} & \mbox{$0{,}653$} & \mbox{$0{,}258$} & \mbox{$0{,}569$} \\
         \bottomrule
     \end{tabularx}
 \end{table}

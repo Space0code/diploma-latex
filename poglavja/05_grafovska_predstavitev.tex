@@ -13,37 +13,15 @@ Graf zato v štirih primerih predstavlja isti učni vzorec, razlikuje pa se po k
 
 \section{Graf in vozlišča}
 
-Graf definiramo kot
-\begin{equation}
-    G = (V, E),
-\end{equation}
-kjer je $V$ množica vozlišč, $E \subseteq V \times V$ pa množica povezav med vozlišči.
-Vozlišča praviloma vsebujejo značilke $\mathbf{x}_v$, ki jih zapišemo v matriko
-\begin{equation}
-    X \in \mathbb{R}^{|V| \times d},
-\end{equation}
-kjer je $d$ število značilk posameznega vozlišča, operator $|\cdot|$ pa moč množice oziroma število njenih elementov.
-Povezavo med vozliščema $i$ in $j$ označimo z $e_{ij} \in E$.
-V usmerjenih grafih ima povezava določeno izvorno in ponorno vozlišče, zato velja $e_{ij} \ne e_{ji}$.
-V neusmerjenih grafih pa povezave nimajo smeri, zato velja $e_{ij} = e_{ji}$.
-
-Povezave lahko vsebujejo tudi uteži.
-Utež povezave med vozliščema $i$ in $j$ označimo z $w_{ij}$.
-Za neutežene povezave si lahko predstavljamo, da imajo utež $w_{ij}=1$.
-Če imajo povezave več uteži, jih zapišemo kot vektor $\mathbf{e}_{ij}$~\cite{gilmer2017mpnn}.
-
-Homogeni graf je graf, ki ne loči različnih vrst vozlišč in povezav.
-Heterogeni graf pa vsebuje vsaj dve različni vrsti vozlišč ali povezav.
+Posamezno $10~s$ časovno okno predstavimo kot graf $G=(V,E)$, v katerem vozlišča predstavljajo veljavne meritve sledilnika pogleda, povezave pa časovne, prostorske in fiksacijske odnose med njimi.
+Osnovni pojmi in zapis grafov so predstavljeni v razdelku~\ref{subsec:osnove-gnn}.
 V tej nalogi smo uporabili heterogeno grafovsko predstavitev, saj smo ločili več tipov povezav.
-
-\subsection{Vozlišča in njihove značilke}
-
 Vsako vozlišče $v_i$ predstavlja eno meritev sledilnika pogleda $x_i$ v trenutku $i$ znotraj časovnega okna:
 \begin{equation}
     v_i \leftrightarrow \mathbf{x}_i.
 \end{equation}
 Če okno vsebuje $n$ veljavnih meritev, potem graf vsebuje $n$ vozlišč.
-Kot omenjeno, se $n$ lahko med okni zaradi čiščenja in filtriranja razlikuje, vendar to ni težava, saj grafovska predstavitev naravno podpira spremenljivo število vozlišč.
+Število $n$ se lahko med okni zaradi čiščenja in filtriranja razlikuje, kar GNN podpira, kot je pojasnjeno v razdelku~\ref{subsec:osnove-gnn}.
 
 Vektor značilk vozlišča za končni graf za množico \emph{vsi signali} je
 \begin{equation}

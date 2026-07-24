@@ -1,10 +1,10 @@
 % če kaj spreminjaš, se drži British English!
 % na koncu preveri, da je konsistenten s slovensko verzijo povzetka!
-Eye-tracking data contain temporal and spatial relations between measurements that are not modelled directly by a classical tabular representation.
-This thesis investigated whether graph neural networks can use these relations for binary valence classification.
-Temporal windows of eye-tracking data were represented as spatio-temporal graphs, where nodes correspond to individual measurements and edges encode temporal proximity, spatial proximity, and shared fixation membership.
-Graph-based models were compared with baseline classifiers, classical machine learning models, and frozen pretrained signal encoders.
-The experiments used 7-fold cross-validation by subject and evaluated four signal sets: \emph{gaze}, \emph{pupil only}, \emph{gaze and pupil}, and \emph{all signals}.
-The results show that graph representations are informative, since graph-based models outperform random and majority classifiers for all signal sets.
-The best graph-based model achieves $65.5~\%$ accuracy and $64.4~\%$ macro F1 on the \emph{gaze and pupil} signal set, but remains below the best \ModelName{SVM} result, which reaches $70.5~\%$ accuracy and $69.7~\%$ macro F1.
-In the evaluated experimental setting, classical models with hand-crafted features are therefore the strongest approach, while graph-based modelling remains a meaningful research direction for eye-tracking data.
+This thesis designed and evaluated a spatio-temporal graph representation of eye-tracking data for binary valence classification.
+Measurements from the MAHNOB-HCI dataset were divided into ten-second windows and represented as nodes connected by temporal, spatial, and fixation edges.
+We compared a homogeneous \ModelName{GCN} with three heterogeneous variants incorporating relation-specific processing, learned relation fusion, and edge weights.
+Using seven-fold subject-wise cross-validation across 22 participants, we compared them with \ModelName{SVM}, \ModelName{LightGBM}, \ModelName{MLP}, \ModelName{GazeMAE}, and \ModelName{MOMENT}.
+The best result was achieved by \ModelName{SVM} using gaze coordinates and pupil sizes (accuracy = $70.5~\%$, macro F1 = $69.7~\%$), whereas the best graph model, \ModelName{HeteroGCN-MLP}, used gaze coordinates alone ($65.9~\%$, $65.8~\%$).
+All graph models outperformed the random and majority classifiers, but increasing model complexity did not yield consistent improvements.
+We conclude that the graph representation of eye-tracking data contains useful information, although aggregated features remain more accurate and computationally efficient for binary valence classification.
+

@@ -47,7 +47,7 @@ V zgodnejših fazah smo izvedli tudi podporno preverjanje z LOSO, ki je skupaj s
 V tem razdelku navedemo nastavitve učenja, ki vplivajo na izvedbo eksperimentov.
 Nevronske modele smo učili z zgodnjim ustavljanjem na validacijski izgubi.
 Grafovski modeli so uporabljali operator \texttt{GCNConv}, dve grafovski plasti, skrite predstavitve velikosti 64 ter povezave s parametri $k_t=1$, $k_s=1$ in $k_f=3$, kot so definirani v poglavju~\ref{sec:grafovska-predstavitev}.
-Podrobni hiperparametri vseh modelov so podani v dodatku~\ref{app:hiperparametri}.
+Podrobni hiperparametri modelov ter uporabljena strojna in programska oprema so podani v dodatku~\ref{app:hiperparametri}.
 
 Nastavitve grafovskih modelov smo izbrali na podlagi predhodnega kompaktnega mrežnega iskanja.
 To iskanje smo izvedli v zgodnejši fazi raziskave, ko je klasifikacijska naloga bila še trirazredna in je poleg negativne in pozitivne vključevala tudi nevtralno valenco.
@@ -73,10 +73,10 @@ Makro F1 izračuna F1 ločeno za vsak razred in nato rezultate povpreči z enako
 kjer $\mathrm{FP}_c$ in $\mathrm{FN}_c$ označujeta število lažno pozitivnih oziroma lažno negativnih napovedi za razred $c$.
 S tem dopolni točnost predvsem pri modelih, ki lahko dosežejo sprejemljivo točnost, vendar večino primerov napovedujejo v en sam razred.
 
-Poleg glavnih metrik smo spremljali tudi uravnoteženo točnost, preciznost, priklic oziroma občutljivost, uteženi F1, ploščino pod krivuljo ROC (AUC, angl. \emph{area under the receiver operating characteristic curve}), izgubo in matrike zamenjav.
+Poleg glavnih metrik smo spremljali tudi preciznost, priklic oziroma občutljivost, uteženi F1, ploščino pod krivuljo ROC (AUC, angl. \emph{area under the receiver operating characteristic curve}) in matrike zamenjav.
 Te metrike smo uporabili predvsem za preverjanje stabilnosti in za podrobnejšo analizo napak.
 Njihove definicije so podane v dodatku~\ref{app:dodatne-metrike}.
-V glavnem besedilu se osredotočimo na točnost in makro F1, razširjene metrike pa poročamo v dodatku~\ref{app:razsirjeni-rezultati-binarna-valenca}.
+V glavnem besedilu se osredotočimo na točnost in makro F1, v dodatku~\ref{app:razsirjeni-rezultati-binarna-valenca} pa poročamo še preciznost, priklic, uteženi F1 in AUC.
 
 \subsubsection*{Spremljanje učenja}
 \label{subsec:spremljanje-ucenja}

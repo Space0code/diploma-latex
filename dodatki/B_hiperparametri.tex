@@ -6,17 +6,8 @@ V tem dodatku podamo podrobnejše nastavitve eksperimentov in modelov ter dopoln
 
 \section{Hiperparametri in izbira nastavitev}
 
-\subsubsection*{Hiperparametri modelov}
-\label{app:hiperparametri-modelov}
 
 Tabela~\ref{tab:hiperparametri-modelov} povzema glavne hiperparametre modelov v končnih eksperimentih.
-Klasični primerjalni modeli uporabljajo agregirane tabelarične značilke, nevronske primerjalne glave uporabljajo bodisi agregirane značilke bodisi zamrznjene predstavitve, grafovski modeli pa uporabljajo grafovsko predstavitev časovnih oken.
-
-\input{tabele/hiperparametri/hiperparametri_modelov.tex}
-
-\subsubsection*{Predhodno mrežno iskanje}
-\label{app:mrezno-iskanje}
-
 Nastavitve grafovske konstrukcije smo izbrali po majhnem predhodnem mrežnem iskanju na 3-razredni valenci, glede na izvorne razrede definirane v tabeli~\ref{tab:label-mapping}.
 Iskanje je spreminjalo število grafovskih plasti, velikost skritih predstavitev ter parametre konstrukcije $k_t$, $k_s$ in $k_f$.
 Primerjali smo več nastavitev števila plasti in skrite razsežnosti, vendar med njimi ni bilo velikih razlik.
@@ -24,6 +15,8 @@ Ker je bil najmanjši model med najboljšimi in najstabilnejšimi, hkrati pa je 
 Pri tej arhitekturni nastavitvi smo v mrežnem iskanju spreminjali $k_t \in \{1,2,3\}$, $k_s \in \{1,2,3\}$ in $k_f \in \{1,2,3,5\}$.
 Najvišji rezultat v tem pomožnem iskanju je dosegla nastavitev $k_t=3$, $k_s=1$ in $k_f=5$, vendar so bile razlike majhne.
 V končnih poskusih smo uporabili redkejšo nastavitev $k_t=1$, $k_s=1$ in $k_f=3$, ker zmanjša gostoto grafa in računsko zahtevnost ter ohrani stabilno delovanje.
+
+\input{tabele/hiperparametri/hiperparametri_modelov.tex}
 
 \input{tabele/hiperparametri/mrezno_iskanje_gnn.tex}
 
@@ -112,24 +105,29 @@ Pri fiksaciji dolžine $F=21$ in parametru $k_f=3$ dobimo $s=7$.
 Vozlišče z lokalnim indeksom $0$ se zato poveže z vozlišči $1$, $8$ in $15$.
 Odmik $1$ ohrani časovno lokalno komunikacijo, večji odmiki pa omogočijo širjenje informacij tudi med časovno bolj oddaljenimi meritvami iste fiksacije.
 Ker vsaka plast GNN omogoča izmenjavo informacij med neposredno povezanimi vozlišči, se doseg znotraj fiksacije dodatno povečuje s številom plasti.
+Opisano lepo prikaže slika~\ref{fig:razsirjene-fiksacijske-povezave} v glavnem besedilu.
 
 \subsubsection*{Značilke povezav}
 
 Tabela~\ref{tab:znacilke-povezav} podrobno opisuje simbole značilk povezav, uporabljene v tabeli~\ref{tab:grafovska-konstrukcija-po-mnozicah}.
 
-\input{tabele/graf/znacilke_povezav.tex}
 
 \section{Ločeni prikazi tipov povezav}
+\label{sec:loceni-prikazi}
 
-Slike prikazujejo isti izsek časovnega okna, vendar ločeno za posamezne tipe povezav.
-Namenjene so predvsem lažjemu branju slike~\ref{fig:konstrukcija-grafa-primer}: časovne povezave pokažejo lokalni red meritev, prostorske povezave sosednost položajev pogleda na zaslonu, fiksacijske povezave pa povezovanje meritev znotraj iste zaznane fiksacije.
+Slike~\ref{fig:casovne-povezave-primer},~\ref{fig:prostorske-povezave-primer} in~\ref{fig:fiksacijske-povezave-primer} prikazujejo isti izsek časovnega okna, vendar ločeno za posamezne tipe povezav.
+Namenjene so predvsem lažjemu branju slike~\ref{fig:konstrukcija-grafa-primer}. 
+Časovne povezave pokažejo lokalni red meritev, prostorske povezave sosednost položajev pogleda na zaslonu, fiksacijske povezave pa povezovanje meritev znotraj iste zaznane fiksacije.
+\newpage
+
+\input{tabele/graf/znacilke_povezav.tex}
 
 % Vir slik: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/model_runs/all_signals/2026-06-12_18-09-29/experiments/multiclass_table6_valence_3class_emotion-elicitation/snapshot.csv.
 % Slike so generirane s skriptom GFM-for-eyetracker/scripts/create_thesis_gnn_graph_examples.py.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{gnn_graph_far_02_P10_90_avi_t106_86-107_95_kt1_ks1_kf3_f3_n9/casovne.png}
-    \caption{Časovne povezave v izseku grafa. Oranžne povezave vodijo naprej po zaporedju meritev, rožnate pa nazaj, zato prikaz poudari lokalno časovno okolico vsakega vozlišča.}
+    \caption{Časovne povezave v izseku grafa. Oranžne povezave vodijo naprej po zaporedju meritev, rožnate pa nazaj. Slika prikazuje lokalno časovno okolico vsakega vozlišča.}
     \label{fig:casovne-povezave-primer}
 \end{figure}
 

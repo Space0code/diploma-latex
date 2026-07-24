@@ -12,7 +12,7 @@ Posledično imata točnost in makro F1 v rezultatih podobne vrednosti.
 Grafovski modeli iz podatkov izluščijo uporaben signal, saj izhodiščne klasifikatorje presegajo za približno deset odstotnih točk točnosti.
 Njihova uspešnost je primerljiva z uspešnostjo zamrznjenih prednaučenih kodirnikov.
 Primerjava sicer ni povsem neposredna.
-GNN smo v vsaki delitvi učili na učnem delu podatkovne zbirke \MAHNOB{}, medtem ko sta bila \ModelName{GazeMAE} in \ModelName{MOMENT} prednaučena na drugih večjih podatkovnih zbirkah, njuna kodirnika pa sta med učenjem ostala zamrznjena.
+GNN smo v vsaki delitvi učili izključno na učnem delu podatkovne zbirke \MAHNOB{}, medtem ko sta bila \ModelName{GazeMAE} in \ModelName{MOMENT} prednaučena na drugih večjih podatkovnih zbirkah, na \MAHNOB{} pa so bile naučene le njune klasifikacijske glave.
 Grafovske predstavitve in predstavitve prednaučenih kodirnikov so torej informativne, vendar pri obravnavanem problemu ne presegajo uveljavljenih pristopov s klasičnimi modeli strojnega učenja in ekspertno oblikovanimi značilkami.
 Ta ugotovitev je metodološko pomembna, saj kaže, da večja izrazna moč grafovskih in drugih globokih modelov sama po sebi ne zagotavlja boljše klasifikacijske uspešnosti.
 Enostavnejši modeli jih konsistentno prekašajo, hkrati pa so hitrejši in zasedejo manj pomnilnika.
@@ -24,15 +24,11 @@ Rezultati torej kažejo, da je uporabljena grafovska predstavitev smiselna in in
 
 \section{Omejitve in doprinosi}
 
-Ugotovitve so omejene na uporabljeno podatkovno zbirko, izbrane množice signalov, binarno klasifikacijo valence in protokol evalvacije, ki ne preverja generalizacije na druge posnetke ali podatkovne zbirke.
-Ciljni razredi so izpeljani iz samoocen čustvenega stanja, zato vsebujejo določeno mero subjektivnosti in šuma.
-Omejitev je tudi uporabljena grafovska konstrukcija, saj predstavlja le enega izmed možnih načinov modeliranja odnosov med meritvami sledilnika pogleda.
-
+\subsubsection*{Doprinosi}
 V nalogi smo preverili uporabnost grafovske predstavitve podatkov sledilnika pogleda pri binarni klasifikaciji valence.
 Časovna okna meritev smo predstavili kot časovno-prostorske grafe in jih ovrednotili s štirimi grafovskimi modeli, ki se postopno nadgrajujejo od preproste proti kompleksnejšim različicam.
 Grafovske modele smo primerjali z izhodiščnima modeloma, klasičnimi modeli strojnega učenja in prednaučenima kodirnikoma signalov na štirih delno prekrivajočih se množicah signalov.
 
-\begin{samepage}
 Glavni doprinosi naloge izhajajo direktno iz raziskovalnih vprašanj in so:
 
 \begin{enumerate}
@@ -41,7 +37,11 @@ Glavni doprinosi naloge izhajajo direktno iz raziskovalnih vprašanj in so:
     \item primerjava klasifikacijske uspešnosti med štirimi množicami signalov sledilnika pogleda;
     \item primerjava grafovskih modelov z negrafovskimi osnovnimi modeli in zamrznjenimi prednaučenimi predstavitvenimi modeli.
 \end{enumerate}
-\end{samepage}
+
+\subsubsection*{Omejitve}
+Ugotovitve so omejene na uporabljeno podatkovno zbirko, izbrane množice signalov, binarno klasifikacijo valence in protokol evalvacije, ki ne preverja generalizacije na druge posnetke ali podatkovne zbirke.
+Ciljni razredi so izpeljani iz samoocen čustvenega stanja, zato vsebujejo določeno mero subjektivnosti in šuma.
+Omejitev je tudi uporabljena grafovska konstrukcija, saj predstavlja le enega izmed možnih načinov modeliranja odnosov med meritvami sledilnika pogleda.
 
 \section{Nadaljnje delo in zaključek}
 
@@ -51,5 +51,5 @@ Grafovsko predstavitev bi bilo mogoče dopolniti tudi z mežiki in sakadami ter 
 Posebej zanimivo je samonadzorovano predtreniranje na signalih sledilnika pogleda, ki bi lahko zmanjšalo odvisnost od majhnih označenih podatkovnih zbirk in omogočilo uporabo neoznačenih podatkov.
 Rezultate bi bilo treba preveriti še na več podatkovnih zbirkah, pri prenosu med nalogami in v pogojih uporabe v realnem času.
 
-Grafovska predstavitev se je izkazala kot informativna, saj je najboljša GNN pri binarni klasifikaciji valence dosegla točnost $65{,}9\,\%$ in presegla izhodiščna klasifikatorja.
-Ni pa izboljšala klasifikacije v primerjavi z vsemi negrafovskimi modeli, saj je najboljši rezultat, točnost $70{,}5\,\%$, dosegel \ModelName{SVM} z ročno oblikovanimi značilkami.
+Grafovska predstavitev se je izkazala kot informativna, saj je najboljša GNN pri binarni klasifikaciji valence dosegla točnost $65{,}9\,\%$ in s tem presegla izhodiščna klasifikatorja.
+Ni pa premagala najboljšega negrafovskega modela \ModelName{SVM}, ki je z ekspertno oblikovanimi značilkami dosegel točnost $70{,}5\,\%$.

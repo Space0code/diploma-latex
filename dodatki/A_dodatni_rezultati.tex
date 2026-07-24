@@ -15,7 +15,7 @@ Tako model ločuje med negativno in pozitivno valenco, primeri z vmesnim oziroma
 \subsubsection*{Dodatne metrike in diagnostične meritve}
 \label{app:dodatne-metrike}
 
-V nadaljevanju so kratko opredeljene mere, uporabljene poleg točnosti in makro F1, ki sta definirani v poglavju~\ref{subsec:metrike}.
+V nadaljevanju so na kratko opredeljene mere, uporabljene poleg točnosti in makro F1, ki sta definirani v poglavju~\ref{subsec:metrike}.
 Za razred $c$ naj bodo $\mathrm{TP}_c$, $\mathrm{FP}_c$ in $\mathrm{FN}_c$ števila pravilnih pozitivnih, lažno pozitivnih oziroma lažno negativnih napovedi.
 
 Uravnotežena točnost je povprečje priklicev po razredih, zato vsakemu razredu pripiše enako težo:
@@ -34,7 +34,7 @@ Uteženi F1 je povprečje F1 po razredih, uteženo s številom dejanskih primero
 AUC (angl. \emph{area under the ROC curve}) je ploščina pod krivuljo ROC in meri, kako dobro napovedne verjetnosti razvrstijo pozitivne primere pred negativne neodvisno od izbranega klasifikacijskega praga.
 Izguba je povprečna negativna logaritemska verjetnost pravilnega razreda, tj. križna entropija.
 Manjša vrednost pomeni boljše ujemanje napovednih verjetnosti s ciljnimi razredi.
-Matrika zamenjav vsebuje števila primerov za vse pare dejanskih vrstic in napovedanih stolpcev; diagonalne celice so pravilne napovedi, preostale pa napake.
+Matrika zamenjav vsebuje števila primerov za vse pare dejanskih vrstic in napovedanih stolpcev, diagonalne celice so pravilne napovedi, preostale pa napake.
 
 Med učenjem smo shranjevali učno in validacijsko izgubo po epohah, najboljšo epoho z najmanjšo validacijsko izgubo, podatek o zgodnjem ustavljanju, čas epohe ter povprečno in največjo $L_2$-normo gradientov parametrov.
 Pri grafovskih modelih smo dodatno spremljali povprečno varianco komponent predstavitev grafa, povprečno kosinusno podobnost vseh parov predstavitev, razpon logitov kot razliko med največjim in najmanjšim logitom ter povprečno entropijo napovednih verjetnosti.
@@ -58,6 +58,8 @@ Razširjene metrike dodatno potrjujejo sklep iz glavne primerjave, saj ostane po
 
 \input{tabele/rezultati/dodatni_rezultati_vsi_signali.tex}
 
+\newpage
+
 \subsubsection*{Primerjava z LOSO}
 \label{app:primerjava-loso}
 
@@ -74,11 +76,11 @@ Spodnja tabela primerja oba protokola, pomišljaj pa označuje, da vrednost za p
 
 V nadaljevanju so prikazane vrstično normalizirane matrike zamenjav za vse modele in vse množice signalov.
 Za vsako množico signalov je pripravljen en prikaz z desetimi matrikami zamenjav v vrstnem redu modelov iz glavne tabele rezultatov.
-Vrstice predstavljajo dejanski razred, stolpci pa napovedani razred. 
-Vrednosti so deleži znotraj dejanskega razreda.
+Vrstice predstavljajo pravilni razred, stolpci pa napovedani razred. 
+Vrednosti so deleži znotraj pravilnega razreda.
 Matrike dopolnjujejo agregirane metrike iz prejšnjih tabel, ker pokažejo, ali model napake dela približno simetrično ali pa sistematično preferira en razred.
 Večinski model pričakovano napoveduje samo najpogostejši razred, pri naučenih modelih pa je razlika med diagonalnima celicama manj izrazita.
-Pri množici \emph{samo zenici} so napake bolj uravnotežene z naključnim ugibanjem kot pri množicah s koordinatami pogleda, kar podpira sklep, da same zenice v tej podatkovni zbirki nosijo šibkejši signal za binarno valenco.
+Pri množici \emph{samo zenici} opazimo, da smo najbližje naključnemu ugibanju, kar podpira sklep, da same zenice v tej podatkovni zbirki nosijo šibkejši signal za binarno valenco.
 
 % Vir slik: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/confusion_matrices.csv.
 % Slike so generirane s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
@@ -99,7 +101,7 @@ Pri množici \emph{samo zenici} so napake bolj uravnotežene z naključnim ugiba
 \begin{figure}
     \centering
     \includegraphics[height=0.84\textheight]{matrike_zamenjav_dodatek_pogled_zenici.pdf}
-    \caption{Matrike zamenjav za množico signalov \emph{pogled in zenici}. Ta množica doseže najboljši skupni rezultat v glavni primerjavi, zato prikaz omogoča neposredno primerjavo napak med najuspešnejšim \ModelName{SVM} in grafovskimi modeli.}
+    \caption{Matrike zamenjav za množico signalov \emph{pogled in zenici}. Ta množica doseže najboljši skupni rezultat v glavni primerjavi. Prikaz omogoča neposredno primerjavo napak med najuspešnejšim \ModelName{SVM} in grafovskimi modeli.}
     \label{fig:matrike-zamenjav-dodatek-pogled-zenici}
 \end{figure}
 
@@ -160,6 +162,6 @@ Entropija in razpon logitov opisujeta gotovost napovedi, varianca predstavitev i
 Pri množici \emph{samo zenici} sta razpon logitov in varianca predstavitev manjša, entropija pa večja, kar je skladno z manj odločnimi napovedmi.
 Pri množicah s koordinatami pogleda so logiti izrazitejši in predstavitve bolj razpršene.
 Slabši rezultati grafovskih modelov v glavni primerjavi torej niso posledica očitnega kolapsa predstavitev v skoraj enake vektorje.
-Diagnostiko razumemo predvsem kot podporno preverjanje stabilnosti učenja, ne kot dokaz, da je izbrana grafovska arhitektura optimalna.
+Rezultati so predstavljeni v tabeli~\ref{tab:diagnostika-prekomerno-glajenje}.
 
 \input{tabele/diagnostika/diagnostika_predstavitev.tex}

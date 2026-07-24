@@ -1,5 +1,5 @@
 % Samodejno generirano iz .../tables/metric_summary_with_std.csv.
-\begin{table}
+\begin{table}[!htbp]
     \centering
     \caption{Razširjeni rezultati za množico signalov \emph{pogled in zenici}. Vrednosti so povprečje $\pm$ standardni odklon čez sedem testnih množic (v odstotkih). Krepko je označen najboljši rezultat v posameznem stolpcu, krepko poševno pa najboljši rezultat med grafovskimi modeli.}
     \label{tab:dodatek-rezultati-dodatni-rezultati-pogled-zenici}
@@ -7,7 +7,7 @@
     \setlength{\tabcolsep}{2pt}
     \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.23\textwidth} *{5}{>{\centering\arraybackslash}X}@{}}
         \toprule
-        \textbf{Model} & \textbf{Točnost} & \makecell{\textbf{Preciz-}\\\textbf{nost}} & \textbf{Priklic} & \textbf{Makro F1} & \textbf{AUC} \\
+        \textbf{Model} & \textbf{Točnost} & \mbox{\textbf{Preciznost}} & \textbf{Priklic} & \textbf{Makro F1} & \textbf{AUC} \\
         \midrule
         Naključni & $50{,}8 \pm 2{,}2$ & $50{,}7 \pm 2{,}1$ & $50{,}7 \pm 2{,}1$ & $50{,}6 \pm 2{,}0$ & $50{,}7 \pm 2{,}1$ \\
         Večinski & $52{,}1 \pm 4{,}9$ & $26{,}0 \pm 2{,}4$ & $50{,}0 \pm 0{,}0$ & $34{,}2 \pm 2{,}0$ & $50{,}0 \pm 0{,}0$ \\

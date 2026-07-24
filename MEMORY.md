@@ -203,6 +203,7 @@ urejanju, strukturi, slogu in virih diplomske naloge.
 
 ## Odprte opombe
 
+- 2026-07-24 Poglavje 2 je preimenovano v `Teoretično ozadje in sorodna dela` in razdeljeno na štiri razdelke: `Osnove grafovskih nevronskih mrež`, `GNN za časovno-prostorske podatke`, `Učenje predstavitev iz signalov` ter `Položaj naloge glede na sorodna dela`. Splošne definicije grafov iz začetka poglavja 4 ter splošna teorija posredovanja sporočil, heterogenih relacij in klasifikacije grafov iz nekdanjega začetka razdelka 5.4 so zbrane v razdelku 2.1. Poglavji 4 in 5 naj se nanje le sklicujeta. V razdelku 5.4 je po arhitekturni tabeli oštevilčeni podrazdelek `Skupni arhitekturni cevovod`; definicije GELU, rezidualne povezave, normalizacije plasti in izpuščanja zaradi mentorjeve zahteve ostanejo v glavnem besedilu. Zaradi omejitve kazala na dve strani sta skupinska naslova `Homogena GNN` in `Heterogene GNN` odstranjena iz kazala, vsi štirje modeli pa so v besedilu označeni z neštevilčenimi mednaslovi.
 - 2026-07-23 Pri strukturnem urejanju je glavni cilj krajše in približno uravnoteženo kazalo, ne odstranitev vseh vidnih ločnic. Kjer pomagajo toku, uporabi kratke poudarjene mednaslove, ki niso vključeni v kazalo in stojijo v svoji vrstici, besedilo pa se začne v naslednji. Hkrati v primernih poglavjih ohrani nekaj pravih podrazdelkov. V poglavju o modelih morajo imena vseh štirih GNN ostati hitro vidna, arhitekturne slike pa morajo biti čim bliže pripadajočim opisom. Izbira operatorja `GCNConv` ostane zelo kratko v grafovskem delu s sklicem na dodatek. V eksperimentalnem protokolu se LOSO samo omeni s sklicem na dodatek, glavne definicije metrik pa morajo zaradi mentorjeve zahteve ostati v glavnem besedilu. Hiperparametri in podrobnosti grafovske konstrukcije so združeni v skupnem metodološkem dodatku.
 - 2026-07-23 V Tabeli 8.2 čas sklepanja pomeni celoten napovedni prehod od
   pripravljenega vhoda modela do razrednih verjetnosti. Za GazeMAE je ta čas
@@ -460,8 +461,8 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   ločeno; v glavnem besedilu jih poimenuj `GazeMAE` oziroma `MOMENT`, brez
   dodatka `+ MLP`, čeprav se za klasifikacijo tehnično uči MLP glava.
 - 2026-07-23 je bilo poglavje `Primerjani modeli` strukturno skrčeno. V kazalu
-  imajo grafovski modeli le podsekciji `Homogena GNN` in `Heterogene GNN`,
-  imena posameznih modelov pa so neštevilčeni mednaslovi. Izbira operatorja
+  ima grafovski del le podrazdelek `Skupni arhitekturni cevovod`, imena
+  posameznih modelov pa so neštevilčeni mednaslovi. Izbira operatorja
   `GCNConv` ostane na kratko v grafovskem delu tega poglavja in se sklicuje na
   podrobnejšo primerjavo v dodatku. Diagrami štirih GNN naj ostanejo neposredno
   ob opisih pripadajočih modelov.

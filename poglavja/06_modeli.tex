@@ -101,7 +101,6 @@ Za ta pristop smo se odločili zato, da ohranimo tabelo rezultatov pregledno.
 \section{Grafovski modeli}
 \label{subsec:grafovski-modeli}
 
-Grafovski modeli uporabljajo grafovsko predstavitev okna iz poglavja~\ref{sec:grafovska-predstavitev}.
 Štiri grafovske modele uredimo v arhitekturno lestvico, tj. zaporedje postopnih nadgradenj, v katerem vsaka naslednja stopnja doda eno obravnavano zmožnost modela.
 Pri isti množici signalov vse stopnje uporabljajo iste vozliščne značilke, iste relacije in ista časovna okna.
 Razlikujejo se po tem, kako obravnavajo tipe povezav, kako združujejo relacijske predstavitve in ali uporabljajo značilke povezav za izračun učljivih uteži povezav.
@@ -110,68 +109,11 @@ V tabeli~\ref{tab:arhitekturna-lestvica-gnn} so na kratko predstavljene razlike 
 
 \input{tabele/modeli/arhitekturna_lestvica_gnn.tex}
 
-\subsubsection*{Posredovanje sporočil in skupni cevovod}
+\subsection{Skupni arhitekturni cevovod}
 \label{subsec:skupni-deli-grafovske-arhitekture}
 
-Grafovske nevronske mreže (GNN) so razred nevronskih mrež, namenjen učenju nad podatki, ki jih lahko predstavimo z grafom~\cite{gilmer2017mpnn,kipf2017gcn}.
-Cilj GNN je naučiti se predstavitev vozlišč, povezav ali celotnega grafa tako, da model pri izračunu predstavitve posameznega vozlišča upošteva tudi njegovo lokalno okolico.
-
-Osnovna ideja GNN je \emph{posredovanje sporočil}~\cite{gilmer2017mpnn}.
-Vsako vozlišče v posamezni plasti prejme informacije od svojih sosedov, jih agregira in na podlagi zbranih informacij posodobi svojo predstavitev.
-
-Splošno plast posredovanja sporočil lahko zapišemo kot
-\begin{equation}
-    \mathbf{h}_v^{(k)} =
-    \phi^{(k)}
-    \left(
-        \mathbf{h}_v^{(k-1)},
-        \bigoplus_{u \in \mathcal{N}(v)}
-        \psi^{(k)}
-        \left(
-            \mathbf{h}_v^{(k-1)},
-            \mathbf{h}_u^{(k-1)},
-            \mathbf{e}_{uv}
-        \right)
-    \right),
-\end{equation}
-kjer je $\mathcal{N}(v)$ množica sosedov vozlišča $v$, $\psi^{(k)}$ funkcija sporočila, $\oplus$ agregacijska funkcija, $\phi^{(k)}$ funkcija posodobitve, $\mathbf{h}_v^{(k)}$ pa predstavitev vozlišča $v$ v plasti $k$.
-Funkcija $\psi^{(k)}$ je lahko na primer linearna preslikava ali večslojni perceptron nad predstavitvama vozlišč in značilkami povezave, $\phi^{(k)}$ pa preprosta vsota prejšnje predstavitve vozlišča in agregiranega sporočila, večslojni perceptron ali rekurentna enota.
-Isti funkciji $\psi^{(k)}$ in $\phi^{(k)}$ uporabimo pri vseh vozliščih, zato je plast ob invariantni agregaciji ekvivariantna na permutacijo vozlišč, kar pomeni, da preureditev vozlišč le enako preuredi njihove izhodne predstavitve.
-Agregacijska funkcija $\oplus$ mora biti invariantna na vrstni red sosedov.
-To lastnost imajo na primer vsota, povprečje in maksimum, zato lahko ista GNN plast deluje na grafih različnih velikosti.
-Pri časovnih vrstah je ureditev meritev sicer naravno določena s časom, vendar jo mora model zajeti eksplicitno, na primer s časovnimi povezavami ali časovnimi značilkami, saj se z grafovsko predstavitvijo sicer izgubi.
-
-Pri heterogenem grafu, kjer povezave razdelimo po tipih oziroma relacijah $r \in \mathcal{R}$, namesto ene same množice sosedov obravnavamo množice $\mathcal{N}_r(v)$, ki vsebujejo sosede vozlišča $v$ po relaciji $r$.
-Sporočila se najprej agregirajo ločeno znotraj posamezne relacije:
-\begin{equation}
-    \mathbf{m}_{v,r}^{(k)} =
-    \bigoplus_{u \in \mathcal{N}_r(v)}
-    \psi_r^{(k)}
-    \left(
-        \mathbf{h}_u^{(k-1)},
-        \mathbf{e}_{uv}
-    \right).
-\end{equation}
-Pri tem je $\psi_r^{(k)}$ funkcija sporočila za relacijo $r$, $\mathbf{m}_{v,r}^{(k)}$ pa agregirano sporočilo, ki ga vozlišče $v$ prejme po tej relaciji v plasti $k$.
-Za vsako relacijo lahko uporabimo ločeno linearno preslikavo ali večslojni perceptron $\psi_r^{(k)}$, agregacija znotraj posamezne relacije pa mora biti, tako kot prej, invariantna na vrstni red sosedov.
-Relacijska sporočila $\mathbf{m}_{v,r}^{(k)}$ se nato združijo v skupno sporočilo za vozlišče.
-Združevanje relacij je lahko vsota ali povprečje, lahko pa vključuje konkatenacijo oziroma učljivo fuzijo relacijskih predstavitev, pri katerih mora biti vrstni red relacij vnaprej določen.
-
-Če želimo napovedati razred celotnega grafa, lahko nalogo obravnavamo kot klasifikacijo na ravni grafa.
-Naj bo $L$ število plasti grafovske nevronske mreže.
-Na zadnji, $L$-ti plasti dobimo končne predstavitve vozlišč $\mathbf{h}_v^{(L)}$, ki jih združimo v predstavitev celotnega grafa:
-\begin{equation}
-    \mathbf{h}_G =
-    \text{READOUT}
-    \left(
-        \{\mathbf{h}_v^{(L)} : v \in V\}
-    \right).
-\end{equation}
-Funkcija $\text{READOUT}$ je agregacijska funkcija na ravni grafa.
-Pogoste izbire so povprečje, vsota, maksimum ali združevanje s pozornostjo.
-Predstavitev grafa $\mathbf{h}_G$ nato uporabimo v klasifikacijski glavi, ki napove razred celotnega grafa.
-
-Grafovski modeli na vhod prejmejo graf glede na izbrano množico signalov, kot definirano v poglavju~\ref{sec:grafovska-predstavitev}.
+Vsi obravnavani grafovski modeli sledijo splošnemu postopku posredovanja sporočil, predstavljenemu v razdelku~\ref{subsec:osnove-gnn}, razlikujejo pa se po obravnavi relacij, njihovi fuziji in uporabi značilk povezav.
+Na vhod prejmejo graf glede na izbrano množico signalov, kot je definirano v poglavju~\ref{sec:grafovska-predstavitev}.
 Razsežnost vhodnih preslikav prilagodimo izbrani množici signalov -- ločeno za značilke vozlišč, pri modelu \ModelName{HeteroGCN-MLP-w}, ki ga bomo kmalu predstavili, pa tudi za značilke povezav.
 
 Vhodne vektorje najprej preslikamo v skupni latentni prostor oziroma prostor skritih predstavitev z dvoslojnim \ModelName{MLP}.
@@ -202,7 +144,7 @@ To vključuje začetno preslikavo značilk vozlišč, grafovske plasti, morebitn
 V nadaljevanju opišemo specifike vsake arhitekture v štiri-stopenjski arhitekturni lestvici, začenši z najenostavnejšim -- s homogenim \ModelName{GCN}.
 V enačbah posameznih modelov je $\mathbf{H}^{(k-1)}$ matrika vhodnih predstavitev vozlišč v $k$-ti grafovski plasti, $\mathbf{Z}^{(k)}$ pa njen izhod pred skupno rezidualno povezavo, normalizacijo plasti in izpuščanjem.
 
-\subsection{Homogena GNN}
+\subsubsection*{\ModelName{GCN}}
 \label{subsec:model-gcn}
 
 \ModelName{GCN} je v osnovi homogeni grafovski model.
@@ -232,10 +174,8 @@ Slika~\ref{fig:diagram-gcn} prikazuje osnovni cevovod tega modela.
     \label{fig:diagram-gcn}
 \end{figure}
 
-\subsection{Heterogene GNN}
-\label{subsec:model-heterogcn-mean}
-
 \subsubsection*{\ModelName{HeteroGCN-mean}}
+\label{subsec:model-heterogcn-mean}
 
 S \ModelName{HeteroGCN-mean} preidemo od homogenega modela k ločeni obravnavi različnih tipov relacij.
 Kot opisano v poglavju~\ref{sec:grafovska-predstavitev} tukaj ločimo različne tipe relacij.

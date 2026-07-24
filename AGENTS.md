@@ -270,8 +270,9 @@ Uporabne opombe iz trenutnega pregleda:
 Prednostna struktura je raziskovalno usmerjena:
 
 1. **Uvod**: motivacija, problem, raziskovalno vprašanje in struktura.
-2. **Sorodna dela**: prepoznava čustev iz pogleda, GNN za časovne oziroma
-   fiziološke podatke, GazeMAE ali samonadzorovane predstavitve, če so uporabljene.
+2. **Teoretično ozadje in sorodna dela**: osnove grafov in GNN, GNN za časovne
+   oziroma časovno-prostorske podatke, učenje predstavitev iz signalov ter
+   položaj naloge glede na sorodna dela.
 3. **Podatki in predobdelava**: MAHNOB-HCI, lokalna podmnožica, oznake, čiščenje,
    oknenje, delitve in preprečevanje uhajanja podatkov.
 4. **Grafovska predstavitev podatkov**: učni vzorec, vozlišča, značilke, tipi

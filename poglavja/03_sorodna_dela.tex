@@ -24,6 +24,15 @@ kjer je $d$ število značilk posameznega vozlišča, operator $|\cdot|$ pa moč
 Povezavo med vozliščema $i$ in $j$ označimo z $e_{ij} \in E$.
 V usmerjenih grafih ima povezava določeno izvorno in ponorno vozlišče, zato v splošnem velja $e_{ij} \ne e_{ji}$.
 V neusmerjenih grafih pa povezave nimajo smeri, zato velja $e_{ij} = e_{ji}$.
+Strukturo grafa zapišemo z matriko sosednosti $\mathbf{A}$, za katero velja
+\begin{equation}
+    A_{ij} =
+    \begin{cases}
+        1, & e_{ij} \in E, \\
+        0, & e_{ij} \notin E.
+    \end{cases}
+\end{equation}
+Pripadajoča diagonalna matrika stopenj $\mathbf{D}$ ima diagonalne elemente $D_{ii} = \sum_j A_{ij}$.
 
 Povezave lahko vsebujejo tudi uteži.
 Utež povezave med vozliščema $i$ in $j$ označimo z $w_{ij}$.

@@ -2,6 +2,6 @@ V diplomski nalogi smo zasnovali in ovrednotili časovno-prostorsko grafovsko pr
 Meritve iz zbirke MAHNOB-HCI smo razdelili na desetsekundna okna in jih predstavili kot vozlišča s časovnimi, prostorskimi in fiksacijskimi povezavami.
 Primerjali smo homogeni \ModelName{GCN} in tri heterogene različice z ločenim obravnavanjem relacij, učljivo fuzijo in utežmi povezav.
 S sedemkratnim prečnim preverjanjem po 22 udeležencih smo jih primerjali z modeli \ModelName{SVM}, \ModelName{LightGBM}, \ModelName{MLP}, \ModelName{GazeMAE} in \ModelName{MOMENT}.
-Najboljši rezultat je dosegel \ModelName{SVM} na koordinatah pogleda in velikostih zenic (točnost = $70{,}5~\%$, makro F1 = $69{,}7~\%$), najboljši grafovski model pa \ModelName{HeteroGCN-MLP} samo na koordinatah pogleda ($65{,}9~\%$, $65{,}8~\%$).
-Vsi grafovski modeli so presegli naključni in večinski klasifikator, vendar večanje kompleksnosti ni prinašalo doslednih izboljšav.
-V nalogi ugotovimo, da grafovska predstavitev podatkov sledilnika pogleda vsebuje uporaben signal, vendar agregirane značilke ostajajo uspešnejše in računsko učinkovitejše za binarno klasifikacijo valence.
+Najboljši rezultat je dosegel \ModelName{SVM} na koordinatah pogleda in velikostih zenic (točnost~=~$70{,}5~\%$, makro F1~=~$69{,}7~\%$), najboljši grafovski model \ModelName{HeteroGCN-MLP} pa samo na koordinatah pogleda ($65{,}9~\%$, $65{,}8~\%$).
+Vsi grafovski modeli so presegli naključni in večinski klasifikator, vendar večja kompleksnost modela ne prinese doslednih izboljšav.
+V nalogi smo ugotovili, da grafovska predstavitev podatkov sledilnika pogleda vsebuje uporaben signal, vendar agregirane značilke ostajajo uspešnejše in računsko učinkovitejše za binarno klasifikacijo valence.

@@ -4,7 +4,7 @@ This thesis designed and evaluated a spatio-temporal graph representation of eye
 Measurements from the MAHNOB-HCI dataset were divided into ten-second windows and represented as nodes connected by temporal, spatial, and fixation edges.
 We compared a homogeneous \ModelName{GCN} with three heterogeneous variants incorporating relation-specific processing, learned relation fusion, and edge weights.
 Using seven-fold subject-wise cross-validation across 22 participants, we compared them with \ModelName{SVM}, \ModelName{LightGBM}, \ModelName{MLP}, \ModelName{GazeMAE}, and \ModelName{MOMENT}.
-The best result was achieved by \ModelName{SVM} using gaze coordinates and pupil sizes (accuracy = $70.5~\%$, macro F1 = $69.7~\%$), whereas the best graph model, \ModelName{HeteroGCN-MLP}, used gaze coordinates alone ($65.9~\%$, $65.8~\%$).
+The best result was achieved by \ModelName{SVM} using gaze coordinates and pupil sizes (accuracy~=~$70.5~\%$, macro F1~=~$69.7~\%$), whereas the best graph model, \ModelName{HeteroGCN-MLP}, used gaze coordinates alone ($65.9~\%$, $65.8~\%$).
 All graph models outperformed the random and majority classifiers, but increasing model complexity did not yield consistent improvements.
 We conclude that the graph representation of eye-tracking data contains useful information, although aggregated features remain more accurate and computationally efficient for binary valence classification.
 

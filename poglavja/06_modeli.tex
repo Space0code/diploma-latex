@@ -65,7 +65,6 @@ Takšni modeli vhodnega okna ne pretvorijo v vnaprej določene statistike, temve
 V tej nalogi smo ju uporabili kot zamrznjena kodirnika, zato njunih parametrov med učenjem nismo spreminjali.
 Na izračunanih predstavitvah smo nato učili ločeno klasifikacijsko glavo \ModelName{MLP}.
 Ta \ModelName{MLP} je arhitekturno drugačen, ločen in nepovezan s samostojnim klasifikatorjem \ModelName{MLP} iz družine klasičnih modelov strojnega učenja.
-\newpage
 
 \subsubsection*{\ModelName{GazeMAE}}
 \label{subsec:gazemae-model}
@@ -224,7 +223,6 @@ Relacijski izhodi $\mathbf{Z}_r^{(k)}$ se izračunajo kot v enačbi~\eqref{eq:mo
     \label{eq:model-heterogcn-mlp}
 \end{equation}
 kjer $\Vert$ označuje konkatenacijo v vnaprej določenem vrstnem redu relacij, $f_{\mathrm{fuz}}^{(k)}$ pa dvoslojni perceptron $k$-te grafovske plasti.
-
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=\textwidth]{\detokenize{HeteroGCN-MLP final.png}}
@@ -271,7 +269,7 @@ Slika~\ref{fig:diagram-heterogcn-mlp-w} prikazuje dodano vejo za izračun učlji
     \caption[Diagram arhitekture \ModelName{HeteroGCN-MLP-w}.]{Diagram arhitekture \ModelName{HeteroGCN-MLP-w}. Model poleg učljive fuzije relacij uporablja še značilke povezav, iz katerih z relacijsko odvisnimi perceptroni izračuna učljive predznačene uteži povezav.}
     \label{fig:diagram-heterogcn-mlp-w}
 \end{figure}
-\newpage
+
 \subsubsection*{Izbira grafovske konvolucije}
 \label{subsec:izbira-grafovske-konvolucije}
 

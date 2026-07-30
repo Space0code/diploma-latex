@@ -760,8 +760,8 @@ def generate_signal_distribution_plots(df: pd.DataFrame, data_figures_dir: Path,
         norm=LogNorm(vmin=1, vmax=max(1, counts.max())),
         shading="auto",
     )
-    ax.set_xlabel("vodoravna koordinata pogleda [px]", fontsize=AXIS_LABEL_FONTSIZE)
-    ax.set_ylabel("navpična koordinata pogleda [px]", fontsize=AXIS_LABEL_FONTSIZE)
+    ax.set_xlabel("vodoravna koordinata pogleda x", fontsize=AXIS_LABEL_FONTSIZE)
+    ax.set_ylabel("navpična koordinata pogleda y", fontsize=AXIS_LABEL_FONTSIZE)
     ax.set_xlim(130, 1130)
     ax.set_ylim(830, 30)
     ax.set_aspect("equal", adjustable="box")

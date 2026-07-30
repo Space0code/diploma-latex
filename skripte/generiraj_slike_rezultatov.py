@@ -634,7 +634,7 @@ def generate_label_noise_alignment_plot(df: pd.DataFrame, output_path: Path, dpi
         annotations = proportions.copy().astype(object)
         for row in proportions.index:
             for col in proportions.columns:
-                annotations.loc[row, col] = f"{proportions.loc[row, col]:.2f}\n(n={counts.loc[row, col]})"
+                annotations.loc[row, col] = f"{proportions.loc[row, col]:.2f}".replace(".", ",") + f"\n(n={counts.loc[row, col]})"
 
         sns.heatmap(
             proportions,

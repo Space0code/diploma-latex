@@ -74,8 +74,8 @@ Model prejme zgolj koordinati pogleda $(x,~y)$, zato smo ga samostojno uporabili
 Ker je bil \ModelName{GazeMAE} učen na $2~s$ oknih, vzorčenih s frekvenco $500~Hz$, smo uporabljena $10~s$ okna najprej pretvorili v obliko, ki jo model pričakuje.
 Koordinati pogleda smo razdelili na pet neprekrivajočih se $2~s$ kosov in ju prevzorčili na ciljno frekvenco $500~Hz$.
 Kodirnika znotraj modela temeljita na časovno-konvolucijskih mrežah ter ločeno kodirata položaj in hitrost pogleda.
-Za vsak kos vrneta po eno predstavitev s~128 razsežnostmi, ki ju združimo v predstavitev s~256 razsežnostmi~\cite{bautista2021gazemae}.
-V naši implementaciji smo nato po petih kosih izračunali povprečje in standardni odklon vsake razsežnosti ter oba vektorja združili v predstavitev celotnega okna s~512 razsežnostmi.
+Za vsak kos vrneta po eno predstavitev s~128 dimenzijami, ki ju združimo v predstavitev s~256 dimenzijami~\cite{bautista2021gazemae}.
+V naši implementaciji smo nato po petih kosih izračunali povprečje in standardni odklon vsake dimenzije ter oba vektorja združili v predstavitev celotnega okna s~512 dimenzijami.
 
 \subsubsection*{\ModelName{MOMENT}}
 \label{subsec:moment-model}
@@ -85,7 +85,7 @@ V nasprotju z \ModelName{GazeMAE} ni vezan samo na koordinate pogleda, zato smo 
 To so lahko velikosti zenic, oddaljenost od sledilnika pogleda in trajanje fiksacije.
 Samostojno smo ga uporabili le za množico \emph{samo zenici}.
 Vhodno okno smo pred uporabo prevzorčili na 512 časovnih korakov.
-\ModelName{MOMENT} temelji na arhitekturi transformerjev za časovne vrste in v uporabljeni nastavitvi izračuna predstavitev okna s~768 razsežnostmi.
+\ModelName{MOMENT} temelji na arhitekturi transformerjev za časovne vrste in v uporabljeni nastavitvi izračuna predstavitev okna s~768 dimenzijami.
 
 \subsubsection*{Združene predstavitve \ModelName{GazeMAE} in \ModelName{MOMENT}}
 
@@ -113,7 +113,7 @@ V tabeli~\ref{tab:arhitekturna-lestvica-gnn} so na kratko predstavljene razlike 
 
 Vsi obravnavani grafovski modeli sledijo splošnemu postopku posredovanja sporočil, predstavljenemu v razdelku~\ref{subsec:osnove-gnn}, razlikujejo pa se po obravnavi relacij, njihovi fuziji in uporabi značilk povezav.
 Na vhod prejmejo graf glede na izbrano množico signalov, kot je definirano v poglavju~\ref{sec:grafovska-predstavitev}.
-Razsežnost vhodnih preslikav prilagodimo izbrani množici signalov -- ločeno za značilke vozlišč, pri modelu \ModelName{HeteroGCN-MLP-w}, ki ga bomo kmalu predstavili, pa tudi za značilke povezav.
+Dimenzijo vhodnih preslikav prilagodimo izbrani množici signalov -- ločeno za značilke vozlišč, pri modelu \ModelName{HeteroGCN-MLP-w}, ki ga bomo kmalu predstavili, pa tudi za značilke povezav.
 
 Vhodne vektorje najprej preslikamo v skupni latentni prostor oziroma prostor skritih predstavitev z dvoslojnim \ModelName{MLP}.
 Tako dobimo začetno predstavitev vsakega vozlišča, ki jo nato posodabljajo grafovske plasti.

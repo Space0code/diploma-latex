@@ -10,8 +10,8 @@ V tem dodatku podamo podrobnejše nastavitve eksperimentov in modelov ter dopoln
 Tabela~\ref{tab:hiperparametri-modelov} povzema glavne hiperparametre modelov v končnih eksperimentih.
 Nastavitve grafovske konstrukcije smo izbrali po majhnem predhodnem mrežnem iskanju na 3-razredni valenci, glede na izvorne razrede definirane v tabeli~\ref{tab:label-mapping}.
 Iskanje je spreminjalo število grafovskih plasti, velikost skritih predstavitev ter parametre konstrukcije $k_t$, $k_s$ in $k_f$.
-Primerjali smo več nastavitev števila plasti in skrite razsežnosti, vendar med njimi ni bilo velikih razlik.
-Ker je bil najmanjši model med najboljšimi in najstabilnejšimi, hkrati pa je računsko najvarčnejši, smo za končne poskuse izbrali $L=2$ (število skritih plasti GNN) in $d=64$ (razsežnost skritih plasti).
+Primerjali smo več nastavitev števila plasti in skrite dimenzije, vendar med njimi ni bilo velikih razlik.
+Ker je bil najmanjši model med najboljšimi in najstabilnejšimi, hkrati pa je računsko najvarčnejši, smo za končne poskuse izbrali $L=2$ (število skritih plasti GNN) in $d=64$ (dimenzija skritih plasti).
 Pri tej arhitekturni nastavitvi smo v mrežnem iskanju spreminjali $k_t \in \{1,2,3\}$, $k_s \in \{1,2,3\}$ in $k_f \in \{1,2,3,5\}$.
 Najvišji rezultat v tem pomožnem iskanju je dosegla nastavitev $k_t=3$, $k_s=1$ in $k_f=5$, vendar so bile razlike majhne.
 V končnih poskusih smo uporabili redkejšo nastavitev $k_t=1$, $k_s=1$ in $k_f=3$, ker zmanjša gostoto grafa in računsko zahtevnost ter ohrani stabilno delovanje.
@@ -51,7 +51,7 @@ Vsak od teh perceptronov ima obliko
 \begin{equation}
     d_e \rightarrow 6 \rightarrow 4 \rightarrow 2 \rightarrow 1,
 \end{equation}
-kjer je $d_e$ razsežnost vektorja značilk povezave za izbrano relacijo in množico signalov.
+kjer je $d_e$ dimenzija vektorja značilk povezave za izbrano relacijo in množico signalov.
 
 Surovo oceno nato omejimo s funkcijo $\tanh$:
 \begin{equation}

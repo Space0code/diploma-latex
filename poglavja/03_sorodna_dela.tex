@@ -16,7 +16,7 @@ Graf definiramo kot
     G = (V, E),
 \end{equation}
 kjer je $V$ množica vozlišč, $E \subseteq V \times V$ pa množica povezav med vozlišči.
-Vozlišča praviloma vsebujejo značilke $\mathbf{x}_v$, ki jih zapišemo v matriko
+Vozlišča praviloma vsebujejo značilke $\mathbf{x}_i$, ki jih zapišemo v matriko
 \begin{equation}
     X \in \mathbb{R}^{|V| \times d},
 \end{equation}
@@ -41,52 +41,52 @@ Vsako vozlišče v posamezni plasti prejme informacije od svojih sosedov, jih ag
 
 Splošno plast posredovanja sporočil lahko zapišemo kot
 \begin{equation}
-    \mathbf{h}_v^{(k)} =
+    \mathbf{h}_j^{(k)} =
     \phi^{(k)}
     \left(
-        \mathbf{h}_v^{(k-1)},
-        \bigoplus_{u \in \mathcal{N}(v)}
+        \mathbf{h}_j^{(k-1)},
+        \bigoplus_{i \in \mathcal{N}(j)}
         \psi^{(k)}
         \left(
-            \mathbf{h}_v^{(k-1)},
-            \mathbf{h}_u^{(k-1)},
-            \mathbf{e}_{uv}
+            \mathbf{h}_j^{(k-1)},
+            \mathbf{h}_i^{(k-1)},
+            \mathbf{e}_{ij}
         \right)
     \right),
     \label{eq:splosno-posredovanje-sporocil}
 \end{equation}
-kjer je $\mathcal{N}(v)$ množica sosedov vozlišča $v$, $\psi^{(k)}$ funkcija sporočila, $\oplus$ agregacijska funkcija, $\phi^{(k)}$ funkcija posodobitve, $\mathbf{h}_v^{(k)}$ pa predstavitev vozlišča $v$ v plasti $k$.
+kjer je $\mathcal{N}(j)$ množica sosedov vozlišča $j$, $\psi^{(k)}$ funkcija sporočila, $\oplus$ agregacijska funkcija, $\phi^{(k)}$ funkcija posodobitve, $\mathbf{h}_j^{(k)}$ pa predstavitev vozlišča $j$ v plasti $k$.
 Funkcija $\psi^{(k)}$ je lahko na primer linearna preslikava ali večslojni perceptron nad predstavitvama vozlišč in značilkami povezave, $\phi^{(k)}$ pa preprosta vsota prejšnje predstavitve vozlišča in agregiranega sporočila, večslojni perceptron ali rekurentna enota.
 Isti funkciji $\psi^{(k)}$ in $\phi^{(k)}$ uporabimo pri vseh vozliščih, zato je plast ob invariantni agregaciji ekvivariantna na permutacijo vozlišč, kar pomeni, da preureditev vozlišč le enako preuredi njihove izhodne predstavitve.
 Agregacijska funkcija $\oplus$ mora biti invariantna na vrstni red sosedov.
 To lastnost imajo na primer vsota, povprečje in maksimum, zato lahko ista GNN plast deluje na grafih različnih velikosti.
 Pri časovnih vrstah je ureditev meritev sicer naravno določena s časom, vendar jo mora model zajeti eksplicitno, na primer s časovnimi povezavami ali časovnimi značilkami, saj se z grafovsko predstavitvijo sicer izgubi.
 
-Pri heterogenem grafu, kjer povezave razdelimo po tipih oziroma relacijah $r \in \mathcal{R}$, namesto ene same množice sosedov obravnavamo množice $\mathcal{N}_r(v)$, ki vsebujejo sosede vozlišča $v$ po relaciji $r$.
+Pri heterogenem grafu, kjer povezave razdelimo po tipih oziroma relacijah $r \in \mathcal{R}$, namesto ene same množice sosedov obravnavamo množice $\mathcal{N}_r(j)$, ki vsebujejo sosede vozlišča $j$ po relaciji $r$.
 Sporočila se najprej agregirajo ločeno znotraj posamezne relacije:
 \begin{equation}
-    \mathbf{m}_{v,r}^{(k)} =
-    \bigoplus_{u \in \mathcal{N}_r(v)}
+    \mathbf{m}_{j,r}^{(k)} =
+    \bigoplus_{i \in \mathcal{N}_r(j)}
     \psi_r^{(k)}
     \left(
-        \mathbf{h}_u^{(k-1)},
-        \mathbf{e}_{uv}
+        \mathbf{h}_i^{(k-1)},
+        \mathbf{e}_{ij}
     \right).
     \label{eq:heterogeno-posredovanje-sporocil}
 \end{equation}
-Pri tem je $\psi_r^{(k)}$ funkcija sporočila za relacijo $r$, $\mathbf{m}_{v,r}^{(k)}$ pa agregirano sporočilo, ki ga vozlišče $v$ prejme po tej relaciji v plasti $k$.
+Pri tem je $\psi_r^{(k)}$ funkcija sporočila za relacijo $r$, $\mathbf{m}_{j,r}^{(k)}$ pa agregirano sporočilo, ki ga vozlišče $j$ prejme po tej relaciji v plasti $k$.
 Za vsako relacijo lahko uporabimo ločeno linearno preslikavo ali večslojni perceptron $\psi_r^{(k)}$, agregacija znotraj posamezne relacije pa mora biti, tako kot prej, invariantna na vrstni red sosedov.
-Relacijska sporočila $\mathbf{m}_{v,r}^{(k)}$ se nato združijo v skupno sporočilo za vozlišče.
+Relacijska sporočila $\mathbf{m}_{j,r}^{(k)}$ se nato združijo v skupno sporočilo za vozlišče.
 Združevanje relacij je lahko vsota ali povprečje, lahko pa vključuje konkatenacijo oziroma učljivo fuzijo relacijskih predstavitev, pri katerih mora biti vrstni red relacij vnaprej določen.
 
 Če želimo napovedati razred celotnega grafa, lahko nalogo obravnavamo kot klasifikacijo na ravni grafa.
 Naj bo $L$ število plasti grafovske nevronske mreže.
-Na zadnji, $L$-ti plasti dobimo končne predstavitve vozlišč $\mathbf{h}_v^{(L)}$, ki jih združimo v predstavitev celotnega grafa:
+Na zadnji, $L$-ti plasti dobimo končne predstavitve vozlišč $\mathbf{h}_i^{(L)}$, ki jih združimo v predstavitev celotnega grafa:
 \begin{equation}
     \mathbf{h}_G =
     \text{READOUT}
     \left(
-        \{\mathbf{h}_v^{(L)} : v \in V\}
+        \{\mathbf{h}_i^{(L)} : i \in V\}
     \right).
     \label{eq:klasifikacija-grafa-readout}
 \end{equation}

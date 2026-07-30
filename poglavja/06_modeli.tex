@@ -126,10 +126,10 @@ Ti gradniki niso predmet primerjave med grafovskimi modeli.
 Gre za uveljavljene gradnike nevronskih mrež, ki podpirajo stabilnejše učenje in omejujejo prekomerno prileganje~\cite{hendrycks2016gelu,he2016deep,ba2016layer,srivastava2014dropout}.
 Primerjava se osredotoča na obravnavo relacij, fuzijo relacijskih predstavitev in uporabo značilk povezav.
 Ker napovedujemo razred celotnega okna, iz končnih predstavitev vozlišč s pozornostnim združevanjem izračunamo predstavitev celotnega grafa.
-Uporabimo $\mathbf{h}_G = \sum_{v \in V} \alpha_v \mathbf{h}_v$, kjer je $\mathbf{h}_G$ predstavitev grafa, $\alpha_v$ utež pozornosti za vozlišče $v$, $\mathbf{h}_v$ pa predstavitev vozlišča $v$.
+Uporabimo $\mathbf{h}_G = \sum_{i \in V} \alpha_i \mathbf{h}_i$, kjer je $\mathbf{h}_G$ predstavitev grafa, $\alpha_i$ utež pozornosti za vozlišče $i$, $\mathbf{h}_i$ pa predstavitev vozlišča $i$.
 Uteži pozornosti normaliziramo s softmax normalizacijo:
 \begin{equation}
-    \alpha_v = \frac{\exp(g(\mathbf{h}_v))}{\sum_{u \in V} \exp(g(\mathbf{h}_u))}.
+    \alpha_i = \frac{\exp(g(\mathbf{h}_i))}{\sum_{j \in V} \exp(g(\mathbf{h}_j))}.
 \end{equation}
 Pri tem je $g$ učljiva funkcija, ki predstavitvi vozlišča priredi skalarno oceno pomembnosti.
 Predstavitev grafa nato pošljemo skozi klasifikacijsko glavo \ModelName{MLP}.
@@ -239,26 +239,26 @@ Ti na podlagi vektorja značilk posamezne povezave, katerega komponente so povze
 Pri posamezni množici signalov se uporabijo le funkcije za relacije, ki so v grafu prisotne.
 Časovne povezave naprej in nazaj si delijo isto funkcijo $f_w^{\text{čas}}$, smer povezave pa je podana kot dodatna značilka povezave $\rho_{ij}$.
 Formule za izračun in normalizacijo uteži so podane v dodatku~\ref{app:naucene-utezi-povezav}.
-Za vozlišče $v$ in relacijo $r$ je glavni korak uteženega posredovanja sporočil
+Za vozlišče $j$ in relacijo $r$ je glavni korak uteženega posredovanja sporočil
 \begin{equation}
     \begin{aligned}
-        \mathbf{z}_{v,r}^{(k)}
+        \mathbf{z}_{j,r}^{(k)}
         &= \operatorname{GELU}\!\left(
-            \sum_{u \in \mathcal{N}_r(v)}
-            w_{uv}^{(r)}
+            \sum_{i \in \mathcal{N}_r(j)}
+            w_{ij}^{(r)}
             \boldsymbol{\Theta}_r^{(k)}
-            \mathbf{h}_u^{(k-1)}
+            \mathbf{h}_i^{(k-1)}
             + \mathbf{b}_r^{(k)}
         \right), \\
-        \mathbf{z}_v^{(k)}
+        \mathbf{z}_j^{(k)}
         &= f_{\mathrm{fuz}}^{(k)}\!\left(
             \mathop{\Vert}_{r \in \mathcal{R}}
-            \mathbf{z}_{v,r}^{(k)}
+            \mathbf{z}_{j,r}^{(k)}
         \right).
     \end{aligned}
     \label{eq:model-heterogcn-mlp-w}
 \end{equation}
-Uteži $w_{uv}^{(r)}$ so že normalizirane po vhodnih povezavah vozlišča $v$ znotraj relacije.
+Uteži $w_{ij}^{(r)}$ so že normalizirane po vhodnih povezavah vozlišča $j$ znotraj relacije.
 
 Ker tudi povezave istega tipa niso nujno enako informativne, lahko model v tej končni stopnji z utežmi na podlagi njihovih značilk poudari koristnejše povezave ter oslabi ali predznačeno spremeni prispevek manj koristnih.
 Slika~\ref{fig:diagram-heterogcn-mlp-w} prikazuje dodano vejo za izračun učljivih uteži povezav.

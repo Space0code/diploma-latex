@@ -44,6 +44,10 @@ urejanju, strukturi, slogu in virih diplomske naloge.
   evklidska razdalja med položajema pogleda na zaslonu, `$d_i^{\text{sled}}$`
   je oddaljenost meritve od sledilnika pogleda, `$\Delta d_{ij}^{\text{sled}}$`
   pa razlika teh oddaljenosti med meritvama.
+- Za indekse vozlišč, meritev in povezav dosledno uporabljaj `$i$`, `$j$` in po
+  potrebi `$k$`, ne `$u$` in `$v$`. Pri usmerjeni povezavi je `$i$` izvorno,
+  `$j$` pa ciljno vozlišče, zato uporabljaj zapise, kot so `$e_{ij}$`,
+  `$w_{ij}$` in `$\mathbf{h}_i$`.
 - Pri sklicih uporabljaj nedeljivi presledek: `Slika~1`, `Tabela~2`,
   `Poglavje~3`, `enačba~(4)`. Za vire uporabljaj `\cite{...}`, ne `\ref{...}`;
   `\ref{...}` uporabljaj samo za označene slike, tabele, enačbe, poglavja ali

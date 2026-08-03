@@ -10,7 +10,7 @@ Koda za predobdelavo, konstrukcijo grafov, učenje modelov, evalvacijo in generi
 Podatkovna zbirka \MAHNOB{} v repozitorij ni vključena. 
 Pridobili smo jo preko uradnega spletnega mesta podatkovne zbirke~\cite{mahnobwebsite}.
 
-\section{Zasnova in validacijski protokol}
+\section{Zasnova in prečno preverjanje}
 \label{subsec:zasnova-glavne-primerjave}
 \label{subsec:validacijski-protokol}
 
@@ -127,7 +127,8 @@ Dodatne matrike zamenjav za vse modele in vse množice signalov so prikazane v d
 Poleg končnih klasifikacijskih meritev smo preverili tudi potek učenja modelov.
 Slika~\ref{fig:potek-izgube-gnn} prikazuje učno in validacijsko izgubo vseh štirih grafovskih arhitektur pri množici signalov \emph{pogled in zenici}.
 Za berljivost so prikazane povprečne vrednosti čez sedem delitev po subjektih, zasenčeno območje pa predstavlja standardni odklon med delitvami.
-Ker se delitve zaradi zgodnjega ustavljanja končajo po različnem številu epoh, se dolžina krivulj med modeli razlikuje in se posledično zasenčeno območje pri večjem številu epoh skrči vse do 0, saj se je le v enem primeru model učil največ epoh.
+Ker se delitve zaradi zgodnjega ustavljanja končajo po različnem številu epoh, se dolžina krivulj med modeli razlikuje in se posledično zasenčeno območje pri večjem številu epoh skrči vse do 0, saj se je le pri eni delitvi model učil največ epoh.
+Od te točke dalje prikazana krivulja zato ne predstavlja več povprečja več delitev, temveč potek ene same delitve, kar pojasni tudi njen stopničast potek.
 \newpage
 % Vir podatkov: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/training_history.csv.
 % Slika je reproducibilno generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.

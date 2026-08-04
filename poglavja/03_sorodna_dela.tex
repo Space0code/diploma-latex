@@ -1,12 +1,12 @@
 \chapter{Teoretično ozadje in sorodna dela}
 \label{sec:sorodna-dela}
 
-To poglavje predstavi teoretične osnove grafovskih nevronskih mrež in umesti nalogo med obstoječe pristope za delo s podatki sledilnika pogleda.
+To poglavje predstavi teoretične osnove grafovskih nevronskih mrež in umesti obravnavano raziskavo med obstoječe pristope za delo s podatki sledilnika pogleda.
 Sorodna dela v tem poglavju obravnavamo z vidika vprašanja, kako podatke sledilnika pogleda predstaviti za klasifikacijo čustvenih oznak.
 Čustvena stanja se pogosto opisujejo z dimenzijama valence in vzburjenosti, pri čemer valenca opisuje razpon čustvenega odziva od negativnega do pozitivnega~\cite{lim2020emotion}.
 
-Najprej predstavimo osnove grafovskih nevronskih mrež ter njihovo uporabo pri časovnih vrstah in časovno-prostorskih podatkih, saj je osrednji del naloge pretvorba časovnega okna meritev sledilnika pogleda v graf.
-Nato povzamemo učenje predstavitev iz signalov in položaj te naloge glede na sorodna dela.
+Najprej predstavimo osnove grafovskih nevronskih mrež ter njihovo uporabo pri časovnih vrstah in časovno-prostorskih podatkih, saj je osrednji del raziskave pretvorba časovnega okna meritev sledilnika pogleda v graf.
+Nato povzamemo učenje predstavitev iz signalov in položaj predlaganega pristopa glede na sorodna dela.
 
 \section{Osnove grafovskih nevronskih mrež}
 \label{subsec:osnove-gnn}
@@ -86,7 +86,7 @@ Sporočila se najprej agregirajo ločeno znotraj posamezne relacije:
 Pri tem je $\psi_r^{(k)}$ funkcija sporočila za relacijo $r$, $\mathbf{m}_{j,r}^{(k)}$ pa agregirano sporočilo, ki ga vozlišče $j$ prejme po tej relaciji v plasti $k$.
 Za vsako relacijo lahko uporabimo ločeno linearno preslikavo ali večslojni perceptron $\psi_r^{(k)}$, agregacija znotraj posamezne relacije pa mora biti, tako kot prej, invariantna na vrstni red sosedov.
 Relacijska sporočila $\mathbf{m}_{j,r}^{(k)}$ se nato združijo v skupno sporočilo za vozlišče.
-Združevanje relacij je lahko vsota ali povprečje, lahko pa vključuje konkatenacijo oziroma učljivo fuzijo relacijskih predstavitev, pri katerih mora biti vrstni red relacij vnaprej določen.
+Združevanje relacij je lahko vsota ali povprečje, lahko pa vključuje konkatenacijo oziroma učljivo fuzijo relacijskih predstavitev, pri čemer mora biti vrstni red relacij vnaprej določen.
 
 Če želimo napovedati razred celotnega grafa, lahko nalogo obravnavamo kot klasifikacijo na ravni grafa.
 Naj bo $L$ število plasti grafovske nevronske mreže.
@@ -109,34 +109,34 @@ Predstavitev grafa $\mathbf{h}_G$ nato uporabimo v klasifikacijski glavi, ki nap
 Za modeliranje časovnih vrst se pogosto uporabljajo rekurentne nevronske mreže z dolgim kratkoročnim spominom (LSTM, angl. \emph{long short-term memory}) in transformerji, ki modelirajo časovne odvisnosti med meritvami~\cite{jin2024gnn4ts}.
 Grafovska predstavitev je smiselna, kadar želimo poleg časovne urejenosti eksplicitno modelirati tudi odnose med več časovnimi vrstami ali prostorske odnose med meritvami~\cite{jin2024gnn4ts}.
 Pregled GNN za časovne vrste to področje obravnava skozi naloge napovedovanja, klasifikacije, imputacije in zaznavanja anomalij.
-Za to nalogo je pomembna predvsem formulacija, pri kateri posamezno časovno okno pretvorimo v grafovsko predstavitev in razred napovemo na ravni celotnega grafa.
+Za obravnavani problem je pomembna predvsem formulacija, pri kateri posamezno časovno okno pretvorimo v grafovsko predstavitev in razred napovemo na ravni celotnega grafa.
 
 Pri podatkih sledilnika pogleda imajo meritve poleg časovnega vrstnega reda tudi prostorsko komponento, saj je vsaka veljavna meritev vezana na položaj pogleda na zaslonu.
 Podobno ločevanje časovnih in prostorskih odvisnosti uporablja na primer časovno-prostorska grafovska konvolucijska mreža ST-GCN (angl. \emph{spatio-temporal graph convolutional network}) pri napovedovanju prometa, kjer grafovska konvolucija modelira prostorske povezave med senzorji, časovna konvolucija pa dinamiko signala skozi čas~\cite{yu2018stgcn}.
-V tej nalogi je ta pristop uporaben kot metodološka analogija, saj ne napovedujemo prihodnjih meritev, temveč klasificiramo razred časovnega okna meritev.
+Pri predlaganem pristopu je to uporabna metodološka analogija, saj ne napovedujemo prihodnjih meritev, temveč klasificiramo razred časovnega okna meritev.
 
 \section{Učenje predstavitev iz signalov}
 \label{subsec:ucenje-predstavitev-signalov}
 
 Poleg ročno oblikovanih značilk obstajajo pristopi, ki se predstavitev naučijo neposredno iz zaporedij meritev.
 S tem zmanjšajo odvisnost od ročne izbire značilk, hkrati pa so njihove predstavitve vezane na podatke in naloge, uporabljene pri predtreniranju.
-V nalogi takšni modeli služijo kot most med klasičnimi modeli na ročno agregiranih značilkah in grafovskimi modeli, ki se predstavitev učijo na sami strukturi podatkov.
+Takšni modeli služijo kot most med klasičnimi modeli na ročno agregiranih značilkah in grafovskimi modeli, ki se predstavitev učijo na sami strukturi podatkov.
 
 \ModelName{GazeMAE} je primer odprtokodnega modela, zasnovanega posebej za očesne gibe, ki z dvema časovno-konvolucijskima avtokodirnikoma ločeno kodira zaporedji koordinat pogleda in iz njih izračunanih hitrosti.
 Pri samonadzorovanem učenju avtokodirnika rekonstruirata delno izpuščene vrednosti signalov~\cite{bautista2021gazemae}.
 \ModelName{MOMENT} je splošnejši prednaučen temeljni model za časovne vrste, ki signal razdeli na dele fiksne dolžine in jih kodira z arhitekturo transformerjev.
 Pri predtreniranju naključno zakrije nekatere dele signala in se uči njihove rekonstrukcije iz preostalega konteksta.
-Ker njegov vhod ni omejen na koordinate zaslone, je uporaben kot primerjava pri ostalih signalih~\cite{goswami2024moment}.
+Ker njegov vhod ni omejen na koordinate zaslona, je uporaben kot primerjava pri ostalih signalih~\cite{goswami2024moment}.
 
 \section{Položaj naloge glede na sorodna dela}
 \label{subsec:polozaj-naloge-sorodna-dela}
 
 Pregled sorodnih del kaže, da se podatki sledilnika pogleda pri prepoznavanju čustvenih stanj najpogosteje uporabljajo v obliki ročno oblikovanih značilk ali zaporedij meritev~\cite{lim2020emotion,tarnowski2020eye,lu2015combining_eye_eeg}.
 Tudi izvirni članek podatkovne zbirke \MAHNOB{} uporablja ročno oblikovane značilke pogleda: pri trirazredni klasifikaciji valence po protokolu LOSO (angl. \emph{leave-one-subject-out}) -- pri katerem je vsak udeleženec enkrat uporabljen kot testna množica -- so avtorji dosegli točnost $68{,}8\,\%$ in povprečno mero F1 $68~\%$~\cite{soleymani2012mahnob}.
-Ti rezultati niso neposredno primerljivi z rezultati te naloge, saj smo uporabili binarno klasifikacijo, drugačna časovna okna in drug eksperimentalni protokol.
+Ti rezultati niso neposredno primerljivi z rezultati tega dela, saj smo uporabili binarno klasifikacijo, drugačna časovna okna in drug eksperimentalni protokol.
 
 Grafovski modeli so pogosteje uporabljeni pri drugih vrstah časovno-prostorskih podatkov oziroma pri fizioloških signalih, predvsem pri elektroencefalografskih signalih (EEG), kjer vozlišča običajno predstavljajo elektrode ali možganska področja~\cite{song2020dgcnn,zhong2022rgnn,liu2024gnn_eeg_survey}.
 Obstajajo tudi večmodalni pristopi za prepoznavo čustev iz EEG in podatkov očesnih gibov~\cite{wu2021emotion,lu2015combining_eye_eeg}.
-Ker v pregledu sorodnih del nismo našli pristopa, ki bi podatke sledilnika pogleda samostojno obravnaval kot časovno-prostorski graf posameznih meritev, v nalogi preverjamo uporabnost takšne predstavitve pri klasifikaciji čustvenih oznak.
-Naloga torej povezuje (1) binarno klasifikacijo valence iz podatkov sledilnika pogleda, (2) GNN za časovno-prostorske podatke ter (3) primerjavo ročno oblikovanih, samonaučenih in grafovskih predstavitev časovnih oken. 
+Ker v pregledu sorodnih del nismo našli pristopa, ki bi podatke sledilnika pogleda samostojno obravnaval kot časovno-prostorski graf posameznih meritev, preverjamo uporabnost takšne predstavitve pri klasifikaciji čustvenih oznak.
+Diplomsko delo torej povezuje (1) binarno klasifikacijo valence iz podatkov sledilnika pogleda, (2) GNN za časovno-prostorske podatke ter (3) primerjavo ročno oblikovanih, samonaučenih in grafovskih predstavitev časovnih oken.
 \newpage

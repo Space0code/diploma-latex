@@ -3,39 +3,31 @@
 % RETAIN_2026-06-12_16-29-08/tables/missing_full_inference_benchmark.json.
 \begin{table}[!htbp]
     \centering
-    \caption{Velikost in računska zahtevnost modelov pri množici signalov \emph{pogled in zenici}.}
+    \caption{Velikost in računska zahtevnost modelov pri množici signalov \emph{pogled in zenici}. Števili parametrov sta podani v tisočih, časa učenja in sklepanja pa v milisekundah na okno.}
     \label{tab:rezultati-racunska-zahtevnost}
-    \footnotesize
-    \setlength{\tabcolsep}{4pt}
-    \resizebox{\textwidth}{!}{%
-    \begin{tabular}{@{}llrrrrr@{}}
+    \small
+    \setlength{\tabcolsep}{3.5pt}
+    \begin{tabularx}{\textwidth}{@{}l >{\centering\arraybackslash}X rrrrr@{}}
         \toprule
-        \makecell[l]{\textbf{Model}} &
-        \makecell[l]{\textbf{Vhod}} &
-        \makecell[c]{\textbf{Učljivi}\\\textbf{parametri}\\\textbf{(v tisočih)}} &
-        \makecell[c]{\textbf{Vsi}\\\textbf{parametri}\\\textbf{(v tisočih)}} &
-        \makecell[c]{\textbf{Učenje}\\\textbf{[ms/okno]}} &
-        \makecell[c]{\textbf{Sklepanje}\\\textbf{[ms/okno]}} &
-        \makecell[c]{\textbf{Točnost}\\\textbf{[\%]}} \\
+        \textbf{Model} & \textbf{Vhod} & \textbf{Učljivi} & \textbf{Vsi} & \textbf{Učenje} & \textbf{Sklepanje} & \textbf{Točnost [\%]} \\
         \midrule
         Naključni & -- & -- & -- & 0{,}00 & 0{,}00 & 50{,}8 \\
         Večinski & -- & -- & -- & 0{,}00 & 0{,}00 & 52{,}1 \\
         \midrule
-        \ModelName{SVM} & \multirow[c]{3}{=}{\centering agregirane značilke} & -- & -- & 0{,}39 & 0{,}08 & \textbf{70{,}5} \\
+        \ModelName{SVM} & \multirow[c]{3}{*}{\makecell[c]{agregirane\\značilke}} & -- & -- & 0{,}39 & 0{,}08 & \textbf{70{,}5} \\
         \ModelName{LightGBM} &  & -- & -- & 0{,}04 & 0{,}00 & 69{,}6 \\
         \ModelName{MLP} &  & 7 & 7 & 0{,}39 & 0{,}00 & 68{,}7 \\
         \midrule
         \ModelName{GazeMAE}\textsuperscript{*} & \multicolumn{1}{c}{\mbox{s. pogleda}} & 82 & 2.119 & 0{,}25 & 2{,}64 & 65{,}7 \\
         \ModelName{MOMENT}\textsuperscript{*} & \multicolumn{1}{c}{\mbox{s. zenic}} & 115 & 125.115 & 0{,}24 & 1{,}69 & 60{,}5 \\
-        \mbox{\ModelName{GazeMAE+MOMENT}} & \multicolumn{1}{c}{\mbox{s. pogleda in zenic}} & 181 & 127.217 & 0{,}26 & 6{,}12 & 65{,}6 \\
+        \mbox{\ModelName{GazeMAE+MOMENT}} & \mbox{s. pogleda in zenic} & 181 & 127.217 & 0{,}26 & 6{,}12 & 65{,}6 \\
         \midrule
-        \ModelName{GCN} & \multirow[c]{4}{=}{\centering grafi} & 26 & 26 & 20{,}73 & 0{,}19 & 65{,}4  \\
+        \ModelName{GCN} & \multirow[c]{4}{*}{grafi} & 26 & 26 & 20{,}73 & 0{,}19 & 65{,}4  \\
         \ModelName{HeteroGCN-mean} &  & 43 & 43 & 26{,}64 & 0{,}20 & 63{,}8  \\
         \ModelName{HeteroGCN-MLP} &  & 76 & 76 & 22{,}27 & 0{,}20 & 64{,}2 \\
         \ModelName{HeteroGCN-MLP-w} &  & 76 & 76 & 21{,}74 & 0{,}19 & \textbf{\emph{65{,}5}} \\
         \bottomrule
-    \end{tabular}
-    }
+    \end{tabularx}
     \vspace{0.4em}
     \parbox{\textwidth}{\footnotesize \emph{Opomba:} \textsuperscript{*}\,Vrstici za \ModelName{GazeMAE} in \ModelName{MOMENT} prikazujeta rezultate na množicah signalov \emph{samo pogled} oziroma \emph{samo zenici}. Čas sklepanja zajema celoten napovedni prehod od že pripravljenega vhoda modela (signalov) do razrednih verjetnosti -- to vključuje kodiranje signala, združevanje predstavitev in klasifikacijsko glavo.}
 \end{table}

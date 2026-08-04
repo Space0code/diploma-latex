@@ -10,7 +10,7 @@ Koda za predobdelavo, konstrukcijo grafov, učenje modelov, evalvacijo in generi
 Podatkovna zbirka \MAHNOB{} v repozitorij ni vključena. 
 Pridobili smo jo preko uradnega spletnega mesta podatkovne zbirke~\cite{mahnobwebsite}.
 
-\section{Zasnova in validacijski protokol}
+\section{Zasnova in prečno preverjanje}
 \label{subsec:zasnova-glavne-primerjave}
 \label{subsec:validacijski-protokol}
 
@@ -23,17 +23,17 @@ S tem smo primerjali tri različne načine opisa istega časovnega okna: tabelar
 Vse štiri množice iz tabele~\ref{tab:grafovska-konstrukcija-po-mnozicah} smo obravnavali kot enakovreden del primerjave, saj nas je zanimalo tudi, kako se klasifikacijska uspešnost spreminja z razpoložljivostjo različnih signalov sledilnika pogleda.
 
 
-\subsubsection*{7-kratno prečno preverjanje po subjektih}
+\subsubsection*{7-kratno prečno preverjanje po udeležencih}
 \label{subsec:subject-7kratno}
 
-Glavno primerjavo smo izvedli s 7-kratnim prečnim preverjanjem po subjektih.
-Pri vsaki ponovitvi so bili testni subjekti popolnoma ločeni od subjektov, uporabljenih za učenje in validacijo.
-Iz učnega dela smo izbrali eno skupino subjektov za validacijsko množico, preostali subjekti pa so sestavljali učno množico.
+Glavno primerjavo smo izvedli s 7-kratnim prečnim preverjanjem po udeležencih.
+Pri vsaki ponovitvi so bili testni udeleženci popolnoma ločeni od udeležencev, uporabljenih za učenje in validacijo.
+Iz učnega dela smo izbrali eno skupino udeležencev za validacijsko množico, preostali udeleženci pa so sestavljali učno množico.
 Delitve so bile pri vseh modelih in vseh množicah signalov enake ter določene s fiksnim naključnim semenom.
 
 Takšna delitev ocenjuje posploševanje na nove udeležence.
 To je za našo nalogo pomembno, saj so signali sledilnika pogleda močno odvisni od specifik posameznika~\cite{lim2020emotion}.
-Ker 22 subjektov ni deljivo s sedem, imajo posamezne testne razdelitve različno velikost -- nekatere vsebujejo tri, druge pa štiri testne subjekte.
+Ker 22 udeležencev ni deljivo s sedem, imajo posamezne testne razdelitve različno velikost -- nekatere vsebujejo tri, druge pa štiri testne udeležence.
 
 Pri nevronskih modelih smo najboljšo različico modela izbrali glede na validacijsko izgubo, nato pa njeno delovanje izmerili na pripadajoči testni množici.
 V zgodnejših fazah smo izvedli tudi podporno preverjanje z LOSO, ki je skupaj s primerjavo obeh validacijskih protokolov podano v dodatku~\ref{app:primerjava-loso}.
@@ -97,14 +97,14 @@ Krivulje učne in validacijske izgube poročamo med rezultati v nadaljevanju, di
 \newpage
 \section{Rezultati}
 
-V nadaljevanju predstavimo rezultate primerjave različnih modelov za binarno klasifikacijo valence pri 7-kratnem prečnem preverjanju po subjektih.
+V nadaljevanju predstavimo rezultate primerjave različnih modelov za binarno klasifikacijo valence pri 7-kratnem prečnem preverjanju po udeležencih.
 Dodatne rezultate in razširjene metrike poročamo v dodatku~\ref{app:dodatni-rezultati}.
 
 % Polna pot vira: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08.
 % Slike rezultatov v tem poglavju so reproducibilno generirane z:
 % diploma-latex/skripte/generiraj_slike_rezultatov.py.
 
-Tabela~\ref{tab:rezultati-glavna-primerjava} prikazuje povprečno točnost in makro F1 pri 7-kratnem prečnem preverjanju po subjektih.
+Tabela~\ref{tab:rezultati-glavna-primerjava} prikazuje povprečno točnost in makro F1 pri 7-kratnem prečnem preverjanju po udeležencih.
 Vse vrednosti so zapisane v odstotkih, štiri signalne množice pa so obravnavane kot enakovredne različice iste klasifikacijske naloge.
 Večinski klasifikator doseže točnost približno $52~\%$, kar ustreza porazdelitvi razredov na sliki~\ref{fig:porazdelitev-valenca-stevila}, vendar ima zaradi napovedovanja samo enega razreda makro F1 približno $34~\%$.
 
@@ -126,15 +126,16 @@ Dodatne matrike zamenjav za vse modele in vse množice signalov so prikazane v d
 
 Poleg končnih klasifikacijskih meritev smo preverili tudi potek učenja modelov.
 Slika~\ref{fig:potek-izgube-gnn} prikazuje učno in validacijsko izgubo vseh štirih grafovskih arhitektur pri množici signalov \emph{pogled in zenici}.
-Za berljivost so prikazane povprečne vrednosti čez sedem delitev po subjektih, zasenčeno območje pa predstavlja standardni odklon med delitvami.
-Ker se delitve zaradi zgodnjega ustavljanja končajo po različnem številu epoh, se dolžina krivulj med modeli razlikuje in se posledično zasenčeno območje pri večjem številu epoh skrči vse do 0, saj se je le v enem primeru model učil največ epoh.
-\newpage
+Za berljivost so prikazane povprečne vrednosti čez sedem delitev po udeležencih, zasenčeno območje pa predstavlja standardni odklon med delitvami.
+Ker se delitve zaradi zgodnjega ustavljanja končajo po različnem številu epoh, se dolžina krivulj med modeli razlikuje in se posledično zasenčeno območje pri večjem številu epoh skrči vse do 0, saj se je le pri eni delitvi model učil največ epoh.
+Od te točke dalje prikazana krivulja zato ne predstavlja več povprečja več delitev, temveč potek ene same delitve, kar pojasni tudi njen stopničast potek.
+
 % Vir podatkov: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/training_history.csv.
 % Slika je reproducibilno generirana s skriptom diploma-latex/skripte/generiraj_slike_rezultatov.py.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{potek_izgube_gnn_pogled_zenici.pdf}
-    \caption{Povprečni potek učne in validacijske izgube grafovskih modelov pri množici signalov \emph{pogled in zenici}. Zasenčena območja predstavljajo standardni odklon čez sedem delitev po subjektih.}
+    \caption{Povprečni potek učne in validacijske izgube grafovskih modelov pri množici signalov \emph{pogled in zenici}. Zasenčena območja predstavljajo standardni odklon čez sedem delitev po udeležencih.}
     \label{fig:potek-izgube-gnn}
 \end{figure}
 

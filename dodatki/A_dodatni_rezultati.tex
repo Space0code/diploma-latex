@@ -47,9 +47,9 @@ Nizka varianca oziroma majhen razpon logitov skupaj z visoko podobnostjo lahko k
 \label{app:razsirjeni-rezultati-binarna-valenca}
 
 Tabele v tem razdelku razširjajo glavno primerjavo iz poglavja~\ref{sec:rezultati}.
-Vrednosti so povprečje $\pm$ standardni odklon čez sedem testnih množic prečnega preverjanja po subjektih.
+Vrednosti so povprečje $\pm$ standardni odklon čez sedem testnih množic prečnega preverjanja po udeležencih.
 % Micro-F1 je enak točnosti; tega izraza v diplomi ne omenjajmo drugje.
-Micro-F1 je pri tej enooznačni klasifikaciji enak točnosti.
+Mikro F1 je pri tej enooznačni klasifikaciji enak točnosti.
 Razširjene metrike dodatno potrjujejo sklep iz glavne primerjave, saj ostane podoben tudi pri drugih pogledih na napake modelov.
 
 % Vir podatkov za tabele: GFM-for-eyetracker/results/quick_v1_v2_comparison/RETAIN_2026-06-12_16-29-08/tables/metric_summary_with_std.csv.
@@ -66,7 +66,7 @@ Razširjene metrike dodatno potrjujejo sklep iz glavne primerjave, saj ostane po
 \subsubsection*{Primerjava z LOSO}
 \label{app:primerjava-loso}
 
-LOSO v vsaki ponovitvi uporabi en subjekt kot testno množico, vse ostale subjekte pa za učenje oziroma validacijo.
+LOSO v vsaki ponovitvi uporabi enega udeleženca kot testno množico, vse ostale udeležence pa za učenje oziroma validacijo.
 V primerjavi s 7-kratnim protokolom zato uporabi več ponovitev in manjšo testno množico v posamezni ponovitvi.
 LOSO smo uporabili kot podporno preverjanje, ne kot glavni evalvacijski protokol.
 Ker bi njegova izvedba za vse modele in štiri množice signalov bistveno povečala število potrebnih poskusov, smo ga izvedli le za izbrane modele pri množici \emph{pogled in zenici}.
@@ -126,7 +126,7 @@ Slika~\ref{fig:ujemanje-oznak-s-samoocenami} primerja razrede, izpeljane iz pres
 Primerjava je uporabna kot groba ocena skladnosti med diskretnimi in številskimi samoocenami čustvenega stanja, ki so bile zbrane v istem eksperimentu.
 Pri binarni valenci je ujemanje na uporabljenem podnaboru $96{,}7\,\%$, pri binarni vzburjenosti pa $70{,}3\,\%$.
 Zato vzburjenosti nismo uporabili kot glavno ciljno nalogo.
-Slike kažejo, da izpeljani razredi valence bolje sledijo samoocenam udeležencev kot izpeljani razredi vzburjenosti.
+Vidimo, da izpeljani razredi valence bolje sledijo samoocenam udeležencev kot izpeljani razredi vzburjenosti.
 To ne pomeni, da so razredi valence brez šuma, vendar je za glavno primerjavo modelov bolj smiselna in stabilna ciljna naloga.
 
 % Vir slike: GFM-for-eyetracker/results/label_noise_analysis/2026-05-13_table6_self_report_alignment/table6_vs_rating_crosstab_long.csv.

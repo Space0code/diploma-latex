@@ -8,7 +8,7 @@ V tem dodatku podamo podrobnejše nastavitve eksperimentov in modelov ter dopoln
 
 
 Tabela~\ref{tab:hiperparametri-modelov} povzema glavne hiperparametre modelov v končnih eksperimentih.
-Nastavitve grafovske konstrukcije smo izbrali po majhnem predhodnem mrežnem iskanju na 3-razredni valenci, glede na izvorne razrede definirane v tabeli~\ref{tab:label-mapping}.
+Nastavitve grafovske konstrukcije smo izbrali po majhnem predhodnem mrežnem iskanju na trirazredni valenci, glede na izvorne razrede definirane v tabeli~\ref{tab:label-mapping}.
 Iskanje je spreminjalo število grafovskih plasti, velikost skritih predstavitev ter parametre konstrukcije $k_t$, $k_s$ in $k_f$.
 Primerjali smo več nastavitev števila plasti in skrite dimenzije, vendar med njimi ni bilo velikih razlik.
 Ker je bil najmanjši model med najboljšimi in najstabilnejšimi, hkrati pa je računsko najvarčnejši, smo za končne poskuse izbrali $L=2$ (število skritih plasti GNN) in $d=64$ (dimenzija skritih plasti).
@@ -25,11 +25,11 @@ V končnih poskusih smo uporabili redkejšo nastavitev $k_t=1$, $k_s=1$ in $k_f=
 \subsubsection*{Strojna in programska oprema}
 \label{app:strojna-programska-oprema}
 
-Glavni eksperimenti so bili izvedeni na računalniku z operacijskim sistemom Linux
+Glavni eksperimenti so bili izvedeni na računalniku z operacijskim sistemom
 Ubuntu, grafično kartico NVIDIA GeForce RTX 4070 z 12~GB grafičnega pomnilnika,
 procesorjem AMD Ryzen 7 5700X, 32~GB sistemskega pomnilnika in pogonom Samsung
 SSD 990 PRO NVMe.
-Poskusi so bili poganjani v okolju Conda \texttt{gfm}.
+Poskusi so bili izvedeni v virtualnem okolju Conda.
 Uporabljene so bile različice: Python 3.10.19, PyTorch 2.9.1+cu126, CUDA 12.6, PyG 2.7.0, scikit-learn 1.7.2, LightGBM 4.6.0, NumPy 1.25.2, pandas 2.3.3, Matplotlib 3.10.6 in seaborn 0.13.2.
 
 \subsubsection*{Učljive uteži povezav}

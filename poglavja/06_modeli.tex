@@ -2,7 +2,7 @@
 \label{sec:modeli}
 
 V nalogi se osredotočamo na primerjavo štirih družin modelov strojnega učenja za klasifikacijo valence iz podatkov sledilnika pogleda.
-V tem poglavju razložimo, katere so te družine in na kratko opišemo vsak uporabljen model znotraj družine.
+V tem poglavju razložimo, katere so te družine, in na kratko opišemo vsak uporabljen model znotraj družine.
 Grafovske modele opišemo podrobneje, saj predstavljajo metodološko jedro naloge, poleg tega pa so za podatke sledilnika pogleda manj standardiziran pristop kot uveljavljeni klasični modeli.
 
 Modeli se razlikujejo po predstavitvi vhodnih podatkov.
@@ -71,8 +71,8 @@ Ta \ModelName{MLP} je arhitekturno drugačen, ločen in nepovezan s samostojnim 
 
 Za podatke pogleda smo uporabili odprtokodni prednaučeni kodirnik \ModelName{GazeMAE}~\cite{bautista2021gazemae}.
 Model prejme zgolj koordinati pogleda $(x,~y)$, zato smo ga samostojno uporabili le za množico \emph{samo pogled}.
-Ker je bil \ModelName{GazeMAE} učen na $2~s$ oknih, vzorčenih s frekvenco $500~Hz$, smo uporabljena $10~s$ okna najprej pretvorili v obliko, ki jo model pričakuje.
-Koordinati pogleda smo razdelili na pet neprekrivajočih se $2~s$ kosov in ju prevzorčili na ciljno frekvenco $500~Hz$.
+Ker je bil \ModelName{GazeMAE} učen na dvosekundnih oknih, vzorčenih s frekvenco $500~Hz$, smo uporabljena $10~s$ okna najprej pretvorili v obliko, ki jo model pričakuje.
+Koordinati pogleda smo razdelili na pet neprekrivajočih se dvosekundnih kosov in ju prevzorčili na ciljno frekvenco $500~Hz$.
 Kodirnika znotraj modela temeljita na časovno-konvolucijskih mrežah ter ločeno kodirata položaj in hitrost pogleda.
 Za vsak kos vrneta po eno predstavitev s~128 dimenzijami, ki ju združimo v predstavitev s~256 dimenzijami~\cite{bautista2021gazemae}.
 V naši implementaciji smo nato po petih kosih izračunali povprečje in standardni odklon vsake dimenzije ter oba vektorja združili v predstavitev celotnega okna s~512 dimenzijami.
@@ -138,9 +138,9 @@ Napoved je razred z večjim logitom.
 Pri poročanju verjetnosti logite normaliziramo s softmaxom.
 Podrobnosti o številu plasti, velikosti skritih predstavitev, verjetnosti izpuščanja in ostalih hiperparametrih so opisane v dodatku~\ref{app:hiperparametri}.
 
-Vse GNN smo učili od začetka do konca (ang. \emph{end-to-end}), kar pomeni, da so se vsi učljivi deli modela optimizirali hkrati glede na klasifikacijsko izgubo.
+Vse GNN smo učili od začetka do konca (angl. \emph{end-to-end}), kar pomeni, da so se vsi učljivi deli modela optimizirali hkrati glede na klasifikacijsko izgubo.
 To vključuje začetno preslikavo značilk vozlišč, grafovske plasti, morebitno fuzijo relacij, pozornostno združevanje in klasifikacijsko glavo.
-V nadaljevanju opišemo specifike vsake arhitekture v štiri-stopenjski arhitekturni lestvici, začenši z najenostavnejšim -- s homogenim \ModelName{GCN}.
+V nadaljevanju opišemo specifike vsake arhitekture v štiristopenjski arhitekturni lestvici, začenši z najenostavnejšim -- s homogenim \ModelName{GCN}.
 V enačbah posameznih modelov je $\mathbf{H}^{(k-1)}$ matrika vhodnih predstavitev vozlišč v $k$-ti grafovski plasti, $\mathbf{Z}^{(k)}$ pa njen izhod pred skupno rezidualno povezavo, normalizacijo plasti in izpuščanjem.
 
 \subsubsection*{\ModelName{GCN}}
@@ -177,7 +177,7 @@ Slika~\ref{fig:diagram-gcn} prikazuje osnovni cevovod tega modela.
 \label{subsec:model-heterogcn-mean}
 
 S \ModelName{HeteroGCN-mean} preidemo od homogenega modela k ločeni obravnavi različnih tipov relacij.
-Kot opisano v poglavju~\ref{sec:grafovska-predstavitev} tukaj ločimo različne tipe relacij.
+Kot opisano v poglavju~\ref{sec:grafovska-predstavitev}, tukaj ločimo različne tipe relacij.
 Relacijske predstavitve vozlišč združimo v skupno predstavitev vozlišča s preprostim povprečenjem.
 Ker časovne, prostorske in fiksacijske povezave opisujejo različne odnose med meritvami, pričakujemo, da bo njihova ločena obdelava ohranila informacije, ki se pri homogenem združevanju povezav lahko izgubijo.
 Za vsako relacijo $r \in \mathcal{R}$ uporabimo ločeno grafovsko konvolucijo, nato pa njihove izhode povprečimo:
@@ -273,6 +273,7 @@ Slika~\ref{fig:diagram-heterogcn-mlp-w} prikazuje dodano vejo za izračun učlji
 \subsubsection*{Izbira grafovske konvolucije}
 \label{subsec:izbira-grafovske-konvolucije}
 
+\enlargethispage{2\baselineskip}
 V glavnih poskusih smo v vseh grafovskih modelih uporabili plast \texttt{GCNConv}~\cite{kipf2017gcn}.
 \texttt{GCNConv} je enostaven in uveljavljen operator posredovanja sporočil, ki smo ga lahko ohranili nespremenjenega skozi celotno arhitekturno lestvico.
 V dodatnem poskusu smo ga primerjali z drugimi operatorji, razlike med njimi pa so bile razmeroma majhne.

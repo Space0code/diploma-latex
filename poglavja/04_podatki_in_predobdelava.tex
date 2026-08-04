@@ -88,7 +88,7 @@ Izbrane podatke smo pred uporabo očistili.
 Najprej smo iz lokalne kopije zbirke \MAHNOB{} odstranili podatke, ki jih v tej nalogi nismo uporabili, in ohranili le podatke eksperimenta vzbujanja čustev.
 Nato smo odstranili vrstice brez signalov pogleda ali velikosti zenic.
 Na voljo smo imeli tudi signale veljavnosti, na podlagi katerih smo odstranili meritve, za katere je sledilnik poročal, da je meritev za vsaj eno oko neveljavna.
-Dodatno smo uporabili filter osamelcev \texttt{q01}-\texttt{q99}, ki je odstranil meritve, pri katerih je bil vsaj eden od štirih osnovnih signalov pod prvim ali nad devetindevetdesetim percentilom, saj te vrednosti močno izkrivljajo porazdelitve signalov.
+Dodatno smo uporabili filter osamelcev \texttt{q01}--\texttt{q99}, ki je odstranil meritve, pri katerih je bil vsaj eden od štirih osnovnih signalov pod prvim ali nad devetindevetdesetim percentilom, saj te vrednosti močno izkrivljajo porazdelitve signalov.
 Na koncu smo kratke vrzeli v numeričnih signalih linearno interpolirali, signala velikosti leve in desne zenice pa dodatno zgladili s kratkim centriranim drsečim povprečjem treh meritev.
 Okno smo uporabili, če je po čiščenju in filtriranju vsebovalo vsaj 60 veljavnih meritev.
 
@@ -119,7 +119,7 @@ Ker zamik ni vezan na posameznega udeleženca, je naša hipoteza, da to ni fizio
 \label{subsec:standardizacija}
 
 Posamezne skupine signalov so izražene v različnih velikostnih redih.
-Modeli strojnega učenja, kot so metoda podpornih vektorjev (SVM), večslojni perceptron (MLP) in GNN, so občutljivi na velikostni red vhodnih značilk oz. signalov.
+Modeli strojnega učenja, kot so metoda podpornih vektorjev (SVM), večslojni perceptron (MLP) in GNN, so občutljivi na velikostni red vhodnih značilk oziroma signalov.
 Zato smo vsako meritev $x$ za vsak signal standardizirali po formuli~$\frac{x-\mu}{\sigma}$.
 Povprečje $\mu$ in standardni odklon $\sigma$ smo izračunali na učni podmnožici, nato pa na validacijski in testni podmnožici standardizacijo uporabili z istimi parametri kot na učni.
 Pri grafovskih modelih smo na enak način standardizirali tudi značilke povezav, kadar jih je uporabljena množica signalov vsebovala.
@@ -129,7 +129,7 @@ Pri grafovskih modelih smo na enak način standardizirali tudi značilke povezav
 Nato smo časovno vrsto razdelili na neprekrivajoča se časovna okna dolžine $T=10~s$.
 Vsako uporabno časovno okno je predstavljalo en učni primer.
 Za $10~s$ smo se odločili na podlagi sorodnega dela na podatkih sledilnika pogleda, kjer so se daljša okna med dolžinami $1$, $3$, $5$ in $10~s$ praviloma izkazala za bolj informativna~\cite{bozak2024feature}.
-Daljših oken nismo uporabili, ker bi težje predpostavili, da celotno okno opisuje enoten čustveni odziv, saj se lahko ta (iz fiziološkega vidika) med ogledom posnetka že opazno spremeni~\cite{zhang2020rcea}.
+Daljših oken nismo uporabili, ker bi težje predpostavili, da celotno okno opisuje enoten čustveni odziv, saj se lahko ta med ogledom posnetka že opazno spremeni~\cite{zhang2020rcea}.
 Tudi sorodna dela, ki prepoznavajo čustva iz očesnih signalov, pogosto uporabljajo razmeroma kratka okna~\cite{wang2018automatic,wu2021emotion}.
 
 Pri frekvenci vzorčenja $60~Hz$ bi 10-sekundno okno brez manjkajočih vrednosti vsebovalo 600 vzorcev.

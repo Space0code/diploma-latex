@@ -23,6 +23,7 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 from matplotlib.colors import LogNorm
+from matplotlib.ticker import FuncFormatter
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -215,6 +216,11 @@ def parse_args() -> argparse.Namespace:
 
 def format_decimal(value: float) -> str:
     return f"{value:.1f}".replace(".", ",")
+
+
+def format_integer_thousands(value: float, _position: float | None = None) -> str:
+    """Oblikuje cela števila s piko kot ločilom tisočic."""
+    return f"{int(round(value)):,}".replace(",", ".")
 
 
 def format_confusion_matrix_annotations(matrix: np.ndarray) -> np.ndarray:
@@ -706,7 +712,7 @@ def generate_label_distribution_plots(df: pd.DataFrame, data_figures_dir: Path, 
                 if annotate_as_percent:
                     text = f"{format_decimal(value)} %"
                 else:
-                    text = f"{int(value)}"
+                    text = format_integer_thousands(value)
                 ax.text(
                     signal_index,
                     bottom[signal_index] + value / 2,
@@ -723,6 +729,8 @@ def generate_label_distribution_plots(df: pd.DataFrame, data_figures_dir: Path, 
         ax.set_xticklabels(signals, fontsize=TICK_LABEL_FONTSIZE)
         ax.set_ylabel(ylabel, fontsize=AXIS_LABEL_FONTSIZE)
         ax.tick_params(axis="y", labelsize=TICK_LABEL_FONTSIZE)
+        if not annotate_as_percent:
+            ax.yaxis.set_major_formatter(FuncFormatter(format_integer_thousands))
         ax.legend(frameon=False, ncol=2, loc="upper center", bbox_to_anchor=(0.5, 1.13), fontsize=TICK_LABEL_FONTSIZE)
         ax.grid(axis="y", color="#E6E6E6", linewidth=0.7)
         ax.set_axisbelow(True)
@@ -766,6 +774,7 @@ def generate_signal_distribution_plots(df: pd.DataFrame, data_figures_dir: Path,
     ax.set_ylim(830, 30)
     ax.set_aspect("equal", adjustable="box")
     ax.tick_params(axis="both", labelsize=TICK_LABEL_FONTSIZE)
+    ax.xaxis.set_major_formatter(FuncFormatter(format_integer_thousands))
     ax.grid(False)
     for spine in ax.spines.values():
         spine.set_color("#B0B0B0")

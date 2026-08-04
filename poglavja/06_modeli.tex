@@ -238,7 +238,7 @@ Za izračun uteži povezav ima model tri večslojne perceptrone: $f_w^{\text{ča
 Ti na podlagi vektorja značilk posamezne povezave, katerega komponente so povzete v tabeli~\ref{tab:znacilke-povezav}, izračunajo skalarno predznačeno utež, ki določa, kako močno posamezna povezava vpliva na posredovanje sporočil.
 Pri posamezni množici signalov se uporabijo le funkcije za relacije, ki so v grafu prisotne.
 Časovne povezave naprej in nazaj si delijo isto funkcijo $f_w^{\text{čas}}$, smer povezave pa je podana kot dodatna značilka povezave $\rho_{ij}$.
-Formule za izračun in normalizacijo uteži so podane v dodatku~\ref{app:naucene-utezi-povezav}.
+Formule za izračun uteži in njihova normalizacija po absolutni vsoti vhodnih uteži so podane v dodatku~\ref{app:naucene-utezi-povezav}, posebej v enačbi~\eqref{eq:normalizacija-predznacenih-utezi}.
 Za vozlišče $j$ in relacijo $r$ je glavni korak uteženega posredovanja sporočil
 \begin{equation}
     \begin{aligned}
@@ -260,7 +260,7 @@ Za vozlišče $j$ in relacijo $r$ je glavni korak uteženega posredovanja sporo�
 \end{equation}
 Uteži $w_{ij}^{(r)}$ so že normalizirane po vhodnih povezavah vozlišča $j$ znotraj relacije.
 
-Ker tudi povezave istega tipa niso nujno enako informativne, lahko model v tej končni stopnji z utežmi na podlagi njihovih značilk poudari koristnejše povezave ter oslabi ali predznačeno spremeni prispevek manj koristnih.
+Ker tudi povezave istega tipa niso nujno enako informativne, lahko model v tej končni stopnji z utežmi na podlagi njihovih značilk poudari koristnejše povezave, oslabi manj koristne ali obrne predznak njihovega prispevka.
 Slika~\ref{fig:diagram-heterogcn-mlp-w} prikazuje dodano vejo za izračun učljivih uteži povezav.
 
 \begin{figure}[!htbp]

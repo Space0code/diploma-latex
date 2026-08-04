@@ -73,9 +73,13 @@ Končno utež normaliziramo po vhodnih povezavah ciljne meritve $v_j$ znotraj is
         \right|
         + \epsilon
     },
+    \label{eq:normalizacija-predznacenih-utezi}
 \end{equation}
 kjer je $\epsilon=10^{-8}$ majhna konstanta za numerično stabilnost.
-Ker normalizacija ohrani predznak uteži, lahko povezava prispevek sosednjega vozlišča tudi zmanjša, ne le poveča.
+Vsota absolutnih vrednosti uteži vseh vhodnih povezav vozlišča znotraj posamezne relacije je zato približno enaka $1$. Odstopanje povzroči le člen $\epsilon$.
+V uporabljeni izvedbi plast \texttt{GCNConv} pri modelu \ModelName{HeteroGCN-MLP-w} teh uteži ne normalizira ponovno po stopnjah vozlišč in ne dodaja samozank, temveč jih neposredno uporabi kot koeficiente sporočil.
+Lastna predstavitev vozlišča se ohranja po ločeni rezidualni povezavi.
+Normalizacija v enačbi~\eqref{eq:normalizacija-predznacenih-utezi} ohrani predznak, zato negativna utež obrne predznak prispevka sosednjega vozlišča, njena absolutna vrednost pa določa njegovo jakost.
 
 \section{Konstrukcija in značilke povezav}
 
